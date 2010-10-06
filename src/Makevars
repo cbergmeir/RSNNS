@@ -1,0 +1,12 @@
+PKG_CPPFLAGS=-I ./ `Rscript -e 'Rcpp:::CxxFlags()'`
+PKG_LIBS=-lfl `Rscript -e 'Rcpp:::LdFlags()'`
+
+#PKG_CPPFLAGS=-I ./
+#PKG_LIBS="-lfl"
+
+.PHONY: all
+
+all: $(SHLIB)
+
+clean:
+	rm -f *.o

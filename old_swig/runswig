@@ -1,0 +1,8 @@
+#! /bin/sh
+
+/home/bergmeir/Download/swig-build/bin/swig -c++ -r RSNNS.i
+sed -e 's/true/TRUE/g' -e 's/false/FALSE/g' RSNNS_wrap.cxx > RSNNS_wrap_edt.cpp
+rm RSNNS_wrap.cxx
+mv RSNNS_wrap_edt.cpp RSNNS_wrap.cpp
+mv RSNNS.R ../R
+

@@ -1,0 +1,3 @@
+useDynLib(RSNNS, .registration=TRUE)
+export(SnnsR_createFullyConnectedFeedForwardNet)
+export(SnnsR_createNet)

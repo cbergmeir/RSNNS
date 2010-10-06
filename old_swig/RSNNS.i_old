@@ -1,0 +1,130 @@
+%module RSNNS
+%{
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "RSNNS_kr_ui.h"
+
+//#include "glob_typ.h"
+//#include "kr_ui.h"
+
+//#include "krui_typ.h"
+//#include "kr_const.h"
+//#include "ext_typ.h"
+//#include "kr_typ.h"
+//#include "enzo_mem_typ.h"
+//#include "trans_f.h"
+//#include "kernel.h"
+
+
+extern "C" int testTrainNeuralNetwork (int a, int b, int *c);
+extern "C" int testTrainNeuralNetworkWrapper(void);
+extern "C" int getFuncInfoWrapper(int a);
+extern "C" char* getFuncInfoWrapper2(int funcno, int *functype);
+extern "C" void encoderExample(void);
+
+//extern "C" float myLearnAllPatterns();
+
+extern "C" krui_err myBackpropLearnAllPatterns(float decay, float *learnAllPatternsError);
+
+#include "example.h"
+
+#include "RSNNS_krui.h"
+
+%}
+
+typedef int krui_err;
+typedef float  FlintType;
+typedef float  FlintTypeParam;
+
+%include "typemaps.i"
+//%include "cstring.i"
+%include "cdata.i"
+
+%apply int *OUTPUT {int *func_type};                                                        
+//%cstring_output_allocated(char **func_name, free($1));
+
+/* Set the input argument to point to a temporary variable */
+%typemap(in, numinputs=0) (char **func_name) (char** temp) {
+//   $1 = temp;
+}
+
+//%typemap(in, numinputs=0) (int *func_type) (int temp2) {
+//   $1 = temp;
+//}
+
+//%append_output(SWIG_FromCharPtr($1));
+
+//krui_allocNewPatternSet
+%apply int *OUTPUT {int *set_no}; 
+
+//krui_DefTrainSubPat
+%apply int *OUTPUT {int *insize}; 
+%apply int *OUTPUT {int *outsize}; 
+%apply int *OUTPUT {int *instep}; 
+%apply int *OUTPUT {int *outstep}; 
+%apply int *OUTPUT {int *max_n_pos}; 
+
+//krui_learnAllPatterns
+%apply int *OUTPUT {int *NoOfOutParams}; 
+
+//krui_getFuncParamInfo
+%apply int *OUTPUT {int *no_of_input_params}; 
+%apply int *OUTPUT {int *no_of_output_params}; 
+
+%typemap(in, numinputs=0) (float **parameterOutArray) (float **temp) {
+//   $1 = temp;
+}
+
+//%include "kr_ui.h"
+//%include "RSNNS_glob_typ.h"
+
+class   PosType  {
+public:
+  short  x,
+	 y,
+	 z;
+};
+
+
+%include "RSNNS_kr_ui.h"
+
+
+
+//%include "kernel.h"
+
+//%typemap(in, numinputs=0) (int *c) (int temp) {
+//   $1 = temp;
+//}
+
+/*%typemap(argout) (int *c) {
+   Rprintf(" test 2\n ");
+   Rprintf("%i",(int) $1);
+
+   Rprintf(" test 1\n ");
+   Rprintf("%i",(int) $1);
+   Rprintf(" test 3\n ");
+  // $result = *($1); //SWIG_AppendResult($result, $1, 1);
+
+}*/
+
+//The *OUTPUT macro crashes..probably buggy for R
+//%apply int *OUTPUT {int *c};
+
+%apply int *OUTPUT {int *functype};
+extern "C" int testTrainNeuralNetwork (int a, int b, int *c);
+extern "C" int testTrainNeuralNetworkWrapper(void);
+extern "C" int getFuncInfoWrapper(int a);
+extern "C" char* getFuncInfoWrapper2(int funcno, int *functype);
+extern "C" void encoderExample(void);
+
+//extern "C" float myLearnAllPatterns();
+
+%apply float *OUTPUT {float *learnAllPatternsError}; 
+extern "C" krui_err myBackpropLearnAllPatterns(float decay, float *learnAllPatternsError);
+
+%include "example.h"
+
+%apply int *OUTPUT {int *functype}; 
+%include "RSNNS_krui.h"
+

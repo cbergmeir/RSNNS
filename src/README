@@ -1,0 +1,96 @@
+/*****************************************************************************
+  FILE           : README
+  SHORTNAME      : readme
+  SNNS VERSION   : 4.2
+
+  PURPOSE        : Readme File for the SNNS Kernel
+  NOTES          :
+
+  AUTHOR         : Guenter Mamier
+  DATE           : 
+
+  CHANGED BY     : 
+  RCS VERSION    : 2.1
+  LAST CHANGE    : $Date: 1998/03/13 17:35:30 $
+
+    Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
+    Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
+
+******************************************************************************/
+
+
+This Directory contains the following files:
+
+README          :       This file
+
+alloca.c	:	implementation of the alloca function for non-standard 
+			systems 
+art_ui.c        :       contains user interface functions for ART networks
+arttr_f.c       :       contains transfer functions for ART networks
+calc_err.c      :       Program for calculating the accurancy of activation
+                        functions that uses the table-lookup technique
+cc_display.c    :	display functions of Cascade-Correlation
+cc_glob.c	:	contains some general functions for cc
+cc_learn.c	:	contains learning functions for cascade correlation
+cc_modify.c	:	contains the modification modules on the cascade 
+			correlation algorithm
+dlvq_learn.c    :	contains all functions of the DLVQ algorithm
+func_tbl.c      :       contains the function table
+getcwd.c	:	implementation of the getcwd function for non-standard 
+			systems 
+init_f.c        :       contains the network initialisation functions
+kernel.c        :       contains the simulator kernel
+kr_JordElm.c    :	handling of Jordan and Elman networks
+kr_amap.c       :       contains kernel functions for ARTMAP networks.
+kr_art.c        :       contains kernel functions for all ART networks
+kr_art1.c       :       contains kernel functions for ART1 networks
+kr_art2.c       :       contains kernel functions for ART2 networks
+kr_funcs.c      :       contains internal interface functions of the kernel
+kr_inversion.c  :	contains network inversion functions
+kr_io.c         :       contains the file I/O interface functions
+kr_mem.c        :       contains the memory management functions of the kernel
+kr_newpattern.c :	pattern handling functions
+kr_pat_parse.c  :       parser for pattern files
+kr_pat_scan.c   :	scanner for pattern files
+kr_rand.c       :	random number generator
+kr_td.c		:	contains the learning functions for time delay networks
+kr_ui.c         :       contains the user interface functions
+learn_f.c       :       contains the learning functions
+lrand48.c	:	implementation of the lrand function for non-standard 
+			systems 
+make_tbl.c      :	generates lookup table for transfer functions
+matrix.c        :       contains matrix operation functions
+memcmp.c	:	implementation of the memcmp function for non-standard 
+			systems 
+prun_f.c        :       contains all pruning related functions
+remap_f.c	:       pattern remapping implementation
+scaled_conj_grad.c:     learning functions for scg algorithm
+stochastic_learn_f.c:   learning functions for stochastic learning
+strdup.c        :       Compatibility source file for ULTRIX-32 and MS-DOS
+tbl_func.c      :       contains the activation functions using table-lookup.
+trans_f.c       :       contains the network transfer functions
+update_f.c      :       contains the network update functions
+
+
+All these source files have two corresponding headder files. A .h file that 
+contains the external declarations for the functions accessible from other
+moduls, and a .ph file for function prototypes and definitions local to the 
+modul.
+
+Additionally there are the following global header files:
+
+art_typ.h       :       contains global data types and constants for external 
+                        programs using ART networks.
+ext_typ.h       :       contains data types for external kernels
+func_mac.h      :       contains macros for transfer functions
+glob_typ.h      :       contains global data types and constants
+                        for external programs
+krart_df.h      :       contains constants and macros for all ART algorithms
+krui_typ.h      :       contains ANSII prototypes of kr_ui.c
+kr_const.h      :       contains kernel constants
+kr_def.h        :       contains kernel default values
+kr_mac.h        :       contains kernel macros
+kr_typ.h        :       contains kernel data types and constants
+version.h       :       contains the version numbers of the kernel
+
+
