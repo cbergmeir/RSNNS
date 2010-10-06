@@ -1,10 +1,22 @@
-#---------------------------------------
-#Function createPatterns
-#---------------------------------------
-SnnsR_createPatterns <- function(inputValues, targetValues) {
+# @include SnnsRObjectFactory.R
+#NULL
+
+#' Create a pattern
+#' @param snnsObject \code{\linkS4class{SnnsR}} object
+#' @param inputValues The input values
+#' @param targetValues The target values
+#' @export
+#' @rdname SnnsR-methods
+SnnsR__createPatterns <- function(snnsObject, inputValues, targetValues) {
+
+  #setMethod("createPatterns", 
+   #   signature = signature(object = "SnnsR", inputValues = "numeric", targetValues = "numeric"),
+    #  function(object, inputValues, targetValues) {
+        
+  #snnsObject <- object
   
-  inputs <- SnnsR_getAllInputUnits()
-  outputs <- SnnsR_getAllOutputUnits()
+  inputs <- snnsObject$getAllInputUnits()
+  outputs <- snnsObject$getAllOutputUnits()
   
   x <- as.matrix(inputValues)
   nInputs <- ncol(x)
@@ -21,46 +33,48 @@ SnnsR_createPatterns <- function(inputValues, targetValues) {
       stop(paste("input value rows ",nrow(x)," not same as output value rows ",nrow(y),sep=""))
   }
   
-  #SnnsKrui_deleteAllPatterns()
+  #snnsObject$deleteAllPatterns()
   
-  patset <- SnnsKrui_allocNewPatternSet()
+  patset <- snnsObject$allocNewPatternSet()
   
   for(i in 1:nrow(x)) {
     for(j in 1:nInputs)  {
-      SnnsKrui_setUnitActivation(inputs[j], x[i,j]);
+      snnsObject$setUnitActivation(inputs[j], x[i,j]);
     }
     
     if(!missing(targetValues)) {  
       for(j in 1:nOutputs)  {
-        SnnsKrui_setUnitActivation(outputs[j], y[i,j]);
+        snnsObject$setUnitActivation(outputs[j], y[i,j]);
       }
     }
-    SnnsKrui_newPattern();
+    snnsObject$newPattern();
   }
   
   return(patset)
 }
 
-#---------------------------------------
-#Function predictValues
-#---------------------------------------
-SnnsR_predictValues <- function(inputValues)  {
+#' Predict values with a trained net
+#' @param snnsObject \code{\linkS4class{SnnsR}} object
+#' @param inputValues The new input values
+#' @export
+#' @rdname SnnsR-methods
+SnnsR__predictValues <- function(snnsObject, inputValues)  {
   
-  outputs <- SnnsR_getAllOutputUnits()
+  outputs <- snnsObject$getAllOutputUnits()
   
   predictions <- matrix(nrow= nrow(inputValues), ncol=length(outputs))
   #currentPattern <- 84
   for(currentPattern in 1:nrow(inputValues))  {
     
-    SnnsKrui_setPatternNo(currentPattern)
+    snnsObject$setPatternNo(currentPattern)
     
     #OUTPUT_NOTHING  1
-    SnnsKrui_showPattern(SnnsR_resolveDefine(SnnsR_patternUpdateModes,"OUTPUT_NOTHING"))
+    snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
     
-    SnnsKrui_updateNet(0)
+    snnsObject$updateNet(0)
     
     for(i in 1:length(outputs)) {
-      predictions[currentPattern,i] <- SnnsKrui_getUnitOutput(outputs[i])
+      predictions[currentPattern,i] <- snnsObject$getUnitOutput(outputs[i])
     }
     
 #    if (length(which(o != irisTargets[currentPattern,])) != 0)  {

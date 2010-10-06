@@ -18,6 +18,8 @@
 
 ******************************************************************************/
 
+public:
+
 /* begin global definition section */
 
 krui_err getNoOfClasses(int startPattern, int endPattern);
@@ -38,54 +40,59 @@ krui_err dlvq_setPointers(void);
 
 void generateMissingClassHiddenUnits(int *generatedNewUnit);
 
-int newPatternsLoaded = 0;
-int dlvq_numberOfLearnCycles=0;
+int newPatternsLoaded;
+int dlvq_numberOfLearnCycles;
 
 /* end global definition section */
 
+private:
+
 /* begin privat definition section */
 
-static struct MIX_UP  **mixupArray;
-static struct MIX_UP  *initialUnitArray;
-static int *lastInsertedUnitArray;
+struct MIX_UP  **mixupArray;
+struct MIX_UP  *initialUnitArray;
+int *lastInsertedUnitArray;
 
-static int noOfClasses=0;
-static int oldNoOfClasses=0;
-static int wrongClassCounter=0;
-static int continueLearning=0;
+int noOfClasses;
+int oldNoOfClasses;
+int wrongClassCounter;
+int continueLearning;
 
-static void printMixupArray(int cycle);
+void printMixupArray(int cycle);
 
-static void allocMixupArray(void);
+void allocMixupArray(void);
 
-static void allocLastInsertedUnitArray(void);
+void allocLastInsertedUnitArray(void);
 
-static void normReferenceVec(struct Unit *hiddenUnitPtr);
+void normReferenceVec(struct Unit *hiddenUnitPtr);
 
-static void moveVec(struct Unit *correctReferenceVec, float learnParam1,
+void moveVec(struct Unit *correctReferenceVec, float learnParam1,
                      struct Unit *wrongReferenceVec,  float learnParam2);
 
-static void writeVectorToMixupArray(int correctClass, int wrongClass, 
+void writeVectorToMixupArray(int correctClass, int wrongClass, 
 				    int patternNo, int sub_pat_no);
 
-static void initFirstUnit(struct Unit *hiddenUnitPtr, int class);
+void initFirstUnit(struct Unit *hiddenUnitPtr, int dlvq_learn_class);
 
-static krui_err insertFirstUnit(struct Unit **hiddenUnitPtr);
+krui_err insertFirstUnit(struct Unit **hiddenUnitPtr);
 
-static krui_err insertNewUnits(void);
+krui_err insertNewUnits(void);
 
-static void initMixupArray(void);
+void initMixupArray(void);
 
-static void dlvq_trainNet(int noOfTrainingCycles, int startPattern, 
+void dlvq_trainNet(int noOfTrainingCycles, int startPattern, 
 			  int endPattern, float learnParam1, 
 			  float learnParam2);
 
-static void generateTmpTopoPtrArray(void);
+void generateTmpTopoPtrArray(void);
 
-static void calculateUnitXYPos(void);
+void calculateUnitXYPos(void);
 
-static void initLastInsertedUnitArray(void);
+void initLastInsertedUnitArray(void);
 
-static void sortHiddenUnitsByClasses(int left, int right);
+void sortHiddenUnitsByClasses(int left, int right);
 
 /* begin privat definition section */
+
+krui_err deleteAllLinksOfTheOutputUnit(void);
+void freeTmpTopoPtrArray(void);

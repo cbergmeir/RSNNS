@@ -1,15 +1,15 @@
-SnnsR_extractPatterns <- function()  {
+SnnsR__extractPatterns <- function(snnsObject)  {
   
-  noPatterns <- SnnsKrui_getNoOfPatterns()
+  noPatterns <- snnsObject$getNoOfPatterns()
   
   inputs <- NULL
   outputs <- NULL
   
   for(i in 1:noPatterns)  {
     #INPUT: 1
-    input <- SnnsKr_getSubPatData(i-1, 0, 1)
+    input <- snnsObject$getSubPatData(i-1, 0, 1)
     #OUTPUT: 2
-    output <- SnnsKr_getSubPatData(i-1, 0, 2)
+    output <- snnsObject$getSubPatData(i-1, 0, 2)
     
     inputs <- rbind(inputs, input)
     outputs <- rbind(outputs, output)

@@ -33,30 +33,30 @@ int parse_pattern_file(int *set, np_pattern_set_info *this_set);
 
 /* begin private definition section */
 
-static int	i;
-static int	dims[MAX_NO_OF_VAR_DIM];
-static int	max_i_dims[MAX_NO_OF_VAR_I_DIM];
-static int	max_o_dims[MAX_NO_OF_VAR_O_DIM];
-static int	actual_dim_count;
-static int	variable_input_dim;
-static int	variable_output_dim;
-static int	current_pattern;
-static int	next_pattern_is_input;
-static int	no_of_input;
-static int	no_of_output;
-static int	no_of_pattern;
-static int	act_size;
-static float	*pat_mem;
-static int      pattern_set;
-static np_pattern_descriptor *pattern;
-static int      with_classes;
-static struct np_symtab *this_class;
-static int      num_param = 0;
-static float    *parameter = NULL;
+ int	i;
+ int	dims[MAX_NO_OF_VAR_DIM];
+ int	max_i_dims[MAX_NO_OF_VAR_I_DIM];
+ int	max_o_dims[MAX_NO_OF_VAR_O_DIM];
+ int	actual_dim_count;
+ int	variable_input_dim;
+ int	variable_output_dim;
+ int	current_pattern;
+ int	next_pattern_is_input;
+ int	no_of_input;
+ int	no_of_output;
+ int	no_of_pattern;
+ int	act_size;
+ float	*pat_mem;
+ int      pattern_set;
+ np_pattern_descriptor *pattern;
+ int      with_classes;
+ struct np_symtab *this_class;
+ int      num_param;
+ float    *parameter;
 
-static np_pattern_set_info *this_set;
+ np_pattern_set_info *this_set;
 
-static void yyerror(char *error);
+ void yyerror(char *error);
 
 /* end private definition section */
 

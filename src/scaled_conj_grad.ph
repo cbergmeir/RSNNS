@@ -32,13 +32,13 @@ krui_err TEST_SCG(int start_pattern, int end_pattern,
 /* end global definition section */
 
 /* begin private definition section */
-static float product_of_xt_by_y(float * x, float * y, int tab_size) ;
-static float square_of_norm(float * x, int tab_size) ;
-static krui_err compute_gradient(int start_pattern, int end_pattern, 
+ float product_of_xt_by_y(float * x, float * y, int tab_size) ;
+ float square_of_norm(float * x, int tab_size) ;
+ krui_err compute_gradient(int start_pattern, int end_pattern, 
 				 float delta_max, float * error) ;
 
-static int        scg_space_size ;
-static FlintType* *scg_gradient ;
+ int        scg_space_size ;
+ FlintType* *scg_gradient ;
 
 #define SCG_FIRST_SIGMA     1E-4	/* should be in ]0 ; 1E-4] */
 #define SCG_FIRST_LAMBDA    1E-6        /* should be in ]0 ; 1E-6] */

@@ -46,6 +46,8 @@ krui_err  UPDATE_JE_Special   (float *parameterArray, int NoOfParams) ;
 krui_err  UPDATE_RM_Propagate(float *parameterArray, int NoOfParams);
 krui_err  ENZO_propagate(float *parameterArray, int NoOfParams);
 
+krui_err  UPDATE_KohonenPropagate(float *parameterArray, int NoOfParams);
+
 /* end global definition section */
 
 /* begin private definition section */
@@ -54,9 +56,9 @@ krui_err  ENZO_propagate(float *parameterArray, int NoOfParams);
 #define  UPDATE_PARAM2( param )   param[ 1 ]  /*    contains the 2nd initialisation parameter  */
 #define  UPDATE_PARAM3( param )   param[ 2 ]  /*    contains the 3rd initialisation parameter  */
 #define  UPDATE_PARAM4( param )   param[ 3 ]  /*    contains the 4th initialisation parameter  */
-static void normalize_inputvector(float sum);
-static krui_err ENZO_PROPAGATE_error_back(void);
-static krui_err ENZO_PROPAGATE_ff(void);
+ void update_f_normalize_inputvector(float sum);
+ krui_err ENZO_PROPAGATE_error_back(void);
+ krui_err ENZO_PROPAGATE_ff(void);
 
 /* end private definition section */
 

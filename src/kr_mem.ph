@@ -116,9 +116,7 @@ void krm_releaseFtypeEntry( struct FtypeUnitStruct  *Ftype_entry );
 /*  create and define a Ftype entry
 */
 struct FtypeUnitStruct *krm_FtypeCreateEntry( char *Ftype_symbol, OutFuncPtr out_func, 
-                                              ActFuncPtr act_func, ActDerivFuncPtr act_deriv_func, ActDerivFuncPtr act_2_deriv_func,
-	PyObject *python_out_func, PyObject *python_act_func,
-	PyObject *python_act_deriv_func, PyObject *python_act_2_deriv_func);
+                                              ActFuncPtr act_func, ActDerivFuncPtr act_deriv_func, ActDerivFuncPtr act_2_deriv_func );
 
 /*  add a site to a previosly defined Ftype entry */
 struct Site *krm_FtypeAddSite(struct FtypeUnitStruct  *Ftype_entry, 
@@ -166,10 +164,10 @@ void krm_getPattern( memPat *p );
 void krm_putPattern( memPat *p );
 #endif
 
-
+/*
 extern struct TransTable  *transTable;
 extern int transTableSize;
-
+*/
 
 
 
@@ -179,7 +177,7 @@ GROUP: Global Var's (as declared by the Memory Manager)
 
 #################################################*/
 
-int  NoOfAllocPatternPairs = 0;  /*  no. of allocated pattern pairs  */
+int  NoOfAllocPatternPairs;  /*  no. of allocated pattern pairs  */
 
 
 /* end global definition section */
@@ -193,74 +191,74 @@ GROUP: Local Var's
 
 #################################################*/
 
-static int  FreeUnitIndex  = 0, /* no. of the next free unit in the unit array*/
-	    NoOfAllocUnits = 0,  /*  no. of allocated units  */
-	    NoOfSites	   = 0, /* no. of used sites in the network and Ftype 
+int  FreeUnitIndex, /* no. of the next free unit in the unit array*/
+	    NoOfAllocUnits,  /*  no. of allocated units  */
+	    NoOfSites, /* no. of used sites in the network and Ftype 
 				   sites (including sites for functionality 
 				   type use only) */
-	    NoOfNetSites   = 0, /* no. of used sites in the network (only unit 
+	    NoOfNetSites, /* no. of used sites in the network (only unit 
 				   sites)  */
-	    NoOfAllocSites = 0,  /*  no. of allocated sites  */
-	    NoOfLinks	   = 0,  /*  no. of links used for the network	*/
-	    NoOfAllocLinks = 0,  /*  no. of allocated links  */
-	    NoOfNTableEntries	    = 0, /*no. of name table entries  */
-	    NoOfAllocNTableEntries  = 0, /*no. of allocated name table entries*/
-	    NoOfSTableEntries	    = 0, /*no. of site table entries  */
-	    NoOfAllocSTableEntries  = 0, /*no. of allocated site table entries*/
-	    NoOfFTableEntries	    = 0; /*no. of functionality types  */
+	    NoOfAllocSites,  /*  no. of allocated sites  */
+	    NoOfLinks,  /*  no. of links used for the network	*/
+	    NoOfAllocLinks,  /*  no. of allocated links  */
+	    NoOfNTableEntries, /*no. of name table entries  */
+	    NoOfAllocNTableEntries, /*no. of allocated name table entries*/
+	    NoOfSTableEntries, /*no. of site table entries  */
+	    NoOfAllocSTableEntries, /*no. of allocated site table entries*/
+	    NoOfFTableEntries; /*no. of functionality types  */
 
-static SiteArray    
-            site_array        = NULL,  /*  pointer to first site array  */
-		       free_site_ptr	 = NULL,  /*  pointer to first free site  */
-		       site_block_list	 = NULL;  /*  pointer to first free site block */
+SiteArray    
+            site_array,  /*  pointer to first site array  */
+		       free_site_ptr,  /*  pointer to first free site  */
+		       site_block_list;  /*  pointer to first free site block */
 
-static LinkArray       
-            link_array        = NULL,  /*  pointer to first link array  */
-		       free_link_ptr	 = NULL,  /*  pointer to first free link  */
-		       link_block_list	 = NULL;  /*  pointer to first free link block */
-
-
-static NTableArray  
-            NTable_array      = NULL,  /* pointer to name table  */
-	    free_NTable_entry = NULL,  /* ptr to first free name table entry  */
-	    NTable_block_list = NULL,  /* ptr to first free name table block  */
-		       curr_NTable_entry = NULL,  /*  pointer to current name table entry  */
-		       curr_NTable_block = NULL;  /*  pointer to current name table block  */
+LinkArray       
+            link_array,  /*  pointer to first link array  */
+		       free_link_ptr,  /*  pointer to first free link  */
+		       link_block_list;  /*  pointer to first free link block */
 
 
-static STableArray  
-            STable_array      = NULL,  /* pointer to site table  */
-            free_STable_entry = NULL,  /* ptr to first free site table entry  */
-	    STable_block_list = NULL,  /* ptr to first free site table block  */
-		       curr_STable_entry = NULL,  /*  pointer to current name site entry  */
-		       curr_STable_block = NULL;  /*  pointer to current name site block  */
+NTableArray  
+            NTable_array,  /* pointer to name table  */
+	    free_NTable_entry,  /* ptr to first free name table entry  */
+	    NTable_block_list,  /* ptr to first free name table block  */
+		       curr_NTable_entry,  /*  pointer to current name table entry  */
+		       curr_NTable_block;  /*  pointer to current name table block  */
 
 
-static struct FtypeUnitStruct  
-            *Ftype_list_root  = NULL,  /*  pointer to root of the Ftype list  */
-			       *curr_Ftype_entry = NULL;  /*  pointer to current Ftype entry  */
+STableArray  
+            STable_array,  /* pointer to site table  */
+            free_STable_entry,  /* ptr to first free site table entry  */
+	    STable_block_list,  /* ptr to first free site table block  */
+		       curr_STable_entry,  /*  pointer to current name site entry  */
+		       curr_STable_block;  /*  pointer to current name site block  */
 
 
-static  int     krm_allocLinks(int N);
-static  int     krm_allocSites(int N);
-static struct Site  *krm_getFtypeSite(void);
+struct FtypeUnitStruct  
+            *Ftype_list_root,  /*  pointer to root of the Ftype list  */
+			       *curr_Ftype_entry;  /*  pointer to current Ftype entry  */
+
+
+ int     krm_allocLinks(int N);
+ int     krm_allocSites(int N);
+struct Site  *krm_getFtypeSite(void);
 
 /* Future Use: release one Ftype-site structure */
-/*static void    krm_releaseFtypeSite(struct Site *site_ptr ); */
+/*void    krm_releaseFtypeSite(struct Site *site_ptr ); */
 
-static void    krm_releaseAllFtypeSites(struct Site *first_site_ptr);
-static  void    krm_releaseSiteArrays(void);
-static  void    krm_relocateLinkPtrs(int offset);
-static	void	krm_releaseUnitArrays(void);
-static  int     krm_allocNTableArray(void);
-static struct NameTable  *krm_getNTableEntry(void);
-static void  krm_releaseNTableArrays(void);
-static int  krm_allocSTableArray(void);
-static int  krm_allocSTableArray(void);
-static  struct SiteTable    *krm_getSTableEntry(void);
-static  void    krm_releaseSTableEntry(struct SiteTable *STable_ptr);
-static  void    krm_releaseSTableArrays(void);
-static struct SiteTable       *krm_getSTableNextRawEntry(void);
+void    krm_releaseAllFtypeSites(struct Site *first_site_ptr);
+ void    krm_releaseSiteArrays(void);
+ void    krm_relocateLinkPtrs(int offset);
+	void	krm_releaseUnitArrays(void);
+ int     krm_allocNTableArray(void);
+struct NameTable  *krm_getNTableEntry(void);
+void  krm_releaseNTableArrays(void);
+int  krm_allocSTableArray(void);
+//int  krm_allocSTableArray(void);
+ struct SiteTable    *krm_getSTableEntry(void);
+ void    krm_releaseSTableEntry(struct SiteTable *STable_ptr);
+ void    krm_releaseSTableArrays(void);
+struct SiteTable       *krm_getSTableNextRawEntry(void);
 
 
 /* end private definition section */

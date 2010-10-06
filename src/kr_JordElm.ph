@@ -27,10 +27,10 @@ krui_err kr_topoCheckJE (void) ;
 krui_err kr_topoSortJE  (void) ;
 
 
-static void  kr_recTopoCheckJE (struct Unit *unit_ptr, int depth) ;
-static void  kr_recTopoSortJE  (struct Unit *unit_ptr, int depth) ;
+void  kr_recTopoCheckJE (struct Unit *unit_ptr, int depth) ;
+void  kr_recTopoSortJE  (struct Unit *unit_ptr, int depth) ;
 
-static TopoPtrArray  topo_ptr ;
+TopoPtrArray  topo_ptr ;
 
 
 #endif

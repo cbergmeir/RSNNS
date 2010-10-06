@@ -421,64 +421,64 @@ struct patternpage
  FROM OUTSIDE THE MODULE (IF NOBODY CHANGES THE STATIC DECLARATION) !!!!!!!
 ******************************************************************************/
 
-static float *kr_np_floatmalloc(int size);
+ float *kr_np_floatmalloc(int size);
 /*****************************************************************************
 allocate pattern memory within a private memory page
 <size> is based on sizeof(float) !!
 ******************************************************************************/
 
-static void kr_np_floatfree(float *ptr);
+ void kr_np_floatfree(float *ptr);
 /*****************************************************************************
 free the pattern memory within a private memory page
 ******************************************************************************/
 
-static krui_err kr_np_InitPattern(void);
+ krui_err kr_np_InitPattern(void);
 /*****************************************************************************
 initialization of pattern descriptor array
 ******************************************************************************/
 
-static krui_err kr_np_ReallocatePatternSet(int pat_set, int new_number);
+ krui_err kr_np_ReallocatePatternSet(int pat_set, int new_number);
 /*****************************************************************************
 reallocates the pattern set <pat_set> to contain <new_number> 
 of pattern entries.
 ******************************************************************************/
 
-static krui_err kr_np_DeletePatternSet(int pat_set);
+ krui_err kr_np_DeletePatternSet(int pat_set);
 /*****************************************************************************
 The pattern set <pat_set> is deleted. All memory of all pattern is
 given back to the operating system.
 ******************************************************************************/
 
-static krui_err kr_np_DeletePattern(int pat_set, int pattern);
+ krui_err kr_np_DeletePattern(int pat_set, int pattern);
 /*****************************************************************************
 delete a specific pattern form a pattern set
 ******************************************************************************/
 
-static void kr_np_delSym(int pat_set, struct np_symtab *entry);
+ void kr_np_delSym(int pat_set, struct np_symtab *entry);
 /*****************************************************************************
 delete the symbol table entry from the given pattern set.
 ******************************************************************************/
 
-static krui_err kr_np_AddPattern(int pat_set, int *pattern);
+ krui_err kr_np_AddPattern(int pat_set, int *pattern);
 /*****************************************************************************
 Add an empty pattern descriptor to the specified pattern set. The position
 of the pattern inside the set is returned in <pattern>.
 ******************************************************************************/
 
-static krui_err kr_np_LoadPatternFile(FILE *pat_file, int *pat_set);
+ krui_err kr_np_LoadPatternFile(FILE *pat_file, int *pat_set);
 /*****************************************************************************
 The pattern file <pat_file> is loaded into memory. An internal pattern
 set number is assigned to this pattern file and returned in <pat_set>.
 Return value: error status
 ******************************************************************************/
 
-static krui_err kr_np_SavePatternFile(FILE *pat_file, int pat_set);
+ krui_err kr_np_SavePatternFile(FILE *pat_file, int pat_set);
 /*****************************************************************************
 The pattern set <pat_set> is saved to FILE <pat_file>.
 Return value: error status
 ******************************************************************************/
 
-static krui_err kr_np_GetInfo(int pat_set, np_pattern_set_info *info);
+ krui_err kr_np_GetInfo(int pat_set, np_pattern_set_info *info);
 /*****************************************************************************
 All information concerning pattern set <pat_set> is copied into the
 informational structure <info> which must be provided by the calling
@@ -487,19 +487,19 @@ The current pattern set is set to pat_set.
 Return value: error status
 ******************************************************************************/
 
-static krui_err kr_np_ValidateInfo(int pat_set);
+ krui_err kr_np_ValidateInfo(int pat_set);
 /*****************************************************************************
 update pattern set information if necessary
 ******************************************************************************/
 
-static krui_err kr_np_GetSubPatSizes(int *input_size, int *output_size);
+ krui_err kr_np_GetSubPatSizes(int *input_size, int *output_size);
 /*****************************************************************************
 Depending on the current pattern set and the sub pattern training scheme,
 which must be defined, the size of the first input sub pattern and the size
 of the first output sub pattern is computed.
 ******************************************************************************/
 
-static krui_err kr_np_GetSubPat(bool input, int *pos_coord, int *size_coord,
+ krui_err kr_np_GetSubPat(bool input, int *pos_coord, int *size_coord,
 				float **data, int *entries);
 /*****************************************************************************
 A sub pattern is cut out of the current pattern at position
@@ -535,14 +535,14 @@ The parameter entries returns the number of entries in the data field.
 
 ******************************************************************************/
 
-static krui_err kr_np_SetSubPat(bool input, int *pos_coord, int *size_coord,
+ krui_err kr_np_SetSubPat(bool input, int *pos_coord, int *size_coord,
 				float *data, int entries);
 /*****************************************************************************
 Equivalent to kr_np_GetSubPat, but copies the <data> into the specified 
 sub pattern
 *****************************************************************************/
 
-static bool kr_np_align_sub_pos(int dim, int *n, int *psize, int *ssize, 
+ bool kr_np_align_sub_pos(int dim, int *n, int *psize, int *ssize, 
 				int *sstep, int *spos);
 /*****************************************************************************
 For a given pattern dimension size <psize> of <dim> dimensions and a
@@ -552,7 +552,7 @@ pattern is returned in <n>. The shift pattern given in <sstep> is used
 to find valid allignment positions
 *****************************************************************************/
 
-static bool kr_np_gen_sub_pos(int dim, int *n, int *psize, int *ssize, 
+ bool kr_np_gen_sub_pos(int dim, int *n, int *psize, int *ssize, 
 			      int *sstep, int *spos, bool count);
 /*****************************************************************************
 For a given pattern dimension size <psize> of <dim> dimensions and a
@@ -570,25 +570,25 @@ available number of subpattern, a wraparound occurs.
 returns number of possible positions.
 *****************************************************************************/
 
-static bool kr_np_allocate_pat_train_entries(int n);
+ bool kr_np_allocate_pat_train_entries(int n);
 /*****************************************************************************
 allocate or reallocate an array which will later include the sorted or
 shuffled pattern order (during training)
 *****************************************************************************/
 
-static bool kr_np_allocate_sub_pat_train_entries(int n);
+ bool kr_np_allocate_sub_pat_train_entries(int n);
 /*****************************************************************************
 allocate or reallocate an array which will later include the sorted or
 shuffled order of the sub pattern of the current pattern
 *****************************************************************************/
 
-static bool kr_np_allocate_pat_mapping_entries(int n);
+ bool kr_np_allocate_pat_mapping_entries(int n);
 /*****************************************************************************
 allocate or reallocate an array which will later include
 the virtual to physical pattern number mapping
 *****************************************************************************/
 
-static void kr_np_order_pat_entries(int start, int end);
+ void kr_np_order_pat_entries(int start, int end);
 /*****************************************************************************
 Fills the allocated array for the pattern ordering with increasing
 numbers if patterns are sorted or with a random permutation if
@@ -596,7 +596,7 @@ patterns are shuffled.  <start> and <end> define the first and last
 pattern number to be used
 *****************************************************************************/
 
-static void kr_np_order_sub_pat_entries(int start, int end);
+ void kr_np_order_sub_pat_entries(int start, int end);
 /*****************************************************************************
 Fills the allocated array for the sub pattern ordering with increasing
 numbers if sub patterns are sorted or with a random permutation if sub
@@ -604,14 +604,14 @@ patterns are shuffled.  <start> and <end> define the first and last
 sub pattern number to be used
 *****************************************************************************/
 
-static void kr_np_order_chunk_arrays(bool shuffle, int pattern_set);
+ void kr_np_order_chunk_arrays(bool shuffle, int pattern_set);
 /*****************************************************************************
 Fills the allocated array for the pattern ordering with increasing
 numbers if patterns are sorted or with a random permutation if
 patterns are shuffled.
 *****************************************************************************/
 
-static void kr_np_order_chunked_pat_entries(int pat_set, int start, int end); 
+ void kr_np_order_chunked_pat_entries(int pat_set, int start, int end); 
 /*****************************************************************************
 Fills the allocated array for the pattern ordering with the
 contents of all chunk arrays.  <start> and <end> define the first and
@@ -619,23 +619,23 @@ last pattern number to be used
 *****************************************************************************/
 
 
-static void kr_np_fill_virtual_to_void_mapping(int pat_set);
+ void kr_np_fill_virtual_to_void_mapping(int pat_set);
 /*****************************************************************************
 Fills the allocated mapping array for the pattern ordering with
 the contents of all chunk arrays.
 *****************************************************************************/
 
-static int kr_np_virtual_to_physical(int vnum);
+ int kr_np_virtual_to_physical(int vnum);
 /*****************************************************************************
 mapping of virtual pattern numbers to physically stored patterns
 *****************************************************************************/
 
-static int kr_np_physical_to_virtual(int pnum);
+ int kr_np_physical_to_virtual(int pnum);
 /*****************************************************************************
 mapping of physical pattern number to a virtual number
 *****************************************************************************/
 
-static krui_err kr_np_DefineSubPatternOrdering(int pat_set, bool input, 
+ krui_err kr_np_DefineSubPatternOrdering(int pat_set, bool input, 
 					       int *size_coord, 
 					       int *incr_coord);
 /*****************************************************************************
@@ -655,7 +655,7 @@ generated the next pattern is used. Depending on npui_shuffle_pattern
 and npui_shuffle_sub_pattern shuffling is activated.
 *****************************************************************************/
 
-static krui_err kr_np_showPatternSTD(int mode);
+ krui_err kr_np_showPatternSTD(int mode);
 /*****************************************************************************
 According to the mode kr_np_showPatternSTD stores the current
 Pattern/sub Pattern into the units activation (and/or output) values.
@@ -670,7 +670,7 @@ store input pattern into input units activations, store output pattern
 into output units activations and update output units output
 *****************************************************************************/
 
-static krui_err kr_np_modifyPattern(void);
+ krui_err kr_np_modifyPattern(void);
 /*****************************************************************************
 The current activation of the input and output units is used to
 modify the current sub pattern.
@@ -683,37 +683,37 @@ modify the current sub pattern.
 /* table for mapping of external pattern set numbers to internal
    numbers. This array is always filled from the beginning. If a set
    is deleted, all higher entries are moved down inside the table. */
-static int                npui_pat_sets[NO_OF_PAT_SETS];
+ int                npui_pat_sets[NO_OF_PAT_SETS];
 
 /* the number of used entries in the above table */
-static int                npui_number_pat_sets             = 0;
+ int                npui_number_pat_sets;
 
 /* the index of the current pattern set into the above table */
-static int                npui_curr_pat_set                = -1;
+ int                npui_curr_pat_set;
 
 /* the number of the current pattern for the current pattern set. This
  is the pattern which is used for several user actions (modify, show,
  ...). This is a virtual pattern number. */
-static int                npui_curr_pattern                = -1;
+ int                npui_curr_pattern;
 
 /* stored values for the sub pattern size, position and shifting step
    size */
-static int                npui_insize[MAX_NO_OF_VAR_DIM];
-static int                npui_outsize[MAX_NO_OF_VAR_DIM];
-static int                npui_inpos[MAX_NO_OF_VAR_DIM];
-static int                npui_outpos[MAX_NO_OF_VAR_DIM];
-static int                npui_instep[MAX_NO_OF_VAR_DIM];
-static int                npui_outstep[MAX_NO_OF_VAR_DIM];
+ int                npui_insize[MAX_NO_OF_VAR_DIM];
+ int                npui_outsize[MAX_NO_OF_VAR_DIM];
+ int                npui_inpos[MAX_NO_OF_VAR_DIM];
+ int                npui_outpos[MAX_NO_OF_VAR_DIM];
+ int                npui_instep[MAX_NO_OF_VAR_DIM];
+ int                npui_outstep[MAX_NO_OF_VAR_DIM];
 
 /* TRUE if size and position fields above are valid */
-static bool               npui_show_defined                = FALSE;
+ bool               npui_show_defined;
 
 /* TRUE if size and step sizes fields above are valid */
-static bool               npui_train_defined               = FALSE;
+ bool               npui_train_defined;
 
 /* shuffle flags as set by the user */
-static bool               npui_shuffle_pattern             = FALSE;
-static bool               npui_shuffle_sub_pattern         = FALSE;
+ bool               npui_shuffle_pattern;
+ bool               npui_shuffle_sub_pattern;
 
 
 
@@ -721,34 +721,34 @@ static bool               npui_shuffle_sub_pattern         = FALSE;
 /* array of (sub) pattern numbers that are to be trained with the
    current pattern set (pattern). numbers within this array may be
    shuffled */
-static int                *np_pat_train_order              = NULL;
-static int                *np_sub_pat_train_order          = NULL;
-static int                *np_pat_mapping_order            = NULL;
+ int                *np_pat_train_order;
+ int                *np_sub_pat_train_order;
+ int                *np_pat_mapping_order;
 
 /* contents of np_(sub_)pat_train_order is valid, if this variable is
  TRUE */
-static bool               np_pat_train_valid               = FALSE;
-static bool               np_sub_pat_train_valid           = FALSE;
-static bool               np_pat_mapping_valid             = FALSE;
+ bool               np_pat_train_valid;
+ bool               np_sub_pat_train_valid;
+ bool               np_pat_mapping_valid;
 
 /* this is the allocated size of np_(sub_)pat_train_order. It is used
    during reallocation for other pattern sets or different training
    situations */
-static int                np_pat_train_size                = 0;
-static int                np_sub_pat_train_size            = 0;
-static int                np_pat_mapping_size              = 0;
+ int                np_pat_train_size;
+ int                np_sub_pat_train_size;
+ int                np_pat_mapping_size;
 
 /* actual number of valid entries in the np_(sub_)pat_train_order
    field. This number may be smaller than np_(sub_)pat_train_size */
-static int                np_pat_train_number              = 0;
-static int                np_sub_pat_train_number          = 0;
+ int                np_pat_train_number;
+ int                np_sub_pat_train_number;
 
 /* index into np_(sub_)pat_train_order field which defines the
    position of the next pattern number that is to be returned by an
    ordered (or shuffled) pattern access. -1 means that alle field
    antries have been processed in an ordered (shuffled) way. */
-static int                np_next_train_pat                = -1;
-static int                np_next_train_sub_pat            = -1;
+ int                np_next_train_pat;
+ int                np_next_train_sub_pat;
 
 /* if pattern shuffling AND sub pattern shuffling is activated at the
    same time, one epoch does not match the usual criterion that each
@@ -759,83 +759,83 @@ static int                np_next_train_sub_pat            = -1;
    used.
    np_random_train_number equals the total number of sub patterns for
    a mixed shuffled access */
-static int                np_random_train_number           = 0;
+ int                np_random_train_number;
 
 /* This is the pattern-in-epoch counter for the mixed shuffled
    access. -1 means that the epoch is completed */
-static int                np_next_train_random             = -1;
+ int                np_next_train_random;
 
 
 
 /* This is the sub pattern definition/shifting scheme for the current
    pattern set */
-static int                np_t_insize[MAX_NO_OF_VAR_DIM];
-static int                np_t_outsize[MAX_NO_OF_VAR_DIM];
-static int                np_t_instep[MAX_NO_OF_VAR_DIM];
-static int                np_t_outstep[MAX_NO_OF_VAR_DIM];
+ int                np_t_insize[MAX_NO_OF_VAR_DIM];
+ int                np_t_outsize[MAX_NO_OF_VAR_DIM];
+ int                np_t_instep[MAX_NO_OF_VAR_DIM];
+ int                np_t_outstep[MAX_NO_OF_VAR_DIM];
 
 /* size of the input and output parts of sub pattern for the current
    sub pattern definition. */
-static int                np_sub_pat_input_size            = 0;
-static int                np_sub_pat_output_size           = 0;
+ int                np_sub_pat_input_size;
+ int                np_sub_pat_output_size;
 
 /* this flag denotes whether the above two variables are valid */
-static bool               np_sub_pat_sizes_valid           = FALSE;
+ bool               np_sub_pat_sizes_valid;
 
 
 
 
 /* internal memory for the total number of sub patterns in the current
    pattern set */
-static int                np_abs_count_No                  = 0;
+ int                np_abs_count_No;
 
 /* internal flag that determines, whether np_abs_count_No has a valid
    entry or has to be recomputed otherwise. This flag is set to FALSE
    during every operation, which may change the access structure to
    the pattern set. */
-static bool               np_abs_count_valid               = FALSE;
+ bool               np_abs_count_valid;
 
 /* the field np_abs_count[n] contains the accumulated number of sub
    patterns up to the pattern n. This field is used to find a specific
    sub pattern by number. */
-static int                *np_abs_count                    = NULL;
+ int                *np_abs_count;
 
 /* This is the allocated size of the field np_abs_count. */
-static int                np_abs_count_size                = 0;
+ int                np_abs_count_size;
 
 
 
 /* size of all following set specific arrays (equals NO_OF_PAT_SETS,
    but kept as variable for further virtualization) */
-static int                   np_used_pat_set_entries       = 0;
+ int                   np_used_pat_set_entries;
 
 /* array if flags which are TRUE if the index is used for a loaded
    pattern set */
-static bool                  *np_pat_set_used              = NULL;
+ bool                  *np_pat_set_used;
 
 /* array of fields of pattern descriptors, here the patterns are stored
    as defined in the pattern file */
-static np_pattern_descriptor **np_pat_sets                 = NULL;
+ np_pattern_descriptor **np_pat_sets;
 
 /* array of set descriptors which hold set specific data independent
    from a specific pattern */
-static np_pattern_set_info   *np_info                      = NULL;
+ np_pattern_set_info   *np_info;
 
 /* array of flags which are true if the indexed set descriptor holds
    valid data. These flags are reset if the structure of the pattern
    set changes. To make the set descriptor valid, usually all patterns
    in the set have to be examined */
-static bool                  *np_info_valid                = NULL;
+ bool                  *np_info_valid;
 
 /* array of symbol tables to store the class names of the indexed
    set. If NULL, the symbol table is empty which is equivalent that
    the pattern set holds no class information */
-static struct np_symtab      **np_st                       = NULL;
+ struct np_symtab      **np_st;
 
 
 
 /* internal pointer to the current physical pattern in the current set */
-static np_pattern_descriptor *np_current_pattern           = NULL;
+ np_pattern_descriptor *np_current_pattern;
 
 
 
@@ -843,13 +843,13 @@ static np_pattern_descriptor *np_current_pattern           = NULL;
    for external usage (training, etc...). Note: the data within these
    fields is read only, which means that modifications have no effect
    on the stored pattern set */
-static float                 *np_i_subpat                  = NULL;
-static int                   np_i_subpatsize               = 0;
-static float                 *np_o_subpat                  = NULL;
-static int                   np_o_subpatsize               = 0;
+ float                 *np_i_subpat;
+ int                   np_i_subpatsize;
+ float                 *np_o_subpat;
+ int                   np_o_subpatsize;
 
 /* entry to private memory management */
-static struct patternpage    *np_pages                     = NULL;
+ struct patternpage    *np_pages;
 
 /* end private definition section */
 

@@ -71,7 +71,7 @@ GROUP: Site Macros
 
 #define  GET_SITE_NAME      (__site_ptr->site_table->Entry.site_name->Entry.symbol)
 
-#define  GET_SITE_VALUE     ( (*__site_ptr->site_table->site_func) (__site_ptr) )
+#define  GET_SITE_VALUE     ( (this->*__site_ptr->site_table->site_func) (__site_ptr) )
 
 /*  Future Application (in SNNS-Kernel V1.4 the sites don't have weights).
 */

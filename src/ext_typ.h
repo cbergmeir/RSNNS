@@ -20,9 +20,10 @@
 #ifndef  KR_EXTERNAL_TYPES
 #define  KR_EXTERNAL_TYPES
 
+class SnnsCLib ;
 
-typedef  void	(* FunctionPtr) (void *,...);
-typedef  krui_err  (* NetFunctionPtr) (void *,...);
+typedef  void	(SnnsCLib::*FunctionPtr) (void *,...);
+typedef  krui_err  (SnnsCLib::*NetFunctionPtr) (void *,...);
 
 
 struct  UnitValues  {

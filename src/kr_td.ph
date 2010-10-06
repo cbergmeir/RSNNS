@@ -33,6 +33,11 @@ krui_err  LEARN_TDBP_McClelland(int start_pattern, int end_pattern,
 				float parameterInArray[], int NoOfInParams,
 				float * *parameterOutArray, int *NoOfOutParams);
  
+krui_err TEST_TDbackprop(int start_pattern, int end_pattern, 
+				 float parameterInArray[], int NoOfInParams,
+				 float * *parameterOutArray, 
+				 int *NoOfOutParams );
+
 /* end global definition section */
 
 
@@ -45,16 +50,16 @@ krui_err  LEARN_TDBP_McClelland(int start_pattern, int end_pattern,
 #define  LEARN_PARAM4( param ) param[ 3 ] /* contains the 4th learning param.*/
 #define  LEARN_PARAM5( param ) param[ 4 ] /* contains the 5th learning param.*/
 
-static krui_err initializeTDBackprop(void);
+ krui_err initializeTDBackprop(void);
 
-static float propagateTDNetBackward(int pattern_no, int sub_pat_no, 
+ float propagateTDNetBackward(int pattern_no, int sub_pat_no, 
 				    float learn_parameter, float delta_max );
 
-static float propagateTDNetBackMcClelland(int pattern_no, int sub_pat_no,
+ float propagateTDNetBackMcClelland(int pattern_no, int sub_pat_no,
 					   float learn_parameter, 
 					   float delta_max );
 
-static float testTDNetBackward(int pattern_no, int sub_pat_no, 
+ float testTDNetBackward(int pattern_no, int sub_pat_no, 
 				    float learn_parameter, float delta_max );
 
 /* end private definition section */

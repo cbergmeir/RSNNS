@@ -97,6 +97,8 @@ void bn_create_elman  (void);*/
                                  FlintType weight) ;
 
 
+ void setPosRow (int unit_no, int no_of_units, int x, int y, int r);
+
 /*  void     fixWindowSize   (Widget window) ;*/
 
 #endif

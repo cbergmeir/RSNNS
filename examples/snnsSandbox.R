@@ -1,3 +1,68 @@
+library(RSNNS)
+
+setClass( "SnnsCLib", representation( pointer = "externalptr" ) )
+
+SnnsCLib_method <- function(name){
+  paste( "SnnsCLib", name, sep = "__" )
+}
+
+SnnsR_method <- function(name){
+  paste( "SnnsR", name, sep = "__" )
+}
+
+setMethod( "$", "SnnsCLib", function(x, name ){
+      function(...) {
+        #print(x)
+        
+        myFunc <- mget(SnnsR_method(name), mode="any", 
+            envir = as.environment(-1), 
+            ifnotfound = list(FALSE), inherits=TRUE)
+
+        if(is.function(myFunc[[1]])) return(myFunc[[1]](...))
+        else return(.Call( SnnsCLib_method(name) , x@pointer , ... )) 
+      }     
+    } )
+
+snnsObjectFactory <- function(){
+  mySnnsObject <- new( "SnnsCLib")
+  mySnnsObject@pointer <- .Call("SnnsCLib__new", package="RSNNS")
+  return(mySnnsObject)
+}
+
+snns <- snnsObjectFactory()
+
+snns
+
+snns$getVersion()
+snns$createFullyConnectedFeedForwardNet()
+
+
+SnnsR__createFullyConnectedFeedForwardNet <- function(x, unitsPerLayer) {
+  print(x)
+  return("test")
+  
+}
+
+exists("SnnsR__createFullyConnectedFeedForwardNet")
+ls(RSNNS)
+
+name <- "getVersion"
+name <- "createFullyConnectedFeedForwardNet"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 library(mvbutils)
 
 doc2Rd("savePatFile")

@@ -32,8 +32,8 @@ int cc_hiddenXminPos;
 /* end   global definition section */
 
 /* begin privat definition section */
-int cc_display_mode=Y_MAX_MODE1;
-int cc_LayerDistance=DEFAULT_DISTANCE_BETWEEN_LAYERS;
+int cc_display_mode;
+int cc_LayerDistance;
 int cc_lastFirstOutputRow;
 
 

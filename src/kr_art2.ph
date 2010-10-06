@@ -301,41 +301,41 @@ GROUP: global variables, local to this module
 
 /* Global variable for parameter values */
 
-static FlintType      Param_rho   = 0.8;
-static FlintType      Param_a     = 0.0;
-static FlintType      Param_b     = 0.0;
-static FlintType      Param_c     = 0.0;
-static FlintType      Param_d     = 0.0;
-static FlintType      Param_theta = 0.5;
+FlintType      Param_rho;
+FlintType      Param_a;
+FlintType      Param_b;
+FlintType      Param_c;
+FlintType      Param_d;
+FlintType      Param_theta;
 
 /* Global variables for vector norms */
 
-static FlintType      NormInp     = 0.0;
-static FlintType      NormW       = 0.0;
-static FlintType      NormU       = 0.0;
-static FlintType      NormV       = 0.0;
-static FlintType      NormP       = 0.0;
-static FlintType      NormR       = 0.0;
+FlintType      NormInp;
+FlintType      NormW;
+FlintType      NormU;
+FlintType      NormV;
+FlintType      NormP;
+FlintType      NormR;
 
 
-static TopoPtrArray   topo_layer[10];      /* contains pointers to first pointer
+TopoPtrArray   topo_layer[10];      /* contains pointers to first pointer
                                               to inp unit, first pointer
                                               to w unit, x unit ... in the topo
                                               pointer array
                                            */
 
-static int            NoOfDelaySteps = 0;
+int            NoOfDelaySteps;
 
-static bool           GlobalReset     = FALSE;
-static bool           TopDownPhase;
-static bool           f1_stable = FALSE;   /* becomes TRUE if F1-Layer is stable
+bool           GlobalReset;
+bool           TopDownPhase;
+bool           f1_stable;   /* becomes TRUE if F1-Layer is stable
                                               (see kra2_check_f1_stability)
                                            */
 
 /* functions that are local to this module
 */
 
-static void   kra2_set_fix_weight (
+void   kra2_set_fix_weight (
 
                                    struct Unit   *src_unit,
                                    struct Unit   *trgt_unit,
@@ -344,27 +344,27 @@ static void   kra2_set_fix_weight (
                                   );
 
 
-static FlintType  kra2_compute_l2_norm (
+FlintType  kra2_compute_l2_norm (
 
                                         int Layer
 
                                        );
 
-static int  kra2_get_NoOfRecUnits (
+int  kra2_get_NoOfRecUnits (
 
                                    void
 
                                   );
 
 
-static krui_err  kra2_get_InpUnits (
+krui_err  kra2_get_InpUnits (
 
                                     TopoPtrArray  *topo_ptr
 
                                    );
 
 
-static krui_err  kra2_get_WUnits (
+krui_err  kra2_get_WUnits (
 
                                   TopoPtrArray *topo_ptr,
                                   int          *no_of_w_units
@@ -372,7 +372,7 @@ static krui_err  kra2_get_WUnits (
                                  );
 
 
-static krui_err  kra2_get_XUnits (
+krui_err  kra2_get_XUnits (
 
                                   TopoPtrArray *topo_ptr,
                                   int          *no_of_x_units
@@ -380,7 +380,7 @@ static krui_err  kra2_get_XUnits (
                                  );
 
 
-static krui_err  kra2_get_UUnits (
+krui_err  kra2_get_UUnits (
 
                                   TopoPtrArray *topo_ptr,
                                   int          *no_of_u_units
@@ -388,7 +388,7 @@ static krui_err  kra2_get_UUnits (
                                  );
 
 
-static krui_err  kra2_get_VUnits (
+krui_err  kra2_get_VUnits (
 
                                   TopoPtrArray *topo_ptr,
                                   int          *no_of_v_units
@@ -396,7 +396,7 @@ static krui_err  kra2_get_VUnits (
                                  );
 
 
-static krui_err  kra2_get_PUnits (
+krui_err  kra2_get_PUnits (
 
                                   TopoPtrArray *topo_ptr,
                                   int          *no_of_p_units
@@ -404,7 +404,7 @@ static krui_err  kra2_get_PUnits (
                                  );
 
 
-static krui_err  kra2_get_QUnits (
+krui_err  kra2_get_QUnits (
 
                                   TopoPtrArray *topo_ptr,
                                   int          *no_of_q_units
@@ -412,7 +412,7 @@ static krui_err  kra2_get_QUnits (
                                  );
 
 
-static krui_err  kra2_get_RUnits (
+krui_err  kra2_get_RUnits (
 
                                   TopoPtrArray *topo_ptr,
                                   int          *no_of_r_units
@@ -420,14 +420,14 @@ static krui_err  kra2_get_RUnits (
                                  );
 
 
-static krui_err  kra2_get_RecUnits (
+krui_err  kra2_get_RecUnits (
 
                                     TopoPtrArray  *topo_ptr
 
                                    );
 
 
-static krui_err  kra2_get_RstUnits (
+krui_err  kra2_get_RstUnits (
 
                                     TopoPtrArray  *topo_ptr,
                                     int          *no_of_rst_units
@@ -435,82 +435,82 @@ static krui_err  kra2_get_RstUnits (
                                    );
 
 
-static krui_err  kra2_TopoPtrArray (
+krui_err  kra2_TopoPtrArray (
 
                                     void
 
                                    );
 
 
-static krui_err  kra2_LinksToInpUnits (
+krui_err  kra2_LinksToInpUnits (
 
                                        TopoPtrArray *topo_ptr
 
                                       );
 
 
-static krui_err  kra2_LinksToWUnits (
+krui_err  kra2_LinksToWUnits (
 
                                      TopoPtrArray *topo_ptr
 
                                     );
 
 
-static krui_err  kra2_LinksToXUnits (
+krui_err  kra2_LinksToXUnits (
 
                                      TopoPtrArray *topo_ptr
 
                                     );
 
 
-static krui_err  kra2_LinksToUUnits (
+krui_err  kra2_LinksToUUnits (
 
                                      TopoPtrArray *topo_ptr
 
                                     );
 
 
-static krui_err  kra2_LinksToVUnits (
+krui_err  kra2_LinksToVUnits (
 
                                      TopoPtrArray *topo_ptr
 
                                     );
 
 
-static krui_err  kra2_LinksToPUnits (
+krui_err  kra2_LinksToPUnits (
 
                                      TopoPtrArray *topo_ptr
 
                                     );
 
 
-static krui_err  kra2_LinksToQUnits (
+krui_err  kra2_LinksToQUnits (
 
                                      TopoPtrArray *topo_ptr
 
                                     );
 
 
-static krui_err  kra2_LinksToRUnits (
+krui_err  kra2_LinksToRUnits (
 
                                      TopoPtrArray *topo_ptr
 
                                     );
 
 
-static krui_err  kra2_LinksToRecUnits (
+krui_err  kra2_LinksToRecUnits (
 
                                        TopoPtrArray *topo_ptr
 
                                       );
 
 
-static krui_err  kra2_LinksToRstUnits (
+krui_err  kra2_LinksToRstUnits (
                                        TopoPtrArray *topo_ptr
                                       );
 
-static krui_err kra2_init_i_act (void);
-static krui_err kra2_init_fix_weights (void);
+krui_err kra2_init_i_act (void);
+krui_err kra2_init_fix_weights (void);
 
 /* end private definition section */
 

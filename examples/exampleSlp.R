@@ -27,6 +27,7 @@ irisTestTargets <- irisTargets[121:nrow(iris),]
 library(RSNNS)
 
 mySlp <- mlp(irisTrainValues, irisTrainTargets, size=5, decay=0.1, maxit=1000)
+#mySlp <- recurrent(irisTrainValues, irisTrainTargets, size=5, decay=0.1, maxit=1000)
 
 print(mySlp)
 
@@ -55,4 +56,4 @@ for(i in 1:nrow(predictions))  {
 }
 print(paste("Errors in test set: ",notCorrect, " of ", nrow(predictions), "\n",sep=""))
 
-SnnsKrui_saveNet("/home/bergmeir/iris.net","iris")
+#SnnsKrui_saveNet("/home/bergmeir/iris.net","iris")

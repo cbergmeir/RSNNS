@@ -111,4 +111,4 @@ char *alloca (int size);
 //#include "kernel/sources/alloca.h"
 #include "getcwd.h"
 #include "strdup.h"
-#include "lrand48.h"
+//#include "lrand48.h"

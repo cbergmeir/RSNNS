@@ -1,52 +1,68 @@
 library(RSNNS)
 
-ver <- SnnsKrui_getVersion()
+setClass( "SnnsCLib", representation( pointer = "externalptr" ) )
+
+SnnsCLib_method <- function(name){
+  paste( "SnnsCLib", name, sep = "__" )
+}
+
+setMethod( "$", "SnnsCLib", function(x, name ){
+      function(...) .Call( SnnsCLib_method(name) , x@pointer , ... )
+    } )
+
+
+mySnnsObject <- new( "SnnsCLib")
+mySnnsObject@pointer <- .Call("SnnsCLib__new", package="RSNNS")
+
+ver <- mySnnsObject$getVersion()
 ver
 
-noFunc <- SnnsKrui_getNoOfFunctions()
+mySnnsObject$getInitialisationFunc()
+    
+noFunc <- mySnnsObject$getNoOfFunctions()
 noFunc
 
 allFuncs <- NULL
 
-for(i in 1:noFunc) allFuncs <- rbind(allFuncs, SnnsKrui_getFuncInfo(i))
+for(i in 1:noFunc) allFuncs <- rbind(allFuncs, mySnnsObject$getFuncInfo(i))
 
 allFuncs
 
-newunit <- SnnsKrui_createDefaultUnit()
+newunit <- mySnnsObject$createDefaultUnit()
 print("New unit:")
 newunit
 
 print("Act func name:")
-SnnsKrui_getUnitActFuncName(newunit)
+mySnnsObject$getUnitActFuncName(newunit)
 
 
-SnnsKrui_isFunction("Act_Logistic", 2);
+mySnnsObject$isFunction("Act_Logistic", 2);
 
-SnnsKrui_getFuncParamInfo("Act_Logistic", 2);
+mySnnsObject$getFuncParamInfo("Act_Logistic", 2);
 
-SnnsKrui_getFuncParamInfo("Std_Backpropagation", 4);
-SnnsKrui_getFuncParamInfo("Quickprop", 4);
+mySnnsObject$getFuncParamInfo("Std_Backpropagation", 4);
+mySnnsObject$getFuncParamInfo("Quickprop", 4);
 
-SnnsKrui_getFuncParamInfo("JE_BP", 4);
-SnnsKrui_getFuncParamInfo("JE_BP_Momentum", 4);
+mySnnsObject$getFuncParamInfo("JE_BP", 4);
+mySnnsObject$getFuncParamInfo("JE_BP_Momentum", 4);
 
-SnnsKrui_getFuncParamInfo("BackpropJogChunk", 4);
+mySnnsObject$getFuncParamInfo("BackpropJogChunk", 4);
 
 
 #TODO: these functions crash...
-#SnnsKrui_getFirstSiteTableEntry()
-#SnnsKrui_getNextSiteTableEntry()
+#mySnnsObject$getFirstSiteTableEntry()
+#mySnnsObject$getNextSiteTableEntry()
 #
-#SnnsKrui_getFirstSymbolTableEntry()
-#SnnsKrui_getNextSymbolTableEntry()
+#mySnnsObject$getFirstSymbolTableEntry()
+#mySnnsObject$getNextSymbolTableEntry()
 
-SnnsKrui_getNetInfo()
-SnnsKrui_getMemoryManagerInfo()
+mySnnsObject$getNetInfo()
+mySnnsObject$getMemoryManagerInfo()
 
-SnnsKrui_getLearnFunc()
-SnnsKrui_getUpdateFunc()
-SnnsKrui_getUnitDefaults()
+mySnnsObject$getLearnFunc()
+mySnnsObject$getUpdateFunc()
+mySnnsObject$getUnitDefaults()
 
-#SnnsKrui_getUnitOutFuncName(200)
+#mySnnsObject$getUnitOutFuncName(200)
 
 

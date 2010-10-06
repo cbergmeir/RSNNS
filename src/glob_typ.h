@@ -1,24 +1,10 @@
-/*****************************************************************************
-  FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/glob_typ.h,v $
-  SHORTNAME      : 
-  SNNS VERSION   : 4.2
- 
-  PURPOSE        : SNNS-Kernel: Global Datatypes and Constants
-  NOTES          : For User's Application Programs, User-Interface and Kernel
- 
-  AUTHOR         : Niels Mache
-  DATE           : 14.02.90 
- 
-  CHANGED BY     : Michael Vogt, Guenter Mamier, Sven Doering, Christine Bagdi
-  RCS VERSION    : $Revision: 2.31 $
-  LAST CHANGE    : $Date: 1998/04/20 11:54:49 $
- 
-    Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
-    Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
- 
-******************************************************************************/
-#ifndef KR_GLOBAL_TYPES
-#define KR_GLOBAL_TYPES
+/**
+ * This file is derived from the original SNNS Kernel Global Datatypes and
+ * Constants file $SNNS_DIR/kernel/sources/glob_type.h
+ */
+
+#ifndef SNNS_GLOBAL_TYPES_HEADER
+#define SNNS_GLOBAL_TYPES_HEADER
 
 #include <stdio.h>
 
@@ -27,10 +13,7 @@
 #  define const
 #endif
 
-
 #ifndef __BORLANDC__
-
-
 
 /*  define MASPAR_KERNEL to build the parallel MasPar Kernel
 */
@@ -124,9 +107,9 @@ GROUP: Public Constants
 #define  KRERR_UPDATE_FUNC      -48
 #define  KRERR_INIT_FUNC        -49
 #define  KRERR_DERIV_FUNC       -50
-#define  KRERR_I_UNITS_CONNECT	-51
-#define  KRERR_O_UNITS_CONNECT	-52
-#define  KRERR_TOPOMODE 	-53
+#define  KRERR_I_UNITS_CONNECT  -51
+#define  KRERR_O_UNITS_CONNECT  -52
+#define  KRERR_TOPOMODE         -53
 #define  KRERR_LEARNING_SITES   -54
 #define  KRERR_SITES_NO_SUPPORT -55
 #define  KRERR_NO_MASPAR_KERNEL -56
@@ -135,10 +118,10 @@ GROUP: Public Constants
 #define  KRERR_NOT_FULLY_CONNECTED -59
 #define  KRERR_MODE_FF1_INVALID_OP -60
 #define  KRERR_NET_TRANSFORM    -61
-#define  KRERR_NO_CURRENT_LINK	-62
-#define  KRERR_NO_CURRENT_UNIT	-63
-#define  KRERR_UNIT_NO_INPUTS	-64
-#define  KRERR_TOPO_DEFINITION	-65
+#define  KRERR_NO_CURRENT_LINK  -62
+#define  KRERR_NO_CURRENT_UNIT  -63
+#define  KRERR_UNIT_NO_INPUTS   -64
+#define  KRERR_TOPO_DEFINITION  -65
 #define  KRERR_BAD_CONNECTION   -66
 #define  KRERR_MASPAR_NO_RESPOND -67
 #define  KRERR_NOT_IMPEMENTED_YET -68
@@ -230,8 +213,8 @@ GROUP: Public Constants
 #define  JOG_WEIGHT_FUNC 8
 #define  ACT_2_DERIV_FUNC 9
 #define  PRUNING_FUNC    10
-#define  TEST_FUNC       11  
-#define  REMAP_FUNC       12  
+#define  TEST_FUNC       11
+#define  REMAP_FUNC       12
 
 #define  FUNC_TYPE_MASK  0x00ff
 #define  DEFAULT_FUNC    0x0100
@@ -265,18 +248,18 @@ GROUP: Public Constants
 
 /*  Topological Unit Types
 */
-#define  UNKNOWN    0
-#define  INPUT      1
-#define  OUTPUT     2
-#define  HIDDEN     3
-#define  DUAL       4
-#define  SPECIAL    5
-#define  SPECIAL_I  6
-#define  SPECIAL_O  7
-#define  SPECIAL_H  8
-#define  SPECIAL_D     9
-#define  SPECIAL_X    10 /* Only used for toggle special flag */
-#define  N_SPECIAL_X  11 /* Only used for toggle special flag */
+#define  UNIT_UNKNOWN    0
+#define  UNIT_INPUT      1
+#define  UNIT_OUTPUT     2
+#define  UNIT_HIDDEN     3
+#define  UNIT_DUAL       4
+#define  UNIT_SPECIAL    5
+#define  UNIT_SPECIAL_I  6
+#define  UNIT_SPECIAL_O  7
+#define  UNIT_SPECIAL_H  8
+#define  UNIT_SPECIAL_D     9
+#define  UNIT_SPECIAL_X    10 /* Only used for toggle special flag */
+#define  UNIT_N_SPECIAL_X  11 /* Only used for toggle special flag */
 
 /*  Unit Input Types
 */
@@ -292,28 +275,28 @@ GROUP: Public Constants
 
 /*  Maximum number of pattern sets
 */
-#define  NO_OF_PAT_SETS 5
+#define  NO_OF_PAT_SETS 2
 
 /*  Maximum Dimensions of Pattern
 */
 #define MAX_NO_OF_VAR_I_DIM     2  /* maximum number of variable input       */
-				   /* dimensions                             */
+                                   /* dimensions                             */
 #define MAX_NO_OF_VAR_O_DIM     2  /* maximum number of variable             */
-				   /* output dimensions                      */
+                                   /* output dimensions                      */
 #define MAX_NO_OF_VAR_DIM       2  /* maximum of MAX_NO_OF_VAR_I_DIM         */
-				   /* MAX_NO_OF_VAR_O_DIM                    */
+                                   /* MAX_NO_OF_VAR_O_DIM                    */
 
 /*  Maximum no. of learning parameters for learning functions
 */
-#define     NO_OF_LEARN_PARAMS	28
+#define     NO_OF_LEARN_PARAMS  28
 
 /*  Maximum no. of results from the learning functions
 */
-#define     NO_OF_RESULTS	10
+#define     NO_OF_RESULTS       10
 
 /*  Maximum no. of stored error from the learning functions
 */
-#define     NO_OF_STORED_ERRORS	50
+#define     NO_OF_STORED_ERRORS 50
 
 /*  Maximum no. of init parameters for initialization functions
 */
@@ -356,15 +339,15 @@ GROUP: Global Datatypes
 
 #################################################*/
 
-typedef int     bool;
+//typedef int     bool;
 typedef float   FlintType;
 typedef int     krui_err;
 
 
 typedef struct
 {
-    double parameter[NO_OF_LEARN_PARAMS]; 
-    /*  UI_NO_OF_CASCADE_PARAMS is declared in ui.h the learn parameter     */ 
+    double parameter[NO_OF_LEARN_PARAMS];
+    /*  UI_NO_OF_CASCADE_PARAMS is declared in ui.h the learn parameter     */
     int noOfParameters;                      /* number of learn parameters  */
     char **parameterDescription;             /* not supported yet           */
     double result[NO_OF_RESULTS];            /* the result of training      */
@@ -380,7 +363,7 @@ typedef struct
     bool interrupted;                        /* marks if all epochs learned */
 } NetLearnParameters;
 
-typedef struct 
+typedef struct
 {
     int number_of_pattern;     /* the number of pattern (pairs) in           */
                                /* this set                                   */
@@ -407,7 +390,7 @@ typedef struct
     char **class_names;        /* array of <classes> class names, ordered    */
     bool class_distrib_active; /* class amount redistribution is active      */
     int *class_redistribution; /* amounts for redistrib. <classes> entries   */
-    
+
     char *remap_function;      /* name of remap function or NULL             */
     float remap_params[NO_OF_REMAP_PARAMS];     /* remap function parameters */
     int no_of_remap_params;    /* number of remap function parameters        */
@@ -447,8 +430,8 @@ GROUP: 3D-Kernel Definitions
 
 struct   PosType  {
   short  x,
-	 y,
-	 z;
+         y,
+         z;
 };
 
 
@@ -457,9 +440,9 @@ struct   PosType  {
 
 struct   PositionVector  {
   float  x,
-	 y,
-	 z,
-	 w;
+         y,
+         z,
+         w;
 };
 
 
@@ -485,10 +468,8 @@ GROUP: Constants for the parallel kernel
 #define  NET_TYPE_GENERAL  0   /*  normal network presentation, no limitations  */
 #define  NET_TYPE_FF1      1   /*  feedforward net with limitations  */
 
-/*  MasPar modes
-*/
+/*  MasPar modes */
 #define  MASPAR_DISCONNECT  0
 #define  MASPAR_CONNECT  1
-
 
 #endif

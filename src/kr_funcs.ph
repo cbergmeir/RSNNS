@@ -61,14 +61,12 @@ GROUP: Local Vars
 
 #define  NO_OF_FUNC_TYPES  11
 #define  NO_OF_KERNELS  2
-static char  CurrNetworkFunc[NO_OF_FUNC_TYPES * NO_OF_KERNELS][FUNCTION_NAME_MAX_LEN];
+char  CurrNetworkFunc[NO_OF_FUNC_TYPES * NO_OF_KERNELS][FUNCTION_NAME_MAX_LEN];
 
-static bool  netFuncInit[NO_OF_FUNC_TYPES * NO_OF_KERNELS] = { 
-                         FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                         FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE  };
+bool  netFuncInit[NO_OF_FUNC_TYPES * NO_OF_KERNELS];
 
-static krui_err  krf_getInternalFuncInfo(int mode, struct FuncInfoDescriptor *func_descr);
-static void  krf_storeCurrentNetworkFunc(char *function_name, int type);
+krui_err  krf_getInternalFuncInfo(int mode, struct FuncInfoDescriptor *func_descr);
+void  krf_storeCurrentNetworkFunc(char *function_name, int type);
 
 
 /* end private definition section */

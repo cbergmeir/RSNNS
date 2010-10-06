@@ -12,6 +12,6 @@ Description: The Stuttgart Neural Network Simulator (SNNS) is a library
     package makes these available through a convenient interface for
     seamless integration within R
 License: GPL (>= 2)
-Collate: 'docData.R' 'mlp.R' 'parser.R' 'RSNNS-package.R'
-    'SnnsWrapperFunctions.R' 'SnnsR_createNets.R' 'SnnsR_globTyp.R'
-    'SnnsR_parser.R' 'SnnsR_patterns.R' 'SnnsR_util.R'
+Collate: 'docData.R' 'mlp.R' 'parser.R' 'recurrent.R' 'RSNNS-package.R'
+    'SnnsDefines.R' 'SnnsR_createNets.R' 'SnnsR_parser.R'
+    'SnnsR_patterns.R' 'SnnsR_util.R' 'SnnsRObjectFactory.R'

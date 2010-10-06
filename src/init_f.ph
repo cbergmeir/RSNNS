@@ -20,6 +20,8 @@
 #ifndef _INIT_F_DEFINED_
 #define  _INIT_F_DEFINED_
 
+public:
+
 /* begin global definition section */
 
 krui_err  INIT_randomizeWeights(float *parameterArray, int NoOfParams);
@@ -59,6 +61,8 @@ krui_err ENZO_noinit(void);
 
 /* end global definition section */
 
+private:
+
 /* begin private definition section */
 
 #define  INIT_PARAM1( param )   param[ 0 ]  /*    contains the 1st initialisation parameter  */
@@ -74,5 +78,7 @@ krui_err ENZO_noinit(void);
 
 
 /* end private definition section */
+
+krui_err   PseudoInv(RbfFloatMatrix *source, int NoOfColumns, RbfFloatMatrix *target );
 
 #endif 

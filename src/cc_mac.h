@@ -232,25 +232,18 @@
 
 
 /* propagation macros */
-extern FlintType OUT_Custom_Python(FlintType act);
 
 #define CALCULATE_ACTIVATION_AND_OUTPUT(UnitPtr,value,p) \
  { \
     UnitPtr->Out.output = ((UnitPtr->out_func == OUT_IDENTITY) ? \
                           (UnitPtr->act = value) : \
-			  ((UnitPtr->out_func == OUT_Custom_Python) ? \
-			   kr_PythonOutFunction(UnitPtr->python_out_func, \
-			    UnitPtr->act = value) : \
-                          (*UnitPtr->out_func) (UnitPtr->act = value))); \
+                          (this->*UnitPtr->out_func) (UnitPtr->act = value)); \
  }
 
 #define CALCULATE_INPUTUNIT_ACTIVATION_AND_OUTPUT(UnitPtr,value) \
     UnitPtr->Out.output = ((UnitPtr->out_func == OUT_IDENTITY) ? \
                           (UnitPtr->act = value) : \
-			  ((UnitPtr->out_func == OUT_Custom_Python) ? \
-			   kr_PythonOutFunction(UnitPtr->python_out_func, \
-			     UnitPtr->act = value) : \
-                          (*UnitPtr->out_func) (UnitPtr->act = value))); \
+                          (this->*UnitPtr->out_func) (UnitPtr->act = value)); \
 
 #define PROPAGATE_THROUGH_INPUT_LAYER(inputUnitPtr,dummy,pattern) \
     FOR_ALL_INPUT_UNITS(inputUnitPtr,dummy){ \
@@ -260,27 +253,18 @@ extern FlintType OUT_Custom_Python(FlintType act);
 #define PROPAGATE_THROUGH_HIDDEN_LAYER(hiddenUnitPtr,dummy,pattern) \
     FOR_ALL_HIDDEN_UNITS(hiddenUnitPtr,dummy) { \
         CALCULATE_ACTIVATION_AND_OUTPUT(hiddenUnitPtr, \
-                  ((hiddenUnitPtr->act_func == ACT_Custom_Python) ? \
-			kr_PythonActFunction(hiddenUnitPtr->python_act_func, \
-						hiddenUnitPtr) : \
-			(hiddenUnitPtr->act_func) (hiddenUnitPtr)) ,pattern); \
+                  (this->*hiddenUnitPtr->act_func)(hiddenUnitPtr),pattern); \
     }
 
 #define PROPAGATE_THROUGH_OUTPUT_LAYER(outputUnitPtr,dummy,pattern) \
     FOR_ALL_OUTPUT_UNITS(outputUnitPtr,dummy) { \
         CALCULATE_ACTIVATION_AND_OUTPUT(outputUnitPtr, \
-                  ((outputUnitPtr->act_func == ACT_Custom_Python) ? \
-			kr_PythonActFunction(outputUnitPtr->python_act_func, \
-						outputUnitPtr) : \
-			(outputUnitPtr->act_func) (outputUnitPtr)) ,pattern); \
+                  (this->*outputUnitPtr->act_func)(outputUnitPtr),pattern); \
     }
 #define PROPAGATE_THROUGH_SPECIAL_LAYER(specialUnitPtr,dummy,pattern) \
 	FOR_ALL_SPECIAL_UNITS(specialUnitPtr,dummy) { \
             CALCULATE_ACTIVATION_AND_OUTPUT(specialUnitPtr, \
-                      ((specialUnitPtr->act_func == ACT_Custom_Python) ? \
-			kr_PythonActFunction(specialUnitPtr->python_act_func, \
-						specialUnitPtr) : \
-			(specialUnitPtr->act_func) (specialUnitPtr)) ,pattern); \
+                      (this->*specialUnitPtr->act_func) (specialUnitPtr),pattern); \
     }
 
 /* modification macros */

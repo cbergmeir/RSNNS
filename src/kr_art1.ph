@@ -71,108 +71,108 @@
 
 /* begin private definition section */
 
-static TopoPtrArray      Art1_del_layer = NULL;   /* Points to first pointer
+TopoPtrArray      Art1_del_layer;   /* Points to first pointer
                                                      within delay-layer
                                                   */
 
 
 /**************** functions, local to this module ******************************/
 
-static int                kra1_get_NoOfRecUnits (
+int                kra1_get_NoOfRecUnits (
 
                                                  void
 
                                                 );
 
-static krui_err           kra1_get_InpUnits (
+krui_err           kra1_get_InpUnits (
 
                                              TopoPtrArray *topo_ptr
 
                                             );
 
-static krui_err           kra1_get_CmpUnits (
+krui_err           kra1_get_CmpUnits (
 
                                              TopoPtrArray *topo_ptr,
                                              int *no_of_cmp_units
 
                                             );
 
-static krui_err           kra1_get_RecUnits (
+krui_err           kra1_get_RecUnits (
 
                                              TopoPtrArray *topo_ptr
 
                                             );
 
-static krui_err           kra1_get_DelUnits (
+krui_err           kra1_get_DelUnits (
 
                                              TopoPtrArray *topo_ptr,
                                              int *no_of_del_units
 
                                             );
 
-static krui_err           kra1_get_RstUnits (
+krui_err           kra1_get_RstUnits (
 
                                              TopoPtrArray *topo_ptr,
                                              int *no_of_rst_units
 
                                             );
 
-static krui_err           kra1_get_SpecUnits (
+krui_err           kra1_get_SpecUnits (
 
                                               TopoPtrArray *topo_ptr,
                                               int *no_of_spec_units
 
                                              );
 
-static krui_err           kra1_TopoPtrArray (
+krui_err           kra1_TopoPtrArray (
 
                                              void
 
                                             );
 
-static krui_err           kra1_Sites (
+krui_err           kra1_Sites (
 
                                       void
 
                                      );
 
-static krui_err           kra1_LinksToInpUnits (
+krui_err           kra1_LinksToInpUnits (
 
                                                 TopoPtrArray *topo_inp_ptr
 
                                                );
 
-static krui_err           kra1_LinksToCmpUnits (
+krui_err           kra1_LinksToCmpUnits (
 
                                                 TopoPtrArray *topo_cmp_ptr
 
                                                );
 
-static krui_err           kra1_LinksToRecUnits (
+krui_err           kra1_LinksToRecUnits (
 
                                                 TopoPtrArray *topo_rec_ptr
 
                                                );
 
-static krui_err           kra1_LinksToDelUnits (
+krui_err           kra1_LinksToDelUnits (
 
                                                 TopoPtrArray *topo_del_ptr
 
                                                );
 
-static krui_err           kra1_LinksToRstUnits (
+krui_err           kra1_LinksToRstUnits (
 
                                                 TopoPtrArray *topo_rst_ptr
 
                                                );
 
-static krui_err           kra1_LinksToSpecUnits (
+krui_err           kra1_LinksToSpecUnits (
 
                                                  TopoPtrArray *topo_spec_ptr
 
                                                 );
 
-static void               kra1_set_fix_weight (
+void               kra1_set_fix_weight (
 
                                                struct Unit *src_unit,
                                                struct Unit *trgt_unit,
@@ -180,7 +180,7 @@ static void               kra1_set_fix_weight (
 
                                               );
 
-static krui_err           kra1_init_fix_weights (
+krui_err           kra1_init_fix_weights (
 
                                                  void
 

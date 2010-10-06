@@ -92,36 +92,28 @@
 
 /* begin private definition section */
 
-static TopoPtrArray      ArtMap_map_layer = NULL;   /* Points to first pointer
+TopoPtrArray      ArtMap_map_layer;   /* Points to first pointer
                                                        within map-layer
                                                     */
 
 
 
 
-static krui_err  kram_get_InpUnits_a (
+krui_err  kram_get_InpUnits_a (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
 
                                      );
 
-static krui_err  kram_get_CmpUnits_a (
+krui_err  kram_get_CmpUnits_a (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
 
                                      );
 
-static krui_err  kram_get_RecUnits_a (
-
-                                      TopoPtrArray      *topo_ptr,
-                                      int               *no_of_units
-
-                                     );
-
-
-static krui_err  kram_get_DelUnits_a (
+krui_err  kram_get_RecUnits_a (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
@@ -129,7 +121,7 @@ static krui_err  kram_get_DelUnits_a (
                                      );
 
 
-static krui_err  kram_get_RstUnits_a (
+krui_err  kram_get_DelUnits_a (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
@@ -137,7 +129,15 @@ static krui_err  kram_get_RstUnits_a (
                                      );
 
 
-static krui_err  kram_get_SpecUnits_a (
+krui_err  kram_get_RstUnits_a (
+
+                                      TopoPtrArray      *topo_ptr,
+                                      int               *no_of_units
+
+                                     );
+
+
+krui_err  kram_get_SpecUnits_a (
 
                                        TopoPtrArray      *topo_ptr,
                                        int               *no_of_units
@@ -145,29 +145,21 @@ static krui_err  kram_get_SpecUnits_a (
                                       );
 
 
-static krui_err  kram_get_InpUnits_b (
+krui_err  kram_get_InpUnits_b (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
 
                                      );
 
-static krui_err  kram_get_CmpUnits_b (
+krui_err  kram_get_CmpUnits_b (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
 
                                      );
 
-static krui_err  kram_get_RecUnits_b (
-
-                                      TopoPtrArray      *topo_ptr,
-                                      int               *no_of_units
-
-                                     );
-
-
-static krui_err  kram_get_DelUnits_b (
+krui_err  kram_get_RecUnits_b (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
@@ -175,7 +167,7 @@ static krui_err  kram_get_DelUnits_b (
                                      );
 
 
-static krui_err  kram_get_RstUnits_b (
+krui_err  kram_get_DelUnits_b (
 
                                       TopoPtrArray      *topo_ptr,
                                       int               *no_of_units
@@ -183,7 +175,15 @@ static krui_err  kram_get_RstUnits_b (
                                      );
 
 
-static krui_err  kram_get_SpecUnits_b (
+krui_err  kram_get_RstUnits_b (
+
+                                      TopoPtrArray      *topo_ptr,
+                                      int               *no_of_units
+
+                                     );
+
+
+krui_err  kram_get_SpecUnits_b (
 
                                        TopoPtrArray      *topo_ptr,
                                        int               *no_of_units
@@ -192,7 +192,7 @@ static krui_err  kram_get_SpecUnits_b (
 
 
 
-static krui_err  kram_get_MapUnits (
+krui_err  kram_get_MapUnits (
 
                                     TopoPtrArray      *topo_ptr,
                                     int               *no_of_units
@@ -200,7 +200,7 @@ static krui_err  kram_get_MapUnits (
                                    );
 
 
-static krui_err  kram_get_SpecUnits (
+krui_err  kram_get_SpecUnits (
 
                                      TopoPtrArray      *topo_ptr,
                                      int               *no_of_units
@@ -208,126 +208,126 @@ static krui_err  kram_get_SpecUnits (
                                     );
 
 
-static krui_err  kram_TopoPtrArray (
+krui_err  kram_TopoPtrArray (
 
                                     void
 
                                    );
 
 
-static krui_err  kram_Sites (
+krui_err  kram_Sites (
 
                              void
 
                             );
 
 
-static krui_err  kram_LinksToInpUnits_a (
+krui_err  kram_LinksToInpUnits_a (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToCmpUnits_a (
+krui_err  kram_LinksToCmpUnits_a (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToRecUnits_a (
+krui_err  kram_LinksToRecUnits_a (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToDelUnits_a (
+krui_err  kram_LinksToDelUnits_a (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToRstUnits_a (
+krui_err  kram_LinksToRstUnits_a (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToSpecUnits_a (
+krui_err  kram_LinksToSpecUnits_a (
 
                                           TopoPtrArray *topo_ptr
 
                                          );
 
 
-static krui_err  kram_LinksToInpUnits_b (
+krui_err  kram_LinksToInpUnits_b (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToCmpUnits_b (
+krui_err  kram_LinksToCmpUnits_b (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToRecUnits_b (
+krui_err  kram_LinksToRecUnits_b (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToDelUnits_b (
+krui_err  kram_LinksToDelUnits_b (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToRstUnits_b (
+krui_err  kram_LinksToRstUnits_b (
 
                                          TopoPtrArray *topo_ptr
 
                                         );
 
 
-static krui_err  kram_LinksToSpecUnits_b (
+krui_err  kram_LinksToSpecUnits_b (
 
                                           TopoPtrArray *topo_ptr
 
                                          );
 
 
-static krui_err  kram_LinksToMapUnits (
+krui_err  kram_LinksToMapUnits (
 
                                        TopoPtrArray *topo_ptr
 
                                       );
 
 
-static krui_err  kram_LinksToSpecUnits (
+krui_err  kram_LinksToSpecUnits (
 
                                         TopoPtrArray *topo_ptr
 
                                        );
 
 
-static krui_err  kram_init_fix_weights (
+krui_err  kram_init_fix_weights (
 
                                         void
 
                                        );
 
 
-static void  kram_set_fix_weight (
+void  kram_set_fix_weight (
 
                                   struct Unit *src_unit,
                                   struct Unit *trgt_unit,

@@ -21,6 +21,8 @@
 #ifndef _CC_GLOB_DEFINED_
 #define  _CC_GLOB_DEFINED_
 
+public:
+
 /* begin global definition section */
 void      cc_printHeadline(char* s,int Length);
 float     cc_getErr (int StartPattern, int EndPattern);
@@ -61,48 +63,23 @@ float OnlineBackPropOfflinePart(float oldValue, float* previousSlope,
 				float* currentSlope, float* LastChange,
 				float eta, float mu, float dummy);
 
-struct CC_DATA  cc_data ={
-  { MAX_PIXEL_ERROR,
-    LEARNING_FUNC, MODIFICATION,
-    ON_OFF, 0, 0, 150, SBC,
-    { 0.0, 0.0, 0.0, 0.0, 0.0 },
-    OFF},
-  { MIN_COVARIANCE_CHANGE, 
-    SPECIAL_PATIENCE,
-    MAX_NO_OF_COVARIANCE_UPDATE_CYCLES,
-    MAX_SPECIAL_UNIT_NO, 
-    SPECIAL_FUNC_TYPE },
-  { MIN_ERROR_CHANGE,
-    OUT_PATIENCE,
-    MAX_NO_OF_ERROR_UPDATE_CYCLES}
-};
+struct CC_DATA  cc_data;
 
-char *cc_actFuncArray[]     ={"Act_Logistic","Act_LogSym","Act_TanH",
-                              "Act_CC_Thresh","Act_Sinus","Act_Exponential",
-			      "Act_Random"};
-char *cc_actFuncArray2[]     ={"Logistic"," LogSym ",
-			      "  TanH  ","dummy"," Sinus  ",
-			      "  Gauss "," Random "};
-char *cc_learningFuncArray[]={" Batch-BP  "," Backprop  ",
-			      " Quickprop ","   Rprop   "};
-char *cc_ModificationArray[]={"   none ","   SDCC ","   LFCC ","   RLCC ",
-			      "   ECC  ","   GCC  ","  Static"};
-char *cc_pruningFuncArray[] ={" SBC "," AIC ","CMSEP"};
 
-int cc_end                = 0;
-int cc_storageFree        = 1;
-int cc_allButtonIsPressed = 1;
+int cc_end;
+int cc_storageFree;
+int cc_allButtonIsPressed;
 
 
 struct Unit  **FirstInputUnitPtr,**FirstHiddenUnitPtr,
              **FirstOutputUnitPtr,**FirstSpecialUnitPtr,
               *bestSpecialUnitPtr;
 
-float **OutputUnitError=NULL;
-float **SpecialUnitAct=NULL;
-float **CorBetweenSpecialActAndOutError=NULL;
-float *MeanOutputUnitError=NULL;
-float *SpecialUnitSumAct=NULL;
+float **OutputUnitError;
+float **SpecialUnitAct;
+float **CorBetweenSpecialActAndOutError;
+float *MeanOutputUnitError;
+float *SpecialUnitSumAct;
 int   LastInsertedHiddenUnit;
 
 float SumSqError;
@@ -110,28 +87,28 @@ float SumSqError;
 int cc_printOnOff;
 int cc_backfittingOnOff;
 int cc_MaxSpecialUnitNo;
-int cc_modification = -1;
+int cc_modification;
 int cc_fastmode;
 float cc_Parameter[5];
 
 
-int *reset=0;
-int cc_cascade=0;
-int NoOfLayers = 0;             /* number hidden layers */
-Layer_Type* ListOfLayers=NULL;  /* data of layers */
+int *reset;
+int cc_cascade;
+int NoOfLayers;             /* number hidden layers */
+Layer_Type* ListOfLayers;  /* data of layers */
 int SizeOfLayerlist;  
 
 
 int cc_outputXMax;
 
-int     cc_actualNetSaved = FALSE;
-float** ActOfUnit = NULL;
-int     NetLearnAlgorithm = NO_INC_ALGORITHM;
+int     cc_actualNetSaved;
+float** ActOfUnit;
+int     NetLearnAlgorithm;
 
-float cc_fse = 0.1;
+float cc_fse;
 int cc_learningFunction;
 
-int prot_fd = -1;
+int prot_fd;
 FILE* prot_stream;
 char DumpText[1024];
 bool cc_NetErgProtocolled;
@@ -140,43 +117,61 @@ int CountSpecTrains,CountOutTrains,CountLinks;
 void Prot();
 void prot(char* s);
 void Prot_Parameters(float* Params,int NetIsCC);
-int filedesc = -1;
+int filedesc;
+
 
 /* the following functions are dummy declarations without implemented body!!
    They are realized by directing their pointers to other functions */
-krui_err (*cc_propagateSpecialUnitsBackward)(int start, int end, int n,
+
+krui_err (SnnsCLib::*cc_propagateSpecialUnitsBackward)(int start, int end, int n,
 					     int counter, float param1,
 					     float param2, float param3);
-float (*cc_propagateOutputUnitsBackward)(int PatternNo, int sub_pat_no,
+float (SnnsCLib::*cc_propagateOutputUnitsBackward)(int PatternNo, int sub_pat_no,
 					 float param1, float param2,
 					 float param3);
-float (*cc_SpecialUnitUpdate)(float oldValue, float* previousSlope,
+float (SnnsCLib::*cc_SpecialUnitUpdate)(float oldValue, float* previousSlope,
 			      float* currentSlope, float* LastChange,
 			      float param1, float param2, float param3);
-float (*cc_OutputUnitUpdate)(float oldValue, float* previousSlope,
+float (SnnsCLib::*cc_OutputUnitUpdate)(float oldValue, float* previousSlope,
 			     float* currentSlope, float* LastChange,
 			     float param1, float param2, float param3);
-
+/*
+krui_err cc_propagateSpecialUnitsBackward(int start, int end, int n,
+					     int counter, float param1,
+					     float param2, float param3);
+float cc_propagateOutputUnitsBackward(int PatternNo, int sub_pat_no,
+					 float param1, float param2,
+					 float param3);
+float cc_SpecialUnitUpdate(float oldValue, float* previousSlope,
+			      float* currentSlope, float* LastChange,
+			      float param1, float param2, float param3);
+float cc_OutputUnitUpdate(float oldValue, float* previousSlope,
+			     float* currentSlope, float* LastChange,
+			     float param1, float param2, float param3);
+*/
 /* end global definition section */
 
-
+private:
 
 /* begin privat definition section */
 
-static int OldNoOfSpecialUnitStorage = 0;
+int OldNoOfSpecialUnitStorage;
 
 #define LINKS_LEAVING(unitPtr)   unitPtr->value_a
 #define LINKS_ARRIVEING(unitPtr) unitPtr->value_b
 #define INPUT_LINKS(unitPtr)     unitPtr->value_c
 
-static void  cc_clearFlags(void);
-static void  DepthFirst4(struct Unit *unitPtr, int depth);
-static void  DepthFirst5(struct Unit *unitPtr, int depth);
+void  cc_clearFlags(void);
+void  DepthFirst4(struct Unit *unitPtr, int depth);
+void  DepthFirst5(struct Unit *unitPtr, int depth);
 krui_err     cc_topoSortMain(int topoSortID);
 
-static TopoPtrArray	global_topo_ptr;
+TopoPtrArray	global_topo_ptr;
 
 /* end  privat definition section */
+
+bool cc_testCycletestFlag(struct Unit* UnitPtr);
+void cc_clearAllCycletestFlags(void);
 
 #endif /* _CC_GLOB_DEFINED_ */
 

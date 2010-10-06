@@ -23,7 +23,7 @@
 /* begin global definition section */
 
 
-#include "krui_typ.h"	/*  Interface function prototypes  */
+//#include "krui_typ.h"	/*  Interface function prototypes  */
 
 /*
 #ifdef __MSDOS__
@@ -35,9 +35,10 @@
 #endif
 */
 
-void (*krui_errorHandler)(int)=NULL;
+//void (*krui_errorHandler)(int)=NULL;
+void (*krui_errorHandler)(int);
 int krui_error_code;
-bool rpckernel=FALSE;
+bool rpckernel;
 
 int  krui_getNoOfUnits(void);
 int  krui_getFirstUnit(void);
@@ -50,7 +51,6 @@ int  krui_searchUnitName(char *unit_name);
 int  krui_searchNextUnitName(void);
 char  *krui_getUnitOutFuncName(int UnitNo);
 krui_err  krui_setUnitOutFunc(int unit_no, char *unitOutFuncName);
-krui_err  krui_setUnitOutPyFunc(int unit_no, PyObject *outfunc);
 char  *krui_getUnitActFuncName(int UnitNo);
 krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName);
 char  *krui_getUnitFTypeName(int UnitNo);
@@ -165,8 +165,10 @@ krui_err   krui_learnSinglePatternFF(int pattern_no, float *parameterInArray, in
 char *krui_getPrunFunc (void);
 krui_err krui_setPrunFunc (char *pruning_func);
 
-extern char *krui_getFFLearnFunc (void);
-extern krui_err krui_setFFLearnFunc (char *FF_learning_func);
+
+char *krui_getFFLearnFunc (void);
+krui_err krui_setFFLearnFunc (char *FF_learning_func);
+
 
 krui_err  krui_setClassDistribution(unsigned int *classDist);
 krui_err  krui_setClassInfo(char *name);
@@ -261,6 +263,11 @@ krui_err krui_setErrorHandler(void(* error_Handler )(int));
 void krui_execHandler(int error_code);
 
 
+char* krui_getFTypeOutFuncName();
+int krui_initInversion();
+void krui_inv_forwardPass(UnitList*);
+double krui_inv_backwardPass(float, float, int*, float, UnitList*, UnitList*);
+
 /*
 #ifdef __MSDOS__
 
@@ -276,7 +283,7 @@ void krui_execHandler(int error_code);
 
 /* begin private definition section */
 
-static char  *krui_topo_err_msg(void);
+ char  *krui_topo_err_msg(void);
 
 /*#################################################
 
@@ -284,15 +291,15 @@ GROUP: Local Var's
 
 #################################################*/
 
-static int  UICurrentNameSearchUnitNo = 0;
-static struct Site  *UICurrentFtypeSite = NULL;
-static struct FtypeUnitStruct  *UICurrentFtypeEntry = NULL;
-static char  *UICurrentNameSearchUnitSymbolPtr = NULL;
+ int  UICurrentNameSearchUnitNo;
+ struct Site  *UICurrentFtypeSite;
+ struct FtypeUnitStruct  *UICurrentFtypeEntry;
+ char  *UICurrentNameSearchUnitSymbolPtr;
 
-static bool dotraining; /* If True => train Network */
-static int noOfStoredErrors=0;
-static double storedLearnErrors[NO_OF_STORED_ERRORS+1];
-static int storedAtEpoch[NO_OF_STORED_ERRORS+1];
+ bool dotraining; /* If True => train Network */
+ int noOfStoredErrors;
+ double storedLearnErrors[NO_OF_STORED_ERRORS+1];
+ int storedAtEpoch[NO_OF_STORED_ERRORS+1];
 
 /*#################################################
 

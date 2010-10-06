@@ -156,9 +156,11 @@ void    ErrMess(char *message);
 
 /* end private definition section */
 
+int RbfLUDcmp(RbfFloatMatrix*, int*);
+void RbfLUBksb(RbfFloatMatrix*, int*, float*);
+
+
 #endif
-
-
 
 
 

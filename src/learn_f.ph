@@ -159,6 +159,15 @@ void propagateNetForward(int pattern_no, int sub_pat_no);
 float propagateNetBackwardBatch(int pattern_no, int sub_pat_no,float delta_max);
 float propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no,float delta_max);
 
+float propagateNetBackwardBatch(int pattern_no, int sub_pat_no,
+				       float delta_max,
+				       Patterns alternative_out_pat, 
+				       int alternative_size)
+{
+return propagateNetBackwardBatch( pattern_no,  sub_pat_no, delta_max);
+};
+
+
 krui_err clearDeltas(void);
 krui_err clearAllDeltas(void);
 
@@ -194,17 +203,27 @@ krui_err  TEST_BPTT(int start_pattern, int end_pattern,
 		     float *parameterInArray, int NoOfInParams, 
 		     float **parameterOutArray, int *NoOfOutParams);
 
+
+
+
+krui_err LEARN_backpropWeightDecay (int start_pattern, 
+					   int end_pattern, 
+					   float *parameterInArray, 
+					   int NoOfInParams, 
+					   float **parameterOutArray,
+					   int *NoOfOutParams); 
+
 /* end global definition section */
 
 /* begin private definition section */
 
 
-static	float testNetBackward2(int pattern_no, int sub_pat_no, 
+	float testNetBackward2(int pattern_no, int sub_pat_no, 
 				    float learn_parameter, float delta_max);
 
-static void test_update_je_context_units(int pattern_no, int sub_pat_no) ; 
+ void test_update_je_context_units(int pattern_no, int sub_pat_no) ; 
 
-static float testNetBackwardRprop(int pattern_no, int sub_pat_no);
+ float testNetBackwardRprop(int pattern_no, int sub_pat_no);
 
 #define  NET_ERROR( param )      param[ 0 ]  /* returns the net error   */
 #define  LEARN_PARAM1( param )   param[ 0 ]  /* contains 1st learning param  */
@@ -216,32 +235,32 @@ static float testNetBackwardRprop(int pattern_no, int sub_pat_no);
 #define  SIGMOID_PRIME_OFFSET    0.1         /* for modified sigmoid function */
 #define SQR(x)  (x) * (x)
 
-static int  NoOfLearnedPatterns;
+ int  NoOfLearnedPatterns;
 
-static float Hebb_error(int NoOfTimes);
+ float Hebb_error(int NoOfTimes);
 
-static void RM_propagate(int pattern_no, int sub_pat_no, float prop_step);
+ void RM_propagate(int pattern_no, int sub_pat_no, float prop_step);
 
-static void RM_learn(float learn_parameter);
+ void RM_learn(float learn_parameter);
 
-static krui_err put_ART1_in_pattern(int pattern_no, int sub_pat_no, 
+ krui_err put_ART1_in_pattern(int pattern_no, int sub_pat_no, 
 				    TopoPtrArray topo_inp_ptr);
 
-static krui_err adjust_ART1_weights(double beta, TopoPtrArray  comp_ptr,
+ krui_err adjust_ART1_weights(double beta, TopoPtrArray  comp_ptr,
 				    TopoPtrArray delay_ptr,
 				    struct Unit   *winner_ptr);
 
-static krui_err put_ART2_in_pattern(int pattern_no, int sub_pat_no,
+ krui_err put_ART2_in_pattern(int pattern_no, int sub_pat_no,
 				    TopoPtrArray topo_inp_ptr);
 
-static krui_err adjust_ART2_weights(double param_d, TopoPtrArray  p_ptr,
+ krui_err adjust_ART2_weights(double param_d, TopoPtrArray  p_ptr,
 				    struct Unit *winner_ptr);
 
-static krui_err put_ARTMAP_in_pattern(int pattern_no, int sub_pat_no,
+ krui_err put_ARTMAP_in_pattern(int pattern_no, int sub_pat_no,
 				      TopoPtrArray topo_inpa_ptr,
 				      TopoPtrArray topo_inpb_ptr);
 
-static krui_err adjust_ARTMAP_weights(double beta_a, double beta_b,
+ krui_err adjust_ARTMAP_weights(double beta_a, double beta_b,
 				      TopoPtrArray compa_ptr,
 				      TopoPtrArray  compb_ptr,
 				      TopoPtrArray  dela_ptr,
@@ -250,92 +269,92 @@ static krui_err adjust_ARTMAP_weights(double beta_a, double beta_b,
 				      struct Unit *winner_ptr_a,
 				      struct Unit *winner_ptr_b);
 
-static	float propagateNetBackward2(int pattern_no, int sub_pat_no, 
+	float propagateNetBackward2(int pattern_no, int sub_pat_no, 
 				    float learn_parameter, float delta_max);
 
-static krui_err updateWeights(float eta);
-static krui_err updateNormalizedWeights(float eta);
+ krui_err updateWeights(float eta);
+ krui_err updateNormalizedWeights(float eta);
 
-static krui_err initializeBackpropMomentum(void);
+ krui_err initializeBackpropMomentum(void);
 
-static	float Backprop_momentum_FSE(int pattern_no, int sub_pat_no, 
+	float Backprop_momentum_FSE(int pattern_no, int sub_pat_no, 
 				    float learn_parameter, float mu, 
 				    float FSE_term, float delta_max);
 
-static float Backprop_weightdecay (int pattern_no, int sub_pat_no, 
+ float Backprop_weightdecay (int pattern_no, int sub_pat_no, 
 				   float learn_parameter, 
 				   float wd_gamma, float min_weight,
 				   float delta_max);
 
-static krui_err initializeQuickprop(void);
+ krui_err initializeQuickprop(void);
 
-static float  propagateNetBackwardQuickprop(int pattern_no, int sub_pat_no,
+ float  propagateNetBackwardQuickprop(int pattern_no, int sub_pat_no,
 					    float delta_max);
 
-static void MODI_quickprop(float learn_parameter, float max_factor, 
+ void MODI_quickprop(float learn_parameter, float max_factor, 
 			   float decay);
 
-static krui_err  initializeCPN(void);
+ krui_err  initializeCPN(void);
 
-static void normalize_weight(struct Unit *winner_ptr, float sum);
+ void normalize_weight(struct Unit *winner_ptr, float sum);
 
-static void normalize_inputvector(float sum);
+ void normalize_inputvector(float sum);
 
-static float propagateNet_CPN(int pattern_no, int sub_pat_no,
+ float propagateNet_CPN(int pattern_no, int sub_pat_no,
 			      float alpha, float beta, float threshold);
 
-static	void  propagateNetForward_perc(int pattern_no, int sub_pat_no);
+	void  propagateNetForward_perc(int pattern_no, int sub_pat_no);
 
-static	float propagateNetBackward_perc(int pattern_no, int sub_pat_no,
+	float propagateNetBackward_perc(int pattern_no, int sub_pat_no,
 					float learn_parameter, float delta_max,
 					float *perc_error);
 
-static int computeDevite(float *devit, float *sum_error,
+ int computeDevite(float *devit, float *sum_error,
                          float target, float output, int errorType );
 
-static float computeAlpha(void);
+ float computeAlpha(void);
 
-static void MODI_rprop(float maxeps, float weight_decay);
+ void MODI_rprop(float maxeps, float weight_decay);
 
-static krui_err initializeRprop(float update_val);
+ krui_err initializeRprop(float update_val);
 
-static void propagateNetForwardMAP(int pattern_no, int sub_pat_no, 
+ void propagateNetForwardMAP(int pattern_no, int sub_pat_no, 
 				   int errorType);
 
-static float propagateNetBackwardRprop(int pattern_no, int sub_pat_no);
+ float propagateNetBackwardRprop(int pattern_no, int sub_pat_no);
 
-static float propagateNetBackwardMAP(int pattern_no, int sub_pat_no, 
+ float propagateNetBackwardMAP(int pattern_no, int sub_pat_no, 
 				     int errorType);
 
-static float testNetBackwardMAP(int pattern_no, int sub_pat_no, int errorType);
+ float testNetBackwardMAP(int pattern_no, int sub_pat_no, int errorType);
 
-static krui_err BPTT_clear_deltaw(void);
+ krui_err BPTT_clear_deltaw(void);
 
-static krui_err initializeBPTT(void);
+ krui_err initializeBPTT(void);
 
-static void BPTT_propagateNetForward(int pattern_no, int sub_pat_no, int nhist);
+ void BPTT_propagateNetForward(int pattern_no, int sub_pat_no, int nhist);
 
-static float initOldDeltas(int pattern_no, int sub_pat_no );
+ float initOldDeltas(int pattern_no, int sub_pat_no );
 
-static float oneStepBackprop(int backstep, int pattern_no, int sub_pat_no, 
+ float oneStepBackprop(int backstep, int pattern_no, int sub_pat_no, 
 			     int nhist);
 
-static void BPTTadapt(float step_size, float bptt_momentum);
+ void BPTTadapt(float step_size, float bptt_momentum);
 
-static float BPTT_propagateNetBackward(int pattern_no, int sub_pat_no, 
+ float BPTT_propagateNetBackward(int pattern_no, int sub_pat_no, 
 				       int nhist);
 
-static float propagateNet_kohonen(int pattern_no, int sub_pat_no, float height,
+ float propagateNet_kohonen(int pattern_no, int sub_pat_no, float height,
 				  float width, int sizehor);
 
-static krui_err initializeKohonenLearning(void);
+ krui_err initializeKohonenLearning(void);
 
-static void update_je_context_units(int pattern_no, int sub_pat_no,
+ void update_je_context_units(int pattern_no, int sub_pat_no,
 				    float use_real_value_percent) ; 
 
-static void reset_je_context_units(void) ;
+ void reset_je_context_units(void) ;
 
-static krui_err check_je_network(void) ;
+ krui_err check_je_network(void) ;
 
 /* end private definition section */
 

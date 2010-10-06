@@ -10,35 +10,41 @@ mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, linout=FALSE) {
   if(any(is.na(y))) stop("missing values in 'y'")
   if(dim(x)[1L] != dim(y)[1L]) stop("nrows of 'x' and 'y' must match")
   
+  #layers <- c(dim(x)[2L], size, dim(y)[2L])
   snns$n <- c(dim(x)[2L], size, dim(y)[2L])
   snns$nunits <- as.integer(1L + sum(snns$n))
   snns$nconn <- rep(0, snns$nunits+1L)
   snns$conn <- numeric(0L)
   
-  SnnsKrui_setLearnFunc('Quickprop')
-  SnnsKrui_setUpdateFunc('Topological_Order')
-  SnnsKrui_setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
+  snnsObject <- SnnsRObjectFactory()
   
-  mlp <- SnnsR_createFullyConnectedFeedForwardNet(snns$n)
-  patset <- SnnsR_createPatterns(x, y)
-  SnnsKrui_setCurrPatSet(patset)
+  snnsObject$setLearnFunc('Quickprop')
+  snnsObject$setUpdateFunc('Topological_Order')
+  snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
   
-  SnnsKrui_initializeNet(-1)
-  SnnsKrui_shufflePatterns(TRUE)
-  SnnsKrui_DefTrainSubPat()
+  #mlp <-
+  snnsObject$createFullyConnectedFeedForwardNet(snns$n)
+  
+  patset <- snnsObject$createPatterns(x, y)
+  snnsObject$setCurrPatSet(patset$set_no)
+  
+  snnsObject$initializeNet(-1)
+  snnsObject$shufflePatterns(TRUE)
+  snnsObject$DefTrainSubPat()
   
   error <- vector()
   for(i in 1:maxit) {
-    res <- SnnsKrui_learnAllPatterns(c(decay, 0, 0, 0))
+    res <- snnsObject$learnAllPatterns(c(decay, 0, 0, 0))
     if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
     error[i] <- res[[2]]
   }
   
-  snns$mlp <- mlp
-  snns$generalErrorIterations <- error
-  fit <- SnnsR_predictValues(x)
+  #snns$mlp <- mlp
+  snns$generalErrorIterations <- as.matrix(error)
+  fit <- snnsObject$predictValues(x)
   
   snns$fitted.values <- fit
+  snns$snnsObject <- snnsObject
   
   class(snns) <- "mlp"
   snns  
@@ -68,13 +74,15 @@ predict.mlp <- function(object, newdata, type=c("raw","class"), ...)
     ntr <- nrow(x)
     nout <- object$n[length(object$n)]
     
+    #nout <- object$snnsObject@layers[length(object$snnsObject@layers)]
+    
     z <- matrix(NA, nrow(newdata), nout,
         dimnames = list(rn, dimnames(object$fitted.values)[[2L]]))
     
     #predict values.. 
-    patset <- SnnsR_createPatterns(newdata) 
-    SnnsKrui_setCurrPatSet(patset)
-    predictions <- SnnsR_predictValues(newdata)
+    patset <- object$snnsObject$createPatterns(newdata) 
+    object$snnsObject$setCurrPatSet(patset$set_no)
+    predictions <- object$snnsObject$predictValues(newdata)
     z[keep,] <- predictions
   }
   z

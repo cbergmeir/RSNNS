@@ -1,3 +1,6 @@
+exportPattern("^[[:alpha:]]+")
 useDynLib(RSNNS, .registration=TRUE)
-export(SnnsR_createFullyConnectedFeedForwardNet)
-export(SnnsR_createNet)
+export(SnnsR__createFullyConnectedFeedForwardNet)
+export(SnnsR__createNet)
+export(SnnsR__createPatterns)
+export(SnnsR__predictValues)

@@ -23,7 +23,7 @@
 
 
 #include "krui_typ.h"	/*  Interface function prototypes  */
-#include "kr_typ.h"
+
 /*
 #ifdef __MSDOS__
 
@@ -50,7 +50,6 @@ extern int       krui_searchUnitName(char *unit_name);
 extern int       krui_searchNextUnitName(void);
 extern char     *krui_getUnitOutFuncName(int UnitNo);
 extern krui_err  krui_setUnitOutFunc(int unit_no, char *unitOutFuncName);
-/*extern krui_err  krui_setUnitOutPyFunc(int unit_no, PyObject *outfunc);*/
 extern char     *krui_getUnitActFuncName(int UnitNo);
 extern krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName);
 extern char     *krui_getUnitFTypeName(int UnitNo);

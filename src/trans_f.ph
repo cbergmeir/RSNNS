@@ -26,7 +26,6 @@ FlintType  OUTP_Identity(register FlintType activation);
 FlintType  OUT_Clip_01(register FlintType activation);
 FlintType  OUT_Clip_11(register FlintType activation);
 FlintType  OUT_Threshold05(register FlintType activation);
-FlintType  OUT_Custom_Python(register FlintType activation);
 FlintType   ACT_Linear(struct Unit *unit_ptr);
 FlintType   ACT_BSBFunction(struct Unit *unit_ptr);
 FlintType   ACT_MinOutPlusWeight(struct Unit *unit_ptr);
@@ -105,8 +104,10 @@ void kohonen_SetExtraParameter(int x);
 
 /* begin private definition section */
 
-static int ExtraParameter;
+ int ExtraParameter;
 
 /* end private definition section */
+
+float exp_s(float);
 
 #endif 

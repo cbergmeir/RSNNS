@@ -328,34 +328,34 @@ GROUP: Global Var's
 
 #################################################*/
 
-bool	NetModified = FALSE,   /* TRUE, if the network topology was modified */
-        NetInitialize = TRUE,  /* TRUE, if the network has been initialized  */
-        LearnFuncHasChanged = TRUE;  /* TRUE, if the learning func changed  */
+bool	NetModified,   /* TRUE, if the network topology was modified */
+        NetInitialize,  /* TRUE, if the network has been initialized  */
+        LearnFuncHasChanged;  /* TRUE, if the learning func changed  */
 
-FlagWord  DefaultSType   = DEF_STYPE;  /*  default topological type	*/
+FlagWord  DefaultSType;  /*  default topological type	*/
 
-int  NoOfUnits	 = 0,    /*  no. of units in the network  */
-     MinUnitNo	 = 0,    /*  the first (lowest) used unit no. in the network */
-     MaxUnitNo	 = 0,	 /*  the last (highest) used unit no. in the network */
-     NoOfInputUnits   = 0,	/*  no. of input units	*/
-     NoOfOutputUnits  = 0,      /*  no. of output units  */
-     NoOfHiddenUnits  = 0,	/*  no. of hidden units  */
-     TopoSortID       = NOT_SORTED;  /*  topologic mode identifier  */
+int  NoOfUnits,    /*  no. of units in the network  */
+     MinUnitNo,    /*  the first (lowest) used unit no. in the network */
+     MaxUnitNo,	 /*  the last (highest) used unit no. in the network */
+     NoOfInputUnits,	/*  no. of input units	*/
+     NoOfOutputUnits,      /*  no. of output units  */
+     NoOfHiddenUnits,	/*  no. of hidden units  */
+     TopoSortID;  /*  topologic mode identifier  */
 
-UnitArray     unit_array       = NULL;  /* the unit array  */
+UnitArray     unit_array;  /* the unit array  */
 
-TopoPtrArray  topo_ptr_array   = NULL;  /* pointers to topological sorted units
+TopoPtrArray  topo_ptr_array;  /* pointers to topological sorted units
 					   used by kr_topoSort()  */
 
-int  no_of_topo_units = 0;  /*  no. of unit pointers in the topo_ptr_array  */
+int  no_of_topo_units;  /*  no. of unit pointers in the topo_ptr_array  */
 
 
 
 /*  Kernel Interface Error Code */
-krui_err  KernelErrorCode = KRERR_NO_ERROR;
+krui_err  KernelErrorCode;
 
 /*  File I/O: Line number of the network file. */
-int  lineno = 0;
+int  lineno;
 
 /*  Stores the error codes and messages of the
     topologic sorting and network checking
@@ -365,17 +365,17 @@ struct TopologicMessages  topo_msg;
 
 /*  Pointers and numbers for storing the current unit, site or link.
     Used by unit/site/link searching routines. */
-struct Unit  *unitPtr = NULL;
-struct Site  *sitePtr = NULL,
-	     *prevSitePtr = NULL;
-struct Link  *linkPtr = NULL,
-	     *prevLinkPtr = NULL;
-int  unitNo = 0;
+struct Unit  *unitPtr;
+struct Site  *sitePtr,
+	     *prevSitePtr;
+struct Link  *linkPtr,
+	     *prevLinkPtr;
+int  unitNo;
 
 
-int   specialNetworkType = NET_TYPE_GENERAL; /* topologic type of a network  */
+int   specialNetworkType; /* topologic type of a network  */
 
-float MinimumError = 1000000;     /* best recognition rate */
+float MinimumError;     /* best recognition rate */
 float Temperature;                /* temperature for Simulated Annealing */
 
 #ifdef MASPAR_KERNEL
@@ -386,7 +386,7 @@ GROUP:  Global var's of the parallel MasPar kernel
 
 #################################################*/
 
-int   masParStatus = MASPAR_DISCONNECT;   /*  holds the status of the MasPar */
+int   masParStatus;   /*  holds the status of the MasPar */
 
 /* stores the topologic description of a feedforward network */
 struct FFnetDescriptor  descrFFnet,
@@ -416,38 +416,32 @@ GROUP: Local Vars
 
 /*  topological sorting: global pointer to the topologic array
     (reduces memory consumption in the recursive depth search routine) */
-static TopoPtrArray	global_topo_ptr;
+TopoPtrArray	kernel_global_topo_ptr;
 
-static int  DefaultSubnetNo  = DEF_SUBNET_NO,	 /*  default subnet no.  */
-            DefaultLayerNo   = DEF_LAYER_NO,	 /*  default layer no.	*/
-            DefaultPosX      = DEF_POS_X,	 /*  default x-position  */
-            DefaultPosY      = DEF_POS_Y;	 /*  default y-position  */
+int  DefaultSubnetNo,	 /*  default subnet no.  */
+            DefaultLayerNo,	 /*  default layer no.	*/
+            DefaultPosX,	 /*  default x-position  */
+            DefaultPosY;	 /*  default y-position  */
 
-static int  DefaultPosZ = DEF_POS_Z;	 /*  default z-position  */
-
-
-static FlintType
-     DefaultIAct      = DEF_I_ACT,	 /*  default initial activation  */
-     DefaultBias      = DEF_BIAS;	 /*  default bias */
+int  DefaultPosZ;	 /*  default z-position  */
 
 
-static OutFuncPtr  DefaultUFuncOut  = NULL; /*  default output function     */
-static ActFuncPtr  DefaultUFuncAct  = NULL; /*  default activation function */
+FlintType
+     DefaultIAct,	 /*  default initial activation  */
+     DefaultBias;	 /*  default bias */
+
+
+OutFuncPtr  DefaultUFuncOut; /*  default output function     */
+ActFuncPtr  DefaultUFuncAct; /*  default activation function */
 
 /*  default derivation act. function  */
-static ActDerivFuncPtr	DefaultUFuncActDeriv = NULL;
+ActDerivFuncPtr	DefaultUFuncActDeriv;
 
 /*  default second derivation act. function  */
-static ActDerivFuncPtr	DefaultUFuncAct2Deriv = NULL;
+ActDerivFuncPtr	DefaultUFuncAct2Deriv;
 
-static PyObject * DefaultUPythonFuncOut;
-static PyObject * DefaultUPythonFuncAct;
-static PyObject * DefaultUPythonFuncActDeriv;
-static PyObject * DefaultUPythonFuncAct2Deriv;
-
-struct TransTable  *transTable = NULL;
-int transTableSize = 0;
-
+struct TransTable  *transTable;
+int transTableSize;
 
 
 
@@ -466,31 +460,31 @@ GROUP: Functions
 #################################################*/
 
 /* count units according to their topological type */
-static void  kr_countUnits(struct Unit *unit_ptr, int mode);
+void  kr_countUnits(struct Unit *unit_ptr, int mode);
 
 /*  */
-static int  kr_searchOutputConnection(struct Unit *start_unit_ptr, 
+int  kr_searchOutputConnection(struct Unit *start_unit_ptr, 
 				      struct Unit *source_unit_ptr, 
 				      FlintType *weight);
 
 /* Copies all output links at <source_unit> to <new_unit>. */
-static krui_err  kr_copyOutputLinks(struct Unit *source_unit_ptr, 
+krui_err  kr_copyOutputLinks(struct Unit *source_unit_ptr, 
 				    struct Unit *new_unit_ptr);
 
 /* Copy all input links from <source_unit> to <new_unit> */
-static krui_err  kr_copyInputLinks(struct Unit *source_unit_ptr, 
+krui_err  kr_copyInputLinks(struct Unit *source_unit_ptr, 
 				   struct Unit *new_unit_ptr);
 
 /* copy the source unit with sites, but no links */
-static krui_err kr_copyUnitFrame(struct Unit *source_unit_ptr, 
+krui_err kr_copyUnitFrame(struct Unit *source_unit_ptr, 
 				 struct Unit *new_unit_ptr);
 
 /* calculate correlated hidden units */
-static krui_err kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2, 
+krui_err kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2, 
 					double *res_corr);
 
 /*  calls the current network function */
-static krui_err  kr_callNetworkFunctionSTD(int type, float *parameterInArray, 
+krui_err  kr_callNetworkFunctionSTD(int type, float *parameterInArray, 
 					   int NoOfInParams, 
 					   float **parameterOutArray, 
 					   int *NoOfOutParams, 

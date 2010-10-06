@@ -63,7 +63,7 @@ void cc_MakeMiscCalculationsForModifications(void);
    /* Actually : CCM --> Calculate Layer Height.            */
    /*            CCS --> Calculate Correlation Output Units */
    /*                    and Groups.                        */
-int* ccs_GroupList=NULL;
+int* ccs_GroupList;
    /* dynamic Array [0..NoOfOutputUnits]. the Group in which */
    /* the specified Output-Unit is.                          */
 
@@ -71,20 +71,20 @@ int* ccs_GroupList=NULL;
 
 /* begin privat definition section */
 
-int ccm_CurrentLayerHeight=0;
+int ccm_CurrentLayerHeight;
    /* Height of the actual Layer in ccm */
 
-int ccm_MissingUnitsInLayer=0;
+int ccm_MissingUnitsInLayer;
    /* How much Units do we need 'til the layer is full ? */
 
 int cco_ActualLayer;
    /* the layer of the actual Special Unit in cco */
 
-struct CC_GROUP* ccs_GroupData=NULL;
+struct CC_GROUP* ccs_GroupData;
    /* dynamic Array [0..NoOfGroups]. Def CC_GROUP --> cc_type.h   */
    /* the Actual best Unit and the correlated Score of the Group. */
 
-int *ccr_ListOfChosenUnits=NULL;
+int *ccr_ListOfChosenUnits;
    /* dynamic Array [0..CCR_NO_OF_LINKS].                      */
    /* Used by ccr. CCR_NO_OF_LINKS should be a small constant  */
    /* entered in the WindowParameters (for example 2,4 or 8).  */      

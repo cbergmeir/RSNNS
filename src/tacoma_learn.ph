@@ -261,7 +261,7 @@ void tac_updateSpecial(float param1,float param2,float param3);
       according to the actual valid learning function (QuickProp,RProp
       or BackProp, according to cc_SpecialUnitUpdate) */
       
-float*  PatternSumError=NULL;
+float*  PatternSumError;
  
    /* Array [n_p] of the summed absolute errors of the output-units
       for a given pattern */
@@ -283,7 +283,7 @@ float*  MeanYi;  /* points to SpecialUnitSumAct */
 
    /* Stores the mean activations of the outputs */
 
-TAC_SPECIAL_UNIT_TYPE* SpecialUnitData=NULL;
+TAC_SPECIAL_UNIT_TYPE* SpecialUnitData;
 
    /* Stores additional data of actually used hidden units */
 
