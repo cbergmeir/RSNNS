@@ -21,8 +21,6 @@
 #ifndef _CC_GLOB_DEFINED_
 #define  _CC_GLOB_DEFINED_
 
-public:
-
 /* begin global definition section */
 void      cc_printHeadline(char* s,int Length);
 float     cc_getErr (int StartPattern, int EndPattern);
@@ -150,8 +148,6 @@ float cc_OutputUnitUpdate(float oldValue, float* previousSlope,
 			     float param1, float param2, float param3);
 */
 /* end global definition section */
-
-private:
 
 /* begin privat definition section */
 

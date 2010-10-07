@@ -18,7 +18,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-#include <config.h>
+//#include <config.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -1104,15 +1104,15 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
     register struct Site *site_ptr;
     register struct Link *link_ptr;
     register TopoPtrArray topo_ptr;
-    static bool first = TRUE;
+    //static bool PRUNE_Skeletonization_first = TRUE;
 
     register Patterns out_pat;
     int size, pattern_no, sub_pat_no, no_of_patterns;
 
-    if (first){
+    if (PRUNE_Skeletonization_first){
       FOR_ALL_UNITS (unit_ptr)
 	unit_ptr->actbuf[0] = 0.0;
-      first = FALSE;
+      PRUNE_Skeletonization_first = FALSE;
     }
 
     FOR_ALL_UNITS (unit_ptr)

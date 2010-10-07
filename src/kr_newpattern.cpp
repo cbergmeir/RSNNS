@@ -1694,7 +1694,7 @@ Patterns SnnsCLib::kr_getSubPatData(int pat_no, int sub_no, int io_type, int *si
     int subpos[MAX_NO_OF_VAR_DIM];
     float *data;
     krui_err err;
-    static float dummy_data = 0.0;
+    //static float kr_getSubPatData_dummy_data = 0.0;
     int intsize;
 
     TRACE_IN();
@@ -1777,7 +1777,7 @@ Patterns SnnsCLib::kr_getSubPatData(int pat_no, int sub_no, int io_type, int *si
 	/* must be exchanged by a dummy non NULL pointer because this */
 	/* function reports errors by NULL pointers */
 	if (data == 0)
-	    TRACE_RETURN((Patterns) &dummy_data);
+	    TRACE_RETURN((Patterns) &kr_getSubPatData_dummy_data);
 
 	TRACE_RETURN((Patterns) data);
 	break;
@@ -3802,9 +3802,9 @@ The parameter entries returns the number of entries in the data field.
 ******************************************************************************/
  void SnnsCLib::kr_np_order_pat_entries(int start, int end)
 {
-    static bool shuffle;
-    static int c_start;
-    static int c_end;
+    //static bool kr_np_order_pat_entries_shuffle;
+    //static int kr_np_order_pat_entries_c_start;
+    //static int kr_np_order_pat_entries_c_end;
 
     register int i;
     register int *fp;
@@ -3814,20 +3814,20 @@ The parameter entries returns the number of entries in the data field.
 
     TRACE_IN();
 
-    if (!np_pat_train_valid || c_start != start || c_end != end 
-	|| shuffle != npui_shuffle_pattern)
+    if (!np_pat_train_valid || kr_np_order_pat_entries_c_start != start || kr_np_order_pat_entries_c_end != end 
+	|| kr_np_order_pat_entries_shuffle != npui_shuffle_pattern)
     {
 	fp = np_pat_train_order;
 	for (i=start; i<=end; i++)
 	    *fp++ = i;
 	np_pat_train_valid = TRUE;
 	np_pat_train_number = end - start + 1;
-	c_start = start;
-	c_end = end;
-	shuffle = npui_shuffle_pattern;
+	kr_np_order_pat_entries_c_start = start;
+	kr_np_order_pat_entries_c_end = end;
+	kr_np_order_pat_entries_shuffle = npui_shuffle_pattern;
     }
 
-    if (shuffle)
+    if (kr_np_order_pat_entries_shuffle)
     {
 	n = np_pat_train_number;
 	fp = np_pat_train_order;
@@ -3858,9 +3858,9 @@ The parameter entries returns the number of entries in the data field.
 ******************************************************************************/
  void SnnsCLib::kr_np_order_sub_pat_entries(int start, int end)
 {
-    static bool shuffle;
-    static int c_start;
-    static int c_end;
+    //static bool kr_np_order_sub_pat_entries_shuffle;
+    //static int kr_np_order_sub_pat_entries_c_start;
+    //static int kr_np_order_sub_pat_entries_c_end;
 
     register int i;
     register int *fp;
@@ -3870,20 +3870,20 @@ The parameter entries returns the number of entries in the data field.
 
     TRACE_IN();
 
-    if (!np_sub_pat_train_valid || c_start != start || c_end != end 
-	|| shuffle != npui_shuffle_sub_pattern)
+    if (!np_sub_pat_train_valid || kr_np_order_sub_pat_entries_c_start != start || kr_np_order_sub_pat_entries_c_end != end 
+	|| kr_np_order_sub_pat_entries_shuffle != npui_shuffle_sub_pattern)
     {
 	fp = np_sub_pat_train_order;
 	for (i=start; i<=end; i++)
 	    *fp++ = i;
 	np_sub_pat_train_valid = TRUE;
 	np_sub_pat_train_number = end - start + 1;
-	c_start = start;
-	c_end = end;
-	shuffle = npui_shuffle_sub_pattern;
+	kr_np_order_sub_pat_entries_c_start = start;
+	kr_np_order_sub_pat_entries_c_end = end;
+	kr_np_order_sub_pat_entries_shuffle = npui_shuffle_sub_pattern;
     }
 
-    if (shuffle)
+    if (kr_np_order_sub_pat_entries_shuffle)
     {
 	n = np_sub_pat_train_number;
 	fp = np_sub_pat_train_order;
@@ -4075,8 +4075,8 @@ The parameter entries returns the number of entries in the data field.
 ******************************************************************************/
  void SnnsCLib::kr_np_order_chunked_pat_entries(int pat_set, int start, int end)
 {
-    static int c_start;
-    static int c_end;
+    //static int kr_np_order_chunked_pat_entries_c_start;
+    //static int kr_np_order_chunked_pat_entries_c_end;
 
     struct np_symtab *list;
     int insert_pos;
@@ -4086,7 +4086,7 @@ The parameter entries returns the number of entries in the data field.
 
     TRACE_IN();
 
-    if (np_pat_train_valid && c_start == start && c_end == end 
+    if (np_pat_train_valid && kr_np_order_chunked_pat_entries_c_start == start && kr_np_order_chunked_pat_entries_c_end == end 
 	&& !npui_shuffle_pattern)
 	{ TRACE_RETURN_VOID(); }
 
@@ -4169,8 +4169,8 @@ The parameter entries returns the number of entries in the data field.
     }
 */
 
-    c_start  = start;
-    c_end = end;
+    kr_np_order_chunked_pat_entries_c_start  = start;
+    kr_np_order_chunked_pat_entries_c_end = end;
     np_pat_train_valid = TRUE;
     np_pat_train_number = end - start + 1;
 

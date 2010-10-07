@@ -20,7 +20,9 @@
   
 ******************************************************************************/
 //#include <config.h>
+#include <stdlib.h>
 #include <stdio.h>
+
 #include <math.h>
 #ifdef HAVE_VALUES_H
 #include <values.h>
@@ -65,8 +67,7 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
 		 int NoOfInParams, float **parameterOutArray,
 		 int *NoOfOutParams)
 {
-    static float    OutParameter[1]; /* OutParameter[0] stores the
-				      * learning error  */
+    //static float    LEARN_MonteCarlo_OutParameter[1]; /* LEARN_MonteCarlo_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
     float           error;
     register FlagWord flags;
@@ -78,7 +79,7 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
 	return (KRERR_PARAMETERS); /* Not enough input parameters  */
     *NoOfOutParams = 1;		/* One return value is available (the
 				 * learning error)  */
-    *parameterOutArray = OutParameter; /* set the output parameter reference  */
+    *parameterOutArray = LEARN_MonteCarlo_OutParameter; /* set the output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified) {		/* Net has been modified */
@@ -101,7 +102,7 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
     /* randomize weigths and bias */
 
     FOR_ALL_UNITS(unit_ptr) {
-	unit_ptr->bias = (FlintType) m_drand48() *
+	unit_ptr->bias = (FlintType) drand48() *
 	    (LEARN_PARAM2(parameterInArray) - LEARN_PARAM1(parameterInArray))
 		+ LEARN_PARAM1(parameterInArray);
 	flags = unit_ptr->flags;
@@ -110,14 +111,14 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
 
 	    if (flags & UFLAG_SITES) { /* unit has sites  */
 		FOR_ALL_SITES_AND_LINKS(unit_ptr, site_ptr, link_ptr)
-		    link_ptr->weight = (FlintType) m_drand48() *
+		    link_ptr->weight = (FlintType) drand48() *
 			(LEARN_PARAM2(parameterInArray) -
 			 LEARN_PARAM1(parameterInArray)) +
 			     LEARN_PARAM1(parameterInArray);
 	    } else {		/* unit has no sites   */
 		if (flags & UFLAG_DLINKS) { /* unit has direct links */
 		    FOR_ALL_LINKS(unit_ptr, link_ptr)
-			link_ptr->weight = (FlintType) m_drand48() *
+			link_ptr->weight = (FlintType) drand48() *
 			    (LEARN_PARAM2(parameterInArray) -
 			     LEARN_PARAM1(parameterInArray)) +
 				 LEARN_PARAM1(parameterInArray);
@@ -130,7 +131,7 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(LEARN_MonteCarlo_OutParameter) = 0.0; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {
@@ -138,12 +139,12 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
 	/* Forward propagation */
 	if ((error = calculate_SS_error(pattern_no, sub_pat_no)) == -1)
 	    return (-1);
-	NET_ERROR(OutParameter) += error;
+	NET_ERROR(LEARN_MonteCarlo_OutParameter) += error;
     }
 
     /* store weights and bias if error decreased */
-    if (NET_ERROR(OutParameter) < MinimumError) {
-	MinimumError = NET_ERROR(OutParameter);
+    if (NET_ERROR(LEARN_MonteCarlo_OutParameter) < MinimumError) {
+	MinimumError = NET_ERROR(LEARN_MonteCarlo_OutParameter);
 	FOR_ALL_UNITS(unit_ptr) {
 	    flags = unit_ptr->flags;
 	    unit_ptr->value_b = unit_ptr->bias;
@@ -199,14 +200,13 @@ SnnsCLib::TEST_MonteCarlo(int start_pattern, int end_pattern, float *parameterIn
 		int NoOfInParams, float **parameterOutArray,
 		int *NoOfOutParams)
 {
-    static float    OutParameter[1]; /* OutParameter[0] stores the
-				      * learning error  */
+    //static float    TEST_MonteCarlo_OutParameter[1]; /* TEST_MonteCarlo_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
     float           error;
 
     *NoOfOutParams = 1;		/* One return value is available (the
 				 * learning error)  */
-    *parameterOutArray = OutParameter; /* set the output parameter reference  */
+    *parameterOutArray = TEST_MonteCarlo_OutParameter; /* set the output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
 
@@ -214,7 +214,7 @@ SnnsCLib::TEST_MonteCarlo(int start_pattern, int end_pattern, float *parameterIn
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(TEST_MonteCarlo_OutParameter) = 0.0; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {
@@ -222,7 +222,7 @@ SnnsCLib::TEST_MonteCarlo(int start_pattern, int end_pattern, float *parameterIn
 	/* Forward propagation */
 	if ((error = calculate_SS_error(pattern_no, sub_pat_no)) == -1)
 	    return (-1);
-	NET_ERROR(OutParameter) += error;
+	NET_ERROR(TEST_MonteCarlo_OutParameter) += error;
     }
 
     return (ret_code);
@@ -495,8 +495,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 			 float **parameterOutArray, int *NoOfOutParams,
 			 int errorFunction)
 {
-    static float    OutParameter[1]; /* OutParameter[0] stores the
-				      * learning error  */
+    //static float    LEARN_SimulatedAnnealing_OutParameter[1]; /* LEARN_SimulatedAnnealing_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
     float           error;
     long int        NextParameter;
@@ -509,7 +508,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 	return (KRERR_PARAMETERS); /* Not enough input parameters  */
     *NoOfOutParams = 1;		/* One return value is available (the
 				 * learning error)  */
-    *parameterOutArray = OutParameter; /* set the output parameter reference  */
+    *parameterOutArray = LEARN_SimulatedAnnealing_OutParameter; /* set the output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     NextParameter = FALSE;
@@ -555,7 +554,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 		/* unit is in use  */
 		if (NextParameter == TRUE) {
 		    unit_ptr->value_c = unit_ptr->bias;
-		    unit_ptr->bias = (FlintType) m_drand48() *
+		    unit_ptr->bias = (FlintType) drand48() *
 			(LEARN_PARAM2(parameterInArray) -
 			 LEARN_PARAM1(parameterInArray)) +
 			     LEARN_PARAM1(parameterInArray);
@@ -571,7 +570,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 		    FOR_ALL_SITES_AND_LINKS(unit_ptr, site_ptr, link_ptr)
 			if (NextParameter == TRUE) {
 			    link_ptr->value_c = link_ptr->weight;
-			    link_ptr->weight = (FlintType) m_drand48() *
+			    link_ptr->weight = (FlintType) drand48() *
 				(LEARN_PARAM2(parameterInArray) -
 				 LEARN_PARAM1(parameterInArray)) +
 				     LEARN_PARAM1(parameterInArray);
@@ -589,7 +588,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 			FOR_ALL_LINKS(unit_ptr, link_ptr)
 			    if (NextParameter == TRUE) {
 				link_ptr->value_c = link_ptr->weight;
-				link_ptr->weight = (FlintType) m_drand48() *
+				link_ptr->weight = (FlintType) drand48() *
 				    (LEARN_PARAM2(parameterInArray) -
 				     LEARN_PARAM1(parameterInArray)) +
 					 LEARN_PARAM1(parameterInArray);
@@ -612,7 +611,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(LEARN_SimulatedAnnealing_OutParameter) = 0.0; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {
@@ -633,15 +632,15 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 		return (-1);
 	    break;
 	}
-	NET_ERROR(OutParameter) += error;
+	NET_ERROR(LEARN_SimulatedAnnealing_OutParameter) += error;
     }
 
     /*
      * throw away new weight or bias if error decreased or propability is to
      * low
      */
-    if ((NET_ERROR(OutParameter) > MinimumError) && (Temperature > 0) &&
-	(m_drand48() > exp((MinimumError - NET_ERROR(OutParameter)) /
+    if ((NET_ERROR(LEARN_SimulatedAnnealing_OutParameter) > MinimumError) && (Temperature > 0) &&
+	(drand48() > exp((MinimumError - NET_ERROR(LEARN_SimulatedAnnealing_OutParameter)) /
 			 ((end_pattern - start_pattern) * Temperature)))) {
 	FOR_ALL_UNITS(unit_ptr) {
 	    flags = unit_ptr->flags;
@@ -666,7 +665,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 	    }
 	}
     } else {
-	MinimumError = NET_ERROR(OutParameter);
+	MinimumError = NET_ERROR(LEARN_SimulatedAnnealing_OutParameter);
     }
     
     /* decrease Temperature */
@@ -758,8 +757,7 @@ SnnsCLib::TEST_SimulatedAnnealing(int start_pattern, int end_pattern,
 			float **parameterOutArray, int *NoOfOutParams,
 			int errorFunction)
 {
-    static float    OutParameter[1]; /* OutParameter[0] stores the
-				      * learning error  */
+    //static float    TEST_SimulatedAnnealing_OutParameter[1]; /* TEST_SimulatedAnnealing_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
     float           error;
     
@@ -767,7 +765,7 @@ SnnsCLib::TEST_SimulatedAnnealing(int start_pattern, int end_pattern,
 	return (KRERR_PARAMETERS); /* Not enough input parameters  */
     *NoOfOutParams = 1;		/* One return value is available (the
 				 * learning error)  */
-    *parameterOutArray = OutParameter; /* set the output parameter reference  */
+    *parameterOutArray = TEST_SimulatedAnnealing_OutParameter; /* set the output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
 
@@ -775,7 +773,7 @@ SnnsCLib::TEST_SimulatedAnnealing(int start_pattern, int end_pattern,
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(TEST_SimulatedAnnealing_OutParameter) = 0.0; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {
@@ -796,7 +794,7 @@ SnnsCLib::TEST_SimulatedAnnealing(int start_pattern, int end_pattern,
 		return (-1);
 	    break;
 	}
-	NET_ERROR(OutParameter) += error;
+	NET_ERROR(TEST_SimulatedAnnealing_OutParameter) += error;
     }
 
     return (ret_code);

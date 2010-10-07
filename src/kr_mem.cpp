@@ -2090,14 +2090,14 @@ void SnnsCLib::krm_getPattern( memPat *p )
 ******************************************************************************/
 void SnnsCLib::krm_putPattern( memPat *p )
 {
-    static int in[MAX_NO_OF_VAR_I_DIM],out[MAX_NO_OF_VAR_I_DIM];
+    //static int krm_putPattern_in[MAX_NO_OF_VAR_I_DIM],krm_putPattern_out[MAX_NO_OF_VAR_I_DIM];
 
     krui_setCurrPatSet( p->number );
-    in[0] = 1; /*krui_getNoOfInputUnits();*/
-    in[1] = 1;
-    out[0] = 1; /*krui_getNoOfOutputUnits();*/
-    out[1] = 1;
-    krui_DefTrainSubPat(in, out, in, out,NULL);
+    krm_putPattern_in[0] = 1; /*krui_getNoOfInputUnits();*/
+    krm_putPattern_in[1] = 1;
+    krm_putPattern_out[0] = 1; /*krui_getNoOfOutputUnits();*/
+    krm_putPattern_out[1] = 1;
+    krui_DefTrainSubPat(krm_putPattern_in, krm_putPattern_out, krm_putPattern_in, krm_putPattern_out,NULL);
 }
 
 #endif

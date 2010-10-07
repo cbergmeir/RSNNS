@@ -18,8 +18,6 @@
 
 ******************************************************************************/
 
-public:
-
 /* begin global definition section */
 
 krui_err getNoOfClasses(int startPattern, int endPattern);
@@ -44,8 +42,6 @@ int newPatternsLoaded;
 int dlvq_numberOfLearnCycles;
 
 /* end global definition section */
-
-private:
 
 /* begin privat definition section */
 

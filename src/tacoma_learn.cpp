@@ -115,7 +115,7 @@ krui_err SnnsCLib::tac_initVariables(float* ParameterInArray,
 
    cc_LayerCorrectnessTest(ParameterInArray,StartPattern,EndPattern);
 
-   m_srand48((long)time(NULL)); 
+   srand48((long)time(NULL)); 
 	      /* inits the random-generator */
    cc_printOnOff = (int)ParameterInArray[8]; 
    cc_backfittingOnOff = (int)ParameterInArray[18];

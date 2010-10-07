@@ -293,15 +293,15 @@ bool  SnnsCLib::krf_funcSearch(char *func_name, int func_type, FunctionPtr *func
 ******************************************************************************/
 char  *SnnsCLib::krf_getFuncName(FunctionPtr func_ptr)
 {
-  static struct FuncInfoDescriptor  functionDescr;
+  //static struct FuncInfoDescriptor  krf_getFuncName_functionDescr;
 
-  functionDescr.function = func_ptr;
+  krf_getFuncName_functionDescr.function = func_ptr;
 
-  KernelErrorCode = krf_getFuncInfo( GET_FUNC_NAME, &functionDescr );
+  KernelErrorCode = krf_getFuncInfo( GET_FUNC_NAME, &krf_getFuncName_functionDescr );
 
-  if (functionDescr.func_type == 0)  return( NULL );
+  if (krf_getFuncName_functionDescr.func_type == 0)  return( NULL );
 
-  return( functionDescr.func_name );
+  return( krf_getFuncName_functionDescr.func_name );
 }
 
 
@@ -323,7 +323,7 @@ GROUP: Functions for managing current and
 char  *SnnsCLib::krf_getCurrentNetworkFunc(int type)
 {
   int  sel;
-  static struct FuncInfoDescriptor  func_descr;
+  //static struct FuncInfoDescriptor  krf_getCurrentNetworkFunc_func_descr;
 
 
   KernelErrorCode = KRERR_NO_ERROR;
@@ -371,9 +371,9 @@ char  *SnnsCLib::krf_getCurrentNetworkFunc(int type)
 
   if (netFuncInit[sel])  return( &CurrNetworkFunc[sel][0] );
 
-  func_descr.func_type = type;
-  if (krf_getFuncInfo( GET_DEFAULT_FUNC, &func_descr ) == KRERR_NO_ERROR)
-    return( func_descr.func_name );
+  krf_getCurrentNetworkFunc_func_descr.func_type = type;
+  if (krf_getFuncInfo( GET_DEFAULT_FUNC, &krf_getCurrentNetworkFunc_func_descr ) == KRERR_NO_ERROR)
+    return( krf_getCurrentNetworkFunc_func_descr.func_name );
 
   return( NULL );
 }

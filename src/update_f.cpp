@@ -552,7 +552,7 @@ krui_err  SnnsCLib::UPDATE_ART1_syncPropagate(float *parameterArray, int NoOfPar
 				   topo_layer[5] : *first special unit
 				   (classified_unit)*/
     TopoPtrArray topo_ptr;
-    static float rho;
+    //static float UPDATE_ART1_syncPropagate_rho;
     bool         inp_pat_changed   = FALSE;
     bool         rho_has_changed   = FALSE;
 
@@ -566,13 +566,13 @@ krui_err  SnnsCLib::UPDATE_ART1_syncPropagate(float *parameterArray, int NoOfPar
 
     /* Check if rho has changed from last to actual call of this update function
        If rho has changed, then put new activation value into unit rho */
-    if (rho != parameterArray[0]) {
+    if (UPDATE_ART1_syncPropagate_rho != parameterArray[0]) {
 	rho_has_changed = TRUE;
     }
 
-    rho = parameterArray[0];
+    UPDATE_ART1_syncPropagate_rho = parameterArray[0];
 
-    if ((rho < 0.0) || (rho > 1.0)) {
+    if ((UPDATE_ART1_syncPropagate_rho < 0.0) || (UPDATE_ART1_syncPropagate_rho > 1.0)) {
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     }
@@ -629,7 +629,7 @@ krui_err  SnnsCLib::UPDATE_ART1_syncPropagate(float *parameterArray, int NoOfPar
        reinitialize the values of the i_act field of the unit structure and
        reset the activations of all non input units */
     if (rho_has_changed || inp_pat_changed) {
-	ret_code = kra1_init_i_act (rho);
+	ret_code = kra1_init_i_act (UPDATE_ART1_syncPropagate_rho);
 	if (ret_code != KRERR_NO_ERROR) 
 	    return (ret_code);
 
@@ -780,7 +780,7 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
 				    topo_layer[8] : *first rec.  unit
 				    topo_layer[9] : *first local reset unit */
     TopoPtrArray topo_ptr;
-    static float rho, param_a, param_b, param_c, param_d, theta;
+    //static float UPDATE_ART2_syncPropagate_rho, UPDATE_ART2_syncPropagate_param_a, UPDATE_ART2_syncPropagate_param_b, UPDATE_ART2_syncPropagate_param_c, UPDATE_ART2_syncPropagate_param_d, UPDATE_ART2_syncPropagate_theta;
     bool         inp_pat_changed   = FALSE;
     bool         rho_has_changed   = FALSE;
     bool         a_has_changed     = FALSE;
@@ -806,26 +806,26 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
        call of this update function.
        If so, then put new activation value into unit rho or change
        the weights of the relevant links. */
-    if (rho != parameterArray[0]) 
+    if (UPDATE_ART2_syncPropagate_rho != parameterArray[0]) 
 	rho_has_changed = TRUE;
 
-    if (param_a != parameterArray[1]) 
+    if (UPDATE_ART2_syncPropagate_param_a != parameterArray[1]) 
 	a_has_changed = TRUE;
 
-    if (param_b != parameterArray[2]) 
+    if (UPDATE_ART2_syncPropagate_param_b != parameterArray[2]) 
 	b_has_changed = TRUE;
 
-    if (param_c != parameterArray[3]) 
+    if (UPDATE_ART2_syncPropagate_param_c != parameterArray[3]) 
 	c_has_changed = TRUE;
 
-    if (theta != parameterArray[4]) 
+    if (UPDATE_ART2_syncPropagate_theta != parameterArray[4]) 
 	theta_has_changed = TRUE;
 
-    rho     = parameterArray[0];
-    param_a = parameterArray[1];
-    param_b = parameterArray[2];
-    param_c = parameterArray[3];
-    theta   = parameterArray[4];
+    UPDATE_ART2_syncPropagate_rho     = parameterArray[0];
+    UPDATE_ART2_syncPropagate_param_a = parameterArray[1];
+    UPDATE_ART2_syncPropagate_param_b = parameterArray[2];
+    UPDATE_ART2_syncPropagate_param_c = parameterArray[3];
+    UPDATE_ART2_syncPropagate_theta   = parameterArray[4];
 
 
     /* Check if network has been modified */
@@ -859,13 +859,13 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
 
     /* Read out value of parameter d from bias field of any unit. The
        value has been written into the bias field by the init-function */
-    param_d = (*(topo_ptr_array+1))->bias;
+    UPDATE_ART2_syncPropagate_param_d = (*(topo_ptr_array+1))->bias;
 
 
     /* Check values of the parameters */
 
-    if ((rho < 0.0) || (rho > 1.0) || (param_a <= 0.0) || (param_b <= 0.0) ||
-	((param_c*param_d)/(1-param_d) > 1.0) ||(theta < 0.0) || (theta > 1.0)){
+    if ((UPDATE_ART2_syncPropagate_rho < 0.0) || (UPDATE_ART2_syncPropagate_rho > 1.0) || (UPDATE_ART2_syncPropagate_param_a <= 0.0) || (UPDATE_ART2_syncPropagate_param_b <= 0.0) ||
+	((UPDATE_ART2_syncPropagate_param_c*UPDATE_ART2_syncPropagate_param_d)/(1-UPDATE_ART2_syncPropagate_param_d) > 1.0) ||(UPDATE_ART2_syncPropagate_theta < 0.0) || (UPDATE_ART2_syncPropagate_theta > 1.0)){
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     } 
@@ -878,7 +878,7 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
     if (rho_has_changed || a_has_changed || b_has_changed ||
 	c_has_changed || theta_has_changed || inp_pat_changed){
 
-	ret_code = kra2_set_params (rho,param_a,param_b,param_c,param_d,theta);
+	ret_code = kra2_set_params (UPDATE_ART2_syncPropagate_rho,UPDATE_ART2_syncPropagate_param_a,UPDATE_ART2_syncPropagate_param_b,UPDATE_ART2_syncPropagate_param_c,UPDATE_ART2_syncPropagate_param_d,UPDATE_ART2_syncPropagate_theta);
 
 	if (ret_code != KRERR_NO_ERROR) 
 	    return (ret_code);
@@ -917,7 +917,7 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
     krart_prop_synch ();
 
     /* Get winner */
-    winner_ptr = krart_get_winner (topo_layer[ART2_REC_LAY-1], param_d);
+    winner_ptr = krart_get_winner (topo_layer[ART2_REC_LAY-1], UPDATE_ART2_syncPropagate_param_d);
 
     /* Check F1 stability */
     kra2_check_f1_stability ();
@@ -1096,9 +1096,9 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
                                     topo_layer[12]: *first map unit
 				    topo_layer[13]: *first special map unit */
     TopoPtrArray topo_ptr;
-    static float rho_a = -1.0;
-    static float rho_b = -1.0;
-    static float rho   = -1.0;
+    //static float UPDATE_ARTMAP_syncPropagate_rho_a = -1.0;
+    //static float UPDATE_ARTMAP_syncPropagate_rho_b = -1.0;
+    //static float UPDATE_ARTMAP_syncPropagate_rho   = -1.0;
     bool         inp_pat_changed   = FALSE;
     bool         rho_has_changed   = FALSE;
 
@@ -1111,17 +1111,17 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
 
     /* Check if rho has changed from last to actual call of this update function
        If rho has changed, then put new activation value into unit rho */
-    if ((rho_a != parameterArray[0]) || (rho_b != parameterArray[1]) ||
-	(rho   != parameterArray[2]))
+    if ((UPDATE_ARTMAP_syncPropagate_rho_a != parameterArray[0]) || (UPDATE_ARTMAP_syncPropagate_rho_b != parameterArray[1]) ||
+	(UPDATE_ARTMAP_syncPropagate_rho   != parameterArray[2]))
 	rho_has_changed = TRUE;
 
-    rho_a = parameterArray[0];
-    rho_b = parameterArray[1];
-    rho   = parameterArray[2];
+    UPDATE_ARTMAP_syncPropagate_rho_a = parameterArray[0];
+    UPDATE_ARTMAP_syncPropagate_rho_b = parameterArray[1];
+    UPDATE_ARTMAP_syncPropagate_rho   = parameterArray[2];
 
 
-    if((rho_a<0.0) || (rho_a>1.0) || (rho_b<0.0) || (rho_b>1.0) ||
-       (rho<0.0) || (rho>1.0)){
+    if((UPDATE_ARTMAP_syncPropagate_rho_a<0.0) || (UPDATE_ARTMAP_syncPropagate_rho_a>1.0) || (UPDATE_ARTMAP_syncPropagate_rho_b<0.0) || (UPDATE_ARTMAP_syncPropagate_rho_b>1.0) ||
+       (UPDATE_ARTMAP_syncPropagate_rho<0.0) || (UPDATE_ARTMAP_syncPropagate_rho>1.0)){
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     }
@@ -1187,7 +1187,7 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
        unit structure and reset the activations of all non input units */
     if (rho_has_changed || inp_pat_changed) {
 
-	ret_code = kram_init_i_act (rho_a, rho_b, rho);
+	ret_code = kram_init_i_act (UPDATE_ARTMAP_syncPropagate_rho_a, UPDATE_ARTMAP_syncPropagate_rho_b, UPDATE_ARTMAP_syncPropagate_rho);
 	if (ret_code != KRERR_NO_ERROR)
 	    return (ret_code);
 

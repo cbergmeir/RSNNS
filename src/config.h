@@ -108,7 +108,7 @@ char *alloca (int size);
 #define MAXFLOAT FLT_MAX
 #endif
 
-//#include "kernel/sources/alloca.h"
-#include "getcwd.h"
-#include "strdup.h"
+//#include "alloca.h"
+//#include "getcwd.h"
+//#include "strdup.h"
 //#include "lrand48.h"

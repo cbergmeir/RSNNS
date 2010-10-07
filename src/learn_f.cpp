@@ -308,8 +308,7 @@ krui_err SnnsCLib::LEARN_backprop(int start_pattern, int end_pattern,
 			float *parameterInArray, int NoOfInParams,
 			float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error */
+    //static float    LEARN_backprop_OutParameter[1];	/* LEARN_backprop_OutParameter[0] stores the learning error */
     int             pattern_no, sub_pat_no, no_of_layers;
 
 
@@ -322,7 +321,7 @@ krui_err SnnsCLib::LEARN_backprop(int start_pattern, int end_pattern,
     }
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = LEARN_backprop_OutParameter;	/* set the output parameter reference */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {
 	/* Net has been modified or topologic array isn't initialized */
@@ -357,7 +356,7 @@ krui_err SnnsCLib::LEARN_backprop(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_backprop_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -367,7 +366,7 @@ krui_err SnnsCLib::LEARN_backprop(int start_pattern, int end_pattern,
 	/* 1st parameter is the learning parameter 2nd parameter is the max.
 	   devitation between output pattern and the output of the output
 	   unit (delta max) */
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(LEARN_backprop_OutParameter) +=
 	    propagateNetBackward2(pattern_no,sub_pat_no,
 				  LEARN_PARAM1(parameterInArray),
 				  LEARN_PARAM2(parameterInArray));
@@ -392,8 +391,7 @@ krui_err SnnsCLib::TEST_backprop(int start_pattern, int end_pattern,
 			float **parameterOutArray, int *NoOfOutParams)
 {
 
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error */
+    //static float    TEST_backprop_OutParameter[1];	/* TEST_backprop_OutParameter[0] stores the learning error */
     int             pattern_no, sub_pat_no, no_of_layers;
 
 
@@ -405,7 +403,7 @@ krui_err SnnsCLib::TEST_backprop(int start_pattern, int end_pattern,
     }
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = TEST_backprop_OutParameter;	/* set the output parameter reference */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {
 	/* Net has been modified or topologic array isn't initialized */
@@ -440,13 +438,13 @@ krui_err SnnsCLib::TEST_backprop(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(TEST_backprop_OutParameter) = 0.0;	/* reset network error value  */
     
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
 	propagateNetForward(pattern_no,sub_pat_no);   /* Forward propagation */
 
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(TEST_backprop_OutParameter) +=
 	    testNetBackward2(pattern_no,sub_pat_no,
 				  LEARN_PARAM1(parameterInArray),
 				  LEARN_PARAM2(parameterInArray));
@@ -969,8 +967,7 @@ krui_err  SnnsCLib::LEARN_backpropBatch(int start_pattern, int end_pattern,
 			      float *parameterInArray, int NoOfInParams, 
 			      float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_backpropBatch_OutParameter[1];	/* LEARN_backpropBatch_OutParameter[0] stores the learning error  */
     int             pattern_no, sub_pat_no, no_of_layers;
     int             pattern_count;
 
@@ -982,7 +979,7 @@ krui_err  SnnsCLib::LEARN_backpropBatch(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
     }
     *NoOfOutParams = 1;	  /* One return value is available ( learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = LEARN_backpropBatch_OutParameter;	/* set the output parameter reference */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
 	/* Net has been modified or topologic array isn't initialized */
@@ -1017,7 +1014,7 @@ krui_err  SnnsCLib::LEARN_backpropBatch(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_backpropBatch_OutParameter) = 0.0;	/* reset network error value  */
     pattern_count = 0;
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 	pattern_count++;
@@ -1027,7 +1024,7 @@ krui_err  SnnsCLib::LEARN_backpropBatch(int start_pattern, int end_pattern,
 	/* 1st parameter is the learning parameter 2nd parameter is the max.
 	   devitation between output pattern and the output of the output
 	   unit (delta max) */
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(LEARN_backpropBatch_OutParameter) +=
 	    propagateNetBackwardBatch(pattern_no,sub_pat_no,
 				      LEARN_PARAM2(parameterInArray));
     }
@@ -1245,7 +1242,7 @@ krui_err SnnsCLib::LEARN_backpropMomentum(int start_pattern, int end_pattern,
 				float *parameterInArray, int NoOfInParams, 
 				float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter[1];  /*OutParameter[0] stores the learning error*/
+    //static float LEARN_backpropMomentum_OutParameter[1];  /*LEARN_backpropMomentum_OutParameter[0] stores the learning error*/
     int          ret_code, pattern_no, sub_pat_no;
 
 
@@ -1254,7 +1251,7 @@ krui_err SnnsCLib::LEARN_backpropMomentum(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = LEARN_backpropMomentum_OutParameter;	/* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
@@ -1294,7 +1291,7 @@ krui_err SnnsCLib::LEARN_backpropMomentum(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_backpropMomentum_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -1305,7 +1302,7 @@ krui_err SnnsCLib::LEARN_backpropMomentum(int start_pattern, int end_pattern,
 	   momentum term 3rd parameter is the flat-spot-elimination value 4th
 	   parameter is the max. devitation between output pattern and the
 	   output of the output unit (delta max) */
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(LEARN_backpropMomentum_OutParameter) +=
 	    Backprop_momentum_FSE(pattern_no,sub_pat_no,
 				  LEARN_PARAM1(parameterInArray),
 				  LEARN_PARAM2(parameterInArray),
@@ -1334,7 +1331,7 @@ krui_err SnnsCLib::TEST_backpropMomentum(int start_pattern, int end_pattern,
 				float *parameterInArray, int NoOfInParams, 
 				float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter[1];  /*OutParameter[0] stores the learning error*/
+    //static float TEST_backpropMomentum_OutParameter[1];  /*TEST_backpropMomentum_OutParameter[0] stores the learning error*/
     int          ret_code, pattern_no, sub_pat_no;
 
 
@@ -1343,7 +1340,7 @@ krui_err SnnsCLib::TEST_backpropMomentum(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = TEST_backpropMomentum_OutParameter;	/* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
@@ -1376,7 +1373,7 @@ krui_err SnnsCLib::TEST_backpropMomentum(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(TEST_backpropMomentum_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -1387,7 +1384,7 @@ krui_err SnnsCLib::TEST_backpropMomentum(int start_pattern, int end_pattern,
 	   momentum term 3rd parameter is the flat-spot-elimination value 4th
 	   parameter is the max. devitation between output pattern and the
 	   output of the output unit (delta max) */
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(TEST_backpropMomentum_OutParameter) +=
 	    testNetBackward2(pattern_no,sub_pat_no,
 				  LEARN_PARAM1(parameterInArray),
 				   LEARN_PARAM4(parameterInArray));
@@ -1634,8 +1631,8 @@ krui_err SnnsCLib::LEARN_backpropWeightDecay (int start_pattern, int end_pattern
 
 {
 
-    static float OutParameter [1];  
-    /* OutParameter [0] stores the learning error */ 
+    //static float LEARN_backpropWeightDecay_OutParameter [1];  
+    /* LEARN_backpropWeightDecay_OutParameter [0] stores the learning error */ 
     int pattern_no, sub_pat_no, no_of_layers;
 
     /* reset return code  */
@@ -1650,7 +1647,7 @@ krui_err SnnsCLib::LEARN_backpropWeightDecay (int start_pattern, int end_pattern
 
     /* learning error is the only output parameter */
     *NoOfOutParams = 1;
-    *parameterOutArray = OutParameter;
+    *parameterOutArray = LEARN_backpropWeightDecay_OutParameter;
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) 
 	/* Net has been modified or topologic array isn't initialized */
@@ -1685,7 +1682,7 @@ krui_err SnnsCLib::LEARN_backpropWeightDecay (int start_pattern, int end_pattern
 	return (KernelErrorCode);
 
     /* reset network error value  */
-    NET_ERROR (OutParameter) = 0.0;
+    NET_ERROR (LEARN_backpropWeightDecay_OutParameter) = 0.0;
 
     while (kr_getSubPatternByOrder (&pattern_no, &sub_pat_no))
     {
@@ -1693,7 +1690,7 @@ krui_err SnnsCLib::LEARN_backpropWeightDecay (int start_pattern, int end_pattern
 	propagateNetForward(pattern_no,sub_pat_no);
 
 	/* Backward propagation with parameters according to header */
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(LEARN_backpropWeightDecay_OutParameter) +=
 	    Backprop_weightdecay (pattern_no, sub_pat_no,
 				  LEARN_PARAM1 (parameterInArray),
 				  LEARN_PARAM2 (parameterInArray),
@@ -1725,8 +1722,7 @@ krui_err  SnnsCLib::LEARN_backpropChunk(int start_pattern, int end_pattern,
 			      float *parameterInArray, int NoOfInParams, 
 			      float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_backpropChunk_OutParameter[1];	/* LEARN_backpropChunk_OutParameter[0] stores the learning error  */
     int             pattern_no, sub_pat_no, no_of_layers;
     int             i = 0;
     
@@ -1739,8 +1735,8 @@ krui_err  SnnsCLib::LEARN_backpropChunk(int start_pattern, int end_pattern,
     }
 
     *NoOfOutParams = 1;	  /* One return value is available ( learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
-    OutParameter[0] = 0.0;
+    *parameterOutArray = LEARN_backpropChunk_OutParameter;	/* set the output parameter reference */
+    LEARN_backpropChunk_OutParameter[0] = 0.0;
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
 	/* Net has been modified or topologic array isn't initialized */
@@ -1767,7 +1763,7 @@ krui_err  SnnsCLib::LEARN_backpropChunk(int start_pattern, int end_pattern,
 	NetModified = FALSE;
     }
 
-    NET_ERROR(OutParameter) = 0.0; /* init error variable */
+    NET_ERROR(LEARN_backpropChunk_OutParameter) = 0.0; /* init error variable */
 
     /* compute the necessary sub patterns */
     KernelErrorCode = kr_initSubPatternOrder(start_pattern,end_pattern);
@@ -1782,7 +1778,7 @@ krui_err  SnnsCLib::LEARN_backpropChunk(int start_pattern, int end_pattern,
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
         propagateNetForward(pattern_no,sub_pat_no);  
-        NET_ERROR(OutParameter) +=
+        NET_ERROR(LEARN_backpropChunk_OutParameter) +=
             propagateNetBackwardBatch(pattern_no,sub_pat_no,
                                       LEARN_PARAM2(parameterInArray));
 	
@@ -1826,8 +1822,7 @@ krui_err  SnnsCLib::LEARN_backpropJogChunk(int start_pattern, int end_pattern,
 				 float *parameterInArray, int NoOfInParams, 
 				 float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_backpropJogChunk_OutParameter[1];	/* LEARN_backpropJogChunk_OutParameter[0] stores the learning error  */
     int             pattern_no, sub_pat_no, no_of_layers;
     int             i = 0;
     
@@ -1840,8 +1835,8 @@ krui_err  SnnsCLib::LEARN_backpropJogChunk(int start_pattern, int end_pattern,
     }
 
     *NoOfOutParams = 1;	  /* One return value is available ( learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
-    OutParameter[0] = 0.0;
+    *parameterOutArray = LEARN_backpropJogChunk_OutParameter;	/* set the output parameter reference */
+    LEARN_backpropJogChunk_OutParameter[0] = 0.0;
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
 	/* Net has been modified or topologic array isn't initialized */
@@ -1868,7 +1863,7 @@ krui_err  SnnsCLib::LEARN_backpropJogChunk(int start_pattern, int end_pattern,
 	NetModified = FALSE;
     }
 
-    NET_ERROR(OutParameter) = 0.0; /* init error variable */
+    NET_ERROR(LEARN_backpropJogChunk_OutParameter) = 0.0; /* init error variable */
 
     /* compute the necessary sub patterns */
     KernelErrorCode = kr_initSubPatternOrder(start_pattern,end_pattern);
@@ -1889,7 +1884,7 @@ krui_err  SnnsCLib::LEARN_backpropJogChunk(int start_pattern, int end_pattern,
 			  LEARN_PARAM5(parameterInArray));
 
         propagateNetForward(pattern_no,sub_pat_no);  
-        NET_ERROR(OutParameter) +=
+        NET_ERROR(LEARN_backpropJogChunk_OutParameter) +=
             propagateNetBackwardBatch(pattern_no,sub_pat_no,
                                       LEARN_PARAM2(parameterInArray));
 	
@@ -1945,8 +1940,7 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 				 float *parameterInArray, int NoOfInParams, 
 				 float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_backpropClassJogChunk_OutParameter[1];	/* LEARN_backpropClassJogChunk_OutParameter[0] stores the learning error  */
     int             pattern_no, sub_pat_no, no_of_layers;
     int             i = 0;
     unsigned long int class_flags;
@@ -1966,8 +1960,8 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
     }
 
     *NoOfOutParams = 1;	  /* One return value is available ( learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
-    OutParameter[0] = 0.0;
+    *parameterOutArray = LEARN_backpropClassJogChunk_OutParameter;	/* set the output parameter reference */
+    LEARN_backpropClassJogChunk_OutParameter[0] = 0.0;
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
 	/* Net has been modified or topologic array isn't initialized */
@@ -2053,7 +2047,7 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 	NetModified = FALSE;
     }
 
-    NET_ERROR(OutParameter) = 0.0; /* init error variable */
+    NET_ERROR(LEARN_backpropClassJogChunk_OutParameter) = 0.0; /* init error variable */
 
     /* compute the necessary sub patterns */
     KernelErrorCode = kr_initSubPatternOrder(start_pattern,end_pattern);
@@ -2091,7 +2085,7 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 	}
 
         propagateNetForward(pattern_no,sub_pat_no);  
-        NET_ERROR(OutParameter) +=
+        NET_ERROR(LEARN_backpropClassJogChunk_OutParameter) +=
             propagateClassNetBackwardBatch(pattern_no,sub_pat_no,
 					   LEARN_PARAM2(parameterInArray));
 	
@@ -2479,7 +2473,7 @@ krui_err SnnsCLib::LEARN_quickprop(int start_pattern, int end_pattern,
 			 float *parameterInArray, int NoOfInParams, 
 			 float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter[1]; /* OutParameter[0] stores the learning error*/
+    //static float LEARN_quickprop_OutParameter[1]; /* LEARN_quickprop_OutParameter[0] stores the learning error*/
     int          pattern_no, sub_pat_no, ret_code;
 
 
@@ -2489,7 +2483,7 @@ krui_err SnnsCLib::LEARN_quickprop(int start_pattern, int end_pattern,
     *NoOfOutParams = 1;		/* one return value is available (the
 				   learning error) */
 
-    *parameterOutArray = OutParameter;	/* set output parameter reference  */
+    *parameterOutArray = LEARN_quickprop_OutParameter;	/* set output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
@@ -2529,14 +2523,14 @@ krui_err SnnsCLib::LEARN_quickprop(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_quickprop_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
 	propagateNetForward(pattern_no,sub_pat_no);   /* Forward propagation */
 
 	/* backward propagation and summation of gradient  */
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(LEARN_quickprop_OutParameter) +=
 	    propagateNetBackwardQuickprop(pattern_no,sub_pat_no,
 					  LEARN_PARAM4(parameterInArray));
     }
@@ -2849,8 +2843,7 @@ krui_err  SnnsCLib::LEARN_CPN(int start_pattern, int end_pattern,
 		    float *parameterInArray, int NoOfInParams, 
 		    float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_CPN_OutParameter[1];	/* LEARN_CPN_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
 
 
@@ -2859,7 +2852,7 @@ krui_err  SnnsCLib::LEARN_CPN(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* one return value is available (the
 				   learning error) */
-    *parameterOutArray = OutParameter;	/* set output parameter reference  */
+    *parameterOutArray = LEARN_CPN_OutParameter;	/* set output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* clear return code  */
 
 
@@ -2900,12 +2893,12 @@ krui_err  SnnsCLib::LEARN_CPN(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_CPN_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
 	NoOfLearnedPatterns++;
-	NET_ERROR(OutParameter) 
+	NET_ERROR(LEARN_CPN_OutParameter) 
 	    += propagateNet_CPN(pattern_no,sub_pat_no,
 				LEARN_PARAM1(parameterInArray),
 				LEARN_PARAM2(parameterInArray),
@@ -3161,8 +3154,7 @@ krui_err SnnsCLib::LEARN_perc(int start_pattern, int end_pattern,
 	            float *parameterInArray, int NoOfInParams, 
 	            float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_perc_OutParameter[1];	/* LEARN_perc_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
     float           p_error, l_error;
     register struct Unit *unit_ptr;
@@ -3172,7 +3164,7 @@ krui_err SnnsCLib::LEARN_perc(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		        /* One return value is available (the
 				           learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = LEARN_perc_OutParameter;	/* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {	
@@ -3217,7 +3209,7 @@ krui_err SnnsCLib::LEARN_perc(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_perc_OutParameter) = 0.0;	/* reset network error value  */
     p_error = 0.0;
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
@@ -3229,7 +3221,7 @@ krui_err SnnsCLib::LEARN_perc(int start_pattern, int end_pattern,
 	   devitation between output pattern and the output of the output
 	   unit (delta max) */
 
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(LEARN_perc_OutParameter) +=
 	    propagateNetBackward_perc(pattern_no,sub_pat_no,
 				      LEARN_PARAM1(parameterInArray),
 				      LEARN_PARAM3(parameterInArray), &p_error);
@@ -3525,15 +3517,15 @@ void SnnsCLib::RbfLearnAdjustWeights(float para_center, float para_bias,
     register TopoPtrArray topo_ptr;
 
 #ifdef RBF_DELTA_PROT
-    static int      step = 0;	/* current learning step */
+    //static int      RbfLearnAdjustWeights_step = 0;	/* current learning RbfLearnAdjustWeights_step */
     char            filename[20];	/* Name of prot file	 */
     FILE           *protfile;	/* filepointer		 */
 
 #endif
 
 #ifdef RBF_DELTA_PROT
-    step++;
-    sprintf(filename, "rbf_%04d.prot", step);
+    RbfLearnAdjustWeights_step++;
+    sprintf(filename, "rbf_%04d.prot", RbfLearnAdjustWeights_step);
     protfile = fopen(filename, "w");
     if (protfile == NULL)
 	fprintf(stderr, "RbfLearnAdjustWeights: Can't open protfile\n");
@@ -3666,7 +3658,7 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 		   float *parameterInArray, int NoOfInParams, 
 		   float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores	 */
+    //static float    LEARN_RBF_OutParameter[1];	/* LEARN_RBF_OutParameter[0] stores	 */
                                         /* the learning error   	 */
     int             ret_code, pattern_no, sub_pat_no, learn_mask;
     float           para_bias, para_center, para_weight, para_pain, 
@@ -3676,7 +3668,7 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
     register struct Link *link_ptr;
 
 #ifdef RBF_LEARN_PROT
-    static int      schritt = 1;
+    //static int      LEARN_RBF_schritt = 1;
     int             fehler_zaehler = 0;
     float           temp_fehler;
     FILE           *protfile;
@@ -3690,7 +3682,7 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* One return value is available */
                                 /* (the learning error)		 */
-    *parameterOutArray = OutParameter;	/* set the reference to */
+    *parameterOutArray = LEARN_RBF_OutParameter;	/* set the reference to */
     /* the output parameter */
 
     ret_code = KRERR_NO_ERROR;	/* default return code		 */
@@ -3712,7 +3704,7 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 	    }
 	}
     }
-    NET_ERROR(OutParameter) = 0.0;
+    NET_ERROR(LEARN_RBF_OutParameter) = 0.0;
     para_center = -LEARN_PARAM1(parameterInArray);
     para_bias = LEARN_PARAM2(parameterInArray);
     para_weight = LEARN_PARAM3(parameterInArray);
@@ -3754,11 +3746,11 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 	temp_fehler = RbfLearnAdjustDelta(para_center,
 			   para_bias, para_weight, para_pain, para_momentum,
 					  para_delta_max, learn_mask);
-	NET_ERROR(OutParameter) += temp_fehler;
+	NET_ERROR(LEARN_RBF_OutParameter) += temp_fehler;
 	if (temp_fehler > 0.0)
 	    fehler_zaehler++;
 #else
-	NET_ERROR(OutParameter) += RbfLearnAdjustDelta(para_center,
+	NET_ERROR(LEARN_RBF_OutParameter) += RbfLearnAdjustDelta(para_center,
 			   para_bias, para_weight, para_pain, para_momentum,
 						para_delta_max, learn_mask);
 #endif
@@ -3771,13 +3763,13 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 
 #ifdef RBF_LEARN_PROT
     protfile = fopen("rbf_learn_prot_file", "a");
-    if (schritt == 1) {
+    if (LEARN_RBF_schritt == 1) {
 	fprintf(protfile, "# Neues Lernprotokoll: \n");
     }
-    fprintf(protfile, "%d %f %d\n", schritt, NET_ERROR(OutParameter),
+    fprintf(protfile, "%d %f %d\n", LEARN_RBF_schritt, NET_ERROR(LEARN_RBF_OutParameter),
 	    fehler_zaehler);
     fclose(protfile);
-    schritt++;
+    LEARN_RBF_schritt++;
 #endif
 
     return (ret_code);
@@ -3849,7 +3841,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 		       float  *parameterInArray,  int  NoOfInParams, 
 		       float **parameterOutArray, int *NoOfOutParams)
 {
-  static float OutParameter[1];
+  //static float LEARN_RBF_DDA_OutParameter[1];
   float        theta_pos           =       LEARN_PARAM1(parameterInArray),
                theta_neg           =       LEARN_PARAM2(parameterInArray);
   int          max_units_displayed = (int )LEARN_PARAM3(parameterInArray),
@@ -4313,11 +4305,11 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 
   /* Compute Error == # misclassified patterns */
 
-  *NoOfOutParams = 1; /*  One return value: OutParameter[0] == learning error */
-  *parameterOutArray = OutParameter;  /*  set the output parameter reference  */
+  *NoOfOutParams = 1; /*  One return value: LEARN_RBF_DDA_OutParameter[0] == learning error */
+  *parameterOutArray = LEARN_RBF_DDA_OutParameter;  /*  set the output parameter reference  */
     
   /* reset network error value  */
-  OutParameter[0] = 0.0;  
+  LEARN_RBF_DDA_OutParameter[0] = 0.0;  
     
   /* compute the necessary sub patterns */
   RBF_ERROR_CHECK( kr_initSubPatternOrder ( start_pattern, end_pattern ) );
@@ -4330,7 +4322,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
       topo_ptr = topo_ptr_array + 2 + NoOfInputUnits  + NoOfHiddenUnits;
 
       while( (output_unit_ptr = * ++topo_ptr) != NULL )
-	OutParameter[0] +=  RBF_SQR( output_unit_ptr->value_a );
+	LEARN_RBF_DDA_OutParameter[0] +=  RBF_SQR( output_unit_ptr->value_a );
     }
   
   return ( KRERR_NO_ERROR );
@@ -4963,7 +4955,7 @@ krui_err SnnsCLib::LEARN_rprop(int start_pattern, int end_pattern,
 		     float *parameterInArray, int NoOfInParams, 
 		     float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter[1]; /*OutParameter[0] stores the*/
+    //static float LEARN_rprop_OutParameter[1]; /*LEARN_rprop_OutParameter[0] stores the*/
     /*learning error*/
     int    pattern_no, sub_pat_no, ret_code;
     float  maxeps, update_value, wd;
@@ -4992,7 +4984,7 @@ krui_err SnnsCLib::LEARN_rprop(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* one return value */
 
-    *parameterOutArray = OutParameter;	/* set output parameter reference  */
+    *parameterOutArray = LEARN_rprop_OutParameter;	/* set output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)){
@@ -5028,13 +5020,13 @@ krui_err SnnsCLib::LEARN_rprop(int start_pattern, int end_pattern,
     if(KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_rprop_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 	propagateNetForward(pattern_no,sub_pat_no);   /* forward propagation  */
 
 	/* backward propagation and summation of gradient  */
-	NET_ERROR(OutParameter) 
+	NET_ERROR(LEARN_rprop_OutParameter) 
 	    += propagateNetBackwardRprop(pattern_no,sub_pat_no);
     }
 
@@ -5058,9 +5050,9 @@ krui_err SnnsCLib::LEARN_RpropMAP(int start_pattern, int end_pattern,
                      float *parameterInArray, int NoOfInParams, 
                      float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter[1]; /*OutParameter[0] stores the*/
+    //static float LEARN_RpropMAP_OutParameter[1]; /*LEARN_RpropMAP_OutParameter[0] stores the*/
     /*learning error*/
-    static int counter=0;
+    //static int LEARN_RpropMAP_counter=0;
     int    pattern_no, sub_pat_no, ret_code,errorType=0,updateEpoch=20;
     float  maxeps, update_value;
     float  alpha, beta, lambda; 
@@ -5093,7 +5085,7 @@ krui_err SnnsCLib::LEARN_RpropMAP(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;         /* one return value */
 
-    *parameterOutArray = OutParameter;  /* set output parameter reference  */
+    *parameterOutArray = LEARN_RpropMAP_OutParameter;  /* set output parameter reference  */
     ret_code = KRERR_NO_ERROR;  /* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)){
@@ -5113,14 +5105,14 @@ krui_err SnnsCLib::LEARN_RpropMAP(int start_pattern, int end_pattern,
         ret_code = kr_topoSort( TOPOLOGICAL_FF );
         if ((ret_code != KRERR_NO_ERROR) && (ret_code != KRERR_DEAD_UNITS))
             return( ret_code );
-        counter = 0;
+        LEARN_RpropMAP_counter = 0;
     }
 
     if (NetModified || NetInitialize || LearnFuncHasChanged){
         /*  Net has been modified or initialized, initialize RPROP */
         ret_code = initializeRprop(update_value);
         if (ret_code != KRERR_NO_ERROR)  return( ret_code );
-        counter = 0;
+        LEARN_RpropMAP_counter = 0;
     }
     NetModified = FALSE;
 
@@ -5130,27 +5122,27 @@ krui_err SnnsCLib::LEARN_RpropMAP(int start_pattern, int end_pattern,
     if(KernelErrorCode != KRERR_NO_ERROR)
         return (KernelErrorCode);
 
-    NET_ERROR(OutParameter) = 0.0;      /* reset network error value  */
+    NET_ERROR(LEARN_RpropMAP_OutParameter) = 0.0;      /* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
         propagateNetForwardMAP(pattern_no,sub_pat_no,errorType);  
 
         /* backward propagation and summation of gradient  */
-        NET_ERROR(OutParameter) 
+        NET_ERROR(LEARN_RpropMAP_OutParameter) 
             += propagateNetBackwardMAP(pattern_no,sub_pat_no, errorType);
     }
-    counter++;
-    if (updateEpoch && (counter % updateEpoch == 0) ){
+    LEARN_RpropMAP_counter++;
+    if (updateEpoch && (LEARN_RpropMAP_counter % updateEpoch == 0) ){
       /* compute bayes hyperparameter */
       alpha = computeAlpha();
-      beta  = krui_getNoOfPatterns() / NET_ERROR(OutParameter);
+      beta  = krui_getNoOfPatterns() / NET_ERROR(LEARN_RpropMAP_OutParameter);
       if (beta ==  0.0)
          lambda = 0.0; /* should never happen */
         else
           lambda = alpha / beta;
 
       fprintf(stderr,"Epoch %d, beta:  %.4f alpha: %.4f lambda: %.4f \n",
-              counter, beta, alpha, lambda);
+              LEARN_RpropMAP_counter, beta, alpha, lambda);
     }
     /*  modify links and bias  */
     MODI_rprop(maxeps, lambda); 
@@ -5176,7 +5168,7 @@ krui_err SnnsCLib::TEST_rprop(int start_pattern, int end_pattern,
 		     float *parameterInArray, int NoOfInParams, 
 		     float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter[1]; /*OutParameter[0] stores the*/
+    //static float TEST_rprop_OutParameter[1]; /*TEST_rprop_OutParameter[0] stores the*/
     /*learning error*/
     int    pattern_no, sub_pat_no, ret_code;
 
@@ -5190,7 +5182,7 @@ krui_err SnnsCLib::TEST_rprop(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* one return value */
 
-    *parameterOutArray = OutParameter;	/* set output parameter reference  */
+    *parameterOutArray = TEST_rprop_OutParameter;	/* set output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)){
@@ -5221,13 +5213,13 @@ krui_err SnnsCLib::TEST_rprop(int start_pattern, int end_pattern,
     if(KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(TEST_rprop_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 	propagateNetForward(pattern_no,sub_pat_no);   /* forward propagation  */
 
 	/* backward propagation and summation of gradient  */
-	NET_ERROR(OutParameter) 
+	NET_ERROR(TEST_rprop_OutParameter) 
 	    += testNetBackwardRprop(pattern_no,sub_pat_no);
     }
 
@@ -5341,7 +5333,7 @@ krui_err SnnsCLib::TEST_MAP(int start_pattern, int end_pattern,
                      float *parameterInArray, int NoOfInParams, 
                      float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter[1]; /*OutParameter[0] stores the*/
+    //static float TEST_MAP_OutParameter[1]; /*TEST_MAP_OutParameter[0] stores the*/
     /*learning error*/
     int    pattern_no, sub_pat_no, ret_code;
     int errorType;
@@ -5356,7 +5348,7 @@ krui_err SnnsCLib::TEST_MAP(int start_pattern, int end_pattern,
     
     *NoOfOutParams = 1;         /* one return value */
 
-    *parameterOutArray = OutParameter;  /* set output parameter reference  */
+    *parameterOutArray = TEST_MAP_OutParameter;  /* set output parameter reference  */
     ret_code = KRERR_NO_ERROR;  /* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)){
@@ -5387,13 +5379,13 @@ krui_err SnnsCLib::TEST_MAP(int start_pattern, int end_pattern,
     if(KernelErrorCode != KRERR_NO_ERROR)
         return (KernelErrorCode);
 
-    NET_ERROR(OutParameter) = 0.0;      /* reset network error value  */
+    NET_ERROR(TEST_MAP_OutParameter) = 0.0;      /* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
         propagateNetForwardMAP(pattern_no,sub_pat_no,errorType);
 
         /* backward propagation and summation of gradient  */
-        NET_ERROR(OutParameter) 
+        NET_ERROR(TEST_MAP_OutParameter) 
           += testNetBackwardMAP(pattern_no,sub_pat_no,errorType);
     }
 
@@ -6982,8 +6974,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
 		    float *parameterInArray, int NoOfInParams, 
 		    float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_BPTT_OutParameter[1];	/* LEARN_BPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no, patterns;
     int             nhist;	/* number of steps back in time */
     register struct Unit *unit_ptr;
@@ -6995,7 +6986,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = LEARN_BPTT_OutParameter;	/* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGIC_TYPE)) {
@@ -7026,7 +7017,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
 	if (ret_code != KRERR_NO_ERROR)
 	    return (ret_code);
     }
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_BPTT_OutParameter) = 0.0;	/* reset network error value  */
 
     NoOfLearnedPatterns = 0;	/* correct bits using threshold of 0.5 */
     nhist = LEARN_PARAM3(parameterInArray);
@@ -7050,7 +7041,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
 	BPTT_propagateNetForward(pattern_no,sub_pat_no,nhist); /*Forward pass */
 
 	/* Backward propagation  */
-	NET_ERROR(OutParameter) 
+	NET_ERROR(LEARN_BPTT_OutParameter) 
 	    += BPTT_propagateNetBackward(pattern_no, sub_pat_no, nhist);
 
 	/* online version: adapt net after each pattern has been
@@ -7081,8 +7072,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
 		    float *parameterInArray, int NoOfInParams, 
 		    float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    TEST_BPTT_OutParameter[1];	/* TEST_BPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no, patterns;
     int             nhist;	/* number of steps back in time */
     register struct Unit *unit_ptr;
@@ -7094,7 +7084,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = TEST_BPTT_OutParameter;	/* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGIC_TYPE)) {
@@ -7125,7 +7115,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
 	if (ret_code != KRERR_NO_ERROR)
 	    return (ret_code);
     }
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(TEST_BPTT_OutParameter) = 0.0;	/* reset network error value  */
 
     NoOfLearnedPatterns = 0;	/* correct bits using threshold of 0.5 */
     nhist = 1;
@@ -7146,7 +7136,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
 	BPTT_propagateNetForward(pattern_no,sub_pat_no,nhist); /*Forward pass*/
     
 	/* Backward propagation  */
-	NET_ERROR(OutParameter) 
+	NET_ERROR(TEST_BPTT_OutParameter) 
 	    += BPTT_propagateNetBackward(pattern_no, sub_pat_no, nhist);
   
     }
@@ -7171,8 +7161,7 @@ krui_err SnnsCLib::LEARN_BBPTT(int start_pattern, int end_pattern,
 		     float *parameterInArray, int NoOfInParams, 
 		     float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_BBPTT_OutParameter[1];	/* LEARN_BBPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no, patterns;
     int             nhist;	/* number of steps back in time */
     register struct Unit *unit_ptr;
@@ -7184,7 +7173,7 @@ krui_err SnnsCLib::LEARN_BBPTT(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = LEARN_BBPTT_OutParameter;	/* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGIC_TYPE)) {
@@ -7215,7 +7204,7 @@ krui_err SnnsCLib::LEARN_BBPTT(int start_pattern, int end_pattern,
 	if (ret_code != KRERR_NO_ERROR)
 	    return (ret_code);
     }
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_BBPTT_OutParameter) = 0.0;	/* reset network error value  */
 
     NoOfLearnedPatterns = 0;	/* correct bits using threshold of 0.5 */
     nhist = LEARN_PARAM3(parameterInArray);
@@ -7240,7 +7229,7 @@ krui_err SnnsCLib::LEARN_BBPTT(int start_pattern, int end_pattern,
 	BPTT_propagateNetForward(pattern_no,sub_pat_no,nhist); /*Forward pass */
 
 	/* Backward propagation  */
-	NET_ERROR(OutParameter) 
+	NET_ERROR(LEARN_BBPTT_OutParameter) 
 	    += BPTT_propagateNetBackward(pattern_no, sub_pat_no, nhist);
 	patterns++;
     }
@@ -7271,8 +7260,7 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
 		     float *parameterInArray, int NoOfInParams, 
 		     float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_QPTT_OutParameter[1];	/* LEARN_QPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no, patterns;
     int             nhist;	/* number of steps back in time */
     register struct Unit *unit_ptr;
@@ -7284,7 +7272,7 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* One return value is available (the
 				   learning error)  */
-    *parameterOutArray = OutParameter;	/* set the output parameter reference */
+    *parameterOutArray = LEARN_QPTT_OutParameter;	/* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;	/* reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGIC_TYPE)) {
@@ -7315,7 +7303,7 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
 	if (ret_code != KRERR_NO_ERROR)
 	    return (ret_code);
     }
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_QPTT_OutParameter) = 0.0;	/* reset network error value  */
 
     NoOfLearnedPatterns = 0;	/* correct bits using threshold of 0.5 */
     nhist = LEARN_PARAM4(parameterInArray);
@@ -7341,7 +7329,7 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
 	BPTT_propagateNetForward(pattern_no,sub_pat_no,nhist); /*Forward pass */
 
 	/* Backward propagation  */
-	NET_ERROR(OutParameter)
+	NET_ERROR(LEARN_QPTT_OutParameter)
 	    += BPTT_propagateNetBackward(pattern_no, sub_pat_no, nhist);
 
 	patterns++;
@@ -7584,8 +7572,7 @@ krui_err SnnsCLib::LEARN_kohonen(int start_pattern, int end_pattern,
 		       float parameterInArray[], int NoOfInParams,
 		       float **parameterOutArray, int *NoOfOutParams)
 {
-    static float    OutParameter[1];	/* OutParameter[0] stores the
-					   learning error  */
+    //static float    LEARN_kohonen_OutParameter[1];	/* LEARN_kohonen_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
 
     if (NoOfUnits == 0)
@@ -7595,7 +7582,7 @@ krui_err SnnsCLib::LEARN_kohonen(int start_pattern, int end_pattern,
 
     *NoOfOutParams = 1;		/* one return value is available (the
 				   learning error) */
-    *parameterOutArray = OutParameter;	/* set output parameter reference  */
+    *parameterOutArray = LEARN_kohonen_OutParameter;	/* set output parameter reference  */
     ret_code = KRERR_NO_ERROR;	/* clear return code  */
 
 
@@ -7647,11 +7634,11 @@ krui_err SnnsCLib::LEARN_kohonen(int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_kohonen_OutParameter) = 0.0;	/* reset network error value  */
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
 	NoOfLearnedPatterns++;
-	NET_ERROR(OutParameter) +=
+	NET_ERROR(LEARN_kohonen_OutParameter) +=
 	    propagateNet_kohonen(pattern_no,sub_pat_no,
 				 LEARN_PARAM1(parameterInArray),
 				 LEARN_PARAM2(parameterInArray),
@@ -7896,7 +7883,7 @@ krui_err  SnnsCLib::LEARN_JE_Backprop (int     start_pattern    , int  end_patte
                              float **parameterOutArray, int *NoOfOutParams)
 
 {
-  static float  OutParameter[1] ; /* OutParameter[0] stores the */
+  //static float  LEARN_JE_Backprop_OutParameter[1] ; /* LEARN_JE_Backprop_OutParameter[0] stores the */
                                   /* learning error             */
   int	        n, pattern_no,sub_pat_no ;
   int           start, end;
@@ -7909,8 +7896,8 @@ krui_err  SnnsCLib::LEARN_JE_Backprop (int     start_pattern    , int  end_patte
 
   *NoOfOutParams     = 1            ; /* one return value is available      */
                                       /* (the learning error)               */
-  *parameterOutArray = OutParameter ; /* set the output parameter reference */ 
-  NET_ERROR (OutParameter) = 0.0    ; /* reset network error value          */
+  *parameterOutArray = LEARN_JE_Backprop_OutParameter ; /* set the output parameter reference */ 
+  NET_ERROR (LEARN_JE_Backprop_OutParameter) = 0.0    ; /* reset network error value          */
 
   if (NetModified || (TopoSortID != TOPOLOGICAL_JE))
   {
@@ -7936,7 +7923,7 @@ krui_err  SnnsCLib::LEARN_JE_Backprop (int     start_pattern    , int  end_patte
 	kr_getSubPatternByNo(&pattern_no,&sub_pat_no,n);
 
 	propagateNetForward (pattern_no,sub_pat_no) ;	
-	NET_ERROR (OutParameter) +=
+	NET_ERROR (LEARN_JE_Backprop_OutParameter) +=
 	    propagateNetBackward2 (pattern_no,sub_pat_no, 
 				   LEARN_PARAM1 (parameterInArray), 
 				   LEARN_PARAM2 (parameterInArray)) ;
@@ -7966,7 +7953,7 @@ krui_err  SnnsCLib::TEST_JE_Backprop (int     start_pattern    , int  end_patter
                              float **parameterOutArray, int *NoOfOutParams)
 
 {
-  static float  OutParameter[1] ; /* OutParameter[0] stores the */
+  //static float  TEST_JE_Backprop_OutParameter[1] ; /* TEST_JE_Backprop_OutParameter[0] stores the */
                                   /* learning error             */
   int	        n, pattern_no,sub_pat_no ;
   int           start, end;
@@ -7978,8 +7965,8 @@ krui_err  SnnsCLib::TEST_JE_Backprop (int     start_pattern    , int  end_patter
 
   *NoOfOutParams     = 1            ; /* one return value is available      */
                                       /* (the learning error)               */
-  *parameterOutArray = OutParameter ; /* set the output parameter reference */ 
-  NET_ERROR (OutParameter) = 0.0    ; /* reset network error value          */
+  *parameterOutArray = TEST_JE_Backprop_OutParameter ; /* set the output parameter reference */ 
+  NET_ERROR (TEST_JE_Backprop_OutParameter) = 0.0    ; /* reset network error value          */
 
   if (NetModified || (TopoSortID != TOPOLOGICAL_JE))
   {
@@ -8005,7 +7992,7 @@ krui_err  SnnsCLib::TEST_JE_Backprop (int     start_pattern    , int  end_patter
 	kr_getSubPatternByNo(&pattern_no,&sub_pat_no,n);
 
 	propagateNetForward (pattern_no,sub_pat_no) ;	
-	NET_ERROR (OutParameter) +=
+	NET_ERROR (TEST_JE_Backprop_OutParameter) +=
 	    testNetBackward2 (pattern_no,sub_pat_no, 
 				   LEARN_PARAM1 (parameterInArray),
 				   LEARN_PARAM2 (parameterInArray)) ;
@@ -8034,7 +8021,7 @@ krui_err SnnsCLib::TEST_JE_BackpropMomentum(int start_pattern, int end_pattern,
 				   int *NoOfOutParams)
 
 {
-  static float  OutParameter[1] ; /* OutParameter[0] stores the */
+  //static float  TEST_JE_BackpropMomentum_OutParameter[1] ; /* TEST_JE_BackpropMomentum_OutParameter[0] stores the */
                                   /* learning error             */
   int	        n, pattern_no,sub_pat_no ;
   int           start, end;
@@ -8045,8 +8032,8 @@ krui_err SnnsCLib::TEST_JE_BackpropMomentum(int start_pattern, int end_pattern,
 
   *NoOfOutParams     = 1            ; /* one return value is available      */
                                       /* (the learning error)               */
-  *parameterOutArray = OutParameter ; /* set the output parameter reference */ 
-  NET_ERROR (OutParameter) = 0.0    ; /* reset network error value          */
+  *parameterOutArray = TEST_JE_BackpropMomentum_OutParameter ; /* set the output parameter reference */ 
+  NET_ERROR (TEST_JE_BackpropMomentum_OutParameter) = 0.0    ; /* reset network error value          */
 
 
 
@@ -8074,7 +8061,7 @@ krui_err SnnsCLib::TEST_JE_BackpropMomentum(int start_pattern, int end_pattern,
       kr_getSubPatternByNo(&pattern_no,&sub_pat_no,n);
 
       propagateNetForward (pattern_no,sub_pat_no) ;	
-      NET_ERROR (OutParameter) +=
+      NET_ERROR (TEST_JE_BackpropMomentum_OutParameter) +=
 	  testNetBackward2  (pattern_no,sub_pat_no,
 				 LEARN_PARAM1( parameterInArray ),
 				 LEARN_PARAM4( parameterInArray )) ;
@@ -8167,7 +8154,7 @@ krui_err SnnsCLib::LEARN_JE_BackpropMomentum(int start_pattern, int end_pattern,
 				   int *NoOfOutParams)
 
 {
-  static float  OutParameter[1] ; /* OutParameter[0] stores the */
+  //static float  LEARN_JE_BackpropMomentum_OutParameter[1] ; /* LEARN_JE_BackpropMomentum_OutParameter[0] stores the */
                                   /* learning error             */
   int	        n, pattern_no,sub_pat_no ;
   int           start, end;
@@ -8178,8 +8165,8 @@ krui_err SnnsCLib::LEARN_JE_BackpropMomentum(int start_pattern, int end_pattern,
 
   *NoOfOutParams     = 1            ; /* one return value is available      */
                                       /* (the learning error)               */
-  *parameterOutArray = OutParameter ; /* set the output parameter reference */ 
-  NET_ERROR (OutParameter) = 0.0    ; /* reset network error value          */
+  *parameterOutArray = LEARN_JE_BackpropMomentum_OutParameter ; /* set the output parameter reference */ 
+  NET_ERROR (LEARN_JE_BackpropMomentum_OutParameter) = 0.0    ; /* reset network error value          */
 
   if (NetModified || (TopoSortID != TOPOLOGICAL_JE))
   {
@@ -8211,7 +8198,7 @@ krui_err SnnsCLib::LEARN_JE_BackpropMomentum(int start_pattern, int end_pattern,
       kr_getSubPatternByNo(&pattern_no,&sub_pat_no,n);
 
       propagateNetForward (pattern_no,sub_pat_no) ;	
-      NET_ERROR (OutParameter) +=
+      NET_ERROR (LEARN_JE_BackpropMomentum_OutParameter) +=
 	  Backprop_momentum_FSE (pattern_no,sub_pat_no,
 				 LEARN_PARAM1( parameterInArray ),
 				 LEARN_PARAM2( parameterInArray ),
@@ -8244,7 +8231,7 @@ krui_err  SnnsCLib::LEARN_JE_Quickprop (int     start_pattern    , int  end_patt
                               float **parameterOutArray, int *NoOfOutParams)
 
 {
-  static float  OutParameter[1] ; /* OutParameter[0] stores the */
+  //static float  LEARN_JE_Quickprop_OutParameter[1] ; /* LEARN_JE_Quickprop_OutParameter[0] stores the */
                                   /* learning error             */
   int	        n,pattern_no,sub_pat_no ;
   int           start, end;
@@ -8255,8 +8242,8 @@ krui_err  SnnsCLib::LEARN_JE_Quickprop (int     start_pattern    , int  end_patt
 
   *NoOfOutParams     = 1            ; /* one return value is available      */
                                       /* (the learning error)               */
-  *parameterOutArray = OutParameter ; /* set the output parameter reference */ 
-  NET_ERROR (OutParameter) = 0.0    ; /* reset network error value          */
+  *parameterOutArray = LEARN_JE_Quickprop_OutParameter ; /* set the output parameter reference */ 
+  NET_ERROR (LEARN_JE_Quickprop_OutParameter) = 0.0    ; /* reset network error value          */
 
   if (NetModified || (TopoSortID != TOPOLOGICAL_JE))
   {
@@ -8291,7 +8278,7 @@ krui_err  SnnsCLib::LEARN_JE_Quickprop (int     start_pattern    , int  end_patt
       kr_getSubPatternByNo(&pattern_no,&sub_pat_no,n);
 
       propagateNetForward (pattern_no,sub_pat_no) ;	
-      NET_ERROR(OutParameter) +=
+      NET_ERROR(LEARN_JE_Quickprop_OutParameter) +=
 	  propagateNetBackwardQuickprop (pattern_no,sub_pat_no,
 					 LEARN_PARAM4 (parameterInArray)) ;
       update_je_context_units (pattern_no,sub_pat_no,
@@ -8325,7 +8312,7 @@ krui_err  SnnsCLib::LEARN_JE_Rprop    (int     start_pattern    , int  end_patte
                              float **parameterOutArray, int *NoOfOutParams)
 
 {
-  static float  OutParameter[1] ; /* OutParameter[0] stores the */
+  //static float  LEARN_JE_Rprop_OutParameter[1] ; /* LEARN_JE_Rprop_OutParameter[0] stores the */
                                   /* learning error             */
   int	        pattern_no,sub_pat_no ;
   int           n, ret_code, blocksize ;
@@ -8349,8 +8336,8 @@ krui_err  SnnsCLib::LEARN_JE_Rprop    (int     start_pattern    , int  end_patte
 
   *NoOfOutParams     = 1            ; /* one return value is available      */
                                       /* (the learning error)               */
-  *parameterOutArray = OutParameter ; /* set the output parameter reference */ 
-  NET_ERROR (OutParameter) = 0.0    ; /* reset network error value          */
+  *parameterOutArray = LEARN_JE_Rprop_OutParameter ; /* set the output parameter reference */ 
+  NET_ERROR (LEARN_JE_Rprop_OutParameter) = 0.0    ; /* reset network error value          */
 
   if (NetModified || (TopoSortID != TOPOLOGICAL_JE))
   {
@@ -8386,7 +8373,7 @@ krui_err  SnnsCLib::LEARN_JE_Rprop    (int     start_pattern    , int  end_patte
       kr_getSubPatternByNo(&pattern_no,&sub_pat_no,n);
 
       propagateNetForward (pattern_no,sub_pat_no) ;	
-      NET_ERROR (OutParameter) +=
+      NET_ERROR (LEARN_JE_Rprop_OutParameter) +=
 	  propagateNetBackwardRprop (pattern_no,sub_pat_no) ;
       update_je_context_units (pattern_no,sub_pat_no,
 			       LEARN_PARAM4(parameterInArray)) ;
@@ -8414,7 +8401,7 @@ krui_err  SnnsCLib::TEST_JE_Rprop    (int     start_pattern    , int  end_patter
 			    float **parameterOutArray, int *NoOfOutParams)
 
 {
-  static float  OutParameter[1] ; /* OutParameter[0] stores the */
+  //static float  TEST_JE_Rprop_OutParameter[1] ; /* TEST_JE_Rprop_OutParameter[0] stores the */
                                   /* learning error             */
   int	        pattern_no,sub_pat_no ;
   int           n, ret_code, blocksize ;
@@ -8428,8 +8415,8 @@ krui_err  SnnsCLib::TEST_JE_Rprop    (int     start_pattern    , int  end_patter
 
   *NoOfOutParams     = 1            ; /* one return value is available      */
                                       /* (the learning error)               */
-  *parameterOutArray = OutParameter ; /* set the output parameter reference */ 
-  NET_ERROR (OutParameter) = 0.0    ; /* reset network error value          */
+  *parameterOutArray = TEST_JE_Rprop_OutParameter ; /* set the output parameter reference */ 
+  NET_ERROR (TEST_JE_Rprop_OutParameter) = 0.0    ; /* reset network error value          */
 
 
   /* DEFAULTS: */
@@ -8460,7 +8447,7 @@ krui_err  SnnsCLib::TEST_JE_Rprop    (int     start_pattern    , int  end_patter
       kr_getSubPatternByNo(&pattern_no,&sub_pat_no,n);
 
       propagateNetForward (pattern_no,sub_pat_no) ;	
-      NET_ERROR (OutParameter) +=
+      NET_ERROR (TEST_JE_Rprop_OutParameter) +=
 	  testNetBackwardRprop (pattern_no,sub_pat_no) ;
       test_update_je_context_units (pattern_no,sub_pat_no) ;
   }
@@ -8611,7 +8598,7 @@ krui_err SnnsCLib::LEARN_RM_delta (int start_pattern, int end_pattern,
 			 float **parameterOutArray, int *NoOfOutParams)
 {
 
-    static float OutParameter [1];
+    //static float LEARN_RM_delta_OutParameter [1];
     int pattern_no,sub_pat_no;
     float Learn_p;
     float prop_step;
@@ -8632,7 +8619,7 @@ krui_err SnnsCLib::LEARN_RM_delta (int start_pattern, int end_pattern,
     }
 
     *NoOfOutParams = 1; /* Out Parameter = Learning error */
-    *parameterOutArray = OutParameter;
+    *parameterOutArray = LEARN_RM_delta_OutParameter;
 
     (void) kr_topoSort (TOPOLOGIC_TYPE);
 
@@ -8644,7 +8631,7 @@ krui_err SnnsCLib::LEARN_RM_delta (int start_pattern, int end_pattern,
 
 
     /* reset network error value  */
-    NET_ERROR (OutParameter) = 0.0;
+    NET_ERROR (LEARN_RM_delta_OutParameter) = 0.0;
 
     /* Determine order of pattern presentation */
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
@@ -8656,7 +8643,7 @@ krui_err SnnsCLib::LEARN_RM_delta (int start_pattern, int end_pattern,
 	RM_learn (Learn_p);
 
 	/* Compute network error */ 
-	NET_ERROR (OutParameter) += Hebb_error(prop_step); 
+	NET_ERROR (LEARN_RM_delta_OutParameter) += Hebb_error(prop_step); 
     }
 
     return (KernelErrorCode);
@@ -8733,7 +8720,7 @@ krui_err SnnsCLib::LEARN_HEBB (int start_pattern, int end_pattern,
 		     float *parameterInArray, int NoOfInParams, 
 		     float **parameterOutArray, int *NoOfOutParams)
 {
-    static float OutParameter [1];
+    //static float LEARN_HEBB_OutParameter [1];
     int pattern_no, sub_pat_no;
     int NoOfTimes;
     float Learn_p, Weight_MAX;
@@ -8752,7 +8739,7 @@ krui_err SnnsCLib::LEARN_HEBB (int start_pattern, int end_pattern,
     }
 
     *NoOfOutParams = 1;  /* Out Parameter = Learning error */
-    *parameterOutArray = OutParameter;
+    *parameterOutArray = LEARN_HEBB_OutParameter;
 
     Learn_p    = LEARN_PARAM1 (parameterInArray);
     Weight_MAX = LEARN_PARAM2 (parameterInArray);
@@ -8773,7 +8760,7 @@ krui_err SnnsCLib::LEARN_HEBB (int start_pattern, int end_pattern,
 
 
     /* reset network error value  */
-    NET_ERROR (OutParameter) = 0.0;
+    NET_ERROR (LEARN_HEBB_OutParameter) = 0.0;
 
     /* Determine order of pattern presentation */
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
@@ -8831,7 +8818,7 @@ krui_err SnnsCLib::LEARN_HEBB (int start_pattern, int end_pattern,
 		}
 	    }
 
-	NET_ERROR (OutParameter) += Hebb_error (NoOfTimes); 
+	NET_ERROR (LEARN_HEBB_OutParameter) += Hebb_error (NoOfTimes); 
     }
     return (KernelErrorCode);
 }

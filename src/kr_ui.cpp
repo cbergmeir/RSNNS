@@ -17,7 +17,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-#include <config.h>
+//#include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -62,7 +62,7 @@
 //#endif
 
 /************ Random seed storage **************/
-long randomSeedVal=0;
+//long randomSeedVal=0;
 /***********************************************/
 
 /*****************************************************************************
@@ -273,14 +273,14 @@ int  SnnsCLib::krui_searchNextUnitName(void)
 char  *SnnsCLib::krui_getUnitOutFuncName(int UnitNo)
 {
     struct Unit   *unit_ptr;
-    static char  out_func_name[FUNCTION_NAME_MAX_LEN];
+    //static char  krui_getUnitOutFuncName_out_func_name[FUNCTION_NAME_MAX_LEN];
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
         return( NULL );         /*  invalid unit #  */
 
-    strcpy( out_func_name, krf_getFuncName( (FunctionPtr) unit_ptr->out_func ));
+    strcpy( krui_getUnitOutFuncName_out_func_name, krf_getFuncName( (FunctionPtr) unit_ptr->out_func ));
 
-    return( out_func_name );
+    return( krui_getUnitOutFuncName_out_func_name );
 }
 
 /*****************************************************************************
@@ -331,14 +331,14 @@ krui_err  SnnsCLib::krui_setUnitOutFunc(int unit_no, char *unitOutFuncName)
 char  *SnnsCLib::krui_getUnitActFuncName(int UnitNo)
 {
     struct Unit   *unit_ptr;
-    static char  act_func_name[FUNCTION_NAME_MAX_LEN];
+    //static char  krui_getUnitActFuncName_act_func_name[FUNCTION_NAME_MAX_LEN];
 
     if ( (unit_ptr = kr_getUnitPtr( UnitNo ) ) == NULL)
         return( NULL );         /*  invalid unit #  */
 
-    strcpy( act_func_name, krf_getFuncName( (FunctionPtr) unit_ptr->act_func ));
+    strcpy( krui_getUnitActFuncName_act_func_name, krf_getFuncName( (FunctionPtr) unit_ptr->act_func ));
 
-    return( act_func_name );
+    return( krui_getUnitActFuncName_act_func_name );
 }
 
 /*****************************************************************************
@@ -1449,15 +1449,15 @@ krui_err  SnnsCLib::krui_setFTypeName(char *Ftype_symbol)
 ******************************************************************************/
 char  *SnnsCLib::krui_getFTypeActFuncName(void)
 {
-    static char  act_func_name[FUNCTION_NAME_MAX_LEN];
+    //static char  krui_getFTypeActFuncName_act_func_name[FUNCTION_NAME_MAX_LEN];
 
     if (UICurrentFtypeEntry == NULL)
         return( NULL );
 
-    strcpy( act_func_name, 
+    strcpy( krui_getFTypeActFuncName_act_func_name, 
 	    krf_getFuncName( (FunctionPtr) UICurrentFtypeEntry->act_func ) );
 
-    return( act_func_name );
+    return( krui_getFTypeActFuncName_act_func_name );
 }
 
 
@@ -1521,15 +1521,15 @@ krui_err  SnnsCLib::krui_setFTypeActFunc(char *act_func_name)
 
 char  *SnnsCLib::krui_getFTypeOutFuncName(void)
 {
-    static char  out_func_name[FUNCTION_NAME_MAX_LEN];
+    //static char  krui_getFTypeOutFuncName_out_func_name[FUNCTION_NAME_MAX_LEN];
 
     if (UICurrentFtypeEntry == NULL)
         return( NULL );
 
-    strcpy( out_func_name, 
+    strcpy( krui_getFTypeOutFuncName_out_func_name, 
 	    krf_getFuncName( (FunctionPtr) UICurrentFtypeEntry->out_func ) );
 
-    return( out_func_name );
+    return( krui_getFTypeOutFuncName_out_func_name );
 }
 
 
@@ -1832,12 +1832,12 @@ int  SnnsCLib::krui_getNoOfFunctions(void)
 ******************************************************************************/
 void  SnnsCLib::krui_getFuncInfo(int func_no, char **func_name, int *func_type)
 {
-    static struct FuncInfoDescriptor  functionDescr;
-    functionDescr.number = func_no - 1;
-    KernelErrorCode = krf_getFuncInfo( GET_FUNC_INFO, &functionDescr );
+    //static struct FuncInfoDescriptor  krui_getFuncInfo_functionDescr;
+    krui_getFuncInfo_functionDescr.number = func_no - 1;
+    KernelErrorCode = krf_getFuncInfo( GET_FUNC_INFO, &krui_getFuncInfo_functionDescr );
 
-    *func_type = functionDescr.func_type;
-    *func_name = functionDescr.func_name;
+    *func_type = krui_getFuncInfo_functionDescr.func_type;
+    *func_name = krui_getFuncInfo_functionDescr.func_name;
 }
 
 
@@ -1875,17 +1875,17 @@ bool  SnnsCLib::krui_isFunction(char *func_name, int func_type)
 bool  SnnsCLib::krui_getFuncParamInfo(char *func_name, int func_type, 
 			    int *no_of_input_params, int *no_of_output_params)
 {
-    static struct FuncInfoDescriptor  functionDescr;
+    //static struct FuncInfoDescriptor  krui_getFuncParamInfo_functionDescr;
 
-    functionDescr.func_type = func_type;
-    strcpy( functionDescr.func_name, func_name );
+    krui_getFuncParamInfo_functionDescr.func_type = func_type;
+    strcpy( krui_getFuncParamInfo_functionDescr.func_name, func_name );
 
-    KernelErrorCode = krf_getFuncInfo( SEARCH_FUNC, &functionDescr );
+    KernelErrorCode = krf_getFuncInfo( SEARCH_FUNC, &krui_getFuncParamInfo_functionDescr );
 
     if (KernelErrorCode != KRERR_NO_ERROR)  return( FALSE );
 
-    *no_of_input_params = functionDescr.no_of_input_parameters;
-    *no_of_output_params = functionDescr.no_of_output_parameters;
+    *no_of_input_params = krui_getFuncParamInfo_functionDescr.no_of_input_parameters;
+    *no_of_output_params = krui_getFuncParamInfo_functionDescr.no_of_output_parameters;
     return( TRUE );
 }
 
@@ -2256,17 +2256,17 @@ krui_err  SnnsCLib::krui_setSiteName(char *site_name)
 ******************************************************************************/
 char  *SnnsCLib::krui_getSiteFuncName(void)
 {
-    static char  site_func_name[FUNCTION_NAME_MAX_LEN];
+    //static char  krui_getSiteFuncName_site_func_name[FUNCTION_NAME_MAX_LEN];
 
     if (sitePtr == NULL){
         KernelErrorCode = KRERR_FTYPE_SITE;
         return( NULL );
     }
 
-    strcpy( site_func_name, 
+    strcpy( krui_getSiteFuncName_site_func_name, 
 	    krf_getFuncName( (FunctionPtr) sitePtr->site_table->site_func ) );
 
-    return( site_func_name );
+    return( krui_getSiteFuncName_site_func_name );
 }
 
 
@@ -3158,10 +3158,10 @@ krui_err   SnnsCLib::krui_updateSingleUnit(int unit_no)
 ******************************************************************************/
 char  *SnnsCLib::krui_getUpdateFunc(void)
 {
-    static char  updateFunc[FUNCTION_NAME_MAX_LEN];
+    //static char  krui_getUpdateFunc_updateFunc[FUNCTION_NAME_MAX_LEN];
 
-    strcpy( updateFunc, krf_getCurrentNetworkFunc( UPDATE_FUNC ) );
-    return( updateFunc );
+    strcpy( krui_getUpdateFunc_updateFunc, krf_getCurrentNetworkFunc( UPDATE_FUNC ) );
+    return( krui_getUpdateFunc_updateFunc );
 }
 
 
@@ -3295,11 +3295,11 @@ GROUP: Learning Functions
 ******************************************************************************/
 char  *SnnsCLib::krui_getLearnFunc(void)
 {
-    static char  learnFunc[FUNCTION_NAME_MAX_LEN];
+    //static char  krui_getLearnFunc_learnFunc[FUNCTION_NAME_MAX_LEN];
 
-    strcpy( learnFunc, krf_getCurrentNetworkFunc( LEARN_FUNC ) );
+    strcpy( krui_getLearnFunc_learnFunc, krf_getCurrentNetworkFunc( LEARN_FUNC ) );
 
-    return( learnFunc );
+    return( krui_getLearnFunc_learnFunc );
 }
 
 
@@ -3643,10 +3643,10 @@ GROUP: Pruning Functions
 char *SnnsCLib::krui_getPrunFunc (void)
 {
 
-    static char prunFunc [FUNCTION_NAME_MAX_LEN];
+    //static char krui_getPrunFunc_prunFunc [FUNCTION_NAME_MAX_LEN];
 
-    strcpy (prunFunc, krf_getCurrentNetworkFunc (PRUNING_FUNC));
-    return (prunFunc);
+    strcpy (krui_getPrunFunc_prunFunc, krf_getCurrentNetworkFunc (PRUNING_FUNC));
+    return (krui_getPrunFunc_prunFunc);
 
 }
 
@@ -3686,10 +3686,10 @@ GROUP: FF-Learning Functions
 char *SnnsCLib::krui_getFFLearnFunc (void)
 {
 
-    static char FFLearnFunc [FUNCTION_NAME_MAX_LEN];
+    //static char krui_getFFLearnFunc_FFLearnFunc [FUNCTION_NAME_MAX_LEN];
 
-    strcpy (FFLearnFunc, krf_getCurrentNetworkFunc(FF_LEARN_FUNC | LEARN_FUNC));
-    return (FFLearnFunc);
+    strcpy (krui_getFFLearnFunc_FFLearnFunc, krf_getCurrentNetworkFunc(FF_LEARN_FUNC | LEARN_FUNC));
+    return (krui_getFFLearnFunc_FFLearnFunc);
 
 }
 
@@ -4403,11 +4403,11 @@ GROUP: Miscellanous
 ******************************************************************************/
 char  *SnnsCLib::krui_getVersion(void)
 {
-    static char snns_version[128];
+    //static char krui_getVersion_snns_version[128];
 
-    strcpy( snns_version, SNNS_VERSION );
-    strcat( snns_version, KERNEL_PATCH );
-    return( snns_version );
+    strcpy( krui_getVersion_snns_version, SNNS_VERSION );
+    strcat( krui_getVersion_snns_version, KERNEL_PATCH );
+    return( krui_getVersion_snns_version );
 }
 
 
@@ -4565,12 +4565,12 @@ void  SnnsCLib::krui_setSeedNo(long int seed)
 {
 
     if (seed != 0) {
-	randomSeedVal = seed;
+	kr_ui_randomSeedVal = seed;
         srand48( seed );  
     } else {
-        if (randomSeedVal == 0) {
-            randomSeedVal = (long) time( (time_t *) 0);
-            srand48( randomSeedVal ); 
+        if (kr_ui_randomSeedVal == 0) {
+            kr_ui_randomSeedVal = (long) time( (time_t *) 0);
+            srand48( kr_ui_randomSeedVal ); 
         }
     }
 }
@@ -4749,12 +4749,12 @@ krui_err  SnnsCLib::krui_setUnitCenters(int unit_no, int center_no,
 char  *SnnsCLib::krui_topo_err_msg(void)
 {
     char  *dest_unit_name,  *src_unit_name;
-    static char  msg1[512];
-    static char  msg2[512];
+    //static char  krui_topo_err_msg_msg1[512];
+    //static char  krui_topo_err_msg_msg2[512];
 
     /* Init */
-    msg1[0] = '\0';
-    msg2[0] = '\0';
+    krui_topo_err_msg_msg1[0] = '\0';
+    krui_topo_err_msg_msg2[0] = '\0';
 
     if (topo_msg.dest_error_unit > 0)
         dest_unit_name = krui_getUnitName( topo_msg.dest_error_unit );
@@ -4764,27 +4764,27 @@ char  *SnnsCLib::krui_topo_err_msg(void)
 
     if (topo_msg.dest_error_unit > 0)
         if (dest_unit_name == NULL)
-            sprintf( msg1, "Unit #%d is the destination unit. ", 
+            sprintf( krui_topo_err_msg_msg1, "Unit #%d is the destination unit. ", 
 		     topo_msg.dest_error_unit );
         else
-            sprintf( msg1, "Unit #%d (%s) is the destination unit. ", 
+            sprintf( krui_topo_err_msg_msg1, "Unit #%d (%s) is the destination unit. ", 
 		     topo_msg.dest_error_unit, dest_unit_name );
 
     if (topo_msg.src_error_unit > 0)
         if (src_unit_name == NULL)
-            sprintf( msg2, "Unit #%d is the source unit. ", 
+            sprintf( krui_topo_err_msg_msg2, "Unit #%d is the source unit. ", 
 		     topo_msg.src_error_unit );
         else
-            sprintf( msg2, "Unit #%d (%s) is the source unit. ", 
+            sprintf( krui_topo_err_msg_msg2, "Unit #%d (%s) is the source unit. ", 
 		     topo_msg.src_error_unit, src_unit_name );
 
     if (topo_msg.dest_error_unit == 0)
-        return( msg2 );
+        return( krui_topo_err_msg_msg2 );
 
     if (topo_msg.src_error_unit > 0)
-        strcat( msg1, msg2 );
+        strcat( krui_topo_err_msg_msg1, krui_topo_err_msg_msg2 );
 
-    return( msg1 );
+    return( krui_topo_err_msg_msg1 );
 }
 
 
@@ -4801,165 +4801,9 @@ char  *SnnsCLib::krui_topo_err_msg(void)
 ******************************************************************************/
 char  *SnnsCLib::krui_error(int error_code)
 {
-    static char *err_message[] = {
-        "Invalid error code",
-        "Insufficient memory",
-        "Invalid unit number",
-        "Invalid unit output function",
-        "Invalid unit activation function",
-        "Invalid site function",
-        "Creation of sites isn't permitted because unit has direct input links",
-        "Creation of a link isn't permitted because there exists already a link between these units",
-        "Memory allocation failed during critical operation. Have lost some pointers, but consistency of the network is guaranteed",
-        "Ftype name isn't definite",
-        /*10*/"Current Ftype entry isn't defined",
-        "Invalid copy mode",
-        "Current unit doesn't have sites",
-        "Can't update unit because unit is frozen",
-        "Redefinition of site name isn't permitted (site name already exists)",
-        "Site name isn't defined",
-        "This is not a 3D-Kernel",
-        "This unit has already a site with this name",
-        "Can't delete site table entry because site is in use",
-        "Current Ftype site isn't defined",
-        /*20*/"Ftype symbol isn't defined",
-        "I/O error: ",
-        "Creation of output file failed (line length limit exceeded)",
-        "The network has not enough layers: ",
-        "No Units defined",
-        "Unexpected EOF",
-        "Line length exceeded",
-        "Incompatible file format",
-        "Can't open file",
-        "Syntax error",
-        /*30*/"Memory allocation error #01",
-        "Topologic type invalid",
-        "Symbol pattern invalid (must match [A-Za-z][^|, ]*)",
-        "Current unit doesn't have a site with this name",
-        "No hidden units defined",
-        "Network contains cycle(s): ",
-        "Network contains dead unit(s): ",
-        "Pattern file contains not the same no. of input units as the network",
-        "Pattern file contains not the same no. of output units as the network",
-        "No. of input units have changed",
-        /*40*/"No. of output units have changed",
-        "No input units defined",
-        "No output units defined",
-        "No patterns defined",
-        "In-Core patterns incompatible with current network (remove In-Core patterns before loading a new network)",
-        "Invalid pattern number",
-        "Invalid learning function",
-        "Invalid parameters",
-        "Invalid update function",
-        "Invalid initialisation function",
-        /*50*/"Derivation function of the activation function doesn't exist",
-        "Input unit(s) with input connection(s) to other units: ",
-        "Output unit(s) with output connection(s) to other units: ",
-        "Invalid topological sorting mode",
-        "Learning function doesn't support sites",
-        "Sites are not supported",
-        "This isn't a MasPar Kernel",
-        "Connection(s) between unit(s) in non-neighbour layers are not supported: ",
-        "The network has too much layers: ",
-        "The network layers aren't fully connected",
-        /*60*/"This operation isn't allowed in the parallel kernel mode",
-        "Change of network type isn't possible in parallel kernel mode",
-        "No current link defined",
-        "No current unit defined",
-        "Current unit doesn't have any inputs",
-        "Invalid parameter in topologic definition section",
-        "Creation of link between these units isn't permitted",
-        "MasPar don't respond",
-        "This function isn't implemented yet",
-        "Kernel isn't in parallel mode",
-        /*70*/"MasPar ran out of memory",
-        "MasPar communication error",
-        "MasPar ran out of processors",
-        "Missing default function (check function table)",
-        "MasPar kernel doesn't support multiple unit output functions",
-        "MasPar kernel doesn't support multiple unit activation functions",
-        "The depth of the network doesn't fit to the learning function",
-        "Wrong no of units in layer: ",
-        "Unit is missing or not correctly connected: ",
-        "Unit doesn't belong to a defined layer in the network: ",
-        /*80*/"Unit has wrong activation function: ",
-        "Unit has wrong output function: ",
-        "Unexpected site function at unit: ",
-        "Unit is not expected to have sites: ",
-        "Unit is expected to have sites: ",
-        "Site missing at unit: ",
-        "Unexpected link: ",
-        "Missing link(s) to unit: ",
-        "Link ends at wrong site of destination unit: ",
-        "This network is not fitting the required topology",
-        /*90*/"Wrong beta parameter in unit bias value: ",
-        "CC error: Topo_ptr_array is sorted in the wrong way", /*CC_ERROR1*/
-        "CC error: There is no memory allocated", /*CC_ERROR2*/
-        "CC error: Not enough memory to run Casscade", /*CC_ERROR3*/
-        "Invalid error code", /*RCC_ERROR4*/
-        "Invalid error code", /*RCC_ERROR5*/
-        "CC error: Hidden layer is not fitting the required topology",
-        "Invalid error code", /*RCC_ERROR7*/
-        "Invalid error code", /*RCC_ERROR8*/
-        "Invalid error code", /*RCC_ERROR9*/
-        /*100*/ "Wrong update function",/*CC_ERROR10*/
-        "Wrong init function",  /*CC_ERROR11*/
-        "DLVQ error: There are empty classes",
-        "DLVQ error: There exists a class lower than zero",
-        "DLVQ error: Wrong no. of output units",
-        "DLVQ error: This network is not fitting the required topology",
-        "DLVQ error: There does not exist a unit for every class",
-        "No more free pattern sets available",
-        "No such pattern set defined",
-        "No current pattern defined",
-        /*110*/ "Specified sub pattern does not fit into pattern",
-        "No such pattern available",
-        "No current pattern set defined",
-        "Pattern (sub pattern) does not fit the network",
-        "No sub pattern shifting scheme defined",
-        "Pattern contains no output information",
-        "New pattern does not fit into existing set",
-        "Paragon kernel not initialized",
-        "Paragon kernel already initialized",
-        "Sending a message fails",
-        /*120*/ "Syntax error in received message",
-        "Receive unknown command",
-        "Less patterns then allocated nodes",
-        "Weight update with global sum fails",
-        "Learning function not parallelized",
-        "Invalid error code", /* RPC-Call failed */
-        "Invalid error code", /* RPC-Timeout */
-        "Invalid error code", /* RPC: No Server defined */
-        "Invalid error code", /* RPC: Cooperativ failed */
-        "Invalid error code", /* RPC: No response from the slaves */
-        /*130*/ "Algorithm needs patterns. Please press TEST first to check patterns.",
-	"RBF-DDA: First input parameter out of range 0<theta_pos<=1.",
-	"RBF-DDA: Second input parameter out of range 0<theta_neg<=1.",
-	"RBF-DDA: Third input parameter must be >=0.",
-	"RBF-DDA: More than one desired class in output pattern.",
-	"RBF-DDA: Input-hidden connection pointer problem.",
-	"RBF-DDA: Input-output shortcut connections are not allowed.",
-	"RBF-DDA: Activation function of input units must be Act_Identity.",
-	"RBF-DDA: Activation function of hidden units must be Act_RBF_Gaussian.",
-	"RBF-DDA: Activation function of output units must be Act_Identity.",
-        /*140*/ "CC error : Invalid additional Parameters.",
-        "Activation-functions have to be Act_Threshold.",
-        "Learning function must be online Backpropagation",
-	"No learning possible with only one class",
-	"Invalid pattern remap function",
-        "Patterns don't have class information",
-	"Illegal virtual class distribution",
-	"Patterns can not be normalized"
-    };  /* 147 error messages */
-
-    static char *ext_messages[] = {
-        "SNNS-Kernel No Errors",
-        "SNNS-Kernel Error: ",
-        "SNNS-Kernel Network Topologic Error: "
-        };
 
     int  NoOfMessages = (sizeof (err_message)) / (sizeof (err_message[0]));
-    static char  mesg[512], aux[512];
+    //static char  krui_error_mesg[512], krui_error_aux[512];
 
 
     if (error_code == 0)        return( ext_messages[0] ); /*   No errors  */
@@ -4986,61 +4830,61 @@ char  *SnnsCLib::krui_error(int error_code)
           case KRERR_PARAM_BETA:
           case KRERR_UNDETERMINED_UNIT:
 
-            strcpy( mesg, ext_messages[2] );
-            strcat( mesg, err_message[ error_code ] );
+            strcpy( krui_error_mesg, ext_messages[2] );
+            strcat( krui_error_mesg, err_message[ error_code ] );
 
             switch (-error_code){
 	    case KRERR_CYCLES:
-		sprintf( aux, "%d cycle(s) in the network. ", 
+		sprintf( krui_error_aux, "%d cycle(s) in the network. ", 
 			 topo_msg.no_of_cycles );
-		strcat( mesg, aux );
+		strcat( krui_error_mesg, krui_error_aux );
 		break;
 	    case KRERR_DEAD_UNITS:
-		sprintf( aux, "%d dead unit(s) in the network. ", 
+		sprintf( krui_error_aux, "%d dead unit(s) in the network. ", 
 			 topo_msg.no_of_dead_units );
-		strcat( mesg, aux );
+		strcat( krui_error_mesg, krui_error_aux );
 		break;
 
 	    default: break;
 	    }
 
-            strcat( mesg, krui_topo_err_msg() );
-            return( mesg );
+            strcat( krui_error_mesg, krui_topo_err_msg() );
+            return( krui_error_mesg );
 
 
           case KRERR_FEW_LAYERS:
           case KRERR_MUCH_LAYERS:
           case KRERR_NOT_FULLY_CONNECTED:
-	      strcpy( mesg, ext_messages[2] );
-	      strcat( mesg, err_message[ error_code ] );
+	      strcpy( krui_error_mesg, ext_messages[2] );
+	      strcat( krui_error_mesg, err_message[ error_code ] );
 
 	      switch (-error_code){
 	      case KRERR_FEW_LAYERS:
-		  sprintf(aux, "Only %d layers found.", topo_msg.no_of_layers );
+		  sprintf(krui_error_aux, "Only %d layers found.", topo_msg.no_of_layers );
 		  break;
 	      case KRERR_MUCH_LAYERS:
-		  sprintf( aux, "%d layers found.", topo_msg.no_of_layers );
+		  sprintf( krui_error_aux, "%d layers found.", topo_msg.no_of_layers );
 		  break;
 
 	      default: break;
 	      }
 
-	      strcat( mesg, aux );
-	      return( mesg );
+	      strcat( krui_error_mesg, krui_error_aux );
+	      return( krui_error_mesg );
 
           case KRERR_NO_OF_UNITS_IN_LAYER:
-	      strcpy (mesg, ext_messages[2]);
-	      strcat (mesg, err_message [error_code]);
-	      sprintf (aux, "The name of the layer is: %s", topo_msg.name);
-	      strcat (mesg, aux);
-	      return (mesg);
+	      strcpy (krui_error_mesg, ext_messages[2]);
+	      strcat (krui_error_mesg, err_message [error_code]);
+	      sprintf (krui_error_aux, "The name of the layer is: %s", topo_msg.name);
+	      strcat (krui_error_mesg, krui_error_aux);
+	      return (krui_error_mesg);
 
           case KRERR_UNIT_MISSING:
-	      strcpy (mesg, ext_messages[2]);
-	      strcat (mesg, err_message [error_code]);
-	      sprintf (aux, "The missing unit is the %s unit.", topo_msg.name);
-	      strcat (mesg, aux);
-	      return (mesg);
+	      strcpy (krui_error_mesg, ext_messages[2]);
+	      strcat (krui_error_mesg, err_message [error_code]);
+	      sprintf (krui_error_aux, "The missing unit is the %s unit.", topo_msg.name);
+	      strcat (krui_error_mesg, krui_error_aux);
+	      return (krui_error_mesg);
 
 
 
@@ -5049,17 +4893,17 @@ char  *SnnsCLib::krui_error(int error_code)
 
           default:
 	      if (lineno != 0){               /*  file I/O error  */
-		  strcpy( mesg, ext_messages[1] );
-		  sprintf( aux, "Loading file failed at line %d : ", lineno );
-		  strcat( mesg, aux );
-		  strcat( mesg, err_message[ error_code ] );
+		  strcpy( krui_error_mesg, ext_messages[1] );
+		  sprintf( krui_error_aux, "Loading file failed at line %d : ", lineno );
+		  strcat( krui_error_mesg, krui_error_aux );
+		  strcat( krui_error_mesg, err_message[ error_code ] );
 
 		  lineno = 0;
-		  return( mesg );
+		  return( krui_error_mesg );
 	      } else {               /*  standard error  */
-		  strcpy( mesg, ext_messages[1] );
-		  strcat( mesg, err_message[ error_code ] );
-		  return( mesg );
+		  strcpy( krui_error_mesg, ext_messages[1] );
+		  strcat( krui_error_mesg, err_message[ error_code ] );
+		  return( krui_error_mesg );
 	      }
         }
 }

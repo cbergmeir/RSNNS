@@ -369,7 +369,7 @@ krui_err  SnnsCLib::LEARN_TDbackprop( int start_pattern, int end_pattern,
 			   float * *parameterOutArray, int *NoOfOutParams )
 
 {
-    static  float  OutParameter[1]; /* OutParameter[0] stores learning error */
+    //static  float  LEARN_TDbackprop_OutParameter[1]; /* OutParameter[0] stores learning error */
     int     ret_code, pattern_no, sub_pat_no;
     struct Unit *unit_ptr;
 
@@ -379,7 +379,7 @@ krui_err  SnnsCLib::LEARN_TDbackprop( int start_pattern, int end_pattern,
 	return( KRERR_PARAMETERS ); /*  Not enough input parameters  */
 
     *NoOfOutParams = 1;	 /* One return value is available (the learning error)*/
-    *parameterOutArray = OutParameter; /* set the output parameter reference  */
+    *parameterOutArray = LEARN_TDbackprop_OutParameter; /* set the output parameter reference  */
     ret_code = KRERR_NO_ERROR;  /*  reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGIC_LOGICAL)){
@@ -434,7 +434,7 @@ krui_err  SnnsCLib::LEARN_TDbackprop( int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_TDbackprop_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -445,7 +445,7 @@ krui_err  SnnsCLib::LEARN_TDbackprop( int start_pattern, int end_pattern,
 	    2nd parameter is the max. devitation between output pattern and
 	    the output of the output unit (delta max)
 	    */
-	NET_ERROR( OutParameter ) +=
+	NET_ERROR( LEARN_TDbackprop_OutParameter ) +=
 	    propagateTDNetBackward(pattern_no,sub_pat_no,
 				   LEARN_PARAM1( parameterInArray ),
 				   LEARN_PARAM2( parameterInArray ) );
@@ -475,7 +475,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 				float * *parameterOutArray, int *NoOfOutParams )
 
 {
-    static  float  OutParameter[1]; /* OutParameter[0] stores learning error*/
+    //static  float  LEARN_TDBP_McClelland_OutParameter[1]; /* OutParameter[0] stores learning error*/
     int   ret_code, pattern_no, sub_pat_no;
     struct Unit *unit_ptr;
 
@@ -485,7 +485,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 	return( KRERR_PARAMETERS ); /*  Not enough input parameters  */
 
     *NoOfOutParams = 1;	/* One return value is available (the learning error)*/
-    *parameterOutArray = OutParameter; /* set the output parameter reference */
+    *parameterOutArray = LEARN_TDBP_McClelland_OutParameter; /* set the output parameter reference */
     ret_code = KRERR_NO_ERROR;  /*  reset return code  */
 
     if (NetModified || (TopoSortID != TOPOLOGIC_LOGICAL)){
@@ -540,7 +540,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_TDBP_McClelland_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -551,7 +551,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 	    2nd parameter is the max. devitation between output pattern and
 	    the output of the output unit (delta max)
 	    */
-	NET_ERROR( OutParameter ) +=
+	NET_ERROR( LEARN_TDBP_McClelland_OutParameter ) +=
 	    propagateTDNetBackMcClelland(pattern_no,sub_pat_no,
 					 LEARN_PARAM1( parameterInArray ),
 					 LEARN_PARAM2( parameterInArray ) );
@@ -763,14 +763,14 @@ krui_err  SnnsCLib::TEST_TDbackprop( int start_pattern, int end_pattern,
 			   float * *parameterOutArray, int *NoOfOutParams )
 
 {
-    static  float  OutParameter[1]; /* OutParameter[0] stores learning error */
+    //static  float  TEST_TDbackprop_OutParameter[1]; /* OutParameter[0] stores learning error */
     int     ret_code, pattern_no, sub_pat_no;
 
     if (NoOfInParams < 1)	/*  #  has to be changed (must be 2) # */
 	return( KRERR_PARAMETERS ); /*  Not enough input parameters  */
 
     *NoOfOutParams = 1;	 /* One return value is available (the learning error)*/
-    *parameterOutArray = OutParameter; /* set the output parameter reference  */
+    *parameterOutArray = TEST_TDbackprop_OutParameter; /* set the output parameter reference  */
     ret_code = KRERR_NO_ERROR;  /*  reset return code  */
 
 
@@ -781,7 +781,7 @@ krui_err  SnnsCLib::TEST_TDbackprop( int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(TEST_TDbackprop_OutParameter) = 0.0;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -792,7 +792,7 @@ krui_err  SnnsCLib::TEST_TDbackprop( int start_pattern, int end_pattern,
 	    2nd parameter is the max. devitation between output pattern and
 	    the output of the output unit (delta max)
 	    */
-	NET_ERROR( OutParameter ) +=
+	NET_ERROR( TEST_TDbackprop_OutParameter ) +=
 	    testTDNetBackward(pattern_no,sub_pat_no,
 				   LEARN_PARAM1( parameterInArray ),
 				   LEARN_PARAM2( parameterInArray ) );

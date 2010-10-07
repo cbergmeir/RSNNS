@@ -5,7 +5,7 @@
 SnnsCLib::SnnsCLib() {
 
 int counter=0;
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //cc_modify.ph
 ccs_GroupList=NULL;
 ccm_CurrentLayerHeight=0;
@@ -13,7 +13,7 @@ ccm_MissingUnitsInLayer=0;
 ccs_GroupData=NULL;
 ccr_ListOfChosenUnits=NULL;
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //kernel.ph
 NetModified = FALSE;
 NetInitialize = TRUE;
@@ -76,13 +76,13 @@ transTable = NULL;
 transTableSize = 0;
 
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //kr_funcs.ph
 
 netFuncInit = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
                          FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE  };
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_newpattern.ph
 //--------------------------------
@@ -129,7 +129,7 @@ np_o_subpat                  = NULL;
 np_o_subpatsize               = 0;
 np_pages                     = NULL;
 
-Rprintf("hier1_%d\n",counter++);
+//Rprintf("hier1_%d\n",counter++);
 //--------------------------------
 //kr_ui.ph
 //--------------------------------
@@ -143,20 +143,20 @@ UICurrentFtypeEntry = NULL;
 UICurrentNameSearchUnitSymbolPtr = NULL;
 noOfStoredErrors=0;
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_amap.ph
 //--------------------------------
 ArtMap_map_layer = NULL; 
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_art1.ph
 //--------------------------------
 
 Art1_del_layer = NULL;
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_art2.ph
 //--------------------------------
@@ -193,7 +193,7 @@ f1_stable = FALSE;
 //num_param = 0;
 //parameter = NULL;
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //cc_display.ph
 //--------------------------------
@@ -201,7 +201,7 @@ Rprintf("hier%d\n",counter++);
 cc_display_mode=Y_MAX_MODE1;
 cc_LayerDistance=DEFAULT_DISTANCE_BETWEEN_LAYERS;
 
-Rprintf("hier2_%d\n",counter++);
+//Rprintf("hier2_%d\n",counter++);
 //--------------------------------
 //dlvq_learn.ph
 //--------------------------------
@@ -215,14 +215,14 @@ wrongClassCounter=0;
 continueLearning=0;
 
 
-Rprintf("hier%d\n",counter++);
+//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_io.ph
 //--------------------------------
 
 NoOfTitles = (sizeof title) / (sizeof title[0]);
 
-Rprintf("hierXX_%d\n",counter++);
+//Rprintf("hierXX_%d\n",counter++);
 //--------------------------------
 //cc_glob.ph
 //--------------------------------
@@ -280,7 +280,7 @@ cc_data.OUT.errorChange = MIN_ERROR_CHANGE;
 cc_data.OUT.outputPatience = OUT_PATIENCE;
 cc_data.OUT.maxNoOfUpdateCycles = MAX_NO_OF_ERROR_UPDATE_CYCLES;
 
-Rprintf("hierXX2_%d\n",counter++);
+//Rprintf("hierXX2_%d\n",counter++);
 
 /*cc_data ={
   { MAX_PIXEL_ERROR,
@@ -312,11 +312,11 @@ SpecialUnitSumAct=NULL;
 
 cc_modification = -1;
 
-Rprintf("hierXX3_%d\n",counter++);
+//Rprintf("hierXX3_%d\n",counter++);
 
 reset=0;
 
-Rprintf("hierXX4_%d\n",counter++);
+//Rprintf("hierXX4_%d\n",counter++);
 
 cc_cascade=0;
 NoOfLayers = 0;             /* number hidden layers */
@@ -334,7 +334,7 @@ filedesc = -1;
 
 OldNoOfSpecialUnitStorage = 0;
 
-Rprintf("hier3_%d\n",counter++);
+//Rprintf("hier3_%d\n",counter++);
 //--------------------------------
 //prun_f.ph
 //--------------------------------
@@ -351,7 +351,7 @@ pr_acceptedError = DEFAULT_ACCEPTED_ERROR;
 pr_minError = DEFAULT_MIN_ERROR;
 pr_obs_initParameter = DEFAULT_OBS_INIT_PARAMETER;
 
-Rprintf("hier3_%d\n",counter++);
+//Rprintf("hier3_%d\n",counter++);
 //--------------------------------
 //tacoma_learn.ph
 //--------------------------------
@@ -427,7 +427,71 @@ m_kernel_kr_CorrMatrix.columns = 0;
 m_kernel_kr_CorrMatrix.field = NULL;
 m_kernel_kr_CorrMatrix.r_pt = NULL;
 
-Rprintf("hier4_%d\n",counter++);
+//Rprintf("hier4_%d\n",counter++);
+
+kr_ui_randomSeedVal=0;
+
+PRUNE_Skeletonization_first = TRUE;
+
+krio_fmtShapeing_formats[0] = "site name";
+krio_fmtShapeing_formats[1] = "sites";
+krio_fmtShapeing_formats[2] = "unitName";
+krio_fmtShapeing_formats[3] = "typeName";
+krio_fmtShapeing_formats[4] = "name";
+krio_fmtShapeing_formats[5] = "site function";
+krio_fmtShapeing_formats[6] = "act func";
+krio_fmtShapeing_formats[7] = "out func";
+krio_fmtShapeing_formats[8] = "no.";
+krio_fmtShapeing_formats[9] = "target";
+krio_fmtShapeing_formats[10] = "act";
+krio_fmtShapeing_formats[11] = "bias";
+krio_fmtShapeing_formats[12] = "position";
+krio_fmtShapeing_formats[13] = "site";
+krio_fmtShapeing_formats[14] = " source:weight";
+krio_fmtShapeing_formats[15] = "subnet";
+krio_fmtShapeing_formats[16] = "layer";
+krio_fmtShapeing_formats[17] = " unitNo.";
+
+krio_writeUnitDefinitions_blank = "\0";
+
+krio_getTType_ttype[0] = "-";
+krio_getTType_ttype[1] = "i";
+krio_getTType_ttype[2] = "o";
+krio_getTType_ttype[3] = "d";
+krio_getTType_ttype[4] = "h";
+krio_getTType_ttype[5] = "s";
+krio_getTType_ttype[6] = "si";
+krio_getTType_ttype[7] = "so";
+krio_getTType_ttype[8] = "sh";
+krio_getTType_ttype[9] = "sd";
+
+
+#ifdef RBF_DELTA_PROT
+RbfLearnAdjustWeights_step = 0;
+#endif
+
+#ifdef RBF_LEARN_PROT
+LEARN_RBF_schritt = 1;
+#endif
+
+LEARN_RpropMAP_counter=0;
+
+
+LEARN_SCG_restart_scg = FALSE;
+LEARN_SCG_stop_scg = FALSE;
+
+UPDATE_ARTMAP_syncPropagate_rho_a = -1.0;
+UPDATE_ARTMAP_syncPropagate_rho_b = -1.0;
+UPDATE_ARTMAP_syncPropagate_rho   = -1.0;
+
+kr_getSubPatData_dummy_data = 0.0;
+
+
+
+
+
+
+
 
 #include "func_tbl.txx"
 

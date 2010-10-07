@@ -122,14 +122,14 @@ void  SnnsCLib::mstrcpy(char *va_alist,...)
 ******************************************************************************/
 char  *SnnsCLib::krio_getIOVersion(void)
 {
-  static char	io_version[128];
+  //static char	krio_getIOVersion_getIOVersion[128];
 
-  strcpy( io_version, NETFILE_VERSION );
+  strcpy( krio_getIOVersion_getIOVersion, NETFILE_VERSION );
 
-  strcat( io_version, KERNEL3D_NETFILE_VERSION );
+  strcat( krio_getIOVersion_getIOVersion, KERNEL3D_NETFILE_VERSION );
 
 
-  return( io_version );
+  return( krio_getIOVersion_getIOVersion );
 }
 
 
@@ -241,15 +241,15 @@ void SnnsCLib::krio_cutTrailingZeros(char *string)
 char  *SnnsCLib::krio_repchar(char c, int N)
 {
   int   i;
-  static char  str[180];
+  //static char  krio_repchar_str[180];
 
-  if ( (N - 1) >= sizeof (str))   N = sizeof (str) - 1;
+  if ( (N - 1) >= sizeof (krio_repchar_str))   N = sizeof (krio_repchar_str) - 1;
 
   for (i = 0; i < N; i++)
-    str[ i ] = c;
+    krio_repchar_str[ i ] = c;
 
-  str[N] = 0;
-  return( str );
+  krio_repchar_str[N] = 0;
+  return( krio_repchar_str );
 }
 
 /*****************************************************************************
@@ -386,26 +386,26 @@ void  SnnsCLib::krio_stringLimits(void)
 
 krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 {
-  static char   *formats[] = {
-                /*  0   */   "site name",
-                /*  1   */   "sites",
-                /*  2   */   "unitName",
-                /*  3   */   "typeName",
-                /*  4   */   "name",
-                /*  5   */   "site function",
-                /*  6   */   "act func",
-                /*  7   */   "out func",
-                /*  8   */   "no.",
-                /*  9   */   "target",
-                /*  10  */   "act",
-                /*  11  */   "bias",
-                /*  12  */   "position",
-                /*  13  */   "site",
-                /*  14  */   " source:weight",
-                /*  15  */   "subnet",
-                /*  16  */   "layer",
-                /*  17  */   " unitNo."
-                             };
+  //static char   *krio_fmtShapeing_formats[] = {
+  //              /*  0   */   "site name",
+  //              /*  1   */   "sites",
+  //              /*  2   */   "unitName",
+  //              /*  3   */   "typeName",
+  //              /*  4   */   "name",
+  //              /*  5   */   "site function",
+  //              /*  6   */   "act func",
+  //              /*  7   */   "out func",
+  //              /*  8   */   "no.",
+  //              /*  9   */   "target",
+  //              /*  10  */   "act",
+  //              /*  11  */   "bias",
+  //              /*  12  */   "position",
+  //              /*  13  */   "site",
+  //              /*  14  */   " source:weight",
+  //              /*  15  */   "subnet",
+  //              /*  16  */   "layer",
+  //              /*  17  */   " unitNo."
+  //                           };
 
   char  fmt [ MAX_LIN_LEN ],
         aux [ MAX_LIN_LEN ];
@@ -418,17 +418,17 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
     case  SITE_DEF:
         if (site_name_len + site_func_len + 5 > MAX_LIN_LEN)
           return( KRERR_SAVE_LINE_LEN );
-        len = Max( site_name_len, strlen( formats[ 0 ] ) );
+        len = Max( site_name_len, strlen( krio_fmtShapeing_formats[ 0 ] ) );
         sprintf( aux, "%d", len );
 	mstrcpy( fmt_shape1, " %-", aux, "s | %s\n", (char *) 0 );
 
 	mstrcpy( fmt, " %-", aux, "s | ", (char *) 0 );
-	sprintf( fmt_hdr1, fmt, formats[ 0 ] );
-	mstrcat( fmt_hdr1, formats[ 5 ], "\n", (char *) 0 );
+	sprintf( fmt_hdr1, fmt, krio_fmtShapeing_formats[ 0 ] );
+	mstrcat( fmt_hdr1, krio_fmtShapeing_formats[ 5 ], "\n", (char *) 0 );
 
 	mstrcpy( fmt_hdr2 ,krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
-	len = Max( site_func_len, strlen( formats[ 6 ] ));
+	len = Max( site_func_len, strlen( krio_fmtShapeing_formats[ 6 ] ));
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "\n", (char *) 0 );
 
         break;
@@ -442,59 +442,59 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 	len = act_len + out_len + site_name_len + type_name_len + 11;
 	if (len > MAX_LIN_LEN)	return( KRERR_SAVE_LINE_LEN );
 
-	len = Max( type_name_len, strlen( formats[ 4 ] ));
+	len = Max( type_name_len, strlen( krio_fmtShapeing_formats[ 4 ] ));
 	len1 = len + 2;
 	sprintf( aux, "%d", len );
 	mstrcpy( fmt_shape1, "%-", aux, "s |", (char *) 0 );
-	sprintf( fmt_hdr1, fmt_shape1, formats[ 4 ] );
+	sprintf( fmt_hdr1, fmt_shape1, krio_fmtShapeing_formats[ 4 ] );
 	mstrcpy( fmt_hdr2, krio_repchar( '-', len + 1 ), "|", (char *) 0 );
 
 
-	len = Max( act_len, strlen( formats[ 6 ] ) );
+	len = Max( act_len, strlen( krio_fmtShapeing_formats[ 6 ] ) );
         len1 = len1 + len + 3;
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
         strcat( fmt_shape1, fmt );
-        sprintf( aux, fmt, formats[ 6 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 6 ] );
 	strcat( fmt_hdr1, aux );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
-	len = Max( out_len, strlen( formats[ 7 ] ) );
+	len = Max( out_len, strlen( krio_fmtShapeing_formats[ 7 ] ) );
         len1 = len1 + len + 3;
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
 	strcat( fmt_shape1, fmt );
 
-        sprintf( aux, fmt, formats[ 7 ] );
-	mstrcat( fmt_hdr1, aux, formats[1], "\n", (char *) 0 );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 7 ] );
+	mstrcat( fmt_hdr1, aux, krio_fmtShapeing_formats[1], "\n", (char *) 0 );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 	mstrcpy( fmt_blank, ",\n", krio_repchar( ' ', len1 ), (char *) 0 );
 
-        len = Max( site_name_len, strlen( formats[ 1 ] ) );
+        len = Max( site_name_len, strlen( krio_fmtShapeing_formats[ 1 ] ) );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "\n", (char *) 0 );
 
         break;
 
     case  DEFAULT_DEF:
-        len = Max( 8, strlen( formats[ 10 ] ) );
+        len = Max( 8, strlen( krio_fmtShapeing_formats[ 10 ] ) );
         len1 = len + 2;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         strcpy( fmt_shape1, "%8.5f |" );
 
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, "%-", aux, "s |", (char *) 0 );
-	sprintf( fmt_hdr1, fmt, formats[ 10 ] );
+	sprintf( fmt_hdr1, fmt, krio_fmtShapeing_formats[ 10 ] );
 
 	mstrcpy( fmt_hdr2, krio_repchar( '-', len + 1 ), "|", (char *) 0 );
 
-        len = Max( 8, strlen( formats[ 11 ] ) );
+        len = Max( 8, strlen( krio_fmtShapeing_formats[ 11 ] ) );
         len1 = len1 + len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         strcat( fmt_shape1, " %8.5f |" );
 
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
-        sprintf( aux, fmt, formats[ 11 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 11 ] );
 	strcat( fmt_hdr1, aux );
 
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
@@ -505,43 +505,43 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
         strcat( fmt_hdr1, " st |" );
 	strcat( fmt_hdr2, "----|" );
 
-        len = Max( subnet_no_len, strlen( formats[ 15 ] ) );
+        len = Max( subnet_no_len, strlen( krio_fmtShapeing_formats[ 15 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         sprintf( aux, "%d", len );
 	mstrcat( fmt_shape1, " %", aux, "d |", (char *) 0 );
 
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
-        sprintf( aux, fmt, formats[ 15 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 15 ] );
 	strcat( fmt_hdr1, aux );
 
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
-        len = Max( layer_no_len, strlen( formats[ 16 ] ) );
+        len = Max( layer_no_len, strlen( krio_fmtShapeing_formats[ 16 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         sprintf( aux, "%d", len );
 	mstrcat( fmt_shape1, " %", aux, "d |", (char *) 0 );
 
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
-        sprintf( aux, fmt, formats[ 16 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 16 ] );
 	strcat( fmt_hdr1, aux );
 
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
-	len = Max( def_act_func_len, strlen( formats[ 6 ] ) );
+	len = Max( def_act_func_len, strlen( krio_fmtShapeing_formats[ 6 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, " %-", aux, "s | ", (char *) 0 );
         strcat( fmt_shape1, fmt );
-        sprintf( aux, fmt, formats[ 6 ] );
-	mstrcat( fmt_hdr1, aux, formats[7], "\n", (char *) 0 );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 6 ] );
+	mstrcat( fmt_hdr1, aux, krio_fmtShapeing_formats[7], "\n", (char *) 0 );
 
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
 
-	len = Max( def_out_func_len, strlen( formats[ 7 ] ) );
+	len = Max( def_out_func_len, strlen( krio_fmtShapeing_formats[ 7 ] ) );
 	len1 += len + 1;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         sprintf( aux, "%d", len );
@@ -552,7 +552,7 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
         break;
 
     case  UNIT_DEF:
-        len = Max( unit_no_len, strlen( formats[ 8 ] ) );
+        len = Max( unit_no_len, strlen( krio_fmtShapeing_formats[ 8 ] ) );
 	len1 = len + 2;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 
@@ -560,12 +560,12 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 	mstrcpy( fmt_shape1, "%", aux, "d |", (char *) 0 );
 
 	mstrcpy( fmt, "%", aux, "s |", (char *) 0 );
-	sprintf( fmt_hdr1, fmt, formats[ 8 ] );
+	sprintf( fmt_hdr1, fmt, krio_fmtShapeing_formats[ 8 ] );
 
 	mstrcpy( fmt_hdr2, krio_repchar( '-', len + 1 ), "|", (char *) 0);
 
 
-        len = Max( type_name_len, strlen( formats[ 3 ] ) );
+        len = Max( type_name_len, strlen( krio_fmtShapeing_formats[ 3 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 
@@ -573,12 +573,12 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
 	strcat( fmt_shape1, fmt );
 
-	sprintf( aux, fmt, formats[ 3 ] );
+	sprintf( aux, fmt, krio_fmtShapeing_formats[ 3 ] );
         strcat( fmt_hdr1, aux );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
 
-        len = Max( unit_name_len, strlen( formats[ 2 ] ) );
+        len = Max( unit_name_len, strlen( krio_fmtShapeing_formats[ 2 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 
@@ -586,12 +586,12 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
 	strcat( fmt_shape1, fmt );
 
-	sprintf( aux, fmt, formats[ 2 ] );
+	sprintf( aux, fmt, krio_fmtShapeing_formats[ 2 ] );
 	strcat( fmt_hdr1, aux );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
 
-        len = Max( 8, strlen( formats[ 10 ] ) );
+        len = Max( 8, strlen( krio_fmtShapeing_formats[ 10 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 
@@ -599,12 +599,12 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
 
-        sprintf( aux, fmt, formats[ 10 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 10 ] );
         strcat( fmt_hdr1, aux );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
 
-        len = Max( 8, strlen( formats[ 11 ] ) );
+        len = Max( 8, strlen( krio_fmtShapeing_formats[ 11 ] ) );
         len1 = len1 + len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         strcat( fmt_shape1, " %8.5f |" );
@@ -612,7 +612,7 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
 
-        sprintf( aux, fmt, formats[ 11 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 11 ] );
         strcat( fmt_hdr1, aux );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
@@ -624,7 +624,7 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 	strcat( fmt_hdr2, "----|" );
 
 
-        len = Max( pos_no_len * 3 + 2, strlen( formats[ 12 ] ) );
+        len = Max( pos_no_len * 3 + 2, strlen( krio_fmtShapeing_formats[ 12 ] ) );
 
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
@@ -651,12 +651,12 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
 
-        sprintf( aux, fmt, formats[ 12 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 12 ] );
         strcat( fmt_hdr1, aux );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
 
-        len = Max( act_func_len, strlen( formats[ 6 ] ) );
+        len = Max( act_func_len, strlen( krio_fmtShapeing_formats[ 6 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 	strcpy( fmt_shape2, fmt_shape1 );
@@ -665,26 +665,26 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
 	strcat( fmt_shape1, fmt );
 
-        sprintf( aux, fmt, formats[ 6 ] );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 6 ] );
         strcat( fmt_hdr1, aux );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 
 
-        len = Max( out_func_len, strlen( formats[ 7 ] ) );
+        len = Max( out_func_len, strlen( krio_fmtShapeing_formats[ 7 ] ) );
 	len1 += len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, " %-", aux, "s | ", (char *) 0 );
 	strcat( fmt_shape1, fmt );
 
-        sprintf( aux, fmt, formats[ 7 ] );
-	mstrcat( fmt_hdr1, aux, formats[1], "\n", (char *) 0 );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 7 ] );
+	mstrcat( fmt_hdr1, aux, krio_fmtShapeing_formats[1], "\n", (char *) 0 );
 
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 	mstrcpy( fmt_blank, ",\n", krio_repchar( ' ', len1 ), (char *) 0 );
 
 
-        len = Max( site_name_len, strlen( formats[ 1 ] ) );
+        len = Max( site_name_len, strlen( krio_fmtShapeing_formats[ 1 ] ) );
 	len1 += len + 2;
 	if (len1 + len > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "\n", (char *) 0 );
@@ -695,18 +695,18 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
         sprintf( aux, "%d", unit_no_len );
 	mstrcpy( fmt_shape3, " %", aux, "d:%8.5f", (char *) 0 );
         mstrcpy( fmt_shape4, " %", aux, "d:%8.5f (%8.5f,%8.5f) ", (char *) 0 );
-        len = Max( unit_no_len, strlen( formats[ 9 ] ) );
+        len = Max( unit_no_len, strlen( krio_fmtShapeing_formats[ 9 ] ) );
         len1 = len + 2;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         sprintf( aux, "%d", len );
 	mstrcpy( fmt_shape1, "%", aux, "d |", (char *) 0 );
 
 	mstrcpy( fmt, "%", aux, "s |", (char *) 0 );
-	sprintf( fmt_hdr1, fmt, formats[ 9 ] );
+	sprintf( fmt_hdr1, fmt, krio_fmtShapeing_formats[ 9 ] );
 	mstrcpy( fmt_hdr2, krio_repchar( '-', len + 1 ), "|", (char *) 0 );
         strcpy( fmt_shape2, krio_repchar( ' ', len1 ) );
 
-        len = Max( site_name_len, strlen( formats[ 13 ] ) );
+        len = Max( site_name_len, strlen( krio_fmtShapeing_formats[ 13 ] ) );
         len1 = len1 + len + 3;
 	if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
         sprintf( aux, "%d", len );
@@ -715,8 +715,8 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 	mstrcpy( fmt, " %-", aux, "s |", (char *) 0 );
         strcat( fmt_shape1, fmt );
         strcat( fmt_shape2, fmt );
-        sprintf( aux, fmt, formats[ 13 ] );
-	mstrcat( fmt_hdr1, aux, formats[14], "\n", (char *) 0 );
+        sprintf( aux, fmt, krio_fmtShapeing_formats[ 13 ] );
+	mstrcat( fmt_hdr1, aux, krio_fmtShapeing_formats[14], "\n", (char *) 0 );
 
 	mstrcat( fmt_hdr2, krio_repchar( '-', len + 2 ), "|", (char *) 0 );
 	mstrcpy( fmt_blank, "\n", krio_repchar( ' ', len1 ), (char *) 0 );
@@ -732,15 +732,15 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
         break;
 
       case  SUBNET_DEF:
-        len = Max( subnet_no_len, strlen( formats[ 15 ] ) );
+        len = Max( subnet_no_len, strlen( krio_fmtShapeing_formats[ 15 ] ) );
 	len1 = len + 1;
         sprintf( aux, "%d", len );
 	mstrcpy( fmt_shape1, "\n%", aux, "d |", (char *) 0 );
 
         sprintf( aux, "%d", len );
 	mstrcpy( fmt, "%", aux, "s |", (char *) 0 );
-        sprintf( fmt_hdr1, fmt, formats[ 15 ] );
-        strcat( fmt_hdr1, formats[17] );
+        sprintf( fmt_hdr1, fmt, krio_fmtShapeing_formats[ 15 ] );
+        strcat( fmt_hdr1, krio_fmtShapeing_formats[17] );
 	mstrcpy( fmt_hdr2, "\n", krio_repchar( '-', len1 ), "|", (char *) 0 );
 	mstrcpy( fmt_blank, "\n", krio_repchar( ' ', len1 + 1 ), (char *) 0 );
 
@@ -755,14 +755,14 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
         break;
 
       case  LAYER_DEF:
-        len = Max( layer_no_len, strlen( formats[ 16 ] ) );
+        len = Max( layer_no_len, strlen( krio_fmtShapeing_formats[ 16 ] ) );
 	len1 = len + 1;
         sprintf( aux, "%d", len );
 	mstrcpy( fmt_shape1, "\n%", aux, "d |", (char *) 0 );
 
 	mstrcpy( fmt, "%", aux, "s |", (char *) 0 );
-        sprintf( fmt_hdr1, fmt, formats[ 16 ] );
-        strcat( fmt_hdr1, formats[17] );
+        sprintf( fmt_hdr1, fmt, krio_fmtShapeing_formats[ 16 ] );
+        strcat( fmt_hdr1, krio_fmtShapeing_formats[17] );
 
 	mstrcpy( fmt_hdr2, "\n", krio_repchar( '-', len1 ), "|", (char *) 0 );
 	mstrcpy( fmt_blank, "\n", krio_repchar( ' ', len1 + 1 ), (char *) 0 );
@@ -901,30 +901,29 @@ krui_err  SnnsCLib::krio_writeTypeDefinitions(void)
 
 char  *SnnsCLib::getTType(int st)
 {
-  static char   *ttype[] = { "-", "i", "o", "d", "h", "s" ,
-                             "si", "so", "sh", "sd"}; 
+  //static char   *krio_getTType_ttype[] = { "-", "i", "o", "d", "h", "s" , "si", "so", "sh", "sd"}; 
 
   switch ( st )  {
     case  INPUT:
-      return( ttype[1] );
+      return( krio_getTType_ttype[1] );
     case  OUTPUT:
-      return( ttype[2] );
+      return( krio_getTType_ttype[2] );
     case  DUAL:
-      return( ttype[3] );
+      return( krio_getTType_ttype[3] );
     case  HIDDEN:
-      return( ttype[4] );
+      return( krio_getTType_ttype[4] );
     case  SPECIAL:
-      return( ttype[5] );
+      return( krio_getTType_ttype[5] );
     case  SPECIAL_I:      
-      return( ttype[6] ); 
+      return( krio_getTType_ttype[6] ); 
     case  SPECIAL_O:      
-      return( ttype[7] ); 
+      return( krio_getTType_ttype[7] ); 
     case  SPECIAL_H:      
-      return( ttype[8] ); 
+      return( krio_getTType_ttype[8] ); 
     case  SPECIAL_D:      
-      return( ttype[9] ); 
+      return( krio_getTType_ttype[9] ); 
     default:
-      return( ttype[0] );
+      return( krio_getTType_ttype[0] );
   }
 }
 
@@ -990,7 +989,7 @@ krui_err  SnnsCLib::krio_writeDefaultDefinitions(void)
 
 krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 {
-  static char   *blank = "\0";
+  //static char   *krio_writeUnitDefinitions_blank = "\0";
 
   struct  PosType   pos;
 
@@ -1034,7 +1033,7 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
     krui_getUnitPosition( unit_no, &pos );
 
     if ( (u_name = krui_getUnitName( unit_no )) == NULL)
-      u_name = blank;
+      u_name = krio_writeUnitDefinitions_blank;
 
     if ( (u_type = krui_getUnitFTypeName( unit_no )) == NULL)
       {  /*  no ftype  */
@@ -1049,7 +1048,7 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
       if (!writeUnitActFuncName && !writeUnitOutFuncName)  {
 
     err = fprintf( file_out, fmt_shape2,
-		   u_no, blank, u_name,
+		   u_no, krio_writeUnitDefinitions_blank, u_name,
                    krui_getUnitActivation( unit_no ),
                    krui_getUnitBias( unit_no ),
                    getTType( krui_getUnitTType( unit_no ) ),
@@ -1057,12 +1056,12 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 
 	}
       else  {
-	if (!writeUnitActFuncName)  act_func = blank;
-	if (!writeUnitOutFuncName)  out_func = blank;
+	if (!writeUnitActFuncName)  act_func = krio_writeUnitDefinitions_blank;
+	if (!writeUnitOutFuncName)  out_func = krio_writeUnitDefinitions_blank;
 
 
     err = fprintf( file_out, fmt_shape1,
-		   u_no, blank, u_name,
+		   u_no, krio_writeUnitDefinitions_blank, u_name,
                    krui_getUnitActivation( unit_no ),
                    krui_getUnitBias( unit_no ),
                    getTType( krui_getUnitTType( unit_no ) ),
@@ -2874,12 +2873,14 @@ void SnnsCLib::krio_readTimeDelayDefs(void)
 ******************************************************************************/
 krui_err  SnnsCLib::krio_loadNet(char *filename, char **netname, char **netfile_version)
 {
-  static char  netname_str[81],
-               netfile_version_str[81],
-               learn_func[81],
-               update_func[81],
-               pruning_func[81],
-               ff_learn_func[81];
+/*
+  static char  krio_loadNet_netname_str[81],
+               krio_loadNet_netfile_version_str[81],
+               krio_loadNet_learn_func[81],
+               krio_loadNet_update_func[81],
+               krio_loadNet_pruning_func[81],
+               krio_loadNet_ff_learn_func[81];
+*/
 
   int  no_units, no_connect, no_unitT,
        no_siteT, title_no, status;
@@ -2897,30 +2898,30 @@ krui_err  SnnsCLib::krio_loadNet(char *filename, char **netname, char **netfile_
   lineno = 1;
   if (NoOfUnits > 0)  krui_deleteNet();
 
-  krio_readHeader( netfile_version_str, netname_str, learn_func, update_func,
-                   pruning_func, ff_learn_func, &no_units, &no_connect, &no_unitT,
+  krio_readHeader( krio_loadNet_netfile_version_str, krio_loadNet_netname_str, krio_loadNet_learn_func, krio_loadNet_update_func,
+                   krio_loadNet_pruning_func, krio_loadNet_ff_learn_func, &no_units, &no_connect, &no_unitT,
 		   &no_siteT );
   if (KernelErrorCode)  goto ende;
 
-  if(*learn_func != '\0')  {
-    (void) krui_setLearnFunc( learn_func );
+  if(*krio_loadNet_learn_func != '\0')  {
+    (void) krui_setLearnFunc( krio_loadNet_learn_func );
     if (KernelErrorCode)  goto ende;
   }
-  if(*update_func != '\0')  {
-    (void)  krui_setUpdateFunc( update_func );
+  if(*krio_loadNet_update_func != '\0')  {
+    (void)  krui_setUpdateFunc( krio_loadNet_update_func );
     if (KernelErrorCode)  goto ende;
   }
-  if(*pruning_func != '\0')  {
-    (void) krui_setPrunFunc( pruning_func );
+  if(*krio_loadNet_pruning_func != '\0')  {
+    (void) krui_setPrunFunc( krio_loadNet_pruning_func );
     if (KernelErrorCode)  goto ende;
   }
-  if(*ff_learn_func != '\0')  {
-    (void)  krui_setFFLearnFunc( ff_learn_func );
+  if(*krio_loadNet_ff_learn_func != '\0')  {
+    (void)  krui_setFFLearnFunc( krio_loadNet_ff_learn_func );
     if (KernelErrorCode)  goto ende;
   }
 
-  *netname = netname_str;
-  *netfile_version = netfile_version_str;
+  *netname = krio_loadNet_netname_str;
+  *netfile_version = krio_loadNet_netfile_version_str;
 
   while ( getSection( fmt_shape1, &title_no ) != NULL )  {
     if (title_no >= 0)  lineno++;  /* increment line number */

@@ -23,7 +23,7 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-#include <config.h>
+//#include <config.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>  

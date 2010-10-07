@@ -20,8 +20,6 @@
 #ifndef _INIT_F_DEFINED_
 #define  _INIT_F_DEFINED_
 
-public:
-
 /* begin global definition section */
 
 krui_err  INIT_randomizeWeights(float *parameterArray, int NoOfParams);
@@ -60,8 +58,6 @@ krui_err INIT_PseudoInv(float *parameterArray, int NoOfParams);
 krui_err ENZO_noinit(void);
 
 /* end global definition section */
-
-private:
 
 /* begin private definition section */
 

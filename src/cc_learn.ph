@@ -20,8 +20,6 @@
 #ifndef _CC_LEARN_DEFINED_
 #define  _CC_LEARN_DEFINED_
 
-public:
-
 /* begin global definition section */
 krui_err LEARN_CC(int StartPattern, int EndPattern,
                       float *ParameterInArray, int NoOfInParams,
@@ -35,8 +33,6 @@ krui_err TEST_CasCor(int start_pattern, int end_pattern,
 			float **parameterOutArray, int *NoOfOutParams);
 
 /* end   global definition section */
-
-private:
 
 /* begin privat definition section */
 float cc_calculateCorrelation(int StartPattern,int EndPattern,int counter);
