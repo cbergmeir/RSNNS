@@ -60,7 +60,7 @@
 
 /* Substitute the variable and function names.  */
 #define yyparse ppparse
-#define yylex   pplex
+//#define yylex   pplex
 #define yyerror pperror
 #define yylval  pplval
 #define yychar  ppchar
@@ -716,9 +716,9 @@ while (YYID (0))
 /* YYLEX -- calling `yylex' with the right arguments.  */
 
 #ifdef YYLEX_PARAM
-# define YYLEX yylex (YYLEX_PARAM)
+# define YYLEX pplex (YYLEX_PARAM)
 #else
-# define YYLEX yylex ()
+# define YYLEX pplex ()
 #endif
 
 /* Enable debugging if requested.  */
@@ -1145,19 +1145,19 @@ yydestruct (yymsg, yytype, yyvaluep)
 
 /* Prevent warnings from -Wmissing-prototypes.  */
 
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int yyparse (void *YYPARSE_PARAM);
-#else
-int yyparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
-int yyparse (void);
-#else
-int yyparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
+//#ifdef YYPARSE_PARAM
+//#if defined __STDC__ || defined __cplusplus
+//int SnnsCLib::yyparse (void *YYPARSE_PARAM);
+//#else
+//int SnnsCLib::yyparse ();
+//#endif
+//#else /* ! YYPARSE_PARAM */
+//#if defined __STDC__ || defined __cplusplus
+//int SnnsCLib::yyparse (void);
+//#else
+//int SnnsCLib::yyparse ();
+//#endif
+//#endif /* ! YYPARSE_PARAM */
 
 
 
@@ -1180,20 +1180,20 @@ int yynerrs;
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 int
-yyparse (void *YYPARSE_PARAM)
+SnnsCLib::yyparse (void *YYPARSE_PARAM)
 #else
 int
-yyparse (YYPARSE_PARAM)
+SnnsCLib::yyparse (YYPARSE_PARAM)
     void *YYPARSE_PARAM;
 #endif
 #else /* ! YYPARSE_PARAM */
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 int
-yyparse (void)
+SnnsCLib::yyparse (void)
 #else
 int
-yyparse ()
+SnnsCLib::yyparse ()
 
 #endif
 #endif
@@ -2112,7 +2112,7 @@ yyreturn:
 
   UPDATE   : 
 ******************************************************************************/
-static void SnnsCLib::yyerror(char *error)
+void SnnsCLib::yyerror(char *error)
 {
     fprintf(stderr, "Parse error in pattern file at line %d:\n%s\n",
 	    lineno, error);

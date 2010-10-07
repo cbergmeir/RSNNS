@@ -329,9 +329,11 @@ int  NoOfKernelFuncs;
 #include "remap_f.ph"  
 #include "tbl_func.ph"
 
-//#include "kr_pat_parse.ph"   
-//#include "kr_pat_scan.ph"    
+#include "kr_pat_scan.ph"    
+#include "kr_pat_parse.ph"   
 
+
+int ppparse();
 
 
 //former not explicitly declared members (some were added to the .ph files)

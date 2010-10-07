@@ -24,10 +24,14 @@
 /* begin global definition section */
 
 int pplex(void);
+int yylex(void);
+
 void scanner_await_pattern_end(void);
 void scanner_await_no_class(void);
 void scanner_await_class(void);
 void scanner_init_scanner(FILE *in_file);
+
+
 
 /* end global definition section */
 
@@ -35,10 +39,10 @@ void scanner_init_scanner(FILE *in_file);
 
 #define yylval pplval
 
-static char *s_dotpos;
-static int scanner_pattern_end_flag;
-static int scanner_no_class_flag;
-static int numbers_as_names;
+char *s_dotpos;
+int scanner_pattern_end_flag;
+int scanner_no_class_flag;
+int numbers_as_names;
 
 /* end private definition section */
 

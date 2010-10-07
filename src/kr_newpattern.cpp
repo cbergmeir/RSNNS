@@ -2718,15 +2718,15 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
     }
 
     /* reset the scanner and the parser */
-//    scanner_init_scanner(pat_file);
+    scanner_init_scanner(pat_file);
 
     /* parse pattern file and check for errors */
-/*    if (parse_pattern_file(&pattern_set, &set_info) != 0)
+    if (parse_pattern_file(&pattern_set, &set_info) != 0)
     {
 	(void) kr_np_DeletePatternSet(pattern_set);
 	{ TRACE_RETURN(KRERR_FILE_FORMAT); }
     }
-    else*/
+    else
     {
 	int i;
 	struct np_symtab *list;
@@ -2822,8 +2822,8 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
     if (info.pub.number_of_pattern == 0)
 	{ TRACE_RETURN(KRERR_NO_PATTERNS); }
 
-//    fprintf(out_file, "SNNS pattern definition file V%d.%d\n",
-//	    CURRENT_VERSION_V, CURRENT_VERSION_R);
+    fprintf(out_file, "SNNS pattern definition file V%d.%d\n",
+	    CURRENT_VERSION_V, CURRENT_VERSION_R);
     fprintf(out_file, "SNNS pattern definition file V%d.%d\n",
 	    0, 0);
     clock = time((time_t *) NULL);
@@ -3408,16 +3408,16 @@ The parameter entries returns the number of entries in the data field.
     } while (!stop);
 
     /* remaping if necessary */
-/*
+
     if (!input && np_info[set].rmf_ptr != NULL)
     {
-	err = np_info[set].rmf_ptr(npu_subpat, f_size,
+	err = (this->*(np_info[set].rmf_ptr))(npu_subpat, f_size,
 				   np_info[set].pub.remap_params,
 				   np_info[set].pub.no_of_remap_params);
 	if (err != KRERR_NO_ERROR)
 	    { TRACE_RETURN(err); }
     }
-*/
+
     /* all done, return results */
     *data = npu_subpat;
     if (entries != (int *) NULL)

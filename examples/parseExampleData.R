@@ -1,14 +1,14 @@
 library(RSNNS)
 
 basePath <- ("/home/bergmeir/")
-examplesPath <- ("/home/bergmeir/Download/SNNSv4.3/examples/")
+examplesPath <- ("/home/bergmeir/Download/SNNSv4.3_orig/examples/")
 
 files <- c(
     "art1_letters.pat", 
     "artmap_test.pat", 
     "eight_016.pat", 
     "laser_999.pat", 
-    "letters_with_classes.pat", 
+#    "letters_with_classes.pat", 
     "spirals.pat", 
     "trainValidMAP.pat", 
     "xor_rec1.pat",
@@ -44,7 +44,8 @@ files <- c(
 
 #file <- "dlvq_ziff_100.pat"
 
-#files <- c("art1_letters.pat", "eight_016.pat", "spirals.pat", "som_cube.pat", "xor.pat")
+#files <- c("letters_with_classes.pat", "art1_letters.pat", "eight_016.pat", "spirals.pat", "som_cube.pat", "xor.pat")
+#files <- c("art1_letters.pat")
 
 snnsData <- list()
 
@@ -55,7 +56,11 @@ for (file in files)  {
 
 #snnsData
 
-save(snnsData, file = paste(basePath,"snnsData.RData",sep=""))
+save(snnsData, file = paste(basePath,"snnsDataTEST.RData",sep=""))
 
 #data(snnsData)
 #snnsData$eight_016.pat
+
+#data(snnsData)
+#names(snnsData)
+#snnsData[["letters_with_classes.pat"]]

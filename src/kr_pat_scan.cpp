@@ -625,12 +625,17 @@ char *yytext;
 #include "y.tab.h"
 #include <stdlib.h>
 #include <string.h>
+
+#include "SnnsCLib.h"
+
+/*
 #include "glob_typ.h"
 #include "kr_typ.h"
 #include "kernel.h"
 #include "kr_newpattern.h"
 #include "kr_pat_parse.h"
 #include "kr_pat_scan.ph"
+*/
 
 #line 653 "lex.yy.c"
 
@@ -780,7 +785,8 @@ YY_MALLOC_DECL
 #define YY_RULE_SETUP \
 	YY_USER_ACTION
 
-YY_DECL
+//YY_DECL
+int SnnsCLib::yylex YY_PROTO(( void ))
 	{
 	register yy_state_type yy_current_state;
 	register char *yy_cp, *yy_bp;
@@ -1910,7 +1916,7 @@ int main()
 #line 130 "kr_pat_scan.l"
 
 
-int pplex(void)
+int SnnsCLib::pplex(void)
 {
     int scanned;
 
@@ -1934,22 +1940,22 @@ int pplex(void)
     }
 }
 
-void scanner_await_pattern_end(void)
+void SnnsCLib::scanner_await_pattern_end(void)
 {
     scanner_pattern_end_flag = 1;
 }
 
-void scanner_await_no_class(void)
+void SnnsCLib::scanner_await_no_class(void)
 {
     scanner_no_class_flag = 1;
 }
 
-void scanner_await_class(void)
+void SnnsCLib::scanner_await_class(void)
 {
     numbers_as_names = 1;
 }
 
-void scanner_init_scanner(FILE *in_file)
+void SnnsCLib::scanner_init_scanner(FILE *in_file)
 {
     yyin = in_file;
 #ifdef FLEX_SCANNER

@@ -15,3 +15,5 @@ myElmanNet$fitted.values
 
 #mySlp <- mlp(inputs, outputs, size=8, decay=0.1, maxit=1000)
 #lines(mySlp$generalErrorIterations[1:500], type="l")
+
+#savePatFile(inputs,outputs, "/home/bergmeir/elmanTEST.pat")

@@ -190,8 +190,8 @@ f1_stable = FALSE;
 //kr_pat_parse.ph
 //--------------------------------
 
-//num_param = 0;
-//parameter = NULL;
+num_param = 0;
+parameter = NULL;
 
 //Rprintf("hier%d\n",counter++);
 //--------------------------------

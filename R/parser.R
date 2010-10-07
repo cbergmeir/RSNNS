@@ -40,25 +40,29 @@ readResFile <- function(filename)  {
 
 savePatFile <- function(inputValues, targetValues, filename)  {
 
- SnnsR_resetRSNNS()
+  snnsObject <- SnnsRObjectFactory()
+ #SnnsR_resetRSNNS()
 
-  SnnsR_createFullyConnectedFeedForwardNet(c(ncol(inputValues),1,ncol(targetValues)))
-  patset <- SnnsR_createPatterns(inputValues, targetValues)
-  SnnsKrui_saveNewPatterns(filename, patset)
+  snnsObject$createFullyConnectedFeedForwardNet(c(ncol(inputValues),1,ncol(targetValues)))
+  patset <- snnsObject$createPatterns(inputValues, targetValues)
+  snnsObject$saveNewPatterns(filename, patset$set_no)
   
- SnnsR_resetRSNNS()
+  rm(snnsObject)
+ #SnnsR_resetRSNNS()
   
 }
 
 readPatFile <- function(filename)  {
     
- SnnsR_resetRSNNS()
+  snnsObject <- SnnsRObjectFactory()
+  #SnnsR_resetRSNNS()
   
-  SnnsKrui_loadNewPatterns(filename)
+  snnsObject$loadNewPatterns(filename)
   
-  patterns <- SnnsR_extractPatterns()
+  patterns <- snnsObject$extractPatterns()
   
- SnnsR_resetRSNNS()
+  rm(snnsObject)
+  #SnnsR_resetRSNNS()
   
   return(patterns)
   

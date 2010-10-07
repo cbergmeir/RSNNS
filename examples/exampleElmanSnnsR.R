@@ -42,7 +42,7 @@ plot(error, type="l")
 
 #lines(error, type="l")
 
-#basePath <- ("/home/bergmeir")
+basePath <- ("/home/bergmeir")
 #snnsObject$saveNet(paste(basePath,"/elman_test.net",sep=""),"elman_test")
-#snnsObject$saveNewPatterns(paste(basePath,"/elman_test.pat",sep=""), patset);
+#snnsObject$saveNewPatterns(paste(basePath,"/elman_test.pat",sep=""), patset$set_no);
 
