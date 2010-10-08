@@ -2824,8 +2824,6 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
 
     fprintf(out_file, "SNNS pattern definition file V%d.%d\n",
 	    CURRENT_VERSION_V, CURRENT_VERSION_R);
-    fprintf(out_file, "SNNS pattern definition file V%d.%d\n",
-	    0, 0);
     clock = time((time_t *) NULL);
     fprintf(out_file, "generated at %s\n\n", (char *) ctime(&clock));
     fprintf(out_file, "No. of patterns : %d\n", info.pub.number_of_pattern);

@@ -286,7 +286,10 @@ public:
   ~SnnsCLib();
 
 #include "kr_ui.ph" 
+
 #include "bn_JordElm.h"
+#include "bn_art1.ph"
+
 #include "kr_newpattern.ph"
 
 private:

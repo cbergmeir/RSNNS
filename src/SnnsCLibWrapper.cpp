@@ -11,14 +11,6 @@ RcppExport SEXP SnnsCLib__new(){
  return Rcpp::XPtr<SnnsCLib>( new SnnsCLib, true ) ;
 }
 
-/*
-RcppExport SEXP SnnsCLib__getVersion( SEXP xp ) {
- Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
- const char* ret = snnsCLib->krui_getVersion();
- return Rcpp::wrap(ret);
-}
-*/
-
 RcppExport SEXP SnnsCLib__getNoOfUnits(SEXP xp) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
   int ret = snnsCLib->krui_getNoOfUnits();
@@ -1917,13 +1909,13 @@ RcppExport SEXP SnnsCLib__setUnitCenters(SEXP xp, SEXP unit_no, SEXP center_no,
   return Rcpp::wrap(err);
 }
 
-//RcppExport SEXP SnnsCLib__error(SEXP xp, SEXP error_code) {
-// Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
-//
-//  int p1 = Rcpp::as<int>(error_code);
-//  const char* ret = snnsCLib->krui_error(p1);
-//  return Rcpp::wrap(ret);
-//}
+RcppExport SEXP SnnsCLib__error(SEXP xp, SEXP error_code) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(error_code);
+  const char* ret = snnsCLib->krui_error(p1);
+  return Rcpp::wrap(ret);
+}
 
 RcppExport SEXP SnnsCLib__NA_Error(SEXP xp, SEXP currentPattern, SEXP error_unit,
                                        SEXP error, SEXP ave) {
@@ -2130,6 +2122,22 @@ RcppExport SEXP SnnsCLib__elman_createNet(SEXP xp, SEXP layer, SEXP columns, SEX
   bool p4 = Rcpp::as<bool>(out_context);
 
   int err = snnsCLib->bn_elman_createNet(p1, p2, n, p4);
+  return Rcpp::wrap(err);
+}
+
+
+RcppExport SEXP SnnsCLib__art1_createNet (SEXP xp, SEXP IUnits, SEXP IRow, SEXP CUnits, SEXP CRos) {
+
+//krui_err bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRos);
+
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(IUnits);
+  int p2 = Rcpp::as<int>(IRow);
+  int p3 = Rcpp::as<int>(CUnits);
+  int p4 = Rcpp::as<int>(CRos);
+
+  int err = snnsCLib->bn_art1_createNet(p1, p2, p3, p4);
   return Rcpp::wrap(err);
 }
 

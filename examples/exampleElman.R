@@ -17,3 +17,6 @@ myElmanNet$fitted.values
 #lines(mySlp$generalErrorIterations[1:500], type="l")
 
 #savePatFile(inputs,outputs, "/home/bergmeir/elmanTEST.pat")
+
+#inputs
+#outputs

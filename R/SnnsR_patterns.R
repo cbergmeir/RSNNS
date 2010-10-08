@@ -42,7 +42,7 @@ SnnsR__createPatterns <- function(snnsObject, inputValues, targetValues) {
       snnsObject$setUnitActivation(inputs[j], x[i,j]);
     }
     
-    if(!missing(targetValues)) {  
+    if(!missing(targetValues) && length(targetValues) != 0) {  
       for(j in 1:nOutputs)  {
         snnsObject$setUnitActivation(outputs[j], y[i,j]);
       }

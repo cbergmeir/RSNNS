@@ -1,18 +1,6 @@
 library(RSNNS)
 
-setClass( "SnnsCLib", representation( pointer = "externalptr" ) )
-
-SnnsCLib_method <- function(name){
-  paste( "SnnsCLib", name, sep = "__" )
-}
-
-setMethod( "$", "SnnsCLib", function(x, name ){
-      function(...) .Call( SnnsCLib_method(name) , x@pointer , ... )
-    } )
-
-
-mySnnsObject <- new( "SnnsCLib")
-mySnnsObject@pointer <- .Call("SnnsCLib__new", package="RSNNS")
+mySnnsObject <- SnnsRObjectFactory()
 
 ver <- mySnnsObject$getVersion()
 ver
