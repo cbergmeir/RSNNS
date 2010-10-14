@@ -31,18 +31,23 @@ models <- mclapply(embeddedTS, function(x) {
       trainingValues <- x[,1:(ncol(x)-1)]
       trainingTargets <- x[,ncol(x)]
       
-      #myNet <- recurrent(trainingValues, trainingTargets, size=c(8,8), decay=0.1, maxit=2000)      
+      #myNet <- jordan(trainingValues, trainingTargets, size=c(8,8), decay=0.1, maxit=2000)      
       myNet <- mlp(trainingValues, trainingTargets, size=c(5), decay=0.1, maxit=2000)
       myNet
     })
 
-par(mfrow=c(6,6))
-plot(models[[1]]$generalErrorIterations, type="l")
-
+#plot(models[[1]]$generalErrorIterations, type="l")
 #plot(models[[9]]$generalErrorIterations, type="l")
 
-for (model in models) {
-  plot(model$generalErrorIterations, type="l")  
-}
+#par(mfrow=c(6,6))
+#for (model in models) {
+#  plot(model$generalErrorIterations, type="l")  
+#}
 
 unlist(lapply(models, function(x) x$generalErrorIterations[length(x$generalErrorIterations)]))
+
+#regression plot
+
+#models[[1]]
+#summary(models[[1]])
+plot(trainingTargets[[1]], models[[1]]$fitted.values)

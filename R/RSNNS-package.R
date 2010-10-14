@@ -25,6 +25,7 @@
 #' @keywords package
 #' @seealso \code{\link{mlp}}
 #' @useDynLib RSNNS .registration=TRUE
+#' @exportPattern "^[[:alpha:]]+"
 #' @examples
 #' \dontrun{mlp(...)}
 NULL

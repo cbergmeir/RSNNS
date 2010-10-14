@@ -11,7 +11,11 @@
 #' @author Christoph
 #' @examples
 #' \dontrun{slp <- SnnsR__createFullyConnectedFeedForwardNet(c(8,5,8))}
-SnnsR__createFullyConnectedFeedForwardNet <- function(snnsObject, unitsPerLayer) {
+SnnsR__createFullyConnectedFeedForwardNet <- function(snnsObject, unitDefaults = c(1,0,1,0,1,"Act_Logistic","Out_Identity"), updateFunc="Topological_Order", unitsPerLayer) {
+  
+  snnsObject$setUpdateFunc(updateFunc)
+  snnsObject$setUnitDefaults(unitDefaults)
+  
   return(snnsObject$createNet(unitsPerLayer, TRUE))
 }
 
@@ -113,3 +117,48 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
   #return(list(inputs=inputs, hidden=hidden, outputs=outputs))
   return(0)
 } 
+
+#' Create an elman network.
+#'
+#' @param snnsObject the object the function is applied to 
+#' @param unitDefaults the default values with wich all units will be created
+#' @param updateFunc the update function of the net
+#' @param arch the architecture of the network
+#' @param columns ...
+#' @param outContext ...
+#' @export
+#' @seealso \code{\link{SnnsR__createFullyConnectedFeedForwardNet}}
+#' @author Christoph
+# @examples
+SnnsR__createElmanNet <- function(snnsObject, unitDefaults = c(1,0,1,0,1,"Act_Logistic","Out_Identity"), updateFunc="JE_Order", arch=c(2,8,2), columns=c(1,1,1), outContext=FALSE) {
+
+  snnsObject$setUpdateFunc(updateFunc)
+  snnsObject$setUnitDefaults(unitDefaults)
+  snnsObject$elman_createNet(arch, columns, outContext)
+
+}
+
+
+#' Create a jordan network.
+#'
+#' @param snnsObject the object the function is applied to 
+#' @param unitDefaults the default values with wich all units will be created
+#' @param updateFunc the update function of the net
+#' @param arch the architecture of the network
+#' @param columns ...
+#' @export
+#' @seealso \code{\link{SnnsR__createFullyConnectedFeedForwardNet}}
+#' @author Christoph
+# @examples
+SnnsR__createJordanNet <- function(snnsObject, unitDefaults = c(1,0,1,0,1,"Act_Logistic","Out_Identity"), updateFunc="JE_Order", arch=c(2,8,2), columns=c(1,2,1)) {
+
+  snnsObject$setUpdateFunc(updateFunc)
+  snnsObject$setUnitDefaults(unitDefaults)
+  
+  if(length(arch) != 3 || length(columns) != 3) 
+    warning("createJordanNet: arch and columns should have length 3, as a jordan net always has 3 layers..")
+  
+  snnsObject$jordan_createNet(arch[1],arch[2],arch[3],columns[1],columns[2],columns[3])
+  
+}
+

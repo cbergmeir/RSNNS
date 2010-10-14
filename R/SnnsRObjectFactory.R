@@ -20,6 +20,9 @@ setMethod( "$", "SnnsR", function(x, name ){
             envir = as.environment(-1), 
             ifnotfound = list(FALSE), inherits=TRUE)
         
+        #very usefull for debugging..
+        #print(name)
+        
         if(is.function(myFunc[[1]])) return(myFunc[[1]](x, ... ))
         else return(.Call( paste( "SnnsCLib", name, sep = "__" ) , x@snnsCLibPointer , ... )) 
       }     
