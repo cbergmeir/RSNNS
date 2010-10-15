@@ -43,7 +43,10 @@ savePatFile <- function(inputValues, targetValues, filename)  {
   snnsObject <- SnnsRObjectFactory()
  #SnnsR_resetRSNNS()
 
-  snnsObject$createFullyConnectedFeedForwardNet(c(ncol(inputValues),1,ncol(targetValues)))
+  snnsObject$createFullyConnectedFeedForwardNet(unitDefaults = c(0,0,1,0,1,"Act_Logistic","Out_Identity"), 
+      FALSE, updateFunc="Topological_Order", 
+      unitsPerLayer=c(ncol(as.matrix(inputValues)),1,ncol(as.matrix(targetValues))))
+  
   patset <- snnsObject$createPatterns(inputValues, targetValues)
   snnsObject$saveNewPatterns(filename, patset$set_no)
   

@@ -11,12 +11,12 @@
 #' @author Christoph
 #' @examples
 #' \dontrun{slp <- SnnsR__createFullyConnectedFeedForwardNet(c(8,5,8))}
-SnnsR__createFullyConnectedFeedForwardNet <- function(snnsObject, unitDefaults = c(1,0,1,0,1,"Act_Logistic","Out_Identity"), updateFunc="Topological_Order", unitsPerLayer) {
+SnnsR__createFullyConnectedFeedForwardNet <- function(snnsObject, unitDefaults = c(1,0,1,0,1,"Act_Logistic","Out_Identity"), updateFunc="Topological_Order", unitsPerLayer, linOut=FALSE) {
   
   snnsObject$setUpdateFunc(updateFunc)
   snnsObject$setUnitDefaults(unitDefaults)
   
-  return(snnsObject$createNet(unitsPerLayer, TRUE))
+  return(snnsObject$createNet(unitsPerLayer, linOut=linOut, TRUE))
 }
 
 
@@ -31,7 +31,7 @@ SnnsR__createFullyConnectedFeedForwardNet <- function(snnsObject, unitDefaults =
 #' @examples
 #' \dontrun{rbf_dda <- SnnsR__createNet(c(2,2), FALSE)}
 #' \dontrun{mlp <- SnnsR__createNet(c(8,5,5,2), TRUE)}
-SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForward = TRUE) {
+SnnsR__createNet <- function(snnsObject, unitsPerLayer, linOut = FALSE, fullyConnectedFeedForward = TRUE) {
   
   if(length(unitsPerLayer) < 2) error("At least 2 layers have to be specified")
   
@@ -47,6 +47,11 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
     layers[[currLayer]][i] <- num
     
     snnsObject$setUnitName(num,paste("Input_",i,sep=""))
+    
+    if(linOut) {
+      snnsObject$setUnitActFunc(num, 'Act_Identity');
+    }
+    
     snnsObject$setUnitTType(num, SnnsDefines_resolveDefine(SnnsDefines_topologicalUnitTypes,"UNIT_INPUT"))
     
     snnsObject$setUnitPosition(num, i, 0, 0)
@@ -67,6 +72,10 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
       layers[[currLayer]][i] <- num
       
       snnsObject$setUnitName(num,paste("Hidden_",currLayer,"_",i,sep=""))
+
+      #if(linOut) {
+      #  snnsObject$setUnitActFunc(num, 'Act_Identity');
+      #}
       
       snnsObject$setUnitTType(num,SnnsDefines_resolveDefine(SnnsDefines_topologicalUnitTypes,"UNIT_HIDDEN"))
       
@@ -95,6 +104,10 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
     layers[[currLayer]][i] <- num
     
     snnsObject$setUnitName(num,paste("Output_",i,sep=""))
+    
+    if(linOut) {
+      snnsObject$setUnitActFunc(num, 'Act_Identity');
+    }
     
     #snnsObject$setUnitActFunc(num, 'Act_Identity');
     #snnsObject$setUnitOutFunc(num, 'Out_Threshold05');

@@ -15,16 +15,20 @@ mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression"
   
   checkInput(x,y)
   
+  linOut <- FALSE
+  if(type=="regression") linOut <- TRUE
+  
   snnsObject <- SnnsRObjectFactory()
   
   nInputs <- dim(x)[2L]
   nOutputs <- dim(y)[2L]
   
-  snnsObject$createFullyConnectedFeedForwardNet(unitDefaults = c(1,0,1,0,1,"Act_Logistic","Out_Identity"), 
+  snnsObject$createFullyConnectedFeedForwardNet(unitDefaults = c(0,0,1,0,1,"Act_Logistic","Out_Identity"), linOut,
                                                 updateFunc="Topological_Order", 
                                                 unitsPerLayer=c(nInputs, size, nOutputs))
   
-  snnsObject$initializeNet(-1)
+  #snnsObject$initializeNet(-1)
+  snnsObject$initializeNet(c(-0.3, 0.3), "Randomize_Weights")
 
   error <- snnsObject$train(x, y, learnFunc="Quickprop", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE)
   

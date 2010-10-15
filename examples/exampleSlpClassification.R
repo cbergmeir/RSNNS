@@ -20,7 +20,7 @@ irisTrainTargets <- irisTargets[1:120,]
 irisTestValues <- irisValues[121:nrow(iris),]    
 irisTestTargets <- irisTargets[121:nrow(iris),]    
 
-mySlp <- mlp(irisTrainValues, irisTrainTargets, size=5, decay=0.1, maxit=200)
+mySlp <- mlp(irisTrainValues, irisTrainTargets, size=5, decay=0.1, type="classification", maxit=200)
 #mySlp <- elman(irisTrainValues, irisTrainTargets, size=5, decay=0.1, maxit=1000)
 
 #mySlp

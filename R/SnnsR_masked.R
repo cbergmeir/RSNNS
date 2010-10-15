@@ -8,7 +8,7 @@
 SnnsR__initializeNet <- function(snnsObject, parameterInArray, initFunc) {
   
   if(!missing(initFunc)) {
-    .Call("SnnsCLib__setInitializationFunc", snnsObject@snnsCLibPointer, initFunc, package="RSNNS")
+    .Call("SnnsCLib__setInitialisationFunc", snnsObject@snnsCLibPointer, initFunc, package="RSNNS")
   }
   err <- .Call("SnnsCLib__initializeNet", snnsObject@snnsCLibPointer, parameterInArray, package="RSNNS")
   #if(err != 0) SnnsR_showWarningFromSnnsError("initializeNet", err)
