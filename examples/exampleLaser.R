@@ -7,15 +7,18 @@ outputs <- snnsData$laser_1000.pat[,outputColumns(snnsData$laser_1000.pat)]
 
 par(mfrow=c(2,2))
 
-testSetRatio <- 0.15
-myNet <- elman(inputs, outputs, size=c(8,8), decay=0.1, maxit=500, testSetRatio=testSetRatio)
+ratio <- 0.15
+
+patterns <- splitForTrainingAndTest(inputs, outputs)
+
+myNet <- elman(patterns$inputsTrain, patterns$targetsTrain, size=c(8,8), decay=0.1, maxit=500, patterns$inputsTest, patterns$targetsTest)
 #myNet <- mlp(inputs, outputs, size=c(5), decay=0.5, maxit=2000, type="classification")
 
 plotIterativeError(myNet)
 #plot(myNet$IterativeFitError*testSetRatio, type="l")
 #lines(myNet$IterativeTestError, col="red")
 
-plotRegressionError(outputs, myNet$fitted.values)
+plotRegressionError(patterns$targetsTrain, myNet$fitted.values)
 
 #plot(outputs, myNet$fitted.values, xlim=c(0,1), ylim=c(0,1))
 #linMod <- lm(myNet$fitted.values ~ outputs)
@@ -24,7 +27,7 @@ plotRegressionError(outputs, myNet$fitted.values)
 
 myNet$IterativeFitError[length(myNet$IterativeFitError)]
 
-summary(myNet)
+#summary(myNet)
 
 plot(inputs, type="l")
 

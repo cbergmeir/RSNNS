@@ -96,3 +96,23 @@ plotRegressionError <- function(targets, fits)
   lines(c(0,1), c(0,1))
   
 }
+
+splitForTrainingAndTest <- function(x, y, ratio=0.15) {
+
+  x <- as.matrix(x)
+  nInputs <- nrow(x)
+  
+  y <- as.matrix(y)
+  
+  trainIndices <- 1 : (nInputs * (1-ratio))
+  testIndices <- (1:nInputs)[-trainIndices]
+  
+  inputsTrain <- x[trainIndices,]
+  targetsTrain <- y[trainIndices,]
+  
+  inputsTest <- x[testIndices,]
+  targetsTest <- y[testIndices,]
+  
+  return(list(inputsTrain=inputsTrain, targetsTrain=targetsTrain, inputsTest=inputsTest, targetsTest=targetsTest))
+  
+}

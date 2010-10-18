@@ -8,7 +8,7 @@ elman <- function(x, ...) UseMethod("elman")
 #'
 #' @export
 #' @author Christoph
-elman.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", testSetRatio=0.0) {
+elman.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", inputsTest=NULL, targetsTest=NULL) {
   
   x <- as.matrix(x)
   y <- as.matrix(y)
@@ -28,24 +28,22 @@ elman.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regressio
     
   snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) )
   
-  result <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, testSetRatio=testSetRatio)
+  result <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, inputsTest=inputsTest, targetsTest=targetsTest)
+#  print(result)
+#  
+#  snns <- NULL
+#  snns$nInputs <- nInputs
+#  snns$nOutputs <- nOutputs
+#  snns$type <- type
+#  
+#  snns$snnsObject <- snnsObject
+#  
+#  class(snns) <- c("elman", "rsnns")
+#  
+#  snns <- fillInTrainingResult(snns, result)
 
-  snns <- NULL
-  snns$nInputs <- nInputs
-  snns$nOutputs <- nOutputs
-  snns$type <- type
+  snns <- rsnnsObjectFactory(nInputs, nOutputs, type, snnsObject, "elman", result)
   
-  snns$IterativeFitError <- result$IterativeFitError
-  snns$IterativeTestError <- result$IterativeTestError
-  
-  #fit <- snnsObject$predictValues(x)
-  
-  snns$fitted.values <- c(result$fitValues, result$testValues)
-  snns$testSetRatio <- testSetRatio
-  
-  snns$snnsObject <- snnsObject
-  
-  class(snns) <- c("elman", "rsnns")
   snns  
 }
 
@@ -59,7 +57,7 @@ jordan <- function(x, ...) UseMethod("jordan")
 #'
 #' @export
 #' @author Christoph
-jordan.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", testSetRatio=0.0) {
+jordan.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", inputsTest=NULL, targetsTest=NULL) {
   
   x <- as.matrix(x)
   y <- as.matrix(y)
@@ -79,25 +77,22 @@ jordan.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regressi
   
   snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) )
   
-  result <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, testSetRatio=testSetRatio)
+  result <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, inputsTest=inputsTest, targetsTest=targetsTest)
   
+#  
+#  snns <- NULL
+#  snns$nInputs <- nInputs
+#  snns$nOutputs <- nOutputs
+#  snns$type <- type
+#  
+#  snns$snnsObject <- snnsObject
+#  
+#  class(snns) <- c("jordan", "rsnns")
+#  
+#  snns <- fillInTrainingResult(snns, result)
+#  
+  snns <- rsnnsObjectFactory(nInputs, nOutputs, type, snnsObject, "jordan", result)
   
-  snns <- NULL
-  snns$nInputs <- nInputs
-  snns$nOutputs <- nOutputs
-  snns$type <- type
-  
-  snns$IterativeFitError <- result$IterativeFitError
-  snns$IterativeTestError <- result$IterativeTestError
-  
-  #fit <- snnsObject$predictValues(x)
-  
-  snns$fitted.values <- c(result$fitValues, result$testValues)
-  snns$testSetRatio <- testSetRatio
-  
-  snns$snnsObject <- snnsObject
-  
-  class(snns) <- c("jordan", "rsnns")
   snns  
 }
 

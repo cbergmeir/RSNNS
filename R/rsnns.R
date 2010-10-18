@@ -84,11 +84,37 @@ plotIterativeError <- function(object)
 {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
-  if(object$testSetRatio != 0) {
-    plot(object$IterativeFitError, type="l")
-    lines(object$IterativeTestError / object$testSetRatio, col="red")    
-  } else {
-    plot(object$IterativeFitError, ylab="Weighted SSE", xlab="Iteration", type="l")
+  plot(object$IterativeFitError, ylab="Weighted SSE", xlab="Iteration", type="l")
+  
+  if(!is.null(object$IterativeTestError)) {
+    
+    testSetRatio <- nrow(as.matrix(object$fitted.values)) / nrow(as.matrix(object$fittedTestValues)) 
+    
+    lines(object$IterativeTestError * testSetRatio, col="red")    
   }
   
+}
+
+rsnnsObjectFactory <- function(nInputs, nOutputs, type, snnsObject, subclass, result) {
+  
+  snns <- NULL
+  snns$nInputs <- nInputs
+  snns$nOutputs <- nOutputs
+  snns$type <- type
+  
+  
+  snns$snnsObject <- snnsObject
+  
+  class(snns) <- c(subclass, "rsnns")
+  
+  #if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  
+  snns$IterativeFitError <- result$IterativeFitError
+  snns$IterativeTestError <- result$IterativeTestError
+  
+  snns$fitted.values <- result$fitValues #rbind(result$fitValues, result$testValues)
+  snns$fittedTestValues <- result$testValues
+  #snns$testSetRatio <- testSetRatio
+  
+  snns
 }
