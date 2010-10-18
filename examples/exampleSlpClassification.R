@@ -14,13 +14,15 @@ for(i in 1:4) {
 
 irisTargets <- decodeClassLabels(iris[,5])
 
-irisTrainValues <- irisValues[1:120,] 
-irisTrainTargets <- irisTargets[1:120,] 
+iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
 
-irisTestValues <- irisValues[121:nrow(iris),]    
-irisTestTargets <- irisTargets[121:nrow(iris),]    
+#irisTrainValues <- irisValues[1:120,] 
+#irisTrainTargets <- irisTargets[1:120,] 
 
-mySlp <- mlp(irisTrainValues, irisTrainTargets, size=5, decay=0.1, type="classification", maxit=200, testSetRatio=0.1)
+#irisTestValues <- irisValues[121:nrow(iris),]    
+#irisTestTargets <- irisTargets[121:nrow(iris),]    
+
+mySlp <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, decay=0.1, type="classification", maxit=200, iris$inputsTest, iris$targetsTest)
 #mySlp <- elman(irisTrainValues, irisTrainTargets, size=5, decay=0.1, maxit=1000)
 
 #mySlp$snnsObject$getNoOfPatterns()
@@ -34,12 +36,14 @@ plotIterativeError(mySlp)
 #plot(mySlp$generalErrorIterations, type="l")
 #mySlp$generalErrorIterations
 
-#plotRegressionError(predictions[,2], irisTestTargets[,2])
 
-predictions <- predict(mySlp,irisTestValues)
-labels <- toNumericClassLabels(iris[121:nrow(iris),5])
 
+predictions <- predict(mySlp,iris$inputsTest)
+#labels <- toNumericClassLabels(iris$targetsTest)
+#labels <- encodeClassLabels(iris$targetsTest)
 #apply(predictions, 1, function(x) {x[labels]})
+
+#plotRegressionError(predictions[,2], iris$targetsTest[,2])
 
 #rocpred <- vector()
 #for(i in 1:nrow(predictions))  {
@@ -50,18 +54,23 @@ labels <- toNumericClassLabels(iris[121:nrow(iris),5])
 #regression plot
 #plot(predictions[,2], as.numeric(labels==2))
 
-confusionMatrix(iris[1:120,5],fitted.values(mySlp))
-confusionMatrix(iris[121:nrow(iris),5],predictions)
+confusionMatrix(iris$targetsTrain,fitted.values(mySlp))
+confusionMatrix(iris$targetsTest,predictions)
 
-library(ROCR)
-pred <- ROCR::prediction(predictions[,2], as.numeric(labels==2))
+plotROC(predictions[,2], iris$targetsTest[,2])
+plotROC(fitted.values(mySlp)[,2], iris$targetsTrain[,2])
 
-perf <- performance(pred,"tpr","fpr")
-plot(perf)
-## precision/recall curve (x-axis: recall, y-axis: precision)
-perf1 <- performance(pred, "prec", "rec")
-plot(perf1)
-## sensitivity/specificity curve (x-axis: specificity,
-## y-axis: sensitivity)
-perf1 <- performance(pred, "sens", "spec")
-plot(perf1)
+#drawROC(predictions[,2], as.numeric(labels==2))
+
+#library(ROCR)
+#pred <- ROCR::prediction(predictions[,2], as.numeric(labels==2))
+#
+#perf <- performance(pred,"tpr","fpr")
+#plot(perf)
+### precision/recall curve (x-axis: recall, y-axis: precision)
+#perf1 <- performance(pred, "prec", "rec")
+#plot(perf1)
+### sensitivity/specificity curve (x-axis: specificity,
+### y-axis: sensitivity)
+#perf1 <- performance(pred, "sens", "spec")
+#plot(perf1)

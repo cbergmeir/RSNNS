@@ -140,7 +140,6 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain, learnFunc="Quick
  
   snnsObject$setCurrPatSet(patsetTrain$set_no)
   result$fitValues <- snnsObject$predictValuesCurrPatSet()
-  snnsObject$deletePatSet(patsetTrain$set_no)
 
   if(testing) {
     
@@ -155,5 +154,9 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain, learnFunc="Quick
     result$testValues <- NULL
   }
 
+  #snns auto-reorganizes the pattern set numbers, so the first generated pattern set
+  #has to be deleted at last
+  snnsObject$deletePatSet(patsetTrain$set_no)
+  
   return(result)
 }

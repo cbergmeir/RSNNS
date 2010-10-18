@@ -10,8 +10,6 @@ mlp <- function(x, ...) UseMethod("mlp")
 #' @author Christoph
 mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", inputsTest=NULL, targetsTest=NULL) {
   
-  #, testSetRatio=0.0
-  
   x <- as.matrix(x)
   y <- as.matrix(y)
   
@@ -29,24 +27,10 @@ mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression"
                                                 updateFunc="Topological_Order", 
                                                 unitsPerLayer=c(nInputs, size, nOutputs))
   
-  #snnsObject$initializeNet(-1)
   snnsObject$initializeNet(c(-0.3, 0.3), "Randomize_Weights")
 
   result <- snnsObject$train(x, y, learnFunc="Quickprop", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, inputsTest=inputsTest, targetsTest=targetsTest)
-  #print(result)
-  
-#  snns <- NULL
-#  snns$nInputs <- nInputs
-#  snns$nOutputs <- nOutputs
-#  snns$type <- type
-#  
-#
-#  snns$snnsObject <- snnsObject
-#  
-#  class(snns) <- c("mlp", "rsnns")
-#  
-#  snns <- fillInTrainingResult(snns, result)
-#  
+
   snns <- rsnnsObjectFactory(nInputs, nOutputs, type, snnsObject, "mlp", result)
     
   snns  

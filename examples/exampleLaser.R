@@ -5,20 +5,31 @@ data(snnsData)
 inputs <- snnsData$laser_1000.pat[,inputColumns(snnsData$laser_1000.pat)]
 outputs <- snnsData$laser_1000.pat[,outputColumns(snnsData$laser_1000.pat)]
 
-par(mfrow=c(2,2))
+par(mfrow=c(3,2))
 
 ratio <- 0.15
 
 patterns <- splitForTrainingAndTest(inputs, outputs)
 
-myNet <- elman(patterns$inputsTrain, patterns$targetsTrain, size=c(8,8), decay=0.1, maxit=500, patterns$inputsTest, patterns$targetsTest)
+#as.matrix(patterns$inputsTest)
+
+myNet <- elman(patterns$inputsTrain, patterns$targetsTrain, size=c(8,8), decay=0.1, maxit=500,
+                                   inputsTest=patterns$inputsTest, targetsTest=patterns$targetsTest)
 #myNet <- mlp(inputs, outputs, size=c(5), decay=0.5, maxit=2000, type="classification")
+
+#names(myNet)
+#myNet$IterativeFitError
+#myNet$fitted.values
+#myNet$fittedTestValues
 
 plotIterativeError(myNet)
 #plot(myNet$IterativeFitError*testSetRatio, type="l")
 #lines(myNet$IterativeTestError, col="red")
 
-plotRegressionError(patterns$targetsTrain, myNet$fitted.values)
+plotRegressionError(patterns$targetsTrain, myNet$fitted.values, main="Regression Plot Fit")
+plotRegressionError(patterns$targetsTest, myNet$fittedTestValues, main="Regression Plot Test")
+
+hist(myNet$fitted.values - patterns$targetsTrain, col="lightblue", main="Error Histogram Fit")
 
 #plot(outputs, myNet$fitted.values, xlim=c(0,1), ylim=c(0,1))
 #linMod <- lm(myNet$fitted.values ~ outputs)

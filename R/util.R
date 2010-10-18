@@ -52,7 +52,8 @@ encodeClassLabels <- function(x) {
 }
 
 toNumericClassLabels <- function(x) {
-  as.numeric(x)
+  if(is.numeric(x)) return(x)
+  else return(as.numeric(x))
 }
 
 #examples
@@ -81,15 +82,32 @@ confusionMatrix <- function(targets, predictions) {
   cm
 }
 
+#' Plot a ROC curve.
+#'
+#' Code is taken from R news Volume 4/1, June 2004
+#' 
+#' @export
+#' @author ...
+
+plotROC <-function(T,D){
+  cutpoints<-c(-Inf, sort(unique(T)), Inf)
+  sens<-sapply(cutpoints,
+      function(c) sum(D[T>c])/sum(D))
+  spec<-sapply(cutpoints,
+      function(c) sum((1-D)[T<=c]/sum(1-D)))
+  plot(1-spec, sens, type="l")
+}
+
+
 #' Regression plot.
 #'
 #' @export
 #' @author Christoph
-plotRegressionError <- function(targets, fits)
+plotRegressionError <- function(targets, fits, ...)
 {
   #if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
-  plot(targets, fits, xlim=c(0,1), ylim=c(0,1))
+  plot(targets, fits, xlim=c(0,1), ylim=c(0,1), ...)
   
   linMod <- lm(fits ~ targets)
   abline(linMod, col="red")

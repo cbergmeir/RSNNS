@@ -80,11 +80,11 @@ predict.rsnns <- function(object, newdata, type=c("regression","classification")
 #'
 #' @export
 #' @author Christoph
-plotIterativeError <- function(object)
+plotIterativeError <- function(object, ...)
 {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
-  plot(object$IterativeFitError, ylab="Weighted SSE", xlab="Iteration", type="l")
+  plot(object$IterativeFitError, ylab="Weighted SSE", xlab="Iteration", type="l", ...)
   
   if(!is.null(object$IterativeTestError)) {
     
