@@ -68,8 +68,27 @@ predict.rsnns <- function(object, newdata, type=c("regression","classification")
     #predict values.. 
     patset <- object$snnsObject$createPatterns(newdata) 
     object$snnsObject$setCurrPatSet(patset$set_no)
-    predictions <- object$snnsObject$predictValues(newdata)
+    predictions <- object$snnsObject$predictValuesCurrPatSet()
+    object$snnsObject$deletePatSet(patset$set_no)
     z[keep,] <- predictions
   }
   z
+  #predictions
+}
+
+#' Plot the iterative training and test error during training of the net.
+#'
+#' @export
+#' @author Christoph
+plotIterativeError <- function(object)
+{
+  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  
+  if(object$testSetRatio != 0) {
+    plot(object$IterativeFitError, type="l")
+    lines(object$IterativeTestError / object$testSetRatio, col="red")    
+  } else {
+    plot(object$IterativeFitError, ylab="Weighted SSE", xlab="Iteration", type="l")
+  }
+  
 }

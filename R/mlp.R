@@ -8,7 +8,7 @@ mlp <- function(x, ...) UseMethod("mlp")
 #'
 #' @export
 #' @author Christoph
-mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression") {
+mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", testSetRatio=0.0) {
   
   x <- as.matrix(x)
   y <- as.matrix(y)
@@ -30,17 +30,19 @@ mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression"
   #snnsObject$initializeNet(-1)
   snnsObject$initializeNet(c(-0.3, 0.3), "Randomize_Weights")
 
-  error <- snnsObject$train(x, y, learnFunc="Quickprop", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE)
+  result <- snnsObject$train(x, y, learnFunc="Quickprop", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, testSetRatio=testSetRatio)
   
   snns <- NULL
   snns$nInputs <- nInputs
   snns$nOutputs <- nOutputs
   snns$type <- type
   
-  snns$generalErrorIterations <- as.matrix(error)
-  fit <- snnsObject$predictValues(x)
+  snns$IterativeFitError <- result$IterativeFitError
+  snns$IterativeTestError <- result$IterativeTestError
   
-  snns$fitted.values <- fit
+  snns$fitted.values <- rbind(result$fitValues, result$testValues)
+  snns$testSetRatio <- testSetRatio
+  
   snns$snnsObject <- snnsObject
   
   class(snns) <- c("mlp", "rsnns")

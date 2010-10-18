@@ -20,15 +20,21 @@ irisTrainTargets <- irisTargets[1:120,]
 irisTestValues <- irisValues[121:nrow(iris),]    
 irisTestTargets <- irisTargets[121:nrow(iris),]    
 
-mySlp <- mlp(irisTrainValues, irisTrainTargets, size=5, decay=0.1, type="classification", maxit=200)
+mySlp <- mlp(irisTrainValues, irisTrainTargets, size=5, decay=0.1, type="classification", maxit=200, testSetRatio=0.1)
 #mySlp <- elman(irisTrainValues, irisTrainTargets, size=5, decay=0.1, maxit=1000)
+
+#mySlp$snnsObject$getNoOfPatterns()
 
 #mySlp
 #summary(mySlp)
 par(mfrow=c(2,2))
 
-plot(mySlp$generalErrorIterations, type="l")
+plotIterativeError(mySlp)
+
+#plot(mySlp$generalErrorIterations, type="l")
 #mySlp$generalErrorIterations
+
+#plotRegressionError(predictions[,2], irisTestTargets[,2])
 
 predictions <- predict(mySlp,irisTestValues)
 labels <- toNumericClassLabels(iris[121:nrow(iris),5])

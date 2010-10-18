@@ -36,6 +36,10 @@ SnnsR__createPatterns <- function(snnsObject, inputValues, targetValues) {
   #snnsObject$deleteAllPatterns()
   
   patset <- snnsObject$allocNewPatternSet()
+  print(snnsObject$getNoOfPatterns())
+  #print(patset)
+  #snnsObject$setCurrPatSet(patset)
+
   
   for(i in 1:nrow(x)) {
     for(j in 1:nInputs)  {
@@ -49,22 +53,35 @@ SnnsR__createPatterns <- function(snnsObject, inputValues, targetValues) {
     }
     snnsObject$newPattern();
   }
+
+  #print("-----------------")
+  #print(nrow(x))
+  #print(snnsObject$getNoOfPatterns())
   
   return(patset)
 }
 
-#' Predict values with a trained net
+#' Predict values with a trained net.
+#' 
+#' This function has to be used embedded in a step of loading and afterwards 
+#' removing the patterns into the snns. As the snns only supports 2 pattern sets
+#' in parallel, this has to be done with caution..
+#' 
 #' @param snnsObject \code{\linkS4class{SnnsR}} object
 #' @param inputValues The new input values
 #' @export
 #' @rdname SnnsR-methods
-SnnsR__predictValues <- function(snnsObject, inputValues)  {
+SnnsR__predictValuesCurrPatSet <- function(snnsObject)  {
   
   outputs <- snnsObject$getAllOutputUnits()
   
-  predictions <- matrix(nrow= nrow(inputValues), ncol=length(outputs))
+  noOfPatterns <- snnsObject$getNoOfPatterns()
+  
+  #print(noOfPatterns)
+  
+  predictions <- matrix(nrow= noOfPatterns, ncol=length(outputs))
   #currentPattern <- 84
-  for(currentPattern in 1:nrow(inputValues))  {
+  for(currentPattern in 1:noOfPatterns)  {
     
     snnsObject$setPatternNo(currentPattern)
     

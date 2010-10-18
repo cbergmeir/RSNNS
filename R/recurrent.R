@@ -8,7 +8,7 @@ elman <- function(x, ...) UseMethod("elman")
 #'
 #' @export
 #' @author Christoph
-elman.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression") {
+elman.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", testSetRatio=0.0) {
   
   x <- as.matrix(x)
   y <- as.matrix(y)
@@ -28,17 +28,21 @@ elman.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regressio
     
   snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) )
   
-  error <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE)
-  
+  result <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, testSetRatio=testSetRatio)
+
   snns <- NULL
   snns$nInputs <- nInputs
   snns$nOutputs <- nOutputs
   snns$type <- type
   
-  snns$generalErrorIterations <- as.matrix(error)
-  fit <- snnsObject$predictValues(x)
+  snns$IterativeFitError <- result$IterativeFitError
+  snns$IterativeTestError <- result$IterativeTestError
   
-  snns$fitted.values <- fit
+  #fit <- snnsObject$predictValues(x)
+  
+  snns$fitted.values <- c(result$fitValues, result$testValues)
+  snns$testSetRatio <- testSetRatio
+  
   snns$snnsObject <- snnsObject
   
   class(snns) <- c("elman", "rsnns")
@@ -55,7 +59,7 @@ jordan <- function(x, ...) UseMethod("jordan")
 #'
 #' @export
 #' @author Christoph
-jordan.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression") {
+jordan.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", testSetRatio=0.0) {
   
   x <- as.matrix(x)
   y <- as.matrix(y)
@@ -75,17 +79,22 @@ jordan.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regressi
   
   snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) )
   
-  error <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE)
+  result <- snnsObject$train(x, y, learnFunc="JE_BP", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, testSetRatio=testSetRatio)
+  
   
   snns <- NULL
   snns$nInputs <- nInputs
   snns$nOutputs <- nOutputs
   snns$type <- type
   
-  snns$generalErrorIterations <- as.matrix(error)
-  fit <- snnsObject$predictValues(x)
+  snns$IterativeFitError <- result$IterativeFitError
+  snns$IterativeTestError <- result$IterativeTestError
   
-  snns$fitted.values <- fit
+  #fit <- snnsObject$predictValues(x)
+  
+  snns$fitted.values <- c(result$fitValues, result$testValues)
+  snns$testSetRatio <- testSetRatio
+  
   snns$snnsObject <- snnsObject
   
   class(snns) <- c("jordan", "rsnns")

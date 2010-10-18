@@ -80,3 +80,19 @@ confusionMatrix <- function(targets, predictions) {
   #colSums(cm)
   cm
 }
+
+#' Regression plot.
+#'
+#' @export
+#' @author Christoph
+plotRegressionError <- function(targets, fits)
+{
+  #if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  
+  plot(targets, fits, xlim=c(0,1), ylim=c(0,1))
+  
+  linMod <- lm(fits ~ targets)
+  abline(linMod, col="red")
+  lines(c(0,1), c(0,1))
+  
+}
