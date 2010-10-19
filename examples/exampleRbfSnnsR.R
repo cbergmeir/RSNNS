@@ -8,7 +8,7 @@ data(snnsData)
 inputs <- snnsData$spirals.pat[,inputColumns(snnsData$spirals.pat)]
 outputs <- snnsData$spirals.pat[,outputColumns(snnsData$spirals.pat)]
 
-snnsObject <- snnsObjectFactory()
+snnsObject <- SnnsRObjectFactory()
 
 snnsObject$setLearnFunc('RBF-DDA')
 snnsObject$setUpdateFunc('Topological_Order')
@@ -20,7 +20,7 @@ snnsObject$setUnitDefaults(0,0,1,0,1,'Act_Logistic','Out_Identity')
 #snnsObject$setInitialisationFunc('RBF_Weights')
 #snnsObject$createNet(c(2,45,2), TRUE)
 
-snnsObject$createNet(c(2,2), FALSE)
+snnsObject$createNet(c(2,2), linOut = FALSE, fullyConnectedFeedForward = FALSE)
 
 
 

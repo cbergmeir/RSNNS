@@ -175,3 +175,4 @@ SnnsR__createJordanNet <- function(snnsObject, unitDefaults = c(1,0,1,0,1,"Act_L
   
 }
 
+

@@ -1,3 +1,25 @@
+#library(ROCR)
+#pred <- ROCR::prediction(predictions[,2], as.numeric(labels==2))
+#
+#perf <- performance(pred,"tpr","fpr")
+#plot(perf)
+### precision/recall curve (x-axis: recall, y-axis: precision)
+#perf1 <- performance(pred, "prec", "rec")
+#plot(perf1)
+### sensitivity/specificity curve (x-axis: specificity,
+### y-axis: sensitivity)
+#perf1 <- performance(pred, "sens", "spec")
+#plot(perf1)
+
+
+#library(datasets)
+#lapply(ls("package:datasets"), function(x) { 
+#    obj <- get(x)
+#    if(is.matrix(obj)) return(c(x, nrow(obj), ncol(obj)))
+#    else return(c(x, length(obj), 1))        
+#    })
+
+
 library(RSNNS)
 
 setClass( "SnnsCLib", representation( pointer = "externalptr" ) )

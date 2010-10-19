@@ -68,7 +68,6 @@ SnnsR__createPatterns <- function(snnsObject, inputValues, targetValues) {
 #' in parallel, this has to be done with caution..
 #' 
 #' @param snnsObject \code{\linkS4class{SnnsR}} object
-#' @param inputValues The new input values
 #' @export
 #' @rdname SnnsR-methods
 SnnsR__predictValuesCurrPatSet <- function(snnsObject)  {
@@ -77,15 +76,12 @@ SnnsR__predictValuesCurrPatSet <- function(snnsObject)  {
   
   noOfPatterns <- snnsObject$getNoOfPatterns()
   
-  #print(noOfPatterns)
-  
   predictions <- matrix(nrow= noOfPatterns, ncol=length(outputs))
-  #currentPattern <- 84
+
   for(currentPattern in 1:noOfPatterns)  {
     
     snnsObject$setPatternNo(currentPattern)
     
-    #OUTPUT_NOTHING  1
     snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
     
     snnsObject$updateNet(0)
@@ -94,12 +90,37 @@ SnnsR__predictValuesCurrPatSet <- function(snnsObject)  {
       predictions[currentPattern,i] <- snnsObject$getUnitOutput(outputs[i])
     }
     
-#    if (length(which(o != irisTargets[currentPattern,])) != 0)  {
-#      print("not recognized correctly:")
-#      print(currentPattern)
-#    }
-#    print(o)
-#    print(irisTargets[currentPattern,])
+  }
+  
+  return(predictions)
+} 
+
+
+#' Get the som output for every pattern in the current pattern set.
+#' 
+#' @param snnsObject \code{\linkS4class{SnnsR}} object
+#' @export
+#' @rdname SnnsR-methods
+SnnsR__somPredictCurrPatSet <- function(snnsObject)  {
+  
+  units <- snnsObject$getAllHiddenUnits()
+  
+  noOfPatterns <- snnsObject$getNoOfPatterns()
+  
+  predictions <- matrix(nrow= noOfPatterns, ncol=length(units))
+  
+  for(currentPattern in 1:noOfPatterns)  {
+    
+    snnsObject$setPatternNo(currentPattern)
+    
+    snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
+    
+    snnsObject$updateNet(0)
+    
+    for(i in 1:length(units)) {
+      predictions[currentPattern,i] <- snnsObject$getUnitOutput(units[i])
+    }
+    
   }
   
   return(predictions)

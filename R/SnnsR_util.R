@@ -46,3 +46,14 @@ SnnsR__resetRSNNS <- function(snnsObject)  {
   
 }
 
+
+#' Set the activation function for all units of a certain TType.
+SnnsR__setTTypeUnitsActFunc <- function(snnsObject, ttype, act_func) {
+  
+  units <- snnsObject$getAllUnitsTType(ttype)
+  
+  for(unit in units) {
+    snnsObject$setUnitActFunc(unit, act_func)
+  }
+
+}

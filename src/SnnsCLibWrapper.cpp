@@ -2141,6 +2141,21 @@ RcppExport SEXP SnnsCLib__art1_createNet (SEXP xp, SEXP IUnits, SEXP IRow, SEXP 
   return Rcpp::wrap(err);
 }
 
+RcppExport SEXP SnnsCLib__kohonen_createNet (SEXP xp, SEXP X, SEXP Y, SEXP IUnits, SEXP HUnits) {
+
+//void bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits);
+
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(X);
+  int p2 = Rcpp::as<int>(Y);
+  int p3 = Rcpp::as<int>(IUnits);
+  int p4 = Rcpp::as<int>(HUnits);
+
+  snnsCLib->bn_kohonen_createNet(p1, p2, p3, p4);
+
+  return R_NilValue;
+}
 
 RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP io_type)  {
 
