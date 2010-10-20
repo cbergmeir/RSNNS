@@ -112,16 +112,97 @@ SnnsR__somPredictCurrPatSet <- function(snnsObject)  {
   for(currentPattern in 1:noOfPatterns)  {
     
     snnsObject$setPatternNo(currentPattern)
-    
     snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
-    
-    snnsObject$updateNet(0)
+    snnsObject$updateNet(c(0.0, 0.0, 1.0))
     
     for(i in 1:length(units)) {
       predictions[currentPattern,i] <- snnsObject$getUnitOutput(units[i])
+      #predictions[currentPattern,i] <- snnsObject$getUnitValueA(units[i])
     }
     
   }
+  
+  return(predictions)
+} 
+
+#' Get the som winners for every pattern in the current pattern set.
+#' 
+#' @param snnsObject \code{\linkS4class{SnnsR}} object
+#' @export
+#' @rdname SnnsR-methods
+SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, X, Y)  {
+  
+  units <- snnsObject$getAllHiddenUnits()
+  
+  noOfPatterns <- snnsObject$getNoOfPatterns()
+  
+  cat("noOfPatterns: ", noOfPatterns, "\n", sep="")
+  
+  #predictions <- matrix(nrow= noOfPatterns, ncol=length(units))
+  winners <- NULL
+  
+  for(currentPattern in 1:noOfPatterns)  {
+   
+    predictions <- vector()
+    
+    #res <- 
+    snnsObject$setPatternNo(currentPattern)
+    #print(res)
+    #res <- 
+    snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
+    #print(res)    
+    #res <- 
+    snnsObject$updateNet(c(0.0, 0.0, 1.0))
+    #print(res)
+    
+    for(i in 1:length(units)) {
+      predictions[i] <- snnsObject$getUnitOutput(units[i])
+      #predictions[currentPattern,i] <- snnsObject$getUnitValueA(units[i])
+    }
+    x <- matrix(predictions, nrow=X)
+    #print(predictions)
+    #the winner is the one with minimal distance
+    winners <- rbind(winners, which(x == min(x, na.rm=TRUE), arr.ind = TRUE))
+    #print(nrow(winners))
+  }
+  
+  som <- matrix(0, nrow=X, ncol=Y)
+  
+  for(i in 1:nrow(winners)) {
+    som[winners[i,1], winners[i,2]] <- som[winners[i,1], winners[i,2]] + 1 
+  }
+  
+  return(som)
+  
+} 
+
+#' Get the som winners for every pattern in the current pattern set.
+#' 
+#' @param snnsObject \code{\linkS4class{SnnsR}} object
+#' @export
+#' @rdname SnnsR-methods
+SnnsR__somPredictCurrPatSetWinnersSpanTree <- function(snnsObject)  {
+  
+  units <- snnsObject$getAllHiddenUnits()
+  
+  noOfPatterns <- snnsObject$getNoOfPatterns()
+  
+  snnsObject$spanning_tree()
+      
+  predictions <- vector() #matrix(nrow= noOfPatterns, ncol=length(units))
+  
+  #for(currentPattern in 1:noOfPatterns)  {
+    
+  #  snnsObject$setPatternNo(currentPattern)
+  #  snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
+  #  snnsObject$updateNet(0)
+    
+    for(i in 1:length(units)) {
+      #predictions[currentPattern,i] <- snnsObject$getUnitOutput(units[i])
+      predictions[i] <- snnsObject$getUnitValueA(units[i])
+    }
+    
+  #}
   
   return(predictions)
 } 

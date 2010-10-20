@@ -1,6 +1,6 @@
 library(RSNNS)
 library(mlbench)
-library(som)
+#library(som)
 
 data(BreastCancer)
 
@@ -18,19 +18,22 @@ BreastCancer <- BreastCancer[sample(1:nrow(BreastCancer),length(1:nrow(BreastCan
 #}
 
 dataValues <- BreastCancer[,2:10]
-dataValues <- normalize(data.matrix(dataValues))
+#dataValues <- normalize(data.matrix(dataValues))
+
+
 
 #remove na's
 colContainsNa <- apply(dataValues, 1, function(x) length(which(is.na(x))))
 dataValues <- dataValues[-which(colContainsNa != 0),]
 
-
+#normalize to 0-1
+dataValues <- apply(data.matrix(dataValues),2, function(x) {(x - min(x)) / (max(x) - min(x))})
 
 dataTargets <- decodeClassLabels(BreastCancer[,11])
 data <- splitForTrainingAndTest(dataValues, dataTargets, ratio=0.25)
 
 
-model <- mlp(data$inputsTrain, data$targetsTrain, size=c(3), decay=0.01, type="classification", maxit=200, data$inputsTest, data$targetsTest)
+model <- mlp(data$inputsTrain, data$targetsTrain, size=c(3), decay=0.05, type="classification", maxit=200, data$inputsTest, data$targetsTest)
 #model <- rbfDDA(data$inputsTrain, data$targetsTrain, size=5, decay=0.1, type="classification", maxit=1000)#, data$inputsTest, data$targetsTest)
 #model <- elman(data$inputsTrain, data$targetsTrain, size=5, decay=0.01, type="classification", maxit=200, data$inputsTest, data$targetsTest)
 #model <- jordan(data$inputsTrain, data$targetsTrain, size=5, decay=0.01, type="classification", maxit=200, data$inputsTest, data$targetsTest)
@@ -54,5 +57,5 @@ plotROC(predictions[,2], data$targetsTest[,2])
 
 #table(targets=encodeClassLabels(data$targetsTrain), predictions=encodeClassLabels(fitted.values(model)))
 
-foo <- som(matrix(rnorm(1000), 250), 3, 5)
-plot(foo, ylim=c(-1, 1))
+#foo <- som(matrix(rnorm(1000), 250), 3, 5)
+#plot(foo, ylim=c(-1, 1))
