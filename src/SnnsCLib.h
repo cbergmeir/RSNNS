@@ -289,6 +289,7 @@ public:
 
 #include "bn_JordElm.h"
 #include "bn_art1.ph"
+#include "bn_art2.ph"
 #include "bn_kohonen.ph"
 
 #include "kr_newpattern.ph"

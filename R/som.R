@@ -51,23 +51,27 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
   snns$mapY <- mapY
   
   if(calculateMap) {
-    snns$map <- snnsObject$somPredictCurrPatSetWinners(mapX, mapY)  
+
+    mapVec <- snnsObject$somPredictCurrPatSetWinners()
+    print(mapVec)
+    snns$map <- vectorToActMap(mapVec, nrow=mapX)
+    
   } else {
     snns$map <- NULL
   }
 
   if(calculateActMaps) {
-    actMapResults <- snnsObject$somPredictCurrPatSet()
-    actMaps <- apply(actMapResults, 1, function(x) { return(list(matrix(x, nrow=mapX)))})
-    actMaps <- lapply(actMaps, function(x) {x[[1]]})
-    snns$actMaps <- actMaps    
+    
+    actMat <- snnsObject$somPredictCurrPatSet()
+    snns$actMaps <- matrixToActMapList(actMat, nrow=mapX)
+    
   } else {
     snns$actMaps <- NULL
   }
   
   if(calculateSpanningTree) {
     spanningTree <- snnsObject$somPredictCurrPatSetWinnersSpanTree()
-    spanningTree <- matrix(spanningTree, nrow=mapX)
+    spanningTree <- vectorToActMap(spanningTree, nrow=mapX)
 
     if(!is.null(targets)) {
       labels <- as.numeric(targets)
@@ -91,10 +95,12 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
   }
 
   #calculate component maps
-  compMaps <- snnsObject$somPredictComponentMaps()
-  compMaps <- apply(compMaps, 1, function(x) { return(list(matrix(x, nrow=mapX)))})
-  compMaps <- lapply(compMaps, function(x) {x[[1]]})
-  snns$componentMaps <- compMaps
+  compMat <- snnsObject$somPredictComponentMaps()
+    snns$componentMaps <- matrixToActMapList(compMat, nrow=mapX)
+  
+  #compMaps <- apply(compMaps, 1, function(x) { return(list(matrix(x, nrow=mapX)))})
+  #compMaps <- lapply(compMaps, function(x) {x[[1]]})
+  #snns$componentMaps <- compMaps
   
   #snns$type <- "som"
     

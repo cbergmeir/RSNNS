@@ -27,13 +27,13 @@ model <- som(inputs, mapX=16, mapY=16, maxit=500,  calculateActMaps=TRUE, calcul
 
 par(mfrow=c(3,3))
 
-for(i in 1:ncol(inputs)) image(model$componentMaps[[i]], col=topo.colors(12))
+for(i in 1:ncol(inputs)) plotActMap(model$componentMaps[[i]], col=rev(topo.colors(12)))
 
-image(model$map, col=rev(heat.colors(12)))
-image(log(model$map+1), col=rev(heat.colors(12)))
+plotActMap(model$map, col=rev(heat.colors(12)))
+plotActMap(log(model$map+1), col=rev(heat.colors(12)))
 persp(1:model$mapX, 1:model$mapY, log(model$map+1), theta = 30, phi = 30, expand = 0.5, col = "lightblue")
 
-image(model$labelledSpanningTree)
+plotActMap(model$labelledSpanningTree)
 
 model$componentMaps
 
@@ -41,3 +41,4 @@ model$map
 model$spanningTree
 model$labelledSpanningTree
 
+#model$snnsObject$saveNet("/home/bergmeir/koh_mat_test.net","koh_mat_test")

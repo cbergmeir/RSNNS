@@ -1,3 +1,14 @@
+SnnsR__resetRSNNS <- function(snnsObject)  {
+  
+  res <- list()
+  res$err <- 0
+  while (res$err == 0) {
+    res <- snnsObject$deletePatSet(0)
+  };
+  
+  snnsObject$deleteNet()
+  
+}
 
 SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
   
@@ -32,21 +43,6 @@ SnnsR__getAllHiddenUnits <- function(snnsObject) {
   return(snnsObject$getAllUnitsTType("UNIT_HIDDEN"))  
 }
 
-SnnsR__resetRSNNS <- function(snnsObject)  {
-  
-  err <- 0
-  while (err == 0) {
-    err <- snnsObject$deletePatSet(0)
-  };
-  
-  #SnnsKrui_deleteAllPatterns()
-  
-  snnsObject$deleteNet()
-  
-  
-}
-
-
 #' Set the activation function for all units of a certain TType.
 SnnsR__setTTypeUnitsActFunc <- function(snnsObject, ttype, act_func) {
   
@@ -56,4 +52,21 @@ SnnsR__setTTypeUnitsActFunc <- function(snnsObject, ttype, act_func) {
     snnsObject$setUnitActFunc(unit, act_func)
   }
 
+}
+
+SnnsR__getUnitsByName <- function(snnsObject, prefix) {
+  
+  res <- NULL
+  
+  nUnits <- snnsObject$getNoOfUnits()
+  
+  for(i in 1:nUnits)  {
+    if(i==1)  unit <- snnsObject$getFirstUnit()
+    else unit <- snnsObject$getNextUnit()
+    
+    name <- snnsObject$getUnitName(unit)
+    if(beginsWith(name,prefix)) res <- c(res, unit)
+  }
+  
+  return(res)
 }

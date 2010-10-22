@@ -8,8 +8,8 @@ data(snnsData)
 
 dataset <- snnsData$art1_letters.pat
 
-inputs <- dataset[,inputColumns(dataset)]
-outputs <- dataset[,outputColumns(dataset)]
+inputs <- dataset#[,inputColumns(dataset)]
+#outputs <- dataset[,outputColumns(dataset)]
 
 snnsObject <- SnnsRObjectFactory()
 
@@ -18,9 +18,10 @@ snnsObject$setLearnFunc('ART1')
 snnsObject$setUpdateFunc('ART1_Synchronous')
 snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
 
-snnsObject$art1_createNet(35,7,25,7)
+snnsObject$art1_createNet(35,7,26,7)
 
-patset <- snnsObject$createPatterns(inputs, outputs)
+#patset <- snnsObject$createPatterns(inputs, outputs)
+patset <- snnsObject$createPatterns(inputs)
 snnsObject$setCurrPatSet(patset$set_no)
 
 #snnsObject$error(-47)
@@ -31,22 +32,27 @@ snnsObject$initializeNet(c(1.0, 1.0))
 snnsObject$shufflePatterns(TRUE)
 snnsObject$DefTrainSubPat()
 
-snnsObject$saveNet(paste(basePath,"/art1_test_untrained.net",sep=""),"art1_test_untrained")
+#snnsObject$saveNet(paste(basePath,"/art1_test_untrained.net",sep=""),"art1_test_untrained")
 
 parameters <- c(0.9, 0, 0)
 maxit <- 1000
 
-error <- vector()
+#error <- vector()
 for(i in 1:maxit) {
   res <- snnsObject$learnAllPatterns(parameters)
   if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
-  error[i] <- res[[2]]
+  #error[i] <- res[[2]]
 }
 
-#error[1:500]
-#plot(error, type="l")
-#lines(error, type="l")
+#snnsObject$saveNet(paste(basePath,"/art1_test.net",sep=""),"art1_test")
+#snnsObject$saveNewPatterns(paste(basePath,"/art1_test.pat",sep=""), patset$set_no);
 
-snnsObject$saveNet(paste(basePath,"/art1_test.net",sep=""),"art1_test")
-snnsObject$saveNewPatterns(paste(basePath,"/art1_test.pat",sep=""), patset$set_no);
+#mapX <- 7
+outputs <- snnsObject$art1Predict()
+#outputMaps <- apply(outputMaps, 1, function(x) { return(list(matrix(x, nrow=mapX, byrow=TRUE)))})
+#outputMaps <- lapply(outputMaps, function(x) {x[[1]]})
+par(mfrow=c(3,3))
 
+outputMaps <- matrixToActMapList(outputs, nrow=7)
+
+for (i in 1:9) image(rot90(outputMaps[[i]]))

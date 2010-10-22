@@ -1055,9 +1055,10 @@ RcppExport SEXP SnnsCLib__learnAllPatterns(SEXP xp, SEXP parameterInArray) {
   }
 
   float *parameterOutArray;
-  int NoOfOutParams;
+  int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_learnAllPatterns(p1, n, &parameterOutArray, &NoOfOutParams);
+
 
   Rcpp::NumericVector out(NoOfOutParams);
   for (int i=0; i<NoOfOutParams; i++) {
@@ -1068,6 +1069,8 @@ RcppExport SEXP SnnsCLib__learnAllPatterns(SEXP xp, SEXP parameterInArray) {
     	Rcpp::Named( "err" ) = err, 
     	Rcpp::Named( "parameterOutArray" ) = out
     	) ;
+
+  //return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
 RcppExport SEXP SnnsCLib__testAllPatterns(SEXP xp, SEXP parameterInArray) {
@@ -1083,7 +1086,7 @@ RcppExport SEXP SnnsCLib__testAllPatterns(SEXP xp, SEXP parameterInArray) {
   }
 
   float *parameterOutArray;
-  int NoOfOutParams;
+  int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_testAllPatterns(p1, n, &parameterOutArray, &NoOfOutParams);
 
@@ -1126,7 +1129,7 @@ RcppExport SEXP SnnsCLib__learnSinglePattern(SEXP xp, SEXP pattern_no, SEXP para
   }
 
   float *parameterOutArray;
-  int NoOfOutParams;
+  int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_learnSinglePattern(p1, p2, n, &parameterOutArray, &NoOfOutParams);
 
@@ -1172,7 +1175,7 @@ RcppExport SEXP SnnsCLib__testSinglePattern(SEXP xp, SEXP pattern_no, SEXP param
   }
 
   float *parameterOutArray;
-  int NoOfOutParams;
+  int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_testSinglePattern(p1, p2, n, &parameterOutArray, &NoOfOutParams);
 
@@ -1224,7 +1227,7 @@ RcppExport SEXP SnnsCLib__learnAllPatternsFF(SEXP xp, SEXP parameterInArray) {
   }
 
   float *parameterOutArray;
-  int NoOfOutParams;
+  int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_learnAllPatternsFF(p1, n, &parameterOutArray, &NoOfOutParams);
 
@@ -1269,7 +1272,7 @@ RcppExport SEXP SnnsCLib__learnSinglePatternFF(SEXP xp, SEXP pattern_no, SEXP pa
   }
 
   float *parameterOutArray;
-  int NoOfOutParams;
+  int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_learnSinglePatternFF(p1, p2, n, &parameterOutArray, &NoOfOutParams);
 
@@ -2139,6 +2142,21 @@ RcppExport SEXP SnnsCLib__art1_createNet (SEXP xp, SEXP IUnits, SEXP IRow, SEXP 
   int p4 = Rcpp::as<int>(CRos);
 
   int err = snnsCLib->bn_art1_createNet(p1, p2, p3, p4);
+  return Rcpp::List::create( Rcpp::Named( "err" ) = err );
+}
+
+RcppExport SEXP SnnsCLib__art2_createNet (SEXP xp, SEXP f1Units, SEXP f1Rows, SEXP f2Units, SEXP f2Rows) {
+
+//krui_err bn_art2_createNet (int f1Units, int f1Rows, int f2Units, int f2Rows);
+
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(f1Units);
+  int p2 = Rcpp::as<int>(f1Rows);
+  int p3 = Rcpp::as<int>(f2Units);
+  int p4 = Rcpp::as<int>(f2Rows);
+
+  int err = snnsCLib->bn_art2_createNet(p1, p2, p3, p4);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
