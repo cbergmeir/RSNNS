@@ -28,6 +28,8 @@ mySnnsObject$isFunction("Act_Logistic", 2);
 
 mySnnsObject$getFuncParamInfo("Act_Logistic", 2);
 
+mySnnsObject$getFuncParamInfo("Act_Component", 2);
+
 mySnnsObject$getFuncParamInfo("Std_Backpropagation", 4);
 mySnnsObject$getFuncParamInfo("Quickprop", 4);
 

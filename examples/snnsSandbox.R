@@ -19,9 +19,18 @@
 #    else return(c(x, length(obj), 1))        
 #    })
 
+res <- 5
+
+is.list(res)
+is.null(res$err)
 
 library(RSNNS)
 
+snnsObject <- SnnsRObjectFactory()
+snnsObject$setCurrentUnit(500)
+
+snnsObject$error(-2)
+    
 setClass( "SnnsCLib", representation( pointer = "externalptr" ) )
 
 SnnsCLib_method <- function(name){

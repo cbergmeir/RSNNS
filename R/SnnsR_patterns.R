@@ -125,6 +125,37 @@ SnnsR__somPredictCurrPatSet <- function(snnsObject)  {
   return(predictions)
 } 
 
+#' Get the som output for every pattern in the current pattern set.
+#' 
+#' @param snnsObject \code{\linkS4class{SnnsR}} object
+#' @export
+#' @rdname SnnsR-methods
+SnnsR__somPredictComponentMaps <- function(snnsObject)  {
+  
+  snnsObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Component")
+  
+  nInputs <- snnsObject$getNoOfInputUnits()
+  units <- snnsObject$getAllHiddenUnits()
+  
+  predictions <- matrix(nrow= nInputs, ncol=length(units))
+  
+  for(input in 1:nInputs)  {
+    
+    snnsObject$kohonen_SetExtraParameter(input)
+    snnsObject$updateNet(c(0.0, 0.0, 1.0))
+    
+    for(i in 1:length(units)) {
+      predictions[input,i] <- snnsObject$getUnitOutput(units[i])
+      #predictions[input,i] <- snnsObject$getUnitValueA(units[i])
+    }
+    
+  }
+  
+  snnsObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Euclid")
+  
+  return(predictions)
+} 
+
 #' Get the som winners for every pattern in the current pattern set.
 #' 
 #' @param snnsObject \code{\linkS4class{SnnsR}} object

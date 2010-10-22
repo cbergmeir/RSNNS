@@ -90,6 +90,12 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
     snns$spanningTree <- NULL
   }
 
+  #calculate component maps
+  compMaps <- snnsObject$somPredictComponentMaps()
+  compMaps <- apply(compMaps, 1, function(x) { return(list(matrix(x, nrow=mapX)))})
+  compMaps <- lapply(compMaps, function(x) {x[[1]]})
+  snns$componentMaps <- compMaps
+  
   #snns$type <- "som"
     
   snns$snnsObject <- snnsObject

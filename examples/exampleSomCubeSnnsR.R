@@ -26,11 +26,11 @@ inputs <- apply(iris[,1:4],2, function(x) {(x - min(x)) / (max(x) - min(x))})
 
 #mapX <- 16
 #mapY <- 16
-#mapX <- 8
-#mapY <- 8
+mapX <- 10
+mapY <- 10
 
-mapX <- 32
-mapY <- 32
+#mapX <- 32
+#mapY <- 32
 #mapX <- 64
 #mapY <- 64
 
@@ -72,8 +72,25 @@ results <- snnsObject$somPredictCurrPatSet()
 maps <- apply(results, 1, function(x) { return(list(matrix(x, nrow=mapX)))})
 maps <- lapply(maps, function(x) {x[[1]]})
 
-par(mfrow=c(2,3))
-#image(maps[[1]][[1]])
+compMaps <- snnsObject$somPredictComponentMaps()
+compMaps <- apply(compMaps, 1, function(x) { return(list(matrix(x, nrow=mapX)))})
+compMaps <- lapply(compMaps, function(x) {x[[1]]})
+
+compMaps
+
+par(mfrow=c(3,3))
+#image(maps[[5]])
+
+for (i in 1:3) image(compMaps[[i]], col=topo.colors(12))
+
+#length(maps)
+#for (i in c(20, 30, 40, 50, 60, 70, 100, 120, 140)) image(maps[[i]])
+#for (i in c(20, 30, 40, 50, 60, 70, 100, 120, 140)) image(mapsVA[[i]])
+
+par(mfrow=c(3,3))
+#for (i in 1:8) image(maps[[i]])
+#for (i in 1:8) image(mapsVA[[i]])
+
 #persp(1:mapX, 1:mapY, maps[[1]][[1]], theta = 30, phi = 30, expand = 0.5, col = "lightblue")
 #
 ##par(mfrow=c(3,3))
@@ -87,6 +104,7 @@ persp(1:mapX, 1:mapY, log(winners+1), theta = 30, phi = 30, expand = 0.5, col = 
 
 image(log(winners+1), col=rev(heat.colors(12)))
 image(log(winners+1), col=topo.colors(12))
+
 
 
 
