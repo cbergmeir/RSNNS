@@ -277,3 +277,10 @@ SnnsR__art2Predict <- function(snnsObject, updateFuncParams=c(0.0))  {
   predictions
   
 } 
+
+SnnsR__assozPredict <- function(snnsObject, updateFuncParams=c(50.0))  {
+  
+  units <- snnsObject$getAllHiddenUnits()
+  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=updateFuncParams)
+  predictions
+} 

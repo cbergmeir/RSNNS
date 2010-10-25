@@ -2160,6 +2160,25 @@ RcppExport SEXP SnnsCLib__art2_createNet (SEXP xp, SEXP f1Units, SEXP f1Rows, SE
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+RcppExport SEXP SnnsCLib__artmap_createNet (SEXP xp, SEXP f1aUnits, SEXP f1aRows, SEXP f2aUnits, SEXP f2aRows, SEXP f1bUnits, SEXP f1bRows, SEXP f2bUnits, SEXP f2bRows) {
+
+//krui_err bn_artmap_createNet (int f1aUnits, int f1aRows, int f2aUnits, int f2aRows, int f1bUnits, int f1bRows, int f2bUnits, int f2bRows);
+
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(f1aUnits);
+  int p2 = Rcpp::as<int>(f1aRows);
+  int p3 = Rcpp::as<int>(f2aUnits);
+  int p4 = Rcpp::as<int>(f2aRows);
+  int p5 = Rcpp::as<int>(f1bUnits);
+  int p6 = Rcpp::as<int>(f1bRows);
+  int p7 = Rcpp::as<int>(f2bUnits);
+  int p8 = Rcpp::as<int>(f2bRows);
+
+  int err = snnsCLib->bn_artmap_createNet(p1, p2, p3, p4, p5, p6, p7, p8);
+  return Rcpp::List::create( Rcpp::Named( "err" ) = err );
+}
+
 RcppExport SEXP SnnsCLib__kohonen_createNet (SEXP xp, SEXP X, SEXP Y, SEXP IUnits, SEXP HUnits) {
 
 //void bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits);
@@ -2171,9 +2190,21 @@ RcppExport SEXP SnnsCLib__kohonen_createNet (SEXP xp, SEXP X, SEXP Y, SEXP IUnit
   int p3 = Rcpp::as<int>(IUnits);
   int p4 = Rcpp::as<int>(HUnits);
 
-  snnsCLib->bn_kohonen_createNet(p1, p2, p3, p4);
+  int err = snnsCLib->bn_kohonen_createNet(p1, p2, p3, p4);
+  return Rcpp::List::create( Rcpp::Named( "err" ) = err );
+}
 
-  return R_NilValue;
+RcppExport SEXP SnnsCLib__assoz_createNet (SEXP xp, SEXP X, SEXP Y) {
+
+//bn_assoz_createNet(int X, int Y);
+
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(X);
+  int p2 = Rcpp::as<int>(Y);
+
+  int err = snnsCLib->bn_assoz_createNet(p1, p2);
+  return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
 RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP io_type)  {

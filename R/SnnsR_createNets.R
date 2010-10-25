@@ -33,7 +33,7 @@ SnnsR__createFullyConnectedFeedForwardNet <- function(snnsObject, unitDefaults =
 #' \dontrun{mlp <- SnnsR__createNet(c(8,5,5,2), TRUE)}
 SnnsR__createNet <- function(snnsObject, unitsPerLayer, linOut = FALSE, fullyConnectedFeedForward = TRUE) {
   
-  if(length(unitsPerLayer) < 2) error("At least 2 layers have to be specified")
+  if(length(unitsPerLayer) < 2) stop("At least 2 layers have to be specified")
   
   layers <- list()
   currLayer <- 1

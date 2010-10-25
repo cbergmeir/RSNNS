@@ -52,8 +52,8 @@ static int X,Y,IUnits,HUnits,OUnits;
 //static void create_net_PROC (void);
 
 /* bn_create_net */
-void errChk(krui_err);
-void bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits);
+//void errChk(krui_err);
+krui_err bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits);
 
 /* end  private definition section */
 #endif

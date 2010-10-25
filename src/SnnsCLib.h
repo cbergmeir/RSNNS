@@ -291,6 +291,8 @@ public:
 #include "bn_art1.ph"
 #include "bn_art2.ph"
 #include "bn_kohonen.ph"
+#include "bn_artmap.ph"
+#include "bn_assoz.ph"
 
 #include "kr_newpattern.ph"
 
