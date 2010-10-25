@@ -1,64 +1,52 @@
 # @include SnnsRObjectFactory.R
 #NULL
 
-#' Create a pattern
+#' Create a pattern set
 #' @param snnsObject \code{\linkS4class{SnnsR}} object
-#' @param inputValues The input values
-#' @param targetValues The target values
+#' @param inputs The input values
+#' @param targets The target values
 #' @export
 #' @rdname SnnsR-methods
-SnnsR__createPatterns <- function(snnsObject, inputValues, targetValues) {
+SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
 
-  #setMethod("createPatterns", 
-   #   signature = signature(object = "SnnsR", inputValues = "numeric", targetValues = "numeric"),
-    #  function(object, inputValues, targetValues) {
-        
-  #snnsObject <- object
+  iUnits <- snnsObject$getAllInputUnits()
+  oUnits <- snnsObject$getAllOutputUnits()
   
-  inputs <- snnsObject$getAllInputUnits()
-  outputs <- snnsObject$getAllOutputUnits()
-  
-  x <- as.matrix(inputValues)
+  x <- as.matrix(inputs)
   nInputs <- ncol(x)
-  if (nInputs != length(inputs)) 
-    stop(paste("number of input data columns ", nInputs ," does not match number of input neurons ", length(inputs) ,sep=""))
+  if (nInputs != length(iUnits)) 
+    stop(paste("number of input data columns ", nInputs ," does not match number of input neurons ", length(iUnits) ,sep=""))
   
-  if(!missing(targetValues)){
-    y <- as.matrix(targetValues)
+  if(!missing(targets)){
+    y <- as.matrix(targets)
     nOutputs <- ncol(y)
-    if (nOutputs != length(outputs)) 
-      stop(paste("number of output data columns ", nOutputs ," does not match number of output neurons ", length(outputs) ,sep=""))
+    if (nOutputs != length(oUnits)) 
+      stop(paste("number of output data columns ", nOutputs ," does not match number of output neurons ", length(oUnits) ,sep=""))
     
     if(nrow(x) != nrow(y)) 
       stop(paste("input value rows ",nrow(x)," not same as output value rows ",nrow(y),sep=""))
   }
   
-  #snnsObject$deleteAllPatterns()
-  
-  patset <- snnsObject$allocNewPatternSet()
-  #print(snnsObject$getNoOfPatterns())
-  #print(patset)
-  #snnsObject$setCurrPatSet(patset)
+  patSet <- snnsObject$allocNewPatternSet()
+
 
   
   for(i in 1:nrow(x)) {
     for(j in 1:nInputs)  {
-      snnsObject$setUnitActivation(inputs[j], x[i,j]);
+      snnsObject$setUnitActivation(iUnits[j], x[i,j]);
     }
     
-    if(!missing(targetValues) && length(targetValues) != 0) {  
+    if(!missing(targets) && length(targets) != 0) {  
       for(j in 1:nOutputs)  {
-        snnsObject$setUnitActivation(outputs[j], y[i,j]);
+        snnsObject$setUnitActivation(oUnits[j], y[i,j]);
       }
     }
     snnsObject$newPattern();
   }
 
-  #print("-----------------")
-  #print(nrow(x))
-  #print(snnsObject$getNoOfPatterns())
+  snnsObject$setCurrPatSet(patSet$set_no)
   
-  return(patset)
+  return(patSet)
 }
 
 #' Predict values with a trained net.
@@ -68,7 +56,7 @@ SnnsR__createPatterns <- function(snnsObject, inputValues, targetValues) {
 #' @param snnsObject \code{\linkS4class{SnnsR}} object
 #' @export
 #' @rdname SnnsR-methods
-SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=0)  {
+SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=c(0.0))  {
   
   #units <- snnsObject$getAllOutputUnits()
   
@@ -93,6 +81,38 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
   return(predictions)
 } 
 
+SnnsR__whereAreResults <- function(snnsObject, netType="reg_class") {
+  
+  units <- NULL
+  #netType <- "art1"
+  
+  if(netType == "art1") {  
+    # in the ART1 network, the units that represent the output patterns are named cmp1, cmp2, ...
+    units <- snnsObject$getUnitsByName("cmp")
+    
+  } else if(netType == "art2") {
+    
+    unitsX <- snnsObject$getUnitsByName("x")
+    unitsQ <- snnsObject$getUnitsByName("q")
+    units <- c(unitsX, unitsQ) 
+    
+  } else if(netType=="assoz") {
+    
+    units <- snnsObject$getAllHiddenUnits()
+    
+  } else if(netType=="som") {
+    
+    units <- snnsObject$getAllHiddenUnits()
+    
+  } else { #if(netType=="reg_class") {
+    
+    units <- snnsObject$getAllOutputUnits()
+    
+  } #else if(netType=="assoz") {  }
+  
+  units
+}
+
 #' Predict values with a trained net.
 #' 
 #' This function has to be used embedded in a step of loading and afterwards 
@@ -102,26 +122,42 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
 #' @param snnsObject \code{\linkS4class{SnnsR}} object
 #' @export
 #' @rdname SnnsR-methods
-SnnsR__predictValuesCurrPatSet <- function(snnsObject)  {
+SnnsR__predictCurrPatSet <- function(snnsObject, netType="reg_class", updateFuncParams=c(0.0))  {
   
-  units <- snnsObject$getAllOutputUnits()
-  predictions <- snnsObject$genericPredictCurrPatSet(units)
+  units <- snnsObject$whereAreResults(netType)
+  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams)
   predictions
-} 
+}
+
+##' Predict values with a trained net.
+##' 
+##' This function has to be used embedded in a step of loading and afterwards 
+##' removing the patterns into the snns. As the snns only supports 2 pattern sets
+##' in parallel, this has to be done with caution..
+##' 
+##' @param snnsObject \code{\linkS4class{SnnsR}} object
+##' @export
+##' @rdname SnnsR-methods
+#SnnsR__predictValuesCurrPatSet <- function(snnsObject)  {
+#  
+#  units <- snnsObject$getAllOutputUnits()
+#  predictions <- snnsObject$genericPredictCurrPatSet(units)
+#  predictions
+#} 
 
 
-#' Get the som output for every pattern in the current pattern set.
-#' 
-#' @param snnsObject \code{\linkS4class{SnnsR}} object
-#' @export
-#' @rdname SnnsR-methods
-SnnsR__somPredictCurrPatSet <- function(snnsObject)  {
-  
-  units <- snnsObject$getAllHiddenUnits()
-  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=c(0.0, 0.0, 1.0))
-  predictions
-
-} 
+##' Get the som output for every pattern in the current pattern set.
+##' 
+##' @param snnsObject \code{\linkS4class{SnnsR}} object
+##' @export
+##' @rdname SnnsR-methods
+#SnnsR__somPredictCurrPatSet <- function(snnsObject)  {
+#  
+#  units <- snnsObject$getAllHiddenUnits()
+#  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=c(0.0, 0.0, 1.0))
+#  predictions
+#
+#} 
 
 #' Get the som output for every pattern in the current pattern set.
 #' 
@@ -240,47 +276,49 @@ SnnsR__somPredictCurrPatSetWinnersSpanTree <- function(snnsObject)  {
 
 
 
-#' Get the art1 output for every pattern in the current pattern set.
-#' 
-#' @param snnsObject \code{\linkS4class{SnnsR}} object
-#' @export
-#' @rdname SnnsR-methods
-SnnsR__art1Predict <- function(snnsObject)  {
-  
-  units <- snnsObject$getUnitsByName("cmp")
+##' Get the art1 output for every pattern in the current pattern set.
+##' 
+##' @param snnsObject \code{\linkS4class{SnnsR}} object
+##' @export
+##' @rdname SnnsR-methods
+#SnnsR__art1Predict <- function(snnsObject, updateFuncParams=c(0.0))  {
+#  
+#  units <- snnsObject$getUnitsByName("cmp")
+#
+#  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=updateFuncParams)
+#  predictions
+#  
+#} 
 
-  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=c(0.0))
-  predictions
-  
-} 
 
+##' Get the art2 output for every pattern in the current pattern set.
+##' 
+##' @param snnsObject \code{\linkS4class{SnnsR}} object
+##' @export
+##' @rdname SnnsR-methods
+#SnnsR__art2Predict <- function(snnsObject, updateFuncParams=c(0.0))  {
+#  
+#  unitsX <- snnsObject$getUnitsByName("x")
+#  unitsQ <- snnsObject$getUnitsByName("q")
+#  units <- c(unitsX, unitsQ)
+#  
+#  #unitsR1 <- snnsObject$getUnitsByName("r1")
+#  #unitsR2 <- snnsObject$getUnitsByName("r2")
+#  #unitsR3 <- snnsObject$getUnitsByName("r3")  
+#  #units <- c(unitsR1, unitsR2, unitsR3)  
+#
+#  #units <- snnsObject$getUnitsByName("rec")
+#  
+#  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=updateFuncParams)
+#  predictions
+#  
+#} 
+#
+#SnnsR__assozPredict <- function(snnsObject, updateFuncParams=c(50.0))  {
+#  
+#  units <- snnsObject$getAllHiddenUnits()
+#  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=updateFuncParams)
+#  predictions
+#} 
 
-#' Get the art1 output for every pattern in the current pattern set.
-#' 
-#' @param snnsObject \code{\linkS4class{SnnsR}} object
-#' @export
-#' @rdname SnnsR-methods
-SnnsR__art2Predict <- function(snnsObject, updateFuncParams=c(0.0))  {
-  
-  unitsX <- snnsObject$getUnitsByName("x")
-  unitsQ <- snnsObject$getUnitsByName("q")
-  units <- c(unitsX, unitsQ)
-  
-  #unitsR1 <- snnsObject$getUnitsByName("r1")
-  #unitsR2 <- snnsObject$getUnitsByName("r2")
-  #unitsR3 <- snnsObject$getUnitsByName("r3")  
-  #units <- c(unitsR1, unitsR2, unitsR3)  
-
-  #units <- snnsObject$getUnitsByName("rec")
-  
-  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=updateFuncParams)
-  predictions
-  
-} 
-
-SnnsR__assozPredict <- function(snnsObject, updateFuncParams=c(50.0))  {
-  
-  units <- snnsObject$getAllHiddenUnits()
-  predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams=updateFuncParams)
-  predictions
-} 
+ 

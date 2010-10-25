@@ -27,8 +27,7 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
     
   snnsObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Euclid")
   
-  patset <- snnsObject$createPatterns(x)
-  snnsObject$setCurrPatSet(patset$set_no)
+  patSet <- snnsObject$createPatSet(x)
   
   snnsObject$initializeNet(c(1.0,  -1.0))
   snnsObject$shufflePatterns(TRUE)
@@ -41,7 +40,6 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
     
   for(i in 1:maxit) {
     res <- snnsObject$learnAllPatterns(parameters)
-    if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
   }
   
   snns <- NULL
@@ -95,8 +93,10 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
   }
 
   #calculate component maps
-  compMat <- snnsObject$somPredictComponentMaps()
-    snns$componentMaps <- matrixToActMapList(compMat, nrow=mapX)
+  compMat <- snnsObject$somPredictComponentMaps()  
+  snns$componentMaps <- matrixToActMapList(compMat, nrow=mapX)
+  
+  snnsObject$deletePatSet(patSet$set_no)
   
   #compMaps <- apply(compMaps, 1, function(x) { return(list(matrix(x, nrow=mapX)))})
   #compMaps <- lapply(compMaps, function(x) {x[[1]]})

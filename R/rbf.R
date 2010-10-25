@@ -33,7 +33,7 @@ rbf.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression"
   snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) , "RBF_Weights")
   result <- snnsObject$train(x, y, learnFunc="RadialBasisLearning", learnFuncParams=c(0.4, 0.2, 5), maxit=maxit, shufflePatterns=TRUE, inputsTest=inputsTest, targetsTest=targetsTest)
 
-  snns <- rsnnsObjectFactory(nInputs, nOutputs, type, snnsObject, "rbfDDA", result)
+  snns <- reg_classObjectFactory(nInputs, nOutputs, type, snnsObject, "rbfDDA", result)
     
   snns  
 }

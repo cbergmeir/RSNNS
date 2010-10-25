@@ -1,4 +1,4 @@
-#' Check the input of an rsnns class for eventual problems.
+#' Check the input of a reg_class class for eventual problems.
 #'
 #' @author Christoph
 checkInput <- function(x,y) {
@@ -105,7 +105,7 @@ plotROC <-function(T,D){
 #' @author Christoph
 plotRegressionError <- function(targets, fits, ...)
 {
-  #if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  #if(!inherits(object, "reg_class")) stop("not a legitimate reg_class model")
   
   plot(targets, fits, xlim=c(0,1), ylim=c(0,1), ...)
   

@@ -34,7 +34,7 @@ rbfDDA.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regressi
   snnsObject$createNet(c(nInputs,nOutputs), linOut = FALSE, fullyConnectedFeedForward = FALSE)
   result <- snnsObject$train(x, y, learnFunc="RBF-DDA", learnFuncParams=c(0.4, 0.2, 5), maxit=maxit, shufflePatterns=TRUE, inputsTest=inputsTest, targetsTest=targetsTest)
 
-  snns <- rsnnsObjectFactory(nInputs, nOutputs, type, snnsObject, "rbfDDA", result)
+  snns <- reg_classObjectFactory(nInputs, nOutputs, type, snnsObject, "rbfDDA", result)
     
   snns  
 }

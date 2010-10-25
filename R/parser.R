@@ -38,34 +38,28 @@ readResFile <- function(filename)  {
   
 }
 
-savePatFile <- function(inputValues, targetValues, filename)  {
+savePatFile <- function(inputs, targets, filename)  {
 
   snnsObject <- SnnsRObjectFactory()
- #SnnsR_resetRSNNS()
 
-  snnsObject$createFullyConnectedFeedForwardNet(unitDefaults = c(0,0,1,0,1,"Act_Logistic","Out_Identity"), 
-      FALSE, updateFunc="Topological_Order", 
-      unitsPerLayer=c(ncol(as.matrix(inputValues)),1,ncol(as.matrix(targetValues))))
+  snnsObject$createFullyConnectedFeedForwardNet(unitsPerLayer=c(ncol(as.matrix(inputs)),ncol(as.matrix(targets))))
   
-  patset <- snnsObject$createPatterns(inputValues, targetValues)
-  snnsObject$saveNewPatterns(filename, patset$set_no)
+  patSet <- snnsObject$createPatSet(inputs, targets)
+  snnsObject$saveNewPatterns(filename, patSet$set_no)
   
   rm(snnsObject)
- #SnnsR_resetRSNNS()
   
 }
 
 readPatFile <- function(filename)  {
     
   snnsObject <- SnnsRObjectFactory()
-  #SnnsR_resetRSNNS()
   
   snnsObject$loadNewPatterns(filename)
   
   patterns <- snnsObject$extractPatterns()
   
   rm(snnsObject)
-  #SnnsR_resetRSNNS()
   
   return(patterns)
   
@@ -85,68 +79,3 @@ outputColumns <- function(table)  {
 
 }
 
-#readPatFile <- function(filename)  {
-#  
-#  #examplesPath <- ("/home/bergmeir/Download/SNNSv4.3/examples")
-#  #filename <- paste(examplesPath,"/eight_016.pat",sep="")
-#  
-#  allData <- scan(filename, what="list", multi.line=TRUE)
-#  
-#  inTable <- NULL
-#  outTable <- NULL
-#  
-#  mode <- "omitHeader"
-#  lineName <- NULL
-#  line <- NULL
-#
-#  i <- 0
-#  while (i < length(allData)) {
-#    
-#    i <- i + 1
-#    
-#    if(mode == "omitHeader")
-#    {
-#      firstSymbol <- substr(allData[i],1,1)
-#      if(!is.na(firstSymbol) && firstSymbol == "#")  {
-#        lineName <- paste(allData[i+1], allData[i+2], allData[i+3], sep=" ")
-#        i <- i + 3
-#        mode <- "parseData"
-#      }
-#    } else if(mode == "parseData")  {
-#      firstSymbol <- substr(allData[i],1,1)
-#
-#      if(!is.na(firstSymbol) && firstSymbol == "#")  {
-#        
-#        if(allData[i+1] == "Output") {
-#          inTable <- rbind(inTable, line)  
-#          rownames(inTable)[nrow(inTable)] <- lineName
-#        } else  {
-#          outTable <- rbind(outTable, line)
-#          rownames(outTable)[nrow(outTable)] <- lineName
-#        }
-#
-#        lineName <- paste(allData[i+1], allData[i+2], allData[i+3], sep=" ")
-#        i <- i + 3
-#        line <- NULL
-#      } else  {
-#        line <- c(line, as.numeric(allData[i]))
-#      }  
-#      
-#      
-#    }
-#  } 
-#  outTable <- rbind(outTable, line)
-#  rownames(outTable)[nrow(outTable)] <- lineName
-#  
-#  colnames(inTable) <- paste("in", 1:ncol(inTable), sep="") 
-#  colnames(outTable) <- paste("out", 1:ncol(outTable), sep="")
-#  
-#  #inTable
-#  #outTable
-#  
-#  table <- cbind(inTable, outTable)
-#  rownames(table) <- paste("pattern", 1:nrow(table), sep="")
-#  #table
-#  return(table)
-#
-#}

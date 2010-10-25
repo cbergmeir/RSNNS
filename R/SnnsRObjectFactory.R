@@ -15,7 +15,7 @@ setClass( "SnnsR", representation( snnsCLibPointer = "externalptr" ) )
 #' if no SnnsR__ method with the name is present, then the according SnnsCLib__ 
 #' method is called
 #'
-#' @export
+# @export
 #' @author Christoph
 setMethod( "$", "SnnsR", function(x, name ){
       function(...) {
@@ -26,7 +26,7 @@ setMethod( "$", "SnnsR", function(x, name ){
             ifnotfound = list(FALSE), inherits=TRUE)
         
         #very usefull for debugging..everytime an SnnsR or SnnsCLib funtion is called, its name is printed
-        #print(name)
+        print(name)
         
         if(is.function(myFunc[[1]])) return(myFunc[[1]](x, ... ))
         else {

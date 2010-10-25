@@ -31,7 +31,7 @@ mlp.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression"
 
   result <- snnsObject$train(x, y, learnFunc="Quickprop", learnFuncParams=c(decay, 0, 0, 0), maxit=maxit, shufflePatterns=TRUE, inputsTest=inputsTest, targetsTest=targetsTest)
 
-  snns <- rsnnsObjectFactory(nInputs, nOutputs, type, snnsObject, "mlp", result)
+  snns <- reg_classObjectFactory(nInputs, nOutputs, type, snnsObject, "mlp", result)
     
   snns  
 }
