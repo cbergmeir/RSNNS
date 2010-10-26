@@ -2,39 +2,57 @@
 #'
 #' @export
 #' @author Christoph
-rbf <- function(x, ...) UseMethod("rbfDDA")
+rbf <- function(x, ...) UseMethod("rbf")
 
 #' Create and train an rbf (not working so far).
 #' 
 #' @export
 #' @author Christoph
-rbf.default <- function(x, y, size=c(5), decay=0.2, maxit=100, type="regression", inputsTest=NULL, targetsTest=NULL) {
+rbf.default <- function(x, y, size=c(5), maxit=100, 
+    initFunc="RBF_Weights", initFuncParams=c(0.0,  1.0,  0.0,  0.02,  0.0), 
+    learnFunc="RadialBasisLearning", learnFuncParams=c(0.01, 0, 0.01, 0.1, 0.8), 
+    updateFunc="Topological_Order", updateFuncParams=c(0.0),
+    shufflePatterns=TRUE, linOut=FALSE,
+    inputsTest=NULL, targetsTest=NULL) {
+  
   
   x <- as.matrix(x)
   y <- as.matrix(y)
   
   checkInput(x,y)
   
-  linOut <- FALSE
-  if(type=="regression") linOut <- TRUE
-  
-  snnsObject <- SnnsRObjectFactory()
-  
   nInputs <- dim(x)[2L]
   nOutputs <- dim(y)[2L]
- 
-  #In order to get it working, the learnFuncParams have to be changes (currently, these are the ones of rbf-dda),
+  
+  snns <- rsnnsObjectFactory(subclass=c("rbf", "reg_class"), nInputs=nInputs, maxit=maxit, 
+      initFunc=initFunc, initFuncParams=initFuncParams, 
+      learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
+      updateFunc=updateFunc, 
+      updateFuncParams=updateFuncParams,
+      shufflePatterns=shufflePatterns, computeIterativeError=TRUE)
+  
+  snns$archParams <- list(size=size)
+  
+  #In order to get it working, maybe the learnFuncParams have to be changed,
   #Act_Funcs of input and output neurons have to be changed,
   #and maybe some other things. See http://www.csc.kth.se/~orre/snns-manual/UserManual/node191.html
   
-  snnsObject$setUpdateFunc('Topological_Order')
-  snnsObject$setUnitDefaults(0,0,1,0,1,'Act_RBF_Gaussian','Out_Identity')
-  snnsObject$createNet(c(nInputs,size,nOutputs), linOut = FALSE, fullyConnectedFeedForward = TRUE)
-  snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) , "RBF_Weights")
-  result <- snnsObject$train(x, y, learnFunc="RadialBasisLearning", learnFuncParams=c(0.4, 0.2, 5), maxit=maxit, shufflePatterns=TRUE, inputsTest=inputsTest, targetsTest=targetsTest)
-
-  snns <- reg_classObjectFactory(nInputs, nOutputs, type, snnsObject, "rbfDDA", result)
-    
-  snns  
+  snns$snnsObject$setUnitDefaults(0,0,1,0,1,'Act_Logistic','Out_Identity')
+  snns$snnsObject$createNet(c(nInputs,size,nOutputs), fullyConnectedFeedForward = TRUE)
+  
+  if(linOut) {
+    outputActFunc <- "Act_Identity"
+  } else {
+    outputActFunc <- "Act_Logistic"
+  }
+  
+  snns$snnsObject$setTTypeUnitsActFunc("UNIT_INPUT", "Act_Identity")
+  snns$snnsObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_RBF_Gaussian")
+  snns$snnsObject$setTTypeUnitsActFunc("UNIT_OUTPUT", outputActFunc)
+  
+  
+  snns <- train.rsnns(snns, inputsTrain=x, targetsTrain=y, inputsTest=inputsTest, targetsTest=targetsTest)
+  
+  snns
 }
 

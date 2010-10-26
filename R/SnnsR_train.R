@@ -77,7 +77,7 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
       snnsObject$DefTrainSubPat()
       
       res <- snnsObject$testAllPatterns(expandedLearnFuncParams)
-      if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
+      #if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
       errorTest[i] <- res[[2]]
       
       snnsObject$setCurrPatSet(patSetTrain$set_no)
@@ -104,7 +104,7 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
     result$IterativeTestError <- NULL
     result$testValues <- NULL
   }
-
+  
   #snns auto-reorganizes the pattern set numbers, so the first generated pattern set
   #has to be deleted at last
   snnsObject$deletePatSet(patSetTrain$set_no)

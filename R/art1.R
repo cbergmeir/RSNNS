@@ -18,25 +18,22 @@ art1.default <- function(x, dimX, dimY, nClusters=nrow(x), maxit=100,
 
   nInputs <- dim(x)[2L]
   
-  snnsObject <- SnnsRObjectFactory()
- 
-  snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
-  snnsObject$art1_createNet(dimX*dimY,dimX,nClusters,dimX)
+  snns <- rsnnsObjectFactory(subclass=c("art1", "association"), nInputs=nInputs, maxit=maxit, 
+      initFunc=initFunc, initFuncParams=initFuncParams, 
+      learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
+      updateFunc=updateFunc, 
+      updateFuncParams=updateFuncParams,
+      shufflePatterns=shufflePatterns, computeIterativeError=FALSE)
+
+  snns$archParams <- list(nClusters=nClusters, dimX=dimX, dimY=dimY)
   
-  trainResult <- snnsObject$train(inputsTrain=x, targetsTrain=NULL, initFunc=initFunc, initFuncParams=initFuncParams, 
-      learnFunc=learnFunc, learnFuncParams=learnFuncParams, updateFunc=updateFunc, 
-      updateFuncParams=updateFuncParams, outputMethod="art1", maxit=maxit, 
-      shufflePatterns=shufflePatterns, computeError=FALSE)
+  #snns$snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
+  snns$snnsObject$art1_createNet(dimX*dimY,dimX,nClusters,dimX)
  
-  snns <- NULL
-  snns$nInputs <- nInputs
-  snns$nClusters <- nClusters
-  snns$dimX <- dimX
-  snns$dimY <- dimY
-  snns$predictions <- matrixToActMapList(trainResult$fitValues, nrow=dimX)
-  snns$snnsObject <- snnsObject
+  snns <- train.rsnns(snns, inputsTrain=x)
   
-  class(snns) <- c("art1", "association")
+  snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
+  
   snns
 }
 

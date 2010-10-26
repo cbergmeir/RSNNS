@@ -15,25 +15,31 @@ irisTargets <- decodeClassLabels(iris[,5])
 
 iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
 
+#model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFuncParams=c(0.1), 
+#    maxit=200, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
 
-mySlp <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, decay=0.1, type="classification", maxit=200, iris$inputsTest, iris$targetsTest)
-#mySlp <- rbfDDA(iris$inputsTrain, iris$targetsTrain, size=5, decay=0.1, type="classification", maxit=1000)#, iris$inputsTest, iris$targetsTest)
-#mySlp <- elman(irisTrainValues, irisTrainTargets, size=5, decay=0.1, maxit=1000)
+model <- rbfDDA(iris$inputsTrain, iris$targetsTrain, maxit=1000)#, iris$inputsTest, iris$targetsTest)
+#model <- elman(iris$inputsTrain, iris$targetsTrain, size=5, learnFuncParams=c(0.1), maxit=100, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
+
+#model <- rbf(iris$inputsTrain, iris$targetsTrain, size=20, maxit=200, initFuncParams=c(0.0,  1.0,  0.0,  0.02,  0.0), learnFuncParams=c(0.01, 0, 0.01, 0.1, 0.8))#, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
+
+#model <- rbf(iris$inputsTrain, iris$targetsTrain, size=20, maxit=50, initFunc="RBF_Weights_Kohonen",
+#    initFuncParams=c(50,  0.4,  0), learnFuncParams=c(0.01, 0, 0.01, 0.1, 0.8))
 
 
-mySlp
-summary(mySlp)
+model
+#summary(model)
 par(mfrow=c(2,2))
 
-plotIterativeError(mySlp)
+plotIterativeError(model)
 
-predictions <- predict(mySlp,iris$inputsTest)
+predictions <- predict(model,iris$inputsTest)
 
 #plotRegressionError(predictions[,2], iris$targetsTest[,2])
 
-confusionMatrix(iris$targetsTrain,fitted.values(mySlp))
+confusionMatrix(iris$targetsTrain,fitted.values(model))
 confusionMatrix(iris$targetsTest,predictions)
 
-plotROC(fitted.values(mySlp)[,2], iris$targetsTrain[,2])
+plotROC(fitted.values(model)[,2], iris$targetsTrain[,2])
 plotROC(predictions[,2], iris$targetsTest[,2])
 

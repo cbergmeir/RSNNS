@@ -25,6 +25,7 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
   
   snnsObject$kohonen_createNet(mapX,mapY,nInputs,mapX*mapY)
     
+  snnsObject$setTTypeUnitsActFunc("UNIT_INPUT", "Act_Identity")
   snnsObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Euclid")
   
   patSet <- snnsObject$createPatSet(x)
@@ -60,7 +61,7 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
 
   if(calculateActMaps) {
     
-    actMat <- snnsObject$somPredictCurrPatSet()
+    actMat <- snnsObject$predictCurrPatSet("som", c(0.0, 0.0, 1.0))
     snns$actMaps <- matrixToActMapList(actMat, nrow=mapX)
     
   } else {
@@ -106,7 +107,7 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
     
   snns$snnsObject <- snnsObject
   
-  class(snns) <- c("som", "clustering")
+  class(snns) <- c("som", "clustering", "rsnns")
   snns
 }
 

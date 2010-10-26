@@ -26,7 +26,7 @@ setMethod( "$", "SnnsR", function(x, name ){
             ifnotfound = list(FALSE), inherits=TRUE)
         
         #very usefull for debugging..everytime an SnnsR or SnnsCLib funtion is called, its name is printed
-        print(name)
+        #print(name)
         
         if(is.function(myFunc[[1]])) return(myFunc[[1]](x, ... ))
         else {

@@ -64,6 +64,8 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
   
   predictions <- matrix(nrow= noOfPatterns, ncol=length(units))
   
+  snnsObject$DefTrainSubPat()  
+  
   for(currentPattern in 1:noOfPatterns)  {
     
     snnsObject$setPatternNo(currentPattern)
@@ -81,34 +83,34 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
   return(predictions)
 } 
 
-SnnsR__whereAreResults <- function(snnsObject, netType="reg_class") {
+SnnsR__whereAreResults <- function(snnsObject, outputMethod="output") {
   
   units <- NULL
-  #netType <- "art1"
+  #outputMethod <- "art1"
   
-  if(netType == "art1") {  
+  if(outputMethod == "art1") {  
     # in the ART1 network, the units that represent the output patterns are named cmp1, cmp2, ...
     units <- snnsObject$getUnitsByName("cmp")
     
-  } else if(netType == "art2") {
+  } else if(outputMethod == "art2") {
     
     unitsX <- snnsObject$getUnitsByName("x")
     unitsQ <- snnsObject$getUnitsByName("q")
     units <- c(unitsX, unitsQ) 
     
-  } else if(netType=="assoz") {
+  } else if(outputMethod=="assoz") {
     
     units <- snnsObject$getAllHiddenUnits()
     
-  } else if(netType=="som") {
+  } else if(outputMethod=="som") {
     
     units <- snnsObject$getAllHiddenUnits()
     
-  } else { #if(netType=="reg_class") {
+  } else { #if(outputMethod=="reg_class") {
     
     units <- snnsObject$getAllOutputUnits()
     
-  } #else if(netType=="assoz") {  }
+  } #else if(outputMethod=="assoz") {  }
   
   units
 }
@@ -122,9 +124,9 @@ SnnsR__whereAreResults <- function(snnsObject, netType="reg_class") {
 #' @param snnsObject \code{\linkS4class{SnnsR}} object
 #' @export
 #' @rdname SnnsR-methods
-SnnsR__predictCurrPatSet <- function(snnsObject, netType="reg_class", updateFuncParams=c(0.0))  {
+SnnsR__predictCurrPatSet <- function(snnsObject, outputMethod="reg_class", updateFuncParams=c(0.0))  {
   
-  units <- snnsObject$whereAreResults(netType)
+  units <- snnsObject$whereAreResults(outputMethod)
   predictions <- snnsObject$genericPredictCurrPatSet(units, updateFuncParams)
   predictions
 }
