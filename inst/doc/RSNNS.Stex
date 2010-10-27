@@ -1,0 +1,162 @@
+\documentclass[a4paper]{article}
+%\VignetteIndexEntry{RSNNS: Neural networks in R}
+\usepackage[latin9]{inputenc}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{Sweave}
+\SweaveOpts{eps=FALSE}
+\newcommand{\RSNNS}{\texttt{RSNNS} }
+\newcommand{\SnnsCLib}{\texttt{SnnsCLib} }
+\linespread{1.3}
+
+\begin{document}
+\begin{Scode}{results=hide, echo=FALSE}
+require(RSNNS)
+options(prompt=" ", encoding="LATIN-9")
+\end{Scode}
+
+\begin{titlepage}
+{\centering \huge Neural Networks in R\\[0.5cm]
+using the Stuttgart Neural Network Simulator:\\[0.5cm]
+\RSNNS version 0.3\\}
+\vfill\par
+{\centering last revised \today\ by Christoph Bergmeir\\}
+\end{titlepage}
+
+\section{Introduction} 
+
+The Stuttgart Neural Network Simulator (SNNS) is a comprehensive software for neural network model building, training and testing. It consists of three parts: the simulation kernel, a gui, and a set of command line tools. It is written in C (the gui with X11), originally for Unix, but also can be run on Windows. Since 1999, when version 4.2 was released, there is no active development. In 2008, version 4.3 was released, which includes some patches contributed by the community and a license change from a more restrictive, academic license to LGPL. Despite its old age, the SNNS still today is one of the most complete, reliable, and fast implementation of neural network standard procedures. With its licensing under LGPL, it is easier to make necessary changes in order to satisfy modern needs such as scriptability and parallelizability. Furthermore, the kernel code can be embedded it into an R package. Making use of the strengths of R, we add visualization functions and give it a convenient API. So \RSNNS is a general purpose, comprehensive neural network package in R.
+
+
+
+%\tsDyn is an R package for the estimation of a number of nonlinear time series models.  The package is at an early stage, and may presumably change significantly in the near future. However, it is quite usable in the current version.
+
+%Each function in the package has at least a minimal help page, with
+%one or more working examples and detailed explanation of function
+%arguments and returned values.  In this document we try to
+%give an overall guided tour of package contents, with some
+%additional notes which are generally difficult to put in the context
+%of a manual.
+%
+%This guide is divided into 3 main sections:
+%\begin{itemize}
+%\item Explorative analysis tools
+%\item Nonlinear autoregressive models
+%\item A case study
+%\end{itemize}
+
+\section{Package Architecture}
+
+All code from the SNNS kernel and some code taken from the gui to create different network topologies (the "bignet" tool in the gui) is ported into one c++ class, which we name \SnnsCLib. The steps carried out were mainly the following:
+
+SNNS has header files with only the public part of a file which are named \texttt{.h} and the complete header files which are named \texttt{.ph}. The \texttt{.h} files usually are not needed and removed. The \texttt{.ph} files are included inside of the \SnnsCLib class definition in the following way:
+
+\begin{verbatim}
+class SnnsCLib {
+
+private:
+
+#include "...ph"
+}
+\end{verbatim}
+
+By this, within the code relatively few things have to be changed. In the header files, the changes mainly are:
+
+\begin{itemize}
+\item remove all static keywords.
+\item move initializations of variables to constructor of \SnnsCLib
+\end{itemize}
+
+In the c++ files, changes are:
+
+\begin{itemize}
+\item static variables within functions have to be turned into member variables.
+\item function declarations have to be changed from "static function".. to "SnnsCLib::function"
+\item calls to the function table with "this->"
+\end{itemize}
+
+
+
+\subsection{...}
+
+\section{Implementation Details}
+
+\section{Examples}
+
+\subsection{Included Example Data}
+
+The data included in the package is included in a list called snnsData:
+
+\begin{Scode}{}
+data(snnsData)
+names(snnsData)
+\end{Scode}
+
+The columns of the datasets are named according to whether they are input or output to the net. For example the \texttt{laser} dataset, can be loaded with:
+\begin{Scode}{results=hide}
+laser <- snnsData$laser_1000.pat
+inputs <- laser[,inputColumns(laser)]
+targets <- laser[,outputColumns(laser)]
+\end{Scode}
+
+
+
+\subsection{Recurrent Neural Networks for Regression}
+
+
+%\begin{Scode}{results=hide, echo=FALSE}
+%inputs <- snnsData$laser_1000.pat[,inputColumns(snnsData$laser_1000.pat)]
+%targets <- snnsData$laser_1000.pat[,outputColumns(snnsData$laser_1000.pat)]
+%\end{Scode}
+
+\begin{Scode}{fig=TRUE, height=4, width=4}
+patterns <- splitForTrainingAndTest(inputs, targets, ratio=0.15)
+model <- elman(patterns$inputsTrain, patterns$targetsTrain, 
+  size=c(8,8), learnFuncParams=c(0.1), maxit=500, 
+  inputsTest=patterns$inputsTest, targetsTest=patterns$targetsTest, 
+  linOut=FALSE)
+plotRegressionError(patterns$targetsTrain, model$fitted.values, main="Regression Plot Fit", pch=3)
+\end{Scode}
+
+%\begin{Scode}{fig=TRUE, height=4, width=4}
+%patterns <- snnsData$art1_letters.pat
+%model <- art1(patterns, dimX=7, dimY=5)
+%#model$fitted.values
+%image(rot90(model$fitted.values[[1]]))
+%\end{Scode}
+
+%A first explorative analysis should include inspecting the distribution of $(x_t, x_{t-l})$ and that of $(x_t, x_{t-l_1}, x_{t-l_2})$ for some lags $l, l_1, l_2$. This can be done easily in R in a variety of ways. The \tsDyn package provide functions \texttt{autopairs} and \texttt{autotriples} for this purpose.\\
+%The \texttt{autopairs} function displays, in essence, a scatterplot of time series $x_t$ versus $x_{t-lag}$. The main arguments to the function are the time series and the desired lag. The scatterplot may be also processed to produce bivariate kernel density estimations, as well as nonparametric kernel autoregression estimations. The type of output is governed by the argument \texttt{type}. Possibile values, along with their meanings, are:\\
+%\begin{tabular}{rl}
+%\texttt{lines} & directed lines \\
+%\texttt{points} & simple scatterplot \\
+%\texttt{levels} & iso-density levels \\
+%\texttt{persp} & density perspective plot \\
+%\texttt{image} & density image map \\
+%\texttt{regression} & kernel autoregression line superposed to scatterplot\\
+%\end{tabular}
+%\\For kernel density and regression estimation, you can specify also the kernel window \texttt{h}. 
+%A typical call to that function can be:
+%\begin{Scode}{eval=FALSE}
+%#autopairs(x, lag=, type=, h=)
+%\end{Scode}
+%All arguments (except the time series \texttt{x}) have default values.
+%
+%At this point a natural question can be: 
+%\emph{why not use directly the original time series as input to \texttt{lyap\_k} instead of model-generated observations}?
+%The answer here is that we have a too short time series for succesfully applying the Kantz algorithm, 
+%so a preliminary modelling for generating more observations is necessary.
+
+\section{Comparison with other implementations}
+
+\section{Conclusions}
+
+\section*{Acknowledgments}
+
+\section*{References}
+
+%\nocite{*}
+%\bibliographystyle{amsplain}
+%\bibliography{bib}
+
+\end{document}
