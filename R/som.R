@@ -8,21 +8,39 @@ som <- function(x, ...) UseMethod("som")
 #'
 #' @export
 #' @author Christoph
-som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2, 0.8, 0.8, mapX), calculateMap=TRUE, calculateActMaps=FALSE, calculateSpanningTree=FALSE, targets=NULL) {
+som.default <- function(x, mapX=16, mapY=16, maxit=100, 
+    initFuncParams = c(1.0,  -1.0), 
+    learnFuncParams=c(0.5, mapX/2, 0.8, 0.8, mapX), 
+    updateFuncParams = c(0.0, 0.0, 1.0),  
+    shufflePatterns = TRUE,
+    calculateMap=TRUE, calculateActMaps=FALSE, calculateSpanningTree=FALSE, targets=NULL) {
+
+  #for the som, no other init/learn/update functions are feasible, so they are not present as
+  #parameters..
+  initFunc = "Kohonen_Weights_v3.2"
+  learnFunc = "Kohonen"
+  updateFunc = "Kohonen_Order"
   
   x <- as.matrix(x)
 
   nInputs <- dim(x)[2L]
   nOutputs <- mapX*mapY
   
-  snnsObject <- SnnsRObjectFactory()
+  snns <- rsnnsObjectFactory(subclass=c("som", "clustering"), nInputs=nInputs, maxit=maxit, 
+      initFunc=initFunc, initFuncParams=initFuncParams, 
+      learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
+      updateFunc=updateFunc, 
+      updateFuncParams=updateFuncParams,
+      shufflePatterns=shufflePatterns, computeIterativeError=FALSE)
   
-  snnsObject$setLearnFunc('Kohonen')
-  snnsObject$setUpdateFunc('Kohonen_Order')
-  snnsObject$setInitialisationFunc('Kohonen_Weights_v3.2')
+  #snnsObject <- SnnsRObjectFactory()
+  snnsObject <- snns$snnsObject
+  
+  snnsObject$setLearnFunc(snns$learnFunc)
+  snnsObject$setUpdateFunc(snns$updateFunc)
+  snnsObject$setInitialisationFunc(snns$initFunc)
   
   snnsObject$setUnitDefaults(0,0,3,0,1,'Act_Logistic','Out_Identity')
-  
   snnsObject$kohonen_createNet(mapX,mapY,nInputs,mapX*mapY)
     
   snnsObject$setTTypeUnitsActFunc("UNIT_INPUT", "Act_Identity")
@@ -30,8 +48,8 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
   
   patSet <- snnsObject$createPatSet(x)
   
-  snnsObject$initializeNet(c(1.0,  -1.0))
-  snnsObject$shufflePatterns(TRUE)
+  snnsObject$initializeNet(snns$initFuncParams)
+  snnsObject$shufflePatterns(snns$shufflePatterns)
   snnsObject$DefTrainSubPat()
   
 #parameters <- c(0.855, 9.0, 0.9, 0.9, 16.0)
@@ -40,14 +58,17 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
   #maxit <- 1000
     
   for(i in 1:maxit) {
-    res <- snnsObject$learnAllPatterns(parameters)
+    res <- snnsObject$learnAllPatterns(snns$learnFuncParams)
   }
   
-  snns <- NULL
-  snns$nInputs <- nInputs
+  #snns <- NULL
+  #snns$nInputs <- nInputs
+  
+  snns$archParams <- list(mapX=mapX, mapY=mapY)
+  
   snns$nOutputs <- nOutputs
-  snns$mapX <- mapX
-  snns$mapY <- mapY
+  #snns$mapX <- mapX
+  #snns$mapY <- mapY
   
   if(calculateMap) {
 
@@ -61,7 +82,7 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
 
   if(calculateActMaps) {
     
-    actMat <- snnsObject$predictCurrPatSet("som", c(0.0, 0.0, 1.0))
+    actMat <- snnsObject$predictCurrPatSet("som", updateFuncParams)
     snns$actMaps <- matrixToActMapList(actMat, nrow=mapX)
     
   } else {
@@ -105,9 +126,8 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100, parameters=c(0.5, mapX/2
   
   #snns$type <- "som"
     
-  snns$snnsObject <- snnsObject
-  
-  class(snns) <- c("som", "clustering", "rsnns")
+  #snns$snnsObject <- snnsObject
+  #class(snns) <- c("som", "clustering", "rsnns")
   snns
 }
 
