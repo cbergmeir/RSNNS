@@ -7,12 +7,14 @@
 \SweaveOpts{eps=FALSE}
 \newcommand{\RSNNS}{\texttt{RSNNS} }
 \newcommand{\SnnsCLib}{\texttt{SnnsCLib} }
+\newcommand{\SnnsR}{\texttt{SnnsR} }
 \linespread{1.3}
 
 \begin{document}
 \begin{Scode}{results=hide, echo=FALSE}
 require(RSNNS)
 options(prompt=" ", encoding="LATIN-9")
+data(snnsData)
 \end{Scode}
 
 \begin{titlepage}
@@ -25,7 +27,7 @@ using the Stuttgart Neural Network Simulator:\\[0.5cm]
 
 \section{Introduction} 
 
-The Stuttgart Neural Network Simulator (SNNS) is a comprehensive software for neural network model building, training and testing. It consists of three parts: the simulation kernel, a gui, and a set of command line tools. It is written in C (the gui with X11), originally for Unix, but also can be run on Windows. Since 1999, when version 4.2 was released, there is no active development. In 2008, version 4.3 was released, which includes some patches contributed by the community and a license change from a more restrictive, academic license to LGPL. Despite its old age, the SNNS still today is one of the most complete, reliable, and fast implementation of neural network standard procedures. With its licensing under LGPL, it is easier to make necessary changes in order to satisfy modern needs such as scriptability and parallelizability. Furthermore, the kernel code can be embedded it into an R package. Making use of the strengths of R, we add visualization functions and give it a convenient API. So \RSNNS is a general purpose, comprehensive neural network package in R.
+The Stuttgart Neural Network Simulator (SNNS)\footnote{http://www.ra.cs.uni-tuebingen.de/SNNS/} is a comprehensive software for neural network model building, training and testing. It consists of three parts: the simulation kernel, a gui, and a set of command line tools. It is written in C (the gui with X11), originally for Unix, but also can be run on Windows. Since 1999, when version 4.2 was released, there is no active development. In 2008, version 4.3 was released, which includes some patches contributed by the community and a license change from a more restrictive, academic license to LGPL. Despite its old age, the SNNS still today is one of the most complete, reliable, and fast implementation of neural network standard procedures. With its licensing under LGPL, it is easier to make necessary changes in order to satisfy modern needs such as scriptability and parallelizability. Furthermore, the kernel code can be embedded it into an R package. Making use of the strengths of R, we add visualization functions and give it a convenient API. So \RSNNS is a general purpose, comprehensive neural network package in R.
 
 
 
@@ -45,9 +47,11 @@ The Stuttgart Neural Network Simulator (SNNS) is a comprehensive software for ne
 %\item A case study
 %\end{itemize}
 
-\section{Package Architecture}
+\section{Implementation details and architecture}
 
-All code from the SNNS kernel and some code taken from the gui to create different network topologies (the "bignet" tool in the gui) is ported into one c++ class, which we name \SnnsCLib. The steps carried out were mainly the following:
+\subsection{The C/C++ code}
+
+All code from the SNNS kernel and some code taken from the gui to create different network topologies (the "bignet" tool in the gui) is ported into one C++ class, which we name \SnnsCLib. The steps carried out were mainly the following:
 
 SNNS has header files with only the public part of a file which are named \texttt{.h} and the complete header files which are named \texttt{.ph}. The \texttt{.h} files usually are not needed and removed. The \texttt{.ph} files are included inside of the \SnnsCLib class definition in the following way:
 
@@ -67,7 +71,7 @@ By this, within the code relatively few things have to be changed. In the header
 \item move initializations of variables to constructor of \SnnsCLib
 \end{itemize}
 
-In the c++ files, changes are:
+In the C++ files, changes are:
 
 \begin{itemize}
 \item static variables within functions have to be turned into member variables.
@@ -75,15 +79,134 @@ In the c++ files, changes are:
 \item calls to the function table with "this->"
 \end{itemize}
 
+\subsection{The R low-level code and C++ wrapping}
+
+The file \texttt{SnnsCLibWrapper.cpp} contains the wrapping C++ code for wrapping the \SnnsCLib functionality. Every function from \SnnsCLib is wrapped by a corresponding function in the wrapper, e.g. the function to set the current learning function \texttt{setLearnFunc}:
+
+\begin{verbatim}
+RcppExport SEXP SnnsCLib__setLearnFunc(SEXP xp, SEXP learning_func) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  std::string p1 = Rcpp::as<std::string>( learning_func );
+
+  int err = snnsCLib->krui_setLearnFunc(const_cast<char*>(p1.c_str()));
+  return Rcpp::List::create( Rcpp::Named( "err" ) = err );
+}
+\end{verbatim}
+
+The SnnsCLib object is always given as first parameter. The other parameters are converted and passed to the function (here learning\_func, the name of the function to set as current learning function). The result of the wrapper functions normally is a named list. If a return value for \texttt{err} is present, then special error handling is used (see section~\ref{TODO}).
+
+The corresponding part for \SnnsCLib on the R side is the S4 class \SnnsR. Each \SnnsR object has a pointer \texttt{snnsCLibPointer} to its corresponding \SnnsCLib object. If the object factory is used, a \SnnsCLib object is generated and the pointer is initialized with this object:
+
+\begin{verbatim}
+snnsObject <- SnnsRObjectFactory()
+\end{verbatim}
+
+\SnnsR contains a convenient calling mechanism for member functions of its instances. The operator \$ is overloaded as suggested by the \texttt{Rcpp} documentation as illustrated by the following example. The function \texttt{SnnsCLib\_\_setLearnFunc} presented above can be called by:
+
+\begin{verbatim}
+snnsObject$setLearnFunc("Quickprop")
+\end{verbatim}
+
+The \$ operator first looks for a function within R with the name \texttt{SnnsR\_\_setLearnFunc}. If no such function is present, R's calling mechanism is used to call the \SnnsCLib function. This has the advantage, that functions from \SnnsCLib can be replaced completely transparently be functions implemented in R, which typically might call the original \SnnsCLib function after some error ckecking and preprocessing, or perform some postprocessing. Also, functions not present within the SNNS can in this way be implemented in R or in C++.
 
 
-\subsection{...}
+\section{R accessible interface}
 
-\section{Implementation Details}
+The R interface accessible to package users is the S3 class rsnns and its subclasses. Using the rsnns to implement a subclass typically consists of three steps.
 
-\section{Examples}
+\begin{itemize}
+\item generate an rsnns object using the object factory \texttt{rsnnsObjectFactory(...)}, setting training, update, and initialization function and their parameters
+\item create/load a network architecture by directly accessing functions of the \SnnsR object created within the rsnns object: rsnnsObject\$snnsObject\$...
+\item train the network, using the function train.rsnns, or by direct access again.
+\end{itemize}
 
-\subsection{Included Example Data}
+The train.rsnns function directly saves all training results in the rsnns object, e.g. in rsnnsObject\$fitted.values. The currently implemented subclasses are the following:
+
+%\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{rsnnsClassDiagram.pdf}
+%  \caption{}
+%  \label{fig:intro}
+  \end{center}
+%\end{figure}
+
+After training, the models can be used to predict new data, or the visualization capabilities of R can be used to analyze the training process and the models performance on training and test data (see section \ref{TODO}).
+
+\begin{Scode}{results=hide, echo=FALSE}
+x <- NULL
+y <- NULL
+\end{Scode}
+
+The interface is nearly the same for all methods:
+
+\begin{Scode}{eval=FALSE}
+mlp(x, y, size=c(5), maxit=100, 
+    initFunc="Randomize_Weights", initFuncParams=c(-0.3, 0.3), 
+    learnFunc="Quickprop", learnFuncParams=c(0.2), 
+    updateFunc="Topological_Order", updateFuncParams=c(0.0),
+    hiddenActFunc="Act_Logistic",
+    shufflePatterns=TRUE, linOut=FALSE, inputsTest=NULL, targetsTest=NULL)
+\end{Scode}
+
+Training data:
+\begin{tabular}{rl}
+\texttt{x} & the training inputs \\
+\texttt{y} & the training outputs (if method is supervised) \\
+\end{tabular}
+
+The network architecture parameters:
+
+\begin{tabular}{rl}
+\texttt{size} & the amount of neurons in the hidden layer. \\
+\end{tabular}
+
+number of iterations, i.e. training epochs that are used:
+\begin{tabular}{rl}
+\texttt{maxit} &  \\
+\end{tabular}
+
+Initialization, learning and update function and their parameters to use. In the SNNS kernel, each of these parameter sets has a maximal length of 5. The arrays can be filled with zeros.
+
+\begin{tabular}{rl}
+\texttt{initFunc} & initialization function to use \\
+\texttt{initFuncParams} & initialization function to use \\
+\texttt{learnFunc} & initialization function to use \\
+\texttt{learnFuncParams} & initialization function to use \\
+\texttt{updateFunc} & initialization function to use \\
+\texttt{updateFuncParams} & initialization function to use \\
+\end{tabular}
+
+Special parameters for the method:
+
+\begin{tabular}{rl}
+\texttt{hiddenActFunc} & activation function for the hidden units\\
+\texttt{shufflePatterns} & shuffle patterns before training\\
+\texttt{linOut} & set the activation function of the output units to logistic or linear\\
+\end{tabular}
+
+Optional test data. Currently, the only benefit of providing test data is, that after each epoch the error on the test set is saved. So, this makes only sense of an error is computed during training, i.e. with supervised methods. The test data could also be used for determining when to stop training. But this is not implemented currently.
+
+\begin{tabular}{rl}
+\texttt{inputsTest} & \\
+\texttt{targetsTest} & \\
+\end{tabular}
+
+\begin{Scode}{results=hide, echo=FALSE}
+encData <- snnsData$encoder.pat
+inputs <- encData[,inputColumns(encData)]
+targets <- encData[,outputColumns(encData)]
+\end{Scode}
+
+The easiest way to train a model is using the default parameters, only setting the training inputs, and -- if needed by the model -- the training outputs. The S3 default print function that is implemented for rsnns models can then be used to get information about the architecture, the functions and their parameters used by the model:
+
+\begin{Scode}
+encoder <- mlp(inputs, targets)
+encoder
+\end{Scode}
+
+
+\section{Included Datasets}
 
 The data included in the package is included in a list called snnsData:
 
@@ -92,6 +215,13 @@ data(snnsData)
 names(snnsData)
 \end{Scode}
 
+
+\section{Examples}
+
+In the following, use of the package is illustrated with some initial examples and one problem of regression, classification, clustering, and association, respectively.
+
+\subsection{Recurrent neural networks for regression}
+
 The columns of the datasets are named according to whether they are input or output to the net. For example the \texttt{laser} dataset, can be loaded with:
 \begin{Scode}{results=hide}
 laser <- snnsData$laser_1000.pat
@@ -99,24 +229,178 @@ inputs <- laser[,inputColumns(laser)]
 targets <- laser[,outputColumns(laser)]
 \end{Scode}
 
-
-
-\subsection{Recurrent Neural Networks for Regression}
-
-
 %\begin{Scode}{results=hide, echo=FALSE}
 %inputs <- snnsData$laser_1000.pat[,inputColumns(snnsData$laser_1000.pat)]
 %targets <- snnsData$laser_1000.pat[,outputColumns(snnsData$laser_1000.pat)]
 %\end{Scode}
 
-\begin{Scode}{fig=TRUE, height=4, width=4}
+To split the data in a training and a test set, a convenience function is available within the package:
+
+\begin{Scode}
 patterns <- splitForTrainingAndTest(inputs, targets, ratio=0.15)
+\end{Scode}
+
+The model is then trained by specifying (besides the training data) the network architecture, the update, initialization, and learning functions and their parameters. As meaningful default values (especially for the functions to use) are given, it should often be sufficient to change the learning parameters. Optionally, test values can be given. Specifying test values here and not later computing them with the \texttt{predict} function has the advantage, that the error on the test set is computed during each epoch of the learning and can later be visualized.
+
+\begin{Scode}
 model <- elman(patterns$inputsTrain, patterns$targetsTrain, 
   size=c(8,8), learnFuncParams=c(0.1), maxit=500, 
   inputsTest=patterns$inputsTest, targetsTest=patterns$targetsTest, 
   linOut=FALSE)
-plotRegressionError(patterns$targetsTrain, model$fitted.values, main="Regression Plot Fit", pch=3)
 \end{Scode}
+
+Input data and fitted values can be visualized e.g. with:
+
+\begin{Scode}{fig=TRUE, height=3, width=6}
+par(mfrow=c(1,2))
+plot(inputs, type="l")
+plot(inputs[1:100], type="l")
+lines(targets[1:100], col="red")
+lines(model$fitted.values[1:100], col="green")
+\end{Scode}
+
+After training, various visualization and analysis methods exist. The iterative error plot shows the summed squared error (SSE), i.e. sum of the squared errors of all patterns for every epoch in black. If a test set is present, its error is adjusted (as the test set might have a different amount of patterns) and showed as a red line.
+
+The regression plot can be used to illustrate the quality of the regression. It has target values on the $x$-axis and fitted/predicted values on the $y$-axis. The optimal fit would yield a line with gradient 1. This optimal line is showed in black. A linear fit to the actual data is shown in red.
+
+Using standard methods of R, also other evaluation techniques can be implemented straightforwardly, e.g. an error histogram.
+  
+\begin{Scode}{fig=TRUE, height=6, width=6}
+par(mfrow=c(2,2))
+plotIterativeError(model, main="Iterative Errors")
+plotRegressionError(patterns$targetsTrain, model$fitted.values, main="Regression Plot Fit", pch=3)
+plotRegressionError(patterns$targetsTest, model$fittedTestValues, main="Regression Plot Test", pch=3)
+hist(model$fitted.values - patterns$targetsTrain, col="lightblue", main="Error Histogram Fit")
+\end{Scode}
+
+
+\subsection{Multilayer perceptron for classification}
+
+Classification is very similar to regression. The neuronal output is normally set to the logistic function instead of linear output, and for each possible class, an output neuron is generated. Then, the training outputs are given in a way, that the neuron of the correct class should be activated, i.e. its output should be close to one, whereas the other neurons should output values close to zero. In \RSNNS, methods of pre- and postprocessing to facilitate this process are implemented.
+
+\begin{Scode}{results=hide, echo=FALSE}
+data(iris)
+#shuffle the vector
+iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
+#center data
+irisValues <- matrix(nrow=nrow(iris), ncol=4)
+for(i in 1:4) {
+  irisValues[,i] <- iris[,i] - mean(iris[,i])  
+}
+\end{Scode}
+
+\begin{Scode}{results=hide}
+irisTargets <- decodeClassLabels(iris[,5])
+iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
+\end{Scode}
+
+The function \texttt{decodeClassLabels} generates a binary matrix of an integer-valued input vector. This is then used to train a multilayer perceptron:
+
+\begin{Scode}
+model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFuncParams=c(0.1), 
+    maxit=50, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
+predictions <- predict(model,iris$inputsTest)
+\end{Scode}
+    
+The iterative and regression errors can be displayed, but the regression error is not so informative any more, as it ideally would only populate the two points $(0, 0)$ and $(1, 1)$. Also, a function for displaying receiver operating characteristics (ROC) is included in the package. They are especially informative, if the classification problem only has two classes.
+    
+\begin{Scode}{fig=TRUE, height=6, width=6}   
+par(mfrow=c(2,2))
+plotIterativeError(model)
+plotRegressionError(predictions[,2], iris$targetsTest[,2], pch=3)
+plotROC(fitted.values(model)[,2], iris$targetsTrain[,2])
+plotROC(predictions[,2], iris$targetsTest[,2])
+\end{Scode}
+
+In the example problem with three classes it is more informative to analyze a confusion matrix, i.e. how often did the network erroneously classify a pattern to another class. This can be done for the train and the test dataset. If the class labels are given as a matrix to the function \texttt{confusionMatrix}, it encodes them using the standard settings, i.e. a winner-takes-all algorithm. For other encoding algorithms, the class labels can be encoded manually. In the following example, the \texttt{402040} method is used. Both \texttt{402040} as \texttt{WTA} are implemented as described in the SNNS manual~\cite{ZellSNNS}. If \texttt{WTA} is used with standard settings, no unclassified patterns remain, as the neuron with the maximal output activation defines the class. In other settings, unclear outputs might yield unclassified patterns, which are represented by zeros as class label.
+
+\begin{Scode}    
+confusionMatrix(iris$targetsTrain,fitted.values(model))
+confusionMatrix(iris$targetsTest,predictions)
+confusionMatrix(iris$targetsTrain, encodeClassLabels(fitted.values(model),method="402040", l=0.4, h=0.6))
+\end{Scode}
+
+\subsection{A self organizing map}
+
+\begin{Scode}{results=hide, echo=FALSE}
+data(iris)
+
+##normalization
+inputs <- apply(iris[,1:4],2, function(x) {(x - min(x)) / (max(x) - min(x))})
+\end{Scode}
+
+\begin{Scode}{results=hide}
+model <- som(inputs, mapX=16, mapY=16, maxit=500,  calculateActMaps=TRUE, calculateSpanningTree=TRUE, targets=iris[,5])
+\end{Scode}
+
+%\begin{Scode}{results=hide, echo=FALSE}
+%par(mfrow=c(3,3))
+%\end{Scode}
+
+\begin{Scode}{fig=TRUE, height=6, width=6}  
+par(mfrow=c(2,2))
+for(i in 1:ncol(inputs)) plotActMap(model$componentMaps[[i]], col=rev(topo.colors(12)))
+\end{Scode}
+
+\begin{Scode}{fig=TRUE, height=6, width=6}  
+par(mfrow=c(2,2))
+plotActMap(model$map, col=rev(heat.colors(12)))
+plotActMap(log(model$map+1), col=rev(heat.colors(12)))
+persp(1:model$archParams$mapX, 1:model$archParams$mapY, log(model$map+1), theta = 30, phi = 30, expand = 0.5, col = "lightblue")
+plotActMap(model$labelledSpanningTree)
+\end{Scode}
+
+
+\subsection{ART2 network for association}
+
+\begin{Scode}{results=hide}
+patterns <- snnsData$art2_tetra.pat
+model <- art2(patterns, f2Units=5)
+\end{Scode}
+
+\begin{Scode}{results=hide}
+testPatterns <- snnsData$art2_tetra_med.pat
+predictions <- predict(model, testPatterns)
+\end{Scode}
+
+\begin{Scode}{fig=TRUE, height=3, width=6}
+library(scatterplot3d)
+par(mfrow=c(1,2))
+scatterplot3d(model$fitted.values[,1:3])
+scatterplot3d(predictions[,1:3])
+\end{Scode}
+
+
+\subsection{Using other functions and parameters, interaction with the SNNS}
+
+All available functions in the SNNS kernel can be determined with \texttt{getSNNSFunctionTable}. Their name, type, number of input- and output parameters are shown. The SNNS manual~\cite{ZellSNNS} describes comprehensively, which functions can be used in which situations, and which parameters are feasible.
+
+\begin{Scode}
+getSNNSFunctionTable()[196:202,]
+\end{Scode}
+
+Methods to save and parse SNNS \texttt{.pat} files are included, as well as a rudimentary parser for \texttt{.res} files. The \texttt{.pat} file methods make use of the original SNNS methods. Currently not supported are \texttt{.pat} files containing patterns with variable length.
+
+\begin{Scode}{results=hide, echo=FALSE}
+filename <- NULL
+\end{Scode}
+
+\begin{Scode}{eval=FALSE}
+readPatFile(filename)
+savePatFile(inputs, targets, filename)
+readResFile(filename)
+\end{Scode}
+
+Furthermore, \texttt{.net} files can be loaded and saved with the normal SNNS kernel methods \texttt{loadNet} and \texttt{saveNet}, so that data interchange with an installation of the original SNNS is possible without problems, e.g. to visualize the network architecture in SNNS, or to train a net in SNNS and use later R to analyze the capabilities of the net. 
+
+The summary function that is implemented in the rsnns class uses the \texttt{saveNet} function to save the current net to a temporal file on disk, loads that file and displays it.
+
+\begin{Scode}{eval=FALSE}
+summary(model)
+\end{Scode}
+
+
+
 
 %\begin{Scode}{fig=TRUE, height=4, width=4}
 %patterns <- snnsData$art1_letters.pat
@@ -147,16 +431,16 @@ plotRegressionError(patterns$targetsTrain, model$fitted.values, main="Regression
 %The answer here is that we have a too short time series for succesfully applying the Kantz algorithm, 
 %so a preliminary modelling for generating more observations is necessary.
 
+
+
 \section{Comparison with other implementations}
 
 \section{Conclusions}
 
-\section*{Acknowledgments}
+%\section*{Acknowledgments}
 
-\section*{References}
-
-%\nocite{*}
-%\bibliographystyle{amsplain}
-%\bibliography{bib}
+\nocite{*}
+\bibliographystyle{amsplain}
+\bibliography{references}
 
 \end{document}

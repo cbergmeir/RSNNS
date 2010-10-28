@@ -57,3 +57,24 @@ matrixToActMapList <- function(m, nrow=0, ncol=0) {
 plotActMap <- function(x, ...) {
   image(rot90(x),...)
 }
+
+
+getSNNSFunctionTable <- function() {
+
+  snnsObject <- SnnsRObjectFactory()
+  
+  noFunc <- snnsObject$getNoOfFunctions()
+  allFuncs <- data.frame()
+  
+  for(i in 1:noFunc) {
+    fi <- snnsObject$getFuncInfo(i)
+    fiInfo <- snnsObject$getFuncParamInfo(fi[[1]], fi[[2]])
+    allFuncs <- rbind(allFuncs, cbind(fi$func_name, fi$func_type, fiInfo$no_of_input_params, fiInfo$no_of_input_params))
+  }
+  
+  names(allFuncs) <- c("name", "type", "#inParams", "#outParams")
+  
+  rm(snnsObject)
+  
+  allFuncs
+}

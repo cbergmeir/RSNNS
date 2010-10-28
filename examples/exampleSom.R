@@ -31,7 +31,7 @@ for(i in 1:ncol(inputs)) plotActMap(model$componentMaps[[i]], col=rev(topo.color
 
 plotActMap(model$map, col=rev(heat.colors(12)))
 plotActMap(log(model$map+1), col=rev(heat.colors(12)))
-persp(1:model$mapX, 1:model$mapY, log(model$map+1), theta = 30, phi = 30, expand = 0.5, col = "lightblue")
+persp(1:model$archParams$mapX, 1:model$archParams$mapY, log(model$map+1), theta = 30, phi = 30, expand = 0.5, col = "lightblue")
 
 plotActMap(model$labelledSpanningTree)
 

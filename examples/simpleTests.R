@@ -1,58 +1,65 @@
 library(RSNNS)
 
-mySnnsObject <- SnnsRObjectFactory()
+snnsObject <- SnnsRObjectFactory()
 
-ver <- mySnnsObject$getVersion()
+ver <- snnsObject$getVersion()
 ver
 
-mySnnsObject$getInitialisationFunc()
+snnsObject$getInitialisationFunc()
     
-noFunc <- mySnnsObject$getNoOfFunctions()
+noFunc <- snnsObject$getNoOfFunctions()
 noFunc
 
-allFuncs <- NULL
+allFuncs <- data.frame()
 
-for(i in 1:noFunc) allFuncs <- rbind(allFuncs, mySnnsObject$getFuncInfo(i))
+for(i in 1:noFunc) {
 
-allFuncs
+  fi <- snnsObject$getFuncInfo(i)
+  fiInfo <- snnsObject$getFuncParamInfo(fi[[1]], fi[[2]])
+  allFuncs <- rbind(allFuncs, cbind(fi$func_name, fi$func_type, fiInfo$no_of_input_params, fiInfo$no_of_input_params))
 
-newunit <- mySnnsObject$createDefaultUnit()
+}
+
+names(allFuncs) <- c("name", "type", "#inParams", "#outParams")
+allFuncs  
+
+newunit <- snnsObject$createDefaultUnit()
 print("New unit:")
 newunit
 
 print("Act func name:")
-mySnnsObject$getUnitActFuncName(newunit)
+snnsObject$getUnitActFuncName(newunit)
 
 
-mySnnsObject$isFunction("Act_Logistic", 2);
+snnsObject$isFunction("Act_Logistic", 2);
 
-mySnnsObject$getFuncParamInfo("Act_Logistic", 2);
+snnsObject$getFuncParamInfo("Act_Logistic", 2);
 
-mySnnsObject$getFuncParamInfo("Act_Component", 2);
+snnsObject$getFuncParamInfo("Act_Component", 2);
 
-mySnnsObject$getFuncParamInfo("Std_Backpropagation", 4);
-mySnnsObject$getFuncParamInfo("Quickprop", 4);
+snnsObject$getFuncParamInfo("Std_Backpropagation", 4);
+snnsObject$getFuncParamInfo("Quickprop", 4);
 
-mySnnsObject$getFuncParamInfo("JE_BP", 4);
-mySnnsObject$getFuncParamInfo("JE_BP_Momentum", 4);
+snnsObject$getFuncParamInfo("JE_BP", 4);
+snnsObject$getFuncParamInfo("JE_BP_Momentum", 4);
 
-mySnnsObject$getFuncParamInfo("BackpropJogChunk", 4);
+snnsObject$getFuncParamInfo("BackpropJogChunk", 4);
 
 
 #TODO: these functions crash...
-#mySnnsObject$getFirstSiteTableEntry()
-#mySnnsObject$getNextSiteTableEntry()
+#snnsObject$getFirstSiteTableEntry()
+#snnsObject$getNextSiteTableEntry()
 #
-#mySnnsObject$getFirstSymbolTableEntry()
-#mySnnsObject$getNextSymbolTableEntry()
+#snnsObject$getFirstSymbolTableEntry()
+#snnsObject$getNextSymbolTableEntry()
 
-mySnnsObject$getNetInfo()
-mySnnsObject$getMemoryManagerInfo()
+snnsObject$getNetInfo()
+snnsObject$getMemoryManagerInfo()
 
-mySnnsObject$getLearnFunc()
-mySnnsObject$getUpdateFunc()
-mySnnsObject$getUnitDefaults()
+snnsObject$getLearnFunc()
+snnsObject$getUpdateFunc()
+snnsObject$getUnitDefaults()
 
-#mySnnsObject$getUnitOutFuncName(200)
+#snnsObject$getUnitOutFuncName(200)
 
 
