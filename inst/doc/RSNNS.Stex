@@ -1,29 +1,43 @@
 \documentclass[a4paper]{article}
+
 %\VignetteIndexEntry{RSNNS: Neural networks in R}
 \usepackage[latin9]{inputenc}
 \usepackage{verbatim}
 \usepackage{amsmath}
 \usepackage{Sweave}
-\SweaveOpts{eps=FALSE}
+
+\SweaveOpts{keep.source=TRUE, eps=FALSE}
+
 \newcommand{\RSNNS}{\texttt{RSNNS} }
 \newcommand{\SnnsCLib}{\texttt{SnnsCLib} }
 \newcommand{\SnnsR}{\texttt{SnnsR} }
-\linespread{1.3}
+%\linespread{1.3}
+
+\title{ Neural Networks in \rlan{} using the Stuttgart Neural Network Simulator: \RSNNS }
+\author{Christoph Bergmeir\\
+{\small University of Granada, Spain}}
+\date{Version 0.3\\
+\today}
 
 \begin{document}
+\setkeys{Gin}{width=\textwidth}
+
+\maketitle
+
+
 \begin{Scode}{results=hide, echo=FALSE}
 require(RSNNS)
 options(prompt=" ", encoding="LATIN-9")
 data(snnsData)
 \end{Scode}
 
-\begin{titlepage}
-{\centering \huge Neural Networks in R\\[0.5cm]
-using the Stuttgart Neural Network Simulator:\\[0.5cm]
-\RSNNS version 0.3\\}
-\vfill\par
-{\centering last revised \today\ by Christoph Bergmeir\\}
-\end{titlepage}
+%\begin{titlepage}
+%{\centering \huge Neural Networks in R\\[0.5cm]
+%using the Stuttgart Neural Network Simulator:\\[0.5cm]
+%\RSNNS version 0.3\\}
+%\vfill\par
+%{\centering last revised \today\ by Christoph Bergmeir\\}
+%\end{titlepage}
 
 \section{Introduction} 
 
