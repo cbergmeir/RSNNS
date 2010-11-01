@@ -25,12 +25,16 @@
 #include <math.h>
 #include <time.h>  
 #include <memory.h>
+
+#include <string.h>
+/*
 #ifdef HAVE_VALUES_H
 #include <values.h>
 #endif
 #ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
+*/
 
 #include "SnnsCLib.h"
 
@@ -333,7 +337,7 @@ void SnnsCLib::cc_initActivationArrays(void)
 ******************************************************************************/
 FlintType SnnsCLib::cc_generateRandomNo(float maxValue)
 {
-    return (FlintType)(drand48()*2.0*maxValue-maxValue);  
+    return (FlintType)(snns_drand48()*2.0*maxValue-maxValue);  
 }
 
 

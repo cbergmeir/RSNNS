@@ -34,9 +34,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+/*
 #ifdef HAVE_VALUES_H
 #include <values.h>
 #endif
+*/
 
 #include "SnnsCLib.h"
 

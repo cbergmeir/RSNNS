@@ -1,7 +1,21 @@
 #ifndef SNNS_HEADER_ALL
 #define SNNS_HEADER_ALL
 
-#include "config.h"
+//#include "config.h"
+//#define HAVE_FCNTL_H 1
+//#define HAVE_SYS_FILE_H 1
+//#define HAVE_SYS_TIME_H 1
+//#define HAVE_UNISTD_H 1
+
+
+#ifndef MAXFLOAT
+#include <float.h>
+#define MAXFLOAT FLT_MAX
+#endif
+
+long snns_lrand48(void);
+void snns_srand48(long seedval);
+double snns_drand48(void);
 
 #include "glob_typ.h"
 

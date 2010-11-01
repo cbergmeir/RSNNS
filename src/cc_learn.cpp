@@ -17,16 +17,20 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-#include <config.h>
+//#include <config.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>  
 #include <memory.h>
+
+#include <string.h>
+/*
 #ifdef HAVE_VALUES_H
 #include <values.h>
 #endif
+*/
 
 #include "SnnsCLib.h"
 //#include "random.h"
@@ -64,7 +68,7 @@ krui_err SnnsCLib::cc_initVariables(float* ParameterInArray,
 
     cc_LayerCorrectnessTest(ParameterInArray,StartPattern,EndPattern);
 
-    srand48((long)time(NULL)); 
+    snns_srand48((long)time(NULL)); 
  
 
     /* now read the parameters from the window to global variables */

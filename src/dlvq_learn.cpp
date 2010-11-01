@@ -17,16 +17,19 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-#include <config.h>
+//#include <config.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>  
 #include <memory.h>
+
+/*
 #ifdef HAVE_VALUES_H
 #include <values.h>
 #endif
+*/
 
 #include "SnnsCLib.h"
 

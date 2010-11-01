@@ -21,9 +21,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#ifdef HAVE_SYS_TIME_H
-#include <sys/time.h>
-#endif
+//#ifdef HAVE_SYS_TIME_H
+//#include <sys/time.h>
+//#endif
 #include <string.h>
 #include <memory.h>
 #include <math.h>
@@ -4566,11 +4566,11 @@ void  SnnsCLib::krui_setSeedNo(long int seed)
 
     if (seed != 0) {
 	kr_ui_randomSeedVal = seed;
-        srand48( seed );  
+        snns_srand48( seed );  
     } else {
         if (kr_ui_randomSeedVal == 0) {
             kr_ui_randomSeedVal = (long) time( (time_t *) 0);
-            srand48( kr_ui_randomSeedVal ); 
+            snns_srand48( kr_ui_randomSeedVal ); 
         }
     }
 }

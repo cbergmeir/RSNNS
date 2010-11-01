@@ -1,6 +1,24 @@
+#include <stdlib.h>
+#include <R_ext/Print.h>
+
 #include "SnnsCLib.h"
 
-#include <R_ext/Print.h>
+long snns_lrand48(void)
+{
+    return (long) rand();
+}
+
+void snns_srand48(long seedval)
+{
+    srand(seedval);
+}
+
+double snns_drand48(void)
+{
+//RAND_MAX 0x7fffffff
+    return((double) (rand() & RAND_MAX)
+	   / (double) RAND_MAX);
+}
 
 SnnsCLib::SnnsCLib() {
 

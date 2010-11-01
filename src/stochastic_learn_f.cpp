@@ -102,7 +102,7 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
     /* randomize weigths and bias */
 
     FOR_ALL_UNITS(unit_ptr) {
-	unit_ptr->bias = (FlintType) drand48() *
+	unit_ptr->bias = (FlintType) snns_drand48() *
 	    (LEARN_PARAM2(parameterInArray) - LEARN_PARAM1(parameterInArray))
 		+ LEARN_PARAM1(parameterInArray);
 	flags = unit_ptr->flags;
@@ -111,14 +111,14 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
 
 	    if (flags & UFLAG_SITES) { /* unit has sites  */
 		FOR_ALL_SITES_AND_LINKS(unit_ptr, site_ptr, link_ptr)
-		    link_ptr->weight = (FlintType) drand48() *
+		    link_ptr->weight = (FlintType) snns_drand48() *
 			(LEARN_PARAM2(parameterInArray) -
 			 LEARN_PARAM1(parameterInArray)) +
 			     LEARN_PARAM1(parameterInArray);
 	    } else {		/* unit has no sites   */
 		if (flags & UFLAG_DLINKS) { /* unit has direct links */
 		    FOR_ALL_LINKS(unit_ptr, link_ptr)
-			link_ptr->weight = (FlintType) drand48() *
+			link_ptr->weight = (FlintType) snns_drand48() *
 			    (LEARN_PARAM2(parameterInArray) -
 			     LEARN_PARAM1(parameterInArray)) +
 				 LEARN_PARAM1(parameterInArray);
@@ -554,7 +554,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 		/* unit is in use  */
 		if (NextParameter == TRUE) {
 		    unit_ptr->value_c = unit_ptr->bias;
-		    unit_ptr->bias = (FlintType) drand48() *
+		    unit_ptr->bias = (FlintType) snns_drand48() *
 			(LEARN_PARAM2(parameterInArray) -
 			 LEARN_PARAM1(parameterInArray)) +
 			     LEARN_PARAM1(parameterInArray);
@@ -570,7 +570,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 		    FOR_ALL_SITES_AND_LINKS(unit_ptr, site_ptr, link_ptr)
 			if (NextParameter == TRUE) {
 			    link_ptr->value_c = link_ptr->weight;
-			    link_ptr->weight = (FlintType) drand48() *
+			    link_ptr->weight = (FlintType) snns_drand48() *
 				(LEARN_PARAM2(parameterInArray) -
 				 LEARN_PARAM1(parameterInArray)) +
 				     LEARN_PARAM1(parameterInArray);
@@ -588,7 +588,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 			FOR_ALL_LINKS(unit_ptr, link_ptr)
 			    if (NextParameter == TRUE) {
 				link_ptr->value_c = link_ptr->weight;
-				link_ptr->weight = (FlintType) drand48() *
+				link_ptr->weight = (FlintType) snns_drand48() *
 				    (LEARN_PARAM2(parameterInArray) -
 				     LEARN_PARAM1(parameterInArray)) +
 					 LEARN_PARAM1(parameterInArray);
@@ -640,7 +640,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
      * low
      */
     if ((NET_ERROR(LEARN_SimulatedAnnealing_OutParameter) > MinimumError) && (Temperature > 0) &&
-	(drand48() > exp((MinimumError - NET_ERROR(LEARN_SimulatedAnnealing_OutParameter)) /
+	(snns_drand48() > exp((MinimumError - NET_ERROR(LEARN_SimulatedAnnealing_OutParameter)) /
 			 ((end_pattern - start_pattern) * Temperature)))) {
 	FOR_ALL_UNITS(unit_ptr) {
 	    flags = unit_ptr->flags;

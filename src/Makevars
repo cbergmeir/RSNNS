@@ -1,5 +1,10 @@
-PKG_CPPFLAGS=-w -I ./ `Rscript -e 'Rcpp:::CxxFlags()'`
-PKG_LIBS=-lfl `Rscript -e 'Rcpp:::LdFlags()'`
+PKG_CPPFLAGS=`Rscript -e 'Rcpp:::CxxFlags()'`
+PKG_LIBS=`Rscript -e 'Rcpp:::LdFlags()'`
+
+#-Wno-write-strings
+
+#PKG_CPPFLAGS=-Wno-write-strings -I ./ `Rscript -e 'Rcpp:::CxxFlags()'`
+#PKG_LIBS=-lfl `Rscript -e 'Rcpp:::LdFlags()'`
 
 #PKG_CPPFLAGS=-w -I ./
 #PKG_LIBS="-lfl"

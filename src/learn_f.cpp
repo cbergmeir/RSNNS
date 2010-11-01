@@ -2065,7 +2065,7 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 	    (LEARN_PARAM4(parameterInArray) != 0.0 || 
 	     LEARN_PARAM5(parameterInArray) != 0.0))
 	{
-#ifdef HAVE_LRAND48
+#ifdef HAVE_snns_lrand48
 	    unsigned short lastseed[3];
 	    unsigned short *seedptr;
 
@@ -2078,7 +2078,7 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 #endif
 	    kr_jogWeights(LEARN_PARAM4(parameterInArray), 
 			  LEARN_PARAM5(parameterInArray));
-#ifdef HAVE_LRAND48
+#ifdef HAVE_snns_lrand48
 	    /* reset to previous random seed */
 	    seed48(lastseed);
 #endif
