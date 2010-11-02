@@ -63,7 +63,7 @@ GROUP: Functions
 
 krui_err  SnnsCLib::krf_getInternalFuncInfo(int mode, struct FuncInfoDescriptor *func_descr)
 {
-  struct FuncTable  *ftbl_ptr;
+  const struct FuncTable  *ftbl_ptr;
   unsigned short  func_type;
 
 
@@ -269,7 +269,7 @@ int  SnnsCLib::krf_getNoOfFuncs(void)
   RETURNS  : TRUE if the given function was found, FALSE otherwise.
   UPDATE   : 
 ******************************************************************************/
-bool  SnnsCLib::krf_funcSearch(char *func_name, int func_type, FunctionPtr *func_ptr)
+bool  SnnsCLib::krf_funcSearch(const char *func_name, int func_type, FunctionPtr *func_ptr)
 {
   struct FuncInfoDescriptor  functionDescr;
 

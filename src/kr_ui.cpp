@@ -353,7 +353,7 @@ char  *SnnsCLib::krui_getUnitActFuncName(int UnitNo)
              error code otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  SnnsCLib::krui_setUnitActFunc(int unit_no, char *unitActFuncName)
+krui_err  SnnsCLib::krui_setUnitActFunc(int unit_no, const char *unitActFuncName)
 {
     struct Unit   *unit_ptr;
     FunctionPtr   act_func_ptr, act_deriv_func_ptr, act_2_deriv_func_ptr;
@@ -4748,7 +4748,7 @@ krui_err  SnnsCLib::krui_setUnitCenters(int unit_no, int center_no,
 ******************************************************************************/
 char  *SnnsCLib::krui_topo_err_msg(void)
 {
-    char  *dest_unit_name,  *src_unit_name;
+    char  *dest_unit_name = NULL,  *src_unit_name = NULL;
     //static char  krui_topo_err_msg_msg1[512];
     //static char  krui_topo_err_msg_msg2[512];
 
@@ -4762,21 +4762,23 @@ char  *SnnsCLib::krui_topo_err_msg(void)
     if (topo_msg.src_error_unit > 0)
         src_unit_name = krui_getUnitName( topo_msg.src_error_unit );
 
-    if (topo_msg.dest_error_unit > 0)
+    if (topo_msg.dest_error_unit > 0) {
         if (dest_unit_name == NULL)
             sprintf( krui_topo_err_msg_msg1, "Unit #%d is the destination unit. ", 
 		     topo_msg.dest_error_unit );
         else
             sprintf( krui_topo_err_msg_msg1, "Unit #%d (%s) is the destination unit. ", 
 		     topo_msg.dest_error_unit, dest_unit_name );
+    }
 
-    if (topo_msg.src_error_unit > 0)
+    if (topo_msg.src_error_unit > 0) {
         if (src_unit_name == NULL)
             sprintf( krui_topo_err_msg_msg2, "Unit #%d is the source unit. ", 
 		     topo_msg.src_error_unit );
         else
             sprintf( krui_topo_err_msg_msg2, "Unit #%d (%s) is the source unit. ", 
 		     topo_msg.src_error_unit, src_unit_name );
+    }
 
     if (topo_msg.dest_error_unit == 0)
         return( krui_topo_err_msg_msg2 );
@@ -4799,10 +4801,9 @@ char  *SnnsCLib::krui_topo_err_msg(void)
   RETURNS  :
   UPDATE   :
 ******************************************************************************/
-char  *SnnsCLib::krui_error(int error_code)
+const char  *SnnsCLib::krui_error(int error_code)
 {
 
-    int  NoOfMessages = (sizeof (err_message)) / (sizeof (err_message[0]));
     //static char  krui_error_mesg[512], krui_error_aux[512];
 
 

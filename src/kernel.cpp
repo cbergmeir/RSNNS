@@ -1450,7 +1450,8 @@ void  SnnsCLib::kr_deleteAllOutputLinks(struct Unit *source_unit_ptr)
 
 
   FOR_ALL_UNITS( unit_ptr )
-    if UNIT_IN_USE( unit_ptr )
+    if UNIT_IN_USE( unit_ptr ) 
+    {
       if UNIT_HAS_SITES( unit_ptr )
         {  /*  unit has sites  */
 	FOR_ALL_SITES( unit_ptr, site_ptr )
@@ -1491,6 +1492,7 @@ void  SnnsCLib::kr_deleteAllOutputLinks(struct Unit *source_unit_ptr)
 
               break;    /*  next unit  */
 	    }
+    }
 }
 
 
@@ -1715,6 +1717,7 @@ void  SnnsCLib::kr_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
 
       if(((flags & UFLAG_IN_USE) == UFLAG_IN_USE) 
 	  && !IS_SPECIAL_UNIT(unit_ptr))
+      {
       /*  unit is in use  */
       if (flags & UFLAG_DLINKS)
 	/*  unit has direct links   */
@@ -1734,6 +1737,7 @@ void  SnnsCLib::kr_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
 #else
             link_ptr->weight += link_ptr->weight * ((FlintType) snns_drand48() * range + min);
 #endif
+    }
   }
 }
 
@@ -1789,8 +1793,8 @@ krui_err SnnsCLib::kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2,
     double covadd;
     double corr;
     double mincorr, maxcorr;
-    int mincorrcol, mincorrrow;
-    int maxcorrcol, maxcorrrow;
+    int mincorrcol = 0, mincorrrow = 0;
+    int maxcorrcol = 0, maxcorrrow = 0;
 
     if (NetModified || (TopoSortID != TOPOLOGICAL_FF)) {
 	/* Net has been modified or topologic array isn't initialized */
@@ -2032,6 +2036,7 @@ krui_err  SnnsCLib::kr_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus,
 
     if(((flags & UFLAG_IN_USE) == UFLAG_IN_USE) 
        && !IS_SPECIAL_UNIT(unit_ptr))
+    {
 	/*  unit is in use  */
 	if (flags & UFLAG_DLINKS)
 	{
@@ -2060,6 +2065,7 @@ krui_err  SnnsCLib::kr_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus,
 			link_ptr->weight * ((FlintType) snns_drand48() * range + min);
 #endif
 	}
+    }
 
     return KRERR_NO_ERROR;		    
 }
@@ -3736,7 +3742,7 @@ GROUP: other functions
 
 float SnnsCLib::kr_NA_Error(int currentPattern, int error_unit, int error, bool ave)
 {
-  register struct   Unit *unit_ptr, *error_unit_ptr ;
+  register struct   Unit *unit_ptr, *error_unit_ptr = NULL;
   register Patterns       out_pat  ;
   register float          error_lin, error_sqr, error_su, devit ;
   int                     pattern_no, sub_pat_no;

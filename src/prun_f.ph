@@ -78,7 +78,7 @@ void pr_setHiddenPruning (int value);
 #define UFLAG_PRUNEFLAG 0x8000
 
 
-typedef krui_err (* PrunFuncPtr) (...);
+typedef krui_err (SnnsCLib::*PrunFuncPtr) (...);
 
  struct Unit *pr_candidateTargetUnit, *pr_candidateUnit;
  struct Link *pr_candidateLink;

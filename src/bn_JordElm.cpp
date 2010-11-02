@@ -48,7 +48,7 @@
 
 {
     krui_err     error_code = KRERR_NO_ERROR ;
-    int          i, unit_no, first_unit ;
+    int          i, unit_no, first_unit = -1;
     char         name[10] ;
 
   

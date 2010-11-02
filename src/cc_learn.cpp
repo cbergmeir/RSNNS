@@ -967,6 +967,10 @@ krui_err SnnsCLib::cc_generateSpecialUnits(int type)
     struct Unit *SpecUnitPtr;
     int CurrentUnit;
 
+    const char *cc_actFuncArray[]     ={"Act_Logistic","Act_LogSym","Act_TanH",
+                              "Act_CC_Thresh","Act_Sinus","Act_Exponential",
+			      "Act_Random"};
+
     cc_MakeMiscCalculationsForModifications();
 
     for(i=0;i<cc_MaxSpecialUnitNo;i++) {

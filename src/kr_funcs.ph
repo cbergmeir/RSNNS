@@ -33,7 +33,7 @@ int krf_getNoOfFuncs( void );
     this function. krf_funcSearch(...) returns TRUE if the given function was
     found, FALSE otherwise.
 */
-bool krf_funcSearch( char *func_name, int  func_type, FunctionPtr  *func_ptr );
+bool krf_funcSearch( const char *func_name, int  func_type, FunctionPtr  *func_ptr );
 
 /*  Returns the name of the given function
 */

@@ -47,7 +47,7 @@ void SnnsCLib::kr_recTouchContextUnits (struct Unit *unit_ptr)
 {
   struct Site   *site_ptr ;
   struct Link   *link_ptr ;
-  bool           unit_has_incoming_links ;
+  bool           unit_has_incoming_links = FALSE;
 
   if (unit_ptr->flags & UFLAG_REFRESH) return ;
 

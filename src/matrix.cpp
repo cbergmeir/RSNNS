@@ -227,7 +227,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 	register float		sum;
 	register float		dum;
 	register float		big;
-	register int		i, j, k, imax;
+	register int		i, j, k, imax=0;
 	register float		temp;
 	register float		*vv;
 

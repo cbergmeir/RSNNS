@@ -201,7 +201,8 @@
 */
 #define NO_OF_COLS(units,rows)  ((int) (units/rows) + POS_SIGN(units % rows))
 
-#define MAX(x,y)                ((x) > (y) ? (x) : (y))
+//already defined in cc_mac.h
+//#define MAX(x,y)                ((x) > (y) ? (x) : (y))
 
 /* No of columns for F1a, F2a, F1b, F2b */
 #define F1a_COLS                 NO_OF_COLS(f1aUnits, f1aRows)

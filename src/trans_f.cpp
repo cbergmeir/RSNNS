@@ -600,7 +600,9 @@ FlintType SnnsCLib::ACT_RM (struct Unit *unit_ptr)
 
 FlintType SnnsCLib::ACT_TACOMA(struct Unit *unit_ptr)
 {
-  ACT_FUNC_DEFS
+  //ACT_FUNC_DEFS
+  register struct Link  *__link_ptr;
+
   register FlintType sum, coordAct,WeightSum;
 
   sum =  0.0;
@@ -660,7 +662,8 @@ FlintType   SnnsCLib::ACT_LogisticI(struct Unit *unit_ptr)
 
 FlintType SnnsCLib::RbfUnitGetNormsqr(struct Unit *unit_ptr)
 {
-        ACT_FUNC_DEFS
+        //ACT_FUNC_DEFS
+        register struct Link  *__link_ptr;
         register FlintType      norm_2 = 0.0;   /* |X - T|^2            */
         register FlintType      diff;           /* difference           */
 
@@ -1400,7 +1403,8 @@ FlintType SnnsCLib::ACT_DERIV_TACOMA(struct Unit *unit_ptr)
     ((\frac{1}{1+e^{-Net}}-\frac{1}{2})^2 - frac{1}{4} )*h(\vec{x}) */
 
 
-  ACT_FUNC_DEFS
+  //ACT_FUNC_DEFS
+  register struct Link  *__link_ptr;
   float sum,coordAct,WeightSum;
   float bruch;
 

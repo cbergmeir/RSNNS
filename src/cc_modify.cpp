@@ -361,7 +361,7 @@ krui_err SnnsCLib::cc_calculateConnections(int SpecUnitNo)
 void SnnsCLib::cc_MakeMiscCalculationsForModifications(void)
 {
    float fTemp;
-   int   Height,i,j,k,chose;
+   int   Height,i,j,k=0,chose;
 
    switch(cc_modification){
       case(CC_STAT) :

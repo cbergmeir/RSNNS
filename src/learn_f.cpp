@@ -31,9 +31,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+
+/*
 #ifdef HAVE_VALUES_H
 #include <values.h>
 #endif
+*/
+
 #include <ctype.h>
 
 #include <limits.h>
@@ -635,7 +639,7 @@ float SnnsCLib::propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no, f
     register TopoPtrArray topo_ptr;
     int size;
     int pattern_class;
-    unsigned long int class_flag;
+    unsigned long int class_flag = 0;
     const int maxclasses = 8 * sizeof(unsigned long int);
     int adjust_this;
     sum_error = 0.0;		/* reset network error  */
@@ -4026,7 +4030,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
  
   while( kr_getSubPatternByOrder ( &pattern_no, &sub_pat_no ) )
     {
-      int      correct_output_unit_no;
+      int      correct_output_unit_no = -1;
       struct   Link *max_to_out_link_ptr;
       struct   Unit *max_rbf_ptr, *correct_output_unit_ptr;
 
@@ -4041,11 +4045,12 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
       correct_output_unit_ptr = NULL;
 
       while( (output_unit_ptr = * ++topo_ptr) != NULL )
-	if ( *out_pat_ptr++ > 0.0 )
+	if ( *out_pat_ptr++ > 0.0 ) {
 	  if ( correct_output_unit_ptr == NULL )
 	    correct_output_unit_ptr = output_unit_ptr;
 	  else
-	    return DDA_DESIRED_CLASS; 
+	    return DDA_DESIRED_CLASS;
+        } 
       
       /* Is there a desired class ? */
       max_rbf_ptr = NULL;
@@ -4057,7 +4062,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 	  /* Find nearest RBF (having highest activation) of correct class */
 	  
 	  FOR_ALL_LINKS( correct_output_unit_ptr, link_ptr)
-	    if ( link_ptr->to->act >= theta_pos )
+	    if ( link_ptr->to->act >= theta_pos ) {
 	      if ( max_rbf_ptr != NULL )
 		{
 		  if ( link_ptr->to->act > max_rbf_ptr->act ) 
@@ -4065,6 +4070,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 		}
 	      else 
 		max_rbf_ptr = link_ptr->to; 
+            }
 	}
       
       /* Shrink competing RBFs */
@@ -4096,7 +4102,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
       /* If there is a desired class: is the actual input pattern already covered 
 	 by an RBF of the correct class? */
       
-      if ( correct_output_unit_ptr != NULL )
+      if ( correct_output_unit_ptr != NULL ) {
 	if ( max_rbf_ptr != NULL) 
 	  {
 	    /* increase weight of link from nearest RBF 
@@ -4218,7 +4224,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 		  }
 	    
 	  } /* end else not covered/new rbf */
-      
+      }
     } /* end while kr_getSubPatternByOrder (Main Loop) */
   
   
@@ -7378,7 +7384,7 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
     float           unit_ptr_net;
     register TopoPtrArray topo_ptr;
     float           adapt;
-    int             winner, current_no;
+    int             winner = -1, current_no;
 
 
     /* calculate the activation and the output values         */
@@ -8541,9 +8547,9 @@ krui_err  SnnsCLib::TEST_JE_Rprop    (int     start_pattern    , int  end_patter
  void SnnsCLib::RM_learn(float learn_parameter)
 {
     register struct Link *link_ptr;
-    register struct Site *site_ptr;
+    register struct Site *site_ptr = NULL;
     register struct Unit *unit_ptr;
-    float ex_in, in_in, error, eta;
+    float ex_in = 0, in_in, error, eta;
 
     eta = learn_parameter;
 
@@ -8677,13 +8683,14 @@ krui_err SnnsCLib::LEARN_RM_delta (int start_pattern, int end_pattern,
 
 	/* update unit outputs */
 	FOR_ALL_UNITS( unit_ptr )
-	    if UNIT_IN_USE( unit_ptr )
+	    if UNIT_IN_USE( unit_ptr ) {
 		if (unit_ptr->out_func == OUT_IDENTITY)
 		    /* there is no need to call the output function  */
 		    unit_ptr->Out.output = unit_ptr->act;
 		else
 		    /* calculate unit's output also  */
 		    unit_ptr->Out.output = (this->*unit_ptr->out_func)(unit_ptr->act);
+            }
     }
 
 

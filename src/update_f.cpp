@@ -78,7 +78,7 @@ krui_err  SnnsCLib::UPDATE_syncPropagate(float *parameterArray, int NoOfParams)
 
     /*    update unit outputs */
     FOR_ALL_UNITS( unit_ptr )
-	if UNIT_IN_USE( unit_ptr )
+	if UNIT_IN_USE( unit_ptr ) {
 	    /*  unit is in use and enabled  */
 	    if (unit_ptr->out_func == OUT_IDENTITY)
 		/*  identity output function: don't call the output function  */
@@ -86,6 +86,7 @@ krui_err  SnnsCLib::UPDATE_syncPropagate(float *parameterArray, int NoOfParams)
 	    else
 		/* no identity output function: calculate unit's output also  */
 		unit_ptr->Out.output = (this->*unit_ptr->out_func) (unit_ptr->act);
+         }
 
     return( KRERR_NO_ERROR );
 }
@@ -1922,7 +1923,8 @@ krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
 {
     register struct Unit   *unit_ptr; 
     FlintType               sum, aux, min;
-    ACT_FUNC_DEFS    /* defines link- and site-pointer */
+    //ACT_FUNC_DEFS    /* defines link- and site-pointer */
+    register struct Link  *__link_ptr;
     register int            i;
     int                     NoOfOnes, where;
     struct Unit            **unitsToUpdate;
@@ -2038,13 +2040,14 @@ krui_err SnnsCLib::UPDATE_RM_Propagate (float *parameterArray, int NoOfParams)
 
       /* update unit outputs  */
       FOR_ALL_UNITS( unit_ptr )
-	  if UNIT_IN_USE( unit_ptr )
+	  if UNIT_IN_USE( unit_ptr ) {
 	      if (unit_ptr->out_func == OUT_IDENTITY)
 		  /*  identity output function: don't call output function  */
 		  unit_ptr->Out.output = unit_ptr->act;
 	      else
 		  /* calculate unit's output also  */
 		  unit_ptr->Out.output = (this->*unit_ptr->out_func) (unit_ptr->act);
+          }
   }
 
   return( KRERR_NO_ERROR );

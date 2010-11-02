@@ -497,7 +497,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
 {
     //static float    LEARN_SimulatedAnnealing_OutParameter[1]; /* LEARN_SimulatedAnnealing_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
-    float           error;
+    float           error = 0;
     long int        NextParameter;
     register FlagWord flags;
     register struct Link *link_ptr;
@@ -759,7 +759,7 @@ SnnsCLib::TEST_SimulatedAnnealing(int start_pattern, int end_pattern,
 {
     //static float    TEST_SimulatedAnnealing_OutParameter[1]; /* TEST_SimulatedAnnealing_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
-    float           error;
+    float           error = 0;
     
     if (NoOfInParams < 4)
 	return (KRERR_PARAMETERS); /* Not enough input parameters  */

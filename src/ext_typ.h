@@ -67,7 +67,7 @@ GROUP: Type Definition of Function Table
 /*  Function table structure
 */
 struct  FuncTable  {
-  char    *func_name;                 /*  name of the function  */
+  const char    *func_name;                 /*  name of the function  */
   unsigned short  func_type,          /*  type of the function  */
            no_of_input_parameters,    /*  no. of input parameters used by this function  */
                                       /*  (only for Update, Init and Learning functions)  */

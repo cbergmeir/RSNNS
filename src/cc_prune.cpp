@@ -86,6 +86,8 @@ float SnnsCLib::cc_getPruningError(int pruneFunc,int StartPattern,int EndPattern
   int p,n;
   float sse,GeTe;
 
+  const char *cc_pruningFuncArray[] ={" SBC "," AIC ","CMSEP"};
+
   p=krui_countLinks();
   sse = cc_getErr (StartPattern, EndPattern);
   n=kr_np_pattern( PATTERN_GET_NUMBER, 0, 0 );

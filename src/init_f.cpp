@@ -1155,7 +1155,7 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 	register struct Unit	*hidden_unit;	/* current hidden unit	*/
 	register int		hidden_units;	/* number of hidden u.	*/
 	register int		act_hidden_num;	/* number of current hu.*/
-	int			reshuffle;	/* restore shuffled p.	*/
+	int			reshuffle = FALSE;	/* restore shuffled p.	*/
 
 #ifdef RBF_DEBUG
 	fprintf(stderr, "RBF_Weights_Kohonen called, start initialization:\n");
@@ -1340,7 +1340,7 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 
 krui_err SnnsCLib::RbfStartInit(float *parameterArray, int NoOfParams, int init_type)
 {
-	krui_err	ret_code;	/* error return code		*/
+	krui_err	ret_code = 0;	/* error return code		*/
 	float		bias;		/* bias of hidden units		*/
 	float		deviation;	/* deviation of centers		*/
 	float		f_0_lin;	/* learning value for pattern==0*/

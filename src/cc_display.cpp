@@ -151,10 +151,12 @@ krui_err SnnsCLib::cc_calculateNetParameters()
  }
 
  FOR_ALL_UNITS(unitPtr){
-   if(IS_INPUT_UNIT(unitPtr))
+   if(IS_INPUT_UNIT(unitPtr)) {
      CC_SET_LAYER_NO(unitPtr,0);
-   if(IS_OUTPUT_UNIT(unitPtr))
+   }
+   if(IS_OUTPUT_UNIT(unitPtr)) {
      CC_SET_LAYER_NO(unitPtr,NoOfLayers+2);
+   }
  }
 
  cc_outputXMax=/* *outXMax; */ X_MIN_POS+4;

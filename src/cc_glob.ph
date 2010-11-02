@@ -61,6 +61,26 @@ float OnlineBackPropOfflinePart(float oldValue, float* previousSlope,
 				float* currentSlope, float* LastChange,
 				float eta, float mu, float dummy);
 
+static const char* err_message[];
+static const char* ext_messages[];
+static const int NoOfMessages;
+
+/*
+static char *cc_actFuncArray[]     ={"Act_Logistic","Act_LogSym","Act_TanH",
+                              "Act_CC_Thresh","Act_Sinus","Act_Exponential",
+			      "Act_Random"};
+
+static char *cc_actFuncArray2[]     ={"Logistic"," LogSym ",
+			      "  TanH  ","dummy"," Sinus  ",
+			      "  Gauss "," Random "};
+static char *cc_learningFuncArray[]={" Batch-BP  "," Backprop  ",
+			      " Quickprop ","   Rprop   "};
+static char *cc_ModificationArray[]={"   none ","   SDCC ","   LFCC ","   RLCC ",
+			      "   ECC  ","   GCC  ","  Static"};
+
+static char *cc_pruningFuncArray[] ={" SBC "," AIC ","CMSEP"};
+*/
+
 struct CC_DATA  cc_data;
 
 

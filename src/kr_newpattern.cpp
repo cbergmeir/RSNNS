@@ -555,7 +555,7 @@ krui_err SnnsCLib::kr_npui_loadNewPatterns(char *filename, int *set_no)
     FILE *infile;
     int pat_set;
     int read_from_pipe = 0;
-    char *buf;
+    char *buf = NULL;
     krui_err err_code;
 
     TRACE_IN();
@@ -893,7 +893,7 @@ krui_err SnnsCLib::kr_npui_setClassDistribution(unsigned int *class_sizes)
 	index = 0;
 	while (list)
 	{
-	    if (list->chunk_amount != class_sizes[index])
+	    if (list->chunk_amount != (int) class_sizes[index])
 	    {
 		list->chunk_amount = class_sizes[index];
 		has_changed++;

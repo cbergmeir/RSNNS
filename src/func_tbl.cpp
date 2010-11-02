@@ -22,6 +22,8 @@
 #include <stdio.h>
 */
 
+#include "SnnsCLib.h"
+
 //#include "kr_typ.h"	    /*	Kernel Types and Constants  */
 //#include "kr_const.h"       /*  Constant Declarators for SNNS-Kernel  */
 /*
@@ -68,7 +70,7 @@
 
 /*  Here is the function table
 */
-kernel_func_table	=
+const struct FuncTable SnnsCLib::kernel_func_table[]	=
   {
 
 /*  Output functions  */
@@ -411,7 +413,7 @@ kernel_func_table	=
 /*  Define the function table size
 */
 //const int  NoOfKernelFuncs = (sizeof (kernel_func_table) / sizeof (struct FuncTable));
-NoOfKernelFuncs = (sizeof (kernel_func_table) / sizeof (struct FuncTable));
+const int  SnnsCLib::NoOfKernelFuncs = (sizeof (kernel_func_table) / sizeof (struct FuncTable));
 /*  **********************************************************************  */
 
 

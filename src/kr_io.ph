@@ -125,8 +125,12 @@ char  fmt_shape1 [ LIN_MAX ],
 	     fmt_blank	[ LIN_MAX ];
 
 
-int  NoOfTitles;
+//int  NoOfTitles;
 
+static const char* resHeader[];
+static const char* headers[];
+static const char* title[];
+static const int NoOfTitles;
 /*
 void  mstrcat(int __builtin_va_alist);
 void  mstrcpy(int __builtin_va_alist);

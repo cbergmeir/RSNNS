@@ -22,7 +22,7 @@ double snns_drand48(void)
 
 SnnsCLib::SnnsCLib() {
 
-int counter=0;
+//int counter=0;
 //Rprintf("hier%d\n",counter++);
 //cc_modify.ph
 ccs_GroupList=NULL;
@@ -200,7 +200,6 @@ NormR       = 0.0;
 NoOfDelaySteps = 0;
 
 GlobalReset     = FALSE;
-TopDownPhase;
 f1_stable = FALSE;
 
 
@@ -234,11 +233,6 @@ continueLearning=0;
 
 
 //Rprintf("hier%d\n",counter++);
-//--------------------------------
-//kr_io.ph
-//--------------------------------
-
-NoOfTitles = (sizeof title) / (sizeof title[0]);
 
 //Rprintf("hierXX_%d\n",counter++);
 //--------------------------------
@@ -511,7 +505,7 @@ kr_getSubPatData_dummy_data = 0.0;
 
 
 
-#include "func_tbl.txx"
+//#include "func_tbl.txx"
 
 }
 

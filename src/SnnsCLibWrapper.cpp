@@ -1557,7 +1557,6 @@ RcppExport SEXP SnnsCLib__DefShowSubPat(SEXP xp) {
   int outsize=0;
   int inpos=0;
   int outpos=0;
-  int max_n_pos=0;
 
   int err = snnsCLib->krui_DefShowSubPat(&insize, &outsize, &inpos, &outpos);
 

@@ -141,7 +141,7 @@ void SnnsCLib::pr_checkDeadUnits (void)
 
         /* count links for each unit */
         FOR_ALL_UNITS (unit_ptr)
-            if (! IS_SPECIAL_UNIT (unit_ptr))
+            if (! IS_SPECIAL_UNIT (unit_ptr)) {
                 if UNIT_HAS_DIRECT_INPUTS (unit_ptr)
                     FOR_ALL_LINKS (unit_ptr, link_ptr)
                         /* calculate number of in- and outgoing links */
@@ -150,6 +150,7 @@ void SnnsCLib::pr_checkDeadUnits (void)
                     FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
                         /* calculate number of in- and outgoing links */
                         pr_updateNoOfLinks (unit_ptr, link_ptr);
+            }
 
         /* delete dead units */
         FOR_ALL_UNITS (unit_ptr)
@@ -592,7 +593,7 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
     pr_noOfLinks = 0;
 
     FOR_ALL_UNITS (unit_ptr)
-	if (!IS_SPECIAL_UNIT (unit_ptr))
+	if (!IS_SPECIAL_UNIT (unit_ptr)) {
 	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr)
 		FOR_ALL_LINKS (unit_ptr, link_ptr)
 		{
@@ -603,6 +604,7 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 		FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_noOfLinks++;
+        }
 
 }
 
@@ -1312,7 +1314,7 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
 
         /* calculate mean for all units */
         FOR_ALL_UNITS (unit_ptr)
-            if (! IS_SPECIAL_UNIT (unit_ptr)) 
+            if (! IS_SPECIAL_UNIT (unit_ptr)) {
                 if (pr_Pass == PR_CONST) {
                     unit_ptr->value_c += (unit_ptr->Out.output - unit_ptr->value_b)
                                          * (unit_ptr->Out.output - unit_ptr->value_b);
@@ -1327,6 +1329,7 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
                                          * (unit_ptr->Out.output 
                                              + this_unit_ptr->Out.output - 1.0);
                 } 
+            }
     }
 
     FOR_ALL_UNITS (unit_ptr)
@@ -1446,7 +1449,7 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
         return (KRERR_UNIT_MISSING);
 
     FOR_ALL_UNITS (unit_ptr) {
-        if (! IS_SPECIAL_UNIT (unit_ptr))
+        if (! IS_SPECIAL_UNIT (unit_ptr)) {
             if UNIT_HAS_DIRECT_INPUTS (unit_ptr) {  /* unit has direct inputs */
                 FOR_ALL_LINKS (unit_ptr, link_ptr)
                     if (link_ptr->to == pr_candidateUnit) {
@@ -1460,6 +1463,7 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
                         if (KernelErrorCode != KRERR_NO_ERROR) return (KernelErrorCode);
 		    }
 	    }
+        }
     }
 
     pr_candidateUnit->bias = 0;
@@ -1675,7 +1679,7 @@ krui_err SnnsCLib::pr_callPrunFunc (int pattern)
     pr_candidateLink       = NULL;
 
     /* invoke function */
-    KernelErrorCode = (*(PrunFuncPtr) net_func_ptr) (pattern);
+    KernelErrorCode = (this->*(PrunFuncPtr)net_func_ptr) (pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
 

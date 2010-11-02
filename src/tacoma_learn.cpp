@@ -337,7 +337,8 @@ krui_err SnnsCLib::tac_initVariables(float* ParameterInArray,
   struct Link* LinkPtr;
   int UnitNo;
   
-  if (krui_getUnitActFuncName(GET_UNIT_NO(OldUnit)) != "ACT_TACOMA") return (TRUE);
+  if (strcmp(krui_getUnitActFuncName(GET_UNIT_NO(OldUnit)), "ACT_TACOMA") != 0) return (TRUE);
+  //if (krui_getUnitActFuncName(GET_UNIT_NO(OldUnit)) != "ACT_TACOMA") return (TRUE);
   /* in/output or with CC calculated units */
   /* Now start with connection routing */
   cc_getPatternParameter(StartPattern,EndPattern,&start,&end,&n);
@@ -531,7 +532,7 @@ krui_err SnnsCLib::tac_initXiAndRis(int StartPattern, int EndPattern)
 ******************************************************************************/
 int  SnnsCLib::tac_NextSpecialUnit(int p,Patterns in_pat_First)
 {
-  int s,i,NextSpecialUnitInInputSpace;
+  int s,i,NextSpecialUnitInInputSpace = 0;
   float devit,SummedSquaredDistance,BestSSD;
   Patterns in_pat;
 
