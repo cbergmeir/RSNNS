@@ -98,7 +98,7 @@
    };
 #endif
 /* Tokens.  */
-
+/*
 #define L_BRACKET 258
 #define R_BRACKET 259
 #define VERSION_HEADER 260
@@ -120,7 +120,7 @@
 #define NUMBER 276
 #define NAME 277
 #define V_NUMBER 278
-
+*/
 
 
 

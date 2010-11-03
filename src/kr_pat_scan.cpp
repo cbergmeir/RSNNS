@@ -30,6 +30,7 @@
 /* The "const" storage-class-modifier is valid. */
 #define YY_USE_CONST
 
+#define YY_NO_UNPUT
 #else	/* ! __cplusplus */
 
 #if __STDC__
@@ -716,12 +717,13 @@ YY_MALLOC_DECL
 
 /* Copy whatever the last rule matched to the standard output. */
 
-#ifndef ECHO
+//#ifndef ECHO
 /* This used to be an fputs(), but since the string might contain NUL's,
  * we now use fwrite().
  */
-#define ECHO (void) fwrite( yytext, yyleng, 1, yyout )
-#endif
+//#define ECHO (void) fwrite( yytext, yyleng, 1, yyout )
+//#define ECHO unsigned int xx_res_not_used = fwrite( yytext, yyleng, 1, yyout )
+//#endif
 
 /* Gets input and stuffs it into "buf".  number of characters read, or YY_NULL,
  * is returned in "result".
@@ -792,6 +794,7 @@ int SnnsCLib::yylex YY_PROTO(( void ))
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
+        unsigned int xx_res_not_used;
 #line 56 "kr_pat_scan.l"
 
 
@@ -1025,7 +1028,8 @@ return(ERROR);
 case 29:
 YY_RULE_SETUP
 #line 130 "kr_pat_scan.l"
-ECHO;
+//ECHO;
+xx_res_not_used = fwrite( yytext, yyleng, 1, yyout );
 	YY_BREAK
 #line 1039 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):

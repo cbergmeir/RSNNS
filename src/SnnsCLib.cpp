@@ -97,8 +97,9 @@ transTableSize = 0;
 //Rprintf("hier%d\n",counter++);
 //kr_funcs.ph
 
-netFuncInit = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                         FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE  };
+//netFuncInit = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+//                         FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE  };
+for(int i=0; i<(NO_OF_FUNC_TYPES * NO_OF_KERNELS); i++) netFuncInit[i] = FALSE;
 
 //Rprintf("hier%d\n",counter++);
 //--------------------------------
