@@ -1,3 +1,7 @@
+library(RSNNS)
+
+getSNNSFunctionTable()
+
 #library(ROCR)
 #pred <- ROCR::prediction(predictions[,2], as.numeric(labels==2))
 #
@@ -24,7 +28,7 @@ res <- 5
 is.list(res)
 is.null(res$err)
 
-library(RSNNS)
+
 
 snnsObject <- SnnsRObjectFactory()
 snnsObject$setCurrentUnit(500)

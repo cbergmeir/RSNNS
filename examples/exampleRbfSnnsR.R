@@ -20,11 +20,11 @@ snnsObject$setUnitDefaults(0,0,1,0,1,'Act_Logistic','Out_Identity')
 #snnsObject$setInitialisationFunc('RBF_Weights')
 #snnsObject$createNet(c(2,45,2), TRUE)
 
-snnsObject$createNet(c(2,2), linOut = FALSE, fullyConnectedFeedForward = FALSE)
+snnsObject$createNet(c(2,2), fullyConnectedFeedForward = FALSE)
 
 
 
-patset <- snnsObject$createPatterns(inputs, outputs)
+patset <- snnsObject$createPatSet(inputs, outputs)
 snnsObject$setCurrPatSet(patset$set_no)
 
 #snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) )

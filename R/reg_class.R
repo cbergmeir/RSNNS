@@ -1,3 +1,13 @@
+#' Function to split data into training and test set.
+#'
+#' Split the input and target values to a training and a test set. Test set is taken from the end of the
+#' data, if shuffling is wanted, it has to be done as preprocessing to this function. Returns a named list.
+#' 
+#' @param x inputs
+#' @param y targets
+#' @param ratio ratio of training and test sets (default: 15\% of the data is used for testing)
+#' @export
+#' @author Christoph
 splitForTrainingAndTest <- function(x, y, ratio=0.15) {
   
   x <- as.matrix(x)
@@ -42,7 +52,12 @@ checkInput <- function(x,y) {
 }
 
 #' Plot the iterative training and test error during training of the net.
-#'
+#' 
+#' Plots (if present) the class members IterativeFitError (as black line) and 
+#' IterativeTestError (as red line).
+#'  
+#' @param object a reg_class object
+#' @param ... parameters passed to \code{plot}
 #' @export
 #' @author Christoph
 plotIterativeError <- function(object, ...)
@@ -67,6 +82,11 @@ plotIterativeError <- function(object, ...)
 
 #' Decode class labels from a numerical or levels vector to a binary matrix.
 #'
+#' Convert the input vector to a binary matrix, which has the value 1 exactly in
+#' the column given by the value in the vector, e.g. 3 --> 0010000.. Number of columns 
+#' of the resulting matrix depends on the number of unique labels found in the vector.
+#' 
+#' @param x class label vector
 #' @export
 #' @author Christoph
 decodeClassLabels <- function(x) {
@@ -91,6 +111,14 @@ decodeClassLabels <- function(x) {
   targets
 }
 
+#' Applies analyzeClassification row-wise to a matrix.
+#' 
+#' @param x inputs
+#' @param method same as in analyzeClassification
+#' @param l idem
+#' @param h idem
+#' @export
+#' @author Christoph
 encodeClassLabels <- function(x, method="WTA", l=0.0, h=0.0) {
   apply(x, 1, function(y) analyzeClassification(y, method, l, h))
 }
@@ -100,11 +128,19 @@ toNumericClassLabels <- function(x) {
   else return(as.numeric(x))
 }
 
-#' Converts continuous neuronal outputs to class labels
+#' Converts continuous neuronal outputs to class labels.
 #' 
 #' Three methods are implemented: 402040, WTA and ForcedWTA.
-#' 402040 and WTA are implemented as in the SNNS Manual (4.2, pp269)
+#' 402040 and WTA are implemented as in the SNNS Manual 4.2 (pp 269)
 #' 
+#' @param y inputs
+#' @param method winner-takes-all or 402040
+#' @param l lower bound, e.g. in 402040: l=0.4
+#' @param h upper bound, e.g. in 402040: h=0.6
+#' @references 
+#' Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' @export
 #' @author Christoph
 analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
   
@@ -143,6 +179,18 @@ analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
 #encodeClassLabels(y)
 #toNumericClassLabels(iris[,5])
 
+#' Computes a confusion matrix.
+#' 
+#' If the class labels are not already encoded, they are encoded with
+#' default values. The confusion matrix shows, how many times a pattern
+#' with the real class x was classified as class y. A perfect method
+#' should result in a diagonal matrix. All values not on the diagonal
+#' are errors of the method.
+#' 
+#' @param targets the known, correct target values
+#' @param predictions the corresponding predictions of a method for the targets
+#' @export
+#' @author Christoph
 confusionMatrix <- function(targets, predictions) {
   
   if(is.matrix(targets)) {
@@ -167,9 +215,10 @@ confusionMatrix <- function(targets, predictions) {
 #'
 #' Code is taken from R news Volume 4/1, June 2004
 #' 
+#' @param T predictions
+#' @param D targets
 #' @export
 #' @author ...
-
 plotROC <-function(T,D){
   cutpoints<-c(-Inf, sort(unique(T)), Inf)
   sens<-sapply(cutpoints,
@@ -180,8 +229,16 @@ plotROC <-function(T,D){
 }
 
 
-#' Regression plot.
-#'
+#' Plot a regression error plot.
+#' 
+#' The plot shows target values on the x-axis and fitted/predicted values on the y-axis. 
+#' The optimal fit would yield a line through zero with gradient one.
+#' This optimal line is shown in black color. A linear fit to the actual data
+#'  is shown in red color.
+#' 
+#' @param targets the target values
+#' @param fits the values predicted/fitted by the model
+#' @param ... parameters passed to \code{plot}
 #' @export
 #' @author Christoph
 plotRegressionError <- function(targets, fits, ...)

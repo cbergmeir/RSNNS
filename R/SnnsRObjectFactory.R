@@ -1,22 +1,22 @@
-#' The main class, contains an instance of the SnnsCLib, i.e. a neural net
-# @slot layers ...
-# @slot generalErrorIterations ...
-# @slot fitted.values ...
-#' @slot snnsCLibPointer a pointer to the corresponding c++ class
+#' The main class, contains a C++ object of type SnnsCLib, i.e. an instance of SNNS
+#' 
+#' 
+#' 
+#' @slot snnsCLibPointer a pointer to the corresponding C++ class
 setClass( "SnnsR", representation( snnsCLibPointer = "externalptr" ) )
 
-#layers = "matrix", 
-#generalErrorIterations = "matrix", 
-#fitted.values = "matrix",
-
-#' Enable calling of C functions as methods of SnnsR objects.
+#' Enable calling of C++ functions as methods of SnnsR objects.
 #'
-#' This function makes methods of SnnsR__ and SnnsCLib__ accessible via $
-#' if no SnnsR__ method with the name is present, then the according SnnsCLib__ 
+#' This function makes methods of SnnsR__ and SnnsCLib__ accessible via $.
+#' If no SnnsR__ method with the name is present, then the according SnnsCLib__ 
 #' method is called
 #'
 # @export
 #' @author Christoph
+#' @rdname SnnsRObject method calling mechanism
+#' @param name function to call
+#' @usage \S4method{$}{SnnsR}(x, name) 
+#' @aliases $,SnnsR-method
 setMethod( "$", "SnnsR", function(x, name ){
       function(...) {
         #print(x)
@@ -52,19 +52,10 @@ setMethod( "$", "SnnsR", function(x, name ){
 #' @author Christoph
 SnnsRObjectFactory <- function(){
 
-  #print("object factory start\n")  
-  #mySnnsObject <- new( "SnnsR", pointer=.Call("SnnsCLib__new", package="RSNNS"))
-
-  mySnnsObject <- new( "SnnsR")
-  mySnnsObject@snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")
+  snnsObject <- new( "SnnsR")
+  snnsObject@snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")
   
-  #mySnnsObject@layers <- as.matrix(0)
-  #mySnnsObject@generalErrorIterations <- as.matrix(0)
-  #mySnnsObject@fitted.values <- as.matrix(0)
-  
-  #print("object factory ok\n")
-  
-  return(mySnnsObject)
+  return(snnsObject)
 }
 
 

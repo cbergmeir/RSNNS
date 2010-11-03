@@ -7,6 +7,7 @@ mlp <- function(x, ...) UseMethod("mlp")
 #' Create and train an mlp.
 #'
 #' @export
+#' @S3method mlp default
 #' @author Christoph
 mlp.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="Randomize_Weights", initFuncParams=c(-0.3, 0.3), 

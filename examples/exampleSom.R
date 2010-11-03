@@ -41,4 +41,5 @@ model$map
 model$spanningTree
 model$labelledSpanningTree
 
+names(model)
 #model$snnsObject$saveNet("/home/bergmeir/koh_mat_test.net","koh_mat_test")

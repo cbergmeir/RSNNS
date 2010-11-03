@@ -7,9 +7,7 @@ outputs <- snnsData$laser_1000.pat[,outputColumns(snnsData$laser_1000.pat)]
 
 par(mfrow=c(3,2))
 
-ratio <- 0.15
-
-patterns <- splitForTrainingAndTest(inputs, outputs)
+patterns <- splitForTrainingAndTest(inputs, outputs, ratio=0.15)
 
 #as.matrix(patterns$inputsTest)
 

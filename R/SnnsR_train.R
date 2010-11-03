@@ -1,16 +1,27 @@
 #' Train a network and test it in every training iteration.
 #'
-#' @param snnsObject the object the function is applied to 
-#' @param inputs a matrix with inputs for the network
-#' @param targets the corresponding targets
+#' @param inputsTrain a matrix with inputs for the network
+#' @param targetsTrain the corresponding targets
+#' @param initFunc the initialization function to use
+#' @param initFuncParams the parameters for the initialization function
 #' @param learnFunc the learning function to use
 #' @param learnFuncParams the parameters for the learning function
+#' @param updateFunc the update function to use
+#' @param updateFuncParams the parameters for the update function
+#' @param outputMethod the output method of the net
 #' @param maxit maximum of iterations to learn
 #' @param shufflePatterns should the patterns be shuffled?
-#' @export
-# @seealso \code{\link{SnnsR__createFullyConnectedFeedForwardNet}}
+#' @param computeError should the error be computed in every iteration?
+#' @param inputsTest a matrix with inputs to test the network
+#' @param targetsTest the corresponding targets for the test input
 #' @author Christoph
-# @examples
+#' @rdname SnnsRObject$train
+#' @usage \S4method{train}{SnnsR}(inputsTrain, targetsTrain=NULL, 
+#'     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
+#'     learnFunc="Quickprop", learnFuncParams=c(0.2, 0, 0, 0),
+#'     updateFunc="Topological_Order", updateFuncParams=c(0.0), outputMethod="reg_class", 
+#'     maxit=100, shufflePatterns=TRUE, computeError=TRUE, inputsTest=NULL, targetsTest=NULL)
+#' @aliases train,SnnsR-method SnnsRObject$train
 SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL, 
     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="Quickprop", learnFuncParams=c(0.2, 0, 0, 0),

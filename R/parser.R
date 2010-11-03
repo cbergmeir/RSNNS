@@ -38,6 +38,7 @@ readResFile <- function(filename)  {
   
 }
 
+
 savePatFile <- function(inputs, targets, filename)  {
 
   snnsObject <- SnnsRObjectFactory()
@@ -65,16 +66,32 @@ readPatFile <- function(filename)  {
   
 }
 
-inputColumns <- function(table)  {
+#' Function to get the columns that are inputs
+#'
+#' This function extracts all columns from a matrix whose column names begin with "in".
+#' The example data of this package follows this naming convention. 
+#' 
+#' @param patterns matrix or data.frame containing the patterns 
+#' @export
+#' @author Christoph
+inputColumns <- function(patterns)  {
   
-  res <- which(substr(colnames(table),1,2) == "in")
+  res <- which(substr(colnames(patterns),1,2) == "in")
   return(res)
 
 }
 
-outputColumns <- function(table)  {
+#' Function to get the columns that are targets
+#'
+#' This function extracts all columns from a matrix whose column names begin with "out".
+#' The example data of this package follows this naming convention. 
+#' 
+#' @param patterns matrix or data.frame containing the patterns 
+#' @export
+#' @author Christoph
+outputColumns <- function(patterns)  {
   
-  res <- which(substr(colnames(table),1,3) == "out")
+  res <- which(substr(colnames(patterns),1,3) == "out")
   return(res)
 
 }

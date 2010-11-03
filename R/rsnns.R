@@ -4,6 +4,8 @@
 #' 
 #' @param object the rsnns object
 #' @export
+#' @S3method print rsnns
+#' @method print rsnns
 #' @author Christoph
 print.rsnns <- function(object, ...)
 {
@@ -35,6 +37,8 @@ print.rsnns <- function(object, ...)
 #' 
 #' @param object the reg_class object
 #' @export
+#' @S3method summary rsnns
+#' @method summary rsnns
 #' @author Christoph
 summary.rsnns <- function(object)
 {
@@ -111,6 +115,8 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
 #' @param object the reg_class object
 #' @param newdata the new input data which is used for prediction
 #' @param type is the new data regression or classification data?
+#' @S3method predict rsnns
+#' @method predict rsnns
 #' @export
 #' @author Christoph
 predict.rsnns <- function(object, newdata)
