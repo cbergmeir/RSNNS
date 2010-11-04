@@ -1,12 +1,12 @@
 \documentclass[a4paper]{article}
 
-%\VignetteIndexEntry{RSNNS: Neural networks in R}
 \usepackage[latin9]{inputenc}
 \usepackage{verbatim}
 \usepackage{amsmath}
 \usepackage{Sweave}
 
 \SweaveOpts{keep.source=TRUE, eps=FALSE}
+%\VignetteIndexEntry{RSNNS: Neural networks in R}
 
 \newcommand{\RSNNS}{\texttt{RSNNS} }
 \newcommand{\SnnsCLib}{\texttt{SnnsCLib} }
@@ -331,22 +331,18 @@ hist(model$fitted.values - patterns$targetsTrain, col="lightblue",
 
 Classification is very similar to regression. The neuronal output is normally set to the logistic function instead of linear output, and for each possible class, an output neuron is generated. Training targets force the activation of the neuron representing the correct class, i.e. its output should be close to one. The other neurons should output values close to zero. Methods of pre- and postprocessing to facilitate such a procedure are present in \texttt{RSNNS}. We use the well-known iris dataset present in R for this example.
 
-%TODO: explain the preprocessing and make it visible; use the same one for the som, and code it into some functions..
+The data is loaded, shuffled, and preprocessed using the function \texttt{normalizeData}, which has different normalization types implemented. We use a normalization to mean zero and variance one:
 
-\begin{Scode}{results=hide, echo=FALSE}
+\begin{Scode}{results=hide}
 data(iris)
-#shuffle the vector
 iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
-#center data
-irisValues <- matrix(nrow=nrow(iris), ncol=4)
-for(i in 1:4) {
-  irisValues[,i] <- iris[,i] - mean(iris[,i])  
-}
+irisValues <- normalizeData(iris[,1:4], "norm")
+irisTargets <- iris[,5]
 \end{Scode}
 
 \begin{Scode}{results=hide}
-irisTargets <- decodeClassLabels(iris[,5])
-iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
+irisDecTargets <- decodeClassLabels(irisTargets)
+iris <- splitForTrainingAndTest(irisValues, irisDecTargets, ratio=0.15)
 \end{Scode}
 
 The function \texttt{decodeClassLabels} generates a binary matrix from an integer-valued input vector representing class labels. This matrix can then be used as training targets for the multilayer perceptron (or any other supervised learning method):
@@ -384,17 +380,10 @@ confusionMatrix(iris$targetsTrain,
 A self organizing map (som) is an unsupervised learning method for clustering. Similar input patterns are spatially near to each other in the map.
 In this example, again the iris data is used. The som can be trained with:
 
-\begin{Scode}{results=hide, echo=FALSE}
-data(iris)
-
-##normalization
-inputs <- apply(iris[,1:4],2, function(x) {(x - min(x)) / (max(x) - min(x))})
-\end{Scode}
-
 \begin{Scode}{results=hide}
-model <- som(inputs, mapX=16, mapY=16, maxit=500,  
+model <- som(irisValues, mapX=16, mapY=16, maxit=500,  
              calculateActMaps=TRUE, calculateSpanningTree=TRUE, 
-             targets=iris[,5])
+             targets=irisTargets)
 \end{Scode}
 
 The targets parameter is optional. If given, a labeled spanning tree is calculated, to see if patterns from the same class appear as groups in the map. As for large pattern sets calculation of the outputs can take a long time, the parameters \texttt{calculateMap}, \texttt{calculateActMaps}, and \texttt{calculateSpanningTree} can be used to control which results are computed. Component maps are always computed.
@@ -403,7 +392,7 @@ The results in more detail are:
 \paragraph{model\$actMaps} An activation map is simply the networks activation for one pattern. The activation maps list \texttt{actMaps} contains a list of activation maps for each pattern. If there are many patterns, this list can be very large. All the other results can be computed from this list. So, being an intermediary result, with limited use especially if many patterns are present, it is not saved if not explicitly requested by the parameter \texttt{calculateActMaps}.
 \paragraph{model\$map} The most common representation of the self organizing map. For each pattern, the winner neuron is computed from its activation map. As unit activations represent euclidean distances, the winner is the unit with minimal activation. The map shows then, for how many patterns each neuron was the winner.
 \paragraph{model\$spanningTree} Same as model\$map, but the numbers do not represent the amount of patterns where the neuron won, but the number identifies the last pattern that led to minimal activation in the neuron. The spanning tree is calculated directly by the SNNS kernel, so it's computation is pretty fast. The concept of som's in SNNS apears to be that the amount of cells is large compared to the amount of patterns, and so it will normally not occur that a neuron wins for more than one pattern. Otherwise, this type of result has limited amount of information.
-\paragraph{model\$labelledSpanningTree} A version of the spanning tree where the numbers identifying patterns are substituted by the corresponding target class of the patterns. So, performance of the (unsupervised) som learning can be controlled using a problem that could also be trained with supervised methods.
+\paragraph{model\$labeledSpanningTree} A version of the spanning tree where the numbers identifying patterns are substituted by the corresponding target class of the patterns. So, performance of the (unsupervised) som learning can be controlled using a problem that could also be trained with supervised methods.
 
 \paragraph{model\$componentMaps} For each input dimension there is one component map, showing where in the map this input component leads to high activation.
 
@@ -415,7 +404,7 @@ plotActMap(model$map, col=rev(heat.colors(12)))
 plotActMap(log(model$map+1), col=rev(heat.colors(12)))
 persp(1:model$archParams$mapX, 1:model$archParams$mapY, log(model$map+1), 
       theta = 30, phi = 30, expand = 0.5, col = "lightblue")
-plotActMap(model$labelledSpanningTree)
+plotActMap(model$labeledSpanningTree)
 \end{Scode}
 
 %\begin{tabular}{rl}
@@ -423,7 +412,7 @@ plotActMap(model$labelledSpanningTree)
 %\texttt{model\$componentMaps} & \\
 %\texttt{model\$actMaps} & \\
 %\texttt{model\$spanningTree} & \\
-%\texttt{model\$labelledSpanningTree} & \\
+%\texttt{model\$labeledSpanningTree} & \\
 %\end{tabular}
 
 %\begin{Scode}{results=hide, echo=FALSE}
@@ -434,7 +423,7 @@ The component maps can be visualized in the same way:
 
 \begin{Scode}{fig=TRUE, height=6, width=6}  
 par(mfrow=c(2,2))
-for(i in 1:ncol(inputs)) plotActMap(model$componentMaps[[i]], 
+for(i in 1:ncol(irisValues)) plotActMap(model$componentMaps[[i]], 
                          col=rev(topo.colors(12)))
 \end{Scode}
 
