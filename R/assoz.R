@@ -1,18 +1,31 @@
-#' Create and train an assoz network.
+#' Create and train an associative memory.
 #'
 #' @export
-#' @author Christoph
 assoz <- function(x, ...) UseMethod("assoz")
 
-#' Create and train an assoz network.
-#'
+#' Create and train an associative memory.
+#' 
+#' @param x a matrix with training inputs for the network
+#' @param dimX
+#' @param dimY
+#' @param maxit maximum of iterations to learn
+#' @param initFunc the initialization function to use
+#' @param initFuncParams the parameters for the initialization function
+#' @param learnFunc the learning function to use
+#' @param learnFuncParams the parameters for the learning function
+#' @param updateFunc the update function to use
+#' @param updateFuncParams the parameters for the update function
+#' @param shufflePatterns should the patterns be shuffled?
+#' @param ... additional function parameters (currently not used)
 #' @export
-#' @author Christoph
+#' @S3method assoz default
+#' @method assoz default
+#' @rdname assoz
 assoz.default <- function(x, dimX, dimY, maxit=100, 
     initFunc="RM_Random_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="RM_delta", learnFuncParams=c(0.01, 100, 0.0, 0.0, 0.0), 
     updateFunc="Auto_Synchronous", updateFuncParams=c(50.0),    
-    shufflePatterns=TRUE) {
+    shufflePatterns=TRUE, ...) {
   
   
   x <- as.matrix(x)

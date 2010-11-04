@@ -1,18 +1,30 @@
-#' Create and train an dlvq network.
+#' Create and train a dlvq network.
 #'
 #' @export
-#' @author Christoph
 dlvq <- function(x, ...) UseMethod("dlvq")
 
-#' Create and train an dlvq network.
-#'
+#' Create and train a dlvq network.
+#' 
+#' @param x a matrix with training inputs for the network
+#' @param y the corresponding targets values
+#' @param maxit maximum of iterations to learn
+#' @param initFunc the initialization function to use
+#' @param initFuncParams the parameters for the initialization function
+#' @param learnFunc the learning function to use
+#' @param learnFuncParams the parameters for the learning function
+#' @param updateFunc the update function to use
+#' @param updateFuncParams the parameters for the update function
+#' @param shufflePatterns should the patterns be shuffled?
+#' @param ... additional function parameters (currently not used)
 #' @export
-#' @author Christoph
+#' @S3method dlvq default
+#' @method dlvq default
+#' @rdname dlvq
 dlvq.default <- function(x, y, maxit=100, 
     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="Dynamic_LVQ", learnFuncParams=c(0.03, 0.03, 10.0), 
     updateFunc="Dynamic_LVQ", updateFuncParams=c(0.0),    
-    shufflePatterns=TRUE) {
+    shufflePatterns=TRUE, ...) {
   
   
   x <- as.matrix(x)

@@ -1,13 +1,17 @@
 #' Function to split data into training and test set.
 #'
 #' Split the input and target values to a training and a test set. Test set is taken from the end of the
-#' data, if shuffling is wanted, it has to be done as preprocessing to this function. Returns a named list.
+#' data, if shuffling is wanted, it has to be done as preprocessing to this function.
 #' 
 #' @param x inputs
 #' @param y targets
 #' @param ratio ratio of training and test sets (default: 15\% of the data is used for testing)
+#' @return a named list with the following elements:
+#' \item{inputsTrain}{a matrix containing the training inputs}
+#' \item{targetsTrain}{a matrix containing the training targets}
+#' \item{inputsTest}{a matrix containing the test inputs}
+#' \item{targetsTest}{a matrix containing the test targets}
 #' @export
-#' @author Christoph
 splitForTrainingAndTest <- function(x, y, ratio=0.15) {
   
   x <- as.matrix(x)
@@ -28,9 +32,7 @@ splitForTrainingAndTest <- function(x, y, ratio=0.15) {
   
 }
 
-#' Check the input of a reg_class object for eventual problems.
-#'
-#' @author Christoph
+## Check the input of a reg_class object for eventual problems.
 checkInput <- function(x,y) {
   
   ok <- TRUE
@@ -59,7 +61,6 @@ checkInput <- function(x,y) {
 #' @param object a reg_class object
 #' @param ... parameters passed to \code{plot}
 #' @export
-#' @author Christoph
 plotIterativeError <- function(object, ...)
 {
   if(!inherits(object, "reg_class")) stop("not a legitimate reg_class model")
@@ -83,12 +84,12 @@ plotIterativeError <- function(object, ...)
 #' Decode class labels from a numerical or levels vector to a binary matrix.
 #'
 #' Convert the input vector to a binary matrix, which has the value 1 exactly in
-#' the column given by the value in the vector, e.g. 3 --> 0010000.. Number of columns 
+#' the column given by the value in the vector, e.g. 3 --> 0010000.. The number of columns 
 #' of the resulting matrix depends on the number of unique labels found in the vector.
 #' 
 #' @param x class label vector
+#' @return a binary matrix
 #' @export
-#' @author Christoph
 decodeClassLabels <- function(x) {
   
   #decodeClassLabels(iris[,5])
@@ -111,18 +112,22 @@ decodeClassLabels <- function(x) {
   targets
 }
 
-#' Applies analyzeClassification row-wise to a matrix.
+#' Applies \link{analyzeClassification} row-wise to a matrix.
 #' 
 #' @param x inputs
 #' @param method same as in analyzeClassification
 #' @param l idem
 #' @param h idem
+#' @return a numeric vector, each number represents a different class. A zero means,
+#' that no class was assigned to the pattern. 
 #' @export
-#' @author Christoph
+#' @seealso analyzeClassification
 encodeClassLabels <- function(x, method="WTA", l=0.0, h=0.0) {
   apply(x, 1, function(y) analyzeClassification(y, method, l, h))
 }
-
+#' Converts a vector (of class labels) to a numeric vector.
+#' 
+#' @param x inputs
 toNumericClassLabels <- function(x) {
   if(is.numeric(x)) return(x)
   else return(as.numeric(x))
@@ -137,11 +142,11 @@ toNumericClassLabels <- function(x) {
 #' @param method winner-takes-all or 402040
 #' @param l lower bound, e.g. in 402040: l=0.4
 #' @param h upper bound, e.g. in 402040: h=0.6
+#' @return the position of the winning unit, or zero, if no classification was done.
 #' @references 
 #' Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' @export
-#' @author Christoph
 analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
   
   classes <- length(y)
@@ -190,7 +195,6 @@ analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
 #' @param targets the known, correct target values
 #' @param predictions the corresponding predictions of a method for the targets
 #' @export
-#' @author Christoph
 confusionMatrix <- function(targets, predictions) {
   
   if(is.matrix(targets)) {
@@ -213,10 +217,12 @@ confusionMatrix <- function(targets, predictions) {
 
 #' Plot a ROC curve.
 #'
-#' Code is taken from R news Volume 4/1, June 2004
+#' Code is taken from R news Volume 4/1, June 2004.
 #' 
 #' @param T predictions
 #' @param D targets
+#' @references 
+#' R news Volume 4/1, June 2004
 #' @export
 #' @author ...
 plotROC <-function(T,D){
@@ -240,7 +246,6 @@ plotROC <-function(T,D){
 #' @param fits the values predicted/fitted by the model
 #' @param ... parameters passed to \code{plot}
 #' @export
-#' @author Christoph
 plotRegressionError <- function(targets, fits, ...)
 {
   #if(!inherits(object, "reg_class")) stop("not a legitimate reg_class model")

@@ -1,46 +1,48 @@
 #' Generic print function for rsnns objects.
 #'
-#' Print out some characteristics of any network object
+#' Print out some characteristics of an rsnns object.
 #' 
-#' @param object the rsnns object
+#' @param x the rsnns object
 #' @export
 #' @S3method print rsnns
 #' @method print rsnns
+#' @rdname rsnns
 #' @author Christoph
-print.rsnns <- function(object, ...)
+print.rsnns <- function(x, ...)
 {
-  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  if(!inherits(x, "rsnns")) stop("not a legitimate rsnns model")
   
-  cat("Class: ", paste(class(object), sep="", collapse="->"), "\n", sep="")
-  cat("Number of inputs:",object$nInputs, "\n",sep=" ")
-  cat("Number of outputs:",object$nOutputs, "\n",sep=" ")
-  cat("Maximal iterations:",object$maxit, "\n",sep=" ")
-  cat("Initialization function:",object$initFunc, "\n",sep=" ")
-  cat("Initialization function parameters:",object$initFuncParams, "\n",sep=" ")
-  cat("Learning function:",object$learnFunc, "\n",sep=" ")  
-  cat("Learning function parameters:",object$learnFuncParams, "\n",sep=" ")
-  cat("Update function:",object$updateFunc, "\n",sep="")
-  cat("Update function parameters:",object$updateFuncParams, "\n",sep=" ")  
-  cat("Patterns are shuffled internally:",object$shufflePatterns, "\n",sep=" ")
-  cat("Compute error in every iteration:",object$computeIterativeError, "\n",sep=" ")  
+  cat("Class: ", paste(class(x), sep="", collapse="->"), "\n", sep="")
+  cat("Number of inputs:",x$nInputs, "\n",sep=" ")
+  cat("Number of outputs:",x$nOutputs, "\n",sep=" ")
+  cat("Maximal iterations:",x$maxit, "\n",sep=" ")
+  cat("Initialization function:",x$initFunc, "\n",sep=" ")
+  cat("Initialization function parameters:",x$initFuncParams, "\n",sep=" ")
+  cat("Learning function:",x$learnFunc, "\n",sep=" ")  
+  cat("Learning function parameters:",x$learnFuncParams, "\n",sep=" ")
+  cat("Update function:",x$updateFunc, "\n",sep="")
+  cat("Update function parameters:",x$updateFuncParams, "\n",sep=" ")  
+  cat("Patterns are shuffled internally:",x$shufflePatterns, "\n",sep=" ")
+  cat("Compute error in every iteration:",x$computeIterativeError, "\n",sep=" ")  
   cat("Architecture Parameters:\n",sep="")
-  print(object$archParams)
+  print(x$archParams)
   cat("All members of model:\n",sep="") 
-  print(names(object))
+  print(names(x))
 }
 
-#' Generic summary function for reg_class objects.
+#' Generic summary function for rsnns objects.
 #'
 #' Print out a summary any network object the funciton calls the SNNS saveNet function to
 #' save the net to a temporary file, then reads this file in, displays its contents and
 #' deletes the file 
 #' 
-#' @param object the reg_class object
+#' @param object the rsnns object
 #' @export
 #' @S3method summary rsnns
 #' @method summary rsnns
+#' @rdname rsnns
 #' @author Christoph
-summary.rsnns <- function(object)
+summary.rsnns <- function(object, ...)
 {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   filename <- tempfile(pattern = "rsnns")
@@ -52,7 +54,25 @@ summary.rsnns <- function(object)
   s
 }
 
-
+#' Object factory for generating objects of type rsnns.
+#'
+#' The object factory initializes member variables of object 
+#' with the values given as parameters and generates an object of type \link{SnnsR}
+#' Later, during training with \link{train.rsnns}, this information is used to train the network.
+#'
+#' @param subclass the subclass of rsnns to generate (vector of strings)
+#' @param nInputs the number of inputs the network will have
+#' @param maxit maximum of iterations to learn
+#' @param initFunc the initialization function to use
+#' @param initFuncParams the parameters for the initialization function
+#' @param learnFunc the learning function to use
+#' @param learnFuncParams the parameters for the learning function
+#' @param updateFunc the update function to use
+#' @param updateFuncParams the parameters for the update function
+#' @param shufflePatterns should the patterns be shuffled?
+#' @param computeIterativeError should the error be computed in every iteration? 
+#' @export
+#' @author Christoph
 rsnnsObjectFactory <- function(subclass, nInputs, maxit, 
     initFunc, initFuncParams, 
     learnFunc, learnFuncParams, 
@@ -76,17 +96,34 @@ rsnnsObjectFactory <- function(subclass, nInputs, maxit,
   snns$snnsObject <- SnnsRObjectFactory()
   
   class(snns) <- c(subclass, "rsnns")
- 
-  #snns$IterativeFitError <- result$IterativeFitError
-  #snns$IterativeTestError <- result$IterativeTestError
-  
-  #snns$fitted.values <- result$fitValues
-  #snns$fittedTestValues <- result$testValues
     
   snns
 }
 
-train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL, targetsTest=NULL) {
+#' Generic train function.
+#'
+#' @param object the object to which to apply train
+#' @param ... additional function parameters
+#' @export
+train <- function(object, ...) UseMethod("train")
+
+#' Generic train function for rsnns objects.
+#'
+#' The function calls \link{SnnsRObject$train} and saves the result in the
+#' current rsnns object
+#' 
+#' @param object the rsnns object
+#' @param inputsTrain training input
+#' @param targetsTrain training targets
+#' @param inputsTest test input
+#' @param targetsTest test targets
+#' @param ... additional function parameters (currently not used)
+#' @export
+#' @S3method train rsnns
+#' @method train rsnns
+#' @rdname rsnns
+#' @author Christoph
+train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL, targetsTest=NULL, ...) {
   
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
@@ -107,21 +144,21 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
   object
 }
 
-#' Generic predict function.
+#' Generic predict function for rsnns object.
 #' 
 #' Predict values using the given network. This is only meaningful with regression and classification
 #' for a clustering network, another function has to be implemented 
 #'
-#' @param object the reg_class object
+#' @param object the rsnns object
 #' @param newdata the new input data which is used for prediction
-#' @param type is the new data regression or classification data?
 #' @S3method predict rsnns
 #' @method predict rsnns
+#' @rdname rsnns
 #' @export
 #' @author Christoph
-predict.rsnns <- function(object, newdata)
+predict.rsnns <- function(object, newdata, ...)
 {
-  if(!inherits(object, "rsnns")) stop("not a legitimate reg_class model")
+  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   #type <- match.arg(type)
   if(missing(newdata)) z <- fitted(object)
   else {

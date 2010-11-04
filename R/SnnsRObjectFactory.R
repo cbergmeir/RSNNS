@@ -1,7 +1,5 @@
 #' The main class, contains a C++ object of type SnnsCLib, i.e. an instance of SNNS
 #' 
-#' 
-#' 
 #' @slot snnsCLibPointer a pointer to the corresponding C++ class
 setClass( "SnnsR", representation( snnsCLibPointer = "externalptr" ) )
 
@@ -12,8 +10,8 @@ setClass( "SnnsR", representation( snnsCLibPointer = "externalptr" ) )
 #' method is called
 #'
 # @export
-#' @author Christoph
-#' @rdname SnnsRObject method calling mechanism
+#' @rdname SnnsRObjectMethodCaller
+#' @param x object of class \link{SnnsR-class}
 #' @param name function to call
 #' @usage \S4method{$}{SnnsR}(x, name) 
 #' @aliases $,SnnsR-method

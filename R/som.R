@@ -1,19 +1,36 @@
-#' Create and train an mlp.
+#' Create and train a self organizing map (som).
 #'
 #' @export
-#' @author Christoph
 som <- function(x, ...) UseMethod("som")
 
-#' Create and train an som.
+#' Create and train a self organizing map (som).
 #'
 #' @export
 #' @author Christoph
+#' 
+#' @param x a matrix with training inputs for the network
+#' @param mapX
+#' @param mapY
+#' @param maxit maximum of iterations to learn
+#' @param initFuncParams the parameters for the initialization function
+#' @param learnFuncParams the parameters for the learning function
+#' @param updateFuncParams the parameters for the update function
+#' @param shufflePatterns should the patterns be shuffled?
+#' @param calculateMap
+#' @param calculateActMaps
+#' @param calculateSpanningTree
+#' @param targets
+#' @param ... additional function parameters (currently not used)
+#' @export
+#' @S3method som default
+#' @method som default
+#' @rdname som
 som.default <- function(x, mapX=16, mapY=16, maxit=100, 
     initFuncParams = c(1.0,  -1.0), 
     learnFuncParams=c(0.5, mapX/2, 0.8, 0.8, mapX), 
     updateFuncParams = c(0.0, 0.0, 1.0),  
     shufflePatterns = TRUE,
-    calculateMap=TRUE, calculateActMaps=FALSE, calculateSpanningTree=FALSE, targets=NULL) {
+    calculateMap=TRUE, calculateActMaps=FALSE, calculateSpanningTree=FALSE, targets=NULL, ...) {
 
   #for the som, no other init/learn/update functions are feasible, so they are not present as
   #parameters..
