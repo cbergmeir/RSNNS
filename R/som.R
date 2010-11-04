@@ -5,9 +5,6 @@ som <- function(x, ...) UseMethod("som")
 
 #' Create and train a self organizing map (som).
 #'
-#' @export
-#' @author Christoph
-#' 
 #' @param x a matrix with training inputs for the network
 #' @param mapX
 #' @param mapY
@@ -90,7 +87,7 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100,
   if(calculateMap) {
 
     mapVec <- snnsObject$somPredictCurrPatSetWinners()
-    print(mapVec)
+    #print(mapVec)
     snns$map <- vectorToActMap(mapVec, nrow=mapX)
     
   } else {
@@ -112,17 +109,17 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100,
 
     if(!is.null(targets)) {
       labels <- as.numeric(targets)
-      labelledSpanningTree <- spanningTree
+      labeledSpanningTree <- spanningTree
       for(i in 1:nrow(spanningTree))
         for(j in 1:ncol(spanningTree))
         {
           if(spanningTree[i,j] != 0)  {
-            labelledSpanningTree[i,j] <- labels[spanningTree[i,j]]      
+            labeledSpanningTree[i,j] <- labels[spanningTree[i,j]]      
           } 
         }
-      snns$labelledSpanningTree <- labelledSpanningTree
+      snns$labeledSpanningTree <- labeledSpanningTree
     } else {
-      snns$labelledSpanningTree <- NULL
+      snns$labeledSpanningTree <- NULL
     }
     
     snns$spanningTree <- spanningTree  

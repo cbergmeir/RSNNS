@@ -14,7 +14,6 @@
 #' @param computeError should the error be computed in every iteration?
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
-#' @author Christoph
 #' @rdname SnnsRObject$train
 #' @usage \S4method{train}{SnnsR}(inputsTrain, targetsTrain=NULL, 
 #'     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 

@@ -45,7 +45,7 @@ art1.default <- function(x, dimX, dimY, nClusters=nrow(x), maxit=100,
   #snns$snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
   snns$snnsObject$art1_createNet(dimX*dimY,dimX,nClusters,dimX)
  
-  snns <- train.rsnns(snns, inputsTrain=x)
+  snns <- train(snns, inputsTrain=x)
   
   snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
   

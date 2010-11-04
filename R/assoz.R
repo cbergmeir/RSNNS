@@ -44,7 +44,7 @@ assoz.default <- function(x, dimX, dimY, maxit=100,
   snns$snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Identity','Out_Identity')
   snns$snnsObject$assoz_createNet(dimX, dimY)
   
-  snns <- train.rsnns(snns, inputsTrain=x)
+  snns <- train(snns, inputsTrain=x)
   
   snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
   

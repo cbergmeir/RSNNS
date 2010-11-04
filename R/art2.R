@@ -43,7 +43,7 @@ art2.default <- function(x, f2Units=5, maxit=100,
   #snns$snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
   snns$snnsObject$art2_createNet(nInputs,nInputs,f2Units,f2Units)
 
-  snns <- train.rsnns(snns, inputsTrain=x)
+  snns <- train(snns, inputsTrain=x)
   
   snns
 }

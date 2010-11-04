@@ -8,7 +8,6 @@
 #' @rdname SnnsRObject$createNet
 #' @usage \S4method{createNet}{SnnsR}(unitsPerLayer, fullyConnectedFeedForward = TRUE)
 #' @aliases createNet,SnnsR-method createNet$getAllUnitsTType
-#' @author Christoph
 #' @examples
 #' \dontrun{SnnsRObject$createNet(c(2,2), FALSE)}
 #' \dontrun{SnnsRObject$createNet(c(8,5,5,2), TRUE)}

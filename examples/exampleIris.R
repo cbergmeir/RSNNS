@@ -5,12 +5,8 @@ data(iris)
 #shuffle the vector
 iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
 
-#center data
-irisValues <- matrix(nrow=nrow(iris), ncol=4)
-for(i in 1:4) {
-  irisValues[,i] <- iris[,i] - mean(iris[,i])  
-}
-
+#normalize data
+irisValues <- normalizeData(iris[,1:4], "norm")
 irisTargets <- decodeClassLabels(iris[,5])
 
 iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
@@ -33,7 +29,7 @@ plotIterativeError(model)
 
 predictions <- predict(model,iris$inputsTest)
 
-#plotRegressionError(predictions[,2], iris$targetsTest[,2])
+plotRegressionError(predictions[,2], iris$targetsTest[,2])
 
 confusionMatrix(iris$targetsTrain,fitted.values(model))
 confusionMatrix(iris$targetsTest,predictions)
@@ -43,19 +39,6 @@ plotROC(predictions[,2], iris$targetsTest[,2])
 
 #confusion matrix with 402040-method
 confusionMatrix(iris$targetsTrain, encodeClassLabels(fitted.values(model),method="402040", l=0.4, h=0.6))
-
-#fitted(model)
-#cbind(encodeClassLabels(fitted(model)), encodeClassLabels(iris$targetsTrain))
-
-#h <- 0.6
-#l <- 0.4
-#apply(fitted(model), 1, function(y) {
-#      analyzeClassification(y, "402040", h=0.6, l=0.4)
-#    })
-
-#apply(fitted(model), 1, function(y) {
-#      analyzeClassification(y, "WTA", h=0.0, l=0.0)
-#    })
 
 model
 

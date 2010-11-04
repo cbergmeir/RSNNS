@@ -1,3 +1,12 @@
+#' Extract the current pattern set to a matrix.
+#' 
+#' Extracts all patterns of the current pattern set and
+#' returns them as a matrix. Columns are named with the prefix "in" or "out", respectively.
+#'  
+#' @return a matrix containing the patterns of the currently loaded patern set.
+#' @rdname SnnsRObject$extractPatterns
+#' @usage \S4method{extractPatterns}{SnnsR}()
+#' @aliases extractPatterns,SnnsR-method SnnsRObject$extractPatterns
 SnnsR__extractPatterns <- function(snnsObject)  {
   
   noPatterns <- snnsObject$getNoOfPatterns()

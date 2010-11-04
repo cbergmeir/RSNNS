@@ -6,7 +6,7 @@
 #' \itemize{
 #' \item generate the rsnns object (with \link{rsnnsObjectFactory})
 #' \item generate the network according to the architecture given
-#' \item train the network (with \link{train.rsnns})
+#' \item train the network (with \link{train})
 #' }
 #'
 #' @export
@@ -72,7 +72,7 @@ mlp.default <- function(x, y, size=c(5), maxit=100,
   snns$snnsObject$setTTypeUnitsActFunc("UNIT_OUTPUT", outputActFunc)
   
   
-  snns <- train.rsnns(snns, inputsTrain=x, targetsTrain=y, inputsTest=inputsTest, targetsTest=targetsTest)
+  snns <- train(snns, inputsTrain=x, targetsTrain=y, inputsTest=inputsTest, targetsTest=targetsTest)
 
 }
 

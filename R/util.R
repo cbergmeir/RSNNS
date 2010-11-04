@@ -28,6 +28,33 @@ rot90 <- function(a) {
   t(a[n:1, ])
 }
 
+#' Data normalization.
+#'
+#' The input matrix is column-wise normalized. The type specifies how:
+#' \describe{
+#' \item{0_1}{values are normalized to the [0,1]-interval. The minimum in the data is mapped to zero, the maximum to one.}
+#' \item{center}{the data is centered, i.e. the mean is substracted}
+#' \item{norm}{the data is normalized to mean zero, variance one}
+#' }
+#' 
+#' @param x input data
+#' @param type string specifying the type of normalization. Implemented are "0_1", "center", and "norm"
+#' @export
+normalizeData <- function(x, type="norm") {
+  
+  res <- NULL
+  
+  if(type == "0_1") {
+    res <- apply(x, 2, function(y) {(y - min(y)) / (max(y) - min(y))})  
+  } else if(type== "center") {
+    res <- apply(x, 2, function(y) {y - mean(y)})
+  } else {
+    res <- apply(x, 2, function(y) {(y - mean(y)) / sd(y)})    
+  }
+  res
+}
+
+
 #' Organize network activation as 2d map.
 #'
 #' The input to this function is a vector containing in each row an activation

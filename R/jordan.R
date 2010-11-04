@@ -62,7 +62,7 @@ jordan.default <- function(x, y, size=c(5), maxit=100,
   snns$snnsObject$setTTypeUnitsActFunc("UNIT_OUTPUT", outputActFunc)
   
   
-  snns <- train.rsnns(snns, inputsTrain=x, targetsTrain=y, inputsTest=inputsTest, targetsTest=targetsTest)
+  snns <- train(snns, inputsTrain=x, targetsTrain=y, inputsTest=inputsTest, targetsTest=targetsTest)
   
   snns  
 }

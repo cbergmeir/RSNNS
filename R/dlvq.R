@@ -43,7 +43,7 @@ dlvq.default <- function(x, y, maxit=100,
   snns$snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Identity','Out_Identity')
   snns$snnsObject$createNet(c(nInputs, 1), fullyConnectedFeedForward = FALSE)
   
-  snns <- train.rsnns(snns, inputsTrain=x, targetsTrain=y)
+  snns <- train(snns, inputsTrain=x, targetsTrain=y)
   
   #snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
   

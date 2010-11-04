@@ -62,7 +62,7 @@ rbfDDA.default <- function(x, y, maxit=100,
   snns$snnsObject$setTTypeUnitsActFunc("UNIT_OUTPUT", outputActFunc)
   
   
-  snns <- train.rsnns(snns, inputsTrain=x, targetsTrain=y)
+  snns <- train(snns, inputsTrain=x, targetsTrain=y)
   
   snns
 

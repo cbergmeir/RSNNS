@@ -47,7 +47,6 @@ setMethod( "$", "SnnsR", function(x, name ){
 #' Object factory to create a new object of type SnnsR.
 #'
 #' @export
-#' @author Christoph
 SnnsRObjectFactory <- function(){
 
   snnsObject <- new( "SnnsR")

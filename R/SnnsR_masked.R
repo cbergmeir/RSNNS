@@ -6,7 +6,6 @@
 #' 
 #' @param parameterInArray the parameters of the initialization function
 #' @param initFunc the name of the initialization function
-#' @author Christoph
 #' @rdname SnnsRObject$initializeNet
 #' @usage \S4method{initializeNet}{SnnsR}(parameterInArray, initFunc)
 #' @aliases initializeNet,SnnsR-method SnnsRObject$initializeNet
@@ -34,7 +33,6 @@ SnnsR__initializeNet <- function(snnsObject, parameterInArray, initFunc) {
 #' @param layer_no idem
 #' @param act_func idem
 #' @param out_func idem
-#' @author Christoph 
 #' @rdname SnnsRObject$setUnitDefaults
 #' @usage \S4method{setUnitDefaults}{SnnsR}(act, bias, st, subnet_no, layer_no, act_func, out_func)
 #' @aliases setUnitDefaults,SnnsR-method SnnsRObject$setUnitDefaults

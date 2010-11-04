@@ -7,7 +7,6 @@
 #' @S3method print rsnns
 #' @method print rsnns
 #' @rdname rsnns
-#' @author Christoph
 print.rsnns <- function(x, ...)
 {
   if(!inherits(x, "rsnns")) stop("not a legitimate rsnns model")
@@ -41,7 +40,6 @@ print.rsnns <- function(x, ...)
 #' @S3method summary rsnns
 #' @method summary rsnns
 #' @rdname rsnns
-#' @author Christoph
 summary.rsnns <- function(object, ...)
 {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
@@ -58,7 +56,7 @@ summary.rsnns <- function(object, ...)
 #'
 #' The object factory initializes member variables of object 
 #' with the values given as parameters and generates an object of type \link{SnnsR}
-#' Later, during training with \link{train.rsnns}, this information is used to train the network.
+#' Later, during training with \link{train}, this information is used to train the network.
 #'
 #' @param subclass the subclass of rsnns to generate (vector of strings)
 #' @param nInputs the number of inputs the network will have
@@ -72,7 +70,6 @@ summary.rsnns <- function(object, ...)
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param computeIterativeError should the error be computed in every iteration? 
 #' @export
-#' @author Christoph
 rsnnsObjectFactory <- function(subclass, nInputs, maxit, 
     initFunc, initFuncParams, 
     learnFunc, learnFuncParams, 
@@ -122,7 +119,6 @@ train <- function(object, ...) UseMethod("train")
 #' @S3method train rsnns
 #' @method train rsnns
 #' @rdname rsnns
-#' @author Christoph
 train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL, targetsTest=NULL, ...) {
   
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
@@ -155,7 +151,6 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
 #' @method predict rsnns
 #' @rdname rsnns
 #' @export
-#' @author Christoph
 predict.rsnns <- function(object, newdata, ...)
 {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")

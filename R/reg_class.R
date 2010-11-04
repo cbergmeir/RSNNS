@@ -54,14 +54,24 @@ checkInput <- function(x,y) {
 }
 
 #' Plot the iterative training and test error during training of the net.
-#' 
+#'
 #' Plots (if present) the class members IterativeFitError (as black line) and 
 #' IterativeTestError (as red line).
-#'  
+#' 
+#' @param object the object to which to apply plotIterativeError
+#' @param ... additional function parameters
+#' @export
+plotIterativeError <- function(object, ...) UseMethod("plotIterativeError")
+
+#' Plot the iterative training and test error during training of the net.
+#' 
 #' @param object a reg_class object
 #' @param ... parameters passed to \code{plot}
 #' @export
-plotIterativeError <- function(object, ...)
+#' @S3method plotIterativeError reg_class
+#' @method plotIterativeError reg_class
+#' @rdname reg_class
+plotIterativeError.reg_class <- function(object, ...)
 {
   if(!inherits(object, "reg_class")) stop("not a legitimate reg_class model")
   
@@ -125,6 +135,7 @@ decodeClassLabels <- function(x) {
 encodeClassLabels <- function(x, method="WTA", l=0.0, h=0.0) {
   apply(x, 1, function(y) analyzeClassification(y, method, l, h))
 }
+
 #' Converts a vector (of class labels) to a numeric vector.
 #' 
 #' @param x inputs

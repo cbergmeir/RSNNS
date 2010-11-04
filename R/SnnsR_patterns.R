@@ -197,7 +197,7 @@ SnnsR__somPredictCurrPatSetWinners <- function(snnsObject)  {
   
   noOfPatterns <- snnsObject$getNoOfPatterns()
   
-  cat("noOfPatterns: ", noOfPatterns, "\n", sep="")
+  #cat("noOfPatterns: ", noOfPatterns, "\n", sep="")
   
   winners <- vector()
   
