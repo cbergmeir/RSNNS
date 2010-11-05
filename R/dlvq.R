@@ -21,7 +21,7 @@ dlvq <- function(x, ...) UseMethod("dlvq")
 #' @method dlvq default
 #' @rdname dlvq
 dlvq.default <- function(x, y, maxit=100, 
-    initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
+    initFunc="DLVQ_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="Dynamic_LVQ", learnFuncParams=c(0.03, 0.03, 10.0), 
     updateFunc="Dynamic_LVQ", updateFuncParams=c(0.0),    
     shufflePatterns=TRUE, ...) {

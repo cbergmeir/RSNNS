@@ -5,7 +5,6 @@ patterns <- snnsData$art2_tetra.pat
 
 model <- art2(patterns, f2Units=5)
 
-model$fitted.values
 model
 
 testPatterns <- snnsData$art2_tetra_med.pat

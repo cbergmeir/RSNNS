@@ -11,4 +11,3 @@ model <- dlvq(inputs, outputs)
 
 mean(fitted(model) - outputs)
 
-#cbind(fitted(model), outputs)

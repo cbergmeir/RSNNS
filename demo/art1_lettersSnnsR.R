@@ -1,6 +1,6 @@
 library(RSNNS)
 
-basePath <- "."
+basePath <- "./"
 
 data(snnsData)
 inputs <- snnsData$art1_letters.pat
@@ -21,18 +21,18 @@ snnsObject$initializeNet(c(1.0, 1.0))
 snnsObject$shufflePatterns(TRUE)
 snnsObject$DefTrainSubPat()
 
-#snnsObject$saveNet(paste(basePath,"/art1_test_untrained.net",sep=""),"art1_test_untrained")
+snnsObject$saveNet(paste(basePath,"art1_lettersSnnsR_untrained.net",sep=""),"art1_lettersSnnsR_untrained")
 
 parameters <- c(0.9, 0, 0)
-maxit <- 1000
+maxit <- 100
 
 for(i in 1:maxit) {
   res <- snnsObject$learnAllPatterns(parameters)
   if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
 }
 
-#snnsObject$saveNet(paste(basePath,"/art1_test.net",sep=""),"art1_test")
-#snnsObject$saveNewPatterns(paste(basePath,"/art1_test.pat",sep=""), patset$set_no);
+snnsObject$saveNet(paste(basePath,"art1_lettersSnnsR.net",sep=""),"art1_lettersSnnsR")
+snnsObject$saveNewPatterns(paste(basePath,"art1_lettersSnnsR.pat",sep=""), patset$set_no);
 
 outputs <- snnsObject$predictCurrPatSet("art1", c(0, 0, 0, 0, 0))
 outputMaps <- matrixToActMapList(outputs, nrow=7)

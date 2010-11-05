@@ -1,7 +1,6 @@
 library(RSNNS)
 
-#examplesPath <- ("/home/bergmeir/Download/SNNSv4.3/examples")
-#load("/home/bergmeir/ts-code/Rpackages/RSNNS/data/snnsData.RData")
+basePath <- ("./")
 
 data(snnsData)
 
@@ -15,19 +14,18 @@ snnsObject$setUpdateFunc('JE_Order')
 snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
 
 snnsObject$elman_createNet(c(2,8,2),c(1,1,1),FALSE)
-
-#IUnits, HUnits, OUnits, ICols, HCols, OCols
 #snnsObject$jordan_createNet(2,8,2,1,2,1)
 
-patset <- snnsObject$createPatterns(inputs, outputs)
-#snnsObject$setCurrPatSet(patset)
+patset <- snnsObject$createPatSet(inputs, outputs)
 snnsObject$setCurrPatSet(patset$set_no)
 
 snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) )
 snnsObject$shufflePatterns(TRUE)
 snnsObject$DefTrainSubPat()
 
-parameters <- c(0.2, 0, 0)
+snnsObject$saveNet(paste(basePath,"eight_elmanSnnsR_untrained.net",sep=""),"eight_elmanSnnsR_untrained")
+
+parameters <- c(0.2, 0, 0, 0, 0)
 maxit <- 1000
 
 error <- vector()
@@ -40,9 +38,6 @@ for(i in 1:maxit) {
 error[1:500]
 plot(error, type="l")
 
-#lines(error, type="l")
-
-basePath <- ("/home/bergmeir")
-#snnsObject$saveNet(paste(basePath,"/elman_test.net",sep=""),"elman_test")
-#snnsObject$saveNewPatterns(paste(basePath,"/elman_test.pat",sep=""), patset$set_no);
+snnsObject$saveNet(paste(basePath,"eight_elmanSnnsR.net",sep=""),"eight_elmanSnnsR")
+snnsObject$saveNewPatterns(paste(basePath,"eight_elmanSnnsR.pat",sep=""), patset$set_no);
 

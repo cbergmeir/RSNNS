@@ -1,10 +1,8 @@
 library(RSNNS)
 
-#examplesPath <- ("/home/bergmeir/Download/SNNSv4.3/examples")
-#load("/home/bergmeir/ts-code/Rpackages/RSNNS/data/snnsData.RData")
+basePath <- ("./")
 
 data(snnsData)
-
 inputs <- snnsData$spirals.pat[,inputColumns(snnsData$spirals.pat)]
 outputs <- snnsData$spirals.pat[,outputColumns(snnsData$spirals.pat)]
 
@@ -22,8 +20,6 @@ snnsObject$setUnitDefaults(0,0,1,0,1,'Act_Logistic','Out_Identity')
 
 snnsObject$createNet(c(2,2), fullyConnectedFeedForward = FALSE)
 
-
-
 patset <- snnsObject$createPatSet(inputs, outputs)
 snnsObject$setCurrPatSet(patset$set_no)
 
@@ -32,23 +28,17 @@ snnsObject$setCurrPatSet(patset$set_no)
 snnsObject$shufflePatterns(TRUE)
 snnsObject$DefTrainSubPat()
 
+snnsObject$saveNet(paste(basePath,"rbfDDA_spiralsSnnsR_untrained.net",sep=""),"rbfDDA_spiralsSnnsR_untrained")
+
 parameters <- c(0.4, 0.2, 5)
 maxit <- 1000
 
-error <- vector()
 for(i in 1:maxit) {
   res <- snnsObject$learnAllPatterns(parameters)
-  if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
-  error[i] <- res[[2]]
 }
 
-error[1:500]
-plot(error, type="l")
-
-basePath <- ("/home/bergmeir")
-snnsObject$saveNet(paste(basePath,"/rbf_testSnnsCLib.net",sep=""),"rbf_test")
-#snnsObject$saveNewPatterns(paste(basePath,"/rbf_testSnnsCLib.pat",sep=""), patset);
-
+snnsObject$saveNet(paste(basePath,"rbfDDA_spiralsSnnsR.net",sep=""),"rbfDDA_spiralsSnnsR")
+snnsObject$saveNewPatterns(paste(basePath,"rbfDDA_spiralsSnnsR.pat",sep=""), patset$set_no);
 
 
 
