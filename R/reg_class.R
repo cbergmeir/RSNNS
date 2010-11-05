@@ -139,6 +139,8 @@ encodeClassLabels <- function(x, method="WTA", l=0.0, h=0.0) {
 #' Converts a vector (of class labels) to a numeric vector.
 #' 
 #' @param x inputs
+#' @return the vector converted to a numeric vector
+#' @export
 toNumericClassLabels <- function(x) {
   if(is.numeric(x)) return(x)
   else return(as.numeric(x))
@@ -214,11 +216,15 @@ confusionMatrix <- function(targets, predictions) {
     tr <- toNumericClassLabels(targets)  
   }
   
+  enc <- FALSE
   if(is.matrix(predictions)) {
-    if(ncol(predictions)!=1) pr <- encodeClassLabels(predictions)
-  } else {
-    pr <- toNumericClassLabels(predictions)
-  }
+    if(ncol(predictions)!=1) {
+      pr <- encodeClassLabels(predictions)
+      enc <- TRUE
+    }
+  } 
+  
+  if(!enc) pr <- toNumericClassLabels(predictions)
   
   cm <- table(targets=tr, predictions=pr)
   #rowSums(cm)

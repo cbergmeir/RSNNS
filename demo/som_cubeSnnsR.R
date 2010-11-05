@@ -61,8 +61,10 @@ compMaps
 par(mfrow=c(3,3))
 for (i in 1:3) plotActMap(compMaps[[i]], col=topo.colors(12))
 
-winners <- snnsObject$somPredictCurrPatSetWinners()
-winners <- vectorToActMap(winners, mapX)
+labels <- as.numeric(iris[,5])
+
+patsetWinners <- snnsObject$somPredictCurrPatSetWinners(c(0.0, 0.0, 1.0), targets=labels)
+winners <- vectorToActMap(patsetWinners$map, mapX)
 plotActMap(winners, col=rev(heat.colors(12)))
 persp(1:mapX, 1:mapY, log(winners+1), theta = 30, phi = 30, expand = 0.5, col = "lightblue")
 
@@ -72,7 +74,7 @@ plotActMap(log(winners+1), col=topo.colors(12))
 spTree <- snnsObject$somPredictCurrPatSetWinnersSpanTree()
 spTree <- vectorToActMap(spTree, mapX)
 
-labels <- as.numeric(iris[,5])
+
 labeledSpTree <- spTree
 for(i in 1:nrow(spTree))
   for(j in 1:ncol(spTree))
@@ -90,6 +92,11 @@ spTree
 print("is the overlap in the map high?:")
 length(which(winners != 0))
 nrow(iris)
+
+#get the labeled map from the labeled units
+labeledMap <- encodeClassLabels(patsetWinners$labeledUnits, method="WTA", l=0,h=0)
+labeledMap <- vectorToActMap(labeledMap, mapX)
+plotActMap(labeledMap)
 
 snnsObject$saveNet(paste(basePath,"som_cubeSnnsR.net",sep=""),"som_cubeSnnsR")
 snnsObject$saveNewPatterns(paste(basePath,"som_cubeSnnsR.pat",sep=""), patset$set_no);

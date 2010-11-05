@@ -957,10 +957,9 @@ RcppExport SEXP SnnsCLib__updateNet(SEXP xp, SEXP parameterInArray) {
 
   Rcpp::NumericVector params(parameterInArray);
 
-  //TODO: this should be variable length..
-  float p1[100];
-
   int n = params.size();
+  float p1[n+1];
+
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
@@ -2226,3 +2225,63 @@ RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP 
   return pattern;
 }
 
+//This function reimplements the functionality of the SNNS function spanning_tree(), to get the winners of all patterns. 
+//This is necessary to get the complete self-organizing map.
+RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_units, SEXP noOfPatterns, SEXP updateFuncParams) {
+ 
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  Rcpp::NumericVector hu(hidden_units);
+  Rcpp::NumericVector params(updateFuncParams);
+
+  int n = params.size();
+  float p1[n+1];
+
+  for (int i=0; i<n; i++) {
+    p1[i] = static_cast<float>(params(i));
+  }
+
+  int nUnits = hu.size();
+  int units[nUnits+1];
+
+  for (int i=0; i<nUnits; i++) {
+    units[i] = static_cast<int>(hu(i));
+  }
+
+  int noPat = Rcpp::as<int>(noOfPatterns);
+  int winners[noPat+1];
+
+  for(int i=1; i<=noPat; i++) {
+
+    snnsCLib->krui_setPatternNo(i);
+
+    //OUTPUT_NOTHING
+    snnsCLib->krui_showPattern(1);
+    snnsCLib->krui_updateNet(p1, n);
+
+    float min;
+    int argmin = 1;
+    for(int j=1;j<=nUnits; j++) {
+
+      float currValue = snnsCLib->krui_getUnitOutput(units[j-1]);
+
+      if(j==1) {
+        min = currValue;
+      } else if(currValue < min) {
+        min = currValue;
+        argmin = j;
+      }
+    }
+ 
+    winners[i-1] = argmin;
+
+  }
+ 
+  Rcpp::NumericVector retWinners(noPat);
+
+  for (int i=0; i<noPat; i++) {
+    retWinners[i] = winners[i];
+  }
+
+  return retWinners;
+}

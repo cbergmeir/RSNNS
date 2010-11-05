@@ -31,11 +31,19 @@ snnsObject$DefTrainSubPat()
 snnsObject$saveNet(paste(basePath,"rbfDDA_spiralsSnnsR_untrained.net",sep=""),"rbfDDA_spiralsSnnsR_untrained")
 
 parameters <- c(0.4, 0.2, 5)
-maxit <- 1000
 
-for(i in 1:maxit) {
-  res <- snnsObject$learnAllPatterns(parameters)
-}
+res <- snnsObject$learnAllPatterns(parameters)
+
+#maxit <- 100
+#for(i in 1:maxit) {
+#}
+
+predictions <- snnsObject$predictCurrPatSet("output", c(0))
+
+p <- encodeClassLabels(predictions, method="WTA", l=0, h=0)
+t <- encodeClassLabels(outputs)
+
+confusionMatrix(t,p)
 
 snnsObject$saveNet(paste(basePath,"rbfDDA_spiralsSnnsR.net",sep=""),"rbfDDA_spiralsSnnsR")
 snnsObject$saveNewPatterns(paste(basePath,"rbfDDA_spiralsSnnsR.pat",sep=""), patset$set_no);

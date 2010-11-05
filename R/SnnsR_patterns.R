@@ -191,38 +191,67 @@ SnnsR__somPredictComponentMaps <- function(snnsObject)  {
 #' @rdname SnnsRObject$somPredictCurrPatSetWinners
 #' @usage \S4method{somPredictCurrPatSetWinners}{SnnsR}()
 #' @aliases somPredictCurrPatSetWinners,SnnsR-method SnnsRObject$somPredictCurrPatSetWinners
-SnnsR__somPredictCurrPatSetWinners <- function(snnsObject)  {
+SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.0, 0.0, 1.0), calculateWinners=FALSE, targets=NULL)  {
   
   units <- snnsObject$getAllHiddenUnits()
-  
   noOfPatterns <- snnsObject$getNoOfPatterns()
+  winners <- snnsObject$somPredictCurrPatSetWinnersC(units, noOfPatterns, updateFuncParams)
   
-  #cat("noOfPatterns: ", noOfPatterns, "\n", sep="")
-  
-  winners <- vector()
-  
-  for(currentPattern in 1:noOfPatterns)  {
-   
-    predictions <- vector()
-    
-    snnsObject$setPatternNo(currentPattern)
-    snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
-    snnsObject$updateNet(c(0.0, 0.0, 1.0))
-    
-    for(i in 1:length(units)) {
-      predictions[i] <- snnsObject$getUnitOutput(units[i])
-    }
-    
-    winners <- c(winners, which(predictions == min(predictions, na.rm=TRUE)))
-  }
-
   map <- seq(0, 0, length=length(units))
-
+  
   for(i in 1:length(winners)) {
     map[winners[i]] <- map[winners[i]] + 1 
   }
 
-  map
+  if(!is.null(targets)) {
+    labels <- as.numeric(targets)
+    
+    classes <- unique(labels)
+    labeledUnits <- matrix(0, nrow=length(units), ncol=length(classes))
+    
+    #labeledSpanningTree <- spanningTree
+    
+    for(i in 1:length(winners)) {
+      currUnit <- winners[i]
+      labeledUnits[currUnit, labels[i]] <- labeledUnits[currUnit, labels[i]] + 1
+    }
+  } else {
+    labeledUnits <- NULL
+  }
+  
+  if(!calculateWinners) winners <- NULL
+  
+  return(list(map=map, winners=winners, labeledUnits=labeledUnits))
+ 
+#  Function is now reimplemented in C++ to be faster..
+  
+#  units <- snnsObject$getAllHiddenUnits()
+#  noOfPatterns <- snnsObject$getNoOfPatterns()
+#  
+#  winners <- vector()
+#  
+#  for(currentPattern in 1:noOfPatterns)  {
+#   
+#    predictions <- vector()
+#    
+#    snnsObject$setPatternNo(currentPattern)
+#    snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
+#    snnsObject$updateNet(updateFuncParams)
+#    
+#    for(i in 1:length(units)) {
+#      predictions[i] <- snnsObject$getUnitOutput(units[i])
+#    }
+#    
+#    winners <- c(winners, which(predictions == min(predictions, na.rm=TRUE)))
+#  }
+#
+#  map <- seq(0, 0, length=length(units))
+#
+#  for(i in 1:length(winners)) {
+#    map[winners[i]] <- map[winners[i]] + 1 
+#  }
+#
+#  map
   
 } 
 

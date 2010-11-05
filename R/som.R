@@ -86,9 +86,9 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100,
   
   if(calculateMap) {
 
-    mapVec <- snnsObject$somPredictCurrPatSetWinners()
+    mapVec <- snnsObject$somPredictCurrPatSetWinners(updateFuncParams)
     #print(mapVec)
-    snns$map <- vectorToActMap(mapVec, nrow=mapX)
+    snns$map <- vectorToActMap(mapVec$map, nrow=mapX)
     
   } else {
     snns$map <- NULL

@@ -14,7 +14,8 @@ iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
 model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFuncParams=c(0.1), 
     maxit=50, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
 
-#model <- rbfDDA(iris$inputsTrain, iris$targetsTrain, maxit=1000)#, iris$inputsTest, iris$targetsTest)
+#model <- rbfDDA(iris$inputsTrain, iris$targetsTrain)
+
 #model <- elman(iris$inputsTrain, iris$targetsTrain, size=5, learnFuncParams=c(0.1), maxit=100, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
 
 #model <- rbf(iris$inputsTrain, iris$targetsTrain, size=20, maxit=200, initFuncParams=c(0.0,  1.0,  0.0,  0.02,  0.0), learnFuncParams=c(0.01, 0, 0.01, 0.1, 0.8))#, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)

@@ -2,6 +2,5 @@
 #'
 #' @name snnsData
 #' @docType data
-#' @author Christoph
 #' @keywords data
 NULL

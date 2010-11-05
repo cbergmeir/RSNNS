@@ -24,13 +24,15 @@ rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 #' @S3method rbfDDA default
 #' @method rbfDDA default
 #' @rdname rbfDDA
-rbfDDA.default <- function(x, y, maxit=100, 
+rbfDDA.default <- function(x, y, maxit=1, 
     initFunc="Randomize_Weights", initFuncParams=c(-0.3, 0.3), 
     learnFunc="RBF-DDA", learnFuncParams=c(0.4, 0.2, 5), 
     updateFunc="Topological_Order", updateFuncParams=c(0.0),
     shufflePatterns=TRUE, linOut=FALSE, ...) {
   
   #TODO: does linOut make sense here?  
+  #as in the beginning no hidden units are present, the init function is not needed
+  #is one iteration always sufficient?
   
   x <- as.matrix(x)
   y <- as.matrix(y)
