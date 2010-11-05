@@ -232,6 +232,13 @@ oldNoOfClasses=0;
 wrongClassCounter=0;
 continueLearning=0;
 
+// This fixes a bug which probably also is present in the original SNNS version
+// that dlvq tries to free the memory of uninitialized pointers, if they happen to be
+// different from NULL
+initialUnitArray= NULL;
+mixupArray = NULL;
+lastInsertedUnitArray = NULL;
+
 
 //Rprintf("hier%d\n",counter++);
 
