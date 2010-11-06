@@ -43,9 +43,11 @@
 #include <math.h>
 #include <time.h>  
 #include <memory.h>
-#ifdef HAVE_VALUES_H
-#include <values.h>
-#endif
+
+#include <string.h>
+//#ifdef HAVE_VALUES_H
+//#include <values.h>
+//#endif
 
 #include "SnnsCLib.h"
 

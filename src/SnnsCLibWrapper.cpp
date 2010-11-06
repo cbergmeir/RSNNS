@@ -2259,7 +2259,7 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
     snnsCLib->krui_showPattern(1);
     snnsCLib->krui_updateNet(p1, n);
 
-    float min;
+    float min = 0;
     int argmin = 1;
     for(int j=1;j<=nUnits; j++) {
 

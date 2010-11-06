@@ -57,7 +57,7 @@ rbf.default <- function(x, y, size=c(5), maxit=100,
   snns$snnsObject$createNet(c(nInputs,size,nOutputs), fullyConnectedFeedForward = TRUE)
   
   if(linOut) {
-    outputActFunc <- "Act_Identity"
+    outputActFunc <- "Act_IdentityPlusBias"
   } else {
     outputActFunc <- "Act_Logistic"
   }
