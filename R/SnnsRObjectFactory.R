@@ -26,20 +26,22 @@ setMethod( "$", "SnnsR", function(x, name ){
         #very usefull for debugging..everytime an SnnsR or SnnsCLib funtion is called, its name is printed
         #print(name)
         
-        if(is.function(myFunc[[1]])) return(myFunc[[1]](x, ... ))
+        if(is.function(myFunc[[1]])) {
+          res <- myFunc[[1]](x, ... )
+        }
         else {
           res <- .Call( paste( "SnnsCLib", name, sep = "__" ) , x@snnsCLibPointer , ... )
-          
-          if(is.list(res))
-            if(!is.null(res$err)) {
-              err <- res$err
-              if(err != 0) {
-                msg <- .Call( "SnnsCLib__error", x@snnsCLibPointer , err )
-                warning(paste("SNNS error message in ", name, " : ", msg, sep=""))
-              }
-            }
-          return(res)
         }
+        
+        if(is.list(res))
+          if(!is.null(res$err)) {
+            err <- res$err
+            if(err != 0) {
+              msg <- .Call( "SnnsCLib__error", x@snnsCLibPointer , err )
+              warning(paste("SNNS error message in ", name, " : ", msg, sep=""))
+            }
+          }
+        return(res)
       }     
     } )
 

@@ -67,14 +67,19 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
   
   #print(patSetTrain)
   #print(patSetTest)
-
-  snnsObject$initializeNet(expandedInitFuncParams, initFunc)
   
   snnsObject$shufflePatterns(shufflePatterns)
-  
   snnsObject$setCurrPatSet(patSetTrain$set_no)
   snnsObject$DefTrainSubPat()  
 
+  if(learnFunc == "RadialBasisLearning") {
+    #cat("RBF: First Initialization step with Kohonen\n")
+    snnsObject$initializeNet(c(0,0,0,0,0), "RBF_Weights_Kohonen")
+  }
+    
+  
+  snnsObject$initializeNet(expandedInitFuncParams, initFunc)
+  
   for(i in 1:maxit) {
   
     res <- snnsObject$learnAllPatterns(expandedLearnFuncParams)
@@ -86,9 +91,16 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
       snnsObject$setCurrPatSet(patSetTest$set_no)
       snnsObject$DefTrainSubPat()
       
-      res <- snnsObject$testAllPatterns(expandedLearnFuncParams)
+      #TODO: Why doesn't testAllPatterns work with RadialBasisLearning? 
+      #And learning even with all parameters = 0 alters the results.. 
+      #if(learnFunc == "RadialBasisLearning")
+      #  res <- snnsObject$learnAllPatterns(c(0,0,0,0.1,0.8))
+      #else
+        res <- snnsObject$testAllPatterns(expandedLearnFuncParams)
       #if(res[[1]] != 0) print(paste("An error occured at iteration ", i, " : ", res, sep=""))
       errorTest[i] <- res[[2]]
+      
+      #print(res)
       
       snnsObject$setCurrPatSet(patSetTrain$set_no)
       snnsObject$DefTrainSubPat()      

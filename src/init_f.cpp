@@ -1,3 +1,54 @@
+/************************************************************************************
+
+   This file is part of SnnsCLib, a fork of the kernel and parts of the gui of 
+   the Stuttgart Neural Network Simulator (SNNS), version 4.3.
+
+   The file's original version is part of SNNS 4.3. It's source code can be found at
+
+   http://www.ra.cs.uni-tuebingen.de/SNNS/
+
+   SNNS 4.3 is under the license LGPL v2. We note that source code files of SNNS 4.3 
+   state as version "4.2". Base of this fork is SNNS 4.3 with a reverse-applied 
+   python patch (see http://developer.berlios.de/projects/snns-dev/).
+
+   SnnsCLib was developed in 2010 by Christoph Bergmeir under supervision of 
+   José M. Benítez, both affiliated to DiCITS Lab, Sci2s group, DECSAI, 
+   University of Granada
+
+   Changes done to the original code were performed with the objective to
+   port it from C to C++ and to encapsulate all code in one class named SnnsCLib.
+
+   Changes in header files mainly include:
+   * removed all static keywords
+   * moved initializations of variables to the constructor of SnnsCLib
+
+   Changes in cpp code files mainly include:
+   * changed file ending from .c to .cpp
+   * removed all SNNS internal includes and only include SnnsCLib   
+   * static variables within functions were turned into member variables of SnnsCLib
+   * function declarations were changed to method declarations, i.e. "SnnsCLib::.."
+     was added
+   * calls to the function table are now "C++-style", using the "this"-pointer
+
+   License of SnnsCLib:
+   
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+ 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+ 
+   You should have received a copy of the GNU Library General Public License
+   along with this library; see the file COPYING.LIB.  If not, write to
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
+
+************************************************************************************/
+
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/init_f.c,v $
   SHORTNAME      : 
@@ -72,7 +123,8 @@ krui_err  SnnsCLib::INIT_randomizeWeights(float *parameterArray, int NoOfParams)
     //static char m_init_f_notfirstrun;
 
     if(m_init_f_notfirstrun == 0) {
-	krui_setSeedNo(0);
+        //SnnsCLib: random number generator is now initialized in the constructor
+	//krui_setSeedNo(0);
 	m_init_f_notfirstrun = 1;
     }
 
@@ -2219,7 +2271,8 @@ krui_err  SnnsCLib::INIT_JE_Weights (float *parameterArray, int NoOfParams)
    * PATCHED 2005-08-01 -- Sabit Cakmak
    * Ensure the random number generator has been initialized, or an error may occur
    */
-  krui_setSeedNo(0);
+  //SnnsCLib: random number generator is now initialized in the constructor
+  //krui_setSeedNo(0);
 
   /* if (range < 0.0) return (KRERR_PARAMETERS) ; */
 

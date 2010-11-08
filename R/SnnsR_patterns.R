@@ -191,7 +191,7 @@ SnnsR__somPredictComponentMaps <- function(snnsObject)  {
 #' @rdname SnnsRObject$somPredictCurrPatSetWinners
 #' @usage \S4method{somPredictCurrPatSetWinners}{SnnsR}()
 #' @aliases somPredictCurrPatSetWinners,SnnsR-method SnnsRObject$somPredictCurrPatSetWinners
-SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.0, 0.0, 1.0), calculateWinners=FALSE, targets=NULL)  {
+SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.0, 0.0, 1.0), saveWinnersPerPattern=TRUE, targets=NULL)  {
   
   units <- snnsObject$getAllHiddenUnits()
   noOfPatterns <- snnsObject$getNoOfPatterns()
@@ -204,24 +204,24 @@ SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.
   }
 
   if(!is.null(targets)) {
-    labels <- as.numeric(targets)
-    
-    classes <- unique(labels)
+
+    classes <- unique(targets)
+    numClasses <- 1:length(classes)
+    names(numClasses) <- classes
     labeledUnits <- matrix(0, nrow=length(units), ncol=length(classes))
-    
-    #labeledSpanningTree <- spanningTree
+    colnames(labeledUnits) <- classes
     
     for(i in 1:length(winners)) {
       currUnit <- winners[i]
-      labeledUnits[currUnit, labels[i]] <- labeledUnits[currUnit, labels[i]] + 1
+      labeledUnits[currUnit, numClasses[targets[i]]] <- labeledUnits[currUnit, numClasses[targets[i]]] + 1
     }
   } else {
     labeledUnits <- NULL
   }
   
-  if(!calculateWinners) winners <- NULL
+  if(!saveWinnersPerPattern) winners <- NULL
   
-  return(list(map=map, winners=winners, labeledUnits=labeledUnits))
+  return(list(nWinnersPerUnit=map, winnersPerPattern=winners, labeledUnits=labeledUnits))
  
 #  Function is now reimplemented in C++ to be faster..
   

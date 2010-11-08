@@ -100,7 +100,7 @@ plotIterativeError.reg_class <- function(object, ...)
 #' @param x class label vector
 #' @return a binary matrix
 #' @export
-decodeClassLabels <- function(x) {
+decodeClassLabels <- function(x, method="0_1", valTrue=1, valFalse=0) {
   
   #decodeClassLabels(iris[,5])
   
@@ -111,14 +111,23 @@ decodeClassLabels <- function(x) {
   #if(length(levels(x))!=0) {
   #  
   #}
-  
+
   classes <- unique(x)
-  
+  numClasses <- 1:length(classes)
+  names(numClasses) <- classes
+
   targets <- matrix(nrow=length(x), ncol=length(classes))
   for(i in 1:length(x))
-    for(j in 1:length(classes))  {
-      targets[i,j] <- as.numeric(j == as.numeric(x[i]))
+    for(j in numClasses)  {
+      if(j == numClasses[x[i]]) {
+        targets[i,j] <- valTrue  
+      }
+      else {
+        targets[i,j] <- valFalse
+      }
     }
+  
+  colnames(targets) <- classes
   targets
 }
 

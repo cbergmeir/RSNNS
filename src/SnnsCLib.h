@@ -13,9 +13,7 @@
 #define MAXFLOAT FLT_MAX
 #endif
 
-long snns_lrand48(void);
-void snns_srand48(long seedval);
-double snns_drand48(void);
+#include "u_lrand48.h"
 
 #include "glob_typ.h"
 

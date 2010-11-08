@@ -2285,3 +2285,21 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
 
   return retWinners;
 }
+
+
+RcppExport SEXP setCurrentSeedVal (SEXP seedval) {
+
+  long seed = Rcpp::as<long>(seedval);
+
+  u_setCurrentSeedVal(seed);
+  //snns_srand48(seed);
+
+  return R_NilValue;
+}
+
+RcppExport SEXP getCurrentSeedVal () {
+
+  long seed = u_getCurrentSeedVal();
+
+  return Rcpp::wrap(seed);
+}

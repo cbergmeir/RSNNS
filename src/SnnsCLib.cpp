@@ -1,24 +1,7 @@
-#include <stdlib.h>
+
 #include <R_ext/Print.h>
 
 #include "SnnsCLib.h"
-
-long snns_lrand48(void)
-{
-    return (long) rand();
-}
-
-void snns_srand48(long seedval)
-{
-    srand(seedval);
-}
-
-double snns_drand48(void)
-{
-//RAND_MAX 0x7fffffff
-    return((double) (rand() & RAND_MAX)
-	   / (double) RAND_MAX);
-}
 
 SnnsCLib::SnnsCLib() {
 
@@ -507,8 +490,8 @@ UPDATE_ARTMAP_syncPropagate_rho   = -1.0;
 kr_getSubPatData_dummy_data = 0.0;
 
 
-
-
+//Initialize the random number generator
+krui_setSeedNo(u_getCurrentSeedVal());
 
 
 

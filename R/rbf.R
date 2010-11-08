@@ -1,9 +1,34 @@
-#' Create and train an rbf (not working so far).
+#############################################################################
+#
+#   This file is part of the R package "RSNNS".
+#
+#   Author: Christoph Bergmeir
+#   Supervisor: José M. Benítez
+#   Copyright (c) DiCITS Lab, Sci2s group, DECSAI, University of Granada.
+#
+#   This library is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU Library General Public
+#   License as published by the Free Software Foundation; either
+#   version 2 of the License, or (at your option) any later version.
+# 
+#   This library is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#   Library General Public License for more details.
+# 
+#   You should have received a copy of the GNU Library General Public License
+#   along with this library; see the file COPYING.LIB.  If not, write to
+#   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+#   Boston, MA 02110-1301, USA.
+#
+#############################################################################
+
+#' Create and train an rbf network.
 #'
 #' @export
 rbf <- function(x, ...) UseMethod("rbf")
 
-#' Create and train an rbf (not working so far).
+#' Create and train an rbf network.
 #' 
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
@@ -25,12 +50,15 @@ rbf <- function(x, ...) UseMethod("rbf")
 #' @method rbf default
 #' @rdname rbf
 rbf.default <- function(x, y, size=c(5), maxit=100, 
-    initFunc="RBF_Weights", initFuncParams=c(0.0,  1.0,  0.0,  0.02,  0.0), 
-    learnFunc="RadialBasisLearning", learnFuncParams=c(0.01, 0, 0.01, 0.1, 0.8), 
+    initFunc="RBF_Weights", initFuncParams=c(0.0,  1.0,  0.0,  0.02,  0.04), 
+    learnFunc="RadialBasisLearning", learnFuncParams=c(1e-5, 0, 1e-5, 0.1, 0.8), 
     updateFunc="Topological_Order", updateFuncParams=c(0.0),
-    shufflePatterns=TRUE, linOut=FALSE,
+    shufflePatterns=TRUE, linOut=TRUE,
     inputsTest=NULL, targetsTest=NULL, ...) {
   
+  if(!is.null(inputsTest)) {
+    warning("Supplying test patterns here is not supported for RBFs (due to problems with the testAllPatterns function of the SNNS kernel). Use predict() instead.")
+  }
   
   x <- as.matrix(x)
   y <- as.matrix(y)
@@ -48,10 +76,6 @@ rbf.default <- function(x, y, size=c(5), maxit=100,
       shufflePatterns=shufflePatterns, computeIterativeError=TRUE)
   
   snns$archParams <- list(size=size)
-  
-  #In order to get it working, maybe the learnFuncParams have to be changed,
-  #Act_Funcs of input and output neurons have to be changed,
-  #and maybe some other things. See http://www.csc.kth.se/~orre/snns-manual/UserManual/node191.html
   
   snns$snnsObject$setUnitDefaults(0,0,1,0,1,'Act_Logistic','Out_Identity')
   snns$snnsObject$createNet(c(nInputs,size,nOutputs), fullyConnectedFeedForward = TRUE)
