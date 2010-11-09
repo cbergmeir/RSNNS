@@ -29,6 +29,11 @@
 require(RSNNS)
 options(prompt=" ", encoding="LATIN-9")
 data(snnsData)
+
+seed <- 3
+set.seed(seed)
+snnsRSetSeedValue(seed)
+
 \end{Scode}
 
 %\begin{titlepage}
@@ -381,8 +386,7 @@ A self organizing map (som) is an unsupervised learning method for clustering. S
 In this example, again the iris data is used. The som can be trained with:
 
 \begin{Scode}{results=hide}
-model <- som(irisValues, mapX=16, mapY=16, maxit=500,  
-             calculateActMaps=TRUE, calculateSpanningTree=TRUE, 
+model <- som(irisValues, mapX=16, mapY=16, maxit=500,               
              targets=irisTargets)
 \end{Scode}
 
@@ -404,7 +408,7 @@ plotActMap(model$map, col=rev(heat.colors(12)))
 plotActMap(log(model$map+1), col=rev(heat.colors(12)))
 persp(1:model$archParams$mapX, 1:model$archParams$mapY, log(model$map+1), 
       theta = 30, phi = 30, expand = 0.5, col = "lightblue")
-plotActMap(model$labeledSpanningTree)
+plotActMap(model$labeledMap)
 \end{Scode}
 
 %\begin{tabular}{rl}
