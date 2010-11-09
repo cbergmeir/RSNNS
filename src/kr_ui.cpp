@@ -4566,11 +4566,11 @@ void  SnnsCLib::krui_setSeedNo(long int seed)
 
     if (seed != 0) {
 	kr_ui_randomSeedVal = seed;
-        snns_srand48( seed );  
+        u_srand48( seed );  
     } else {
         if (kr_ui_randomSeedVal == 0) {
             kr_ui_randomSeedVal = (long) time( (time_t *) 0);
-            snns_srand48( kr_ui_randomSeedVal ); 
+            u_srand48( kr_ui_randomSeedVal ); 
         }
     }
 }

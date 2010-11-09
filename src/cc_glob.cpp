@@ -507,7 +507,7 @@ void SnnsCLib::cc_initActivationArrays(void)
 ******************************************************************************/
 FlintType SnnsCLib::cc_generateRandomNo(float maxValue)
 {
-    return (FlintType)(snns_drand48()*2.0*maxValue-maxValue);  
+    return (FlintType)(u_drand48()*2.0*maxValue-maxValue);  
 }
 
 

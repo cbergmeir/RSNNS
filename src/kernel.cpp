@@ -1723,9 +1723,9 @@ void  SnnsCLib::kr_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
 	/*  unit has direct links   */
 	FOR_ALL_LINKS( unit_ptr, link_ptr )
 #ifdef JOGWEIGHTS_BY_ADDING
-          link_ptr->weight += (FlintType) snns_drand48() * range + min;
+          link_ptr->weight += (FlintType) u_drand48() * range + min;
 #else
-          link_ptr->weight += link_ptr->weight * ((FlintType) snns_drand48() * range + min);
+          link_ptr->weight += link_ptr->weight * ((FlintType) u_drand48() * range + min);
       
 #endif
 	  else
@@ -1733,9 +1733,9 @@ void  SnnsCLib::kr_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
 	  /*  unit has sites  */
 	  FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )
 #ifdef JOGWEIGHTS_BY_ADDING
-            link_ptr->weight += (FlintType) snns_drand48() * range + min;
+            link_ptr->weight += (FlintType) u_drand48() * range + min;
 #else
-            link_ptr->weight += link_ptr->weight * ((FlintType) snns_drand48() * range + min);
+            link_ptr->weight += link_ptr->weight * ((FlintType) u_drand48() * range + min);
 #endif
     }
   }
@@ -2022,7 +2022,7 @@ krui_err  SnnsCLib::kr_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus,
     if (unit_ptr1 == NULL || unit_ptr2 == NULL || fabs(correlation) < mincorr)
 	return KRERR_NO_ERROR;
 
-    unit_ptr = snns_drand48() > 0.5 ? unit_ptr2 : unit_ptr1;
+    unit_ptr = u_drand48() > 0.5 ? unit_ptr2 : unit_ptr1;
 
 #ifdef CORR_DEBUG
     printf("maximum correlation is %g between %s and %s, jogging %s\n", 
@@ -2051,7 +2051,7 @@ krui_err  SnnsCLib::kr_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus,
 		maxweight = 1.0;
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )
                 link_ptr->weight += 
-		    maxweight * ((FlintType) snns_drand48() * range + min);
+		    maxweight * ((FlintType) u_drand48() * range + min);
 	}
 	else
 	{
@@ -2059,10 +2059,10 @@ krui_err  SnnsCLib::kr_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus,
 		/*  unit has sites  */
 		FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )
 #ifdef JOGWEIGHTS_BY_ADDING
-		    link_ptr->weight += (FlintType) snns_drand48() * range + min;
+		    link_ptr->weight += (FlintType) u_drand48() * range + min;
 #else
                     link_ptr->weight += 
-			link_ptr->weight * ((FlintType) snns_drand48() * range + min);
+			link_ptr->weight * ((FlintType) u_drand48() * range + min);
 #endif
 	}
     }
@@ -3669,8 +3669,8 @@ krui_err  SnnsCLib::kr_makeUnitPermutation(void)
   /*  permutate unit order  */
   for (i = 0; i < no_of_units; i++)
     {
-    t_ptr1 = topo_ptr + (snns_lrand48() % no_of_units);
-    t_ptr2 = topo_ptr + (snns_lrand48() % no_of_units);
+    t_ptr1 = topo_ptr + (u_lrand48() % no_of_units);
+    t_ptr2 = topo_ptr + (u_lrand48() % no_of_units);
 
     unit_ptr = *t_ptr1;
     *t_ptr1 = *t_ptr2;

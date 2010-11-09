@@ -69,7 +69,7 @@ krui_err SnnsCLib::cc_initVariables(float* ParameterInArray,
     cc_LayerCorrectnessTest(ParameterInArray,StartPattern,EndPattern);
 
     //SnnsCLib: random number generator is now initialized in the constructor
-    //snns_srand48((long)time(NULL)); 
+    //u_srand48((long)time(NULL)); 
  
 
     /* now read the parameters from the window to global variables */

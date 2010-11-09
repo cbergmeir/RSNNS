@@ -118,7 +118,7 @@ krui_err SnnsCLib::tac_initVariables(float* ParameterInArray,
    cc_LayerCorrectnessTest(ParameterInArray,StartPattern,EndPattern);
 
    //SnnsCLib: random number generator is now initialized in the constructor
-   //snns_srand48((long)time(NULL)); 
+   //u_srand48((long)time(NULL)); 
 	      /* inits the random-generator */
    cc_printOnOff = (int)ParameterInArray[8]; 
    cc_backfittingOnOff = (int)ParameterInArray[18];

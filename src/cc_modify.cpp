@@ -320,7 +320,7 @@ krui_err SnnsCLib::cc_calculateConnections(int SpecUnitNo)
         }
         else{
            for(i=0;i<CCR_NO_OF_LINKS;i++){
-              Choose = (int)(snns_drand48()*(float)(FoundUnits-i));    
+              Choose = (int)(u_drand48()*(float)(FoundUnits-i));    
                 /* choose one of the remaining units */
               for (j=0,cnt=0;
                   ((cnt<Choose)||(ListOfAllUnits[j] == FIELD_EMPTY));
@@ -374,7 +374,7 @@ void SnnsCLib::cc_MakeMiscCalculationsForModifications(void)
                   exp((-NoOfLayers*CCM_DAEMPFUNG))*CCM_HEIGHT;
                          /* calculate funtion */
                Height = (int)(fTemp+
-                     (snns_drand48()*2.0*CCM_DIFF_HEIGHT-CCM_DIFF_HEIGHT));
+                     (u_drand48()*2.0*CCM_DIFF_HEIGHT-CCM_DIFF_HEIGHT));
                          /* add or substract radom didderence */
             }     
             PRINTF("HeightOfLayer %d set to %d.\n",NoOfLayers,((Height>0) ? Height : 1));
@@ -388,7 +388,7 @@ void SnnsCLib::cc_MakeMiscCalculationsForModifications(void)
          for(i=0;i<NoOfOutputUnits;i++)
             ccs_GroupList[i] = FIELD_EMPTY;  /* all places are free */
          for(i=0;i<CCS_NO_OF_GROUPS;i++){
-            chose=(int)(snns_drand48()*(NoOfOutputUnits-i));                             
+            chose=(int)(u_drand48()*(NoOfOutputUnits-i));                             
             /* I want the OutputUnit No chose, which is left, in my group */
             for(j=0;(k<chose)||(ccs_GroupList[j]!=FIELD_EMPTY);j++){
             /* Count from the start, and take the chosen Unit which is left.
@@ -403,7 +403,7 @@ void SnnsCLib::cc_MakeMiscCalculationsForModifications(void)
             on the groups. */
          for (j=0;j<NoOfOutputUnits;j++){
             if (ccs_GroupList[j] == FIELD_EMPTY)
-                ccs_GroupList[j] = (int)(snns_drand48()*CCS_NO_OF_GROUPS);
+                ccs_GroupList[j] = (int)(u_drand48()*CCS_NO_OF_GROUPS);
 	 }
          return;
       default :  

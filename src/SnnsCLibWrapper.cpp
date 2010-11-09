@@ -2292,7 +2292,7 @@ RcppExport SEXP setCurrentSeedVal (SEXP seedval) {
   long seed = Rcpp::as<long>(seedval);
 
   u_setCurrentSeedVal(seed);
-  //snns_srand48(seed);
+  //u_srand48(seed);
 
   return R_NilValue;
 }

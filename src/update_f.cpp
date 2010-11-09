@@ -150,7 +150,7 @@ krui_err  SnnsCLib::UPDATE_randomOrderPropagate(float *parameterArray, int NoOfP
 
     for (n = 0; n < no_of_units; n++){
 	/*	  choose unit  */
-	unit_ptr = u_array + (1 + snns_lrand48() % no_of_units);
+	unit_ptr = u_array + (1 + u_lrand48() % no_of_units);
 
 	if (!IS_INPUT_UNIT( unit_ptr ))
 	    /*  this isn't a input unit: calculate the activation of the unit by

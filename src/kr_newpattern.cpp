@@ -1418,7 +1418,7 @@ bool SnnsCLib::kr_getSubPatternByOrder(int *pattern, int *sub)
 	    np_next_train_random = -1;
 
 	TRACE_RETURN((kr_getSubPatternByNo(pattern, sub, 
-				     snns_lrand48() % np_random_train_number)));
+				     u_lrand48() % np_random_train_number)));
     }
 
     if (np_next_train_pat == -1)
@@ -3836,7 +3836,7 @@ The parameter entries returns the number of entries in the data field.
 	fp = np_pat_train_order;
 	for (i=0; i<n; i++)
 	{
-	    s = snns_lrand48() % (n-i);
+	    s = u_lrand48() % (n-i);
 	    h = *fp;
 	    *fp++ = np_pat_train_order[s+i];
 	    np_pat_train_order[s+i] = h;
@@ -3892,7 +3892,7 @@ The parameter entries returns the number of entries in the data field.
 	fp = np_sub_pat_train_order;
 	for (i=0; i<n; i++)
 	{
-	    s = snns_lrand48() % (n-i);
+	    s = u_lrand48() % (n-i);
 	    h = *fp;
 	    *fp++ = np_sub_pat_train_order[s+i];
 	    np_sub_pat_train_order[s+i] = h;
@@ -4029,7 +4029,7 @@ The parameter entries returns the number of entries in the data field.
 		    fp = list->pat_nums;
 		    for (j=0; j<n; j++)
 		    {
-			s = snns_lrand48() % (n-j);
+			s = u_lrand48() % (n-j);
 			h = *fp;
 			*fp++ = list->pat_nums[s+j];
 			list->pat_nums[s+j] = h;
@@ -4049,7 +4049,7 @@ The parameter entries returns the number of entries in the data field.
 		fp = list->pat_nums;
 		for (j=0; j<n; j++)
 		{
-		    s = snns_lrand48() % (n-j);
+		    s = u_lrand48() % (n-j);
 		    h = *fp;
 		    *fp++ = list->pat_nums[s+j];
 		    list->pat_nums[s+j] = h;

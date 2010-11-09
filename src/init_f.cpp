@@ -106,7 +106,7 @@
   PURPOSE  : Initializes connection weights with uniform distributed 
              random values.
   RETURNS  : 
-  NOTES    : Function calls snns_drand48(). <min> must be less then <max>.
+  NOTES    : Function calls u_drand48(). <min> must be less then <max>.
 
   UPDATE   : 05.04.94 by Sven Doering
 ******************************************************************************/
@@ -165,20 +165,20 @@ krui_err  SnnsCLib::INIT_randomizeWeights(float *parameterArray, int NoOfParams)
 	    if ( ((flags & UFLAG_IN_USE) == UFLAG_IN_USE)
 		&& (!IS_SPECIAL_UNIT(unit_ptr))) {
 		/*  unit is in use  */
-		unit_ptr->bias = (FlintType) snns_drand48() * range + min_weight;
+		unit_ptr->bias = (FlintType) u_drand48() * range + min_weight;
 
 		if ( (flags & UFLAG_INPUT_PAT) == UFLAG_SITES ) {
 		    /*  unit has sites  */
 		    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )
 			link_ptr->weight = 
-			    (FlintType)snns_drand48() * range + min_weight;
+			    (FlintType)u_drand48() * range + min_weight;
 		} else  {
 		    /*  unit has no sites   */
 		    if ( (flags & UFLAG_INPUT_PAT) == UFLAG_DLINKS ){
 			/*  unit has direct links   */
 			FOR_ALL_LINKS( unit_ptr, link_ptr )
 			    link_ptr->weight = 
-				(FlintType) snns_drand48() * range + min_weight;
+				(FlintType) u_drand48() * range + min_weight;
 		    }
 		}
 	    }
@@ -198,7 +198,7 @@ krui_err  SnnsCLib::INIT_randomizeWeights(float *parameterArray, int NoOfParams)
 	     changed. This kind of initialization is necessary for 
 	     autoassociative memory networks.
   RETURNS  : 
-  NOTES    : Function calls snns_drand48(). <min> must be less then <max>.
+  NOTES    : Function calls u_drand48(). <min> must be less then <max>.
 
   UPDATE   : 11.02.94
 ******************************************************************************/
@@ -250,20 +250,20 @@ krui_err  SnnsCLib::INIT_RM_randomizeWeights(float *parameterArray, int NoOfPara
       if ( ((flags & UFLAG_IN_USE) == UFLAG_IN_USE)
 	  && (!IS_SPECIAL_UNIT(unit_ptr)))
         {     /*  unit is in use  */
-        unit_ptr->bias = (FlintType) snns_drand48() * range + min_weight;
+        unit_ptr->bias = (FlintType) u_drand48() * range + min_weight;
 
         if ( (flags & UFLAG_INPUT_PAT) == UFLAG_SITES )
           {       /*  unit has sites  */
 	  FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )
             if (!IS_INPUT_UNIT (link_ptr->to))
-            link_ptr->weight = (FlintType) snns_drand48() * range + min_weight;
+            link_ptr->weight = (FlintType) u_drand48() * range + min_weight;
         }else  {
           /*  unit has no sites   */
           if ( (flags & UFLAG_INPUT_PAT) == UFLAG_DLINKS )
             {     /*  unit has direct links   */
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )
               if (!IS_INPUT_UNIT (link_ptr->to))
-              link_ptr->weight = (FlintType) snns_drand48() * range + min_weight;
+              link_ptr->weight = (FlintType) u_drand48() * range + min_weight;
           }
         }
       }
@@ -348,7 +348,7 @@ krui_err  SnnsCLib::INIT_randomizeWeights_perc(float *parameterArray, int NoOfPa
 		    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr ){
 			ar = unit_ptr->value_c ;
 			link_ptr->weight = 
-			    (FlintType) snns_drand48() * 
+			    (FlintType) u_drand48() * 
 			    (max_weight/ar - min_weight/ar) + (min_weight/ar);
 		    }
 		} else  {
@@ -359,7 +359,7 @@ krui_err  SnnsCLib::INIT_randomizeWeights_perc(float *parameterArray, int NoOfPa
 			FOR_ALL_LINKS( unit_ptr, link_ptr ) {
 			    ar = unit_ptr->value_c ;
 			    link_ptr->weight = 
-				(FlintType) snns_drand48() * 
+				(FlintType) u_drand48() * 
 				(max_weight/ar - min_weight/ar) + 
 				(min_weight/ar);
 			}
@@ -424,13 +424,13 @@ krui_err SnnsCLib::INIT_Weights_CPNv32(float *parameterArray, int NoOfParams)
 	if UNIT_HAS_SITES( unit_ptr ){
 	    /* the unit has sites */
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
-		link_ptr->weight = (FlintType) snns_drand48() * range + min;
+		link_ptr->weight = (FlintType) u_drand48() * range + min;
 		sum += link_ptr->weight * link_ptr->weight;
 	    }
 	}else{
 	    /* the unit has direct links */
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )  {
-		link_ptr->weight = (FlintType) snns_drand48() * range + min;
+		link_ptr->weight = (FlintType) u_drand48() * range + min;
 		sum += link_ptr->weight * link_ptr->weight;
 	    }
 	}
@@ -456,11 +456,11 @@ krui_err SnnsCLib::INIT_Weights_CPNv32(float *parameterArray, int NoOfParams)
 	if UNIT_HAS_SITES( unit_ptr ){
 	    /* the unit has sites */
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )
-		link_ptr->weight = (FlintType) snns_drand48() * range + min;
+		link_ptr->weight = (FlintType) u_drand48() * range + min;
 	}else{
 	    /* the unit has direct links */
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )
-		link_ptr->weight = (FlintType) snns_drand48() * range + min;
+		link_ptr->weight = (FlintType) u_drand48() * range + min;
 	}
     }
 
@@ -526,7 +526,7 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
 	    /* the unit has sites */
           do { sum = 0.0;
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
-		link_ptr->weight = (FlintType) snns_drand48() * intervall + offset;
+		link_ptr->weight = (FlintType) u_drand48() * intervall + offset;
 		sum += link_ptr->weight * link_ptr->weight;
 	    }
           } while ((sum > 1.0) || (sum == 0.0));
@@ -534,7 +534,7 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
 	    /* the unit has direct links */
           do { sum = 0.0;
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )  {
-		link_ptr->weight = (FlintType) snns_drand48() * intervall + offset;
+		link_ptr->weight = (FlintType) u_drand48() * intervall + offset;
 		sum += link_ptr->weight * link_ptr->weight;
 	    }
           } while ((sum > 1.0) || (sum == 0.0));
@@ -561,11 +561,11 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
 	if UNIT_HAS_SITES( unit_ptr ){
 	    /* the unit has sites */
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )
-		link_ptr->weight = (FlintType) snns_drand48() * range + min;
+		link_ptr->weight = (FlintType) u_drand48() * range + min;
 	}else{
 	    /* the unit has direct links */
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )
-		link_ptr->weight = (FlintType) snns_drand48() * range + min;
+		link_ptr->weight = (FlintType) u_drand48() * range + min;
 	}
     }
 
@@ -695,7 +695,7 @@ void SnnsCLib::RbfInitSetCenter(int pattern_no, int sub_pat_no,
 	FOR_ALL_LINKS(hidden_unit, link_ptr){
 	    link_ptr->weight = link_ptr->to->Out.output *
 		(1.0 + deviation * 
-		 tan(((float)snns_drand48() * 2.8274334 - 1.4137167)));
+		 tan(((float)u_drand48() * 2.8274334 - 1.4137167)));
 	}
     }
 
@@ -2142,14 +2142,14 @@ krui_err SnnsCLib::INIT_SOM_Weights_v32(float *parameterArray, int NoOfParams)
     if UNIT_HAS_SITES( unit_ptr )
       { /* the unit has sites */
       FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
-        link_ptr->weight = (FlintType) snns_drand48() * range + min;
+        link_ptr->weight = (FlintType) u_drand48() * range + min;
         sum += link_ptr->weight * link_ptr->weight;
       }
     }
     else
       { /* the unit has direct links */
       FOR_ALL_LINKS( unit_ptr, link_ptr )  {
-        link_ptr->weight = (FlintType) snns_drand48() * range + min;
+        link_ptr->weight = (FlintType) u_drand48() * range + min;
         sum += link_ptr->weight * link_ptr->weight;
       }
     }
@@ -2315,13 +2315,13 @@ krui_err  SnnsCLib::INIT_JE_Weights (float *parameterArray, int NoOfParams)
       }
       else
       {
-        unit_ptr->bias = (FlintType) snns_drand48() * range + min_weight ;
+        unit_ptr->bias = (FlintType) u_drand48() * range + min_weight ;
 
         if ((flags & UFLAG_INPUT_PAT) == UFLAG_SITES)
         { 
           /*  unit has sites  */
 	  FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
-            link_ptr->weight = (FlintType) snns_drand48() * range + min_weight ;
+            link_ptr->weight = (FlintType) u_drand48() * range + min_weight ;
         } 
         else  
         {
@@ -2329,7 +2329,7 @@ krui_err  SnnsCLib::INIT_JE_Weights (float *parameterArray, int NoOfParams)
           if ((flags & UFLAG_INPUT_PAT) == UFLAG_DLINKS)
           { /*  unit has direct links   */
 	    FOR_ALL_LINKS (unit_ptr, link_ptr)
-              link_ptr->weight = (FlintType) snns_drand48() * range + min_weight ;
+              link_ptr->weight = (FlintType) u_drand48() * range + min_weight ;
           }
         } /* else */
       } /* if */
