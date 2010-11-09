@@ -1,3 +1,55 @@
+/************************************************************************************
+
+   This file is part of SnnsCLib, a fork of the kernel and parts of the gui of 
+   the Stuttgart Neural Network Simulator (SNNS), version 4.3.
+
+   The file's original version is part of SNNS 4.3. It's source code can be found at
+
+   http://www.ra.cs.uni-tuebingen.de/SNNS/
+
+   SNNS 4.3 is under the license LGPL v2. We note that source code files of SNNS 4.3 
+   state as version "4.2". Base of this fork is SNNS 4.3 with a reverse-applied 
+   python patch (see http://developer.berlios.de/projects/snns-dev/).
+
+   SnnsCLib was developed in 2010 by Christoph Bergmeir under supervision of 
+   José M. Benítez, both affiliated to DiCITS Lab, Sci2s group, DECSAI, 
+   University of Granada
+
+   Changes done to the original code were performed with the objective to
+   port it from C to C++ and to encapsulate all code in one class named SnnsCLib.
+
+   Changes in header files mainly include:
+   * removed all static keywords
+   * moved initializations of variables to the constructor of SnnsCLib
+
+   Changes in cpp code files mainly include:
+   * changed file ending from .c to .cpp
+   * removed all SNNS internal includes and only include SnnsCLib   
+   * static variables within functions were turned into member variables of SnnsCLib
+   * function declarations were changed to method declarations, i.e. "SnnsCLib::.."
+     was added
+   * calls to the function table are now "C++-style", using the "this"-pointer
+
+   License of SnnsCLib:
+   
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+ 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+ 
+   You should have received a copy of the GNU Library General Public License
+   along with this library; see the file COPYING.LIB.  If not, write to
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
+
+************************************************************************************/
+
+
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/xgui/sources/bn_artmap.c,v $
   SHORTNAME      : bn_artmap
@@ -308,27 +360,6 @@
 */
 #define CHECK_RETURN(ret_code)  if (ret_code != KRERR_NO_ERROR) \
                                    return (ret_code)
-
-/*
-#include <config.h>
-
-
-#include <X11/Intrinsic.h>
-#include <X11/Shell.h>
-#include <X11/Xaw/Box.h>
-#include <X11/Xaw/Form.h>
-
-#include "ui.h"
-#include "kr_ui.h"
-#include "ui_mainP.h"
-#include "ui_xWidgets.h"
-#include "ui_fileP.h"
-#include "bn_basics.h"
-#include "ui_control.h"
-#include "ui_confirmer.h"
-
-#include "bn_artmap.ph"
-*/
 
 
 
@@ -1479,81 +1510,3 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    return (ret_code);
 }
 
-
-
-
-/*****************************************************************************
-  FUNCTION : bn_artmap_donePROC
-
-  PURPOSE  : Callback function for DONE button in artmap
-  NOTES    :
-
-  UPDATE   : 20.1.1993
-******************************************************************************/
-/*
-static void bn_artmap_donePROC (void)
-
-{
-
-   XtDestroyWidget (baseWidget);
-   bn_artmap_open = 0;
-
-}
-*/
-
-
-/*****************************************************************************
-  FUNCTION : bn_art1_createPROC
-
-  PURPOSE  : Callback function for CREATE NET button in art1
-  NOTES    :
-
-  UPDATE   : 20.1.1993
-******************************************************************************/
-/*
-static void bn_artmap_createPROC (void)
-
-{
-  int units[4], rows[4];
-  int NoOfLayers = 4;
-
-  if (bn_basics_check_existingNetwork()) {
-
-     bn_basics_getValues (NoOfLayers, units, rows, artmapUnitWidget, artmapRowWidget);
-
-     if (bn_basics_checkValues(NoOfLayers, units, rows)) {
-        bn_artmap_createNet (units[0], rows[0], units[1], rows[1],
-                             units[2], rows[2], units[3], rows[3]);
-
-        bn_basics_refresh ();
-        ui_confirmOk ("Network created!");
-     }
-
-  }
-
-  return;
-
-}
-*/
-
-
-/*****************************************************************************
-  FUNCTION : bn_createARTMAP
-
-  PURPOSE  : create ARTMAP panel
-  NOTES    :
-
-  UPDATE   : 20.1.1993
-******************************************************************************/
-/*
-void bn_createARTMAP(void)
-
-{
-  bn_basics_createART (ARTMAP_MODEL, &baseWidget, &bn_artmap_open,
-                       artmapUnitWidget, artmapRowWidget,
-                       (XtCallbackProc) bn_artmap_createPROC,
-                       (XtCallbackProc) bn_artmap_donePROC);
-
-
-}
-*/

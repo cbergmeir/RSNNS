@@ -68,37 +68,12 @@
     Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
 
 ******************************************************************************/
-//#include <config.h>
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "SnnsCLib.h"
-
-//#include "kr_rand.h"
-
-//#include "kr_typ.h"	 /*  Kernel Types and Constants             */
-//#include "kr_const.h"	 /*  Constant Declarators for SNNS-Kernel   */
-//#include "kr_def.h"	 /*  Default Values                         */
-//#include "kernel.h"	 /*  SNNS-Kernel Function Prototypes        */
-//#include "glob_typ.h"    /*  Global Types                           */
-//#include "random.h"	 /*  Randomize Library Function Prototypes  */
-//#include "kr_mac.h"	 /*  Kernel Macros                          */
-//#include "kr_art.h"      /*  Prototypes and global defs for ART     */
-//#include "kr_art1.h"     /*  Prototypes and global defs for ART1    */
-//#include "kr_art2.h"     /*  Prototypes and global defs for ART2    */
-//#include "kr_amap.h"     /*  Prototypes and global defs for ARTMAP  */
-//#include "krart_df.h"    /*  Definitions for ART functions          */
-//#include "learn_f.h"     /*  For the RBF functions                  */
-//#include "kr_ui.h"
-//#include "cc_type.h"
-//#include "cc_glob.h"      /* Definitions for cascade                 */
-//#include "matrix.h"
-//#include "kr_newpattern.h"
-
-//#include "init_f.ph"
-
-
 
 /*****************************************************************************
   FUNCTION : INIT_randomizeWeights

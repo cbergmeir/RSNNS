@@ -1,7 +1,104 @@
+/************************************************************************************
+
+   This file is a wrapper of SnnsCLib for R. SnnsCLib is a fork of the kernel and parts 
+   of the gui of the Stuttgart Neural Network Simulator (SNNS), version 4.3.
+
+   SnnsCLib was developed in 2010 by Christoph Bergmeir under supervision of 
+   José M. Benítez, both affiliated to DiCITS Lab, Sci2s group, DECSAI, 
+   University of Granada
+
+   Changes done to the original code were performed with the objective to
+   port it from C to C++ and to encapsulate all code in one class named SnnsCLib.
+
+   Changes in header files mainly include:
+   * removed all static keywords
+   * moved initializations of variables to the constructor of SnnsCLib
+
+   Changes in cpp code files mainly include:
+   * changed file ending from .c to .cpp
+   * removed all SNNS internal includes and only include SnnsCLib   
+   * static variables within functions were turned into member variables of SnnsCLib
+   * function declarations were changed to method declarations, i.e. "SnnsCLib::.."
+     was added
+   * calls to the function table are now "C++-style", using the "this"-pointer
+
+   License of SnnsCLib:
+   
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+ 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+ 
+   You should have received a copy of the GNU Library General Public License
+   along with this library; see the file COPYING.LIB.  If not, write to
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
+
+************************************************************************************/
+
+/*
+The following functions are currently not wrapped and therewith not callable from R. However, 
+their wrapping is prepared and commented-out code is present in this file.
+Mostly, only wrapping of some parameters is not implemented. 
+
+Integration of functions beginning with -- probably would require some more work. 
+Integration of all other functions is straightforward, and was only omitted because they 
+are currently not needed:
+
+-- krui_err     deleteUnitList(int no_of_units, int unit_list[]);
+-- krui_err     createFTypeEntry(char *Ftype_symbol, char *act_func_name, char *out_func_name, 
+                                                    int no_of_sites, char **array_of_site_names);
+int             getFirstPredUnit(FlintType *strength);
+int             getFirstPredUnitAndData(FlintType *strength,float *val_a,float *val_b, float *val_c);
+int             getNextPredUnit(FlintType *strength);
+int             getNextPredUnitAndData(FlintType *strength,float *val_a,float *val_b, float *val_c);
+int             getCurrentPredUnit(FlintType *strength);
+
+int             getFirstSuccUnit(int source_unit_no, FlintType *weight);
+int             getNextSuccUnit(FlintType *weight);
+
+bool            areConnectedWeight(int source_unit_no,int target_unit_no, FlintType *weight);
+
+struct Link*    createLinkWithAdditionalParameters(int source_unit_no, FlintTypeParam weight,
+                                                      float val_a,float val_b,float val_c);
+krui_err        setRemapFunc(char *name, float *params);
+
+-- krui_err     trainNetwork(NetLearnParameters *parameters);
+-- krui_err     getNetworkErrorArray(double **learnErrors,int **atEpoch,int *noOfErrors);
+
+krui_err        setClassDistribution(unsigned int *classDist);
+krui_err        AlignSubPat(int *inpos, int *outpos, int *no);
+krui_err        GetShapeOfSubPattern(int *insize, int *outsize, int *inpos, int *outpos, int n_pos);
+
+-- krui_err     saveResultParam(char *filename, bool create,int startpattern, int endpattern,bool includeinput, 
+                                     bool includeoutput,float *Update_param_array,int NoOfUpdateParam);
+
+krui_err        xyTransTable(int op, int *x, int *y, int z);
+krui_err        getUnitCenters(int unit_no, int center_no,struct PositionVector **unit_center);
+krui_err        setUnitCenters(int unit_no, int center_no,struct PositionVector *unit_center);
+
+#ifdef MASPAR_KERNEL
+krui_err        MasPar( mode );
+krui_err        getMasParStatus(void);
+krui_err        MasParBenchmark( func_type, cycles, result );
+#endif
+
+void            inv_forwardPass(struct UnitList *inputs);
+double          inv_backwardPass(float learn, float delta_max,int *err_units, float ratio,
+                                         struct UnitList *inputs,struct UnitList *outputs);
+
+krui_err        setErrorHandler(void(* error_Handler )(int));
+*/
+
 
 #include <Rcpp.h>
 
-#include <R_ext/Print.h>
+//#include <R_ext/Print.h>
 
 //using namespace Rcpp ;
 
@@ -40,7 +137,7 @@ RcppExport SEXP SnnsCLib__setCurrentUnit(SEXP xp, SEXP unit_no) {
 
   int p1 = Rcpp::as<int>(unit_no);
   int err = snnsCLib->krui_setCurrentUnit(p1);
-  //return Rcpp::wrap(err);
+
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
@@ -394,6 +491,11 @@ RcppExport SEXP SnnsCLib__deleteUnit(SEXP xp, SEXP unit_no) {
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+/*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__deleteUnitList(SEXP xp, SEXP no_of_units, int unit_list[]) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
@@ -402,6 +504,7 @@ RcppExport SEXP SnnsCLib__deleteUnitList(SEXP xp, SEXP no_of_units, int unit_lis
   int err = snnsCLib->krui_deleteUnitList(p1, unit_list);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 RcppExport SEXP SnnsCLib__createFTypeUnit(SEXP xp, SEXP Ftype_symbol) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -526,6 +629,11 @@ RcppExport SEXP SnnsCLib__setFTypeSiteName(SEXP xp, SEXP FType_site_name) {
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+/*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__createFTypeEntry(SEXP xp, SEXP Ftype_symbol, SEXP act_func_name,
                                            SEXP out_func_name, SEXP no_of_sites,
                                            char **array_of_site_names) {
@@ -541,6 +649,7 @@ RcppExport SEXP SnnsCLib__createFTypeEntry(SEXP xp, SEXP Ftype_symbol, SEXP act_
                                            array_of_site_names);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 RcppExport SEXP SnnsCLib__deleteFTypeEntry(SEXP xp, SEXP Ftype_symbol) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -746,6 +855,12 @@ RcppExport SEXP SnnsCLib__deleteSite(SEXP xp) {
   return Rcpp::wrap(ret);
 }
 
+/*
+//------------------------------------------
+// Wrapping for these functions is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
+
 RcppExport SEXP SnnsCLib__getFirstPredUnit(SEXP xp, FlintType *strength) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
@@ -797,15 +912,6 @@ RcppExport SEXP SnnsCLib__getNextSuccUnit(SEXP xp, FlintType *weight) {
   return Rcpp::wrap(ret);
 }
 
-RcppExport SEXP SnnsCLib__areConnected(SEXP xp, SEXP source_unit_no, SEXP target_unit_no) {
- Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
-
-  int p1 = Rcpp::as<int>(source_unit_no);
-  int p2 = Rcpp::as<int>(target_unit_no);
-
-  bool ret = snnsCLib->krui_areConnected(p1, p2);
-  return Rcpp::wrap(ret);
-}
 
 RcppExport SEXP SnnsCLib__areConnectedWeight(SEXP xp, SEXP source_unit_no, SEXP target_unit_no,
                                              FlintType *weight) {
@@ -815,6 +921,17 @@ RcppExport SEXP SnnsCLib__areConnectedWeight(SEXP xp, SEXP source_unit_no, SEXP 
   int p2 = Rcpp::as<int>(target_unit_no);
 
   bool ret = snnsCLib->krui_areConnectedWeight(p1, p2, weight);
+  return Rcpp::wrap(ret);
+}
+*/
+
+RcppExport SEXP SnnsCLib__areConnected(SEXP xp, SEXP source_unit_no, SEXP target_unit_no) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(source_unit_no);
+  int p2 = Rcpp::as<int>(target_unit_no);
+
+  bool ret = snnsCLib->krui_areConnected(p1, p2);
   return Rcpp::wrap(ret);
 }
 
@@ -852,6 +969,11 @@ RcppExport SEXP SnnsCLib__createLink(SEXP xp, SEXP source_unit_no, SEXP weight) 
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+/*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 struct Link* SnnsCLib__createLinkWithAdditionalParameters(SEXP xp,
                             SEXP source_unit_no, SEXP weight,
                             SEXP val_a,SEXP val_b,SEXP val_c) {
@@ -865,6 +987,7 @@ struct Link* SnnsCLib__createLinkWithAdditionalParameters(SEXP xp,
 
   return snnsCLib->krui_createLinkWithAdditionalParameters( p1, p2, p3, p4, p5);
 }
+*/
 
 RcppExport SEXP SnnsCLib__deleteLink(SEXP xp) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -934,6 +1057,11 @@ RcppExport SEXP SnnsCLib__setUpdateFunc(SEXP xp, SEXP update_func) {
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+/*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__setRemapFunc(SEXP xp, SEXP name, float *params) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
@@ -942,6 +1070,7 @@ RcppExport SEXP SnnsCLib__setRemapFunc(SEXP xp, SEXP name, float *params) {
   int err = snnsCLib->krui_setRemapFunc(const_cast<char*>(p1.c_str()), params);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 /*RcppExport SEXP SnnsCLib__updateNet(SEXP xp, float *parameterInArray, SEXP NoOfInParams) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1017,12 +1146,18 @@ RcppExport SEXP SnnsCLib__setLearnFunc(SEXP xp, SEXP learning_func) {
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+/*
+//------------------------------------------
+// Wrapping for these functions is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__trainNetwork(SEXP xp, NetLearnParameters *parameters) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
   int err = snnsCLib->krui_trainNetwork(parameters);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+
 
 RcppExport SEXP SnnsCLib__getNetworkErrorArray(SEXP xp, double **learnErrors,int **atEpoch,
                                                int *noOfErrors) {
@@ -1032,6 +1167,7 @@ RcppExport SEXP SnnsCLib__getNetworkErrorArray(SEXP xp, double **learnErrors,int
                                                noOfErrors);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 RcppExport SEXP SnnsCLib__stopTraining(SEXP xp) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1069,7 +1205,6 @@ RcppExport SEXP SnnsCLib__learnAllPatterns(SEXP xp, SEXP parameterInArray) {
     	Rcpp::Named( "parameterOutArray" ) = out
     	) ;
 
-  //return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
 RcppExport SEXP SnnsCLib__testAllPatterns(SEXP xp, SEXP parameterInArray) {
@@ -1306,12 +1441,18 @@ RcppExport SEXP SnnsCLib__learnSinglePatternFF(SEXP xp, SEXP pattern_no,
 }
 */
 
+/*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__setClassDistribution(SEXP xp, unsigned int *classDist) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
   int err = snnsCLib->krui_setClassDistribution(classDist);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 RcppExport SEXP SnnsCLib__setClassInfo(SEXP xp, SEXP name) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1377,7 +1518,6 @@ RcppExport SEXP SnnsCLib__allocNewPatternSet(SEXP xp) {
   int set_no;
   int err = snnsCLib->krui_allocNewPatternSet(&set_no);
 
-  //return Rcpp::List::create( Rcpp::Named( "err" ) = err );
   return Rcpp::List::create( 
     	Rcpp::Named( "err" ) = err, 
     	Rcpp::Named( "set_no" ) = set_no
@@ -1545,8 +1685,6 @@ RcppExport SEXP SnnsCLib__GetPatInfo(SEXP xp) {
 //    	Rcpp::Named( "output_dim_sizes" ) = pat_info.output_dim_sizes[0]
     	) ;
 
-//  int err=0;
-//  return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
 RcppExport SEXP SnnsCLib__DefShowSubPat(SEXP xp) {
@@ -1580,7 +1718,6 @@ RcppExport SEXP SnnsCLib__DefTrainSubPat(SEXP xp) {
 
   int err = snnsCLib->krui_DefTrainSubPat(&insize, &outsize, &instep, &outstep, &max_n_pos);
 
-  //return Rcpp::List::create( Rcpp::Named( "err" ) = err );
   return Rcpp::List::create( 
     	Rcpp::Named( "err" ) = err, 
     	Rcpp::Named( "insize" ) = insize,
@@ -1591,6 +1728,11 @@ RcppExport SEXP SnnsCLib__DefTrainSubPat(SEXP xp) {
     	) ;
 }
 
+/*
+//------------------------------------------
+// Wrapping for these functions is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__AlignSubPat(SEXP xp, int *inpos, int *outpos, int *no) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
@@ -1608,6 +1750,7 @@ RcppExport SEXP SnnsCLib__GetShapeOfSubPattern(SEXP xp, int *insize, int *outsiz
                                            inpos, outpos, p5);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 RcppExport SEXP SnnsCLib__saveNet(SEXP xp, SEXP filename, SEXP netname) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1634,6 +1777,11 @@ RcppExport SEXP SnnsCLib__loadNet(SEXP xp, SEXP filename) {
 
 }
 
+/*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__saveResultParam(SEXP xp, SEXP filename, SEXP create,
                                           SEXP startpattern, SEXP endpattern,
                                           SEXP includeinput, SEXP includeoutput,
@@ -1656,6 +1804,7 @@ RcppExport SEXP SnnsCLib__saveResultParam(SEXP xp, SEXP filename, SEXP create,
   int err = snnsCLib->krui_saveResultParam(const_cast<char*>(p1.c_str()), p2, p3, p4, p5, p6, Update_param_array, p8);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 RcppExport SEXP SnnsCLib__allocateUnits(SEXP xp, SEXP no_of_units) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1807,7 +1956,6 @@ RcppExport SEXP SnnsCLib__getUnitDefaults(SEXP xp) {
     	Rcpp::Named( "out_func" ) = (const char*) out_func
     	) ;
 
-//  return R_NilValue;
 }
 
 RcppExport SEXP SnnsCLib__setUnitDefaults(SEXP xp, SEXP act,
@@ -1879,6 +2027,11 @@ RcppExport SEXP SnnsCLib__getNoOfSpecialOutputUnits(SEXP xp) {
   return Rcpp::wrap(ret);
 }
 
+/*
+//------------------------------------------
+// Wrapping for these functions is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__xyTransTable(SEXP xp, SEXP op, int *x, int *y, SEXP z) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
@@ -1910,6 +2063,7 @@ RcppExport SEXP SnnsCLib__setUnitCenters(SEXP xp, SEXP unit_no, SEXP center_no,
   int err = snnsCLib->krui_setUnitCenters(p1, p2, unit_center);
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
+*/
 
 RcppExport SEXP SnnsCLib__error(SEXP xp, SEXP error_code) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1946,7 +2100,13 @@ RcppExport SEXP SnnsCLib__countLinks(SEXP xp) {
   return Rcpp::wrap(ret);
 }
 
-
+/*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+// Furthermore, the MASPAR_KERNEL is not tested and most probably 
+// currently not working in SnnsCLib
+//------------------------------------------
 #ifdef MASPAR_KERNEL
 
 RcppExport SEXP SnnsCLib__MasPar(SEXP xp, mode ) {
@@ -1972,6 +2132,7 @@ RcppExport SEXP SnnsCLib__MasParBenchmark(SEXP xp, func_type, cycles, result ) {
 
 
 #endif
+*/
 
 RcppExport SEXP SnnsCLib__setSpecialNetworkType(SEXP xp, SEXP net_type) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1995,6 +2156,11 @@ RcppExport SEXP SnnsCLib__initInversion(SEXP xp) {
   return Rcpp::wrap(ret);
 }
 
+/*
+//------------------------------------------
+// Wrapping for these functions is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__inv_forwardPass(SEXP xp, struct UnitList *inputs) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
@@ -2019,6 +2185,7 @@ RcppExport SEXP SnnsCLib__inv_backwardPass(SEXP xp, SEXP learn, SEXP delta_max,
                                            outputs);
   return Rcpp::wrap(ret);
 }
+*/
 
 RcppExport SEXP SnnsCLib__kohonen_SetExtraParameter(SEXP xp, SEXP x) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -2057,6 +2224,10 @@ RcppExport SEXP SnnsCLib__getErrorCode(SEXP xp) {
 }
 
 /*
+//------------------------------------------
+// Wrapping for this function is not implemented so far:
+// Parameters with a type different from SEXP are not handled correctly so far.
+//------------------------------------------
 RcppExport SEXP SnnsCLib__setErrorHandler(void(* error_Handler )(int)) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 

@@ -1,0 +1,159 @@
+What has been done so far?
+
+-Copy SNNS/kernel/sources to src/
+-delete unneeded files: Makefile, kernel.dtt, calc_err.c, make_tbl.c
+-create Makevars-file in src/
+
+...
+
+
+-copy config.h from SNNS/ to src/ 
+- remove from config.h relative paths: "kernel/sources/"
+
+
+-remove from kernel.h functions: kr_searchUnitSiteWithPred (as kernel.h is not included in the swig interface any more, this is probably not necessary)
+ and from kr_ui.h: krui_setUnitOutPyFunc
+
+
+-create RSNNS.i in src/
+
+...
+
+-run swig, move RSNNS.R to R/, replace in RSNNS_wrap.c all true to TRUE and all false to FALSE:
+
+swig -r RSNNS.i
+sed -e 's/true/TRUE/g' -e 's/false/FALSE/g' RSNNS_wrap.c > RSNNS_wrap_edt.c
+rm RSNNS_wrap.c
+mv RSNNS_wrap_edt.c RSNNS_wrap.c
+mv RSNNS.R ../R
+
+
+
+- For windows compatibility: 
+  *run SNNS config script on windows machine (or deactivate some stuff manually)
+   in the RTools-shell: 
+   sh
+   ./configure --build=i386-pc-cygwin32
+  *remove alloca stuff from config.h
+  *add to config.h: 
+  
++#ifndef MAXFLOAT
++#include <float.h>
++#define MAXFLOAT FLT_MAX
++#endif 
+  
+  *remove alloca.h and alloca.c
+  
+  *add to kr_pat_scan.c:
+    int yywrap() { return 1; }
+	
+	and comment the YY_SKIP_YYWRAP stuff
+  
+  *edit lrand48.c: replace "random" by "rand"
+
+
+-to build swig from svn sources:
+
+AUTOMAKE=automake-1.7 ACLOCAL=aclocal-1.7 ./autogen.sh
+./configure --disable-ccache --prefix=/home/bergmeir/Download/swig-build
+make
+make install
+
+
+-to compile as cpp:
+
+change ".c" to ".cpp":
+for i in *.c; do mv $i $i"pp"; done
+
+//for i in *; do j=`echo $i | cut -d . -f 1`; j=$j"_32.png"; mv $i $j; done
+//for i in *.png; do j=`echo $i | cut -d . -f 1`; j=$j".eps"; convert -resize 300x180 $i ./eps/$j; done
+//for i in *.pdf; do j=`echo $i | cut -d . -f 1`; j=$j".eps"; convert $i ./eps/$j; done
+
+add some stuff to the .h files:
+
+for i in *.h;
+do
+sed -e '1i\
+#ifdef __cplusplus\
+extern "C" {\
+#endif' -e '$a\
+#ifdef __cplusplus\
+}\
+#endif' $i > $i"1";
+
+#rm $i;
+mv $i"1" $i;
+done
+
+
+
+
+change in
+/home/bergmeir/Download/swig-build/share/swig/2.0.1/r/r.swg
+
+free($1)
+to
+//free($1)
+otherwise, the *OUTPUT macro of swig is not working
+
+
+
+to make automatically generated Rd to work:
+sed  -i -e 's/%%  ~~function to do ... ~~/function to do/g' *.Rd
+
+
+TODOs: 
+- extract important things from configure.in of SNNS and build own configure script for 
+  the R package (with autoconf), e.g. to determine, if Flex is present
+
+
+#---------------------------------------
+
+//%apply char* *OUTPUT {char **func_name};                                                        
+
+//%inline %{
+//extern void krui_getFuncInfo(int func_no, char **func_name,int *func_type);
+//%}
+
+/* Set the input argument to point to a temporary variable */
+%typemap(in, numinputs=0) (char **func_name) (char* temp) {
+   $1 = &temp;
+}
+
+%typemap(argout) (char **func_name) {
+   $result = SWIG_AppendResult($result, $1, 1);
+
+}
+
+//
+// status is an output parameters for cvCalcOpticalFlowPyrLK
+//
+%typemap (in, numinputs=1) (char *status) (int tmpCountStatus){
+  // as input, we still need the size of the status array
+
+  // memorize the size of the status array
+  tmpCountStatus = (int)OctInt_AsLong ($input);
+
+  // create the status array for the C call
+  $1 = (char *)malloc (tmpCountStatus * sizeof (char));
+}
+
+//
+// the status returned by cvCalcOpticalFlowPyrLK
+//
+%typemap(argout) (char *status) {
+  int i;
+  octave_value to_add;
+
+  // create the list to return
+  to_add = OctList_New (tmpCountStatus$argnum);
+
+  // extract all the integer values of the result, and add it to the
+  // final resulting list
+  for (i = 0; i < tmpCountStatus$argnum; i++) {
+    OctList_SetItem (to_add, i, OctBool_FromLong ($1 [i]));
+  }
+
+  $result = SWIG_AppendResult($result, &to_add, 1); 
+}
+

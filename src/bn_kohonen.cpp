@@ -1,3 +1,55 @@
+/************************************************************************************
+
+   This file is part of SnnsCLib, a fork of the kernel and parts of the gui of 
+   the Stuttgart Neural Network Simulator (SNNS), version 4.3.
+
+   The file's original version is part of SNNS 4.3. It's source code can be found at
+
+   http://www.ra.cs.uni-tuebingen.de/SNNS/
+
+   SNNS 4.3 is under the license LGPL v2. We note that source code files of SNNS 4.3 
+   state as version "4.2". Base of this fork is SNNS 4.3 with a reverse-applied 
+   python patch (see http://developer.berlios.de/projects/snns-dev/).
+
+   SnnsCLib was developed in 2010 by Christoph Bergmeir under supervision of 
+   José M. Benítez, both affiliated to DiCITS Lab, Sci2s group, DECSAI, 
+   University of Granada
+
+   Changes done to the original code were performed with the objective to
+   port it from C to C++ and to encapsulate all code in one class named SnnsCLib.
+
+   Changes in header files mainly include:
+   * removed all static keywords
+   * moved initializations of variables to the constructor of SnnsCLib
+
+   Changes in cpp code files mainly include:
+   * changed file ending from .c to .cpp
+   * removed all SNNS internal includes and only include SnnsCLib   
+   * static variables within functions were turned into member variables of SnnsCLib
+   * function declarations were changed to method declarations, i.e. "SnnsCLib::.."
+     was added
+   * calls to the function table are now "C++-style", using the "this"-pointer
+
+   License of SnnsCLib:
+   
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+ 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+ 
+   You should have received a copy of the GNU Library General Public License
+   along with this library; see the file COPYING.LIB.  If not, write to
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
+
+************************************************************************************/
+
+
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/xgui/sources/bn_kohonen.c,v $
   SHORTNAME      : bn_kohonen
@@ -23,157 +75,6 @@
 #define CHECK_RETURN(ret_code)  if (ret_code != KRERR_NO_ERROR) \
                                    return (ret_code)
 
-
-/*
-#include <config.h>
-
-#include <X11/Intrinsic.h>
-#include <X11/Shell.h>
-#include <X11/Xaw/Box.h>
-#include <X11/Xaw/Form.h>
-
-#include "ui.h"
-#include "kr_ui.h"
-#include "ui_mainP.h"
-#include "ui_xWidgets.h"
-#include "ui_utilP.h"
-#include "ui_textP.h"
-#include "ui_fileP.h"
-#include "ui_confirmer.h"
-#include "ui_control.h"
-#include "bn_basics.h"
-
-#include "bn_kohonen.ph"
-*/
-
-/*****************************************************************************
-  FUNCTION : bn_createKOHONEN
-
-  PURPOSE  : create the kohonen bignet window.
-  NOTES    :
-  RETURNS  :
-
-  UPDATE   : 
-******************************************************************************/
-/*
-void bn_createKOHONEN (void)
-{
-  Widget   box, panel, create_kohonen, done, dummy;
-  Arg      arg[25];
-  Cardinal n;
-  char     buf[40];
-  
-
-    if(kohonen_widget_open) {
-	XRaiseWindow (XtDisplay (baseWidget), XtWindow (baseWidget));
-	return;
-    }
-
-    sprintf (buf, "SNNS BigNet (Kohonen)");
-    n = 0;  
-    
-    XtSetArg(arg[n],XtNminHeight,82); n++;
-    XtSetArg(arg[n],XtNminWidth,254); n++;  
-    XtSetArg(arg[n],XtNmaxHeight,82); n++;
-    XtSetArg(arg[n],XtNmaxWidth,254); n++;
-    
-    
-    baseWidget = 
-      XtCreatePopupShell (buf, topLevelShellWidgetClass, ui_toplevel, arg, n); 
-    n = 0;  
-    box = XtCreateManagedWidget ("box", boxWidgetClass, baseWidget, arg, n);
-    panel = XtCreateManagedWidget ("form", formWidgetClass, box, NULL, 0);
-    
-    dummy= ui_xCreateLabelItem("Components:",panel,80,NULL,NULL);
-    Comp = ui_xCreateDialogItem(" ", panel, "", 30, dummy, NULL);
-    
-    dummy= ui_xCreateLabelItem("X-size:", panel, 80, NULL, dummy);
-    Xsize= ui_xCreateDialogItem(" ", panel, "", 30, dummy, Comp);	
-    
-    dummy= ui_xCreateLabelItem("Y-size:", panel, 80, Xsize, Comp);
-    Ysize= ui_xCreateDialogItem(" ", panel, "", 30, dummy, Comp);
-    
-    create_kohonen = ui_xCreateButtonItem ("create_net",box,NULL,NULL);
-    XtAddCallback(create_kohonen,XtNcallback,
-		  (XtCallbackProc)create_net_PROC,NULL);
-    done = ui_xCreateButtonItem ("done",box,create_kohonen,NULL);
-    XtAddCallback(done,XtNcallback,(XtCallbackProc)done_PROC,NULL);
-    
-    XtPopup (baseWidget, XtGrabNone);
-    kohonen_widget_open = 1;
-    
-
-}
-
-*/
-
-/*****************************************************************************
-  FUNCTION : done_PROC
-
-  PURPOSE  : callback function of the done-button. 
-  NOTES    :
-  RETURNS  :
-
-  UPDATE   : june 11 1993
-******************************************************************************/
-/*
-static void done_PROC (void)
-{
-    XtDestroyWidget (baseWidget);
-    kohonen_widget_open = 0;
-}
-*/
-/*****************************************************************************
-  FUNCTION : create_net_PROC
-
-  PURPOSE  : callback function of the create-button. 
-  NOTES    :
-  RETURNS  :
-
-  UPDATE   : june 11 1993
-******************************************************************************/
-/*
-static void create_net_PROC(void)
-{
-  int create= TRUE;
-
-  IUnits= ui_xIntFromAsciiWidget(Comp);
-  X     = ui_xIntFromAsciiWidget(Xsize);
-  Y     = ui_xIntFromAsciiWidget(Ysize);
-  OUnits= 0;
-  HUnits= X*Y;
-
-  if ((IUnits>0) && (X>0) && (Y>0)) {
-    if(krui_getNoOfUnits() != 0)
-      create= ui_confirmYes("Create will erase current network. Create?");
-    if (create) {
-      krui_deleteNet();
-      bn_kohonen_createNet();
-      bn_basics_refresh();
-      ui_confirmOk("Network created.");
-    }
-  } else ui_confirmOk("Wrong parameters. Use positive integers.");
-
-} */
-/* create_net_PROC */
-
-
-/*****************************************************************************
-  FUNCTION : errChk
-
-  PURPOSE  : check whether an error occured during a process 
-  NOTES    : 
-  RETURNS  :
-
-  UPDATE   : june 6 1993
-******************************************************************************/
-
-/*
-void errChk(krui_err ret)
-{
-  if (ret != 0) ui_tw_errorMessage(krui_error(ret));
-}
-*/
 
 /*****************************************************************************
   FUNCTION : bn_kohonen_createNet
@@ -263,11 +164,6 @@ krui_err SnnsCLib::bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits)
   //CHECK_RETURN( ret );
 
   return(ret);
-  /*
-  ui_NumberOfLearnParamsChanged();
-  ui_NumberOfUpdateParamsChanged();
-  ui_NumberOfInitParamsChanged();
-  */
 
 } /* bn_kohonen_createNet */
 

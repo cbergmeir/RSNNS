@@ -1,12 +1,49 @@
+/************************************************************************************
+
+   This file is part of SnnsCLib, a fork of the kernel and parts of the gui of 
+   the Stuttgart Neural Network Simulator (SNNS), version 4.3.
+
+   SnnsCLib was developed in 2010 by Christoph Bergmeir under supervision of 
+   José M. Benítez, both affiliated to DiCITS Lab, Sci2s group, DECSAI, 
+   University of Granada
+
+   Changes done to the original code were performed with the objective to
+   port it from C to C++ and to encapsulate all code in one class named SnnsCLib.
+
+   Changes in header files mainly include:
+   * removed all static keywords
+   * moved initializations of variables to the constructor of SnnsCLib
+
+   Changes in cpp code files mainly include:
+   * changed file ending from .c to .cpp
+   * removed all SNNS internal includes and only include SnnsCLib   
+   * static variables within functions were turned into member variables of SnnsCLib
+   * function declarations were changed to method declarations, i.e. "SnnsCLib::.."
+     was added
+   * calls to the function table are now "C++-style", using the "this"-pointer
+
+   License of SnnsCLib:
+   
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+ 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+ 
+   You should have received a copy of the GNU Library General Public License
+   along with this library; see the file COPYING.LIB.  If not, write to
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
+
+************************************************************************************/
+
+
 #ifndef SNNS_HEADER_ALL
 #define SNNS_HEADER_ALL
-
-//#include "config.h"
-//#define HAVE_FCNTL_H 1
-//#define HAVE_SYS_FILE_H 1
-//#define HAVE_SYS_TIME_H 1
-//#define HAVE_UNISTD_H 1
-
 
 #ifndef MAXFLOAT
 #include <float.h>
@@ -78,9 +115,6 @@ public:
 
 private:
 
-//#include "func_tbl.txx"
-//the func table
-//struct FuncTable  kernel_func_table[277];
 #include "func_tbl.ph"
 
 #include "arttr_f.ph"     
@@ -104,7 +138,6 @@ private:
 #include "cc_glob.ph"     
 #include "kr_art2.ph"  
 #include "kr_JordElm.ph"    
-//#include "kr_rand.ph"        
 #include "prun_f.ph"   
 #include "tacoma_learn.ph"
 #include "cc_learn.ph"    

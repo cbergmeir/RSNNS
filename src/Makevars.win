@@ -1,10 +1,6 @@
 PKG_CPPFLAGS=-Wno-write-strings `Rscript -e 'Rcpp:::CxxFlags()'`
 PKG_LIBS=`Rscript -e 'Rcpp:::LdFlags()'`
 
-#PKG_CPPFLAGS=-I"D:/Doctorado/ts-code/Rpackages/RSNNS/src"
-#PKG_CPPFLAGS=-I"D:/Doctorado/ts-code/Rpackages/RSNNS/src" -I"C:/Users/smpsn/Documents/R/win-library/2.11/Rcpp/lib"
-#PKG_LIBS=`Rscript -e "Rcpp:::LdFlags()")`
-
 .PHONY: all
 
 all: $(SHLIB)

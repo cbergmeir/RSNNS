@@ -1,12 +1,54 @@
+/************************************************************************************
 
-#include <R_ext/Print.h>
+   This file is part of SnnsCLib, a fork of the kernel and parts of the gui of 
+   the Stuttgart Neural Network Simulator (SNNS), version 4.3.
+
+   SnnsCLib was developed in 2010 by Christoph Bergmeir under supervision of 
+   José M. Benítez, both affiliated to DiCITS Lab, Sci2s group, DECSAI, 
+   University of Granada
+
+   Changes done to the original code were performed with the objective to
+   port it from C to C++ and to encapsulate all code in one class named SnnsCLib.
+
+   Changes in header files mainly include:
+   * removed all static keywords
+   * moved initializations of variables to the constructor of SnnsCLib
+
+   Changes in cpp code files mainly include:
+   * changed file ending from .c to .cpp
+   * removed all SNNS internal includes and only include SnnsCLib   
+   * static variables within functions were turned into member variables of SnnsCLib
+   * function declarations were changed to method declarations, i.e. "SnnsCLib::.."
+     was added
+   * calls to the function table are now "C++-style", using the "this"-pointer
+
+   License of SnnsCLib:
+   
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+ 
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+ 
+   You should have received a copy of the GNU Library General Public License
+   along with this library; see the file COPYING.LIB.  If not, write to
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
+
+************************************************************************************/
+
+
+
+//#include <R_ext/Print.h>
 
 #include "SnnsCLib.h"
 
 SnnsCLib::SnnsCLib() {
 
-//int counter=0;
-//Rprintf("hier%d\n",counter++);
 //cc_modify.ph
 ccs_GroupList=NULL;
 ccm_CurrentLayerHeight=0;
@@ -14,7 +56,6 @@ ccm_MissingUnitsInLayer=0;
 ccs_GroupData=NULL;
 ccr_ListOfChosenUnits=NULL;
 
-//Rprintf("hier%d\n",counter++);
 //kernel.ph
 NetModified = FALSE;
 NetInitialize = TRUE;
@@ -76,15 +117,12 @@ DefaultUFuncAct2Deriv = NULL;
 transTable = NULL;
 transTableSize = 0;
 
-
-//Rprintf("hier%d\n",counter++);
 //kr_funcs.ph
 
 //netFuncInit = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
 //                         FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE  };
 for(int i=0; i<(NO_OF_FUNC_TYPES * NO_OF_KERNELS); i++) netFuncInit[i] = FALSE;
 
-//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_newpattern.ph
 //--------------------------------
@@ -131,7 +169,6 @@ np_o_subpat                  = NULL;
 np_o_subpatsize               = 0;
 np_pages                     = NULL;
 
-//Rprintf("hier1_%d\n",counter++);
 //--------------------------------
 //kr_ui.ph
 //--------------------------------
@@ -145,20 +182,17 @@ UICurrentFtypeEntry = NULL;
 UICurrentNameSearchUnitSymbolPtr = NULL;
 noOfStoredErrors=0;
 
-//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_amap.ph
 //--------------------------------
 ArtMap_map_layer = NULL; 
 
-//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_art1.ph
 //--------------------------------
 
 Art1_del_layer = NULL;
 
-//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //kr_art2.ph
 //--------------------------------
@@ -194,7 +228,6 @@ f1_stable = FALSE;
 num_param = 0;
 parameter = NULL;
 
-//Rprintf("hier%d\n",counter++);
 //--------------------------------
 //cc_display.ph
 //--------------------------------
@@ -202,7 +235,6 @@ parameter = NULL;
 cc_display_mode=Y_MAX_MODE1;
 cc_LayerDistance=DEFAULT_DISTANCE_BETWEEN_LAYERS;
 
-//Rprintf("hier2_%d\n",counter++);
 //--------------------------------
 //dlvq_learn.ph
 //--------------------------------
@@ -223,9 +255,6 @@ mixupArray = NULL;
 lastInsertedUnitArray = NULL;
 
 
-//Rprintf("hier%d\n",counter++);
-
-//Rprintf("hierXX_%d\n",counter++);
 //--------------------------------
 //cc_glob.ph
 //--------------------------------
@@ -283,8 +312,6 @@ cc_data.OUT.errorChange = MIN_ERROR_CHANGE;
 cc_data.OUT.outputPatience = OUT_PATIENCE;
 cc_data.OUT.maxNoOfUpdateCycles = MAX_NO_OF_ERROR_UPDATE_CYCLES;
 
-//Rprintf("hierXX2_%d\n",counter++);
-
 /*cc_data ={
   { MAX_PIXEL_ERROR,
     LEARNING_FUNC, MODIFICATION,
@@ -315,11 +342,7 @@ SpecialUnitSumAct=NULL;
 
 cc_modification = -1;
 
-//Rprintf("hierXX3_%d\n",counter++);
-
 reset=0;
-
-//Rprintf("hierXX4_%d\n",counter++);
 
 cc_cascade=0;
 NoOfLayers = 0;             /* number hidden layers */
@@ -337,7 +360,6 @@ filedesc = -1;
 
 OldNoOfSpecialUnitStorage = 0;
 
-//Rprintf("hier3_%d\n",counter++);
 //--------------------------------
 //prun_f.ph
 //--------------------------------
@@ -354,7 +376,6 @@ pr_acceptedError = DEFAULT_ACCEPTED_ERROR;
 pr_minError = DEFAULT_MIN_ERROR;
 pr_obs_initParameter = DEFAULT_OBS_INIT_PARAMETER;
 
-//Rprintf("hier3_%d\n",counter++);
 //--------------------------------
 //tacoma_learn.ph
 //--------------------------------
@@ -430,8 +451,6 @@ m_kernel_kr_CorrMatrix.columns = 0;
 m_kernel_kr_CorrMatrix.field = NULL;
 m_kernel_kr_CorrMatrix.r_pt = NULL;
 
-//Rprintf("hier4_%d\n",counter++);
-
 kr_ui_randomSeedVal=0;
 
 PRUNE_Skeletonization_first = TRUE;
@@ -493,11 +512,8 @@ kr_getSubPatData_dummy_data = 0.0;
 //Initialize the random number generator
 krui_setSeedNo(u_getCurrentSeedVal());
 
-
-
-
-//#include "func_tbl.txx"
-
 }
 
 SnnsCLib::~SnnsCLib() {}
+
+
