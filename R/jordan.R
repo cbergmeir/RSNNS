@@ -26,10 +26,13 @@
 
 #' Create and train a jordan network.
 #'
+#' Jordan networks are recurrent networks 
+#' and very similar to \code{\link{elman}} networks.
+#' 
 #' @export
 jordan <- function(x, ...) UseMethod("jordan")
 
-#' Create and train a jordan network.
+#' Create and train a jordan network. 
 #' 
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
@@ -46,10 +49,17 @@ jordan <- function(x, ...) UseMethod("jordan")
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
 #' @param ... additional function parameters (currently not used)
+#' @return an rsnns object.
 #' @export
 #' @S3method jordan default
 #' @method jordan default
 #' @rdname jordan
+#' @seealso \code{\link{elman}}
+#' @examples 
+#' \dontrun{demo(iris)}
+#' \dontrun{demo(laser)}
+#' \dontrun{demo(eight_elman)}
+#' \dontrun{demo(eight_elmanSnnsR)}
 jordan.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="JE_Weights", initFuncParams=c(1.0,  -1.0,  0.3,  1.0,  0.5), 
     learnFunc="JE_BP", learnFuncParams=c(0.2), 

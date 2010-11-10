@@ -32,7 +32,7 @@ dlvq <- function(x, ...) UseMethod("dlvq")
 #' Create and train a dlvq network.
 #' 
 #' @param x a matrix with training inputs for the network
-#' @param y the corresponding targets values
+#' @param y the corresponding target values
 #' @param initFunc the initialization function to use
 #' @param initFuncParams the parameters for the initialization function
 #' @param learnFunc the learning function to use
@@ -41,10 +41,15 @@ dlvq <- function(x, ...) UseMethod("dlvq")
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
+#' @return an rsnns object. The \code{fitted.values} member contains the 
+#' activation patterns for all inputs
 #' @export
 #' @S3method dlvq default
 #' @method dlvq default
 #' @rdname dlvq
+#' @examples 
+#' \dontrun{demo(dlvq_ziff)}
+#' \dontrun{demo(dlvq_ziffSnnsR)}
 dlvq.default <- function(x, y, 
     initFunc="DLVQ_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="Dynamic_LVQ", learnFuncParams=c(0.03, 0.03, 10.0), 

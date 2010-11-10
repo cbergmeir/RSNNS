@@ -24,7 +24,7 @@
 #############################################################################
 
 
-#' Create and train an rbf with the DDA algorithm.
+#' Create and train a rbf network with the DDA algorithm.
 #'
 #' As the output is winner-takes-all, this type of net can only be used
 #' for classification.
@@ -50,6 +50,9 @@ rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 #' @S3method rbfDDA default
 #' @method rbfDDA default
 #' @rdname rbfDDA
+#' @examples 
+#' \dontrun{demo(iris)}
+#' \dontrun{demo(rbfDDA_spiralsSnnsR)}
 rbfDDA.default <- function(x, y, maxit=1, 
     initFunc="Randomize_Weights", initFuncParams=c(-0.3, 0.3), 
     learnFunc="RBF-DDA", learnFuncParams=c(0.4, 0.2, 5), 

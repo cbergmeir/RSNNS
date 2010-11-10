@@ -58,7 +58,7 @@ SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
   
   res <- NULL
   
-  resolvedTType <- SnnsDefines_resolveDefine(SnnsDefines_topologicalUnitTypes, ttype)
+  resolvedTType <- resolveSnnsRDefine("topologicalUnitTypes", ttype)
   
   nUnits <- snnsObject$getNoOfUnits()
   
@@ -158,7 +158,7 @@ SnnsR__getUnitsByName <- function(snnsObject, prefix) {
 #' Set the seed value that will be used in the constructor of 
 #' every object to set the seed of rand().
 #'
-#' @param the seed to use. If 0, a seed based on the system time is used.
+#' @param seed the seed to use. If 0, a seed based on the system time is used.
 #' @export
 snnsRSetSeedValue <- function(seed) {
   .Call("setCurrentSeedVal", seed, package="RSNNS")  

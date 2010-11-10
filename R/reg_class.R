@@ -38,6 +38,13 @@
 #' \item{inputsTest}{a matrix containing the test inputs}
 #' \item{targetsTest}{a matrix containing the test targets}
 #' @export
+#' @examples
+#' data(iris)
+#' #shuffle the vector
+#' iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
+#' irisValues <- normalizeData(iris[,1:4], "norm")
+#' irisTargets <- decodeClassLabels(iris[,5])
+#' splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
 splitForTrainingAndTest <- function(x, y, ratio=0.15) {
   
   x <- as.matrix(x)
@@ -89,14 +96,14 @@ checkInput <- function(x,y) {
 #' @export
 plotIterativeError <- function(object, ...) UseMethod("plotIterativeError")
 
-#' Plot the iterative training and test error during training of the net.
+#' Plot the iterative training and test error of the net of this rsnns object.
 #' 
 #' @param object a reg_class object
 #' @param ... parameters passed to \code{plot}
 #' @export
 #' @S3method plotIterativeError reg_class
 #' @method plotIterativeError reg_class
-#' @rdname reg_class
+#' @rdname plotIterativeError
 plotIterativeError.reg_class <- function(object, ...)
 {
   if(!inherits(object, "reg_class")) stop("not a legitimate reg_class model")
@@ -119,24 +126,27 @@ plotIterativeError.reg_class <- function(object, ...)
 
 #' Decode class labels from a numerical or levels vector to a binary matrix.
 #'
-#' Convert the input vector to a binary matrix, which has the value 1 exactly in
-#' the column given by the value in the vector, e.g. 3 --> 0010000.. The number of columns 
-#' of the resulting matrix depends on the number of unique labels found in the vector.
+#' Convert the input vector to a binary matrix, which has the value \code{valTrue} (e.g. 1) exactly in
+#' the column given by the value in the input vector, and the value \code{valFalse} (e.g. 0) in the other 
+#' columns. The number of columns of the resulting matrix depends on the number of unique 
+#' labels found in the vector. E.g. the input c(1, 3, 2, 3) will result in an output matrix with rows: 
+#' 100 001 010 001
 #' 
 #' @param x class label vector
-#' @return a binary matrix
+#' @param valTrue see description above 
+#' @param valFalse see description above
+#' @return a binary matrix. See description above
 #' @export
-decodeClassLabels <- function(x, method="0_1", valTrue=1, valFalse=0) {
-  
-  #decodeClassLabels(iris[,5])
+#' @examples
+#' decodeClassLabels(c(1,3,2,3))
+#' 
+#' data(iris)
+#' decodeClassLabels(iris[,5])
+decodeClassLabels <- function(x, valTrue=1, valFalse=0) {
   
   #y <- gl(2, 4, 8)
   #levels(y) <- c("low", "high")
-  #y
-  
-  #if(length(levels(x))!=0) {
-  #  
-  #}
+  #if(length(levels(y))!=0) {}
 
   classes <- unique(x)
   numClasses <- 1:length(classes)
@@ -157,7 +167,7 @@ decodeClassLabels <- function(x, method="0_1", valTrue=1, valFalse=0) {
   targets
 }
 
-#' Applies \link{analyzeClassification} row-wise to a matrix.
+#' Applies \code{analyzeClassification} row-wise to a matrix.
 #' 
 #' @param x inputs
 #' @param method same as in analyzeClassification
@@ -166,7 +176,11 @@ decodeClassLabels <- function(x, method="0_1", valTrue=1, valFalse=0) {
 #' @return a numeric vector, each number represents a different class. A zero means,
 #' that no class was assigned to the pattern. 
 #' @export
-#' @seealso analyzeClassification
+#' @seealso \code{\link{analyzeClassification}}
+#' @examples 
+#' data(iris)
+#' labels <- decodeClassLabels(iris[,5])
+#' encodeClassLabels(labels)
 encodeClassLabels <- function(x, method="WTA", l=0.0, h=0.0) {
   apply(x, 1, function(y) analyzeClassification(y, method, l, h))
 }
@@ -176,6 +190,9 @@ encodeClassLabels <- function(x, method="WTA", l=0.0, h=0.0) {
 #' @param x inputs
 #' @return the vector converted to a numeric vector
 #' @export
+#' @examples 
+#' data(iris)
+#' toNumericClassLabels(iris[,5])
 toNumericClassLabels <- function(x) {
   if(is.numeric(x)) return(x)
   else return(as.numeric(x))
@@ -195,6 +212,7 @@ toNumericClassLabels <- function(x) {
 #' Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' @export
+#' @seealso \code{\link{encodeClassLabels}}
 analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
   
   classes <- length(y)
@@ -226,22 +244,17 @@ analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
   resClass  
 }
 
-#examples
-#y <- decodeClassLabels(iris[,5])
-#y
-#encodeClassLabels(y)
-#toNumericClassLabels(iris[,5])
-
 #' Computes a confusion matrix.
 #' 
 #' If the class labels are not already encoded, they are encoded with
-#' default values. The confusion matrix shows, how many times a pattern
+#' default values. The confusion matrix shows how many times a pattern
 #' with the real class x was classified as class y. A perfect method
 #' should result in a diagonal matrix. All values not on the diagonal
 #' are errors of the method.
 #' 
 #' @param targets the known, correct target values
 #' @param predictions the corresponding predictions of a method for the targets
+#' @return the confusion matrix
 #' @export
 confusionMatrix <- function(targets, predictions) {
   

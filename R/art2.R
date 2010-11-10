@@ -25,6 +25,10 @@
 
 
 #' Create and train an art2 network.
+#' 
+#' Art2 is very similar to art1, but for real-valued input. See \code{\link{art1}}
+#' for more information. A difference is, that the art2 implementation doesn't 
+#' assume two-dimpensional input and output. 
 #'
 #' @export
 art2 <- function(x, ...) UseMethod("art2")
@@ -32,7 +36,7 @@ art2 <- function(x, ...) UseMethod("art2")
 #' Create and train an art2 network.
 #' 
 #' @param x a matrix with training inputs for the network
-#' @param f2Units 
+#' @param f2Units controls the number of clusters assumed to be present
 #' @param maxit maximum of iterations to learn
 #' @param initFunc the initialization function to use
 #' @param initFuncParams the parameters for the initialization function
@@ -42,10 +46,16 @@ art2 <- function(x, ...) UseMethod("art2")
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
+#' @return an rsnns object. The \code{fitted.values} member contains the 
+#' activation patterns for all inputs
 #' @export
 #' @S3method art2 default
 #' @method art2 default
+#' @seealso \code{\link{art2}}
 #' @rdname art2
+#' @examples 
+#' \dontrun{demo(art2_tetra)}
+#' \dontrun{demo(art2_tetraSnnsR)}
 art2.default <- function(x, f2Units=5, maxit=100, 
     initFunc="ART2_Weights", initFuncParams=c(0.9, 2.0), 
     learnFunc="ART2", learnFuncParams=c(0.98, 10.0, 10.0, 0.1, 0.0), 

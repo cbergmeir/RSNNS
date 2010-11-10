@@ -23,12 +23,24 @@
 #
 #############################################################################
 
-#' Create and train an rbf network.
+#' Create and train a radial basis function (rbf) network.
 #'
+#' Radial basis functions are feed-forward networks with one hidden layer.
+#' They save information about each pattern locally in the net (not globally as mlps)
+#' Their use is similar to that of \code{\link{mlp}}. However, their initialization
+#' can be difficult and require prior knowledge. Before their use, you probably want
+#' to read pp 172-183 of the SNNS User Manual 4.2. The initialization is performed in
+#' the current implementation by a call to RBF_Weights_Kohonen with all parameters
+#' set to zero and a successive call to the given \code{initFunc} (usually RBF_Weights).
+#' If this initialization doesn't fit your needs, you should use the RSNNS low-level interface
+#' to implement your own one. Have a look then at the demos/examples. 
+#' Also, depending on whether linear or logistic output is chosen, the initialization parameters
+#' have to be different (normally c(0,1,...) for linear and c(-4,4,...) for logistic).
+#' 
 #' @export
 rbf <- function(x, ...) UseMethod("rbf")
 
-#' Create and train an rbf network.
+#' Create and train a radial basis function (rbf) network.
 #' 
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
@@ -49,6 +61,10 @@ rbf <- function(x, ...) UseMethod("rbf")
 #' @S3method rbf default
 #' @method rbf default
 #' @rdname rbf
+#' @examples 
+#' \dontrun{demo(rbf_irisSnnsR)}
+#' \dontrun{demo(rbf_sin)}
+#' \dontrun{demo(rbf_sinSnnsR)}
 rbf.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="RBF_Weights", initFuncParams=c(0.0,  1.0,  0.0,  0.02,  0.04), 
     learnFunc="RadialBasisLearning", learnFuncParams=c(1e-5, 0, 1e-5, 0.1, 0.8), 

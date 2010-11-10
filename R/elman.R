@@ -26,10 +26,13 @@
 
 #' Create and train an elman network.
 #'
+#' Elman networks are recurrent networks 
+#' and very similar to \code{\link{jordan}} networks.
+#' 
 #' @export
 elman <- function(x, ...) UseMethod("elman")
 
-#' Create and train an elman network.
+#' Create and train an elman network. 
 #' 
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
@@ -43,14 +46,21 @@ elman <- function(x, ...) UseMethod("elman")
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param linOut sets the activation function of the output units to linear or logistic
-#' @param outContext
+#' @param outContext if TRUE, the context units are also output units (untested)
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
 #' @param ... additional function parameters (currently not used)
+#' @return an rsnns object.
 #' @export
 #' @S3method elman default
 #' @method elman default
 #' @rdname elman
+#' @seealso \code{\link{jordan}}
+#' @examples 
+#' \dontrun{demo(iris)}
+#' \dontrun{demo(laser)}
+#' \dontrun{demo(eight_elman)}
+#' \dontrun{demo(eight_elmanSnnsR)}
 elman.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="JE_Weights", initFuncParams=c(1.0,  -1.0,  0.3,  1.0,  0.5), 
     learnFunc="JE_BP", learnFuncParams=c(0.2), 

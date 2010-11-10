@@ -1,5 +1,7 @@
 
-SnnsDefines_errorCodes <- 
+SnnsDefines <- list()
+
+SnnsDefines$errorCodes <- 
     matrix(c(
             "KRERR_NO_ERROR",         0,
             "KRERR_INSUFFICIENT_MEM", -1,
@@ -148,7 +150,7 @@ SnnsDefines_errorCodes <-
 
 
         
-SnnsDefines_functionTypes <-  matrix(c(
+SnnsDefines$functionTypes <-  matrix(c(
 "OUT_FUNC",        1,
 "ACT_FUNC",        2,
 "SITE_FUNC",       3,
@@ -168,27 +170,27 @@ SnnsDefines_functionTypes <-  matrix(c(
         ,ncol=2,byrow=TRUE)
             
             
-SnnsDefines_entryTypesNameTable <-  matrix(c(
+SnnsDefines$entryTypesNameTable <-  matrix(c(
 "UNUSED_SYM",         0,
 "UNIT_SYM",           1,
 "SITE_SYM",           2,
 "FTYPE_UNIT_SYM",     3)
                 ,ncol=2,byrow=TRUE)
                 
-SnnsDefines_constantsNetworkAnalyzer <-  matrix(c(     
+SnnsDefines$constantsNetworkAnalyzer <-  matrix(c(     
 "MAX_ARRAY_SIZE", 5000,
 "NA_ERROR_LIN",      1,
 "NA_ERROR_SQR",      2,
 "NA_ERROR_SU",       3)
                 ,ncol=2,byrow=TRUE)            
 
-SnnsDefines_copyModes <-  matrix(c("INPUTS_AND_OUTPUTS",     1,
+SnnsDefines$copyModes <-  matrix(c("INPUTS_AND_OUTPUTS",     1,
 "ONLY_INPUTS",            2,
 "ONLY_OUTPUTS",           3,
 "ONLY_UNIT",              4)
 ,ncol=2,byrow=TRUE)
 
-SnnsDefines_topologicalUnitTypes <-
+SnnsDefines$topologicalUnitTypes <-
     matrix(c("UNIT_UNKNOWN",    0,
             "UNIT_INPUT",      1,
             "UNIT_OUTPUT",     2,
@@ -203,34 +205,49 @@ SnnsDefines_topologicalUnitTypes <-
             "UNIT_N_SPECIAL_X",  11) # Only used for toggle special flag
         ,ncol=2,byrow=TRUE)
             
-SnnsDefines_unitInputTypes <-  matrix(c(
+SnnsDefines$unitInputTypes <-  matrix(c(
 "NO_INPUTS",      0,
 "SITES",          1,
 "DIRECT_LINKS",   2)
         ,ncol=2,byrow=TRUE)
 
-SnnsDefines_patternUpdateModes <-  matrix(c(
+SnnsDefines$patternUpdateModes <-  matrix(c(
 "OUTPUT_NOTHING",  1,
 "OUTPUT_ACT",      2,
 "OUTPUT_OUT",     3)      
                 ,ncol=2,byrow=TRUE)
             
-            
-SnnsDefines_getDefine <- function(defList, defValue)  {
-  defRow <- which(defList[,2] == toString(defValue))
-  return(defList[defRow,1])
+#' Get a define of the SNNS kernel.
+#'
+#' All defines present can be shown with \code{RSNNS:::SnnsDefines}. 
+#' 
+#' @param defList the defines list from which to get the define from
+#' @param defValue the value in the list
+#' @export           
+#' @seealso \code{\link{resolveSnnsRDefine}}
+#' @examples
+#' getSnnsRDefine("topologicalUnitTypes",3)
+#' getSnnsRDefine("errorCodes",-50)
+getSnnsRDefine <- function(defList, defValue)  {
+  defRow <- which(SnnsDefines[[defList]][,2] == toString(defValue))
+  return(SnnsDefines[[defList]][defRow,1])
 }
 
-SnnsDefines_resolveDefine <- function(defList, def)  {
-  defRow <- which(defList[,1] == toString(def))
-  return(as.numeric(defList[defRow,2]))  
+#' Resolve a define of the SNNS kernel.
+#'
+#' All defines present can be shown with \code{RSNNS:::SnnsDefines}.
+#' 
+#' @param defList the defines list from which to resolve the define from
+#' @param def the name of the define
+#' @export
+#' @seealso \code{\link{getSnnsRDefine}}           
+#' @examples
+#' resolveSnnsRDefine("topologicalUnitTypes","UNIT_HIDDEN")
+resolveSnnsRDefine <- function(defList, def)  {
+  defRow <- which(SnnsDefines[[defList]][,1] == toString(def))
+  return(as.numeric(SnnsDefines[[defList]][defRow,2]))  
 }
 
-#examples
-#  getDefine(topological_unit_types,3)
-#  resolveDefine(topological_unit_types,"UNIT_HIDDEN")
-#  getDefine(error_codes,50)
-
-SnnsDefines_showWarningFromSnnsError <- function(func, err) {
-  warning(paste("An error occured in ", func,": ", SnnsDefines_getDefine(SnnsDefines_errorCodes, err),sep=""))
-}            
+#SnnsDefines_showWarningFromSnnsError <- function(func, err) {
+#  warning(paste("An error occured in ", func,": ", SnnsDefines_getDefine(SnnsDefines_errorCodes, err),sep=""))
+#}            

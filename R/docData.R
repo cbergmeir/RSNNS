@@ -24,9 +24,17 @@
 #############################################################################
 
 
-#' This is all the data from the SNNS examples directory, stored as one list.
+#' Emaple data contained in the package.
+#' 
+#' This is data from the original SNNS examples directory ported to R and stored as one list.
+#' The function \code{\link{readPatFile}} was used to parse all pattern files (.pat) from the 
+#' original SNNS examples directory. Due to limitations of this function, pattern files
+#' containing patterns with variable size were omitted. 
 #'
 #' @name snnsData
 #' @docType data
 #' @keywords data
+#' @examples
+#' data(snnsData)
+#' names(snnsData)
 NULL

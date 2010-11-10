@@ -26,19 +26,10 @@
 
 #' Create and train a multi-layer perceptron (mlp).
 #'
-#' Create and train a multi layer perceptron. 
-#' Most of the parameters are directly passed to \link{rsnnsObjectFactory} or \link{train}.
-#' The method follows the typical procedure for rsnns objects: 
-#' \itemize{
-#' \item generate the rsnns object (with \link{rsnnsObjectFactory})
-#' \item generate the network according to the architecture given
-#' \item train the network (with \link{train})
-#' }
-#'
 #' @export
 mlp <- function(x, ...) UseMethod("mlp")
 
-#' Create and train an mlp.
+#' Create and train a multi-layer perceptron (mlp).
 #' 
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
@@ -56,10 +47,15 @@ mlp <- function(x, ...) UseMethod("mlp")
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
 #' @param ... additional function parameters (currently not used)
+#' @return an rsnns object.
 #' @export
 #' @S3method mlp default
 #' @method mlp default
 #' @rdname mlp
+#' @examples 
+#' \dontrun{demo(iris)}
+#' \dontrun{demo(laser)}
+#' \dontrun{demo(encoderSnnsCLib)}
 mlp.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="Randomize_Weights", initFuncParams=c(-0.3, 0.3), 
     learnFunc="Quickprop", learnFuncParams=c(0.2), 

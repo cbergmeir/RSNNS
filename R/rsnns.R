@@ -29,10 +29,11 @@
 #' Print out some characteristics of an rsnns object.
 #' 
 #' @param x the rsnns object
+#' @param ... additional function parameters (currently not used)
 #' @export
 #' @S3method print rsnns
 #' @method print rsnns
-#' @rdname rsnns
+# @rdname rsnns
 print.rsnns <- function(x, ...)
 {
   if(!inherits(x, "rsnns")) stop("not a legitimate rsnns model")
@@ -62,10 +63,11 @@ print.rsnns <- function(x, ...)
 #' deletes the file 
 #' 
 #' @param object the rsnns object
+#' @param ... additional function parameters (currently not used)
 #' @export
 #' @S3method summary rsnns
 #' @method summary rsnns
-#' @rdname rsnns
+# @rdname rsnns
 summary.rsnns <- function(object, ...)
 {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
@@ -83,6 +85,17 @@ summary.rsnns <- function(object, ...)
 #' The object factory initializes member variables of object 
 #' with the values given as parameters and generates an object of type \link{SnnsR}
 #' Later, during training with \link{train}, this information is used to train the network.
+#' TODO
+#' Create and train a multi layer perceptron. 
+#' Most of the parameters are directly passed to \link{rsnnsObjectFactory} or \link{train}.
+#' The method follows the typical procedure for rsnns objects: 
+#' \itemize{
+#' \item generate the rsnns object (with \link{rsnnsObjectFactory})
+#' \item generate the network according to the architecture given
+#' \item train the network (with \link{train})
+#' }
+#'
+#' 
 #'
 #' @param subclass the subclass of rsnns to generate (vector of strings)
 #' @param nInputs the number of inputs the network will have
@@ -144,7 +157,7 @@ train <- function(object, ...) UseMethod("train")
 #' @export
 #' @S3method train rsnns
 #' @method train rsnns
-#' @rdname rsnns
+#' @rdname train
 train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL, targetsTest=NULL, ...) {
   
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
@@ -173,9 +186,10 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
 #'
 #' @param object the rsnns object
 #' @param newdata the new input data which is used for prediction
+#' @param ... additional function parameters (currently not used)
 #' @S3method predict rsnns
 #' @method predict rsnns
-#' @rdname rsnns
+# @rdname rsnns
 #' @export
 predict.rsnns <- function(object, newdata, ...)
 {

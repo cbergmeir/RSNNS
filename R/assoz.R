@@ -24,16 +24,19 @@
 #############################################################################
 
 
-#' Create and train an associative memory.
+#' Create and train an (auto-)associative memory.
 #'
+#' Similar to the \code{\link{art1}} and \code{\link{art2}} network types.
+#' The implementation assumes two-dimensional input and output (cf. \code{\link{art1}}).
+#' 
 #' @export
 assoz <- function(x, ...) UseMethod("assoz")
 
-#' Create and train an associative memory.
+#' Create and train an (auto-)associative memory.
 #' 
 #' @param x a matrix with training inputs for the network
-#' @param dimX
-#' @param dimY
+#' @param dimX x dimension of inputs and outputs
+#' @param dimY y dimension of inputs and outputs
 #' @param maxit maximum of iterations to learn
 #' @param initFunc the initialization function to use
 #' @param initFuncParams the parameters for the initialization function
@@ -43,10 +46,16 @@ assoz <- function(x, ...) UseMethod("assoz")
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
+#' @return an rsnns object. The \code{fitted.values} member contains the 
+#' activation patterns for all inputs
 #' @export
 #' @S3method assoz default
 #' @method assoz default
 #' @rdname assoz
+#' @seealso \code{\link{art1}}, \code{\link{art2}}
+#' @examples 
+#' \dontrun{demo(assoz_letters)}
+#' \dontrun{demo(assoz_lettersSnnsR)}
 assoz.default <- function(x, dimX, dimY, maxit=100, 
     initFunc="RM_Random_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="RM_delta", learnFuncParams=c(0.01, 100, 0.0, 0.0, 0.0), 

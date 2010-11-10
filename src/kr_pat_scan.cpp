@@ -1649,7 +1649,8 @@ YY_BUFFER_STATE b;
 
 #ifndef YY_ALWAYS_INTERACTIVE
 #ifndef YY_NEVER_INTERACTIVE
-extern int isatty YY_PROTO(( int ));
+//SnnsCLib: this was removed to avoid an error of "gcc -pedantic"
+//extern int isatty YY_PROTO(( int ));
 #endif
 #endif
 

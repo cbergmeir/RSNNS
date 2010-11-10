@@ -99,7 +99,7 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
     
     snnsObject$setPatternNo(currentPattern)
     
-    snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
+    snnsObject$showPattern(resolveSnnsRDefine("patternUpdateModes","OUTPUT_NOTHING"))
     
     snnsObject$updateNet(updateFuncParams)
     
@@ -261,7 +261,7 @@ SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.
 #    predictions <- vector()
 #    
 #    snnsObject$setPatternNo(currentPattern)
-#    snnsObject$showPattern(SnnsDefines_resolveDefine(SnnsDefines_patternUpdateModes,"OUTPUT_NOTHING"))
+#    snnsObject$showPattern(resolveSnnsRDefine("patternUpdateModes","OUTPUT_NOTHING"))
 #    snnsObject$updateNet(updateFuncParams)
 #    
 #    for(i in 1:length(units)) {

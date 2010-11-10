@@ -26,8 +26,8 @@
 
 #' Rudimentary parser for .res files.
 #'
-#' This function contains a rudimentary parser for the SNNS .res files. It
-#' is completely implemented in R and doesn't make use of SNNS.
+#' This function contains a rudimentary parser for SNNS .res files. It
+#' is completely implemented in R and doesn't make use of SNNS (i.e., SnnsCLib).
 #' 
 #' @param filename the name of the .res file 
 #' @return a matrix containing the predicted values that were found in the .res file
@@ -74,8 +74,8 @@ readResFile <- function(filename)  {
 
 #' Save data to a .pat file.
 #'
-#' This function generates an instance of SNNS (i.e. an \link{SnnsR-class} object), loads the given
-#' data there as a pattern set and then uses the functionality of SNNS to save the data as a .pat file. 
+#' This function generates an \link{SnnsR-class} object, loads the given data there 
+#' as a pattern set and then uses the functionality of SNNS to save the data as a .pat file. 
 #' 
 #' @param inputs a matrix with input values 
 #' @param targets a matrix with target values
@@ -96,8 +96,9 @@ savePatFile <- function(inputs, targets, filename)  {
 
 #' Load data from a .pat file.
 #'
-#' This function generates an instance of SNNS (i.e. an \link{SnnsR-class} object), loads the given
-#' .pat file there as a pattern set and then extracts the patterns to a matrix, using \link{SnnsRObject$extractPatterns}. 
+#' This function generates an \link{SnnsR-class} object, loads the given .pat file 
+#' there as a pattern set and then extracts the patterns to a matrix, 
+#' using \link{SnnsRObject$extractPatterns}. 
 #' 
 #' @param filename the name of the .pat file
 #' @return a matrix containing the data loaded from the .pat file. 

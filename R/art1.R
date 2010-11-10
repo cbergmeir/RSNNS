@@ -26,6 +26,16 @@
 
 #' Create and train an art1 network.
 #'
+#' Adaptive resonance theory (art) networks are association networks. I.e. they 
+#' perform clustering by finding a prototype to the given input. So, input and output
+#' are the same type of data. Art1 is for binary inputs only. If you have real-valued input, use 
+#' \code{\link{art2}} instead. In its current implementation, the network
+#' has two-dimensional input (and output). I.e., x is a matrix containing all 
+#' (one dimensional) input patterns. Internally, every one of these patterns
+#' is converted to a two-dimensional pattern using parameters \code{dimX} and \code{dimY}.
+#' The parameter nClusters controls the amount of clusters that are assumed to
+#' be present in the input patterns. For more details, see the SNNS documentation. 
+#'
 #' @export
 art1 <- function(x, ...) UseMethod("art1")
 
@@ -33,9 +43,9 @@ art1 <- function(x, ...) UseMethod("art1")
 #' Create and train an art1 network.
 #' 
 #' @param x a matrix with training inputs for the network
-#' @param dimX 
-#' @param dimY
-#' @param nClusters
+#' @param dimX x dimension of inputs and outputs
+#' @param dimY y dimension of inputs and outputs
+#' @param nClusters controls the number of clusters assumed to be present
 #' @param maxit maximum of iterations to learn
 #' @param initFunc the initialization function to use
 #' @param initFuncParams the parameters for the initialization function
@@ -45,10 +55,16 @@ art1 <- function(x, ...) UseMethod("art1")
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
+#' @return an rsnns object. the \code{fitted.values} member of the object contains a 
+#' list of two-dimensional activation patterns 
 #' @export
 #' @S3method art1 default
 #' @method art1 default
+#' @seealso \code{\link{art2}}
 #' @rdname art1
+#' @examples 
+#' \dontrun{demo(art1_letters)}
+#' \dontrun{demo(art1_lettersSnnsR)}
 art1.default <- function(x, dimX, dimY, nClusters=nrow(x), maxit=100, 
     initFunc="ART1_Weights", initFuncParams=c(1.0, 1.0), 
     learnFunc="ART1", learnFuncParams=c(0.9, 0.0, 0.0), 

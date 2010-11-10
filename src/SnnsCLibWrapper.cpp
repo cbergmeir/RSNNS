@@ -1087,13 +1087,16 @@ RcppExport SEXP SnnsCLib__updateNet(SEXP xp, SEXP parameterInArray) {
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p1[n+1];
+  float* p1 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
   int err = snnsCLib->krui_updateNet(p1, n);
+
+  delete[] p1;
+
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
@@ -1120,13 +1123,17 @@ RcppExport SEXP SnnsCLib__initializeNet(SEXP xp, SEXP parameterInArray) {
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p1[n+1];
+
+  float* p1 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
   int err = snnsCLib->krui_initializeNet(p1, n);
+
+  delete[] p1;
+
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
@@ -1183,7 +1190,8 @@ RcppExport SEXP SnnsCLib__learnAllPatterns(SEXP xp, SEXP parameterInArray) {
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p1[n+1];
+
+  float* p1 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
@@ -1194,6 +1202,7 @@ RcppExport SEXP SnnsCLib__learnAllPatterns(SEXP xp, SEXP parameterInArray) {
 
   int err = snnsCLib->krui_learnAllPatterns(p1, n, &parameterOutArray, &NoOfOutParams);
 
+  delete[] p1;
 
   Rcpp::NumericVector out(NoOfOutParams);
   for (int i=0; i<NoOfOutParams; i++) {
@@ -1213,7 +1222,8 @@ RcppExport SEXP SnnsCLib__testAllPatterns(SEXP xp, SEXP parameterInArray) {
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p1[n+1];
+
+  float* p1 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
@@ -1223,6 +1233,8 @@ RcppExport SEXP SnnsCLib__testAllPatterns(SEXP xp, SEXP parameterInArray) {
   int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_testAllPatterns(p1, n, &parameterOutArray, &NoOfOutParams);
+
+  delete[] p1;
 
   Rcpp::NumericVector out(NoOfOutParams);
   for (int i=0; i<NoOfOutParams; i++) {
@@ -1256,7 +1268,7 @@ RcppExport SEXP SnnsCLib__learnSinglePattern(SEXP xp, SEXP pattern_no, SEXP para
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p2[n+1];
+  float* p2 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p2[i] = static_cast<float>(params(i));
@@ -1266,6 +1278,8 @@ RcppExport SEXP SnnsCLib__learnSinglePattern(SEXP xp, SEXP pattern_no, SEXP para
   int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_learnSinglePattern(p1, p2, n, &parameterOutArray, &NoOfOutParams);
+
+  delete[] p2;
 
   Rcpp::NumericVector out(NoOfOutParams);
   for (int i=0; i<NoOfOutParams; i++) {
@@ -1302,7 +1316,7 @@ RcppExport SEXP SnnsCLib__testSinglePattern(SEXP xp, SEXP pattern_no, SEXP param
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p2[n+1];
+  float* p2 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p2[i] = static_cast<float>(params(i));
@@ -1312,6 +1326,8 @@ RcppExport SEXP SnnsCLib__testSinglePattern(SEXP xp, SEXP pattern_no, SEXP param
   int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_testSinglePattern(p1, p2, n, &parameterOutArray, &NoOfOutParams);
+
+  delete[] p2;
 
   Rcpp::NumericVector out(NoOfOutParams);
   for (int i=0; i<NoOfOutParams; i++) {
@@ -1354,7 +1370,7 @@ RcppExport SEXP SnnsCLib__learnAllPatternsFF(SEXP xp, SEXP parameterInArray) {
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p1[n+1];
+  float* p1 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
@@ -1364,6 +1380,8 @@ RcppExport SEXP SnnsCLib__learnAllPatternsFF(SEXP xp, SEXP parameterInArray) {
   int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_learnAllPatternsFF(p1, n, &parameterOutArray, &NoOfOutParams);
+
+  delete[] p1;
 
   Rcpp::NumericVector out(NoOfOutParams);
   for (int i=0; i<NoOfOutParams; i++) {
@@ -1399,7 +1417,7 @@ RcppExport SEXP SnnsCLib__learnSinglePatternFF(SEXP xp, SEXP pattern_no, SEXP pa
   Rcpp::NumericVector params(parameterInArray);
 
   int n = params.size();
-  float p2[n+1];
+  float* p2 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p2[i] = static_cast<float>(params(i));
@@ -1409,6 +1427,8 @@ RcppExport SEXP SnnsCLib__learnSinglePatternFF(SEXP xp, SEXP pattern_no, SEXP pa
   int NoOfOutParams = 0;
 
   int err = snnsCLib->krui_learnSinglePatternFF(p1, p2, n, &parameterOutArray, &NoOfOutParams);
+
+  delete[] p2;
 
   Rcpp::NumericVector out(NoOfOutParams);
   for (int i=0; i<NoOfOutParams; i++) {
@@ -2279,8 +2299,8 @@ RcppExport SEXP SnnsCLib__elman_createNet(SEXP xp, SEXP layer, SEXP columns, SEX
 
   if(n != paramsColumns.size()) return Rcpp::wrap(-1);
 
-  int p1[n+1];
-  int p2[n+1];
+  int* p1 = new int[n+1];
+  int* p2 = new int[n+1];
 
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<int>(paramsLayer(i));
@@ -2295,6 +2315,10 @@ RcppExport SEXP SnnsCLib__elman_createNet(SEXP xp, SEXP layer, SEXP columns, SEX
   bool p4 = Rcpp::as<bool>(out_context);
 
   int err = snnsCLib->bn_elman_createNet(p1, p2, n, p4);
+
+  delete[] p1;
+  delete[] p2;
+
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
@@ -2406,21 +2430,23 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
   Rcpp::NumericVector params(updateFuncParams);
 
   int n = params.size();
-  float p1[n+1];
+  float* p1 = new float[n+1];
 
   for (int i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
   int nUnits = hu.size();
-  int units[nUnits+1];
+  //int units[nUnits+1];
+  int* units = new int[nUnits+1];
 
   for (int i=0; i<nUnits; i++) {
     units[i] = static_cast<int>(hu(i));
   }
 
   int noPat = Rcpp::as<int>(noOfPatterns);
-  int winners[noPat+1];
+  //int winners[noPat+1];
+  int* winners = new int[noPat+1];
 
   for(int i=1; i<=noPat; i++) {
 
@@ -2453,6 +2479,10 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
   for (int i=0; i<noPat; i++) {
     retWinners[i] = winners[i];
   }
+
+  delete[] p1;
+  delete[] units;
+  delete[] winners;
 
   return retWinners;
 }

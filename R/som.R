@@ -42,6 +42,7 @@ som <- function(x, ...) UseMethod("som")
 #' @param calculateMap
 #' @param calculateActMaps
 #' @param calculateSpanningTree
+#' @param saveWinnersPerPattern
 #' @param targets
 #' @param ... additional function parameters (currently not used)
 #' @export

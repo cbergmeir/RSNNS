@@ -54,7 +54,7 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
     
     snnsObject$setUnitName(num,paste("Input_",i,sep=""))
     
-    snnsObject$setUnitTType(num, SnnsDefines_resolveDefine(SnnsDefines_topologicalUnitTypes,"UNIT_INPUT"))
+    snnsObject$setUnitTType(num, resolveSnnsRDefine("topologicalUnitTypes","UNIT_INPUT"))
     
     snnsObject$setUnitPosition(num, i, 0, 0)
     
@@ -75,7 +75,7 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
       
       snnsObject$setUnitName(num,paste("Hidden_",currLayer,"_",i,sep=""))
      
-      snnsObject$setUnitTType(num,SnnsDefines_resolveDefine(SnnsDefines_topologicalUnitTypes,"UNIT_HIDDEN"))
+      snnsObject$setUnitTType(num, resolveSnnsRDefine("topologicalUnitTypes","UNIT_HIDDEN"))
       
       snnsObject$setUnitPosition(num, i, (currLayer-1)*2, 0)
       
@@ -102,7 +102,7 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
     
     snnsObject$setUnitName(num,paste("Output_",i,sep=""))
     
-    snnsObject$setUnitTType(num,SnnsDefines_resolveDefine(SnnsDefines_topologicalUnitTypes,"UNIT_OUTPUT"))
+    snnsObject$setUnitTType(num, resolveSnnsRDefine("topologicalUnitTypes","UNIT_OUTPUT"))
     
     snnsObject$setUnitPosition(num, i, (currLayer-1)*2, 0)
     
