@@ -25,17 +25,16 @@
 
 #' Create and train a radial basis function (rbf) network.
 #'
-#' Radial basis functions are feed-forward networks with one hidden layer.
-#' They save information about each pattern locally in the net (not globally as mlps)
-#' Their use is similar to that of \code{\link{mlp}}. However, their initialization
-#' can be difficult and require prior knowledge. Before their use, you probably want
+#' The use of an rbf-network is similar to that of an \code{\link{mlp}}. However, its initialization
+#' can be difficult and require prior knowledge. Before use of this function, you might want
 #' to read pp 172-183 of the SNNS User Manual 4.2. The initialization is performed in
-#' the current implementation by a call to RBF_Weights_Kohonen with all parameters
-#' set to zero and a successive call to the given \code{initFunc} (usually RBF_Weights).
+#' the current implementation by a call to \code{RBF_Weights_Kohonen(0,0,0,0,0)} 
+#' and a successive call to the given \code{initFunc} (usually \code{RBF_Weights}).
 #' If this initialization doesn't fit your needs, you should use the RSNNS low-level interface
 #' to implement your own one. Have a look then at the demos/examples. 
-#' Also, depending on whether linear or logistic output is chosen, the initialization parameters
-#' have to be different (normally c(0,1,...) for linear and c(-4,4,...) for logistic).
+#' Also, we note that depending on whether linear or logistic output is chosen, 
+#' the initialization parameters have to be different (normally \code{c(0,1,...)}
+#'  for linear and \code{c(-4,4,...)} for logistic output).
 #' 
 #' @export
 rbf <- function(x, ...) UseMethod("rbf")

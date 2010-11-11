@@ -30,7 +30,8 @@
 #' Create a layered network.
 #'
 #' @param unitsPerLayer a vector of integers that represents the number of units in each layer, including input and output layer
-#' @param fullyConnectedFeedForward if TRUE, the network is fully connected as a feed-forward network. If FALSE, no connections are made
+#' @param fullyConnectedFeedForward if \code{TRUE}, the network is fully connected as a feed-forward network. If \code{FALSE}, 
+#' no connections are created
 #' @rdname SnnsRObject$createNet
 #' @usage \S4method{createNet}{SnnsR}(unitsPerLayer, fullyConnectedFeedForward = TRUE)
 #' @aliases createNet,SnnsR-method createNet$getAllUnitsTType

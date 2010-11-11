@@ -56,7 +56,7 @@ rot90 <- function(a) {
 
 #' Data normalization.
 #'
-#' The input matrix is column-wise normalized. The type specifies how:
+#' The input matrix is column-wise normalized. The parameter \code{type} specifies how:
 #' \describe{
 #' \item{0_1}{values are normalized to the [0,1]-interval. The minimum in the data is mapped to zero, the maximum to one.}
 #' \item{center}{the data is centered, i.e. the mean is substracted}
@@ -101,11 +101,11 @@ vectorToActMap <- function(v, nrow=0, ncol=0) {
   
 }
   
-#' Organize a matrix with network activations as 2d maps.
+#' Organize a matrix containing 1d vectors of network activations as 2d maps.
 #'
 #' The input to this function is a matrix containing in each row an activation
 #' pattern/output of a neural network. This function uses \link{vectorToActMap} to 
-#' reorganizes the matrix to a list of matrices, whereby each row of the input matrix 
+#' reorganize the matrix to a list of matrices, whereby each row of the input matrix 
 #' is converted to a matrix in the output list.
 #' 
 #' @param m the matrix containing one activation pattern in every row
@@ -161,9 +161,9 @@ getSnnsRFunctionTable <- function() {
 
 #' Get a define of the SNNS kernel.
 #'
-#' All defines present can be shown with \code{RSNNS:::SnnsDefines}. 
+#' All defines-lists present can be shown with \code{RSNNS:::SnnsDefines}. 
 #' 
-#' @param defList the defines list from which to get the define from
+#' @param defList the defines-list from which to get the define from
 #' @param defValue the value in the list
 #' @return a string with the name of the define
 #' @export           
@@ -178,9 +178,9 @@ getSnnsRDefine <- function(defList, defValue)  {
 
 #' Resolve a define of the SNNS kernel.
 #'
-#' All defines present can be shown with \code{RSNNS:::SnnsDefines}.
+#' All defines-lists present can be shown with \code{RSNNS:::SnnsDefines}.
 #' 
-#' @param defList the defines list from which to resolve the define from
+#' @param defList the defines-list from which to resolve the define from
 #' @param def the name of the define
 #' @return the value of the define
 #' @export
@@ -196,10 +196,12 @@ resolveSnnsRDefine <- function(defList, def)  {
 #  warning(paste("An error occured in ", func,": ", SnnsDefines_getDefine(SnnsDefines_errorCodes, err),sep=""))
 #}
 
+#' Set the seed value used in all \code{SnnsR} objects.
+#' 
 #' Set the seed value that will be used in the constructor of 
-#' every object to set the seed of rand().
+#' every \code{SnnsCLib} object to set the seed of rand().
 #'
-#' @param seed the seed to use. If 0, a seed based on the system time is used.
+#' @param seed the seed to use. If 0, a seed based on the system time is generated.
 #' @export
 setSnnsRSeedValue <- function(seed) {
   .Call("setCurrentSeedVal", seed, package="RSNNS")  

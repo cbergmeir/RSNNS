@@ -24,7 +24,7 @@
 #############################################################################
 
 
-#' Generic print function for rsnns objects.
+#' Generic print function for \code{rsnns} objects.
 #'
 #' Print out some characteristics of an \code{\link{rsnns}} object.
 #' 
@@ -56,11 +56,11 @@ print.rsnns <- function(x, ...)
   print(names(x))
 }
 
-#' Generic summary function for rsnns objects.
+#' Generic summary function for \code{rsnns} objects.
 #'
-#' Print out a summary any network object the funciton calls the SNNS saveNet function to
-#' save the net to a temporary file, then reads this file in, displays its contents and
-#' deletes the file. 
+#' Print out a summary of the network. The function calls the function saveNet of the SNNS kernel to
+#' save the net to a temporary file. Then, it reads this file in, displays its contents and
+#' deletes the temporary file. 
 #' 
 #' @param object the \code{\link{rsnns}} object
 #' @param ... additional function parameters (currently not used)
@@ -83,19 +83,23 @@ summary.rsnns <- function(object, ...)
 
 # Most of the parameters are directly passed to \code{\link{rsnnsObjectFactory}} or \code{\link{train}}.
 
-#' Object factory for generating objects of type rsnns.
+#' Object factory for generating \code{rsnns} objects.
 #'
 #' The object factory generates an \code{rsnns} object and initializes its member variables
-#' with the values given as parameters. Furthermore, it generates an object of type \link{SnnsR}.
-#' Later, during training with \code{\link{train}}, this information is used to train the network.
+#' with the values given as parameters. Furthermore, it generates an object of \code{\link{SnnsR-class}}.
+#' Later, this information is to be used to train the network.
 #' 
-#' The typical procedure implemented in rsnns subclasses is the following: 
+#' The typical procedure implemented in \code{rsnns} subclasses is the following: 
 #' \itemize{
 #' \item generate the \code{rsnns} object with this object factory
 #' \item generate the network according to the architecture needed
 #' \item train the network (with \code{\link{train}})
 #' }
 #'
+#' In every \code{rsnns} object, the iterative error is the summed squared error (SSE) of all patterns. If
+#' the SSE is computed on the test set, then it is weighted to take care of the different amount of patterns
+#' in the sets.
+#' 
 #' @param subclass the subclass of rsnns to generate (vector of strings)
 #' @param nInputs the number of inputs the network will have
 #' @param maxit maximum of iterations to learn
@@ -146,12 +150,12 @@ rsnnsObjectFactory <- function(subclass, nInputs, maxit,
 #' @export
 train <- function(object, ...) UseMethod("train")
 
-#' Generic train function for rsnns objects.
+#' Generic train function for \code{rsnns} objects.
 #'
-#' The function calls \link{SnnsRObject$train} and saves the result in the
-#' current rsnns object
+#' The function calls \code{\link{SnnsRObject$train}} and saves the result in the
+#' current \code{\link{rsnns}} object
 #' 
-#' @param object the rsnns object
+#' @param object the \code{\link{rsnns}} object
 #' @param inputsTrain training input
 #' @param targetsTrain training targets
 #' @param inputsTest test input
@@ -183,12 +187,11 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
   object
 }
 
-#' Generic predict function for rsnns object.
+#' Generic predict function for \code{rsnns} object.
 #' 
-#' Predict values using the given network. This is only meaningful with regression and classification
-#' for a clustering network, another function has to be implemented 
+#' Predict values using the given network. 
 #'
-#' @param object the rsnns object
+#' @param object the \code{\link{rsnns}} object
 #' @param newdata the new input data which is used for prediction
 #' @param ... additional function parameters (currently not used)
 #' @return the predicted values

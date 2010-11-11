@@ -28,7 +28,7 @@
 #' 
 #' Art2 is very similar to art1, but for real-valued input. See \code{\link{art1}}
 #' for more information. A difference is, that the art2 implementation doesn't 
-#' assume two-dimpensional input and output. 
+#' assume two-dimensional input and output. 
 #'
 #' @export
 art2 <- function(x, ...) UseMethod("art2")
@@ -47,7 +47,7 @@ art2 <- function(x, ...) UseMethod("art2")
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member contains the 
-#' activation patterns for all inputs
+#' activation patterns for all inputs.
 #' @export
 #' @S3method art2 default
 #' @method art2 default

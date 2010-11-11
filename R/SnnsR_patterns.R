@@ -31,7 +31,7 @@
 #' 
 #' @param inputs the input values
 #' @param targets the target values
-#' @return a list with elements \code{$err} and \code{$set_no}, which identifies the patern set within the SnnsR object 
+#' @return a list with elements \code{err} and \code{set_no}. The latter one identifies the pattern set within the \code{\link{SnnsR-class}} object 
 #' @rdname SnnsRObject$createPatSet
 #' @usage \S4method{createPatSet}{SnnsR}(inputs, targets)
 #' @aliases createPatSet,SnnsR-method SnnsRObject$createPatSet
@@ -118,12 +118,12 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
 #' 
 #' Depending on the network architecture, output is present in hidden units, in output units, etc.
 #' In some network types, the output units have a certain name prefix in SNNS. This function finds
-#' the output units according to certain network types. Possible types (= values for outputMethod)
+#' the output units according to certain network types. Possible types (= values for \code{outputMethod})
 #' are: "art1", "art2", "assoz", "som", "output". If the given \code{outputMethod} is unknown, 
 #' the function defaults to "output".  
 #' 
 #' @param outputMethod a string defining the output method of the net. 
-#' @return a list of numbers identifying units that can be considereed output
+#' @return a list of numbers identifying the units
 #' @rdname SnnsRObject$whereAreResults
 #' @usage \S4method{whereAreResults}{SnnsR}(outputMethod="output")
 #' @aliases whereAreResults,SnnsR-method SnnsRObject$whereAreResults
@@ -163,7 +163,7 @@ SnnsR__whereAreResults <- function(snnsObject, outputMethod="output") {
 #' Predict values with a trained net.
 #' 
 #' This function has to be used embedded in a step of loading and afterwards 
-#' removing the patterns into the SnnsRObject. As SNNS only supports 2 pattern sets
+#' removing the patterns into the \code{\link{SnnsR-class}} object. As SNNS only supports 2 pattern sets
 #' in parallel, removing unneeded pattern sets is quite important.
 #' 
 #' @param outputMethod is passed to \link{SnnsRObject$whereAreResults}
@@ -233,7 +233,8 @@ SnnsR__somPredictComponentMaps <- function(snnsObject, updateFuncParams=c(0.0, 0
 #' present in the \code{targets} (columns), the amount of patterns of the class where the unit has won. From the \code{labeledUnits}, 
 #' the \code{labeledMap} can be computed, e.g. by voting of the class labels for the final label of the unit.}
 #' @rdname SnnsRObject$somPredictCurrPatSetWinners
-#' @usage \S4method{somPredictCurrPatSetWinners}{SnnsR}(updateFuncParams=c(0.0, 0.0, 1.0), saveWinnersPerPattern=TRUE, targets=NULL)
+#' @usage \S4method{somPredictCurrPatSetWinners}{SnnsR}(updateFuncParams=c(0.0, 0.0, 1.0), 
+#' saveWinnersPerPattern=TRUE, targets=NULL)
 #' @aliases somPredictCurrPatSetWinners,SnnsR-method SnnsRObject$somPredictCurrPatSetWinners
 #' @seealso \code{\link{som}}
 SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.0, 0.0, 1.0), saveWinnersPerPattern=TRUE, targets=NULL)  {

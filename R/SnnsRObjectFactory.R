@@ -27,20 +27,20 @@
 #' The main class of the package. Each instance contains a pointer to 
 #' a C++ object of type SnnsCLib, i.e. an instance of the SNNS kernel.
 #' 
-#' @slot snnsCLibPointer a pointer to the corresponding C++ class
+#' @slot snnsCLibPointer A pointer to the corresponding C++ class
 setClass( "SnnsR", representation( snnsCLibPointer = "externalptr" ) )
 
-#' Enable calling of C++ functions as methods of SnnsR objects.
+#' Enable calling of C++ functions as methods of \code{SnnsR-class} objects.
 #'
-#' This function makes methods of SnnsR__ and SnnsCLib__ accessible via $.
-#' If no SnnsR__ method with the name is present, then the according SnnsCLib__ 
+#' This function makes methods of SnnsR__ and SnnsCLib__ accessible via "$".
+#' If no SnnsR__ method is present, then the according SnnsCLib__ 
 #' method is called. This enables a very flexible method handling.
 #' To mask a method from SnnsCLib, e.g. to do some parameter checking or postprocessing,
 #' only a method with the same name, but beginning with SnnsR__ has to be present in R. 
-#' See e.g. \code{\link{SnnsRObject$initializeNet}}, for such an implementation. Furthermore,
-#' error handling is done within the method caller. If the result of a function is a list with a member \code{err}, 
-#' then \code{SnnsCLib__error} is called to use the SNNS kernel function to resolve the error code to a string, and
-#' an R warning is thrown with the obtained text.
+#' See e.g. \code{\link{SnnsRObject$initializeNet}} for such an implementation. 
+#' Error handling is also done within the method caller. If the result of a function is a list with a member \code{err}, 
+#' then \code{SnnsCLib__error} is called to use the SNNS kernel function to get the corresponding error message code
+#' and an R warning is thrown containing this message.
 #'
 # @export
 #' @rdname SnnsRObjectMethodCaller
@@ -79,7 +79,7 @@ setMethod( "$", "SnnsR", function(x, name ){
     } )
 
 
-#' Object factory to create a new object of type SnnsR.
+#' Object factory to create a new object of type \code{SnnsR-class}.
 #'
 #' @export
 SnnsRObjectFactory <- function(){

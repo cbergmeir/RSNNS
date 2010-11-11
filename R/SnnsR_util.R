@@ -24,9 +24,9 @@
 #############################################################################
 
 
-#' Reset the SnnsRObject.
+#' Reset the \code{SnnsR-class} object.
 #' 
-#' Delete all pattern sets and delete the current net in the SnnsRObject.
+#' Delete all pattern sets and delete the current net in the \code{\link{SnnsR-class}} object.
 #'  
 #' @rdname SnnsRObject$resetRSNNS
 #' @usage \S4method{resetRSNNS}{SnnsR}()
@@ -43,12 +43,12 @@ SnnsR__resetRSNNS <- function(snnsObject)  {
   
 }
 
-#' Get all units in the net of a certain ttype.
+#' Get all units in the net of a certain \code{ttype}.
 #' 
-#' Possible ttypes defined by SNNS are, among others:
-#' "UNIT_OUTPUT", "UNIT_INPUT", and "UNIT_HIDDEN". For these ttypes, special functions exist.
+#' Possible \code{ttype} defined by SNNS are, among others:
+#' "UNIT_OUTPUT", "UNIT_INPUT", and "UNIT_HIDDEN".
 #' 
-#' @param ttype a string containing the ttype.
+#' @param ttype a string containing the \code{ttype}.
 #' @return a vector with integer numbers identifying the units.
 #' @rdname SnnsRObject$getAllUnitsTType
 #' @usage \S4method{getAllUnitsTType}{SnnsR}(ttype)
@@ -108,17 +108,19 @@ SnnsR__getAllHiddenUnits <- function(snnsObject) {
   return(snnsObject$getAllUnitsTType("UNIT_HIDDEN"))  
 }
 
+#\link{getAllUnitsTType,SnnsR-method}
+
 #' Set the activation function for all units of a certain ttype.
 #' 
-#' The function uses the function \link{getAllUnitsTType,SnnsR-method} to find all units of a certain
-#' ttype, and sets the activation function of all these units to the given activation function
+#' The function uses the function \code{\link{SnnsRObject$getAllUnitsTType}} to find all units of a certain
+#' \code{ttype}, and sets the activation function of all these units to the given activation function.
 #'  
-#' @param ttype a string containing the ttype.
+#' @param ttype a string containing the \code{ttype}.
 #' @param act_func the name of the activation function to set.
 #' @rdname SnnsRObject$setTTypeUnitsActFunc
 #' @usage \S4method{setTTypeUnitsActFunc}{SnnsR}(ttype, act_func)
 #' @aliases setTTypeUnitsActFunc,SnnsR-method SnnsRObject$setTTypeUnitsActFunc
-#' @seealso \link{SnnsRObject$getAllUnitsTType}
+#' @seealso \code{\link{SnnsRObject$getAllUnitsTType}}
 #' @examples
 #' \dontrun{SnnsRObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Logistic")}
 SnnsR__setTTypeUnitsActFunc <- function(snnsObject, ttype, act_func) {

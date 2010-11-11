@@ -24,10 +24,10 @@
 #############################################################################
 
 
-#' Rudimentary parser for .res files.
+#' Rudimentary parser for res files.
 #'
 #' This function contains a rudimentary parser for SNNS .res files. It
-#' is completely implemented in R and doesn't make use of SNNS (i.e., SnnsCLib).
+#' is completely implemented in R and doesn't make use of SNNS functionality.
 #' 
 #' @param filename the name of the .res file 
 #' @return a matrix containing the predicted values that were found in the .res file
@@ -72,7 +72,7 @@ readResFile <- function(filename)  {
   
 }
 
-#' Save data to a .pat file.
+#' Save data to a pat file.
 #'
 #' This function generates an \link{SnnsR-class} object, loads the given data there 
 #' as a pattern set and then uses the functionality of SNNS to save the data as a .pat file. 
@@ -94,7 +94,7 @@ savePatFile <- function(inputs, targets, filename)  {
   
 }
 
-#' Load data from a .pat file.
+#' Load data from a pat file.
 #'
 #' This function generates an \link{SnnsR-class} object, loads the given .pat file 
 #' there as a pattern set and then extracts the patterns to a matrix, 

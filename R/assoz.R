@@ -47,7 +47,7 @@ assoz <- function(x, ...) UseMethod("assoz")
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member contains the 
-#' activation patterns for all inputs
+#' activation patterns for all inputs.
 #' @export
 #' @S3method assoz default
 #' @method assoz default

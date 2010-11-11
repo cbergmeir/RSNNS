@@ -27,7 +27,7 @@
 #' Function to split data into training and test set.
 #'
 #' Split the input and target values to a training and a test set. Test set is taken from the end of the
-#' data, if shuffling is wanted, it has to be done as preprocessing to this function.
+#' data. If the data is to be shuffled, this should be done before calling this function.
 #' 
 #' @param x inputs
 #' @param y targets
@@ -42,8 +42,10 @@
 #' data(iris)
 #' #shuffle the vector
 #' iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
+#' 
 #' irisValues <- normalizeData(iris[,1:4], "norm")
 #' irisTargets <- decodeClassLabels(iris[,5])
+#' 
 #' splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
 splitForTrainingAndTest <- function(x, y, ratio=0.15) {
   
@@ -86,10 +88,10 @@ checkInput <- function(x,y) {
   ok
 }
 
-#' Plot the iterative training and test error during training of the net.
+#' Plot the iterative training and test error of the net of this rsnns object.
 #'
-#' Plots (if present) the class members IterativeFitError (as black line) and 
-#' IterativeTestError (as red line).
+#' Plots (if present) the class members \code{IterativeFitError} (as black line) and 
+#' \code{IterativeTestError} (as red line).
 #' 
 #' @param object the object to which to apply plotIterativeError
 #' @param ... additional function parameters
@@ -126,16 +128,16 @@ plotIterativeError.reg_class <- function(object, ...)
 
 #' Decode class labels from a numerical or levels vector to a binary matrix.
 #'
-#' Convert the input vector to a binary matrix, which has the value \code{valTrue} (e.g. 1) exactly in
-#' the column given by the value in the input vector, and the value \code{valFalse} (e.g. 0) in the other 
+#' Convert the input vector to a binary matrix. In the matrix, the value \code{valTrue} (e.g. 1) is present
+#' exactly in the column given by the value in the input vector, and the value \code{valFalse} (e.g. 0) in the other 
 #' columns. The number of columns of the resulting matrix depends on the number of unique 
 #' labels found in the vector. E.g. the input c(1, 3, 2, 3) will result in an output matrix with rows: 
 #' 100 001 010 001
 #' 
 #' @param x class label vector
-#' @param valTrue see description above 
-#' @param valFalse see description above
-#' @return a binary matrix. See description above
+#' @param valTrue see Details paragraph
+#' @param valFalse see Details paragraph
+#' @return a matrix containing the decoded class labels
 #' @export
 #' @examples
 #' decodeClassLabels(c(1,3,2,3))
@@ -170,10 +172,10 @@ decodeClassLabels <- function(x, valTrue=1, valFalse=0) {
 #' Applies \code{analyzeClassification} row-wise to a matrix.
 #' 
 #' @param x inputs
-#' @param method same as in analyzeClassification
+#' @param method see \code{analyzeClassification}
 #' @param l idem
 #' @param h idem
-#' @return a numeric vector, each number represents a different class. A zero means,
+#' @return a numeric vector, each number represents a different class. A zero means
 #' that no class was assigned to the pattern. 
 #' @export
 #' @seealso \code{\link{analyzeClassification}}
@@ -198,16 +200,16 @@ toNumericClassLabels <- function(x) {
   else return(as.numeric(x))
 }
 
-#' Converts continuous neuronal outputs to class labels.
+#' Converts continuous outputs to class labels.
 #' 
-#' Three methods are implemented: 402040, WTA and ForcedWTA.
-#' 402040 and WTA are implemented as in the SNNS Manual 4.2 (pp 269)
+#' The two methods 402040, and winner-takes-all (WTA) are implemented
+#'  as in the SNNS User Manual 4.2 (pp 269)
 #' 
 #' @param y inputs
-#' @param method winner-takes-all or 402040
+#' @param method "WTA" or "402040"
 #' @param l lower bound, e.g. in 402040: l=0.4
 #' @param h upper bound, e.g. in 402040: h=0.6
-#' @return the position of the winning unit, or zero, if no classification was done.
+#' @return the position of the winning unit (i.e., the winning class), or zero, if no classification was done.
 # @references 
 # Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
 # \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
@@ -246,8 +248,8 @@ analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
 
 #' Computes a confusion matrix.
 #' 
-#' If the class labels are not already encoded, they are encoded with
-#' default values. The confusion matrix shows how many times a pattern
+#' If the class labels are not already encoded, they are encoded using \code{\link{encodeClassLabels}} 
+#' (with default values). The confusion matrix shows how many times a pattern
 #' with the real class x was classified as class y. A perfect method
 #' should result in a diagonal matrix. All values not on the diagonal
 #' are errors of the method.

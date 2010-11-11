@@ -17,9 +17,9 @@ modelJordan <- jordan(patterns$inputsTrain, patterns$targetsTrain, size=c(8), le
 #                inputsTest=patterns$inputsTest, targetsTest=patterns$targetsTest, linOut=TRUE)
 
 names(model)
-model$IterativeFitError
-model$fitted.values
-model$fittedTestValues
+#model$IterativeFitError
+#model$fitted.values
+#model$fittedTestValues
 
 par(mfrow=c(3,3))
 
@@ -31,7 +31,7 @@ plotRegressionError(patterns$targetsTrain, model$fitted.values, main="Regression
 plotRegressionError(patterns$targetsTest, model$fittedTestValues, main="Regression Plot Test")
 hist(model$fitted.values - patterns$targetsTrain, col="lightblue", main="Error Histogram Fit")
 
-model$IterativeFitError[length(model$IterativeFitError)]
+#model$IterativeFitError[length(model$IterativeFitError)]
 
 plot(inputs, type="l")
 

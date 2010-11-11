@@ -28,13 +28,13 @@
 #'
 #' Adaptive resonance theory (art) networks are association networks. I.e. they 
 #' perform clustering by finding a prototype to the given input. So, input and output
-#' are the same type of data. Art1 is for binary inputs only. If you have real-valued input, use 
+#' are the same type of data. Art1 is for binary inputs only, if you have real-valued input, use 
 #' \code{\link{art2}} instead. In its current implementation, the network
-#' has two-dimensional input (and output). I.e., x is a matrix containing all 
+#' has two-dimensional input (and output). The matrix \code{x} contains all 
 #' (one dimensional) input patterns. Internally, every one of these patterns
 #' is converted to a two-dimensional pattern using parameters \code{dimX} and \code{dimY}.
-#' The parameter nClusters controls the amount of clusters that are assumed to
-#' be present in the input patterns. For more details, see the SNNS documentation. 
+#' The parameter \code{nClusters} controls the amount of clusters that are assumed to
+#' be present in the input patterns. A detailed description of the theory is available from the SNNS decumentation. 
 #'
 #' @export
 art1 <- function(x, ...) UseMethod("art1")
@@ -55,8 +55,8 @@ art1 <- function(x, ...) UseMethod("art1")
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
-#' @return an \code{\link{rsnns}} object. the \code{fitted.values} member of the object contains a 
-#' list of two-dimensional activation patterns 
+#' @return an \code{\link{rsnns}} object. The \code{fitted.values} member of the object contains a 
+#' list of two-dimensional activation patterns.
 #' @export
 #' @S3method art1 default
 #' @method art1 default

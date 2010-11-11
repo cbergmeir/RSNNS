@@ -53,9 +53,8 @@ som <- function(x, ...) UseMethod("som")
 #' switched on, the som generates some special members:
 #' \item{map}{the som. For each unit, the amount of patterns where this unit won is given.}
 #' \item{componentMaps}{a map for every input component, showing where in the map this component leads to high activation.}
-#' \item{actMaps}{a list containing for each pattern a matrix with activations of each unit. Each such 
-#' matrix can be converted with \code{\link{matrixToActMapList}} to a list of activation maps.
-#' The \code{actMaps} are an intermediary result, from which all other results can be computed. However, this list can be very long,
+#' \item{actMaps}{a list containing for each pattern its activation map, i.e. all unit activations.
+#' The \code{actMaps} are an intermediary result, from which all other results can be computed. This list can be very long,
 #' so normally it won't be saved.}
 #' \item{winnersPerPattern}{a vector where for each pattern the number of the winning unit is given. Also, an intermediary result
 #'  that normally won't be saved.}
@@ -63,8 +62,8 @@ som <- function(x, ...) UseMethod("som")
 #' present in the \code{targets} (columns), the amount of patterns of the class where the unit has won. From the \code{labeledUnits}, 
 #' the \code{labeledMap} can be computed, e.g. by voting of the class labels for the final label of the unit.}  
 #' \item{labeledMap}{a labeled som that is computed from \code{labeledUnits} using \code{\link{decodeClassLabels}}.}
-#' \item{spanningTree}{uses the original SNNS function to calculate the map. For each unit, the last pattern where this unit won is present.
-#' As the other results have more information, the spanning tree is only interesting, if the other functions are too slow or if the original SNNS
+#' \item{spanningTree}{the result of the original SNNS function to calculate the map. For each unit, the last pattern where this unit won is present.
+#' As the other results are more informative, the spanning tree is only interesting, if the other functions are too slow or if the original SNNS
 #' implementation is needed.}
 #' @export
 #' @S3method som default
