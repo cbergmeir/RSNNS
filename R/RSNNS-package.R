@@ -84,7 +84,7 @@
 #' @aliases RSNNS
 #' @docType package
 #' @title Getting started with the RSNNS package
-# @encoding latin1
+# @encoding UTF-8
 # @encoding Latin-1
 #' @author Christoph Bergmeir \email{c.bergmeir@@decsai.ugr.es} 
 #' 

@@ -1,4 +1,4 @@
-PKG_CPPFLAGS=-Wno-write-strings -pedantic `Rscript -e 'Rcpp:::CxxFlags()'`
+PKG_CPPFLAGS=-Wno-write-strings `Rscript -e 'Rcpp:::CxxFlags()'`
 PKG_LIBS=`Rscript -e 'Rcpp:::LdFlags()'`
 
 .PHONY: all
