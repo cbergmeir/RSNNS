@@ -6,7 +6,7 @@ data(iris)
 
 seed <- 2
 set.seed(seed)
-snnsRSetSeedValue(seed)
+setSnnsRSeedValue(seed)
 
 #shuffle the vector
 #iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]

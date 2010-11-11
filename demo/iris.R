@@ -2,7 +2,7 @@ library(RSNNS)
 
 seed <- 2
 set.seed(seed)
-snnsRSetSeedValue(seed)
+setSnnsRSeedValue(seed)
 
 data(iris)
 

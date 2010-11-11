@@ -84,6 +84,7 @@ SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
 #' 
 #' @param units the units that define the output
 #' @param updateFuncParams the parameters for the update function (the function has to be already set)
+#' @return the predicted values
 #' @rdname SnnsRObject$genericPredictCurrPatSet
 #' @usage \S4method{genericPredictCurrPatSet}{SnnsR}(units, updateFuncParams=c(0.0))
 #' @aliases genericPredictCurrPatSet,SnnsR-method SnnsRObject$genericPredictCurrPatSet
@@ -122,6 +123,7 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
 #' the function defaults to "output".  
 #' 
 #' @param outputMethod a string defining the output method of the net. 
+#' @return a list of numbers identifying units that can be considereed output
 #' @rdname SnnsRObject$whereAreResults
 #' @usage \S4method{whereAreResults}{SnnsR}(outputMethod="output")
 #' @aliases whereAreResults,SnnsR-method SnnsRObject$whereAreResults
@@ -166,6 +168,7 @@ SnnsR__whereAreResults <- function(snnsObject, outputMethod="output") {
 #' 
 #' @param outputMethod is passed to \link{SnnsRObject$whereAreResults}
 #' @param updateFuncParams parameters passed to the networks update function
+#' @return the predicted values
 #' @rdname SnnsRObject$predictCurrPatSet
 #' @usage \S4method{predictCurrPatSet}{SnnsR}(outputMethod="reg_class", updateFuncParams=c(0.0))
 #' @aliases predictCurrPatSet,SnnsR-method SnnsRObject$predictCurrPatSet
@@ -177,12 +180,15 @@ SnnsR__predictCurrPatSet <- function(snnsObject, outputMethod="reg_class", updat
 }
 
 
-#' Get the som component maps.
+#' Calculate the som component maps.
 #' 
+#' @param updateFuncParams parameters passed to the networks update function
+#' @return a matrix containing all componant maps as 1d vectors
 #' @rdname SnnsRObject$somPredictComponentMaps
-#' @usage \S4method{somPredictComponentMaps}{SnnsR}()
+#' @usage \S4method{somPredictComponentMaps}{SnnsR}(updateFuncParams=c(0.0, 0.0, 1.0))
 #' @aliases somPredictComponentMaps,SnnsR-method SnnsRObject$somPredictComponentMaps
-SnnsR__somPredictComponentMaps <- function(snnsObject)  {
+#' @seealso \code{\link{som}}
+SnnsR__somPredictComponentMaps <- function(snnsObject, updateFuncParams=c(0.0, 0.0, 1.0))  {
   
   snnsObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Component")
   
@@ -196,7 +202,7 @@ SnnsR__somPredictComponentMaps <- function(snnsObject)  {
   
     #parameter has to be reversed to get same order as in SNNS gui.. TODO: why?
     snnsObject$kohonen_SetExtraParameter((nInputs+1) - input)
-    snnsObject$updateNet(c(0.0, 0.0, 1.0))
+    snnsObject$updateNet(updateFuncParams)
     
     for(i in 1:length(units)) {
       predictions[input,i] <- snnsObject$getUnitOutput(units[i])
@@ -212,11 +218,24 @@ SnnsR__somPredictComponentMaps <- function(snnsObject)  {
 
 
 
-#' Get for every unit the amount it has won, for every pattern in the current pattern set.
-#' 
+#' Get most of the relevant results from a som.
+#'
+#' This function is most conveniently used through \code{\link{som}}.
+#'  
+#' @param updateFuncParams parameters passed to the networks update function
+#' @param saveWinnersPerPattern should a list with the winners for every pattern be saved?
+#' @param targets optional target classes of the patterns
+#' @return a list with three elements:
+#' \item{nWinnersPerUnit}{For each unit, the amount of patterns where this unit won is given. So, this is a 1d vector representing the normal version of the som.}
+#' \item{winnersPerPattern}{a vector where for each pattern the number of the winning unit is given. This is an intermediary result
+#'  that normally won't be saved.}
+#' \item{labeledUnits}{a matrix which -- if the \code{targets} parameter is given -- contains for each unit (rows) and each class 
+#' present in the \code{targets} (columns), the amount of patterns of the class where the unit has won. From the \code{labeledUnits}, 
+#' the \code{labeledMap} can be computed, e.g. by voting of the class labels for the final label of the unit.}
 #' @rdname SnnsRObject$somPredictCurrPatSetWinners
-#' @usage \S4method{somPredictCurrPatSetWinners}{SnnsR}()
+#' @usage \S4method{somPredictCurrPatSetWinners}{SnnsR}(updateFuncParams=c(0.0, 0.0, 1.0), saveWinnersPerPattern=TRUE, targets=NULL)
 #' @aliases somPredictCurrPatSetWinners,SnnsR-method SnnsRObject$somPredictCurrPatSetWinners
+#' @seealso \code{\link{som}}
 SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.0, 0.0, 1.0), saveWinnersPerPattern=TRUE, targets=NULL)  {
   
   units <- snnsObject$getAllHiddenUnits()
@@ -284,9 +303,13 @@ SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.
 
 #' Get the spanning tree of the som, calculated directly by SNNS.
 #' 
+#' @return the spanning tree, which is the som, showing for each unit a number identifying 
+#' the last pattern for which this unit won. (We note that, also if there are more than 
+#' one patterns, only the last one is saved)  
 #' @rdname SnnsRObject$somPredictCurrPatSetWinnersSpanTree
 #' @usage \S4method{somPredictCurrPatSetWinnersSpanTree}{SnnsR}()
 #' @aliases somPredictCurrPatSetWinnersSpanTree,SnnsR-method SnnsRObject$somPredictCurrPatSetWinnersSpanTree
+#' @seealso \code{\link{som}}
 SnnsR__somPredictCurrPatSetWinnersSpanTree <- function(snnsObject)  {
   
   units <- snnsObject$getAllHiddenUnits()

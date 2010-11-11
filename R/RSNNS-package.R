@@ -64,24 +64,41 @@
 #' As the high-level api is already quite powerful and flexible, you'll most probably normally end up using one of the functions:
 #' \code{\link{mlp}}, \code{\link{dlvq}}, \code{\link{rbf}}, \code{\link{rbfDDA}}, \code{\link{elman}}, 
 #' \code{\link{jordan}}, \code{\link{som}}, \code{\link{art1}}, \code{\link{art2}}, or \code{\link{assoz}},
-#' with some pre- and postprocessing.
-#' 
-#' Demos ending with "SnnsR" show use of the low-level api. If you want to do special things with neural networks that are currently not implemented
-#' in the high-level api, you can see in this demos how to do it. Many demos are present both as high-level and low-level versions. 
+#' with some pre- and postprocessing. These S3 classes are all subclasses of \code{\link{rsnns}}.
 #' 
 #' Also have a look at the original SNNS and the SNNS User Manual 4.2, especially pp 67-87 for explications on all the parameters
 #' of the learning functions, and pp 145-215 for detailed (theoretical) explications of the methods and advice on their use.
+#' 
+#' Demos ending with "SnnsR" show use of the low-level api. If you want to do special things with neural networks that are currently not implemented
+#' in the high-level api, you can see in this demos how to do it. Many demos are present both as high-level and low-level versions.
+#' 
+#' The low-level api consists mainly of the class \code{\link{SnnsR-class}}, which internally holds a pointer to a C++ object of 
+#' the class \code{SnnsCLib}, i.e., an instance of the SNNS kernel. The class furthermore implements a calling mechanism for methods of the SnnsCLib 
+#' object, so that they call be called conveniently using the "$"-operator. This calling mechanism also allows for transparent masking of methods or extending the 
+#' kernel with new methods from R. See \code{\link{$,SnnsR-method}}. R-functions that are added by RSNNS to the kernel are documented within 
+#' this manual, beginning with \code{SnnsRObject$}. Documentation of the original SNNS kernel user interface functions can be found in the SNNS User Manual 4.2 pp 290-314. 
+#' A call to e.g. the SNNS kernel function \code{krui_getNoOfUnits(..)} can be done with \code{SnnsRObject$getNoOfUnits(...)}. However, some functions were omitted 
+#' due to different reasons. Fur more details and other known issues see the file KnownIssues.
 #' 
 #' @name RSNNS-package
 #' @aliases RSNNS
 #' @docType package
 #' @title Getting started with the RSNNS package
-#' @author Christoph Bergmeir \email{c.bergmeir@@decsai.ugr.es}
+# @encoding latin1
+# @encoding Latin-1
+#' @author Christoph Bergmeir \email{c.bergmeir@@decsai.ugr.es} 
+#' 
+#' with Jose M. Benitez \email{j.m.benitez@@decsai.ugr.es}
+#' 
+#' DiCITS Lab, Sci2s group, DECSAI, University of Granada.
+#' 
+#' \url{http://dicits.ugr.es}, \url{http://sci2s.ugr.es}
+#' 
 #' @references 
 #' Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
+#' 
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 # @references
-# \url{http://dicits.ugr.es}, \url{http://sci2s.ugr.es}
 #' @keywords package neural networks SNNS
 #' @seealso \code{\link{mlp}}, \code{\link{dlvq}}, \code{\link{rbf}}, \code{\link{rbfDDA}}, \code{\link{elman}}, 
 #' \code{\link{jordan}}, \code{\link{som}}, \code{\link{art1}}, \code{\link{art2}}, \code{\link{assoz}}

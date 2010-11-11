@@ -26,9 +26,9 @@
 
 #' Generic print function for rsnns objects.
 #'
-#' Print out some characteristics of an rsnns object.
+#' Print out some characteristics of an \code{\link{rsnns}} object.
 #' 
-#' @param x the rsnns object
+#' @param x the \code{\link{rsnns}} object
 #' @param ... additional function parameters (currently not used)
 #' @export
 #' @S3method print rsnns
@@ -60,10 +60,11 @@ print.rsnns <- function(x, ...)
 #'
 #' Print out a summary any network object the funciton calls the SNNS saveNet function to
 #' save the net to a temporary file, then reads this file in, displays its contents and
-#' deletes the file 
+#' deletes the file. 
 #' 
-#' @param object the rsnns object
+#' @param object the \code{\link{rsnns}} object
 #' @param ... additional function parameters (currently not used)
+#' @return the contents of the .net file that SNNS would generate from the object, as a string.  
 #' @export
 #' @S3method summary rsnns
 #' @method summary rsnns
@@ -80,22 +81,20 @@ summary.rsnns <- function(object, ...)
   s
 }
 
+# Most of the parameters are directly passed to \code{\link{rsnnsObjectFactory}} or \code{\link{train}}.
+
 #' Object factory for generating objects of type rsnns.
 #'
-#' The object factory initializes member variables of object 
-#' with the values given as parameters and generates an object of type \link{SnnsR}
-#' Later, during training with \link{train}, this information is used to train the network.
-#' TODO
-#' Create and train a multi layer perceptron. 
-#' Most of the parameters are directly passed to \link{rsnnsObjectFactory} or \link{train}.
-#' The method follows the typical procedure for rsnns objects: 
-#' \itemize{
-#' \item generate the rsnns object (with \link{rsnnsObjectFactory})
-#' \item generate the network according to the architecture given
-#' \item train the network (with \link{train})
-#' }
-#'
+#' The object factory generates an \code{rsnns} object and initializes its member variables
+#' with the values given as parameters. Furthermore, it generates an object of type \link{SnnsR}.
+#' Later, during training with \code{\link{train}}, this information is used to train the network.
 #' 
+#' The typical procedure implemented in rsnns subclasses is the following: 
+#' \itemize{
+#' \item generate the \code{rsnns} object with this object factory
+#' \item generate the network according to the architecture needed
+#' \item train the network (with \code{\link{train}})
+#' }
 #'
 #' @param subclass the subclass of rsnns to generate (vector of strings)
 #' @param nInputs the number of inputs the network will have
@@ -108,7 +107,11 @@ summary.rsnns <- function(object, ...)
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param computeIterativeError should the error be computed in every iteration? 
+#' @return a partly initialized \code{rsnns} object 
+#' @aliases rsnns
 #' @export
+#' @seealso \code{\link{mlp}}, \code{\link{dlvq}}, \code{\link{rbf}}, \code{\link{rbfDDA}}, \code{\link{elman}}, 
+#' \code{\link{jordan}}, \code{\link{som}}, \code{\link{art1}}, \code{\link{art2}}, \code{\link{assoz}}
 rsnnsObjectFactory <- function(subclass, nInputs, maxit, 
     initFunc, initFuncParams, 
     learnFunc, learnFuncParams, 
@@ -154,6 +157,7 @@ train <- function(object, ...) UseMethod("train")
 #' @param inputsTest test input
 #' @param targetsTest test targets
 #' @param ... additional function parameters (currently not used)
+#' @return an \code{\link{rsnns}} object, to which the results of training have been added. 
 #' @export
 #' @S3method train rsnns
 #' @method train rsnns
@@ -187,6 +191,7 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
 #' @param object the rsnns object
 #' @param newdata the new input data which is used for prediction
 #' @param ... additional function parameters (currently not used)
+#' @return the predicted values
 #' @S3method predict rsnns
 #' @method predict rsnns
 # @rdname rsnns

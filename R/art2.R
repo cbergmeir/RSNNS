@@ -46,7 +46,7 @@ art2 <- function(x, ...) UseMethod("art2")
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param ... additional function parameters (currently not used)
-#' @return an rsnns object. The \code{fitted.values} member contains the 
+#' @return an \code{\link{rsnns}} object. The \code{fitted.values} member contains the 
 #' activation patterns for all inputs
 #' @export
 #' @S3method art2 default

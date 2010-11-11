@@ -40,6 +40,11 @@
 #' @param computeError should the error be computed in every iteration?
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
+#' @return a list containing:
+#' \item{fitValues}{the fitted values, i.e. outputs of the training inputs}
+#' \item{IterativeFitError}{The SSE in every iteration/epoch on the training set}
+#' \item{testValues}{the predicted values, i.e. outputs of the test inputs}
+#' \item{IterativeTestError}{The SSE in every iteration/epoch on the test set}
 #' @rdname SnnsRObject$train
 #' @usage \S4method{train}{SnnsR}(inputsTrain, targetsTrain=NULL, 
 #'     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 

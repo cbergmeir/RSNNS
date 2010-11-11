@@ -50,7 +50,7 @@ elman <- function(x, ...) UseMethod("elman")
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
 #' @param ... additional function parameters (currently not used)
-#' @return an rsnns object.
+#' @return an \code{\link{rsnns}} object.
 #' @export
 #' @S3method elman default
 #' @method elman default

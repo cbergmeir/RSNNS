@@ -208,9 +208,9 @@ toNumericClassLabels <- function(x) {
 #' @param l lower bound, e.g. in 402040: l=0.4
 #' @param h upper bound, e.g. in 402040: h=0.6
 #' @return the position of the winning unit, or zero, if no classification was done.
-#' @references 
-#' Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
-#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+# @references 
+# Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
+# \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' @export
 #' @seealso \code{\link{encodeClassLabels}}
 analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {

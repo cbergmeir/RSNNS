@@ -217,37 +217,4 @@ SnnsDefines$patternUpdateModes <-  matrix(c(
 "OUTPUT_OUT",     3)      
                 ,ncol=2,byrow=TRUE)
             
-#' Get a define of the SNNS kernel.
-#'
-#' All defines present can be shown with \code{RSNNS:::SnnsDefines}. 
-#' 
-#' @param defList the defines list from which to get the define from
-#' @param defValue the value in the list
-#' @export           
-#' @seealso \code{\link{resolveSnnsRDefine}}
-#' @examples
-#' getSnnsRDefine("topologicalUnitTypes",3)
-#' getSnnsRDefine("errorCodes",-50)
-getSnnsRDefine <- function(defList, defValue)  {
-  defRow <- which(SnnsDefines[[defList]][,2] == toString(defValue))
-  return(SnnsDefines[[defList]][defRow,1])
-}
-
-#' Resolve a define of the SNNS kernel.
-#'
-#' All defines present can be shown with \code{RSNNS:::SnnsDefines}.
-#' 
-#' @param defList the defines list from which to resolve the define from
-#' @param def the name of the define
-#' @export
-#' @seealso \code{\link{getSnnsRDefine}}           
-#' @examples
-#' resolveSnnsRDefine("topologicalUnitTypes","UNIT_HIDDEN")
-resolveSnnsRDefine <- function(defList, def)  {
-  defRow <- which(SnnsDefines[[defList]][,1] == toString(def))
-  return(as.numeric(SnnsDefines[[defList]][defRow,2]))  
-}
-
-#SnnsDefines_showWarningFromSnnsError <- function(func, err) {
-#  warning(paste("An error occured in ", func,": ", SnnsDefines_getDefine(SnnsDefines_errorCodes, err),sep=""))
-#}            
+            

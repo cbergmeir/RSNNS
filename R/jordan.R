@@ -49,7 +49,7 @@ jordan <- function(x, ...) UseMethod("jordan")
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
 #' @param ... additional function parameters (currently not used)
-#' @return an rsnns object.
+#' @return an \code{\link{rsnns}} object.
 #' @export
 #' @S3method jordan default
 #' @method jordan default

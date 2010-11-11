@@ -46,6 +46,7 @@ rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param linOut sets the activation function of the output units to linear or logistic
 #' @param ... additional function parameters (currently not used)
+#' @return an \code{\link{rsnns}} object.
 #' @export
 #' @S3method rbfDDA default
 #' @method rbfDDA default

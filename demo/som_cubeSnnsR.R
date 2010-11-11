@@ -56,7 +56,7 @@ for(i in 1:maxit) {
 actMaps <- snnsObject$predictCurrPatSet("som", c(0.0, 0.0, 1.0))
 actMaps <- matrixToActMapList(actMaps, mapX)
 
-compMaps <- snnsObject$somPredictComponentMaps()
+compMaps <- snnsObject$somPredictComponentMaps(c(0.0, 0.0, 1.0))
 compMaps <- matrixToActMapList(compMaps, mapX)
 compMaps
 

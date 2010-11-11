@@ -65,6 +65,7 @@ rot90 <- function(a) {
 #' 
 #' @param x input data
 #' @param type string specifying the type of normalization. Implemented are "0_1", "center", and "norm"
+#' @return column-wise normalized input
 #' @export
 normalizeData <- function(x, type="norm") {
   
@@ -90,6 +91,7 @@ normalizeData <- function(x, type="norm") {
 #' @param v the vector containing the activation pattern
 #' @param nrow number of rows the resulting matrices will have
 #' @param ncol number of columns the resulting matrices will have
+#' @return a matrix containing the 2d reorganized input
 #' @export
 #' @seealso \link{matrixToActMapList} \link{plotActMap}
 vectorToActMap <- function(v, nrow=0, ncol=0) {
@@ -109,6 +111,7 @@ vectorToActMap <- function(v, nrow=0, ncol=0) {
 #' @param m the matrix containing one activation pattern in every row
 #' @param nrow number of rows the resulting matrices will have
 #' @param ncol number of columns the resulting matrices will have
+#' @return a list containing the activation map matrices
 #' @export
 #' @seealso \link{vectorToActMap} \link{plotActMap}
 matrixToActMapList <- function(m, nrow=0, ncol=0) {
@@ -136,7 +139,7 @@ plotActMap <- function(x, ...) {
 #' \item{#inParams}{the number of input parameters of the function}
 #' \item{#outParams}{the number of output parameters of the function}
 #' @export
-getSNNSFunctionTable <- function() {
+getSnnsRFunctionTable <- function() {
 
   snnsObject <- SnnsRObjectFactory()
   
@@ -154,4 +157,50 @@ getSNNSFunctionTable <- function() {
   rm(snnsObject)
   
   allFuncs
+}
+
+#' Get a define of the SNNS kernel.
+#'
+#' All defines present can be shown with \code{RSNNS:::SnnsDefines}. 
+#' 
+#' @param defList the defines list from which to get the define from
+#' @param defValue the value in the list
+#' @return a string with the name of the define
+#' @export           
+#' @seealso \code{\link{resolveSnnsRDefine}}
+#' @examples
+#' getSnnsRDefine("topologicalUnitTypes",3)
+#' getSnnsRDefine("errorCodes",-50)
+getSnnsRDefine <- function(defList, defValue)  {
+  defRow <- which(SnnsDefines[[defList]][,2] == toString(defValue))
+  return(SnnsDefines[[defList]][defRow,1])
+}
+
+#' Resolve a define of the SNNS kernel.
+#'
+#' All defines present can be shown with \code{RSNNS:::SnnsDefines}.
+#' 
+#' @param defList the defines list from which to resolve the define from
+#' @param def the name of the define
+#' @return the value of the define
+#' @export
+#' @seealso \code{\link{getSnnsRDefine}}           
+#' @examples
+#' resolveSnnsRDefine("topologicalUnitTypes","UNIT_HIDDEN")
+resolveSnnsRDefine <- function(defList, def)  {
+  defRow <- which(SnnsDefines[[defList]][,1] == toString(def))
+  return(as.numeric(SnnsDefines[[defList]][defRow,2]))  
+}
+
+#SnnsDefines_showWarningFromSnnsError <- function(func, err) {
+#  warning(paste("An error occured in ", func,": ", SnnsDefines_getDefine(SnnsDefines_errorCodes, err),sep=""))
+#}
+
+#' Set the seed value that will be used in the constructor of 
+#' every object to set the seed of rand().
+#'
+#' @param seed the seed to use. If 0, a seed based on the system time is used.
+#' @export
+setSnnsRSeedValue <- function(seed) {
+  .Call("setCurrentSeedVal", seed, package="RSNNS")  
 }
