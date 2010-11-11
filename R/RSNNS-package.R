@@ -3,7 +3,7 @@
 #   This file is part of the R package "RSNNS".
 #
 #   Author: Christoph Bergmeir
-#   Supervisor: JosÃ© M. BenÃ­tez
+#   Supervisor: José M. Benítez
 #   Copyright (c) DiCITS Lab, Sci2s group, DECSAI, University of Granada.
 #
 #   This library is free software; you can redistribute it and/or
@@ -88,7 +88,7 @@
 # @encoding Latin-1
 #' @author Christoph Bergmeir \email{c.bergmeir@@decsai.ugr.es} 
 #' 
-#' with Jose M. Benitez \email{j.m.benitez@@decsai.ugr.es}
+#' with José M. Benítez \email{j.m.benitez@@decsai.ugr.es}
 #' 
 #' DiCITS Lab, Sci2s group, DECSAI, University of Granada.
 #' 
