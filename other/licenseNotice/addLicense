@@ -1,3 +1,0 @@
-ls *.cpp *.h *.ph *.bak *.l *.y *.tbl | while read file; do 
- ( cat SnnsCLibLicenseNotice.txt ${file} ) > ${file}.new && mv ${file}.new ${file}
-done
