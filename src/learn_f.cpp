@@ -4005,7 +4005,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
       if ( strcmp( krui_getUnitActFuncName( RBF_GET_UNIT_NO(output_unit_ptr) ),
 		   "Act_Identity" ) )
         {
-	  RBF_ERROR_CHECK( krui_setUnitActFunc ( RBF_GET_UNIT_NO(output_unit_ptr), "Act_Identity" ) );
+	  RBF_ERROR_CHECK( krui_setUnitActFunc ( RBF_GET_UNIT_NO(output_unit_ptr), const_cast<char*>("Act_Identity") ) );
         }
 
       if ( output_unit_ptr->out_func != OUT_IDENTITY )
@@ -4141,7 +4141,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 	    NetModified = TRUE;
 	    RBF_ERROR_CHECK( new_rbf_no );
 	    RBF_ERROR_CHECK( kr_unitSetTType ( new_rbf_no, HIDDEN ) );
-	    RBF_ERROR_CHECK( krui_setUnitActFunc ( new_rbf_no, "Act_RBF_Gaussian" ) );
+	    RBF_ERROR_CHECK( krui_setUnitActFunc ( new_rbf_no, const_cast<char*>("Act_RBF_Gaussian") ) );
 	    new_rbf_ptr = kr_getUnitPtr ( new_rbf_no );
 	    RBF_ERROR_CHECK( KernelErrorCode );
 	    new_rbf_ptr->i_act      = 0.0;

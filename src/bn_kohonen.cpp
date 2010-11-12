@@ -148,19 +148,19 @@ krui_err SnnsCLib::bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits)
 
   /*  set the update function  */
 
-  ret = krui_setUpdateFunc (KOHONEN_UPDATE_FUNC_NAME);
+  ret = krui_setUpdateFunc (const_cast<char*>(KOHONEN_UPDATE_FUNC_NAME));
   CHECK_RETURN( ret );
 
 
   /* set the learning function */
 
-  ret = krui_setLearnFunc (KOHONEN_LEARN_FUNC_NAME);
+  ret = krui_setLearnFunc (const_cast<char*>(KOHONEN_LEARN_FUNC_NAME));
   CHECK_RETURN( ret );
 
 
   /* set the init function */
 
-  ret = krui_setInitialisationFunc (KOHONEN_INIT_FUNC_NAME);
+  ret = krui_setInitialisationFunc (const_cast<char*>(KOHONEN_INIT_FUNC_NAME));
   //CHECK_RETURN( ret );
 
   return(ret);

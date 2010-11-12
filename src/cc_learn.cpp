@@ -256,7 +256,7 @@ void SnnsCLib::cc_trainSpecialUnits(int maxNoOfCovarianceUpdateCycles,
     float oldHighScore=0.0,newHighScore;
     float Error;
 
-    cc_printHeadline("Training of the candidates",LENGTH_HEADLINE);
+    cc_printHeadline(const_cast<char*>("Training of the candidates"),LENGTH_HEADLINE);
     cc_calculateOutputUnitError(StartPattern,EndPattern);
     if (SumSqError==0.0){
 	Error = cc_getErr(StartPattern,EndPattern); /* calc SumSqError */
@@ -327,7 +327,7 @@ void SnnsCLib::cc_trainOutputUnits(int maxNoOfErrorUpdateCycles, int backfittPat
     int s,dummy;
     //static float OutParameter[1];
 
-    cc_printHeadline("Training of the output units",LENGTH_HEADLINE);
+    cc_printHeadline(const_cast<char*>("Training of the output units"),LENGTH_HEADLINE);
     *NoOfOutParams = 1;
     *ParameterOutArray = m_cc_trainOutputUnits_OutParameter;
     cc_initOutputUnits();
@@ -1009,7 +1009,7 @@ krui_err SnnsCLib::cc_generateSpecialUnits(int type)
 	    kr_unitSetTType(CurrentUnit=kr_makeDefaultUnit(),SPECIAL); 
 	ERROR_CHECK;
 	KernelErrorCode = krui_setUnitActFunc(CurrentUnit,
-					      cc_actFuncArray[selector]);
+					      const_cast<char*>(cc_actFuncArray[selector]));
 	ERROR_CHECK;  
 
 	SpecUnitPtr = kr_getUnitPtr(CurrentUnit); 

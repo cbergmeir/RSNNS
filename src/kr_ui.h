@@ -104,7 +104,7 @@ int  krui_searchNextUnitName(void);
 char  *krui_getUnitOutFuncName(int UnitNo);
 krui_err  krui_setUnitOutFunc(int unit_no, char *unitOutFuncName);
 char  *krui_getUnitActFuncName(int UnitNo);
-krui_err  krui_setUnitActFunc(int unit_no, const char *unitActFuncName);
+krui_err  krui_setUnitActFunc(int unit_no, char *unitActFuncName);
 char  *krui_getUnitFTypeName(int UnitNo);
 FlintType  krui_getUnitActivation(int UnitNo);
 krui_err  krui_setUnitActivation(int UnitNo, FlintTypeParam unit_activation);

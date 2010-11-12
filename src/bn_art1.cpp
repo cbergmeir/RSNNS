@@ -195,9 +195,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     if (unit_no < 0)  CHECK_RETURN( unit_no );
     ret_code = krui_setUnitTType( unit_no, INPUT );
     CHECK_RETURN( ret_code );
-    ret_code = krui_setUnitActFunc(unit_no, ART1_ACTF_INP);
+    ret_code = krui_setUnitActFunc(unit_no, const_cast<char*>(ART1_ACTF_INP));
     CHECK_RETURN (ret_code);
-    ret_code = krui_setUnitOutFunc(unit_no, ART1_OUTFUNC);
+    ret_code = krui_setUnitOutFunc(unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
     sprintf (name,"%s%d","inp",i);
     ret_code = krui_setUnitName (unit_no, name);
@@ -234,9 +234,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     if (unit_no < 0)  CHECK_RETURN( unit_no );
     ret_code = krui_setUnitTType( unit_no, HIDDEN );
     CHECK_RETURN( ret_code );
-    ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_CMP);
+    ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_CMP));
     CHECK_RETURN (ret_code);
-    ret_code = krui_setUnitOutFunc (unit_no, ART1_OUTFUNC);
+    ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
     sprintf (name,"%s%d","cmp",i);
     ret_code = krui_setUnitName (unit_no, name);
@@ -277,9 +277,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     if (unit_no < 0)  CHECK_RETURN( unit_no );
     ret_code = krui_setUnitTType( unit_no, SPECIAL );
     CHECK_RETURN( ret_code );
-    ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_REC);
+    ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_REC));
     CHECK_RETURN (ret_code);
-    ret_code = krui_setUnitOutFunc (unit_no, ART1_OUTFUNC);
+    ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
     sprintf (name,"%s%d","rec",i);
     ret_code = krui_setUnitName (unit_no, name);
@@ -317,9 +317,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     if (unit_no < 0)  CHECK_RETURN( unit_no );
     ret_code = krui_setUnitTType( unit_no, HIDDEN );
     CHECK_RETURN( ret_code );
-    ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_DEL);
+    ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_DEL));
     CHECK_RETURN (ret_code);
-    ret_code = krui_setUnitOutFunc (unit_no, ART1_OUTFUNC);
+    ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
     sprintf (name,"%s%d","del",i);
     ret_code = krui_setUnitName (unit_no, name);
@@ -352,11 +352,11 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_D);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_D));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitOutFunc (unit_no, ART1_OUTFUNC);
+  ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "d1");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("d1"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -372,11 +372,11 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_D);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_D));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitOutFunc (unit_no, ART1_OUTFUNC);
+  ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "d2");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("d2"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -392,11 +392,11 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_D);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_D));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitOutFunc (unit_no, ART1_OUTFUNC);
+  ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "d3");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("d3"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -411,12 +411,12 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   Col = 1;
 
   /* Create Site Table Entries for Reset layer units */
-  ret_code = krui_createSiteTableEntry (ART1_SITE_NAME_RST_SELF,
-					   ART1_SITE_FUNC_RST_SELF);
+  ret_code = krui_createSiteTableEntry (const_cast<char*>(ART1_SITE_NAME_RST_SELF),
+					   const_cast<char*>(ART1_SITE_FUNC_RST_SELF));
   CHECK_RETURN (ret_code);
 
-  ret_code = krui_createSiteTableEntry (ART1_SITE_NAME_RST_SIGNAL,
-					   ART1_SITE_FUNC_RST_SIGNAL);
+  ret_code = krui_createSiteTableEntry (const_cast<char*>(ART1_SITE_NAME_RST_SIGNAL),
+					   const_cast<char*>(ART1_SITE_FUNC_RST_SIGNAL));
   CHECK_RETURN (ret_code);
 
 
@@ -426,7 +426,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     if (unit_no < 0)  CHECK_RETURN( unit_no );
     ret_code = krui_setUnitTType( unit_no, HIDDEN );
     CHECK_RETURN( ret_code );
-    ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_RST);
+    ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_RST));
     CHECK_RETURN (ret_code);
     sprintf (name,"%s%d","rst",i);
     ret_code = krui_setUnitName (unit_no, name);
@@ -452,9 +452,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     CHECK_RETURN (ret_code);
 
     /* Add the two Sites */
-    ret_code = krui_addSite (ART1_SITE_NAME_RST_SELF);
+    ret_code = krui_addSite (const_cast<char*>(ART1_SITE_NAME_RST_SELF));
     CHECK_RETURN (ret_code);
-    ret_code = krui_addSite (ART1_SITE_NAME_RST_SIGNAL);
+    ret_code = krui_addSite (const_cast<char*>(ART1_SITE_NAME_RST_SIGNAL));
     CHECK_RETURN (ret_code);
   }
 
@@ -465,12 +465,12 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   /* Create Site Table Entries for the two Sites */
 
-  ret_code = krui_createSiteTableEntry (ART1_SITE_NAME_REC_G1,
-                                         ART1_SITE_FUNC_REC_G1);
+  ret_code = krui_createSiteTableEntry (const_cast<char*>(ART1_SITE_NAME_REC_G1),
+                                         const_cast<char*>(ART1_SITE_FUNC_REC_G1));
   CHECK_RETURN (ret_code);
 
-  ret_code = krui_createSiteTableEntry (ART1_SITE_NAME_INP_G1,
-                                         ART1_SITE_FUNC_INP_G1);
+  ret_code = krui_createSiteTableEntry (const_cast<char*>(ART1_SITE_NAME_INP_G1),
+                                         const_cast<char*>(ART1_SITE_FUNC_INP_G1));
   CHECK_RETURN (ret_code);
 
   ColOffset = ICol + 2 + (int) ICol/2;
@@ -482,9 +482,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_G1);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_G1));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "g1");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("g1"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -496,9 +496,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* Add the two Sites */
-  ret_code = krui_addSite (ART1_SITE_NAME_INP_G1);
+  ret_code = krui_addSite (const_cast<char*>(ART1_SITE_NAME_INP_G1));
   CHECK_RETURN (ret_code);
-  ret_code = krui_addSite (ART1_SITE_NAME_REC_G1);
+  ret_code = krui_addSite (const_cast<char*>(ART1_SITE_NAME_REC_G1));
   CHECK_RETURN (ret_code);
 
 
@@ -509,21 +509,21 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   /*  Create ResetI unit */
 
-  ret_code = krui_createSiteTableEntry (ART1_SITE_NAME_INP_RI,
-                                         ART1_SITE_FUNC_INP_RI);
+  ret_code = krui_createSiteTableEntry (const_cast<char*>(ART1_SITE_NAME_INP_RI),
+                                         const_cast<char*>(ART1_SITE_FUNC_INP_RI));
   CHECK_RETURN (ret_code);
 
-  ret_code = krui_createSiteTableEntry (ART1_SITE_NAME_RHO_RI,
-                                         ART1_SITE_FUNC_RHO_RI);
+  ret_code = krui_createSiteTableEntry (const_cast<char*>(ART1_SITE_NAME_RHO_RI),
+                                         const_cast<char*>(ART1_SITE_FUNC_RHO_RI));
   CHECK_RETURN (ret_code);
 
   unit_no = krui_createDefaultUnit();
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_RI);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_RI));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "ri");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("ri"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -534,9 +534,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* Add the two Sites */
-  ret_code = krui_addSite (ART1_SITE_NAME_INP_RI);
+  ret_code = krui_addSite (const_cast<char*>(ART1_SITE_NAME_INP_RI));
   CHECK_RETURN (ret_code);
-  ret_code = krui_addSite (ART1_SITE_NAME_RHO_RI);
+  ret_code = krui_addSite (const_cast<char*>(ART1_SITE_NAME_RHO_RI));
   CHECK_RETURN (ret_code);
 
 
@@ -550,9 +550,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_RC);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_RC));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "rc");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("rc"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -569,9 +569,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_RG);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_RG));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "rg");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("rg"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -590,9 +590,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_CL);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_CL));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "cl");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("cl"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -611,9 +611,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_NCL);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_NCL));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "nc");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("nc"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -631,9 +631,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_RHO);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_RHO));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "rho");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("rho"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -651,9 +651,9 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   if (unit_no < 0)  CHECK_RETURN( unit_no );
   ret_code = krui_setUnitTType( unit_no, HIDDEN );
   CHECK_RETURN( ret_code );
-  ret_code = krui_setUnitActFunc (unit_no, ART1_ACTF_G2);
+  ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_G2));
   CHECK_RETURN (ret_code);
-  ret_code = krui_setUnitName (unit_no, "g2");
+  ret_code = krui_setUnitName (unit_no, const_cast<char*>("g2"));
   CHECK_RETURN (ret_code);
 
   unit_pos.x = Col + ColOffset;
@@ -728,13 +728,13 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
      CHECK_RETURN (ret_code);
 
      /* from itself */
-     ret_code = krui_setSite (ART1_SITE_NAME_RST_SELF);
+     ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_RST_SELF));
      CHECK_RETURN (ret_code);
      ret_code = krui_createLink (i, 0.0);
      CHECK_RETURN (ret_code);
 
      /* from delay units */
-     ret_code = krui_setSite (ART1_SITE_NAME_RST_SIGNAL);
+     ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_RST_SIGNAL));
      CHECK_RETURN (ret_code);
      ret_code = krui_createLink ((i-CUnits-3), 0.0);
      CHECK_RETURN (ret_code);
@@ -779,7 +779,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* from input units */
-  ret_code = krui_setSite (ART1_SITE_NAME_INP_G1);
+  ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_INP_G1));
   CHECK_RETURN (ret_code);
   FOR_ALL_ART1_INP_UNITS (j) {
      ret_code = krui_createLink (j, 0.0);
@@ -787,7 +787,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   }
 
   /* from recognition units */
-  ret_code = krui_setSite (ART1_SITE_NAME_REC_G1);
+  ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_REC_G1));
   CHECK_RETURN (ret_code);
   FOR_ALL_ART1_REC_UNITS (j) {
      ret_code = krui_createLink (j, 0.0);
@@ -800,7 +800,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* Site for input units */
-  ret_code = krui_setSite (ART1_SITE_NAME_INP_RI);
+  ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_INP_RI));
   CHECK_RETURN (ret_code);
 
   /* from input units */
@@ -810,7 +810,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   }
 
   /* Site for Unit RHO */
-  ret_code = krui_setSite (ART1_SITE_NAME_RHO_RI);
+  ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_RHO_RI));
   CHECK_RETURN (ret_code);
 
   /* from RHO unit */
@@ -892,11 +892,11 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
 
   /*  set the update function  */
-  ret_code = krui_setUpdateFunc (ART1_UPDATE_FUNC_NAME);
+  ret_code = krui_setUpdateFunc (const_cast<char*>(ART1_UPDATE_FUNC_NAME));
   CHECK_RETURN( ret_code );
 
   /* set the learning function */
-  ret_code = krui_setLearnFunc (ART1_LEARN_FUNC_NAME);
+  ret_code = krui_setLearnFunc (const_cast<char*>(ART1_LEARN_FUNC_NAME));
 
   //ui_NumberOfLearnParamsChanged();
   //ui_NumberOfUpdateParamsChanged();

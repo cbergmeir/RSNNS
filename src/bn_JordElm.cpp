@@ -262,16 +262,16 @@
  
   /* ---------------------------   create units  ----------------------------*/
 
-  i_unit = createUnitLayer(IUnits,INPUT,"Act_Identity","Out_Identity","inp");
+  i_unit = createUnitLayer(IUnits,INPUT,const_cast<char*>("Act_Identity"),const_cast<char*>("Out_Identity"),const_cast<char*>("inp"));
   if (i_unit < 0) IF_ERROR_RETURN (i_unit) ;
 
-  h_unit = createUnitLayer(HUnits,HIDDEN,"Act_Logistic","Out_Identity","hid") ;
+  h_unit = createUnitLayer(HUnits,HIDDEN,const_cast<char*>("Act_Logistic"),const_cast<char*>("Out_Identity"),const_cast<char*>("hid"));
   if (h_unit < 0) IF_ERROR_RETURN (h_unit) ;
 
-  o_unit = createUnitLayer(OUnits,OUTPUT,"Act_Logistic","Out_Identity","out") ;
+  o_unit = createUnitLayer(OUnits,OUTPUT,const_cast<char*>("Act_Logistic"),const_cast<char*>("Out_Identity"),const_cast<char*>("out"));
   if (o_unit < 0) IF_ERROR_RETURN (o_unit) ;
 
-  s_unit =createUnitLayer(OUnits,SPECIAL_H,"Act_Identity","Out_Identity","con");
+  s_unit =createUnitLayer(OUnits,SPECIAL_H,const_cast<char*>("Act_Identity"),const_cast<char*>("Out_Identity"),const_cast<char*>("con"));
   if (s_unit < 0) IF_ERROR_RETURN (s_unit) ;
 
 
@@ -312,13 +312,13 @@
 
   /*  -----------------------  set default functions  -----------------------*/
 
-  error_code = krui_setLearnFunc ("JE_BP") ;
+  error_code = krui_setLearnFunc (const_cast<char*>("JE_BP")) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = krui_setInitialisationFunc ("JE_Weights") ;
+  error_code = krui_setInitialisationFunc (const_cast<char*>("JE_Weights")) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = krui_setUpdateFunc ("JE_Order") ;
+  error_code = krui_setUpdateFunc (const_cast<char*>("JE_Order")) ;
 
   return (error_code) ;
 } 
@@ -360,21 +360,21 @@ Parameters:
 
   /* ---------------------------   create units  ----------------------------*/
 
-  i_unit = createUnitLayer (layer[0], INPUT, "Act_Identity", 
-                            "Out_Identity", "inp") ;
+  i_unit = createUnitLayer (layer[0], INPUT, const_cast<char*>("Act_Identity"), 
+                            const_cast<char*>("Out_Identity"), const_cast<char*>("inp")) ;
   if (i_unit < 0) IF_ERROR_RETURN (i_unit) ;
 
   strcpy (name, "hid") ;
   for (i = 1 ; i <= no_of_hidden_layers ; i++)
   {
     if (no_of_hidden_layers > 1) sprintf (name, "hid%d", i) ;  
-    h_unit[i] = createUnitLayer(layer[i], HIDDEN, "Act_Logistic", 
-                                "Out_Identity", name) ;
+    h_unit[i] = createUnitLayer(layer[i], HIDDEN, const_cast<char*>("Act_Logistic"), 
+                                const_cast<char*>("Out_Identity"), name) ;
     if (h_unit[i] < 0) IF_ERROR_RETURN (h_unit[i]) ;
   }
 
-  o_unit = createUnitLayer (layer[o_layer], OUTPUT,  "Act_Logistic", 
-                            "Out_Identity", "out") ;
+  o_unit = createUnitLayer (layer[o_layer], OUTPUT,  const_cast<char*>("Act_Logistic"), 
+                            const_cast<char*>("Out_Identity"), const_cast<char*>("out")) ;
   if (o_unit < 0) IF_ERROR_RETURN (o_unit) ;
 
   if (out_context) 
@@ -389,8 +389,8 @@ Parameters:
   for (i = 1 ; i <= no_of_context_layers ; i++)
   {
     if (no_of_context_layers > 1) sprintf (name, "con%d", i) ;  
-    c_unit[i] = createUnitLayer (layer[i], SPECIAL_H, "Act_Identity", 
-                                 "Out_Identity", name ) ;
+    c_unit[i] = createUnitLayer (layer[i], SPECIAL_H, const_cast<char*>("Act_Identity"), 
+                                 const_cast<char*>("Out_Identity"), name ) ;
     if (c_unit[i] < 0) IF_ERROR_RETURN (c_unit[i]) ;
   }
 
@@ -459,13 +459,13 @@ Parameters:
 
   /* ----------------------   set default functions  ------------------------*/
 
-  error_code = krui_setLearnFunc ("JE_BP") ;
+  error_code = krui_setLearnFunc (const_cast<char*>("JE_BP")) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = krui_setInitialisationFunc ("JE_Weights") ;
+  error_code = krui_setInitialisationFunc (const_cast<char*>("JE_Weights")) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = krui_setUpdateFunc ("JE_Order") ;
+  error_code = krui_setUpdateFunc (const_cast<char*>("JE_Order")) ;
 
   return (error_code) ;
 }

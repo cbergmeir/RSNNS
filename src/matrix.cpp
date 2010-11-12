@@ -281,7 +281,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 
 	if ((vv = (float *) malloc(m -> rows * sizeof(float))) == NULL)
 	{
-	    ErrMess("RbfLUDcmp: impossible to allocate helpmatrix.\n");
+	    ErrMess(const_cast<char*>("RbfLUDcmp: impossible to allocate helpmatrix.\n"));
 	    return KRERR_INSUFFICIENT_MEM;
 	}
 
@@ -410,14 +410,14 @@ int	SnnsCLib::RbfInvMatrix(RbfFloatMatrix *m)
 
 #ifdef	DEBUG_MODE
 	if (m -> rows != m -> columns)
-	    ErrMess("RbfInvMatrix: matrix not of form N x N.\n");
+	    ErrMess(const_cast<char*>("RbfInvMatrix: matrix not of form N x N.\n"));
 #endif
 
 	if (!RbfAllocMatrix(m -> rows, m -> rows, &help) ||
 	    (indx = (int *) malloc(m -> rows * sizeof(int))) == NULL ||
 	    (b = (float *) malloc(m -> rows * sizeof(float))) == NULL)
 	{
-	    ErrMess("RbfInvMatrix: impossible to allocate helpmatrix.\n");
+	    ErrMess(const_cast<char*>("RbfInvMatrix: impossible to allocate helpmatrix.\n"));
 	    return KRERR_INSUFFICIENT_MEM;
 	}
 
@@ -466,7 +466,7 @@ int	SnnsCLib::RbfInvMatrix(RbfFloatMatrix *m)
 
 #ifdef	DEBUG_MODE
 	if (m -> rows != m -> columns)
-	    ErrMess("RbfInvMatrix: matrix not of form N x N.\n");
+	    ErrMess(const_cast<char*>("RbfInvMatrix: matrix not of form N x N.\n"));
 #endif
 
 	n = m -> rows;			/* n = dimension of matrix	*/
@@ -476,7 +476,7 @@ int	SnnsCLib::RbfInvMatrix(RbfFloatMatrix *m)
 
 	if (!RbfAllocMatrix(2, n, &help))
 	{
-	    ErrMess("RbfInvMatrix: impossible to allocate helpmatrix.\n");
+	    ErrMess(const_cast<char*>("RbfInvMatrix: impossible to allocate helpmatrix.\n"));
 	    return KRERR_INSUFFICIENT_MEM;
 	}
 

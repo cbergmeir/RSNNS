@@ -90,7 +90,7 @@ GROUP: Unit activation functions using table lookup
 */
 FlintType   SnnsCLib::ACT_LogisticTbl(struct Unit *unit_ptr)
 {
-#include "sigmoid.h"	/*  m,b value tables for linear approximation  */
+#include "sigmoid_tbl.h"	/*  m,b value tables for linear approximation  */
 
   ACT_FUNC_DEFS
   register FlintType  sum, x;

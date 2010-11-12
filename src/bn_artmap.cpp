@@ -76,106 +76,106 @@
 
 
 /* Definition of the Output Function */
-#define OUTFUNC    "Out_Identity"
+#define OUTFUNC    const_cast<char*>("Out_Identity") 
 
 
 /* Definition of the Activationfunctions */
-#define ACTF_INPa "Act_Identity"
-#define ACTF_CMPa "Act_at_least_2"
-#define ACTF_RECa "Act_Identity"
-#define ACTF_DELa "Act_at_least_2"
-#define ACTF_Da   "Act_at_least_1"
-#define ACTF_RSTa "Act_at_least_1"
-#define ACTF_G1a  "Act_at_least_2"
-#define ACTF_RIa  "Act_Product"
-#define ACTF_RCa  "Act_Identity"
-#define ACTF_RGa  "Act_less_than_0"
-#define ACTF_CLa  "Act_at_least_1"
-#define ACTF_NCa  "Act_ARTMAP_NCa"
-#define ACTF_RHOa "Act_Identity"
-#define ACTF_G2a  "Act_at_most_0"
+#define ACTF_INPa const_cast<char*>("Act_Identity") 
+#define ACTF_CMPa const_cast<char*>("Act_at_least_2")
+#define ACTF_RECa const_cast<char*>("Act_Identity")
+#define ACTF_DELa const_cast<char*>("Act_at_least_2")
+#define ACTF_Da   const_cast<char*>("Act_at_least_1")
+#define ACTF_RSTa const_cast<char*>("Act_at_least_1")
+#define ACTF_G1a  const_cast<char*>("Act_at_least_2")
+#define ACTF_RIa  const_cast<char*>("Act_Product")
+#define ACTF_RCa  const_cast<char*>("Act_Identity")
+#define ACTF_RGa  const_cast<char*>("Act_less_than_0")
+#define ACTF_CLa  const_cast<char*>("Act_at_least_1")
+#define ACTF_NCa  const_cast<char*>("Act_ARTMAP_NCa")
+#define ACTF_RHOa const_cast<char*>("Act_Identity")
+#define ACTF_G2a  const_cast<char*>("Act_at_most_0")
 
 
-#define ACTF_INPb "Act_Identity"
-#define ACTF_CMPb "Act_at_least_2"
-#define ACTF_RECb "Act_Identity"
-#define ACTF_DELb "Act_at_least_2"
-#define ACTF_Db   "Act_at_least_1"
-#define ACTF_RSTb "Act_at_least_1"
-#define ACTF_G1b  "Act_at_least_2"
-#define ACTF_RIb  "Act_Product"
-#define ACTF_RCb  "Act_Identity"
-#define ACTF_RGb  "Act_less_than_0"
-#define ACTF_CLb  "Act_at_least_1"
-#define ACTF_NCb  "Act_ARTMAP_NCb"
-#define ACTF_RHOb "Act_Identity"
-#define ACTF_G2b  "Act_at_most_0"
+#define ACTF_INPb const_cast<char*>("Act_Identity")
+#define ACTF_CMPb const_cast<char*>("Act_at_least_2")
+#define ACTF_RECb const_cast<char*>("Act_Identity")
+#define ACTF_DELb const_cast<char*>("Act_at_least_2")
+#define ACTF_Db   const_cast<char*>("Act_at_least_1")
+#define ACTF_RSTb const_cast<char*>("Act_at_least_1")
+#define ACTF_G1b  const_cast<char*>("Act_at_least_2")
+#define ACTF_RIb  const_cast<char*>("Act_Product")
+#define ACTF_RCb  const_cast<char*>("Act_Identity")
+#define ACTF_RGb  const_cast<char*>("Act_less_than_0")
+#define ACTF_CLb  const_cast<char*>("Act_at_least_1")
+#define ACTF_NCb  const_cast<char*>("Act_ARTMAP_NCb")
+#define ACTF_RHOb const_cast<char*>("Act_Identity")
+#define ACTF_G2b  const_cast<char*>("Act_at_most_0")
 
-#define ACTF_MAP  "Act_at_least_2"
-#define ACTF_D1   "Act_Identity"
-#define ACTF_RB   "Act_Product"
-#define ACTF_RM   "Act_Identity"
-#define ACTF_RG   "Act_less_than_0"
-#define ACTF_G    "Act_exactly_1"
-#define ACTF_CL   "Act_at_least_2"
-#define ACTF_NC   "Act_at_least_1"
-#define ACTF_RHO  "Act_Identity"
-#define ACTF_QU   "Act_Product"
-#define ACTF_DRHO "Act_ARTMAP_DRho"
+#define ACTF_MAP  const_cast<char*>("Act_at_least_2")
+#define ACTF_D1   const_cast<char*>("Act_Identity")
+#define ACTF_RB   const_cast<char*>("Act_Product")
+#define ACTF_RM   const_cast<char*>("Act_Identity")
+#define ACTF_RG   const_cast<char*>("Act_less_than_0")
+#define ACTF_G    const_cast<char*>("Act_exactly_1")
+#define ACTF_CL   const_cast<char*>("Act_at_least_2")
+#define ACTF_NC   const_cast<char*>("Act_at_least_1")
+#define ACTF_RHO  const_cast<char*>("Act_Identity")
+#define ACTF_QU   const_cast<char*>("Act_Product")
+#define ACTF_DRHO const_cast<char*>("Act_ARTMAP_DRho")
 
 
 
 /* Site names
 */
-#define SITE_NAME_RSTa_SELF    "ArtMap_Site_Rsta_Self"
-#define SITE_NAME_RSTa_SIGNAL  "ArtMap_Site_Rsta_Signal"
-#define SITE_NAME_REC_G1a      "ArtMap_Site_Rec_G1a"
-#define SITE_NAME_INP_G1a      "ArtMap_Site_Inp_G1a"
-#define SITE_NAME_INP_RIa      "ArtMap_Site_Inp_RIa"
-#define SITE_NAME_RHO_RIa      "ArtMap_Site_Rho_RIa"
+#define SITE_NAME_RSTa_SELF    const_cast<char*>("ArtMap_Site_Rsta_Self")
+#define SITE_NAME_RSTa_SIGNAL  const_cast<char*>("ArtMap_Site_Rsta_Signal")
+#define SITE_NAME_REC_G1a      const_cast<char*>("ArtMap_Site_Rec_G1a")
+#define SITE_NAME_INP_G1a      const_cast<char*>("ArtMap_Site_Inp_G1a")
+#define SITE_NAME_INP_RIa      const_cast<char*>("ArtMap_Site_Inp_RIa")
+#define SITE_NAME_RHO_RIa      const_cast<char*>("ArtMap_Site_Rho_RIa")
 
-#define SITE_NAME_RSTb_SELF    "ArtMap_Site_Rstb_Self"
-#define SITE_NAME_RSTb_SIGNAL  "ArtMap_Site_Rstb_Signal"
-#define SITE_NAME_REC_G1b      "ArtMap_Site_Rec_G1b"
-#define SITE_NAME_INP_G1b      "ArtMap_Site_Inp_G1b"
-#define SITE_NAME_INP_RIb      "ArtMap_Site_Inp_RIb"
-#define SITE_NAME_RHO_RIb      "ArtMap_Site_Rho_RIb"
+#define SITE_NAME_RSTb_SELF    const_cast<char*>("ArtMap_Site_Rstb_Self")
+#define SITE_NAME_RSTb_SIGNAL  const_cast<char*>("ArtMap_Site_Rstb_Signal")
+#define SITE_NAME_REC_G1b      const_cast<char*>("ArtMap_Site_Rec_G1b")
+#define SITE_NAME_INP_G1b      const_cast<char*>("ArtMap_Site_Inp_G1b")
+#define SITE_NAME_INP_RIb      const_cast<char*>("ArtMap_Site_Inp_RIb")
+#define SITE_NAME_RHO_RIb      const_cast<char*>("ArtMap_Site_Rho_RIb")
 
-#define SITE_NAME_ARTa_G       "ArtMap_Site_ARTa_G"
-#define SITE_NAME_ARTb_G       "ArtMap_Site_ARTb_G"
-#define SITE_NAME_B_RB         "ArtMap_Site_B_RB"
-#define SITE_NAME_RHO_RB       "ArtMap_Site_Rho_RB"
-#define SITE_NAME_CMPa_QU      "ArtMap_Site_Cmpa_QU"
-#define SITE_NAME_INPa_QU      "ArtMap_Site_Inpa_QU"
+#define SITE_NAME_ARTa_G       const_cast<char*>("ArtMap_Site_ARTa_G")
+#define SITE_NAME_ARTb_G       const_cast<char*>("ArtMap_Site_ARTb_G")
+#define SITE_NAME_B_RB         const_cast<char*>("ArtMap_Site_B_RB")
+#define SITE_NAME_RHO_RB       const_cast<char*>("ArtMap_Site_Rho_RB")
+#define SITE_NAME_CMPa_QU      const_cast<char*>("ArtMap_Site_Cmpa_QU")
+#define SITE_NAME_INPa_QU      const_cast<char*>("ArtMap_Site_Inpa_QU")
 
 /* Site function names
 */
-#define SITE_FUNC_RSTa_SELF    "Site_WeightedSum"
-#define SITE_FUNC_RSTa_SIGNAL  "Site_at_least_2"
-#define SITE_FUNC_REC_G1a      "Site_at_most_0"
-#define SITE_FUNC_INP_G1a      "Site_at_least_1"
-#define SITE_FUNC_INP_RIa      "Site_WeightedSum"
-#define SITE_FUNC_RHO_RIa      "Site_WeightedSum"
+#define SITE_FUNC_RSTa_SELF    const_cast<char*>("Site_WeightedSum")
+#define SITE_FUNC_RSTa_SIGNAL  const_cast<char*>("Site_at_least_2")
+#define SITE_FUNC_REC_G1a      const_cast<char*>("Site_at_most_0")
+#define SITE_FUNC_INP_G1a      const_cast<char*>("Site_at_least_1")
+#define SITE_FUNC_INP_RIa      const_cast<char*>("Site_WeightedSum")
+#define SITE_FUNC_RHO_RIa      const_cast<char*>("Site_WeightedSum")
 
-#define SITE_FUNC_RSTb_SELF    "Site_WeightedSum"
-#define SITE_FUNC_RSTb_SIGNAL  "Site_at_least_2"
-#define SITE_FUNC_REC_G1b      "Site_at_most_0"
-#define SITE_FUNC_INP_G1b      "Site_at_least_1"
-#define SITE_FUNC_INP_RIb      "Site_WeightedSum"
-#define SITE_FUNC_RHO_RIb      "Site_WeightedSum"
+#define SITE_FUNC_RSTb_SELF    const_cast<char*>("Site_WeightedSum")
+#define SITE_FUNC_RSTb_SIGNAL  const_cast<char*>("Site_at_least_2")
+#define SITE_FUNC_REC_G1b      const_cast<char*>("Site_at_most_0")
+#define SITE_FUNC_INP_G1b      const_cast<char*>("Site_at_least_1")
+#define SITE_FUNC_INP_RIb      const_cast<char*>("Site_WeightedSum")
+#define SITE_FUNC_RHO_RIb      const_cast<char*>("Site_WeightedSum")
 
-#define SITE_FUNC_ARTa_G       "Site_at_least_1"
-#define SITE_FUNC_ARTb_G       "Site_at_least_1"
-#define SITE_FUNC_B_RB         "Site_WeightedSum"
-#define SITE_FUNC_RHO_RB       "Site_WeightedSum"
-#define SITE_FUNC_CMPa_QU      "Site_WeightedSum"
-#define SITE_FUNC_INPa_QU      "Site_Reciprocal"
+#define SITE_FUNC_ARTa_G       const_cast<char*>("Site_at_least_1")
+#define SITE_FUNC_ARTb_G       const_cast<char*>("Site_at_least_1")
+#define SITE_FUNC_B_RB         const_cast<char*>("Site_WeightedSum")
+#define SITE_FUNC_RHO_RB       const_cast<char*>("Site_WeightedSum")
+#define SITE_FUNC_CMPa_QU      const_cast<char*>("Site_WeightedSum")
+#define SITE_FUNC_INPa_QU      const_cast<char*>("Site_Reciprocal")
 
 /* Learning function name */
-#define LEARN_FUNC_NAME     "ARTMAP"
+#define LEARN_FUNC_NAME     const_cast<char*>("ARTMAP")
 
 /* Update function name */
-#define UPDATE_FUNC_NAME    "ARTMAP_Stable"
+#define UPDATE_FUNC_NAME    const_cast<char*>("ARTMAP_Stable")
 
 
 
@@ -516,37 +516,37 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    /********* create ARTa units ******************/
 
    /* create Input Layer for ARTa */
-   ret_code = bn_artmap_make_layer (f1aUnits, f1aRows, F1a_COLS, INPa_X, INPa_Y, "inpa",
+   ret_code = bn_artmap_make_layer (f1aUnits, f1aRows, F1a_COLS, INPa_X, INPa_Y, const_cast<char*>("inpa"),
                                     INPUT, ACTF_INPa, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Comparison Layer for ARTa */
-   ret_code = bn_artmap_make_layer (f1aUnits, f1aRows, F1a_COLS, CMPa_X, CMPa_Y, "cmpa",
+   ret_code = bn_artmap_make_layer (f1aUnits, f1aRows, F1a_COLS, CMPa_X, CMPa_Y, const_cast<char*>("cmpa"),
                                     HIDDEN, ACTF_CMPa, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Recognition Layer for ARTa */
-   ret_code = bn_artmap_make_layer (f2aUnits, f2aRows, F2a_COLS, RECa_X, RECa_Y, "reca",
+   ret_code = bn_artmap_make_layer (f2aUnits, f2aRows, F2a_COLS, RECa_X, RECa_Y, const_cast<char*>("reca"),
                                     SPECIAL, ACTF_RECa, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Delay Layer for ARTa */
-   ret_code = bn_artmap_make_layer (f2aUnits, f2aRows, F2a_COLS, DELa_X, DELa_Y, "dela",
+   ret_code = bn_artmap_make_layer (f2aUnits, f2aRows, F2a_COLS, DELa_X, DELa_Y, const_cast<char*>("dela"),
                                     HIDDEN, ACTF_DELa, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create d1a */
-   ret_code = bn_artmap_make_layer (1, 1, 1, D1a_X, D1a_Y, "d1a", HIDDEN, ACTF_Da,
+   ret_code = bn_artmap_make_layer (1, 1, 1, D1a_X, D1a_Y, const_cast<char*>("d1a"), HIDDEN, ACTF_Da,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create d2a */
-   ret_code = bn_artmap_make_layer (1, 1, 1, D2a_X, D2a_Y, "d2a", HIDDEN, ACTF_Da,
+   ret_code = bn_artmap_make_layer (1, 1, 1, D2a_X, D2a_Y, const_cast<char*>("d2a"), HIDDEN, ACTF_Da,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create d3a */
-   ret_code = bn_artmap_make_layer (1, 1, 1, D3a_X, D3a_Y, "d3a", HIDDEN, ACTF_Da,
+   ret_code = bn_artmap_make_layer (1, 1, 1, D3a_X, D3a_Y, const_cast<char*>("d3a"), HIDDEN, ACTF_Da,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -557,7 +557,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc,     SITE_FUNC_RSTa_SELF);
    strcpy(*(SiteFunc+1), SITE_FUNC_RSTa_SIGNAL);
 
-   ret_code = bn_artmap_make_layer (f2aUnits, f2aRows, F2a_COLS, RSTa_X, RSTa_Y, "rsta",
+   ret_code = bn_artmap_make_layer (f2aUnits, f2aRows, F2a_COLS, RSTa_X, RSTa_Y, const_cast<char*>("rsta"),
                                     HIDDEN, ACTF_RSTa, OUTFUNC, NoOfSites, SiteName,
                                     SiteFunc);
    CHECK_RETURN (ret_code);
@@ -570,7 +570,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_REC_G1a);
    strcpy(*(SiteFunc+1), SITE_FUNC_INP_G1a);
 
-   ret_code = bn_artmap_make_layer (1, 1, 1, G1a_X, G1a_Y, "g1a", HIDDEN, ACTF_G1a,
+   ret_code = bn_artmap_make_layer (1, 1, 1, G1a_X, G1a_Y, const_cast<char*>("g1a"), HIDDEN, ACTF_G1a,
                                     OUTFUNC, NoOfSites, SiteName, SiteFunc);
    CHECK_RETURN (ret_code);
 
@@ -581,38 +581,38 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_INP_RIa);
    strcpy(*(SiteFunc+1), SITE_FUNC_RHO_RIa);
 
-   ret_code = bn_artmap_make_layer (1, 1, 1, RIa_X, RIa_Y, "ria", HIDDEN, ACTF_RIa,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RIa_X, RIa_Y, const_cast<char*>("ria"), HIDDEN, ACTF_RIa,
                                     OUTFUNC, NoOfSites, SiteName, SiteFunc);
    CHECK_RETURN (ret_code);
 
    /* create rca */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RCa_X, RCa_Y, "rca", HIDDEN, ACTF_RCa,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RCa_X, RCa_Y, const_cast<char*>("rca"), HIDDEN, ACTF_RCa,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
 
    /* create rga */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RGa_X, RGa_Y, "rga", HIDDEN, ACTF_RGa,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RGa_X, RGa_Y, const_cast<char*>("rga"), HIDDEN, ACTF_RGa,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create cla */
-   ret_code = bn_artmap_make_layer (1, 1, 1, CLa_X, CLa_Y, "cla", HIDDEN, ACTF_CLa,
+   ret_code = bn_artmap_make_layer (1, 1, 1, CLa_X, CLa_Y, const_cast<char*>("cla"), HIDDEN, ACTF_CLa,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create nca */
-   ret_code = bn_artmap_make_layer (1, 1, 1, NCa_X, NCa_Y, "nca", HIDDEN, ACTF_NCa,
+   ret_code = bn_artmap_make_layer (1, 1, 1, NCa_X, NCa_Y, const_cast<char*>("nca"), HIDDEN, ACTF_NCa,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create rhoa */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RHOa_X, RHOa_Y, "rhoa", HIDDEN, ACTF_RHOa,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RHOa_X, RHOa_Y, const_cast<char*>("rhoa"), HIDDEN, ACTF_RHOa,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create g2a */
-   ret_code = bn_artmap_make_layer (1, 1, 1, G2a_X, G2a_Y, "g2a", HIDDEN, ACTF_G2a,
+   ret_code = bn_artmap_make_layer (1, 1, 1, G2a_X, G2a_Y, const_cast<char*>("g2a"), HIDDEN, ACTF_G2a,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -621,12 +621,12 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    /********* create MAP-Field units ******************/
 
    /* create map layer */
-   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, MAP_X, MAP_Y, "map", HIDDEN,
+   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, MAP_X, MAP_Y, const_cast<char*>("map"), HIDDEN,
                                     ACTF_MAP, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create d1 unit */
-   ret_code = bn_artmap_make_layer (1, 1, 1, D1_X, D1_Y, "d1", HIDDEN, ACTF_D1, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, D1_X, D1_Y, const_cast<char*>("d1"), HIDDEN, ACTF_D1, OUTFUNC,
                                     0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -637,7 +637,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_ARTa_G);
    strcpy(*(SiteFunc+1), SITE_FUNC_ARTb_G);
 
-   ret_code = bn_artmap_make_layer (1, 1, 1, G_X, G_Y, "G", HIDDEN, ACTF_G, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, G_X, G_Y, const_cast<char*>("G"), HIDDEN, ACTF_G, OUTFUNC,
                                     NoOfSites, SiteName, SiteFunc);
    CHECK_RETURN (ret_code);
 
@@ -648,32 +648,32 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_B_RB);
    strcpy(*(SiteFunc+1), SITE_FUNC_RHO_RB);
 
-   ret_code = bn_artmap_make_layer (1, 1, 1, RB_X, RB_Y, "rb", HIDDEN, ACTF_RB, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RB_X, RB_Y, const_cast<char*>("rb"), HIDDEN, ACTF_RB, OUTFUNC,
                                     NoOfSites, SiteName, SiteFunc);
    CHECK_RETURN (ret_code);
 
    /* create rm unit */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RM_X, RM_Y, "rm", HIDDEN, ACTF_RM, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RM_X, RM_Y, const_cast<char*>("rm"), HIDDEN, ACTF_RM, OUTFUNC,
                                     0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create rg unit */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RG_X, RG_Y, "rg", HIDDEN, ACTF_RG, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RG_X, RG_Y, const_cast<char*>("rg"), HIDDEN, ACTF_RG, OUTFUNC,
                                     0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create cl unit */
-   ret_code = bn_artmap_make_layer (1, 1, 1, CL_X, CL_Y, "cl", HIDDEN, ACTF_CL, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, CL_X, CL_Y, const_cast<char*>("cl"), HIDDEN, ACTF_CL, OUTFUNC,
                                     0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create nc unit */
-   ret_code = bn_artmap_make_layer (1, 1, 1, NC_X, NC_Y, "nc", HIDDEN, ACTF_NC, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, NC_X, NC_Y, const_cast<char*>("nc"), HIDDEN, ACTF_NC, OUTFUNC,
                                     0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create rho unit */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RHO_X, RHO_Y, "rho", HIDDEN, ACTF_RHO, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RHO_X, RHO_Y, const_cast<char*>("rho"), HIDDEN, ACTF_RHO, OUTFUNC,
                                     0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -684,12 +684,12 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_INPa_QU);
    strcpy(*(SiteFunc+1), SITE_FUNC_CMPa_QU);
 
-   ret_code = bn_artmap_make_layer (1, 1, 1, QU_X, QU_Y, "qu", HIDDEN, ACTF_QU, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, QU_X, QU_Y, const_cast<char*>("qu"), HIDDEN, ACTF_QU, OUTFUNC,
                                     NoOfSites, SiteName, SiteFunc);
    CHECK_RETURN (ret_code);
 
    /* create drho unit */
-   ret_code = bn_artmap_make_layer (1, 1, 1, DRHO_X, DRHO_Y, "drho", HIDDEN, ACTF_DRHO, OUTFUNC,
+   ret_code = bn_artmap_make_layer (1, 1, 1, DRHO_X, DRHO_Y, const_cast<char*>("drho"), HIDDEN, ACTF_DRHO, OUTFUNC,
                                     0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -699,36 +699,36 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
 
    /* create Input Layer for ARTb */
-   ret_code = bn_artmap_make_layer (f1bUnits, f1bRows, F1b_COLS, INPb_X, INPb_Y, "inpb",
+   ret_code = bn_artmap_make_layer (f1bUnits, f1bRows, F1b_COLS, INPb_X, INPb_Y, const_cast<char*>("inpb"),
                                     INPUT, ACTF_INPb, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Comparison Layer for ARTb */
-   ret_code = bn_artmap_make_layer (f1bUnits, f1bRows, F1b_COLS, CMPb_X, CMPb_Y, "cmpb",
+   ret_code = bn_artmap_make_layer (f1bUnits, f1bRows, F1b_COLS, CMPb_X, CMPb_Y, const_cast<char*>("cmpb"),
                                     HIDDEN, ACTF_CMPb, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Recognition Layer for ARTb */
-   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, RECb_X, RECb_Y, "recb",
+   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, RECb_X, RECb_Y, const_cast<char*>("recb"),
                                     SPECIAL, ACTF_RECb, OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Delay Layer for ARTa */
-   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, DELb_X, DELb_Y, "delb",
+   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, DELb_X, DELb_Y, const_cast<char*>("delb"),
                                     HIDDEN, ACTF_DELb, OUTFUNC, 0, NULL, NULL);
 
    /* create d1b */
-   ret_code = bn_artmap_make_layer (1, 1, 1, D1b_X, D1b_Y, "d1b", HIDDEN, ACTF_Db,
+   ret_code = bn_artmap_make_layer (1, 1, 1, D1b_X, D1b_Y, const_cast<char*>("d1b"), HIDDEN, ACTF_Db,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create d2b */
-   ret_code = bn_artmap_make_layer (1, 1, 1, D2b_X, D2b_Y, "d2b", HIDDEN, ACTF_Db,
+   ret_code = bn_artmap_make_layer (1, 1, 1, D2b_X, D2b_Y, const_cast<char*>("d2b"), HIDDEN, ACTF_Db,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create d3b */
-   ret_code = bn_artmap_make_layer (1, 1, 1, D3b_X, D3b_Y, "d3b", HIDDEN, ACTF_Db,
+   ret_code = bn_artmap_make_layer (1, 1, 1, D3b_X, D3b_Y, const_cast<char*>("d3b"), HIDDEN, ACTF_Db,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -739,7 +739,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_RSTb_SELF);
    strcpy(*(SiteFunc+1), SITE_FUNC_RSTb_SIGNAL);
 
-   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, RSTb_X, RSTb_Y, "rstb",
+   ret_code = bn_artmap_make_layer (f2bUnits, f2bRows, F2b_COLS, RSTb_X, RSTb_Y, const_cast<char*>("rstb"),
                                     HIDDEN, ACTF_RSTb, OUTFUNC, NoOfSites, SiteName,
                                     SiteFunc);
    CHECK_RETURN (ret_code);
@@ -752,7 +752,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_REC_G1b);
    strcpy(*(SiteFunc+1), SITE_FUNC_INP_G1b);
 
-   ret_code = bn_artmap_make_layer (1, 1, 1, G1b_X, G1b_Y, "g1b", HIDDEN, ACTF_G1b,
+   ret_code = bn_artmap_make_layer (1, 1, 1, G1b_X, G1b_Y, const_cast<char*>("g1b"), HIDDEN, ACTF_G1b,
                                     OUTFUNC, NoOfSites, SiteName, SiteFunc);
    CHECK_RETURN (ret_code);
 
@@ -763,38 +763,38 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    strcpy(*SiteFunc    , SITE_FUNC_INP_RIb);
    strcpy(*(SiteFunc+1), SITE_FUNC_RHO_RIb);
 
-   ret_code = bn_artmap_make_layer (1, 1, 1, RIb_X, RIb_Y, "rib", HIDDEN, ACTF_RIb,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RIb_X, RIb_Y, const_cast<char*>("rib"), HIDDEN, ACTF_RIb,
                                     OUTFUNC, NoOfSites, SiteName, SiteFunc);
    CHECK_RETURN (ret_code);
 
    /* create rcb */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RCb_X, RCb_Y, "rcb", HIDDEN, ACTF_RCb,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RCb_X, RCb_Y, const_cast<char*>("rcb"), HIDDEN, ACTF_RCb,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
 
    /* create rgb */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RGb_X, RGb_Y, "rgb", HIDDEN, ACTF_RGb,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RGb_X, RGb_Y, const_cast<char*>("rgb"), HIDDEN, ACTF_RGb,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create clb */
-   ret_code = bn_artmap_make_layer (1, 1, 1, CLb_X, CLb_Y, "clb", HIDDEN, ACTF_CLb,
+   ret_code = bn_artmap_make_layer (1, 1, 1, CLb_X, CLb_Y, const_cast<char*>("clb"), HIDDEN, ACTF_CLb,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create ncb */
-   ret_code = bn_artmap_make_layer (1, 1, 1, NCb_X, NCb_Y, "ncb", HIDDEN, ACTF_NCb,
+   ret_code = bn_artmap_make_layer (1, 1, 1, NCb_X, NCb_Y, const_cast<char*>("ncb"), HIDDEN, ACTF_NCb,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create rhob */
-   ret_code = bn_artmap_make_layer (1, 1, 1, RHOb_X, RHOb_Y, "rhob", HIDDEN, ACTF_RHOb,
+   ret_code = bn_artmap_make_layer (1, 1, 1, RHOb_X, RHOb_Y, const_cast<char*>("rhob"), HIDDEN, ACTF_RHOb,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create g2b */
-   ret_code = bn_artmap_make_layer (1, 1, 1, G2b_X, G2b_Y, "g2b", HIDDEN, ACTF_G2b,
+   ret_code = bn_artmap_make_layer (1, 1, 1, G2b_X, G2b_Y, const_cast<char*>("g2b"), HIDDEN, ACTF_G2b,
                                     OUTFUNC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 

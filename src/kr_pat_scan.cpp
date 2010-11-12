@@ -653,9 +653,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "kr_pat_scan.l"
+//#line 1 "kr_pat_scan.l"
 #define INITIAL 0
-#line 2 "kr_pat_scan.l"
+//#line 2 "kr_pat_scan.l"
 /*****************************************************************************
   FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/kernel/sources/kr_pat_scan.c,v $
   SHORTNAME      : pattern scanner
@@ -690,7 +690,7 @@ char *yytext;
 #include "kr_pat_scan.ph"
 */
 
-#line 653 "lex.yy.c"
+//#line 653 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -847,10 +847,10 @@ int SnnsCLib::yylex YY_PROTO(( void ))
 	register int yy_act;
 
         unsigned int xx_res_not_used;
-#line 56 "kr_pat_scan.l"
+//#line 56 "kr_pat_scan.l"
 
 
-#line 807 "lex.yy.c"
+//#line 807 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -934,39 +934,39 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
-#line 59 "kr_pat_scan.l"
+//#line 59 "kr_pat_scan.l"
 case 2:
 YY_RULE_SETUP
-#line 59 "kr_pat_scan.l"
+//#line 59 "kr_pat_scan.l"
 ;
 	YY_BREAK
 case 3:
-#line 62 "kr_pat_scan.l"
+//#line 62 "kr_pat_scan.l"
 case 4:
-#line 63 "kr_pat_scan.l"
+//#line 63 "kr_pat_scan.l"
 case 5:
 YY_RULE_SETUP
-#line 63 "kr_pat_scan.l"
+//#line 63 "kr_pat_scan.l"
 lineno++;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 65 "kr_pat_scan.l"
+//#line 65 "kr_pat_scan.l"
 return(0); /* end of text */
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 67 "kr_pat_scan.l"
+//#line 67 "kr_pat_scan.l"
 return(L_BRACKET);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 69 "kr_pat_scan.l"
+//#line 69 "kr_pat_scan.l"
 return(R_BRACKET);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 71 "kr_pat_scan.l"
+//#line 71 "kr_pat_scan.l"
 {
 					s_dotpos = strchr((char *) yytext, '.');
 					*s_dotpos = '\0';
@@ -978,14 +978,14 @@ YY_RULE_SETUP
 				        }
 	YY_BREAK
 case 10:
-#line 82 "kr_pat_scan.l"
+//#line 82 "kr_pat_scan.l"
 case 11:
-#line 83 "kr_pat_scan.l"
+//#line 83 "kr_pat_scan.l"
 case 12:
-#line 84 "kr_pat_scan.l"
+//#line 84 "kr_pat_scan.l"
 case 13:
 YY_RULE_SETUP
-#line 84 "kr_pat_scan.l"
+//#line 84 "kr_pat_scan.l"
 {
                                                     if (numbers_as_names)
 						    {
@@ -1001,72 +1001,72 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 97 "kr_pat_scan.l"
+//#line 97 "kr_pat_scan.l"
 return(VERSION_HEADER);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 99 "kr_pat_scan.l"
+//#line 99 "kr_pat_scan.l"
 return(GENERATED_AT);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 101 "kr_pat_scan.l"
+//#line 101 "kr_pat_scan.l"
 return(NO_OF_PATTERN);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 103 "kr_pat_scan.l"
+//#line 103 "kr_pat_scan.l"
 return(NO_OF_INPUT);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 105 "kr_pat_scan.l"
+//#line 105 "kr_pat_scan.l"
 return(NO_OF_OUTPUT);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 107 "kr_pat_scan.l"
+//#line 107 "kr_pat_scan.l"
 return(NO_OF_VAR_IDIM);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 109 "kr_pat_scan.l"
+//#line 109 "kr_pat_scan.l"
 return(NO_OF_VAR_ODIM);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 111 "kr_pat_scan.l"
+//#line 111 "kr_pat_scan.l"
 return(MAXIMUM_IDIM);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 113 "kr_pat_scan.l"
+//#line 113 "kr_pat_scan.l"
 return(MAXIMUM_ODIM);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 115 "kr_pat_scan.l"
+//#line 115 "kr_pat_scan.l"
 return(NO_OF_CLASSES);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 117 "kr_pat_scan.l"
+//#line 117 "kr_pat_scan.l"
 return(CLASS_REDISTRIB);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 119 "kr_pat_scan.l"
+//#line 119 "kr_pat_scan.l"
 return(REMAPFUNCTION);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 121 "kr_pat_scan.l"
+//#line 121 "kr_pat_scan.l"
 return(REMAP_PARAM);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 123 "kr_pat_scan.l"
+//#line 123 "kr_pat_scan.l"
 {
                                                     yylval.name = strdup(yytext);
                                                     return(NAME);
@@ -1074,16 +1074,16 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 128 "kr_pat_scan.l"
+//#line 128 "kr_pat_scan.l"
 return(ERROR);
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 130 "kr_pat_scan.l"
+//#line 130 "kr_pat_scan.l"
 //ECHO;
 xx_res_not_used = fwrite( yytext, yyleng, 1, yyout );
 	YY_BREAK
-#line 1039 "lex.yy.c"
+//#line 1039 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1970,7 +1970,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 130 "kr_pat_scan.l"
+//#line 130 "kr_pat_scan.l"
 
 
 int SnnsCLib::pplex(void)

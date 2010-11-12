@@ -903,7 +903,7 @@ krui_err SnnsCLib::insertFirstUnit(struct Unit **hiddenUnitPtr)
     KernelErrorCode = krui_setUnitTType(hiddenUnit,HIDDEN);  
     ERROR_CHECK;
 
-    KernelErrorCode = krui_setUnitActFunc(hiddenUnit,"Act_Identity");
+    KernelErrorCode = krui_setUnitActFunc(hiddenUnit,const_cast<char*>("Act_Identity"));
     ERROR_CHECK;
 
     *hiddenUnitPtr = kr_getUnitPtr(hiddenUnit);

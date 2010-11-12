@@ -76,58 +76,58 @@
 /* Possible choices are:   "Out_ART2_Noise_PLin"
                            "Out_ART2_Noise_ContDiff"
 */
-#define ART2_NOISE_FUNCTION  "Out_ART2_Noise_ContDiff"
+#define ART2_NOISE_FUNCTION  const_cast<char*>("Out_ART2_Noise_ContDiff")
 
 /* Definition of the Activationfunctions */
 
 /* F0-Layer */
-#define ACTF_INP "Act_Identity"
+#define ACTF_INP const_cast<char*>("Act_Identity")
 
 /* F1-Layer */
-#define ACTF_P   "Act_ART2_Identity"
-#define ACTF_Q   "Act_ART2_NormP"
-#define ACTF_U   "Act_ART2_NormV"
-#define ACTF_V   "Act_ART2_Identity"
-#define ACTF_W   "Act_ART2_Identity"
-#define ACTF_X   "Act_ART2_NormW"
-#define ACTF_R   "Act_ART2_NormIP"
+#define ACTF_P   const_cast<char*>("Act_ART2_Identity")
+#define ACTF_Q   const_cast<char*>("Act_ART2_NormP")
+#define ACTF_U   const_cast<char*>("Act_ART2_NormV")
+#define ACTF_V   const_cast<char*>("Act_ART2_Identity")
+#define ACTF_W   const_cast<char*>("Act_ART2_Identity")
+#define ACTF_X   const_cast<char*>("Act_ART2_NormW")
+#define ACTF_R   const_cast<char*>("Act_ART2_NormIP")
 
 /* F2-Layer */
-#define ACTF_REC "Act_ART2_Rec"
-#define ACTF_RST "Act_ART2_Rst"
+#define ACTF_REC const_cast<char*>("Act_ART2_Rec")
+#define ACTF_RST const_cast<char*>("Act_ART2_Rst")
 
 
 
 /* Definition of the Output Function */
 
 /* F0-Layer */
-#define OUTF_INP "Out_Identity"
+#define OUTF_INP const_cast<char*>("Out_Identity")
 
 /* F1-Layer */
-#define OUTF_P   "Out_Identity"
+#define OUTF_P   const_cast<char*>("Out_Identity")
 #define OUTF_Q   ART2_NOISE_FUNCTION   /* This output function has to be
                                           the same as for Units X
                                           (Noise Reduction/Contrast enhancem.)
                                        */
-#define OUTF_U   "Out_Identity"
-#define OUTF_V   "Out_Identity"
-#define OUTF_W   "Out_Identity"
+#define OUTF_U   const_cast<char*>("Out_Identity")
+#define OUTF_V   const_cast<char*>("Out_Identity")
+#define OUTF_W   const_cast<char*>("Out_Identity")
 #define OUTF_X   ART2_NOISE_FUNCTION   /* This output function has to be
                                           the same as for Units Q
                                           (Noise Reduction/Contrast enhancem.)
                                        */
-#define OUTF_R   "Out_Identity"
+#define OUTF_R   const_cast<char*>("Out_Identity")
 
 /* F2-Layer */
-#define OUTF_REC "Out_Identity"
-#define OUTF_RST "Out_Identity"
+#define OUTF_REC const_cast<char*>("Out_Identity")
+#define OUTF_RST const_cast<char*>("Out_Identity")
 
 
 /* Learning function name */
-#define LEARN_FUNC_NAME        "ART2"
+#define LEARN_FUNC_NAME        const_cast<char*>("ART2")
 
 /* Update function name */
-#define UPDATE_FUNC_NAME       "ART2_Stable"
+#define UPDATE_FUNC_NAME       const_cast<char*>("ART2_Stable")
 
 
 
@@ -334,13 +334,13 @@ krui_err SnnsCLib::bn_art2_createNet (int f1Units, int f1Rows, int f2Units, int 
 
    /* create Input Layer  */
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, INP_X, INP_Y,
-                          1, 1, "inp", INPUT, ACTF_INP, OUTF_INP, 0,
+                          1, 1, const_cast<char*>("inp"), INPUT, ACTF_INP, OUTF_INP, 0,
                           NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create W-Units */
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, W_X, W_Y,
-                          F1_SEP_X, F1_SEP_Y, "w",
+                          F1_SEP_X, F1_SEP_Y, const_cast<char*>("w"),
                           HIDDEN, ACTF_W, OUTF_W, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -349,7 +349,7 @@ krui_err SnnsCLib::bn_art2_createNet (int f1Units, int f1Rows, int f2Units, int 
    /* create X-Units */
 
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, X_X, X_Y,
-                          F1_SEP_X, F1_SEP_Y, "x", HIDDEN, ACTF_X,
+                          F1_SEP_X, F1_SEP_Y, const_cast<char*>("x"), HIDDEN, ACTF_X,
                           OUTF_X, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
@@ -357,43 +357,43 @@ krui_err SnnsCLib::bn_art2_createNet (int f1Units, int f1Rows, int f2Units, int 
    /* create U-Units */
 
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, U_X, U_Y,
-                          F1_SEP_X, F1_SEP_Y, "u", HIDDEN, ACTF_U,
+                          F1_SEP_X, F1_SEP_Y, const_cast<char*>("u"), HIDDEN, ACTF_U,
                           OUTF_U, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create V-Units */
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, V_X, V_Y,
-                          F1_SEP_X, F1_SEP_Y, "v",
+                          F1_SEP_X, F1_SEP_Y, const_cast<char*>("v"),
                           HIDDEN, ACTF_V, OUTF_V, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create P-Units */
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, P_X, P_Y,
-                          F1_SEP_X, F1_SEP_Y, "p",
+                          F1_SEP_X, F1_SEP_Y, const_cast<char*>("p"),
                           HIDDEN, ACTF_P, OUTF_P, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Q-Units */
 
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, Q_X, Q_Y,
-                          F1_SEP_X, F1_SEP_Y, "q", HIDDEN, ACTF_Q,
+                          F1_SEP_X, F1_SEP_Y, const_cast<char*>("q"), HIDDEN, ACTF_Q,
                           OUTF_Q, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create R-Units */
 
    ret_code = bn_art2_make_layer (f1Units, f1Rows, F1_COLS, R_X, R_Y,
-                          F1_SEP_X, F1_SEP_Y, "r", HIDDEN, ACTF_R,
+                          F1_SEP_X, F1_SEP_Y, const_cast<char*>("r"), HIDDEN, ACTF_R,
                           OUTF_R, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    /* create Recognition Layer */
    ret_code = bn_art2_make_layer (f2Units, f2Rows, F2_COLS, REC_X, REC_Y, 1, 1,
-                          "rec", SPECIAL, ACTF_REC, OUTF_REC, 0, NULL, NULL);
+                          const_cast<char*>("rec"), SPECIAL, ACTF_REC, OUTF_REC, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
    ret_code = bn_art2_make_layer (f2Units, f2Rows, F2_COLS, RST_X, RST_Y, 1, 1,
-                          "rst", HIDDEN, ACTF_RST, OUTF_RST, 0, NULL, NULL);
+                          const_cast<char*>("rst"), HIDDEN, ACTF_RST, OUTF_RST, 0, NULL, NULL);
    CHECK_RETURN (ret_code);
 
 

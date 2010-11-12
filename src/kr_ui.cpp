@@ -374,7 +374,7 @@ char  *SnnsCLib::krui_getUnitActFuncName(int UnitNo)
              error code otherwise.
   UPDATE   :
 ******************************************************************************/
-krui_err  SnnsCLib::krui_setUnitActFunc(int unit_no, const char *unitActFuncName)
+krui_err  SnnsCLib::krui_setUnitActFunc(int unit_no, char *unitActFuncName)
 {
     struct Unit   *unit_ptr;
     FunctionPtr   act_func_ptr, act_deriv_func_ptr, act_2_deriv_func_ptr;

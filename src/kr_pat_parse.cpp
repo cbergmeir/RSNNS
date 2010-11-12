@@ -177,7 +177,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 20 "kr_pat_parse_bison.y"
+//#line 20 "kr_pat_parse_bison.y"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -205,7 +205,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 36 "kr_pat_parse_bison.y"
+//#line 36 "kr_pat_parse_bison.y"
 {
 	float	value;		/* allgemeine Zahl */	
         char    *name;          /* allgemeiner String */
@@ -216,7 +216,7 @@ typedef union YYSTYPE
 	}	version;	/* Versionsnummer #.# */
 }
 /* Line 187 of yacc.c.  */
-#line 175 "y.tab.c"
+//#line 175 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -229,7 +229,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 188 "y.tab.c"
+//#line 188 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -1485,7 +1485,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 63 "kr_pat_parse_bison.y"
+//#line 63 "kr_pat_parse_bison.y"
     {	
 		    current_pattern = 0;
 		    next_pattern_is_input = 1;
@@ -1493,55 +1493,55 @@ yyreduce:
 		    if (kr_np_AllocatePatternSet(&pattern_set, no_of_pattern)
 			!= KRERR_NO_ERROR)
 		    { 
-			yyerror("can't allocate memory"); 
+			yyerror(const_cast<char*>("can't allocate memory")); 
 			YYABORT; 
 		    }
 		}
     break;
 
   case 3:
-#line 75 "kr_pat_parse_bison.y"
+//#line 75 "kr_pat_parse_bison.y"
     {
 		    if (current_pattern < no_of_pattern ||
 			!next_pattern_is_input)
 		    { 
-			yyerror("unexpected end of file"); 
+			yyerror(const_cast<char*>("unexpected end of file")); 
 			YYABORT; 
 		    }
 		    if (with_classes != this_set->pub.classes)
 		    {
-			yyerror("real number of classes does not match pattern file header");
+			yyerror(const_cast<char*>("real number of classes does not match pattern file header"));
 			YYABORT;
 		    }
 		}
     break;
 
   case 4:
-#line 91 "kr_pat_parse_bison.y"
+//#line 91 "kr_pat_parse_bison.y"
     {
 		if (((yyvsp[(2) - (2)].version).v == CURRENT_VERSION_V && (yyvsp[(2) - (2)].version).r > CURRENT_VERSION_R) ||
 		    (yyvsp[(2) - (2)].version).v > CURRENT_VERSION_V)
 		{ 
-		    yyerror("version of pattern file not supported"); 
+		    yyerror(const_cast<char*>("version of pattern file not supported")); 
 		    YYABORT; 
 		}
 	}
     break;
 
   case 5:
-#line 100 "kr_pat_parse_bison.y"
+//#line 100 "kr_pat_parse_bison.y"
     {
 		no_of_pattern = (int) (yyvsp[(6) - (6)].value);
 		if (no_of_pattern <= 0)
 		{ 
-		    yyerror("illegal number of pattern"); 
+		    yyerror(const_cast<char*>("illegal number of pattern")); 
 		    YYABORT; 
 		}
 	}
     break;
 
   case 6:
-#line 109 "kr_pat_parse_bison.y"
+//#line 109 "kr_pat_parse_bison.y"
     {
 	    this_set->pub.classes = 0;
 	    this_set->pub.class_names = NULL;
@@ -1551,7 +1551,7 @@ yyreduce:
     break;
 
   case 7:
-#line 116 "kr_pat_parse_bison.y"
+//#line 116 "kr_pat_parse_bison.y"
     {
 	    this_set->pub.remap_function = NULL;
 	    this_set->pub.no_of_remap_params = 0;
@@ -1559,47 +1559,47 @@ yyreduce:
     break;
 
   case 9:
-#line 124 "kr_pat_parse_bison.y"
+//#line 124 "kr_pat_parse_bison.y"
     { 
 		no_of_input = (int) (yyvsp[(2) - (2)].value);
 		if (no_of_input < 0)
 		{ 
-		    yyerror("illegal number of input units"); 
+		    yyerror(const_cast<char*>("illegal number of input units")); 
 		    YYABORT; 
 		} 
 	}
     break;
 
   case 10:
-#line 135 "kr_pat_parse_bison.y"
+//#line 135 "kr_pat_parse_bison.y"
     { 
 		no_of_output = (int) (yyvsp[(2) - (2)].value);
 		if (no_of_output < 0)
 		{ 
-		    yyerror("illegal number of output units"); 
+		    yyerror(const_cast<char*>("illegal number of output units")); 
 		    YYABORT; 
 		} 
 	}
     break;
 
   case 11:
-#line 144 "kr_pat_parse_bison.y"
+//#line 144 "kr_pat_parse_bison.y"
     { no_of_output = 0; }
     break;
 
   case 12:
-#line 148 "kr_pat_parse_bison.y"
+//#line 148 "kr_pat_parse_bison.y"
     {
 		variable_input_dim = (yyvsp[(2) - (4)].value); 
 		if (variable_input_dim < 0 || 
 		    variable_input_dim > MAX_NO_OF_VAR_I_DIM)
 		{ 
-		    yyerror("illegal variable input dimensions"); 
+		    yyerror(const_cast<char*>("illegal variable input dimensions")); 
 		    YYABORT; 
 		}
 		if (actual_dim_count != variable_input_dim)
 		{ 
-		    yyerror("illegal number of entries in dimension list"); 
+		    yyerror(const_cast<char*>("illegal number of entries in dimension list")); 
 		    YYABORT; 
 		}
 		for (i=0; i<variable_input_dim; i++)
@@ -1608,24 +1608,24 @@ yyreduce:
     break;
 
   case 13:
-#line 165 "kr_pat_parse_bison.y"
+//#line 165 "kr_pat_parse_bison.y"
     { variable_input_dim = 0; }
     break;
 
   case 14:
-#line 169 "kr_pat_parse_bison.y"
+//#line 169 "kr_pat_parse_bison.y"
     {
 		variable_output_dim = (yyvsp[(2) - (4)].value); 
 		if (variable_output_dim < 0 || 
 		    variable_output_dim > MAX_NO_OF_VAR_O_DIM ||
 		    no_of_output == 0)
 		{ 
-		    yyerror("illegal variable output dimensions"); 
+		    yyerror(const_cast<char*>("illegal variable output dimensions")); 
 		    YYABORT; 
 		}
 		if (actual_dim_count != variable_output_dim)
 		{ 
-		    yyerror("illegal number of entries in dimension list"); 
+		    yyerror(const_cast<char*>("illegal number of entries in dimension list")); 
 		    YYABORT; 
 		}
 		for (i=0; i<variable_output_dim; i++)
@@ -1634,19 +1634,19 @@ yyreduce:
     break;
 
   case 15:
-#line 187 "kr_pat_parse_bison.y"
+//#line 187 "kr_pat_parse_bison.y"
     { variable_output_dim = 0; }
     break;
 
   case 16:
-#line 191 "kr_pat_parse_bison.y"
+//#line 191 "kr_pat_parse_bison.y"
     {
     with_classes = (int) (yyvsp[(2) - (2)].value);
 }
     break;
 
   case 17:
-#line 195 "kr_pat_parse_bison.y"
+//#line 195 "kr_pat_parse_bison.y"
     {
     with_classes = (int) (yyvsp[(2) - (4)].value);
     num_param = 0;
@@ -1654,7 +1654,7 @@ yyreduce:
     break;
 
   case 18:
-#line 200 "kr_pat_parse_bison.y"
+//#line 200 "kr_pat_parse_bison.y"
     {
     int i;
 
@@ -1662,7 +1662,7 @@ yyreduce:
 	(int *) malloc(num_param * sizeof(int));
     if (!this_set->pub.class_redistribution)
     {
-	yyerror("can't allocate memory"); 
+	yyerror(const_cast<char*>("can't allocate memory")); 
 	YYABORT; 
     }
     for (i=0; i<num_param; i++)
@@ -1670,53 +1670,53 @@ yyreduce:
     this_set->pub.class_distrib_active = TRUE;
     if (num_param != with_classes)
     {
-	yyerror("contradictory definition of class redistribution and number of classes in pattern file header");
+	yyerror(const_cast<char*>("contradictory definition of class redistribution and number of classes in pattern file header"));
 	YYABORT;
     }
 }
     break;
 
   case 19:
-#line 220 "kr_pat_parse_bison.y"
+//#line 220 "kr_pat_parse_bison.y"
     {
     with_classes = 0;
 }
     break;
 
   case 20:
-#line 226 "kr_pat_parse_bison.y"
+//#line 226 "kr_pat_parse_bison.y"
     {
     this_set->pub.remap_function = strdup((yyvsp[(2) - (2)].name));
     if (!this_set->pub.remap_function)
     {
-	yyerror("can't allocate memory"); 
+	yyerror(const_cast<char*>("can't allocate memory")); 
 	YYABORT; 
     }
 }
     break;
 
   case 21:
-#line 235 "kr_pat_parse_bison.y"
+//#line 235 "kr_pat_parse_bison.y"
     {
     num_param = 0;
 }
     break;
 
   case 22:
-#line 239 "kr_pat_parse_bison.y"
+//#line 239 "kr_pat_parse_bison.y"
     {
     int i;
 
     this_set->pub.remap_function = strdup((yyvsp[(2) - (7)].name));
     if (!this_set->pub.remap_function)
     {
-	yyerror("can't allocate memory"); 
+	yyerror(const_cast<char*>("can't allocate memory")); 
 	YYABORT; 
     }
 
     if (num_param > NO_OF_REMAP_PARAMS)
     {
-	yyerror("to many parameters for remap function");
+	yyerror(const_cast<char*>("to many parameters for remap function"));
 	YYABORT;
     }
 
@@ -1727,7 +1727,7 @@ yyreduce:
     break;
 
   case 26:
-#line 267 "kr_pat_parse_bison.y"
+//#line 267 "kr_pat_parse_bison.y"
     {
     num_param++;
     if (num_param > 1)
@@ -1740,31 +1740,31 @@ yyreduce:
     break;
 
   case 27:
-#line 279 "kr_pat_parse_bison.y"
+//#line 279 "kr_pat_parse_bison.y"
     {
 			actual_dim_count = 0;
 		}
     break;
 
   case 29:
-#line 284 "kr_pat_parse_bison.y"
+//#line 284 "kr_pat_parse_bison.y"
     {
 		        actual_dim_count = 0;
 		}
     break;
 
   case 32:
-#line 294 "kr_pat_parse_bison.y"
+//#line 294 "kr_pat_parse_bison.y"
     {
 		if (actual_dim_count >= MAX_NO_OF_VAR_DIM)
 		{ 
-		    yyerror("to many entries in dimension list"); 
+		    yyerror(const_cast<char*>("to many entries in dimension list")); 
 		    YYABORT; 
 		}
 		dims[actual_dim_count] = (int) (yyvsp[(1) - (1)].value);
 		if (dims[actual_dim_count] <= 0)
 		{ 
-		    yyerror("illegal size of dimension"); 
+		    yyerror(const_cast<char*>("illegal size of dimension")); 
 		    YYABORT; 
 		}
 		actual_dim_count++;
@@ -1772,23 +1772,23 @@ yyreduce:
     break;
 
   case 35:
-#line 315 "kr_pat_parse_bison.y"
+//#line 315 "kr_pat_parse_bison.y"
     {
     if (current_pattern >= no_of_pattern)
     { 
-	yyerror("to many patterns"); 
+	yyerror(const_cast<char*>("to many patterns")); 
 	YYABORT; 
     }
 }
     break;
 
   case 36:
-#line 323 "kr_pat_parse_bison.y"
+//#line 323 "kr_pat_parse_bison.y"
     {
     if (kr_np_GetDescriptor(pattern_set, current_pattern, &pattern)
 	!= KRERR_NO_ERROR)
     {
-	yyerror("pattern parser internal error");
+	yyerror(const_cast<char*>("pattern parser internal error"));
 	YYABORT;
     }
     if (next_pattern_is_input)
@@ -1799,7 +1799,7 @@ yyreduce:
 	pattern -> pub.output_dim = variable_output_dim;
 	if (actual_dim_count != variable_input_dim)
 	{ 
-	    yyerror("illegal number of entries in dimension list"); 
+	    yyerror(const_cast<char*>("illegal number of entries in dimension list")); 
 	    YYABORT; 
 	}
 	act_size = no_of_input;
@@ -1807,7 +1807,7 @@ yyreduce:
 	{
 	    if (dims[i] > max_i_dims[i])
 	    { 
-		yyerror("variable dimension overflow"); 
+		yyerror(const_cast<char*>("variable dimension overflow")); 
 		YYABORT; 
 	    }
 	    act_size *= dims[i];
@@ -1816,7 +1816,7 @@ yyreduce:
 	if (kr_np_AllocatePattern(pattern, next_pattern_is_input)
 	    != KRERR_NO_ERROR)
 	{ 
-	    yyerror("can't allocate memory"); 
+	    yyerror(const_cast<char*>("can't allocate memory")); 
 	    YYABORT; 
 	}
 	pat_mem = pattern -> input_pattern;
@@ -1825,7 +1825,7 @@ yyreduce:
     {
 	if (actual_dim_count != variable_output_dim)
 	{ 
-	    yyerror("illegal number of entries in dimension list"); 
+	    yyerror(const_cast<char*>("illegal number of entries in dimension list")); 
 	    YYABORT; 
 	}
 	act_size = no_of_output;
@@ -1833,7 +1833,7 @@ yyreduce:
 	{
 	    if (dims[i] > max_o_dims[i])
 	    { 
-		yyerror("variable dimension overflow"); 
+		yyerror(const_cast<char*>("variable dimension overflow")); 
 		YYABORT; 
 	    }
 	    act_size *= dims[i];
@@ -1842,7 +1842,7 @@ yyreduce:
 	if (kr_np_AllocatePattern(pattern, next_pattern_is_input)
 	    != KRERR_NO_ERROR)
 	{ 
-	    yyerror("can't allocate memory"); 
+	    yyerror(const_cast<char*>("can't allocate memory")); 
 	    YYABORT; 
 	}
 	pat_mem = pattern -> output_pattern;
@@ -1851,18 +1851,18 @@ yyreduce:
     break;
 
   case 37:
-#line 388 "kr_pat_parse_bison.y"
+//#line 388 "kr_pat_parse_bison.y"
     {
     if (act_size > 0)
     { 
-	yyerror("to little values in pattern"); 
+	yyerror(const_cast<char*>("to little values in pattern")); 
 	YYABORT; 
     }
 }
     break;
 
   case 38:
-#line 396 "kr_pat_parse_bison.y"
+//#line 396 "kr_pat_parse_bison.y"
     {
     if (with_classes == 0 || (next_pattern_is_input && no_of_output > 0))
 	scanner_await_no_class();
@@ -1872,7 +1872,7 @@ yyreduce:
     break;
 
   case 39:
-#line 403 "kr_pat_parse_bison.y"
+//#line 403 "kr_pat_parse_bison.y"
     {
     if (no_of_output > 0)
 	next_pattern_is_input = !next_pattern_is_input;
@@ -1883,18 +1883,18 @@ yyreduce:
     break;
 
   case 41:
-#line 414 "kr_pat_parse_bison.y"
+//#line 414 "kr_pat_parse_bison.y"
     {
     actual_dim_count = 0;
 }
     break;
 
   case 44:
-#line 425 "kr_pat_parse_bison.y"
+//#line 425 "kr_pat_parse_bison.y"
     {
 		if (act_size == 0)
 		{ 
-		    yyerror("to many values in pattern"); 
+		    yyerror(const_cast<char*>("to many values in pattern")); 
 		    YYABORT; 
 		}
 		*pat_mem++ = (yyvsp[(1) - (1)].value);
@@ -1904,18 +1904,18 @@ yyreduce:
     break;
 
   case 45:
-#line 439 "kr_pat_parse_bison.y"
+//#line 439 "kr_pat_parse_bison.y"
     {
     pattern->mysym = NULL;
 }
     break;
 
   case 46:
-#line 443 "kr_pat_parse_bison.y"
+//#line 443 "kr_pat_parse_bison.y"
     {
     if (kr_np_lookupSym(pattern_set, (yyvsp[(1) - (1)].name), &this_class) != KRERR_NO_ERROR)
     { 
-	yyerror("can't allocate memory"); 
+	yyerror(const_cast<char*>("can't allocate memory")); 
 	YYABORT; 
     }
     if (this_class->set_amount == 0)
@@ -1927,7 +1927,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1886 "y.tab.c"
+//#line 1886 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1963,7 +1963,7 @@ yyerrlab:
     {
       ++yynerrs;
 #if ! YYERROR_VERBOSE
-      yyerror (YY_("syntax error"));
+      yyerror (YY_(const_cast<char*>("syntax error")));
 #else
       {
 	YYSIZE_T yysize = yysyntax_error (0, yystate, yychar);
@@ -1991,7 +1991,7 @@ yyerrlab:
 	  }
 	else
 	  {
-	    yyerror (YY_("syntax error"));
+	    yyerror (YY_(const_cast<char*>("syntax error")));
 	    if (yysize != 0)
 	      goto yyexhaustedlab;
 	  }
@@ -2014,7 +2014,7 @@ yyerrlab:
 	}
       else
 	{
-	  yydestruct ("Error: discarding",
+	  yydestruct (const_cast<char*>("Error: discarding"),
 		      yytoken, &yylval);
 	  yychar = YYEMPTY;
 	}
@@ -2070,7 +2070,7 @@ yyerrlab1:
 	YYABORT;
 
 
-      yydestruct ("Error: popping",
+      yydestruct (const_cast<char*>("Error: popping"),
 		  yystos[yystate], yyvsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
@@ -2084,7 +2084,7 @@ yyerrlab1:
 
 
   /* Shift the error token.  */
-  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
+  YY_SYMBOL_PRINT (const_cast<char*>("Shifting"), yystos[yyn], yyvsp, yylsp);
 
   yystate = yyn;
   goto yynewstate;
@@ -2109,14 +2109,14 @@ yyabortlab:
 | yyexhaustedlab -- memory exhaustion comes here.  |
 `-------------------------------------------------*/
 yyexhaustedlab:
-  yyerror (YY_("memory exhausted"));
+  yyerror (YY_(const_cast<char*>("memory exhausted")));
   yyresult = 2;
   /* Fall through.  */
 #endif
 
 yyreturn:
   if (yychar != YYEOF && yychar != YYEMPTY)
-     yydestruct ("Cleanup: discarding lookahead",
+     yydestruct (const_cast<char*>("Cleanup: discarding lookahead"),
 		 yytoken, &yylval);
   /* Do not reclaim the symbols of the rule which action triggered
      this YYABORT or YYACCEPT.  */
@@ -2124,7 +2124,7 @@ yyreturn:
   YY_STACK_PRINT (yyss, yyssp);
   while (yyssp != yyss)
     {
-      yydestruct ("Cleanup: popping",
+      yydestruct (const_cast<char*>("Cleanup: popping"),
 		  yystos[*yyssp], yyvsp);
       YYPOPSTACK (1);
     }
@@ -2141,7 +2141,7 @@ yyreturn:
 }
 
 
-#line 456 "kr_pat_parse_bison.y"
+//#line 456 "kr_pat_parse_bison.y"
 
 
 /*****************************************************************************

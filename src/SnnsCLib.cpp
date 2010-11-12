@@ -455,37 +455,37 @@ kr_ui_randomSeedVal=0;
 
 PRUNE_Skeletonization_first = TRUE;
 
-krio_fmtShapeing_formats[0] = "site name";
-krio_fmtShapeing_formats[1] = "sites";
-krio_fmtShapeing_formats[2] = "unitName";
-krio_fmtShapeing_formats[3] = "typeName";
-krio_fmtShapeing_formats[4] = "name";
-krio_fmtShapeing_formats[5] = "site function";
-krio_fmtShapeing_formats[6] = "act func";
-krio_fmtShapeing_formats[7] = "out func";
-krio_fmtShapeing_formats[8] = "no.";
-krio_fmtShapeing_formats[9] = "target";
-krio_fmtShapeing_formats[10] = "act";
-krio_fmtShapeing_formats[11] = "bias";
-krio_fmtShapeing_formats[12] = "position";
-krio_fmtShapeing_formats[13] = "site";
-krio_fmtShapeing_formats[14] = " source:weight";
-krio_fmtShapeing_formats[15] = "subnet";
-krio_fmtShapeing_formats[16] = "layer";
-krio_fmtShapeing_formats[17] = " unitNo.";
+krio_fmtShapeing_formats[0] = const_cast<char*>("site name");
+krio_fmtShapeing_formats[1] = const_cast<char*>("sites");
+krio_fmtShapeing_formats[2] = const_cast<char*>("unitName");
+krio_fmtShapeing_formats[3] = const_cast<char*>("typeName");
+krio_fmtShapeing_formats[4] = const_cast<char*>("name");
+krio_fmtShapeing_formats[5] = const_cast<char*>("site function");
+krio_fmtShapeing_formats[6] = const_cast<char*>("act func");
+krio_fmtShapeing_formats[7] = const_cast<char*>("out func");
+krio_fmtShapeing_formats[8] = const_cast<char*>("no.");
+krio_fmtShapeing_formats[9] = const_cast<char*>("target");
+krio_fmtShapeing_formats[10] = const_cast<char*>("act");
+krio_fmtShapeing_formats[11] = const_cast<char*>("bias");
+krio_fmtShapeing_formats[12] = const_cast<char*>("position");
+krio_fmtShapeing_formats[13] = const_cast<char*>("site");
+krio_fmtShapeing_formats[14] = const_cast<char*>(" source:weight");
+krio_fmtShapeing_formats[15] = const_cast<char*>("subnet");
+krio_fmtShapeing_formats[16] = const_cast<char*>("layer");
+krio_fmtShapeing_formats[17] = const_cast<char*>(" unitNo.");
 
-krio_writeUnitDefinitions_blank = "\0";
+krio_writeUnitDefinitions_blank = const_cast<char*>("\0");
 
-krio_getTType_ttype[0] = "-";
-krio_getTType_ttype[1] = "i";
-krio_getTType_ttype[2] = "o";
-krio_getTType_ttype[3] = "d";
-krio_getTType_ttype[4] = "h";
-krio_getTType_ttype[5] = "s";
-krio_getTType_ttype[6] = "si";
-krio_getTType_ttype[7] = "so";
-krio_getTType_ttype[8] = "sh";
-krio_getTType_ttype[9] = "sd";
+krio_getTType_ttype[0] = const_cast<char*>("-");
+krio_getTType_ttype[1] = const_cast<char*>("i");
+krio_getTType_ttype[2] = const_cast<char*>("o");
+krio_getTType_ttype[3] = const_cast<char*>("d");
+krio_getTType_ttype[4] = const_cast<char*>("h");
+krio_getTType_ttype[5] = const_cast<char*>("s");
+krio_getTType_ttype[6] = const_cast<char*>("si");
+krio_getTType_ttype[7] = const_cast<char*>("so");
+krio_getTType_ttype[8] = const_cast<char*>("sh");
+krio_getTType_ttype[9] = const_cast<char*>("sd");
 
 
 #ifdef RBF_DELTA_PROT

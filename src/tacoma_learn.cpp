@@ -459,7 +459,7 @@ krui_err SnnsCLib::tac_generateNewUnit(int UnitNo,int LayerNo,int StartPattern,i
       kr_unitSetTType(CurrentUnit=kr_makeDefaultUnit(),SPECIAL); 
    ERROR_CHECK;
    KernelErrorCode = 
-      krui_setUnitActFunc(CurrentUnit,"Act_TACOMA");
+      krui_setUnitActFunc(CurrentUnit,const_cast<char*>("Act_TACOMA"));
    ERROR_CHECK;  
    NewUnitPtr = kr_getUnitPtr(CurrentUnit); 
    ERROR_CHECK;
@@ -627,7 +627,7 @@ void SnnsCLib::tac_printRanks(float MaxSummedError)
 
   if (cc_printOnOff)
   {
-    cc_printHeadline("Installing new units",LENGTH_HEADLINE);
+    cc_printHeadline(const_cast<char*>("Installing new units"),LENGTH_HEADLINE);
 
     for(UnitNo=0;UnitNo<cc_MaxSpecialUnitNo;UnitNo++){
        printf (
@@ -734,7 +734,7 @@ int SnnsCLib::tac_calculateRanksAndRadius(int start,int end)
 
   Modulo = TAC_KOHONEN /20;  /* for the printing */
 
-  cc_printHeadline("Kohonen-Training",LENGTH_HEADLINE);
+  cc_printHeadline(const_cast<char*>("Kohonen-Training"),LENGTH_HEADLINE);
 
   KernelErrorCode=tac_initXiAndRis(StartPattern,EndPattern);
   ERROR_CHECK;
@@ -957,7 +957,7 @@ krui_err SnnsCLib::tac_initSpecialUnitLinks(void)
     int counter,start,end,n;
     float oldHighScore=0.0;
 
-    cc_printHeadline("Training of the candidates",LENGTH_HEADLINE);
+    cc_printHeadline(const_cast<char*>("Training of the candidates"),LENGTH_HEADLINE);
 
     for (counter=0;counter<maxNoOfCovarianceUpdateCycles;counter++){
 	KernelErrorCode=cc_getPatternParameter
@@ -1044,7 +1044,7 @@ krui_err SnnsCLib::tac_installNewUnits(int LayerNo,float MaxError,int StartPatte
 
   NoOfInstalledUnits=0;
 
-  if (LayerNo>1) cc_printHeadline("Connection routing",LENGTH_HEADLINE);
+  if (LayerNo>1) cc_printHeadline(const_cast<char*>("Connection routing"),LENGTH_HEADLINE);
 
   for (i=0;i<cc_MaxSpecialUnitNo;i++){
      if ((SpecialUnitData[i].SummedErrorInRegion/MaxError)

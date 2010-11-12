@@ -2142,13 +2142,13 @@ void  SnnsCLib::krio_readHeader(char *netfile_version, char *net_name,
   }
 
   /*  determine version number of the network file  */
-  if (my_strstr( netfile_version, KERNEL3D_NETFILE_VERSION ) != NULL)
+  if (my_strstr( netfile_version, const_cast<char*>(KERNEL3D_NETFILE_VERSION) ) != NULL)
     NetfileVersion = 1;
   else
     NetfileVersion = 0;
 
-  if (my_strstr( netfile_version, NETFILE_VERSION ) != NULL ||
-      my_strstr( netfile_version, NETFILE_VERSION2 ) != NULL)
+  if (my_strstr( netfile_version, const_cast<char*>(NETFILE_VERSION) ) != NULL ||
+      my_strstr( netfile_version, const_cast<char*>(NETFILE_VERSION2) ) != NULL)
     /*  current netfile version  */
     no_of_scan_params = 9;
   else

@@ -111,7 +111,7 @@ krui_err SnnsCLib::bn_assoz_createNet(int X, int Y)
       if (unit_no < 0)  CHECK_RETURN (unit_no);
       ret = krui_setUnitTType( unit_no, INPUT );
       CHECK_RETURN (ret);
-      ret = krui_setUnitActFunc( unit_no, "Act_RM" );
+      ret = krui_setUnitActFunc( unit_no, const_cast<char*>("Act_RM") );
       CHECK_RETURN (ret);
       
       unit_pos.y = i;
@@ -127,7 +127,7 @@ krui_err SnnsCLib::bn_assoz_createNet(int X, int Y)
       if (unit_no < 0)  CHECK_RETURN (unit_no);
       ret = krui_setUnitTType( unit_no, HIDDEN );
       CHECK_RETURN (ret);
-      ret = krui_setUnitActFunc( unit_no, "Act_RM" );
+      ret = krui_setUnitActFunc( unit_no, const_cast<char*>("Act_RM") );
       CHECK_RETURN (ret);
       
       unit_pos.y = i;
@@ -159,15 +159,15 @@ krui_err SnnsCLib::bn_assoz_createNet(int X, int Y)
   } 
 
   /*  set the update function  */
-  ret = krui_setUpdateFunc (ASSOZ_UPDATE_FUNC_NAME);
+  ret = krui_setUpdateFunc (const_cast<char*>(ASSOZ_UPDATE_FUNC_NAME));
   CHECK_RETURN (ret);
 
   /* set the learning function */
-  ret = krui_setLearnFunc (ASSOZ_LEARN_FUNC_NAME);
+  ret = krui_setLearnFunc (const_cast<char*>(ASSOZ_LEARN_FUNC_NAME));
   CHECK_RETURN (ret);
 
   /* set the init function */
-  ret = krui_setInitialisationFunc (ASSOZ_INIT_FUNC_NAME);
+  ret = krui_setInitialisationFunc (const_cast<char*>(ASSOZ_INIT_FUNC_NAME));
   //CHECK_RETURN (ret);
 
   return(ret);
