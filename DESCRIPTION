@@ -2,7 +2,7 @@ Package: RSNNS
 Type: Package
 Version: 0.3
 Date: 2010-11-10
-Depends: R (>= 2.10.0), methods, Rcpp
+Depends: R (>= 2.10.0), methods, Rcpp (>= 0.8.5)
 Suggests: scatterplot3d
 LazyLoad: yes
 Author: Christoph Bergmeir <c.bergmeir@decsai.ugr.es>
@@ -18,6 +18,8 @@ Description: The Stuttgart Neural Network Simulator (SNNS) is a library
     most common neural network topologies and learning algorithms
     integrate seamlessly into R.
 License: LGPL (>= 2)
+LinkingTo: Rcpp
+SystemRequirements: GNU make
 Collate: 'art1.R' 'art2.R' 'assoz.R' 'dlvq.R' 'docData.R' 'elman.R'
     'jordan.R' 'mlp.R' 'parser.R' 'rbf.R' 'rbfDDA.R' 'reg_class.R'
     'RSNNS-package.R' 'rsnns.R' 'SnnsDefines.R' 'SnnsR_createNets.R'
