@@ -92,7 +92,7 @@ float SnnsCLib::cc_calculatePruneError(int prune_func,int p,int n,float sse)
 {
     switch (prune_func){
       case SBC:
-	return n * log(sse/n) + p*log(n);
+	return n * log(sse/n) + p*log((double)n);
       case AIC:
 	return n* log(sse/n) + p*2;
       case CMSEP:

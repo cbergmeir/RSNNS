@@ -2191,12 +2191,12 @@ krui_err SnnsCLib::INIT_SOM_Weights_const(float *parameterArray, int NoOfParams)
       if UNIT_HAS_SITES( unit_ptr ){
 	  /* the unit has sites */
 	  FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
-	      link_ptr->weight = (FlintType) 1.0/sqrt(NoOfInputUnits);
+	      link_ptr->weight = (FlintType) 1.0/sqrt((double)NoOfInputUnits);
 	  }
       }else{
 	  /* the unit has direct links */
 	  FOR_ALL_LINKS( unit_ptr, link_ptr )  {
-	      link_ptr->weight = (FlintType) 1.0/sqrt(NoOfInputUnits);
+	      link_ptr->weight = (FlintType) 1.0/sqrt((double)NoOfInputUnits);
 	  }
       }
 
