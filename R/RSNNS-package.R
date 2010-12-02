@@ -29,8 +29,8 @@
 #' \tabular{ll}{
 #' Package: \tab RSNNS\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.3-1\cr
-#' Date: \tab 2010-11-17\cr
+#' Version: \tab 0.3-2\cr
+#' Date: \tab 2010-11-30\cr
 #' License: \tab LGPL (>= 2)\cr
 #' LazyLoad: \tab yes\cr
 #' }

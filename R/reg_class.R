@@ -288,17 +288,18 @@ confusionMatrix <- function(targets, predictions) {
 #' 
 #' @param T predictions
 #' @param D targets
+#' @param ... parameters passed to plot
 #' @references 
 #' R news Volume 4/1, June 2004
 #' @export
 #' @author ...
-plotROC <-function(T,D){
+plotROC <-function(T, D, ...){
   cutpoints<-c(-Inf, sort(unique(T)), Inf)
   sens<-sapply(cutpoints,
       function(c) sum(D[T>c])/sum(D))
   spec<-sapply(cutpoints,
       function(c) sum((1-D)[T<=c]/sum(1-D)))
-  plot(1-spec, sens, type="l")
+  plot(1-spec, sens, type="l", ...)
 }
 
 

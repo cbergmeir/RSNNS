@@ -1,7 +1,7 @@
 Package: RSNNS
 Type: Package
-Version: 0.3-1
-Date: 2010-11-17
+Version: 0.3-2
+Date: 2010-11-30
 Depends: R (>= 2.10.0), methods, Rcpp (>= 0.8.5)
 Suggests: scatterplot3d
 LazyLoad: yes
