@@ -142,6 +142,10 @@ SnnsR__whereAreResults <- function(snnsObject, outputMethod="output") {
     unitsQ <- snnsObject$getUnitsByName("q")
     units <- c(unitsX, unitsQ) 
     
+  } else if(outputMethod == "artmap") {
+    
+    units <- snnsObject$getUnitsByName("map")
+        
   } else if(outputMethod=="assoz") {
     
     units <- snnsObject$getAllHiddenUnits()

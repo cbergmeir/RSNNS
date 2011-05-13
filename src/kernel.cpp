@@ -3541,8 +3541,11 @@ krui_err  SnnsCLib::kr_topoSort(int topo_sorting_mode)
     return( KernelErrorCode );
   }
 
+//  if (krm_allocUnitTopoArray( NoOfUnits + 15) != KRERR_NO_ERROR)
+//    return( KernelErrorCode );
+//20110513 patch by C. Bergmeir: kr_amap.c:429 caused an access to unreserved memory.
 
-  if (krm_allocUnitTopoArray( NoOfUnits + 15) != KRERR_NO_ERROR)
+  if (krm_allocUnitTopoArray( NoOfUnits + 16) != KRERR_NO_ERROR)
     return( KernelErrorCode );
 
   /*  clear error codes  */

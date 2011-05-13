@@ -4,10 +4,10 @@ This document contains some known issues of SnnsCLib and RSNNS, and possible wor
 1. Configure mechanism of SNNS was cut down
 -----------------------------------------------------------------------------------------------
 
-The main focus of SnnsCLib was getting it to work properly under up-to-date Linux and Windows
-systems, using the R-internal compilation mechanism. So, as the environment is pretty clear,
-the configure mechanism of SNNS was mostly removed, possibly also removing some of the flexibility 
-of SNNS.
+The main focus of SnnsCLib was getting it to work properly under up-to-date Linux, Solaris, and
+Windows systems, using the R-internal compilation mechanism. So, as the environment is pretty clear,
+the configure mechanism of SNNS was mostly removed, possibly loosing compatibility with some 
+architectures SNNS runs on.
 
 -----------------------------------------------------------------------------------------------
 2. Unimplemented network types artmap, hopfield, td

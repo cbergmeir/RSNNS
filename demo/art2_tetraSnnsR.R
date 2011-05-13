@@ -3,7 +3,7 @@ library(RSNNS)
 basePath <- ("./")
 
 data(snnsData)
-dataset <- snnsData$art2_tetra.pat
+dataset <- snnsData$art2_tetra_med.pat
 
 inputs <- dataset
 
@@ -26,7 +26,7 @@ snnsObject$DefTrainSubPat()
 
 snnsObject$saveNet(paste(basePath,"art2_tetraSnnsR_untrained.net",sep=""),"art2_tetraSnnsR_untrained")
 
-parameters <- c(0.98, 10.0, 10.0, 0.1, 0.0)
+parameters <- c(0.99, 20.0, 20.0, 0.1, 0.0)
 maxit <- 100
 
 for(i in 1:maxit) {
@@ -37,12 +37,10 @@ for(i in 1:maxit) {
 snnsObject$saveNet(paste(basePath,"art2_tetraSnnsR.net",sep=""),"art2_tetraSnnsR")
 snnsObject$saveNewPatterns(paste(basePath,"art2_tetraSnnsR_train.pat",sep=""), patset$set_no);
 
-testdata <- snnsData$art2_tetra_med.pat
-testPatset <- snnsObject$createPatSet(testdata)
-snnsObject$setCurrPatSet(testPatset$set_no)
-
-snnsObject$saveNewPatterns(paste(basePath,"art2_tetraSnnsR_test.pat",sep=""), patset$set_no);
-
+#testdata <- snnsData$art2_tetra_med.pat
+#testPatset <- snnsObject$createPatSet(testdata)
+#snnsObject$setCurrPatSet(testPatset$set_no)
+#snnsObject$saveNewPatterns(paste(basePath,"art2_tetraSnnsR_test.pat",sep=""), patset$set_no);
 outputs <- snnsObject$predictCurrPatSet("art2", parameters)
 outputs
 
