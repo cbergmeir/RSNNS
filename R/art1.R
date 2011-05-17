@@ -36,6 +36,10 @@
 #' The parameter \code{nClusters} controls the amount of clusters that are assumed to
 #' be present in the input patterns. A detailed description of the theory is available from the SNNS decumentation. 
 #'
+#' @references
+#' Grossberg, S. (1988), Adaptive pattern classification and universal recoding. I.: parallel development and coding of neural feature detectors, MIT Press, Cambridge, MA, USA, chapter I, pp. 243--258.
+#' 
+#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. 
 #' @export
 art1 <- function(x, ...) UseMethod("art1")
 

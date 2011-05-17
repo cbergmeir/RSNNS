@@ -36,6 +36,8 @@
 #' the initialization parameters have to be different (normally \code{c(0,1,...)}
 #'  for linear and \code{c(-4,4,...)} for logistic output).
 #' 
+#' @references 
+#' Poggio, T. & Girosi, F. (1989), 'A Theory of Networks for Approximation and Learning'(A.I. Memo No.1140, C.B.I.P. Paper No. 31), Technical report, MIT ARTIFICIAL INTELLIGENCE LABORATORY.
 #' @export
 rbf <- function(x, ...) UseMethod("rbf")
 

@@ -29,6 +29,8 @@
 #' Elman networks are recurrent networks 
 #' and very similar to \code{\link{jordan}} networks.
 #' 
+#' @references 
+#' Elman, J. L. (1990), 'Finding structure in time', Cognitive Science 14(2), 179--211.
 #' @export
 elman <- function(x, ...) UseMethod("elman")
 

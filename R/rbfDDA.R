@@ -29,6 +29,10 @@
 #' As the output is winner-takes-all, this type of net can only be used
 #' for classification.
 #'
+#' @references 
+#' Berthold, M. R. & Diamond, J. (1995), Boosting the Performance of RBF Networks with Dynamic Decay Adjustment, in 'Advances in Neural Information Processing Systems', MIT Press, , pp. 521--528.
+#' 
+#' Hudak, M. (1993), 'RCE classifiers: theory and practice', Cybernetics and Systems 23(5), 483--515.
 #' @export
 rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 

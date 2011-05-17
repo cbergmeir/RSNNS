@@ -3,6 +3,7 @@ laser	regression example: the original SNNS laser data, used with various superv
 som_iris	self-organizing map: a som for the iris data, using the RSNNS high-level api (rsnns)
 art1_letters	the original SNNS art1 letters example, using the RSNNS high-level api (rsnns)
 art2_tetra	the original SNNS art2 tetra example, using the RSNNS high-level api (rsnns)
+artmap_letters	the original SNNS artmap letters example, using the RSNNS high-level api (rsnns)
 assoz_letters	an associative memory example using the letters data, RSNNS high-level api (rsnns)
 dlvq_ziff	the original SNNS dlvq ziff example, using the RSNNS high-level api (rsnns)
 eight_elman	the original SNNS eight elman example, using the RSNNS high-level api (rsnns)
@@ -10,6 +11,7 @@ rbf_sin	a rbf network to approximante a a noisy sin function, using the RSNNS hi
 encoderSnnsCLib	the original SNNS encoder example, using the RSNNS low-level api (SnnsR), and only functions directly mapped to SnnsCLib functions
 art1_lettersSnnsR	the original art1 letters example, using the RSNNS low-level api (SnnsR)
 art2_tetraSnnsR	the original art2 tetra example, using the RSNNS low-level api (SnnsR)
+artmap_lettersSnnsR	the original artmap letters example, using the RSNNS low-level api (SnnsR)
 assoz_lettersSnnsR	an associative memory example using the letters data, RSNNS low-level api (SnnsR)
 dlvq_ziffSnnsR	the original SNNS dlvq ziff example, using the RSNNS low-level api (SnnsR)
 eight_elmanSnnsR	the original SNNS eight elman example, using the RSNNS low-level api (SnnsR)

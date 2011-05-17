@@ -24,29 +24,45 @@
 #############################################################################
 
 
-#' Create and train an art1 network.
+#' Create and train an artmap network.
 #'
-#' Adaptive resonance theory (art) networks are association networks. I.e. they 
-#' perform clustering by finding a prototype to the given input. So, input and output
-#' are the same type of data. Art1 is for binary inputs only, if you have real-valued input, use 
-#' \code{\link{art2}} instead. In its current implementation, the network
-#' has two-dimensional input (and output). The matrix \code{x} contains all 
-#' (one dimensional) input patterns. Internally, every one of these patterns
-#' is converted to a two-dimensional pattern using parameters \code{dimX} and \code{dimY}.
-#' The parameter \code{nClusters} controls the amount of clusters that are assumed to
-#' be present in the input patterns. A detailed description of the theory is available from the SNNS decumentation. 
+#' An artmap performs supervised learning. It consists of two coupled art networks.
+#' In theory, these could be art1, art2, or other art networks. However, in SNNS artmap is
+#' implemented for art1 only. So, this function is to be used with binary input. 
 #'
+#' @references
+#' Carpenter, G. A.; Grossberg, S. & Reynolds, J. H. (1991), 'ARTMAP: Supervised real-time learning and classification of nonstationary data by a self-organizing neural network', Neural Networks 4(5), 565--588.
+#' 
+#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. 
+# accepts binary input only
+# 
+# consists of two 
+# artAdaptive resonance theory (art) networks are association networks. I.e. they 
+# perform clustering by finding a prototype to the given input. So, input and output
+# are the same type of data. Art1 is for binary inputs only, if you have real-valued input, use 
+# \code{\link{art2}} instead. In its current implementation, the network
+# has two-dimensional input (and output). The matrix \code{x} contains all 
+# (one dimensional) input patterns. Internally, every one of these patterns
+# is converted to a two-dimensional pattern using parameters \code{dimX} and \code{dimY}.
+# The parameter \code{nClusters} controls the amount of clusters that are assumed to
+# be present in the input patterns. A detailed description of the theory is available from the SNNS decumentation. 
+#
 #' @export
-art1 <- function(x, ...) UseMethod("art1")
+artmap <- function(x, ...) UseMethod("artmap")
 
 
-#' Create and train an art1 network.
+#' Create and train an artmap network.
 #' 
 #' @param x a matrix with training inputs for the network
-#' @param dimX x dimension of inputs and outputs
-#' @param dimY y dimension of inputs and outputs
-#' @param nClusters controls the number of clusters assumed to be present
-#' @param maxit maximum of iterations to learn
+#' @param nInputsTrain the number of columns of the matrix that are training input
+#' @param nInputsTargets the number of columns that are teacher signals
+#' @param nUnitsRecLayerTrain number of units in the recognition layer of the training-data ART network
+#' @param nUnitsRecLayerTargets number of units in the recognition layer of the target-data ART network
+#' @param maxit maximum of iterations to perform
+#' @param nRowInputsTrain number of rows the training input units are to be organized in (only for visualization purposes of the net in the original SNNS software)
+#' @param nRowInputsTargets same, but for the teacher signal input units
+#' @param nRowUnitsRecLayerTrain same, but for the recognition layer of the training-data ART network
+#' @param nRowUnitsRecLayerTargets same, but for the recognition layer of the teacher-data ART network
 #' @param initFunc the initialization function to use
 #' @param initFuncParams the parameters for the initialization function
 #' @param learnFunc the learning function to use
@@ -58,38 +74,45 @@ art1 <- function(x, ...) UseMethod("art1")
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member of the object contains a 
 #' list of two-dimensional activation patterns.
 #' @export
-#' @S3method art1 default
-#' @method art1 default
-#' @seealso \code{\link{art2}}
-#' @rdname art1
+#' @S3method artmap default
+#' @method artmap default
+#' @seealso \code{\link{art1}}, \code{\link{art2}}
+#' @rdname artmap
 #' @examples 
-#' \dontrun{demo(art1_letters)}
-#' \dontrun{demo(art1_lettersSnnsR)}
-art1.default <- function(x, dimX, dimY, nClusters=nrow(x), maxit=100, 
-    initFunc="ART1_Weights", initFuncParams=c(1.0, 1.0), 
-    learnFunc="ART1", learnFuncParams=c(0.9, 0.0, 0.0), 
-    updateFunc="ART1_Stable", updateFuncParams=c(0.0),    
+#' \dontrun{demo(artmap_letters)}
+#' \dontrun{demo(artmap_lettersSnnsR)}
+artmap.default <- function(x, nInputsTrain, nInputsTargets, nUnitsRecLayerTrain, nUnitsRecLayerTargets, maxit=1, 
+    nRowInputsTrain=1, nRowInputsTargets=1, nRowUnitsRecLayerTrain=1, nRowUnitsRecLayerTargets=1,
+    initFunc="ARTMAP_Weights", initFuncParams=c(1.0, 1.0, 1.0, 1.0, 0.0), 
+    learnFunc="ARTMAP", learnFuncParams=c(0.8, 1.0, 1.0, 0, 0), 
+    updateFunc="ARTMAP_Stable", updateFuncParams=c(0.8, 1.0, 1.0, 0, 0),    
     shufflePatterns=TRUE, ...) {
   
   x <- as.matrix(x)
 
-  nInputs <- dim(x)[2L]
+  nInputs <- nInputsTrain + nInputsTargets
   
-  snns <- rsnnsObjectFactory(subclass=c("art1", "association"), nInputs=nInputs, maxit=maxit, 
+  if(nInputs != dim(x)[2L]) {
+    warning("nInputsTrain + nInputsTargets has to be the same as the number of columns of the input matrix. Not training the ARTMAP..")
+    return()
+  }
+
+  snns <- rsnnsObjectFactory(subclass=c("artmap", "association"), nInputs=nInputs, maxit=maxit, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 
       updateFuncParams=updateFuncParams,
       shufflePatterns=shufflePatterns, computeIterativeError=FALSE)
 
-  snns$archParams <- list(nClusters=nClusters, dimX=dimX, dimY=dimY)
+  snns$archParams <- list(nInputsTrain=nInputsTrain, nInputsTargets=nInputsTargets, 
+                          nUnitsRecLayerTrain=nUnitsRecLayerTrain, nUnitsRecLayerTargets=nUnitsRecLayerTargets, 
+      nRowInputsTrain=nRowInputsTrain, nRowInputsTargets=nRowInputsTargets, 
+      nRowUnitsRecLayerTrain=nRowUnitsRecLayerTrain, nRowUnitsRecLayerTargets=nRowUnitsRecLayerTargets)
+    
+  snns$snnsObject$artmap_createNet(nInputsTrain,nRowInputsTrain,nUnitsRecLayerTrain,nRowUnitsRecLayerTrain,
+                              nInputsTargets,nRowInputsTargets,nUnitsRecLayerTargets,nRowUnitsRecLayerTargets)
   
-  #snns$snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
-  snns$snnsObject$art1_createNet(dimX*dimY,dimX,nClusters,dimX)
- 
   snns <- train(snns, inputsTrain=x)
-  
-  snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
   
   snns
 }

@@ -30,6 +30,10 @@
 #' for more information. A difference is, that the art2 implementation doesn't 
 #' assume two-dimensional input and output. 
 #'
+#' @references
+#' Carpenter, G. A. & Grossberg, S. (1987), 'ART 2: self-organization of stable category recognition codes for analog input patterns', Appl. Opt. 26(23), 4919--4930.
+#' 
+#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. 
 #' @export
 art2 <- function(x, ...) UseMethod("art2")
 

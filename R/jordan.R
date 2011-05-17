@@ -29,6 +29,8 @@
 #' Jordan networks are recurrent networks 
 #' and very similar to \code{\link{elman}} networks.
 #' 
+#' @references 
+#' Jordan, M. I. (1986), 'Serial Order: A Parallel, Distributed Processing Approach', Advances in Connectionist Theory Speech 121(ICS-8604), 471-495.
 #' @export
 jordan <- function(x, ...) UseMethod("jordan")
 

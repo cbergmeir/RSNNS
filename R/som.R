@@ -30,6 +30,10 @@
 #' As the computation might be slow if many patterns are involved,
 #' much of its output is made switchable (see comments on return values).  
 #' 
+#' @references 
+#' Kohonen, T. (1988), Self-organization and associative memory, Vol. 8, Springer-Verlag.
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley.
 #' @export
 som <- function(x, ...) UseMethod("som")
 
