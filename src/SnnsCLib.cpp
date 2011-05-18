@@ -508,6 +508,13 @@ UPDATE_ARTMAP_syncPropagate_rho   = -1.0;
 
 kr_getSubPatData_dummy_data = 0.0;
 
+krio_loadNet_netname_str[0] = 0;
+krio_loadNet_netfile_version_str[0] = 0;
+krio_loadNet_learn_func[0] = 0;
+krio_loadNet_update_func[0] = 0;
+krio_loadNet_pruning_func[0] = 0;
+krio_loadNet_ff_learn_func[0] = 0;
+
 
 //Initialize the random number generator
 krui_setSeedNo(u_getCurrentSeedVal());
