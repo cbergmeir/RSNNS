@@ -108,6 +108,27 @@ SnnsR__getAllHiddenUnits <- function(snnsObject) {
   return(snnsObject$getAllUnitsTType("UNIT_HIDDEN"))  
 }
 
+
+#' Get the weight matrix between two sets of units
+#' 
+#' @param unitsLayer1 a vector with the numbers of units in layer 1
+#' @param unitsLayer2 a vector with the numbers of units in layer 2
+#' @return the weight matrix between the two sets of neurons 
+#' @rdname SnnsRObject$getWeightMatrix
+#' @usage \S4method{getWeightMatrix}{SnnsR}(unitsLayer1, unitsLayer2)
+#' @aliases getWeightMatrix,SnnsR-method SnnsRObject$getWeightMatrix
+#' @seealso \link{SnnsRObject$getAllUnitsTType}
+SnnsR__getWeightMatrix <- function (snnsObject, unitsLayer1, unitsLayer2) {
+  
+  C <- matrix(nrow=length(unitsLayer1), ncol=length(unitsLayer2))
+  for(i in 1:length(unitsLayer1))
+    for(j in 1:length(unitsLayer2)) {
+      res <- snnsObject$areConnectedWeight(unitsLayer1[i],unitsLayer2[j])
+      C[i,j] <- res$weight
+    }
+  C
+}
+
 #\link{getAllUnitsTType,SnnsR-method}
 
 #' Set the activation function for all units of a certain ttype.

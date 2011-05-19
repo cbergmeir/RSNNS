@@ -855,75 +855,142 @@ RcppExport SEXP SnnsCLib__deleteSite(SEXP xp) {
   return Rcpp::wrap(ret);
 }
 
-/*
+
 //------------------------------------------
 // Wrapping for these functions is not implemented so far:
 // Parameters with a type different from SEXP are not handled correctly so far.
 //------------------------------------------
 
-RcppExport SEXP SnnsCLib__getFirstPredUnit(SEXP xp, FlintType *strength) {
+
+
+
+
+
+
+RcppExport SEXP SnnsCLib__getFirstPredUnit(SEXP xp) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
-  int ret = snnsCLib->krui_getFirstPredUnit(strength);
-  return Rcpp::wrap(ret);
-}
+  //float p1 = Rcpp::as<float>(source_unit_no);
 
-RcppExport SEXP SnnsCLib__getFirstPredUnitAndData(SEXP xp, FlintType *strength,float *val_a,float *val_b, float *val_c) {
- Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+  float strength=0;
+  int unit = snnsCLib->krui_getFirstPredUnit(&strength);
 
-  int ret = snnsCLib->krui_getFirstPredUnitAndData(strength, val_a, val_b, val_c);
-  return Rcpp::wrap(ret);
-}
+  return Rcpp::List::create( 
+    	Rcpp::Named( "unit" ) = unit, 
+    	Rcpp::Named( "strength" ) = strength
+    	) ;
 
-RcppExport SEXP SnnsCLib__getNextPredUnit(SEXP xp, FlintType *strength) {
- Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
-
-  int ret = snnsCLib->krui_getNextPredUnit(strength);
-  return Rcpp::wrap(ret);
-}
-
-RcppExport SEXP SnnsCLib__getNextPredUnitAndData(SEXP xp, FlintType *strength,float *val_a,float *val_b, float *val_c) {
- Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
-
-  int ret = snnsCLib->krui_getNextPredUnitAndData(strength, val_a, val_b, val_c);
-  return Rcpp::wrap(ret);
-}
-
-RcppExport SEXP SnnsCLib__getCurrentPredUnit(SEXP xp, FlintType *strength) {
- Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
-
-  int ret = snnsCLib->krui_getCurrentPredUnit(strength);
-  return Rcpp::wrap(ret);
 }
 
 
-RcppExport SEXP SnnsCLib__getFirstSuccUnit(SEXP xp, SEXP source_unit_no, FlintType *weight) {
+RcppExport SEXP SnnsCLib__getFirstPredUnitAndData(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  float strength=0, val_a=0, val_b=0, val_c=0;
+
+  int unit = snnsCLib->krui_getFirstPredUnitAndData(&strength, &val_a, &val_b, &val_c);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "unit" ) = unit, 
+    	Rcpp::Named( "strength" ) = strength,
+    	Rcpp::Named( "val_a" ) = val_a,
+    	Rcpp::Named( "val_b" ) = val_b,
+    	Rcpp::Named( "val_c" ) = val_c
+    	) ;
+}
+
+
+RcppExport SEXP SnnsCLib__getNextPredUnit(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  float strength=0;
+
+  int unit = snnsCLib->krui_getNextPredUnit(&strength);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "unit" ) = unit, 
+    	Rcpp::Named( "strength" ) = strength
+    	) ;
+
+}
+
+
+RcppExport SEXP SnnsCLib__getNextPredUnitAndData(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  float strength=0, val_a=0, val_b=0, val_c=0;
+
+  int unit = snnsCLib->krui_getNextPredUnitAndData(&strength, &val_a, &val_b, &val_c);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "unit" ) = unit, 
+    	Rcpp::Named( "strength" ) = strength,
+    	Rcpp::Named( "val_a" ) = val_a,
+    	Rcpp::Named( "val_b" ) = val_b,
+    	Rcpp::Named( "val_c" ) = val_c
+    	) ;
+}
+
+RcppExport SEXP SnnsCLib__getCurrentPredUnit(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  float strength=0;
+
+  int unit = snnsCLib->krui_getCurrentPredUnit(&strength);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "unit" ) = unit, 
+    	Rcpp::Named( "strength" ) = strength
+    	) ;
+
+}
+
+
+RcppExport SEXP SnnsCLib__getFirstSuccUnit(SEXP xp, SEXP source_unit_no) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
   int p1 = Rcpp::as<int>(source_unit_no);
-  int ret = snnsCLib->krui_getFirstSuccUnit(p1, weight);
-  return Rcpp::wrap(ret);
+
+  float weight=0;
+
+  int unit = snnsCLib->krui_getFirstSuccUnit(p1, &weight);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "unit" ) = unit, 
+    	Rcpp::Named( "weight" ) = weight
+    	) ;
 }
 
-RcppExport SEXP SnnsCLib__getNextSuccUnit(SEXP xp, FlintType *weight) {
+
+RcppExport SEXP SnnsCLib__getNextSuccUnit(SEXP xp) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
-  int ret = snnsCLib->krui_getNextSuccUnit(weight);
-  return Rcpp::wrap(ret);
+  float weight=0;
+
+  int unit = snnsCLib->krui_getNextSuccUnit(&weight);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "unit" ) = unit, 
+    	Rcpp::Named( "weight" ) = weight
+    	) ;
 }
 
 
-RcppExport SEXP SnnsCLib__areConnectedWeight(SEXP xp, SEXP source_unit_no, SEXP target_unit_no,
-                                             FlintType *weight) {
+RcppExport SEXP SnnsCLib__areConnectedWeight(SEXP xp, SEXP source_unit_no, SEXP target_unit_no) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
   int p1 = Rcpp::as<int>(source_unit_no);
   int p2 = Rcpp::as<int>(target_unit_no);
 
-  bool ret = snnsCLib->krui_areConnectedWeight(p1, p2, weight);
-  return Rcpp::wrap(ret);
+  float weight=0;
+
+  bool are_connected = snnsCLib->krui_areConnectedWeight(p1, p2, &weight);
+  return Rcpp::List::create( 
+    	Rcpp::Named( "are_connected" ) = are_connected, 
+    	Rcpp::Named( "weight" ) = weight
+    	) ;
 }
-*/
+
 
 RcppExport SEXP SnnsCLib__areConnected(SEXP xp, SEXP source_unit_no, SEXP target_unit_no) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -1748,6 +1815,29 @@ RcppExport SEXP SnnsCLib__DefTrainSubPat(SEXP xp) {
     	) ;
 }
 
+
+RcppExport SEXP SnnsCLib__DefTrainSubPatXX(SEXP xp, SEXP insize, SEXP outsize, SEXP instep, SEXP outstep, SEXP max_n_pos) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(insize);
+  int p2 = Rcpp::as<int>(outsize);
+  int p3 = Rcpp::as<int>(instep);
+  int p4 = Rcpp::as<int>(outstep);
+  int p5 = Rcpp::as<int>(max_n_pos);
+
+  int err = snnsCLib->krui_DefTrainSubPat(&p1, &p2, &p3, &p4, &p5);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "insize" ) = insize,
+    	Rcpp::Named( "outsize" ) = outsize,
+    	Rcpp::Named( "instep" ) = instep, 
+    	Rcpp::Named( "outstep" ) = outstep,
+    	Rcpp::Named( "max_n_pos" ) = max_n_pos
+    	) ;
+}
+
+
 /*
 //------------------------------------------
 // Wrapping for these functions is not implemented so far:
@@ -2411,6 +2501,7 @@ RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP 
   int size=0;
   float* patternData = snnsCLib->kr_getSubPatData(p1, p2, p3, &size);
 
+Rprintf("size:%d", size);
   Rcpp::NumericVector pattern(size);
 
   for (int i=0; i<size; i++) {
