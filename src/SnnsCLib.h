@@ -102,114 +102,13 @@ public:
   SnnsCLib();
   ~SnnsCLib();
 
+//------------------------------------------------
+// kr_ui.h
+//------------------------------------------------
+
 #include "kr_ui.h" 
 
-#include "bn_JordElm.h"
-#include "bn_art1.h"
-#include "bn_art2.h"
-#include "bn_kohonen.h"
-#include "bn_artmap.h"
-#include "bn_assoz.h"
-
-#include "kr_newpattern.h"
-
-private:
-
-#include "func_tbl.h"
-
-#include "arttr_f.h"     
-#include "cc_modify.h"   
-#include "kernel.h"   
-#include "kr_funcs.h"      
-#include "scaled_conj_grad.h"    
-#include "trans_f.h"
-#include "art_ui.h"      
-#include "cc_prune.h"    
-#include "kr_amap.h"  
-#include "kr_inversion.h"  
-#include "learn_f.h"  
-#include "update_f.h"
-#include "cc_display.h"  
-#include "dlvq_learn.h"  
-#include "kr_art1.h"  
-#include "kr_io.h"         
-#include "matrix.h"   
-#include "stochastic_learn_f.h"
-#include "cc_glob.h"     
-#include "kr_art2.h"  
-#include "kr_JordElm.h"    
-#include "prun_f.h"   
-#include "tacoma_learn.h"
-#include "cc_learn.h"    
-#include "init_f.h"      
-#include "kr_art.h"   
-#include "kr_mem.h"        
-#include "kr_td.h"          
-#include "remap_f.h"  
-#include "tbl_func.h"
-
-#include "kr_pat_scan.h"    
-#include "kr_pat_parse.h"   
-
-
-int ppparse();
-
-
-//former not explicitly declared members (some were added to the .ph files)
-
-//kernel
-
-void clr_T_flags();
-void DepthFirst1(Unit*, int);
-void DepthFirst2(Unit*, int);
-void DepthFirst3(Unit*, int);
-krui_err kr_topoSortT();
-krui_err kr_topoSortFF();
-krui_err kr_topoSortIHO();
-//int llncompare(const Unit**, const Unit**);
-//int transTableCompare(const void*, const void*);
-krui_err kr_topoSortLOG();
-
-//kr_JordElm
-
-void kr_recTouchContextUnits(Unit*);
-
-//kr_io
-
-bool matchHead(int);
-krui_err krio_writeTimeDelayDefs();
-
-
-
 //former static variables
-
-//cc_learn
-float m_cc_trainOutputUnits_OutParameter[1];
-float m_TEST_CasCor_OutParameter[1];
-int   m_cc_learn_GroupNo;
-float m_cc_learn_LeTe;
-
-//dlvq_learn
-
-int dlvq_learn_cycleCounter,dlvq_learn_noOfTrainingCycles;
-float dlvq_learn_learnParam1,dlvq_learn_learnParam2;
-float dlvq_learn_OutParameter[1];
-
-//init_f
-
-char m_init_f_notfirstrun;
-
-//kernel
-
-struct Link  *m_kernel_link_ptr;
-struct Unit  *m_kernel_source_unit_ptr,*m_kernel_current_unit_ptr;
-struct Site  *m_kernel_current_site_ptr;
-RbfFloatMatrix m_kernel_kr_CorrMatrix;
-char  m_kernel_activation_func[FUNCTION_NAME_MAX_LEN], m_kernel_output_func[FUNCTION_NAME_MAX_LEN];
-
-#ifdef MASPAR_KERNEL
-struct NetFuncParameters  m_kernel_net_func_params;
-#endif
 
 //kr_ui
 
@@ -237,42 +136,172 @@ char  krui_getVersion_snns_version[128];
 struct FuncInfoDescriptor  krui_getFuncInfo_functionDescr;
 struct FuncInfoDescriptor  krui_getFuncParamInfo_functionDescr;
 
-//prun_f
 
-bool PRUNE_Skeletonization_first;
+//------------------------------------------------
+// Big net
+//------------------------------------------------
+#include "bn_JordElm.h"
+#include "bn_art1.h"
+#include "bn_art2.h"
+#include "bn_kohonen.h"
+#include "bn_artmap.h"
+#include "bn_assoz.h"
+
+//------------------------------------------------
+// kr_newpattern.h
+//------------------------------------------------
+#include "kr_newpattern.h"
+
+//former static variables
+
+//kr_newpattern
+
+float kr_getSubPatData_dummy_data;
+
+bool kr_np_order_pat_entries_shuffle;
+int kr_np_order_pat_entries_c_start;
+int kr_np_order_pat_entries_c_end;
+
+bool kr_np_order_sub_pat_entries_shuffle;
+int kr_np_order_sub_pat_entries_c_start;
+int kr_np_order_sub_pat_entries_c_end;
+
+int kr_np_order_chunked_pat_entries_c_start;
+int kr_np_order_chunked_pat_entries_c_end;
+
+private:
+
+//------------------------------------------------
+// matrix.h
+//------------------------------------------------
+
+#include "matrix.h"  
+
+//------------------------------------------------
+// func_tbl.h
+//------------------------------------------------
+
+#include "func_tbl.h"
+
+//------------------------------------------------
+// arttr_f.h
+//------------------------------------------------
+
+#include "arttr_f.h"     
+
+//------------------------------------------------
+// cc_modify.h
+//------------------------------------------------
+
+#include "cc_modify.h"   
+
+//------------------------------------------------
+// kernel.h
+//------------------------------------------------
+
+#include "kernel.h"   
+
+//former not explicitly declared members (some were added to the .ph files)
+
+//kernel
+
+void clr_T_flags();
+void DepthFirst1(Unit*, int);
+void DepthFirst2(Unit*, int);
+void DepthFirst3(Unit*, int);
+krui_err kr_topoSortT();
+krui_err kr_topoSortFF();
+krui_err kr_topoSortIHO();
+//int llncompare(const Unit**, const Unit**);
+//int transTableCompare(const void*, const void*);
+krui_err kr_topoSortLOG();
+
+//former static variables
+
+//kernel
+
+struct Link  *m_kernel_link_ptr;
+struct Unit  *m_kernel_source_unit_ptr,*m_kernel_current_unit_ptr;
+struct Site  *m_kernel_current_site_ptr;
+RbfFloatMatrix m_kernel_kr_CorrMatrix;
+char  m_kernel_activation_func[FUNCTION_NAME_MAX_LEN], m_kernel_output_func[FUNCTION_NAME_MAX_LEN];
+
+#ifdef MASPAR_KERNEL
+struct NetFuncParameters  m_kernel_net_func_params;
+#endif
+
+
+//------------------------------------------------
+// kr_funcs.h
+//------------------------------------------------
+
+#include "kr_funcs.h"      
+
+//former static variables
 
 //kr_funcs
 
 struct FuncInfoDescriptor  krf_getFuncName_functionDescr;
 struct FuncInfoDescriptor  krf_getCurrentNetworkFunc_func_descr;
 
-//kr_io
-char  krio_getIOVersion_getIOVersion[128];
-char  krio_repchar_str[180];
+//------------------------------------------------
+// scaled_conj_grad.h
+//------------------------------------------------
 
-char  krio_loadNet_netname_str[81],
-      krio_loadNet_netfile_version_str[81],
-      krio_loadNet_learn_func[81],
-      krio_loadNet_update_func[81],
-      krio_loadNet_pruning_func[81],
-      krio_loadNet_ff_learn_func[81];
+#include "scaled_conj_grad.h"    
 
-char   *krio_fmtShapeing_formats[18];
-char   *krio_writeUnitDefinitions_blank;
+//former static variables
 
-char   *krio_getTType_ttype[10];
+//scaled_conj_grad
 
-//kr_mem
+float    LEARN_SCG_OutParameter[1];
+int      LEARN_SCG_k, LEARN_SCG_restart_scg,
+         LEARN_SCG_stop_scg,
+         LEARN_SCG_success;
+int      LEARN_SCG_count_under_tol ; 
+float    LEARN_SCG_delta, LEARN_SCG_norm_of_p_2, LEARN_SCG_lambda, LEARN_SCG_lambda_bar, LEARN_SCG_current_error, 
+         LEARN_SCG_old_error, LEARN_SCG_norm_of_rk ;
 
-int krm_putPattern_in[MAX_NO_OF_VAR_I_DIM],krm_putPattern_out[MAX_NO_OF_VAR_I_DIM];
+FlintType* *LEARN_SCG_weights ;
+FlintType  *LEARN_SCG_old_gradient, *LEARN_SCG_p, *LEARN_SCG_r, *LEARN_SCG_old_weights, *LEARN_SCG_step ;
 
-//kr_td
+//------------------------------------------------
+// trans_f.h
+//------------------------------------------------
 
-float  LEARN_TDbackprop_OutParameter[1];
-float  TEST_TDbackprop_OutParameter[1];
-float  LEARN_TDBP_McClelland_OutParameter[1];
+#include "trans_f.h"
 
-//learn_f
+//------------------------------------------------
+// art_ui.h
+//------------------------------------------------
+
+#include "art_ui.h"      
+
+//------------------------------------------------
+// cc_prune.h
+//------------------------------------------------
+
+#include "cc_prune.h"    
+
+//------------------------------------------------
+// kr_amap.h
+//------------------------------------------------
+
+#include "kr_amap.h"  
+
+//------------------------------------------------
+// kr_inversion.h
+//------------------------------------------------
+
+#include "kr_inversion.h"  
+
+//------------------------------------------------
+// learn_f.h
+//------------------------------------------------
+
+#include "learn_f.h"  
+
+//former static variables
 
 float  LEARN_backprop_OutParameter[1];
 float  TEST_backprop_OutParameter[1];
@@ -318,28 +347,13 @@ int    LEARN_RBF_schritt;
 
 int LEARN_RpropMAP_counter;
 
+//------------------------------------------------
+// update_f.h
+//------------------------------------------------
 
-//scaled_conj_grad
+#include "update_f.h"
 
-float    LEARN_SCG_OutParameter[1];
-int      LEARN_SCG_k, LEARN_SCG_restart_scg,
-         LEARN_SCG_stop_scg,
-         LEARN_SCG_success;
-int      LEARN_SCG_count_under_tol ; 
-float    LEARN_SCG_delta, LEARN_SCG_norm_of_p_2, LEARN_SCG_lambda, LEARN_SCG_lambda_bar, LEARN_SCG_current_error, 
-         LEARN_SCG_old_error, LEARN_SCG_norm_of_rk ;
-
-FlintType* *LEARN_SCG_weights ;
-FlintType  *LEARN_SCG_old_gradient, *LEARN_SCG_p, *LEARN_SCG_r, *LEARN_SCG_old_weights, *LEARN_SCG_step ;
-
-//stochastic_learn_f
-
-float  LEARN_MonteCarlo_OutParameter[1];
-float  TEST_MonteCarlo_OutParameter[1];
-float  LEARN_SimulatedAnnealing_OutParameter[1];
-float  TEST_SimulatedAnnealing_OutParameter[1];
-
-//update_f
+//former static variables
 
 float UPDATE_ART1_syncPropagate_rho;
 float UPDATE_ART2_syncPropagate_rho, 
@@ -353,20 +367,197 @@ float UPDATE_ARTMAP_syncPropagate_rho_a;
 float UPDATE_ARTMAP_syncPropagate_rho_b;
 float UPDATE_ARTMAP_syncPropagate_rho;
 
-//kr_newpattern
+//------------------------------------------------
+// cc_display.h
+//------------------------------------------------
 
-float kr_getSubPatData_dummy_data;
+#include "cc_display.h"  
 
-bool kr_np_order_pat_entries_shuffle;
-int kr_np_order_pat_entries_c_start;
-int kr_np_order_pat_entries_c_end;
+//------------------------------------------------
+// dlvq_learn.h
+//------------------------------------------------
 
-bool kr_np_order_sub_pat_entries_shuffle;
-int kr_np_order_sub_pat_entries_c_start;
-int kr_np_order_sub_pat_entries_c_end;
+#include "dlvq_learn.h"  
 
-int kr_np_order_chunked_pat_entries_c_start;
-int kr_np_order_chunked_pat_entries_c_end;
+//former static variables
+
+int dlvq_learn_cycleCounter,dlvq_learn_noOfTrainingCycles;
+float dlvq_learn_learnParam1,dlvq_learn_learnParam2;
+float dlvq_learn_OutParameter[1];
+
+//------------------------------------------------
+// kr_art1.h
+//------------------------------------------------
+
+#include "kr_art1.h"  
+
+//------------------------------------------------
+// kr_io.h
+//------------------------------------------------
+
+#include "kr_io.h"         
+
+//former not explicitly declared members
+
+bool matchHead(int);
+krui_err krio_writeTimeDelayDefs();
+
+//former static variables
+
+char  krio_getIOVersion_getIOVersion[128];
+char  krio_repchar_str[180];
+
+char  krio_loadNet_netname_str[81],
+      krio_loadNet_netfile_version_str[81],
+      krio_loadNet_learn_func[81],
+      krio_loadNet_update_func[81],
+      krio_loadNet_pruning_func[81],
+      krio_loadNet_ff_learn_func[81];
+
+char   *krio_fmtShapeing_formats[18];
+char   *krio_writeUnitDefinitions_blank;
+
+char   *krio_getTType_ttype[10];
+
+
+//------------------------------------------------
+// stochastic_learn_f.h
+//------------------------------------------------
+
+#include "stochastic_learn_f.h"
+
+//former static variables
+
+float  LEARN_MonteCarlo_OutParameter[1];
+float  TEST_MonteCarlo_OutParameter[1];
+float  LEARN_SimulatedAnnealing_OutParameter[1];
+float  TEST_SimulatedAnnealing_OutParameter[1];
+
+//------------------------------------------------
+// cc_glob.h
+//------------------------------------------------
+
+#include "cc_glob.h"     
+
+//------------------------------------------------
+// kr_art2.h
+//------------------------------------------------
+
+#include "kr_art2.h"  
+
+//------------------------------------------------
+// kr_JordElm.h
+//------------------------------------------------
+
+#include "kr_JordElm.h"    
+
+//former not explicitly declared members (some were added to the .ph files)
+
+//kr_JordElm
+
+void kr_recTouchContextUnits(Unit*);
+
+
+//------------------------------------------------
+// prun_f.h
+//------------------------------------------------
+
+#include "prun_f.h"   
+
+//former static variables
+
+bool PRUNE_Skeletonization_first;
+
+
+//------------------------------------------------
+// tacoma_learn.h
+//------------------------------------------------
+
+#include "tacoma_learn.h"
+
+//------------------------------------------------
+// cc_learn.h
+//------------------------------------------------
+
+#include "cc_learn.h"    
+
+//former static variables
+
+float m_cc_trainOutputUnits_OutParameter[1];
+float m_TEST_CasCor_OutParameter[1];
+int   m_cc_learn_GroupNo;
+float m_cc_learn_LeTe;
+
+//------------------------------------------------
+// init_f.h
+//------------------------------------------------
+
+#include "init_f.h"      
+
+//former static variables
+
+char m_init_f_notfirstrun;
+
+//------------------------------------------------
+// kr_art.h
+//------------------------------------------------
+
+#include "kr_art.h"   
+
+//------------------------------------------------
+// kr_mem.h
+//------------------------------------------------
+
+#include "kr_mem.h"        
+
+//former static variables
+
+int krm_putPattern_in[MAX_NO_OF_VAR_I_DIM],krm_putPattern_out[MAX_NO_OF_VAR_I_DIM];
+
+//------------------------------------------------
+// kr_td.h
+//------------------------------------------------
+
+#include "kr_td.h"          
+
+//former static variables
+
+float  LEARN_TDbackprop_OutParameter[1];
+float  TEST_TDbackprop_OutParameter[1];
+float  LEARN_TDBP_McClelland_OutParameter[1];
+
+//------------------------------------------------
+// remap_f.h
+//------------------------------------------------
+
+#include "remap_f.h"  
+
+//------------------------------------------------
+// tbl_func.h
+//------------------------------------------------
+
+#include "tbl_func.h"
+
+//------------------------------------------------
+// kr_pat_scan.h
+//------------------------------------------------
+
+#include "kr_pat_scan.h"    
+
+//------------------------------------------------
+// kr_pat_parse.h
+//------------------------------------------------
+
+#include "kr_pat_parse.h"   
+
+int ppparse();
+
+//------------------------------------------------
+// Other
+//------------------------------------------------
+
+void setIntArrayToZero(int* array, int n);
+void setFuncInfoDescriptorToZero(FuncInfoDescriptor* f);
 
 };
 
