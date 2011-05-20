@@ -227,3 +227,29 @@ predict.rsnns <- function(object, newdata, ...)
   z
   #predictions
 }
+
+
+#' Generic function to extract a weight matrix.
+#'
+#' @param object the object to which to apply weightMatrix
+#' @param ... additional function parameters
+#' @export
+weightMatrix <- function(object, ...) UseMethod("weightMatrix")
+
+#' Function to extract the weight matrix of an \code{rsnns} object.
+#'
+#' The function calls \code{\link{SnnsRObject$getCompleteWeightMatrix}} and returns its result.
+#' 
+#' @param object the \code{\link{rsnns}} object
+#' @param ... additional function parameters (currently not used)
+#' @return a matrix with all weights from all neurons present in the net. 
+#' @export
+#' @S3method weightMatrix rsnns
+#' @method weightMatrix rsnns
+#' @rdname weightMatrix
+weightMatrix.rsnns <- function(object, ...) {
+  
+  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  
+  object$snnsObject$getCompleteWeightMatrix(setDimNames=TRUE)
+}

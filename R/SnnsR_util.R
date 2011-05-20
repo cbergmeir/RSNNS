@@ -63,16 +63,15 @@ SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
   nUnits <- snnsObject$getNoOfUnits()
   
   for(i in 1:nUnits)  {
+    
     if(i==1)  unit <- snnsObject$getFirstUnit()
     else unit <- snnsObject$getNextUnit()
     
-    #print(unit)
     type <- snnsObject$getUnitTType(unit)
     if(type == resolvedTType) res <- c(res, unit)
-    #print(type)
   }
   
-  return(res)
+  res
 }
 
 #' Get all output units of the net.
@@ -83,7 +82,7 @@ SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
 #' @aliases getAllOutputUnits,SnnsR-method SnnsRObject$getAllOutputUnits
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getAllOutputUnits <- function(snnsObject) {
-  return(snnsObject$getAllUnitsTType("UNIT_OUTPUT"))  
+  snnsObject$getAllUnitsTType("UNIT_OUTPUT")  
 }
 
 #' Get all input units of the net.
@@ -94,7 +93,7 @@ SnnsR__getAllOutputUnits <- function(snnsObject) {
 #' @aliases getAllInputUnits,SnnsR-method SnnsRObject$getAllInputUnits
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getAllInputUnits <- function(snnsObject) {
-  return(snnsObject$getAllUnitsTType("UNIT_INPUT"))  
+  snnsObject$getAllUnitsTType("UNIT_INPUT")  
 }
 
 #' Get all hidden units of the net.
@@ -105,25 +104,47 @@ SnnsR__getAllInputUnits <- function(snnsObject) {
 #' @aliases getAllHiddenUnits,SnnsR-method SnnsRObject$getAllHiddenUnits
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getAllHiddenUnits <- function(snnsObject) {
-  return(snnsObject$getAllUnitsTType("UNIT_HIDDEN"))  
+  snnsObject$getAllUnitsTType("UNIT_HIDDEN")  
 }
 
 
 #' Get the weight matrix between two sets of units
 #' 
-#' @param unitsLayer1 a vector with the numbers of units in layer 1
-#' @param unitsLayer2 a vector with the numbers of units in layer 2
+#' @param unitsSource a vector with numbers identifying the source units
+#' @param unitsTarget a vector with numbers identifying the target units
+#' @param setDimNames indicates, whether names of units are extracted and set as row/col names in the weight matrix
 #' @return the weight matrix between the two sets of neurons 
 #' @rdname SnnsRObject$getWeightMatrix
-#' @usage \S4method{getWeightMatrix}{SnnsR}(unitsLayer1, unitsLayer2)
+#' @usage \S4method{getWeightMatrix}{SnnsR}(unitsSource, unitsTarget, setDimNames)
 #' @aliases getWeightMatrix,SnnsR-method SnnsRObject$getWeightMatrix
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
-SnnsR__getWeightMatrix <- function (snnsObject, unitsLayer1, unitsLayer2) {
+SnnsR__getWeightMatrix <- function (snnsObject, unitsSource, unitsTarget, setDimNames=TRUE) {
   
-  C <- matrix(nrow=length(unitsLayer1), ncol=length(unitsLayer2))
-  for(i in 1:length(unitsLayer1))
-    for(j in 1:length(unitsLayer2)) {
-      res <- snnsObject$areConnectedWeight(unitsLayer1[i],unitsLayer2[j])
+  C <- matrix(nrow=length(unitsSource), ncol=length(unitsTarget))
+  
+  if(setDimNames) {
+    
+    unitsSourceNames <- NULL
+    unitsTargetNames <- NULL
+    
+    for(i in 1:length(unitsSource)) {
+      name <- snnsObject$getUnitName(unitsSource[i])
+      unitsSourceNames <- c(unitsSourceNames, name)
+    }
+    
+    for(j in 1:length(unitsTarget)) {
+      name <- snnsObject$getUnitName(unitsTarget[j])
+      unitsTargetNames <- c(unitsTargetNames, name)
+      
+    }
+
+    rownames(C) <- unitsSourceNames    
+    colnames(C) <- unitsTargetNames    
+  }
+  
+  for(i in 1:length(unitsSource))
+    for(j in 1:length(unitsTarget)) {
+      res <- snnsObject$areConnectedWeight(unitsSource[i],unitsTarget[j])
       C[i,j] <- res$weight
     }
   C
@@ -154,6 +175,48 @@ SnnsR__setTTypeUnitsActFunc <- function(snnsObject, ttype, act_func) {
 
 }
 
+#' Get all units present in the net.
+#' 
+#' @return a vector with integer numbers identifying the units.
+#' @rdname SnnsRObject$getAllUnits
+#' @usage \S4method{getAllUnits}{SnnsR}()
+#' @aliases getAllUnits,SnnsR-method SnnsRObject$getAllUnits
+SnnsR__getAllUnits <- function(snnsObject) {
+  
+  #res <- data.frame()
+  res <- NULL
+  
+  nUnits <- snnsObject$getNoOfUnits()
+  
+  for(i in 1:nUnits)  {
+    if(i==1)  unit <- snnsObject$getFirstUnit()
+    else unit <- snnsObject$getNextUnit()
+    
+    #name <- snnsObject$getUnitName(unit)
+    #res <- rbind(res, data.frame(name=name, unit=unit))
+    res <- c(res, unit)
+  }
+  
+  res
+}
+
+#' Get the complete weight matrix.
+#' 
+#' Get a weight matrix containing all weights of all neurons present in the net.
+#' 
+#' @param setDimNames indicates, whether names of units are extracted and set as row/col names in the weight matrix
+#' @return the complete weight matrix
+#' @rdname SnnsRObject$getCompleteWeightMatrix
+#' @usage \S4method{getCompleteWeightMatrix}{SnnsR}(setDimNames)
+#' @aliases getCompleteWeightMatrix,SnnsR-method SnnsRObject$getCompleteWeightMatrix
+SnnsR__getCompleteWeightMatrix <- function(snnsObject, setDimNames=TRUE) {
+  
+  allUnits <- snnsObject$getAllUnits()
+  res <- snnsObject$getWeightMatrix(allUnits, allUnits, setDimNames=setDimNames)
+  res
+}
+
+
 #' Find all units whose name begins with a given prefix.
 #' 
 #' @param prefix a prefix that the names of the units to find have.
@@ -175,5 +238,5 @@ SnnsR__getUnitsByName <- function(snnsObject, prefix) {
     if(beginsWith(name,prefix)) res <- c(res, unit)
   }
   
-  return(res)
+  res
 }

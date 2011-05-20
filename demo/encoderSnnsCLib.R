@@ -90,6 +90,7 @@ for(i in 1:500) {
 error
 plot(error, type="l")
 
+mySnnsObject$getCompleteWeightMatrix()
+
 mySnnsObject$saveNet(paste(basePath,"encoderSnnsCLib.net",sep=""),"encoderSnnsCLib")
 mySnnsObject$saveNewPatterns(paste(basePath,"encoderSnnsCLib.pat",sep=""), patset$set_no);
-

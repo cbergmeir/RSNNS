@@ -55,3 +55,5 @@ plotROC(predictions[,2], iris$targetsTest[,2])
 confusionMatrix(iris$targetsTrain, encodeClassLabels(fitted.values(model),method="402040", l=0.4, h=0.6))
 
 model
+
+weightMatrix(model)
