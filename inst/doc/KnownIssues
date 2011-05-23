@@ -10,7 +10,7 @@ the configure mechanism of SNNS was mostly removed, possibly loosing compatibili
 architectures SNNS runs on.
 
 -----------------------------------------------------------------------------------------------
-2. Unimplemented network types artmap, hopfield, td
+2. Bignet functions for hopfield, td are missing
 -----------------------------------------------------------------------------------------------
 
 As RSNNS has a 3-level architecture:
@@ -20,34 +20,30 @@ RSNNS low-level api (SnnsR)
 C++ api (SnnsCLib)
 
 methods might be implemented on an architecture level, but not on the next one above. 
-E.g. for artmap networks, there is a convenient create function SnnsCLib::bn_artmap_createNet 
-that is available from R using SnnsRObject$artmap_createNet. So, implementation of an artmap 
-using SnnsR is possible, though there is no RSNNS high-level S3 class "artmap".
-
-Other network types that are supported by SNNS, and though in theory also by SnnsCLib, are 
-hopfield and time-delay (td) networks. However, as there is currently no convenient way to create 
-such functions, one has to do it "manually", using SnnsR functions, as shown e.g. in the encoder 
-demo. Or, alternatively, use an original SNNS installation to create the net, and later use SnnsR
-to load patterns, train it, and visualize results.
-
-If needed, some of these network types might be implemented in the future on higher levels of the api.
+E.g. for hopfield and td networks, there is currently no convenient create function for the 
+networks in RSNNS. However, these can be created with the original bignet tool and then loaded 
+into RSNNS, or they could be created using low-level functionality to create units and links.
+Such a "manual" creation using SnnsR functions is shown e.g. in the encoder demo.
+If you are interested in a particular type of network, don't hesitate to make a feature request.
 
 -----------------------------------------------------------------------------------------------
 3. Radial basis function initialization
 -----------------------------------------------------------------------------------------------
 
-As it turns out to be quite difficult to initialize a RBF network reliably, the SNNS Manual has
+As it turns out to be quite difficult to initialize a RBF network reliably, the SNNS manual has
 a section commenting on this problem. The rbf high-level implementenation of rsnns only implements
 a standard version of this. If you need something different, stick to the low-level api. See the demo
 rbf_sinSnnsR.
 
 -----------------------------------------------------------------------------------------------
-4. .pat files containing variable-dimension patterns are not supported
+4. .pat files containing variable-dimension patterns are only partly supported
 -----------------------------------------------------------------------------------------------
 
-SNNS .pat files can contain patterns with variable dimension. However, loading such files with 
-SnnsCLib::krui_loadNewPatterns is untested, and loading them from R, e.g. with readPatFile, is 
-known not to work.
+SNNS .pat files can contain patterns with variable dimension. Loading and training using the 
+low-level api works as in original SNNS (using SnnsCLib::krui_loadNewPatterns). However, loading 
+such files with readPatFile, is known not to work. The straightforward way around this is to use R 
+for all the preprocessing and extraction of sub-patterns, and to present the already extracted, 
+fixed subpatterns to the net.
 
 -----------------------------------------------------------------------------------------------
 5. Flag for 2D output
@@ -64,33 +60,15 @@ The following functions are currently not wrapped and therewith not callable fro
 their wrapping is prepared and commented-out code is present in SnnsCLibWrapper.cpp.
 Mostly, only wrapping of some parameters is not implemented. 
 
-Integration of functions beginning with -- probably would require some more work. Integration of all other functions is straightforward,
-and was only omitted because they are currently not needed.
-
--- krui_err     deleteUnitList(int no_of_units, int unit_list[]);
--- krui_err     createFTypeEntry(char *Ftype_symbol, char *act_func_name, char *out_func_name, int no_of_sites, char **array_of_site_names);
-int             getFirstPredUnit(FlintType *strength);
-int             getFirstPredUnitAndData(FlintType *strength,float *val_a,float *val_b, float *val_c);
-int             getNextPredUnit(FlintType *strength);
-int             getNextPredUnitAndData(FlintType *strength,float *val_a,float *val_b, float *val_c);
-int             getCurrentPredUnit(FlintType *strength);
-
-int             getFirstSuccUnit(int source_unit_no, FlintType *weight);
-int             getNextSuccUnit(FlintType *weight);
-
-bool            areConnectedWeight(int source_unit_no,int target_unit_no, FlintType *weight);
+krui_err     deleteUnitList(int no_of_units, int unit_list[]);
+krui_err     createFTypeEntry(char *Ftype_symbol, char *act_func_name, char *out_func_name, int no_of_sites, char **array_of_site_names);
 
 struct Link*    createLinkWithAdditionalParameters(int source_unit_no, FlintTypeParam weight,float val_a,float val_b,float val_c);
-krui_err        setRemapFunc(char *name, float *params);
 
--- krui_err     trainNetwork(NetLearnParameters *parameters);
--- krui_err     getNetworkErrorArray(double **learnErrors,int **atEpoch,int *noOfErrors);
+krui_err     trainNetwork(NetLearnParameters *parameters);
+krui_err     getNetworkErrorArray(double **learnErrors,int **atEpoch,int *noOfErrors);
 
-krui_err        setClassDistribution(unsigned int *classDist);
-krui_err        AlignSubPat(int *inpos, int *outpos, int *no);
-krui_err        GetShapeOfSubPattern(int *insize, int *outsize, int *inpos, int *outpos, int n_pos);
-
--- krui_err     saveResultParam(char *filename, bool create,int startpattern, int endpattern,bool includeinput, bool includeoutput,float *Update_param_array,int NoOfUpdateParam);
+(krui_err        setClassDistribution(unsigned int *classDist);)
 
 krui_err        xyTransTable(int op, int *x, int *y, int z);
 krui_err        getUnitCenters(int unit_no, int center_no,struct PositionVector **unit_center);

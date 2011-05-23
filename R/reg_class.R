@@ -43,7 +43,7 @@
 #' #shuffle the vector
 #' iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
 #' 
-#' irisValues <- normalizeData(iris[,1:4], "norm")
+#' irisValues <- iris[,1:4]
 #' irisTargets <- decodeClassLabels(iris[,5])
 #' 
 #' splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
@@ -63,9 +63,56 @@ splitForTrainingAndTest <- function(x, y, ratio=0.15) {
   inputsTest <- x[testIndices,]
   targetsTest <- y[testIndices,]
   
-  return(list(inputsTrain=inputsTrain, targetsTrain=targetsTrain, inputsTest=inputsTest, targetsTest=targetsTest))
-  
+  list(inputsTrain=inputsTrain, targetsTrain=targetsTrain, inputsTest=inputsTest, targetsTest=targetsTest)  
 }
+
+#' Function to normalize training and test set.
+#'
+#' Normalize training and test set as obtained by \code{\link{splitForTrainingAndTest}} in the following way:
+#' The \code{inputsTrain} member is normalized using \code{\link{normalizeData}} with the parameters given in \code{type}.
+#' The normalization parameters obtained during this normalization are then used to normalize the \code{inputsTest} member.
+#' if \code{dontNormTargets} is not set, then the targets are normalized in the same way. In classification problems,
+#' normalizing the targets normally makes no sense. For regression, normalizing also the targets is usually a good idea. 
+#' 
+#' @param x a list containing training and test data. Usually the output of \code{\link{splitForTrainingAndTest}}.
+#' @param dontNormTargets should the target values also be normalized?
+#' @param type type of the normalization. This parameter is passed to \code{\link{normalizeData}}. 
+#' @return a named list with the same elements as \code{\link{splitForTrainingAndTest}}, but with normalized values.
+#' The normalization parameters are appended to each member of the list as attributes, as in \code{\link{normalizeData}}.
+#' @seealso \code{\link{splitForTrainingAndTest}}, \code{\link{normalizeData}}, \code{\link{denormalizeData}}, 
+#' \code{\link{getNormParameters}}
+#' @export
+#' @examples
+#' data(iris)
+#' #shuffle the vector
+#' iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
+#' 
+#' irisValues <- iris[,1:4]
+#' irisTargets <- decodeClassLabels(iris[,5])
+#' 
+#' iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
+#' normTrainingAndTestSet(iris)
+normTrainingAndTestSet <- function(x, dontNormTargets=TRUE, type="norm") {
+  
+  inputsTrain <- normalizeData(x$inputsTrain, type=type)
+  inputsTest <- normalizeData(x$inputsTest, type=attr(inputsTrain, "normParams"))
+  
+  if(dontNormTargets) {
+    
+    targetsTrain <- x$targetsTrain
+    targetsTest <- x$targetsTest
+    
+  } else {
+    
+    targetsTrain <- normalizeData(x$targetsTrain, type=type)
+    targetsTest <- normalizeData(x$targetsTest, type=attr(targetsTrain, "normParams"))
+    
+  }
+  
+  list(inputsTrain=inputsTrain, targetsTrain=targetsTrain, inputsTest=inputsTest, targetsTest=targetsTest)  
+}
+
+
 
 ## Check the input of a reg_class object for eventual problems.
 checkInput <- function(x,y) {

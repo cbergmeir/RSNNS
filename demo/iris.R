@@ -9,14 +9,14 @@ data(iris)
 #shuffle the vector
 iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
 
-#normalize data
-irisValues <- normalizeData(iris[,1:4], "norm")
-#irisValues <- normalizeData(iris[,1:4], "0_1")
-
+irisValues <- iris[,1:4]
 irisTargets <- decodeClassLabels(iris[,5])
 #irisTargets <- decodeClassLabels(iris[,5], valTrue=0.9, valFalse=0.1)
 
 iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
+
+#normalize data
+iris <- normTrainingAndTestSet(iris)
 
 model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFuncParams=c(0.1), 
     maxit=50, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
