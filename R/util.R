@@ -178,3 +178,7 @@ resolveSnnsRDefine <- function(defList, def)  {
 setSnnsRSeedValue <- function(seed) {
   .Call("setCurrentSeedVal", seed, package="RSNNS")  
 }
+
+getKrioTitle <- function(title_num) {
+  .Call("getKrioTitle", title_num, package="RSNNS")  
+}

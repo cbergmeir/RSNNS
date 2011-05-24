@@ -1,0 +1,275 @@
+#############################################################################
+#
+#   This file is part of the R package "RSNNS".
+#
+#   Author: Christoph Bergmeir
+#   Supervisor: José M. Benítez
+#   Copyright (c) DiCITS Lab, Sci2s group, DECSAI, University of Granada.
+#
+#   This library is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU Library General Public
+#   License as published by the Free Software Foundation; either
+#   version 2 of the License, or (at your option) any later version.
+# 
+#   This library is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#   Library General Public License for more details.
+# 
+#   You should have received a copy of the GNU Library General Public License
+#   along with this library; see the file COPYING.LIB.  If not, write to
+#   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+#   Boston, MA 02110-1301, USA.
+#
+#############################################################################
+
+#' Get all units in the net of a certain \code{ttype}.
+#' 
+#' Possible \code{ttype} defined by SNNS are, among others:
+#' "UNIT_OUTPUT", "UNIT_INPUT", and "UNIT_HIDDEN".
+#' 
+#' @param ttype a string containing the \code{ttype}.
+#' @return a vector with integer numbers identifying the units.
+#' @rdname SnnsRObject$getAllUnitsTType
+#' @usage \S4method{getAllUnitsTType}{SnnsR}(ttype)
+#' @aliases getAllUnitsTType,SnnsR-method SnnsRObject$getAllUnitsTType
+#' @seealso \link{SnnsRObject$getAllOutputUnits}, \link{SnnsRObject$getAllInputUnits}, \link{SnnsRObject$getAllHiddenUnits}
+SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
+  
+  res <- NULL
+  
+  resolvedTType <- resolveSnnsRDefine("topologicalUnitTypes", ttype)
+  
+  nUnits <- snnsObject$getNoOfUnits()
+  
+  for(i in 1:nUnits)  {
+    
+    if(i==1)  unit <- snnsObject$getFirstUnit()
+    else unit <- snnsObject$getNextUnit()
+    
+    type <- snnsObject$getUnitTType(unit)
+    if(type == resolvedTType) res <- c(res, unit)
+  }
+  
+  res
+}
+
+#' Get all output units of the net.
+#' 
+#' @return a vector with integer numbers identifying the units.
+#' @rdname SnnsRObject$getAllOutputUnits
+#' @usage \S4method{getAllOutputUnits}{SnnsR}()
+#' @aliases getAllOutputUnits,SnnsR-method SnnsRObject$getAllOutputUnits
+#' @seealso \link{SnnsRObject$getAllUnitsTType}
+SnnsR__getAllOutputUnits <- function(snnsObject) {
+  snnsObject$getAllUnitsTType("UNIT_OUTPUT")  
+}
+
+#' Get all input units of the net.
+#' 
+#' @return a vector with integer numbers identifying the units.
+#' @rdname SnnsRObject$getAllInputUnits
+#' @usage \S4method{getAllInputUnits}{SnnsR}()
+#' @aliases getAllInputUnits,SnnsR-method SnnsRObject$getAllInputUnits
+#' @seealso \link{SnnsRObject$getAllUnitsTType}
+SnnsR__getAllInputUnits <- function(snnsObject) {
+  snnsObject$getAllUnitsTType("UNIT_INPUT")  
+}
+
+#' Get all hidden units of the net.
+#' 
+#' @return a vector with integer numbers identifying the units.
+#' @rdname SnnsRObject$getAllHiddenUnits
+#' @usage \S4method{getAllHiddenUnits}{SnnsR}()
+#' @aliases getAllHiddenUnits,SnnsR-method SnnsRObject$getAllHiddenUnits
+#' @seealso \link{SnnsRObject$getAllUnitsTType}
+SnnsR__getAllHiddenUnits <- function(snnsObject) {
+  snnsObject$getAllUnitsTType("UNIT_HIDDEN")  
+}
+
+
+#' Get the weight matrix between two sets of units
+#' 
+#' @param unitsSource a vector with numbers identifying the source units
+#' @param unitsTarget a vector with numbers identifying the target units
+#' @param setDimNames indicates, whether names of units are extracted and set as row/col names in the weight matrix
+#' @return the weight matrix between the two sets of neurons 
+#' @rdname SnnsRObject$getWeightMatrix
+#' @usage \S4method{getWeightMatrix}{SnnsR}(unitsSource, unitsTarget, setDimNames)
+#' @aliases getWeightMatrix,SnnsR-method SnnsRObject$getWeightMatrix
+#' @seealso \link{SnnsRObject$getAllUnitsTType}
+SnnsR__getWeightMatrix <- function (snnsObject, unitsSource, unitsTarget, setDimNames=TRUE) {
+  
+  C <- matrix(nrow=length(unitsSource), ncol=length(unitsTarget))
+  
+  if(setDimNames) {
+    
+    unitsSourceNames <- NULL
+    unitsTargetNames <- NULL
+    
+    for(i in 1:length(unitsSource)) {
+      name <- snnsObject$getUnitName(unitsSource[i])
+      unitsSourceNames <- c(unitsSourceNames, name)
+    }
+    
+    for(j in 1:length(unitsTarget)) {
+      name <- snnsObject$getUnitName(unitsTarget[j])
+      unitsTargetNames <- c(unitsTargetNames, name)
+      
+    }
+
+    rownames(C) <- unitsSourceNames    
+    colnames(C) <- unitsTargetNames    
+  }
+  
+  for(i in 1:length(unitsSource))
+    for(j in 1:length(unitsTarget)) {
+      res <- snnsObject$areConnectedWeight(unitsSource[i],unitsTarget[j])
+      C[i,j] <- res$weight
+    }
+  C
+}
+
+#\link{getAllUnitsTType,SnnsR-method}
+
+#' Set the activation function for all units of a certain ttype.
+#' 
+#' The function uses the function \code{\link{SnnsRObject$getAllUnitsTType}} to find all units of a certain
+#' \code{ttype}, and sets the activation function of all these units to the given activation function.
+#'  
+#' @param ttype a string containing the \code{ttype}.
+#' @param act_func the name of the activation function to set.
+#' @rdname SnnsRObject$setTTypeUnitsActFunc
+#' @usage \S4method{setTTypeUnitsActFunc}{SnnsR}(ttype, act_func)
+#' @aliases setTTypeUnitsActFunc,SnnsR-method SnnsRObject$setTTypeUnitsActFunc
+#' @seealso \code{\link{SnnsRObject$getAllUnitsTType}}
+#' @examples
+#' \dontrun{SnnsRObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Logistic")}
+SnnsR__setTTypeUnitsActFunc <- function(snnsObject, ttype, act_func) {
+  
+  units <- snnsObject$getAllUnitsTType(ttype)
+  
+  for(unit in units) {
+    snnsObject$setUnitActFunc(unit, act_func)
+  }
+
+}
+
+#' Get all units present in the net.
+#' 
+#' @return a vector with integer numbers identifying the units.
+#' @rdname SnnsRObject$getAllUnits
+#' @usage \S4method{getAllUnits}{SnnsR}()
+#' @aliases getAllUnits,SnnsR-method SnnsRObject$getAllUnits
+SnnsR__getAllUnits <- function(snnsObject) {
+  
+  #res <- data.frame()
+  res <- NULL
+  
+  nUnits <- snnsObject$getNoOfUnits()
+  
+  for(i in 1:nUnits)  {
+    if(i==1)  unit <- snnsObject$getFirstUnit()
+    else unit <- snnsObject$getNextUnit()
+    
+    #name <- snnsObject$getUnitName(unit)
+    #res <- rbind(res, data.frame(name=name, unit=unit))
+    res <- c(res, unit)
+  }
+  
+  res
+}
+
+#' Get the complete weight matrix.
+#' 
+#' Get a weight matrix containing all weights of all neurons present in the net.
+#' 
+#' @param setDimNames indicates, whether names of units are extracted and set as row/col names in the weight matrix
+#' @return the complete weight matrix
+#' @rdname SnnsRObject$getCompleteWeightMatrix
+#' @usage \S4method{getCompleteWeightMatrix}{SnnsR}(setDimNames)
+#' @aliases getCompleteWeightMatrix,SnnsR-method SnnsRObject$getCompleteWeightMatrix
+SnnsR__getCompleteWeightMatrix <- function(snnsObject, setDimNames=TRUE) {
+  
+  allUnits <- snnsObject$getAllUnits()
+  res <- snnsObject$getWeightMatrix(allUnits, allUnits, setDimNames=setDimNames)
+  res
+}
+
+
+#' Find all units whose name begins with a given prefix.
+#' 
+#' @param prefix a prefix that the names of the units to find have.
+#' @return a vector with integer numbers identifying the units.
+#' @rdname SnnsRObject$getUnitsByName
+#' @usage \S4method{getUnitsByName}{SnnsR}(prefix)
+#' @aliases getUnitsByName,SnnsR-method SnnsRObject$getUnitsByName
+SnnsR__getUnitsByName <- function(snnsObject, prefix) {
+  
+  res <- NULL
+  
+  nUnits <- snnsObject$getNoOfUnits()
+  
+  for(i in 1:nUnits)  {
+    if(i==1)  unit <- snnsObject$getFirstUnit()
+    else unit <- snnsObject$getNextUnit()
+    
+    name <- snnsObject$getUnitName(unit)
+    if(beginsWith(name,prefix)) res <- c(res, unit)
+  }
+  
+  res
+}
+
+SnnsR__getInfoHeader <- function(snnsObject) {
+  
+  NoOfUnits <- snnsObject$getNoOfUnits()
+  netInfo <- snnsObject$getNetInfo()
+  
+  names <- NULL
+  values <- NULL
+  
+  res <- data.frame()
+  
+  res <- rbind(res, data.frame(name=getKrioTitle(3), value=NoOfUnits, stringsAsFactors=FALSE))
+  res <- rbind(res, data.frame(name=getKrioTitle(4), value=netInfo$no_of_links, stringsAsFactors=FALSE))
+  res <- rbind(res, data.frame(name=getKrioTitle(5), value=netInfo$no_of_FTable_entries, stringsAsFactors=FALSE))
+  res <- rbind(res, data.frame(name=getKrioTitle(6), value=netInfo$no_of_STable_entries, stringsAsFactors=FALSE))
+  
+  learnFunc <- snnsObject$getLearnFunc()
+  updateFunc <- snnsObject$getUpdateFunc()
+  
+  res <- rbind(res, data.frame(name=getKrioTitle(7), value=learnFunc, stringsAsFactors=FALSE))
+  res <- rbind(res, data.frame(name=getKrioTitle(16), value=updateFunc, stringsAsFactors=FALSE))
+  
+  if(learnFunc == "PruningFeedForward") {
+    res <- rbind(res, data.frame(name=getKrioTitle(19), value=snnsObject$getPrunFunc(), stringsAsFactors=FALSE))
+    res <- rbind(res, data.frame(name=getKrioTitle(20), value=snnsObject$getFFLearnFunc(), stringsAsFactors=FALSE))
+  }
+  
+  res
+}
+
+#SnnsR__showInfoHeader <- function(snnsObject) {
+#  
+#  NoOfUnits <- snnsObject$getNoOfUnits()
+#  netInfo <- snnsObject$getNetInfo()
+#  
+#  cat(   # getKrioTitle(14), 
+#      "\n",
+#      getKrioTitle(3), ": ", NoOfUnits, "\n",
+#      getKrioTitle(4), ": ", netInfo$no_of_links, "\n",
+#      getKrioTitle(5), ": ", netInfo$no_of_FTable_entries, "\n",
+#      getKrioTitle(6), ": ", netInfo$no_of_STable_entries, "\n\n")
+#  
+#  learnFunc <- snnsObject$getLearnFunc()
+#  updateFunc <- snnsObject$getUpdateFunc()
+#  
+#  cat( getKrioTitle(7), ": ", learnFunc, "\n")
+#  cat( getKrioTitle(16), ": ", updateFunc, "\n" )
+#  
+#  if(learnFunc == "PruningFeedForward") {
+#    cat( getKrioTitle(19), ": ", snnsObject$getPrunFunc(), "\n" )
+#    cat( getKrioTitle(20), ": ", snnsObject$getFFLearnFunc(), "\n" )
+#  }
+#}

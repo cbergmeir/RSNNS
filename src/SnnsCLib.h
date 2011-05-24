@@ -169,6 +169,36 @@ int kr_np_order_sub_pat_entries_c_end;
 int kr_np_order_chunked_pat_entries_c_start;
 int kr_np_order_chunked_pat_entries_c_end;
 
+
+//------------------------------------------------
+// kr_io.h
+//------------------------------------------------
+
+#include "kr_io.h"         
+
+//former not explicitly declared members
+
+bool matchHead(int);
+krui_err krio_writeTimeDelayDefs();
+
+//former static variables
+
+char  krio_getIOVersion_getIOVersion[128];
+char  krio_repchar_str[180];
+
+char  krio_loadNet_netname_str[81],
+      krio_loadNet_netfile_version_str[81],
+      krio_loadNet_learn_func[81],
+      krio_loadNet_update_func[81],
+      krio_loadNet_pruning_func[81],
+      krio_loadNet_ff_learn_func[81];
+
+char   *krio_fmtShapeing_formats[18];
+char   *krio_writeUnitDefinitions_blank;
+
+char   *krio_getTType_ttype[10];
+
+
 private:
 
 //------------------------------------------------
@@ -390,35 +420,6 @@ float dlvq_learn_OutParameter[1];
 //------------------------------------------------
 
 #include "kr_art1.h"  
-
-//------------------------------------------------
-// kr_io.h
-//------------------------------------------------
-
-#include "kr_io.h"         
-
-//former not explicitly declared members
-
-bool matchHead(int);
-krui_err krio_writeTimeDelayDefs();
-
-//former static variables
-
-char  krio_getIOVersion_getIOVersion[128];
-char  krio_repchar_str[180];
-
-char  krio_loadNet_netname_str[81],
-      krio_loadNet_netfile_version_str[81],
-      krio_loadNet_learn_func[81],
-      krio_loadNet_update_func[81],
-      krio_loadNet_pruning_func[81],
-      krio_loadNet_ff_learn_func[81];
-
-char   *krio_fmtShapeing_formats[18];
-char   *krio_writeUnitDefinitions_blank;
-
-char   *krio_getTType_ttype[10];
-
 
 //------------------------------------------------
 // stochastic_learn_f.h
