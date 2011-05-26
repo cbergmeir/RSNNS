@@ -42,3 +42,29 @@ SnnsR__resetRSNNS <- function(snnsObject)  {
   snnsObject$deleteNet()
   
 }
+
+
+SnnsR__serialize <- function(snnsObject) {
+  
+  filename <- tempfile(pattern = "rsnns")
+  snnsObject$saveNet(filename, "RSNNS_untitled")
+  file <- file(filename, "r")
+  s <- readLines(file)
+  close(file)
+  unlink(filename)    
+  snnsObject@variables$serialization <- s
+  s
+}
+
+
+SnnsR__deserialize <- function(snnsObject, str) {
+  
+  filename <- tempfile(pattern = "rsnns")
+  file <- file(filename, "w")
+  writeLines(str, con=file)
+  close(file)
+  
+  snnsObject$loadNet(filename)
+  
+  unlink(filename)
+}

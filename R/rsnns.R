@@ -34,8 +34,7 @@
 #' @S3method print rsnns
 #' @method print rsnns
 # @rdname rsnns
-print.rsnns <- function(x, ...)
-{
+print.rsnns <- function(x, ...) {
   if(!inherits(x, "rsnns")) stop("not a legitimate rsnns model")
   
   cat("Class: ", paste(class(x), sep="", collapse="->"), "\n", sep="")
@@ -54,7 +53,40 @@ print.rsnns <- function(x, ...)
   print(x$archParams)
   cat("All members of model:\n",sep="") 
   print(names(x))
+  
+  invisible(x)
 }
+
+#' @export
+extractNetInfo <- function(object, ...) {
+  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  
+  object$snnsObject$extractNetInfo()
+}
+
+## @export
+#save.rsnns <- function(object, path, name=deparse(object)) {
+#  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+#  
+#  object$serialization <- object$snnsObject$serialize()
+#  
+#  #assign(name, object)
+#  #save(list=name, file = assemblePathName(path, paste(name, ".RData", sep="")))                
+#  save(object, file = path)
+#  
+#  netName <- "untitled"
+#}
+
+## @export
+#load.rsnns <- function(filename, objectName) {
+#
+#  load(filename)
+#  
+#  object <- get("objectName")
+#  object$snnsObject <- deserializeSnnsR(object$serialization)
+#  
+#  object
+#}
 
 #' Generic summary function for \code{rsnns} objects.
 #'
@@ -69,18 +101,31 @@ print.rsnns <- function(x, ...)
 #' @S3method summary rsnns
 #' @method summary rsnns
 # @rdname rsnns
-summary.rsnns <- function(object, ...)
-{
+summary.rsnns <- function(object, origSnnsFormat=FALSE, ...) {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
-  filename <- tempfile(pattern = "rsnns")
-  object$snnsObject$saveNet(filename, " ")
-  file <- file(filename, "r")
-  s <- readLines(file)
-  close(file)
-  unlink(filename)
+  
+  if(origSnnsFormat) {
+
+    s <- object$snnsObject$serialize()
+    
+#    filename <- tempfile(pattern = "rsnns")
+#    object$snnsObject$saveNet(filename, " ")
+#    file <- file(filename, "r")
+#    s <- readLines(file)
+#    close(file)
+#    unlink(filename)    
+  } else {
+    s <- extractNetInfo(object)
+    
+    if(length(s$fullWeightMatrix) > 20*20)
+      s$fullWeightMatrix <- "omitting full weight matrix as it is bigger than 20*20"
+      
+  }
   s
 }
 
+
+  
 # Most of the parameters are directly passed to \code{\link{rsnnsObjectFactory}} or \code{\link{train}}.
 
 #' Object factory for generating \code{rsnns} objects.
@@ -199,8 +244,7 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
 #' @method predict rsnns
 # @rdname rsnns
 #' @export
-predict.rsnns <- function(object, newdata, ...)
-{
+predict.rsnns <- function(object, newdata, ...) {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   #type <- match.arg(type)
   if(missing(newdata)) z <- fitted(object)

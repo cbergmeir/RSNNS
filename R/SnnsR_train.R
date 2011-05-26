@@ -57,7 +57,8 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="Quickprop", learnFuncParams=c(0.2, 0, 0, 0),
     updateFunc="Topological_Order", updateFuncParams=c(0.0), outputMethod="reg_class", 
-    maxit=100, shufflePatterns=TRUE, computeError=TRUE, inputsTest=NULL, targetsTest=NULL) {
+    maxit=100, shufflePatterns=TRUE, computeError=TRUE, inputsTest=NULL, targetsTest=NULL, 
+    serializeTrainedObject=TRUE) {
 
   testing <- TRUE
   if(is.null(inputsTest)) testing <- FALSE
@@ -163,5 +164,8 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
   #has to be deleted at last
   snnsObject$deletePatSet(patSetTrain$set_no)
   
-  return(result)
+  if(serializeTrainedObject)
+    snnsObject$serialize()
+  
+  result
 }

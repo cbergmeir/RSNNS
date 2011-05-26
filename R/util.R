@@ -182,3 +182,12 @@ setSnnsRSeedValue <- function(seed) {
 getKrioTitle <- function(title_num) {
   .Call("getKrioTitle", title_num, package="RSNNS")  
 }
+
+is.nil <- function(ptr) {
+  
+  if (class(ptr)!="externalptr") stop("argument given is not a pointer")
+  
+  res <- .Call("isnil", ptr)
+  
+  res
+}

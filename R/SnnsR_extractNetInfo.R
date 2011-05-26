@@ -100,6 +100,8 @@ SnnsR__getAllHiddenUnits <- function(snnsObject) {
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getWeightMatrix <- function (snnsObject, unitsSource, unitsTarget, setDimNames=TRUE) {
   
+  blank <- " "
+
   C <- matrix(nrow=length(unitsSource), ncol=length(unitsTarget))
   
   if(setDimNames) {
@@ -109,11 +111,15 @@ SnnsR__getWeightMatrix <- function (snnsObject, unitsSource, unitsTarget, setDim
     
     for(i in 1:length(unitsSource)) {
       name <- snnsObject$getUnitName(unitsSource[i])
+      if(is.null(name)) name <- blank
+      
       unitsSourceNames <- c(unitsSourceNames, name)
     }
     
     for(j in 1:length(unitsTarget)) {
       name <- snnsObject$getUnitName(unitsTarget[j])
+      if(is.null(name)) name <- blank
+      
       unitsTargetNames <- c(unitsTargetNames, name)
       
     }
@@ -229,7 +235,7 @@ SnnsR__getInfoHeader <- function(snnsObject) {
   names <- NULL
   values <- NULL
   
-  res <- data.frame()
+  res <- NULL
   
   res <- rbind(res, data.frame(name=getKrioTitle(3), value=NoOfUnits, stringsAsFactors=FALSE))
   res <- rbind(res, data.frame(name=getKrioTitle(4), value=netInfo$no_of_links, stringsAsFactors=FALSE))
@@ -249,6 +255,207 @@ SnnsR__getInfoHeader <- function(snnsObject) {
   
   res
 }
+
+
+
+SnnsR__getUnitDefinitions <- function(snnsObject) {
+  
+  blank <- " "
+  snnsObject$getUnitDefaults()
+  
+  res <- NULL
+  
+  unit_no <- snnsObject$getFirstUnit()
+  
+  while(unit_no > 0)  {
+    
+    pos <- snnsObject$getUnitPosition( unit_no)
+    
+    u_name <- snnsObject$getUnitName( unit_no )
+    
+    if (is.null(u_name)) u_name <- blank
+    
+    u_type <- snnsObject$getUnitFTypeName( unit_no )
+    
+    if(is.null(u_type)) {
+      
+      no_Ftype <- TRUE
+      
+      u_type <- blank
+      
+      act_func <- snnsObject$getUnitActFuncName( unit_no )
+      out_func <- snnsObject$getUnitOutFuncName( unit_no )
+      
+    } else {
+      
+      no_Ftype <- FALSE
+      
+      act_func <- NULL
+      out_func <- NULL
+      
+    }
+    
+    if(is.null(act_func)) act_func <- blank
+    if(is.null(out_func)) out_func <- blank
+    
+    unit_act <- snnsObject$getUnitActivation( unit_no ) 
+    unit_bias <- snnsObject$getUnitBias( unit_no )
+    unit_ttype <- snnsObject$getUnitTType( unit_no )
+    
+    unit_ttype <- getSnnsRDefine("topologicalUnitTypes", unit_ttype)
+    
+    
+    sites <- NULL
+    
+    if ( no_Ftype )  {
+      
+      site_no <- snnsObject$setFirstSite()
+      
+      while(site_no > 0) {
+        
+        sites <- c(sites, snnsObject$getSiteName())
+        site_no <- snnsObject$setNextSite()
+      }
+    }
+    
+    if(is.null(sites)) {
+      siteNames <- blank
+    } else {
+      siteNames <- paste(sites, sep="", collapse=", ")  
+    }
+    
+    
+    res <- rbind(res, data.frame(unitNo=unit_no, unitName=u_name,
+            unitAct=unit_act,
+            unitBias=unit_bias,
+            type=unit_ttype,
+            posX=pos$x, posY=pos$y, posZ=pos$z, 
+            actFunc=act_func, outFunc=out_func, sites=siteNames, 
+            stringsAsFactors=FALSE))
+    
+    unit_no <- snnsObject$getNextUnit()  
+  }
+  
+  res  
+}
+
+
+SnnsR__getSiteDefinitions <- function(snnsObject) {
+  
+  res <- NULL
+  
+  tableEntry <- snnsObject$getFirstSiteTableEntry()
+  
+  while(tableEntry$ret) {
+    
+    res <- rbind(res, data.frame(siteName=tableEntry$site_name, 
+            siteFunc=tableEntry$site_func, stringsAsFactors=FALSE))
+    
+    tableEntry <- snnsObject$getNextSiteTableEntry()
+  }
+  
+  res  
+}
+
+
+SnnsR__getTypeDefinitions <- function(snnsObject) {
+  
+  blank <- " "
+  
+  res <- NULL
+  
+  isEntry <- snnsObject$setFirstFTypeEntry()
+  
+  while(isEntry) {
+    
+    sites <- NULL
+    
+    isSite <- snnsObject$setFirstFTypeSite()
+    
+    while(isSite) {
+      
+      sites <- c(sites, snnsObject$getFTypeSiteName())
+      isSite <- snnsObject$setNextFTypeSite()
+    }
+    
+    if(is.null(sites)) {
+      siteNames <- blank
+    } else {
+      siteNames <- paste(sites, sep="", collapse=", ")  
+    }
+    
+    res <- rbind(res, data.frame(typeName=snnsObject$getFTypeName(), 
+            typeActFuncName=snnsObject$getFTypeActFuncName(), 
+            typeOutFuncName=snnsObject$getFTypeOutFuncName(),
+            sites=siteNames,
+            stringsAsFactors=FALSE))
+    
+    isEntry <- snnsObject$setNextFTypeEntry()
+  }
+  
+  res  
+}
+
+SnnsR__getConnectionDefs <- function(snnsObject) {
+  
+  res <- NULL
+  
+  # this should be a reimplementation of krio_writeConnectionDefs() in kr_io.cpp
+  # however, it is currently not implemented. 
+  
+  res
+}
+
+SnnsR__getSubnetDefs <- function(snnsObject) {
+  
+  res <- NULL
+  
+  # this should be a reimplementation of krio_writeSubnetDefs() in kr_io.cpp
+  # however, it is currently not implemented. 
+  
+  res
+}
+
+SnnsR__getLayerDefs <- function(snnsObject) {
+  
+  res <- NULL
+  
+  # this should be a reimplementation of krio_writeLayerDefs() in kr_io.cpp
+  # however, it is currently not implemented. 
+  
+  res
+}
+
+SnnsR__getTimeDelayDefs <- function(snnsObject) {
+  
+  res <- NULL
+  
+  # this should be a reimplementation of krio_writeTimeDelayDefs() in kr_io.cpp
+  # however, it is currently not implemented. 
+  
+  res
+}
+
+
+SnnsR__extractNetInfo <- function(snnsObject) {
+  
+  res <- list()
+  
+  res[["infoHeader"]] <- snnsObject$getInfoHeader()
+  res[["typeDefinitions"]] <- snnsObject$getTypeDefinitions()
+  res[["unitDefinitions"]] <- snnsObject$getUnitDefinitions()
+  res[["siteDefinitions"]] <- snnsObject$getSiteDefinitions()
+
+  res[["fullWeightMatrix"]] <- snnsObject$getWeightMatrix(snnsObject$getAllUnits(), snnsObject$getAllUnits())
+  
+  res[["connectionDefs"]] <- snnsObject$getConnectionDefs()
+  res[["subnetDefs"]] <- snnsObject$getSubnetDefs()
+  res[["layerDefs"]] <- snnsObject$getLayerDefs()
+  res[["timeDelayDefs"]] <- snnsObject$getTimeDelayDefs()
+  
+  res
+}
+
 
 #SnnsR__showInfoHeader <- function(snnsObject) {
 #  

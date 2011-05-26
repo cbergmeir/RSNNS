@@ -28,7 +28,10 @@
 #' a C++ object of type SnnsCLib, i.e. an instance of the SNNS kernel.
 #' 
 #' @slot snnsCLibPointer A pointer to the corresponding C++ class
-setClass( "SnnsR", representation( snnsCLibPointer = "externalptr" ) )
+setClass( "SnnsR", representation( variables="environment" ))
+
+#snnsCLibPointer = "externalptr",
+#serialization="character")
 
 #' Enable calling of C++ functions as methods of \code{SnnsR-class} objects.
 #'
@@ -52,6 +55,17 @@ setMethod( "$", "SnnsR", function(x, name ){
       function(...) {
         #print(x)
         
+        if(is.nil(x@variables$snnsCLibPointer)) {
+          if( (length( x@variables$serialization ) != 1) && (x@variables$serialization[1] != "")) {
+            
+            eval.parent({x@variables$snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")}, 2 )
+            SnnsR__deserialize(x, x@variables$serialization)
+          } else {
+            warning("The internal SnnsCLib object is not present, nor its serialization. Exiting..")
+            return()
+          }
+        }
+        
         myFunc <- mget(paste( "SnnsR", name, sep = "__" ), mode="any", 
             envir = as.environment(-1), 
             ifnotfound = list(FALSE), inherits=TRUE)
@@ -63,14 +77,14 @@ setMethod( "$", "SnnsR", function(x, name ){
           res <- myFunc[[1]](x, ... )
         }
         else {
-          res <- .Call( paste( "SnnsCLib", name, sep = "__" ) , x@snnsCLibPointer , ... )
+          res <- .Call( paste( "SnnsCLib", name, sep = "__" ) , x@variables$snnsCLibPointer , ... )
         }
         
         if(is.list(res))
           if(!is.null(res$err)) {
             err <- res$err
             if(err != 0) {
-              msg <- .Call( "SnnsCLib__error", x@snnsCLibPointer , err )
+              msg <- .Call( "SnnsCLib__error", x@variables$snnsCLibPointer , err )
               warning(paste("SNNS error message in ", name, " : ", msg, sep=""))
             }
           }
@@ -85,9 +99,13 @@ setMethod( "$", "SnnsR", function(x, name ){
 SnnsRObjectFactory <- function(){
 
   snnsObject <- new( "SnnsR")
-  snnsObject@snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")
   
-  return(snnsObject)
+  snnsObject@variables <- new.env()
+  
+  snnsObject@variables$snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")
+  snnsObject@variables$serialization <- ""
+  
+  snnsObject
 }
 
 

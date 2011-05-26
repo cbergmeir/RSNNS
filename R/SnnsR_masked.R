@@ -38,9 +38,9 @@
 SnnsR__initializeNet <- function(snnsObject, parameterInArray, initFunc) {
   
   if(!missing(initFunc)) {
-    .Call("SnnsCLib__setInitialisationFunc", snnsObject@snnsCLibPointer, initFunc, package="RSNNS")
+    .Call("SnnsCLib__setInitialisationFunc", snnsObject@variables$snnsCLibPointer, initFunc, package="RSNNS")
   }
-  err <- .Call("SnnsCLib__initializeNet", snnsObject@snnsCLibPointer, parameterInArray, package="RSNNS")
+  err <- .Call("SnnsCLib__initializeNet", snnsObject@variables$snnsCLibPointer, parameterInArray, package="RSNNS")
   err
 }
 
@@ -77,7 +77,7 @@ SnnsR__setUnitDefaults <- function(snnsObject, act, bias, st, subnet_no, layer_n
     act <- as.numeric(act[1])    
   }
     
-  err <- .Call("SnnsCLib__setUnitDefaults", snnsObject@snnsCLibPointer, act, bias, st, subnet_no, layer_no, 
+  err <- .Call("SnnsCLib__setUnitDefaults", snnsObject@variables$snnsCLibPointer, act, bias, st, subnet_no, layer_no, 
       act_func, out_func, package="RSNNS")
   err
 }
