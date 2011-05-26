@@ -522,7 +522,7 @@ Art1_del_layer = NULL;
 //------------------------------------------------
 
 file_in = NULL;
-file_out = NULL;
+//file_out = NULL;
 
 is_subnet_info = 0;
 is_layer_info = 0;

@@ -73,6 +73,9 @@
 
 #include "version.h"
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 //--------------------------------
 //Topological Unit Types for bn_JordElm, cc_glob, ...

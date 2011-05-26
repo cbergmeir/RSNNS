@@ -56,7 +56,7 @@ setMethod( "$", "SnnsR", function(x, name ){
         #print(x)
         
         if(is.nil(x@variables$snnsCLibPointer)) {
-          if( (length( x@variables$serialization ) != 1) && (x@variables$serialization[1] != "")) {
+          if( x@variables$serialization[1] != "") {
             
             eval.parent({x@variables$snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")}, 2 )
             SnnsR__deserialize(x, x@variables$serialization)

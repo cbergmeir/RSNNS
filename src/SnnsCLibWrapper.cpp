@@ -1897,6 +1897,27 @@ RcppExport SEXP SnnsCLib__saveNet(SEXP xp, SEXP filename, SEXP netname) {
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+RcppExport SEXP SnnsCLib__serializeNet(SEXP xp, SEXP netname) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  std::string p1 = Rcpp::as<std::string>( netname );  
+
+  std::stringstream buf;
+
+  Rprintf("0");
+
+  int err = snnsCLib->krui_serializeNet(&buf, const_cast<char*>(p1.c_str()));
+
+  Rprintf("1");
+  Rprintf(buf.str().c_str());
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "serialization" ) = buf.str()
+    	) ;
+}
+
+
 RcppExport SEXP SnnsCLib__loadNet(SEXP xp, SEXP filename) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 

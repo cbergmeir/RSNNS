@@ -79,6 +79,7 @@
 #include <stdio.h>
 
 #include "SnnsCLib.h"
+#include "SnnsCLib_util.h"
 
 #ifdef ultrix
 #define retchk( ret_code )  if ((ret_code) == EOF)  return( KRERR_IO )
@@ -263,43 +264,43 @@ krui_err  SnnsCLib::krio_writeHeader(char *version, char *net_name)
   clock = 1;
   (void) time( (time_t *) &clock);
 
-  err = fprintf( file_out, "%s %s\n%s %s\n%s : ",
+  *stream_out << format( "%s %s\n%s %s\n%s : ",
                 title[0], version, title[1], 
 		ctime( (time_t *) &clock), title[2] );
-  retchk( err );
+  //retchk( err );
 
   if (net_name == NULL)
-    err = fprintf( file_out, "UNTITLED\n" );
+    *stream_out << format( "UNTITLED\n" );
   else
-    err = fprintf( file_out, "%s\n", net_name );
+    *stream_out << format( "%s\n", net_name );
 
-  retchk( err );
-  err = fprintf( file_out, "%s :\n%s : %i\n%s : %i\n%s : %i\n%s : %i\n",
+  //retchk( err );
+  *stream_out << format( "%s :\n%s : %i\n%s : %i\n%s : %i\n%s : %i\n",
                 title[14],
                 title[3], NoOfUnits,
                 title[4], kr_io_NoOfLinks,
                 title[5], no_of_FTable_entries,
                 title[6], no_of_STable_entries );
 
-  retchk( err );
+  //retchk( err );
 
   learn_func = krui_getLearnFunc();
 
-  err = fprintf( file_out, "\n\n%s : %s\n",
+  *stream_out << format( "\n\n%s : %s\n",
                 title[7], learn_func );
-  retchk( err );
-  err = fprintf( file_out, "%s   : %s\n",
+  //retchk( err );
+  *stream_out << format( "%s   : %s\n",
                 title[16], krui_getUpdateFunc() );
-  retchk( err );
+  //retchk( err );
 
   if (strcmp (learn_func, "PruningFeedForward") == 0)
   {
-  err = fprintf( file_out, "%s   : %s\n",
+  *stream_out << format( "%s   : %s\n",
                 title[19], krui_getPrunFunc() );
-  retchk( err );
-  err = fprintf( file_out, "%s   : %s\n",
+  //retchk( err );
+  *stream_out << format( "%s   : %s\n",
                 title[20], krui_getFFLearnFunc() );
-  retchk( err );
+  //retchk( err );
   }
 
   return( KRERR_NO_ERROR );
@@ -902,25 +903,25 @@ krui_err  SnnsCLib::krio_writeSiteDefinitions(void)
     return( 0 );
 
   err = krio_fmtShapeing( SITE_DEF );
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, "\n\n%s :\n\n", title[8] );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr1 );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( "\n\n%s :\n\n", title[8] );
+  //retchk( err );
+  *stream_out << format( fmt_hdr1 );
+  //retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   do
     {
-    err = fprintf( file_out, fmt_shape1,
+    *stream_out << format( fmt_shape1,
                    site_name, site_func );
-    retchk( err );
+    //retchk( err );
   }
   while (krui_getNextSiteTableEntry( &site_name, &site_func ) );
 
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
   return( 0 );
 }
 
@@ -946,42 +947,42 @@ krui_err  SnnsCLib::krio_writeTypeDefinitions(void)
     return( 0 );
 
   err = krio_fmtShapeing( TYPE_DEF );
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, "\n\n%s :\n\n", title[9] );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr1 );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( "\n\n%s :\n\n", title[9] );
+  //retchk( err );
+  *stream_out << format( fmt_hdr1 );
+  //retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   do  {
-    err = fprintf( file_out, fmt_shape1,
+    *stream_out << format( fmt_shape1,
                    krui_getFTypeName(),
                    krui_getFTypeActFuncName(), krui_getFTypeOutFuncName() );
-    retchk( err );
+    //retchk( err );
 
     if ( krui_setFirstFTypeSite() )  {
       second = FALSE;
       do  {
         if (second)  {
-	  err = fprintf( file_out, fmt_blank );
-          retchk( err );
+	  *stream_out << format( fmt_blank );
+          //retchk( err );
 	}
 
-	err = fprintf( file_out, " %-s", krui_getFTypeSiteName() );
-        retchk( err );
+	*stream_out << format( " %-s", krui_getFTypeSiteName() );
+        //retchk( err );
         second = TRUE;
       }
       while ( krui_setNextFTypeSite() );
     }
 
-    err = fprintf( file_out, "\n" );
-    retchk( err );
+    *stream_out << format( "\n" );
+    //retchk( err );
   }
   while (krui_setNextFTypeEntry() );
 
-  err = fprintf( file_out, fmt_hdr2 );
+  *stream_out << format( fmt_hdr2 );
   if (err <= 0)  return( err );
 
   return( 0 );
@@ -1045,31 +1046,31 @@ krui_err  SnnsCLib::krio_writeDefaultDefinitions(void)
 
 
   err = krio_fmtShapeing( DEFAULT_DEF );
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, "\n\n%s :\n\n", title[13] );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr1 );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( "\n\n%s :\n\n", title[13] );
+  //retchk( err );
+  *stream_out << format( fmt_hdr1 );
+  //retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   krui_getUnitDefaults( &act, &bias, &st, &subnet_no, &layer_no,
                         &act_func, &out_func );
 
   if ((act_func != NULL) && (out_func != NULL))  {
-    err = fprintf( file_out, fmt_shape1, act, bias, getTType( st ),
+    *stream_out << format( fmt_shape1, act, bias, getTType( st ),
                    subnet_no, layer_no, act_func, out_func );
   }
   else  {
-    err = fprintf( file_out, fmt_shape1, act, bias, getTType( st ),
+    *stream_out << format( fmt_shape1, act, bias, getTType( st ),
                    subnet_no, layer_no, " ", " " );
   }
 
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   return( 0 );
 }
@@ -1112,14 +1113,14 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
   if (NoOfUnits <= 0)  return( KRERR_NO_ERROR );
 
   err = krio_fmtShapeing( UNIT_DEF );
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, "\n\n%s :\n\n", title[10] );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr1 );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( "\n\n%s :\n\n", title[10] );
+  //retchk( err );
+  *stream_out << format( fmt_hdr1 );
+  //retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   krui_getUnitDefaults( &act_def, &bias_def, &st_def, &subnet_no, &layer_no,
                         &act_func_def, &out_func_def );
@@ -1145,7 +1146,7 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 
       if (!writeUnitActFuncName && !writeUnitOutFuncName)  {
 
-    err = fprintf( file_out, fmt_shape2,
+    *stream_out << format( fmt_shape2,
 		   u_no, krio_writeUnitDefinitions_blank, u_name,
                    krui_getUnitActivation( unit_no ),
                    krui_getUnitBias( unit_no ),
@@ -1158,7 +1159,7 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 	if (!writeUnitOutFuncName)  out_func = krio_writeUnitDefinitions_blank;
 
 
-    err = fprintf( file_out, fmt_shape1,
+    *stream_out << format( fmt_shape1,
 		   u_no, krio_writeUnitDefinitions_blank, u_name,
                    krui_getUnitActivation( unit_no ),
                    krui_getUnitBias( unit_no ),
@@ -1169,7 +1170,7 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
     }
     else  {
 
-    err = fprintf( file_out, fmt_shape2,
+    *stream_out << format( fmt_shape2,
                    u_no, u_type, u_name,
                    krui_getUnitActivation( unit_no ),
                    krui_getUnitBias( unit_no ),
@@ -1181,33 +1182,33 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
     }
 
 
-    retchk( err );
+    //retchk( err );
 
     if ( no_Ftype )  {
       if ( krui_setFirstSite() )  {
         second = FALSE;
         do  {
           if (second)  {
-	    err = fprintf( file_out, fmt_blank );
-	    retchk( err );
+	    *stream_out << format( fmt_blank );
+	    //retchk( err );
 	  }
 
-	  err = fprintf( file_out, " %-s", krui_getSiteName() );
-          retchk( err );
+	  *stream_out << format( " %-s", krui_getSiteName() );
+          //retchk( err );
           second = TRUE;
 	}
         while ( krui_setNextSite() );
       }
     }
 
-    err = fprintf( file_out, "\n" );
-    retchk( err );
+    *stream_out << format( "\n" );
+    //retchk( err );
     u_no++;
   }
   while ( (unit_no = krui_getNextUnit() ) > 0);
 
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   return( KRERR_NO_ERROR );
 }
@@ -1243,12 +1244,12 @@ krui_err    SnnsCLib::krio_writeTimeDelayDefs(void)
   if ((strcmp (krui_getLearnFunc(), "TimeDelayBackprop") == 0) || 
       (strcmp (krui_getLearnFunc(), "TDBP_McClelland") == 0)) {
   
-     err = fprintf( file_out, "\n\n%s :\n\n", title[18] ); 
-     retchk( err );
-     err = fprintf (file_out, "%s\n", headers[8]);
-     retchk (err);
-     err = fprintf (file_out, "-----|-----|-----|------|------|-------\n");
-     retchk (err);
+     *stream_out << format( "\n\n%s :\n\n", title[18] ); 
+     //retchk( err );
+     *stream_out << format( "%s\n", headers[8]);
+     //retchk (err);
+     *stream_out << format( "-----|-----|-----|------|------|-------\n");
+     //retchk (err);
 
      unit_no = krui_getFirstUnit ();
      u_no = 1;
@@ -1263,17 +1264,17 @@ krui_err    SnnsCLib::krio_writeTimeDelayDefs(void)
        soff = unit_ptr->TD.source_offset;
        conn_type = unit_ptr->TD.td_connect_typ;
     
-       err = fprintf (file_out, "%4d |%4d |%4d |%5d |%5d |%6d\n", 
+       *stream_out << format( "%4d |%4d |%4d |%5d |%5d |%6d\n", 
 		      u_no, lln, lun, toff, soff, conn_type);
-       retchk (err);
+       //retchk (err);
     
        unit_no = krui_getNextUnit ();
        u_no++;
 
      } while (unit_no != 0);
 
-     err = fprintf(file_out, "-----|-----|-----|------|------|-------\n");
-     retchk (err);
+     *stream_out << format( "-----|-----|-----|------|------|-------\n");
+     //retchk (err);
 
    }
   
@@ -1310,27 +1311,27 @@ krui_err  SnnsCLib::krio_writeSourcesAndWeights(void)
 
   do  {
     if (second)  {
-      err = fprintf( file_out, "," );
-      retchk( err );
+      *stream_out << format( "," );
+      //retchk( err );
     }
 
     if (++i > max_connects_per_line)  {
       i = 1;
-      err = fprintf( file_out, fmt_blank );
-      retchk( err );
+      *stream_out << format( fmt_blank );
+      //retchk( err );
     }
     if ((tacoma_mode)&&((val_a != 0.0)&&(val_b != 0.0)))
-      err = fprintf( file_out, fmt_shape4, source_unit, weight, val_b, val_a);
+      *stream_out << format( fmt_shape4, source_unit, weight, val_b, val_a);
     else
-      err = fprintf( file_out, fmt_shape3, source_unit, weight );
-    retchk( err );
+      *stream_out << format( fmt_shape3, source_unit, weight );
+    //retchk( err );
 
     second = TRUE;
   }
   while ( (source_unit = krui_getNextPredUnitAndData( &weight, &val_a, &val_b, &val_c )) > 0);
 
-  err = fprintf( file_out, "\n" );
-  retchk( err );
+  *stream_out << format( "\n" );
+  //retchk( err );
 
   return( KRERR_NO_ERROR );
 }
@@ -1358,14 +1359,14 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
   if (kr_io_NoOfLinks == 0)  return( 0 );
 
   err = krio_fmtShapeing( CONNECT_DEF );
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, "\n\n%s :\n\n", title[11] );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr1 );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( "\n\n%s :\n\n", title[11] );
+  //retchk( err );
+  *stream_out << format( fmt_hdr1 );
+  //retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   unit_no = krui_getFirstUnit();
   target_unit = 1;
@@ -1373,10 +1374,10 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
   do  {
     switch (krui_getUnitInputType( unit_no ))  {
       case  DIRECT_LINKS:
-	err = fprintf( file_out, fmt_shape1, target_unit, " ");
-        retchk( err );
+	*stream_out << format( fmt_shape1, target_unit, " ");
+        //retchk( err );
 	err = krio_writeSourcesAndWeights();
-        retchk( err );
+        //retchk( err );
 
         break;
 
@@ -1387,17 +1388,17 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
         do  {
           if (krui_getFirstPredUnit( &weight ) > 0)  {
             if (second)  {
-	      err = fprintf( file_out, fmt_shape2, krui_getSiteName() );
-              retchk( err );
+	      *stream_out << format( fmt_shape2, krui_getSiteName() );
+              //retchk( err );
 	    }
             else  {
-	      err = fprintf( file_out, fmt_shape1, target_unit, 
+	      *stream_out << format( fmt_shape1, target_unit, 
 			    krui_getSiteName() );
-              retchk( err );
+              //retchk( err );
 	    }
 
 	    err = krio_writeSourcesAndWeights();
-            retchk( err );
+            //retchk( err );
 
             second = TRUE;
 	  }
@@ -1411,8 +1412,8 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
   }
   while ( (unit_no = krui_getNextUnit()) > 0 );
 
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
   return( KRERR_NO_ERROR );
 }
 
@@ -1439,14 +1440,14 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
   if (!is_subnet_info)  return( 0 );
 
   err = krio_fmtShapeing( SUBNET_DEF );
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, "\n\n%s :\n\n", title[12] );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr1 );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( "\n\n%s :\n\n", title[12] );
+  //retchk( err );
+  *stream_out << format( fmt_hdr1 );
+  //retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   /*  get default subnet number  */
   krui_getUnitDefaults( &dummy1, &dummy1, &dummy2, &def_subnet_no, &dummy2,
@@ -1465,8 +1466,8 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
 	  if (subnet_no == def_subnet_no)
 	      continue;
 
-	  err = fprintf( file_out, fmt_shape1, subnet_no, i);
-	  retchk( err );
+	  *stream_out << format( fmt_shape1, subnet_no, i);
+	  //retchk( err );
 	  elem_no = 0;
 
 	  for (k = i + 1, unit_ptr2 = unit_ptr + 1;
@@ -1478,25 +1479,25 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
 		  if (unit_ptr2->subnet_no == subnet_no)  {
 		      unit_ptr2->flags |= UFLAG_REFRESH;
 
-		      err = fprintf( file_out, "," );
-		      retchk( err );
+		      *stream_out << format( "," );
+		      //retchk( err );
 
 		      if ( (++elem_no % max_subnets_per_line) == 0)  {
-			  err = fprintf( file_out, fmt_blank );
-			  retchk( err );
+			  *stream_out << format( fmt_blank );
+			  //retchk( err );
 		      }
 
-		      err = fprintf( file_out, fmt_shape2,  k);
-		      retchk( err );
+		      *stream_out << format( fmt_shape2,  k);
+		      //retchk( err );
 		  }
 	      }
 	  }
       }
 
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
-  err = fprintf( file_out, "\n" );
-  retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
+  *stream_out << format( "\n" );
+  //retchk( err );
 
   return( KRERR_NO_ERROR );
 }
@@ -1525,14 +1526,14 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
   if (!is_layer_info)  return( KRERR_NO_ERROR );
 
   err = krio_fmtShapeing( LAYER_DEF );
-  retchk( err );
+  //retchk( err );
 
-  err = fprintf( file_out, "\n\n%s :\n\n", title[15] );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr1 );
-  retchk( err );
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
+  *stream_out << format( "\n\n%s :\n\n", title[15] );
+  //retchk( err );
+  *stream_out << format( fmt_hdr1 );
+  //retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
 
   /*  get default layer number	*/
   krui_getUnitDefaults( &dummy1, &dummy1, &dummy2, &dummy2, &def_layer_no,
@@ -1551,8 +1552,8 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
 	  if (layer_no == def_layer_no)
 	      continue;
 
-	  err = fprintf( file_out, fmt_shape1, layer_no, i);
-	  retchk( err );
+	  *stream_out << format( fmt_shape1, layer_no, i);
+	  //retchk( err );
 	  elem_no = 0;
 
 	  for (k = i + 1, unit_ptr2 = unit_ptr + 1;
@@ -1563,25 +1564,25 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
 		  if ((int) unit_ptr2->layer_no == layer_no)  {
 		      unit_ptr2->flags |= UFLAG_REFRESH;
 
-		      err = fprintf( file_out, "," );
-		      retchk( err );
+		      *stream_out << format( "," );
+		      //retchk( err );
 
 		      if ( (++elem_no % max_layers_per_line) == 0)  {
-			  err = fprintf( file_out, fmt_blank );
-			  retchk( err );
+			  *stream_out << format( fmt_blank );
+			  //retchk( err );
 		      }
 
-		      err = fprintf( file_out, fmt_shape2, k);
-		      retchk( err );
+		      *stream_out << format( fmt_shape2, k);
+		      //retchk( err );
 		  }
 	      }
 	  }
       }
 
-  err = fprintf( file_out, fmt_hdr2 );
-  retchk( err );
-  err = fprintf( file_out, "\n" );
-  retchk( err );
+  *stream_out << format( fmt_hdr2 );
+  //retchk( err );
+  *stream_out << format( "\n" );
+  //retchk( err );
 
   return( KRERR_NO_ERROR );
 }
@@ -1596,32 +1597,29 @@ krui_err  SnnsCLib::writeXYTransTable(void)
 
 
   if (transTableSize > 0)  {
-    err = fprintf( file_out, "\n\n%s :\n\n", title[17]);
-    retchk( err );
-    err = fprintf( file_out, " delta x | delta y |    z    \n");
-    retchk( err );
-    err = fprintf( file_out, "---------|---------|---------\n");
-    retchk( err );
+    *stream_out << format( "\n\n%s :\n\n", title[17]);
+    //retchk( err );
+    *stream_out << format( " delta x | delta y |    z    \n");
+    //retchk( err );
+    *stream_out << format( "---------|---------|---------\n");
+    //retchk( err );
     for (z_index = 0; z_index < transTableSize; z_index++)  {
-	err = fprintf( file_out, "%8d |", transTable[z_index].x);
-	retchk( err );
-	err = fprintf( file_out, "%8d |", transTable[z_index].y);
-	retchk( err );
-	err = fprintf( file_out, "%8d \n", transTable[z_index].z);
-	retchk( err );
+	*stream_out << format( "%8d |", transTable[z_index].x);
+	//retchk( err );
+	*stream_out << format( "%8d |", transTable[z_index].y);
+	//retchk( err );
+	*stream_out << format( "%8d \n", transTable[z_index].z);
+	//retchk( err );
     }
 
-    err = fprintf( file_out, "---------|---------|---------\n");
-    retchk( err );
-    err = fprintf( file_out, "\n" );
-    retchk( err );
+    *stream_out << format( "---------|---------|---------\n");
+    //retchk( err );
+    *stream_out << format( "\n" );
+    //retchk( err );
   }
 
   return( KRERR_NO_ERROR );
 }
-
-
-
 
 /*****************************************************************************
   FUNCTION : krio_saveNet  
@@ -1634,14 +1632,65 @@ krui_err  SnnsCLib::writeXYTransTable(void)
 ******************************************************************************/
 krui_err  SnnsCLib::krio_saveNet(char *filename, char *netname)
 {
+
+  stream_out = new std::ofstream( filename, std::ios::out );
+
+  int  err = krio_serializeNetInternal(netname);
+
+  static_cast<std::ofstream*>(stream_out)->close();
+
+  return( err );
+}
+
+
+/*****************************************************************************
+  FUNCTION : krio_serializeNet  
+
+  PURPOSE  : 
+  NOTES    : 
+
+  RETURNS  : 
+  UPDATE   : 
+******************************************************************************/
+krui_err  SnnsCLib::krio_serializeNet(std::stringstream *buf, char *netname)
+{
+
+  stream_out = buf;
+
+  int  err = krio_serializeNetInternal(netname);
+
+  return( err );
+}
+
+
+/*****************************************************************************
+  FUNCTION : krio_serializeNetInternal  
+
+  PURPOSE  : 
+  NOTES    : 
+
+  RETURNS  : 
+  UPDATE   : 
+******************************************************************************/
+krui_err  SnnsCLib::krio_serializeNetInternal(char *netname)
+{
   int  err;
 
   if (NoOfUnits == 0)  return( KRERR_NO_UNITS );  /*  no units defined	*/
 
-  if ((file_out = fopen( filename, "w" )) == NULL)  {
-    err = KRERR_IO;  /*  file open error  */
+  //stream_out = new std::ofstream( filename, std::ios::out );
+  //stream_out = new ofstream( fullFileName.c_str(), ios::out );
+  //*stream_out->open(filename);
+
+  if (!stream_out->good())  {
+    err = KRERR_IO;  //  file open error
     goto  ende;
   }
+
+/*  if ((file_out = fopen( filename, "w" )) == NULL)  {
+    err = KRERR_IO;  //  file open error
+    goto  ende;
+  }*/
 
   kr_forceUnitGC();  /*  do unit garbage-collection  */
 
@@ -1680,7 +1729,9 @@ krui_err  SnnsCLib::krio_saveNet(char *filename, char *netname)
   err = writeXYTransTable();
   if (err < 0)	goto ende;
 
-  err = fclose( file_out );
+  //err = fclose( file_out );
+  //*stream_out->close();
+  //static_cast<std::ofstream*>(stream_out)->close();
 
 ende:
 
@@ -3145,21 +3196,35 @@ krui_err SnnsCLib::krio_saveResult(char *filename, bool create, int startpattern
   end   = kr_AbsPosOfFirstSubPat(endpattern-1);
   end  += kr_NoOfSubPatPairs(endpattern-1)-1;
 
-  if (create)
-    file_out = fopen(filename, "w");
-  else
-    file_out = fopen(filename, "a");
-  if (file_out == NULL)
-  { /*  Can't open file  */
+  if (create) {
+    //file_out = fopen(filename, "w");
+    //*stream_out->open(filename);
+    stream_out = new std::ofstream( filename, std::ios::out );
+  } else {
+    //file_out = fopen(filename, "a");
+    //*stream_out->open(filename, std::fstream::app);
+    stream_out = new std::ofstream( filename, std::ios::app );
+  };
+
+  if (!stream_out->good())
+  { //  Can't open file
     KernelErrorCode = KRERR_FILE_OPEN;
     return( KernelErrorCode );
   }
 
+/*
+  if (file_out == NULL)
+  { //  Can't open file
+    KernelErrorCode = KRERR_FILE_OPEN;
+    return( KernelErrorCode );
+  }
+*/
+
   KernelErrorCode = KRERR_IO;
 
   /*  write header and version number  */
-  ret = fprintf( file_out, resHeader[0], krio_getIOVersion() );
-  RETCHKGTO( ret );
+  *stream_out << format( resHeader[0], krio_getIOVersion() );
+  //RETCHKGTO( ret );
   lineno++;
 
   /*  write date  */
@@ -3168,38 +3233,38 @@ krui_err SnnsCLib::krio_saveResult(char *filename, bool create, int startpattern
 
   strcpy( work_str, resHeader[1] );
   strcat( work_str, " %s\n" );
-  ret = fprintf( file_out, work_str, ctime( (time_t *) &clock) );
-  RETCHKGTO( ret );
+  *stream_out << format( work_str, ctime( (time_t *) &clock) );
+  //RETCHKGTO( ret );
   lineno++;
 
   /*  write no. of patterns, input units, output units  */
   strcpy( work_str, resHeader[2] );
   strcat( work_str, resHeader[3] );
   strcat( work_str, resHeader[4] );
-  ret = fprintf( file_out, work_str, end - start + 1, 
+  *stream_out << format( work_str, end - start + 1, 
 		krui_getNoOfInputUnits() + krui_getNoOfSpecialInputUnits(),
 		krui_getNoOfOutputUnits() + krui_getNoOfSpecialOutputUnits() );
-  RETCHKGTO( ret );
+  //RETCHKGTO( ret );
   lineno += 3;
 
   /* write numbers of used patterns */
   strcpy( work_str, resHeader[5] );
   strcat( work_str, resHeader[6] );
-  ret = fprintf( file_out, work_str, startpattern, endpattern);
-  RETCHKGTO( ret );
+  *stream_out << format( work_str, startpattern, endpattern);
+  //RETCHKGTO( ret );
   lineno += 2;
 
   /* write additional format information */
   if (includeinput)
   {
-    ret = fprintf(file_out, resHeader[7]);
-    RETCHKGTO( ret );
+    *stream_out << format( resHeader[7]);
+    //RETCHKGTO( ret );
     lineno += 1;
   }
   if (includeoutput)
   {
-    ret = fprintf(file_out, resHeader[8]);
-    RETCHKGTO( ret );
+    *stream_out << format( resHeader[8]);
+    //RETCHKGTO( ret );
     lineno += 1;
   }
 
@@ -3218,8 +3283,8 @@ krui_err SnnsCLib::krio_saveResult(char *filename, bool create, int startpattern
 	goto ende;
     }
 
-    ret = fprintf( file_out, "#%d.%d\n", pat+1, sub+1 );
-    RETCHKGTO( ret );
+    *stream_out << format( "#%d.%d\n", pat+1, sub+1 );
+    //RETCHKGTO( ret );
 
     if (includeinput)
     {
@@ -3236,13 +3301,16 @@ krui_err SnnsCLib::krio_saveResult(char *filename, bool create, int startpattern
 		    strcat( work_str, " " );
             }
    
-	    ret = fputs( work_str, file_out );
-	    RETCHKGTO( ret );  
+	    //ret = fputs( work_str, file_out );
+            *stream_out << work_str;
+
+	    //RETCHKGTO( ret );  
 
 	    lineno++;
 	    in_pat++;
     	}
-	fputs( "\n", file_out );
+	//fputs( "\n", file_out );
+        *stream_out << "\n";
 	in_pat = save_in_pat;
     }
 
@@ -3260,13 +3328,15 @@ krui_err SnnsCLib::krio_saveResult(char *filename, bool create, int startpattern
 		    strcat( work_str, " " );
             }
 
-	    ret = fputs( work_str, file_out );
-	    RETCHKGTO( ret );  
+	    //ret = fputs( work_str, file_out );
+            *stream_out << work_str;
+	    //RETCHKGTO( ret );  
 
 	    lineno++;
       	    out_pat++;
     	}
-	fputs( "\n", file_out );
+	//fputs( "\n", file_out );
+        *stream_out << "\n";
     }
 
     /* activate input layer */
@@ -3298,23 +3368,28 @@ krui_err SnnsCLib::krio_saveResult(char *filename, bool create, int startpattern
 		else  
 		    strcat( work_str, " " );
 		j++;
-	    	ret = fputs( work_str, file_out );
-	    	RETCHKGTO( ret );  
+                *stream_out << work_str;
+	    	//ret = fputs( work_str, file_out );
+	    	//RETCHKGTO( ret );  
 
 	    	lineno++;
             }
         }
-    fputs( "\n", file_out );
+    //fputs( "\n", file_out );
+    *stream_out << "\n";
   }
 
 
 ende:
   if (KernelErrorCode == KRERR_NO_ERROR)
       lineno = 0;
-  if (fclose(file_out) != 0 && KernelErrorCode == KRERR_NO_ERROR)
-    KernelErrorCode = KRERR_IO;
+  //if (fclose(file_out) != 0 && KernelErrorCode == KRERR_NO_ERROR)
+    //KernelErrorCode = KRERR_IO;
+  //*stream_out->close();
+  static_cast<std::ofstream*>(stream_out)->close();
 
   return KernelErrorCode;
 }
 
-
+//err = fprintf( file_out,
+//*stream_out << format(

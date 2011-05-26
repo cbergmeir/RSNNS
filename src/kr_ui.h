@@ -253,6 +253,9 @@ krui_err  krui_GetShapeOfSubPattern(int *insize, int *outsize,
 				    int *inpos, int *outpos, int n_pos);
 
 krui_err  krui_saveNet(char *filename, char *netname);
+
+krui_err  krui_serializeNet(std::stringstream *buf, char *netname);
+
 krui_err  krui_loadNet(char *filename, char **netname);
 krui_err  krui_saveResultParam(char *filename, bool create, 
 			       int startpattern, int endpattern, 

@@ -141,7 +141,9 @@ GROUP: Local Var's
 typedef char   SymbolType[LIN_MAX];
 
 FILE  *file_in;
-FILE  *file_out;
+//FILE  *file_out;
+
+std::ostream *stream_out;
 
 bool  is_subnet_info,
 	     is_layer_info,
@@ -231,7 +233,8 @@ void  krio_readSubnetDefs(void);
 void  krio_readLayerDefs(void);
 void  readXYTransTable(void);
 
-
+krui_err  krio_serializeNetInternal(char *netname);
+krui_err  krio_serializeNet(std::stringstream *buf, char *netname);
 /* end private definition section */
 
 #endif 

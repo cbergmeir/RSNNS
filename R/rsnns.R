@@ -101,12 +101,12 @@ extractNetInfo <- function(object, ...) {
 #' @S3method summary rsnns
 #' @method summary rsnns
 # @rdname rsnns
-summary.rsnns <- function(object, origSnnsFormat=FALSE, ...) {
+summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
   if(origSnnsFormat) {
 
-    s <- object$snnsObject$serialize()
+    s <- object$snnsObject$serializeNet("RSNNS_untitled")
     
 #    filename <- tempfile(pattern = "rsnns")
 #    object$snnsObject$saveNet(filename, " ")
@@ -121,7 +121,7 @@ summary.rsnns <- function(object, origSnnsFormat=FALSE, ...) {
       s$fullWeightMatrix <- "omitting full weight matrix as it is bigger than 20*20"
       
   }
-  s
+  invisible(s$serialization)
 }
 
 
@@ -211,7 +211,7 @@ train <- function(object, ...) UseMethod("train")
 #' @S3method train rsnns
 #' @method train rsnns
 #' @rdname train
-train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL, targetsTest=NULL, ...) {
+train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL, targetsTest=NULL, serializeTrainedObject=TRUE, ...) {
   
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
@@ -220,7 +220,7 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
       learnFunc=object$learnFunc, learnFuncParams=object$learnFuncParams, updateFunc=object$updateFunc, 
       updateFuncParams=object$updateFuncParams, outputMethod=class(object)[1], maxit=object$maxit, 
       shufflePatterns=object$shufflePatterns, computeError=object$computeIterativeError, 
-      inputsTest=inputsTest, targetsTest=targetsTest)
+      inputsTest=inputsTest, targetsTest=targetsTest, serializeTrainedObject=serializeTrainedObject)
   
   object$IterativeFitError <- trainResult$IterativeFitError
   object$IterativeTestError <- trainResult$IterativeTestError

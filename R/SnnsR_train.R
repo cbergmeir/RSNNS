@@ -164,8 +164,10 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
   #has to be deleted at last
   snnsObject$deletePatSet(patSetTrain$set_no)
   
-  if(serializeTrainedObject)
-    snnsObject$serialize()
+  if(serializeTrainedObject) {
+    s <- snnsObject$serializeNet("RSNNS_untitled")
+    snnsObject@variables$serialization <- s$serialization
+  }
   
   result
 }

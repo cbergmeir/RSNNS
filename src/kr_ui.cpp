@@ -4173,6 +4173,23 @@ krui_err  SnnsCLib::krui_saveNet(char *filename, char *netname)
 
 
 /*****************************************************************************
+  FUNCTION : krui_serializeNet  
+
+  PURPOSE  : 
+  NOTES    : 
+
+  RETURNS  : 
+  UPDATE   : 
+******************************************************************************/
+krui_err  SnnsCLib::krui_serializeNet(std::stringstream *buf, char *netname)
+{
+
+ return (krio_serializeNet(buf, netname));
+
+}
+
+
+/*****************************************************************************
   FUNCTION : krui_loadNet
 
   PURPOSE  : Load a network file and create a network.
@@ -5216,3 +5233,4 @@ void SnnsCLib::krui_execHandler(int error_code)
 
     if(krui_errorHandler != NULL)  ((*krui_errorHandler) (error_code));
 }
+
