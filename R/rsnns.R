@@ -64,18 +64,12 @@ extractNetInfo <- function(object, ...) {
   object$snnsObject$extractNetInfo()
 }
 
-## @export
-#save.rsnns <- function(object, path, name=deparse(object)) {
-#  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
-#  
-#  object$serialization <- object$snnsObject$serialize()
-#  
-#  #assign(name, object)
-#  #save(list=name, file = assemblePathName(path, paste(name, ".RData", sep="")))                
-#  save(object, file = path)
-#  
-#  netName <- "untitled"
-#}
+#' @export
+exportToSnnsNetFile <- function(object, filename, netname="RSNNS_untitled") {
+  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
+  
+  object$snnsObject$saveNet(filename, netname)
+}
 
 ## @export
 #load.rsnns <- function(filename, objectName) {
