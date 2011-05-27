@@ -60,6 +60,20 @@ art2 <- function(x, ...) UseMethod("art2")
 #' @examples 
 #' \dontrun{demo(art2_tetra)}
 #' \dontrun{demo(art2_tetraSnnsR)}
+#' 
+#' 
+#' data(snnsData)
+#' patterns <- snnsData$art2_tetra_med.pat
+#' 
+#' model <- art2(patterns, f2Units=5, learnFuncParams=c(0.99, 20, 20, 0.1, 0), 
+#'                   updateFuncParams=c(0.99, 20, 20, 0.1, 0))
+#' model
+#' 
+#' \dontrun{library(scatterplot3d)}
+#' 
+#' \dontrun{par(mfrow=c(2,2))}
+#' \dontrun{scatterplot3d(patterns)}
+#' \dontrun{scatterplot3d(model$fitted.values[,1:3])}
 art2.default <- function(x, f2Units=5, maxit=100, 
     initFunc="ART2_Weights", initFuncParams=c(0.9, 2.0), 
     learnFunc="ART2", learnFuncParams=c(0.98, 10.0, 10.0, 0.1, 0.0), 

@@ -247,19 +247,48 @@ toNumericClassLabels <- function(x) {
   else return(as.numeric(x))
 }
 
-#' Converts continuous outputs to class labels.
+ 
+#' This function converts the continuous outputs to binary outputs that can be used for classification.
+#' The two methods 402040, and winner-takes-all (WTA), are implemented as described in the SNNS User Manual 4.2. 
 #' 
-#' The two methods 402040, and winner-takes-all (WTA) are implemented
-#'  as in the SNNS User Manual 4.2 (pp 269)
+#' The following text is an edited citation from the SNNS User Manual 4.2 (pp 269):
 #' 
+#' \describe{
+#' \item{402040}{ 
+#' A pattern is recognized as classified correctly, if (i) the output of exactly one output unit is >= h 
+#' (ii) the teaching output of this unit is the maximum teaching output (> 0) of the pattern (iii) the output of all
+#' other output units is <= l.
+#' 
+#' A pattern is recognized as classified incorrectly, if (i) and (iii) hold as above, but for (ii) holds that the teaching output is \emph{not}
+#' the maximum teaching output of the pattern or there is no teaching output > 0.
+#' 
+#' A pattern is recognized as unclassified in all other cases.
+#' 
+#' The method derives its name from the commonly used default values l = 0.4, h = 0.6.
+#' }
+#' \item{WTA}{
+#' A pattern is recognized as classified correctly, if (i) there is an output unit with the value greater than the output value of all other
+#' output units (this output value is supposed to be a) (ii) a > h (iii) the teaching output of this unit is the maximum teaching output 
+#' of the pattern (> 0) (iv) the output of all other units is < a - l.
+#' 
+#' A pattern is recognized as classified incorrectly, if (i), (ii), and (iv) hold as above, but for (iii) holds that the teaching output of this 
+#' unit is \emph{not} the maximum teaching output of the pattern or there is no teaching output > 0.
+#'  
+#' A pattern is recognized as unclassified in all other cases. 
+#' 
+#' Commonly used default values for this method are: l = 0.0, h = 0.0.
+#' }
+#' } 
+#' 
+#' @title Converts continuous outputs to class labels
 #' @param y inputs
 #' @param method "WTA" or "402040"
 #' @param l lower bound, e.g. in 402040: l=0.4
 #' @param h upper bound, e.g. in 402040: h=0.6
 #' @return the position of the winning unit (i.e., the winning class), or zero, if no classification was done.
-# @references 
-# Zell, A. et al. SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2
-# \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' @references 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen.
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' @export
 #' @seealso \code{\link{encodeClassLabels}}
 analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {

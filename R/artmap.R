@@ -81,6 +81,17 @@ artmap <- function(x, ...) UseMethod("artmap")
 #' @examples 
 #' \dontrun{demo(artmap_letters)}
 #' \dontrun{demo(artmap_lettersSnnsR)}
+#' 
+#' 
+#' data(snnsData)
+#' trainData <- snnsData$artmap_train.pat
+#' testData <- snnsData$artmap_test.pat
+#' 
+#' model <- artmap(trainData, nInputsTrain=70, nInputsTargets=5, 
+#'                   nUnitsRecLayerTrain=50, nUnitsRecLayerTargets=26)
+#' model$fitted.values
+#' 
+#' predict(model, testData)
 artmap.default <- function(x, nInputsTrain, nInputsTargets, nUnitsRecLayerTrain, nUnitsRecLayerTargets, maxit=1, 
     nRowInputsTrain=1, nRowInputsTargets=1, nRowUnitsRecLayerTrain=1, nRowUnitsRecLayerTargets=1,
     initFunc="ARTMAP_Weights", initFuncParams=c(1.0, 1.0, 1.0, 1.0, 0.0), 

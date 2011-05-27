@@ -57,13 +57,30 @@ print.rsnns <- function(x, ...) {
   invisible(x)
 }
 
+#' Extract information from a network
+#' 
+#' This function generates a list of data.frames containing the most important information 
+#' that defines a network, in a format that is easy to use. To get the full definition in 
+#' the original SNNS format, use \code{\link{summary.rsnns}} or \code{\link{exportToSnnsNetFile}} 
+#' instead. 
+#' Internally, a call to \code{\link{SnnsRObject$extractNetInfo}} is done, and the results of 
+#' this call are returned.
+#' 
+#' @param object the \code{\link{rsnns}} object
+#' @return a list containing information extracted from the network (see \code{\link{SnnsRObject$extractNetInfo}}).
 #' @export
-extractNetInfo <- function(object, ...) {
+#' @seealso \code{\link{SnnsRObject$extractNetInfo}}
+extractNetInfo <- function(object) {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
   object$snnsObject$extractNetInfo()
 }
 
+#' Export the net to a file in the original SNNS file format.
+#' 
+#' @param object the \code{\link{rsnns}} object
+#' @param filename path and filename to be written to 
+#' @param netname name that is given to the network in the file
 #' @export
 exportToSnnsNetFile <- function(object, filename, netname="RSNNS_untitled") {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
@@ -89,12 +106,13 @@ exportToSnnsNetFile <- function(object, filename, netname="RSNNS_untitled") {
 #' deletes the temporary file. 
 #' 
 #' @param object the \code{\link{rsnns}} object
+#' @param origSnnsFormat show data in SNNS's original format in which networks are saved, or show output of \code{\link{extractNetInfo}}
 #' @param ... additional function parameters (currently not used)
 #' @return the contents of the .net file that SNNS would generate from the object, as a string.  
 #' @export
 #' @S3method summary rsnns
 #' @method summary rsnns
-# @rdname rsnns
+#' @seealso \code{\link{extractNetInfo}} 
 summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
   if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
@@ -182,23 +200,26 @@ rsnnsObjectFactory <- function(subclass, nInputs, maxit,
   snns
 }
 
-#' Generic train function.
+#' Internal generic train function for \code{rsnns} objects.
 #'
 #' @param object the object to which to apply train
 #' @param ... additional function parameters
 #' @export
 train <- function(object, ...) UseMethod("train")
 
-#' Generic train function for \code{rsnns} objects.
+#' Internal generic train function for \code{rsnns} objects.
 #'
 #' The function calls \code{\link{SnnsRObject$train}} and saves the result in the
-#' current \code{\link{rsnns}} object
+#' current \code{\link{rsnns}} object. This function is used internally by the 
+#' models (e.g. \code{\link{mlp}}) for training. Unless you are not about to implement
+#' a new model on the S3 layer you most probably don't want to use this function.
 #' 
 #' @param object the \code{\link{rsnns}} object
 #' @param inputsTrain training input
 #' @param targetsTrain training targets
 #' @param inputsTest test input
 #' @param targetsTest test targets
+#' @param serializeTrainedObject parameter passed to \code{\link{SnnsRObject$train}}
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object, to which the results of training have been added. 
 #' @export

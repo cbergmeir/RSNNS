@@ -56,6 +56,15 @@ assoz <- function(x, ...) UseMethod("assoz")
 #' @examples 
 #' \dontrun{demo(assoz_letters)}
 #' \dontrun{demo(assoz_lettersSnnsR)}
+#' 
+#' 
+#' data(snnsData)
+#' patterns <- snnsData$art1_letters.pat
+#' 
+#' model <- assoz(patterns, dimX=7, dimY=5)
+#' 
+#' par(mfrow=c(3,3))
+#' for (i in 1:9) plotActMap(model$fitted.values[[i]])
 assoz.default <- function(x, dimX, dimY, maxit=100, 
     initFunc="RM_Random_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="RM_delta", learnFuncParams=c(0.01, 100, 0.0, 0.0, 0.0), 

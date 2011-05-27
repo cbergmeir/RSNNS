@@ -227,6 +227,12 @@ SnnsR__getUnitsByName <- function(snnsObject, prefix) {
   res
 }
 
+#' Get an info header of the network.
+#'  
+#' @return a data frame containing some general characteristics of the network.
+#' @rdname SnnsRObject$getInfoHeader
+#' @usage \S4method{getInfoHeader}{SnnsR}()
+#' @aliases getInfoHeader,SnnsR-method SnnsRObject$getInfoHeader 
 SnnsR__getInfoHeader <- function(snnsObject) {
   
   NoOfUnits <- snnsObject$getNoOfUnits()
@@ -257,7 +263,12 @@ SnnsR__getInfoHeader <- function(snnsObject) {
 }
 
 
-
+#' Get the unit definitions of the network.
+#'  
+#' @return a data frame containing information about all units present in the network.
+#' @rdname SnnsRObject$getUnitDefinitions
+#' @usage \S4method{getUnitDefinitions}{SnnsR}()
+#' @aliases getUnitDefinitions,SnnsR-method SnnsRObject$getUnitDefinitions 
 SnnsR__getUnitDefinitions <- function(snnsObject) {
   
   blank <- " "
@@ -340,6 +351,12 @@ SnnsR__getUnitDefinitions <- function(snnsObject) {
 }
 
 
+#' Get the sites definitions of the network.
+#'  
+#' @return a data frame containing information about all sites present in the network.
+#' @rdname SnnsRObject$getSiteDefinitions
+#' @usage \S4method{getSiteDefinitions}{SnnsR}()
+#' @aliases getSiteDefinitions,SnnsR-method SnnsRObject$getSiteDefinitions 
 SnnsR__getSiteDefinitions <- function(snnsObject) {
   
   res <- NULL
@@ -357,7 +374,12 @@ SnnsR__getSiteDefinitions <- function(snnsObject) {
   res  
 }
 
-
+#' Get the FType definitions of the network.
+#'  
+#' @return a data frame containing information about FType units present in the network.
+#' @rdname SnnsRObject$getTypeDefinitions
+#' @usage \S4method{getTypeDefinitions}{SnnsR}()
+#' @aliases getTypeDefinitions,SnnsR-method SnnsRObject$getTypeDefinitions 
 SnnsR__getTypeDefinitions <- function(snnsObject) {
   
   blank <- " "
@@ -436,7 +458,19 @@ SnnsR__getTimeDelayDefs <- function(snnsObject) {
   res
 }
 
-
+#' Get characteristics of the network.
+#' 
+#' The returned list has three members: 
+#' \itemize{
+#' \item infoHeader general information about the network
+#' \item unitDefinitions information about the units
+#' \item fullWeightMatrix weight matrix of the connections
+#' }
+#'  
+#' @return a list of data frames containing information extracted from the network.
+#' @rdname SnnsRObject$extractNetInfo
+#' @usage \S4method{extractNetInfo}{SnnsR}()
+#' @aliases extractNetInfo,SnnsR-method SnnsRObject$extractNetInfo
 SnnsR__extractNetInfo <- function(snnsObject) {
   
   res <- list()
@@ -456,27 +490,3 @@ SnnsR__extractNetInfo <- function(snnsObject) {
   res
 }
 
-
-#SnnsR__showInfoHeader <- function(snnsObject) {
-#  
-#  NoOfUnits <- snnsObject$getNoOfUnits()
-#  netInfo <- snnsObject$getNetInfo()
-#  
-#  cat(   # getKrioTitle(14), 
-#      "\n",
-#      getKrioTitle(3), ": ", NoOfUnits, "\n",
-#      getKrioTitle(4), ": ", netInfo$no_of_links, "\n",
-#      getKrioTitle(5), ": ", netInfo$no_of_FTable_entries, "\n",
-#      getKrioTitle(6), ": ", netInfo$no_of_STable_entries, "\n\n")
-#  
-#  learnFunc <- snnsObject$getLearnFunc()
-#  updateFunc <- snnsObject$getUpdateFunc()
-#  
-#  cat( getKrioTitle(7), ": ", learnFunc, "\n")
-#  cat( getKrioTitle(16), ": ", updateFunc, "\n" )
-#  
-#  if(learnFunc == "PruningFeedForward") {
-#    cat( getKrioTitle(19), ": ", snnsObject$getPrunFunc(), "\n" )
-#    cat( getKrioTitle(20), ": ", snnsObject$getFFLearnFunc(), "\n" )
-#  }
-#}

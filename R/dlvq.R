@@ -54,6 +54,17 @@ dlvq <- function(x, ...) UseMethod("dlvq")
 #' @examples 
 #' \dontrun{demo(dlvq_ziff)}
 #' \dontrun{demo(dlvq_ziffSnnsR)}
+#' 
+#' 
+#' data(snnsData)
+#' dataset <- snnsData$dlvq_ziff_100.pat
+#' 
+#' inputs <- dataset[,inputColumns(dataset)]
+#' outputs <- dataset[,outputColumns(dataset)]
+#' 
+#' model <- dlvq(inputs, outputs)
+#' 
+#' mean(fitted(model) - outputs)
 dlvq.default <- function(x, y, 
     initFunc="DLVQ_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="Dynamic_LVQ", learnFuncParams=c(0.03, 0.03, 10.0), 

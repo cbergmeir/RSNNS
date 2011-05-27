@@ -57,3 +57,7 @@ confusionMatrix(iris$targetsTrain, encodeClassLabels(fitted.values(model),method
 model
 
 weightMatrix(model)
+
+summary(model)
+
+extractNetInfo(model)

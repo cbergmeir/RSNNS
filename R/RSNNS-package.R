@@ -77,10 +77,13 @@
 #' object, so that they can be called conveniently using the "$"-operator. This calling mechanism also allows for transparent masking of methods or extending the 
 #' kernel with new methods from within R. See \code{\link{$,SnnsR-method}}. R-functions that are added by RSNNS to the kernel are documented in 
 #' this manual under topics beginning with \code{SnnsRObject$}. Documentation of the original SNNS kernel user interface functions can be found in the SNNS User Manual 4.2 pp 290-314. 
-#' A call to e.g. the SNNS kernel function \code{krui_getNoOfUnits(..)} can be done with \code{SnnsRObject$getNoOfUnits(...)}. However, some functions were excluded 
+#' A call to e.g. the SNNS kernel function \code{krui_getNoOfUnits(..)} can be done with \code{SnnsRObject$getNoOfUnits(...)}. However, a few functions were excluded 
 #' from the wrapping for various reasons. Fur more details and other known issues see the file /inst/doc/KnownIssues.
 #' 
 #' Most of the example data included in SNNS is also present in this package, see \code{\link{snnsData}}.
+#' 
+#' If you have problems using RSNNS, find a bug, or have suggestions, please contact the package maintainer by email, instead of writing to the general R lists or contacting the 
+#' authors of the original SNNS software. 
 #' 
 #' @name RSNNS-package
 #' @aliases RSNNS
@@ -97,6 +100,9 @@
 #' \url{http://dicits.ugr.es}, \url{http://sci2s.ugr.es}
 #' 
 #' @references 
+#' 
+#' \emph{General neural network literature:}
+#' 
 #' Bishop, C. M. (2003), Neural networks for pattern recognition, University Press, Oxford.
 #' 
 #' Haykin, S. S. (1999), Neural networks :a comprehensive foundation, Prentice Hall, Upper Saddle River, NJ.
@@ -105,7 +111,9 @@
 #' 
 #' Rojas, R. (1996), Neural networks :a systematic introduction, Springer-Verlag, Berlin.
 #' 
-#' Rumelhart, D. E.; Clelland, J. L. M. & Group, P. R. (1986), Parallel distributed processing :explorations in the microstructure of cognition, Mit, Cambridge, MA etc..
+# Rumelhart, D. E.; Clelland, J. L. M. & Group, P. R. (1986), Parallel distributed processing :explorations in the microstructure of cognition, Mit, Cambridge, MA etc..
+# 
+#' \emph{Literature on the original SNNS software:}
 #' 
 #' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen.
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
@@ -113,7 +121,6 @@
 #' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley.
 
 #' 
-# @references
 #' @keywords package neural networks SNNS
 #' @seealso \code{\link{mlp}}, \code{\link{dlvq}}, \code{\link{rbf}}, \code{\link{rbfDDA}}, \code{\link{elman}}, 
 #' \code{\link{jordan}}, \code{\link{som}}, \code{\link{art1}}, \code{\link{art2}}, \code{\link{artmap}}, \code{\link{assoz}}
