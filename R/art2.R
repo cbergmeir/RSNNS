@@ -24,16 +24,30 @@
 #############################################################################
 
 
-#' Create and train an art2 network.
-#' 
-#' Art2 is very similar to art1, but for real-valued input. See \code{\link{art1}}
-#' for more information. A difference is, that the art2 implementation doesn't 
-#' assume two-dimensional input and output. 
+#' ART2 is very similar to ART1, but for real-valued input. See \code{\link{art1}}
+#' for more information. Opposed to the ART1 implementation, the ART2 implementation 
+#' does not assume two-dimensional input and output. 
 #'
+#' As comparison of real-valued vectors is more difficult than comparison of binary vectors, 
+#' the comparison layer is more complex in ART2, and actually consists of three layers. With a more
+#' complex comparison layer, also other parts of the network enhance their complexity.
+#' In SNNS, this enhanced complexity is refelcted by the presence of more parameters in initialization-, learning-,
+#' and update function.  
+#' 
+#' A detailed description of the theory and the parameters is available from the SNNS documentation and the other referenced literature. 
+#' 
+#' @title Create and train an art2 network
 #' @references
 #' Carpenter, G. A. & Grossberg, S. (1987), 'ART 2: self-organization of stable category recognition codes for analog input patterns', Appl. Opt. 26(23), 4919--4930.
 #' 
-#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. 
+#' Grossberg, S. (1988), Adaptive pattern classification and universal recoding. I.: parallel development and coding of neural feature detectors, MIT Press, Cambridge, MA, USA, chapter I, pp. 243--258.
+#' 
+#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. (in German)
+#' 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 art2 <- function(x, ...) UseMethod("art2")
 
@@ -55,7 +69,7 @@ art2 <- function(x, ...) UseMethod("art2")
 #' @export
 #' @S3method art2 default
 #' @method art2 default
-#' @seealso \code{\link{art2}}
+#' @seealso \code{\link{art1}}, \code{\link{artmap}}
 #' @rdname art2
 #' @examples 
 #' \dontrun{demo(art2_tetra)}

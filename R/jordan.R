@@ -24,13 +24,30 @@
 #############################################################################
 
 
-#' Create and train a jordan network.
-#'
-#' Jordan networks are recurrent networks 
-#' and very similar to \code{\link{elman}} networks.
+#' Jordan networks are partially recurrent networks 
+#' and similar to Elman networks (see \code{\link{elman}}). Partially recurrent networks 
+#' are useful when working with time series data. I.e., when the output of the 
+#' network not only should depend on the current pattern, but also on the patterns
+#' presented before.
 #' 
+#' Learning on Jordan networks:
+#' Backpropagation algorithms for feed forward networks can be adapted for their use with 
+#' this type of networks. In SNNS, there exist adapted versions of several backpropagation-type
+#' algorithms for Jordan and Elman networks.  
+#' 
+#' Network architecture: A Jordan network can be seen as a feed forward network with additional
+#' context units in the input layer. These context units take input from themselves (direct feedback), and from 
+#' the output units. The context units save the current state of the net. In a Jordan net, the number of context 
+#' units and output units has to be the same.
+#' 
+#' @title Create and train a Jordan network
 #' @references 
 #' Jordan, M. I. (1986), 'Serial Order: A Parallel, Distributed Processing Approach', Advances in Connectionist Theory Speech 121(ICS-8604), 471-495.
+#' 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 jordan <- function(x, ...) UseMethod("jordan")
 
@@ -62,6 +79,32 @@ jordan <- function(x, ...) UseMethod("jordan")
 #' \dontrun{demo(laser)}
 #' \dontrun{demo(eight_elman)}
 #' \dontrun{demo(eight_elmanSnnsR)}
+#' 
+#' 
+#' data(snnsData)
+#' inputs <- snnsData$laser_1000.pat[,inputColumns(snnsData$laser_1000.pat)]
+#' outputs <- snnsData$laser_1000.pat[,outputColumns(snnsData$laser_1000.pat)]
+#' 
+#' patterns <- splitForTrainingAndTest(inputs, outputs, ratio=0.15)
+#' 
+#' modelJordan <- jordan(patterns$inputsTrain, patterns$targetsTrain, 
+#'                        size=c(8), learnFuncParams=c(0.1), maxit=100,
+#'                        inputsTest=patterns$inputsTest, 
+#'                        targetsTest=patterns$targetsTest, linOut=FALSE)
+#' 
+#' names(modelJordan)
+#' 
+#' par(mfrow=c(3,3))
+#' plotIterativeError(modelJordan)
+#' 
+#' plotRegressionError(patterns$targetsTrain, modelJordan$fitted.values)
+#' plotRegressionError(patterns$targetsTest, modelJordan$fittedTestValues)
+#' hist(modelJordan$fitted.values - patterns$targetsTrain, col="lightblue")
+#' 
+#' plot(inputs, type="l")
+#' plot(inputs[1:100], type="l")
+#' lines(outputs[1:100], col="red")
+#' lines(modelJordan$fitted.values[1:100], col="green")
 jordan.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="JE_Weights", initFuncParams=c(1.0,  -1.0,  0.3,  1.0,  0.5), 
     learnFunc="JE_BP", learnFuncParams=c(0.2), 

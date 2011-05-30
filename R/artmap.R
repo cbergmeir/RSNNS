@@ -24,45 +24,49 @@
 #############################################################################
 
 
-#' Create and train an artmap network.
+#' An ARTMAP performs supervised learning. It consists of two coupled ART networks.
+#' In theory, these could be ART1, ART2, or others. However, in SNNS ARTMAP is
+#' implemented for ART1 only. So, this function is to be used with binary input. 
+#' As explained in the description of \code{\link{art1}}, ART aims at solving the stability/plasticity
+#' dilemma. So, the advantage of ARTMAP are, that it is a supervised learning mechanism
+#' that guarantees stability.
 #'
-#' An artmap performs supervised learning. It consists of two coupled art networks.
-#' In theory, these could be art1, art2, or other art networks. However, in SNNS artmap is
-#' implemented for art1 only. So, this function is to be used with binary input. 
-#'
+#' See also the details section of \code{\link{art1}}. The two ART1 networks are connected by a \emph{map field}.
+#' The input of the first ART1 network is the training input, the input of the second network are the target values, 
+#' the teacher signals. The two networks are often called ARTa and ARTb, we call them here training data ART network 
+#' and target data network.  
+#' 
+#' A detailed description of the theory and the parameters is available from 
+#' the SNNS documentation and the other referenced literature. 
+#' 
+#' @title Create and train an artmap network
 #' @references
 #' Carpenter, G. A.; Grossberg, S. & Reynolds, J. H. (1991), 'ARTMAP: Supervised real-time learning and classification of nonstationary data by a self-organizing neural network', Neural Networks 4(5), 565--588.
 #' 
-#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. 
-# accepts binary input only
-# 
-# consists of two 
-# artAdaptive resonance theory (art) networks are association networks. I.e. they 
-# perform clustering by finding a prototype to the given input. So, input and output
-# are the same type of data. Art1 is for binary inputs only, if you have real-valued input, use 
-# \code{\link{art2}} instead. In its current implementation, the network
-# has two-dimensional input (and output). The matrix \code{x} contains all 
-# (one dimensional) input patterns. Internally, every one of these patterns
-# is converted to a two-dimensional pattern using parameters \code{dimX} and \code{dimY}.
-# The parameter \code{nClusters} controls the amount of clusters that are assumed to
-# be present in the input patterns. A detailed description of the theory is available from the SNNS decumentation. 
-#
+#' Grossberg, S. (1988), Adaptive pattern classification and universal recoding. I.: parallel development and coding of neural feature detectors, MIT Press, Cambridge, MA, USA, chapter I, pp. 243--258.
+#' 
+#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. (in German)
+#' 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 artmap <- function(x, ...) UseMethod("artmap")
 
 
 #' Create and train an artmap network.
 #' 
-#' @param x a matrix with training inputs for the network
+#' @param x a matrix with training inputs and targets for the network
 #' @param nInputsTrain the number of columns of the matrix that are training input
-#' @param nInputsTargets the number of columns that are teacher signals
-#' @param nUnitsRecLayerTrain number of units in the recognition layer of the training-data ART network
-#' @param nUnitsRecLayerTargets number of units in the recognition layer of the target-data ART network
+#' @param nInputsTargets the number of columns that are target values
+#' @param nUnitsRecLayerTrain number of units in the recognition layer of the training data ART network
+#' @param nUnitsRecLayerTargets number of units in the recognition layer of the target data ART network
 #' @param maxit maximum of iterations to perform
 #' @param nRowInputsTrain number of rows the training input units are to be organized in (only for visualization purposes of the net in the original SNNS software)
-#' @param nRowInputsTargets same, but for the teacher signal input units
-#' @param nRowUnitsRecLayerTrain same, but for the recognition layer of the training-data ART network
-#' @param nRowUnitsRecLayerTargets same, but for the recognition layer of the teacher-data ART network
+#' @param nRowInputsTargets same, but for the target value input units
+#' @param nRowUnitsRecLayerTrain same, but for the recognition layer of the training data ART network
+#' @param nRowUnitsRecLayerTargets same, but for the recognition layer of the target data ART network
 #' @param initFunc the initialization function to use
 #' @param initFuncParams the parameters for the initialization function
 #' @param learnFunc the learning function to use

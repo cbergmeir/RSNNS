@@ -24,10 +24,9 @@
 #############################################################################
 
 
-#' Generic print function for \code{rsnns} objects.
-#'
 #' Print out some characteristics of an \code{\link{rsnns}} object.
 #' 
+#' @title Generic print function for rsnns objects
 #' @param x the \code{\link{rsnns}} object
 #' @param ... additional function parameters (currently not used)
 #' @export
@@ -57,15 +56,16 @@ print.rsnns <- function(x, ...) {
   invisible(x)
 }
 
-#' Extract information from a network
-#' 
+
 #' This function generates a list of data.frames containing the most important information 
 #' that defines a network, in a format that is easy to use. To get the full definition in 
 #' the original SNNS format, use \code{\link{summary.rsnns}} or \code{\link{exportToSnnsNetFile}} 
 #' instead. 
+#' 
 #' Internally, a call to \code{\link{SnnsRObject$extractNetInfo}} is done, and the results of 
 #' this call are returned.
 #' 
+#' @title Extract information from a network
 #' @param object the \code{\link{rsnns}} object
 #' @return a list containing information extracted from the network (see \code{\link{SnnsRObject$extractNetInfo}}).
 #' @export
@@ -76,8 +76,10 @@ extractNetInfo <- function(object) {
   object$snnsObject$extractNetInfo()
 }
 
-#' Export the net to a file in the original SNNS file format.
-#' 
+#' Export the net that is present in the \code{\link{rsnns}} object in the 
+#' original (.net) SNNS file format.
+#'
+#' @title Export the net to a file in the original SNNS file format
 #' @param object the \code{\link{rsnns}} object
 #' @param filename path and filename to be written to 
 #' @param netname name that is given to the network in the file
@@ -88,23 +90,13 @@ exportToSnnsNetFile <- function(object, filename, netname="RSNNS_untitled") {
   object$snnsObject$saveNet(filename, netname)
 }
 
-## @export
-#load.rsnns <- function(filename, objectName) {
-#
-#  load(filename)
-#  
-#  object <- get("objectName")
-#  object$snnsObject <- deserializeSnnsR(object$serialization)
-#  
-#  object
-#}
 
-#' Generic summary function for \code{rsnns} objects.
-#'
-#' Print out a summary of the network. The function calls the function saveNet of the SNNS kernel to
-#' save the net to a temporary file. Then, it reads this file in, displays its contents and
-#' deletes the temporary file. 
+#' Prints out a summary of the network. The printed information can be either 
+#' all information of the network in the original SNNS file format,
+#' or the information given by \code{\link{extractNetInfo}}.
+#' This behaviour is controlled with the parameter \code{origSnnsFormat}.
 #' 
+#' @title Generic summary function for rsnns objects
 #' @param object the \code{\link{rsnns}} object
 #' @param origSnnsFormat show data in SNNS's original format in which networks are saved, or show output of \code{\link{extractNetInfo}}
 #' @param ... additional function parameters (currently not used)
@@ -137,11 +129,6 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
 }
 
 
-  
-# Most of the parameters are directly passed to \code{\link{rsnnsObjectFactory}} or \code{\link{train}}.
-
-#' Object factory for generating \code{rsnns} objects.
-#'
 #' The object factory generates an \code{rsnns} object and initializes its member variables
 #' with the values given as parameters. Furthermore, it generates an object of \code{\link{SnnsR-class}}.
 #' Later, this information is to be used to train the network.
@@ -157,6 +144,7 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
 #' the SSE is computed on the test set, then it is weighted to take care of the different amount of patterns
 #' in the sets.
 #' 
+#' @title Object factory for generating rsnns objects
 #' @param subclass the subclass of rsnns to generate (vector of strings)
 #' @param nInputs the number of inputs the network will have
 #' @param maxit maximum of iterations to learn
@@ -200,19 +188,19 @@ rsnnsObjectFactory <- function(subclass, nInputs, maxit,
   snns
 }
 
-#' Internal generic train function for \code{rsnns} objects.
-#'
+
+#' The function calls \code{\link{SnnsRObject$train}} and saves the result in the
+#' current \code{\link{rsnns}} object. This function is used internally by the 
+#' models (e.g. \code{\link{mlp}}) for training. Unless you are not about to implement
+#' a new model on the S3 layer you most probably don't want to use this function.
+#' 
+#' @title Internal generic train function for rsnns objects
 #' @param object the object to which to apply train
 #' @param ... additional function parameters
 #' @export
 train <- function(object, ...) UseMethod("train")
 
 #' Internal generic train function for \code{rsnns} objects.
-#'
-#' The function calls \code{\link{SnnsRObject$train}} and saves the result in the
-#' current \code{\link{rsnns}} object. This function is used internally by the 
-#' models (e.g. \code{\link{mlp}}) for training. Unless you are not about to implement
-#' a new model on the S3 layer you most probably don't want to use this function.
 #' 
 #' @param object the \code{\link{rsnns}} object
 #' @param inputsTrain training input
@@ -247,10 +235,10 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
   object
 }
 
-#' Generic predict function for \code{rsnns} object.
-#' 
+
 #' Predict values using the given network. 
 #'
+#' @title Generic predict function for rsnns object
 #' @param object the \code{\link{rsnns}} object
 #' @param newdata the new input data which is used for prediction
 #' @param ... additional function parameters (currently not used)
@@ -288,16 +276,15 @@ predict.rsnns <- function(object, newdata, ...) {
 }
 
 
-#' Generic function to extract a weight matrix.
+#' The function calls \code{\link{SnnsRObject$getCompleteWeightMatrix}} and returns its result.
 #'
+#' @title Function to extract the weight matrix of an rsnns object
 #' @param object the object to which to apply weightMatrix
 #' @param ... additional function parameters
 #' @export
 weightMatrix <- function(object, ...) UseMethod("weightMatrix")
 
-#' Function to extract the weight matrix of an \code{rsnns} object.
-#'
-#' The function calls \code{\link{SnnsRObject$getCompleteWeightMatrix}} and returns its result.
+#' Function to extract the weight matrix of an rsnns object.
 #' 
 #' @param object the \code{\link{rsnns}} object
 #' @param ... additional function parameters (currently not used)

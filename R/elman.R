@@ -24,13 +24,27 @@
 #############################################################################
 
 
-#' Create and train an elman network.
-#'
-#' Elman networks are recurrent networks 
-#' and very similar to \code{\link{jordan}} networks.
+#' Elman networks are partially recurrent networks 
+#' and similar to Jordan networks (function \code{\link{jordan}}). For details, see explanations there. 
 #' 
+#' Learning on Elman networks:
+#' Same as in Jordan networks (see \code{\link{jordan}}).
+#' 
+#' Network architecture: The difference between Elman and Jordan networks is that in an Elman
+#' network the context units get input not from the output units, but from the hidden units. Furthermore,
+#' there is no direct feedback in the context units. In an Elman net, the number of context units and hidden 
+#' units has to be the same. The main advantage of Elman nets is that the number of context 
+#' units is not directly determined by the output dimension (as in Jordan nets), but by the number of
+#' hidden units, which is more flexible, as it is easy to add/remove hidden units, but not output units.
+#' 
+#' @title Create and train an Elman network
 #' @references 
 #' Elman, J. L. (1990), 'Finding structure in time', Cognitive Science 14(2), 179--211.
+#' 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 elman <- function(x, ...) UseMethod("elman")
 
@@ -63,6 +77,24 @@ elman <- function(x, ...) UseMethod("elman")
 #' \dontrun{demo(laser)}
 #' \dontrun{demo(eight_elman)}
 #' \dontrun{demo(eight_elmanSnnsR)}
+#' 
+#' 
+#' data(snnsData)
+#' inputs <- snnsData$eight_016.pat[,inputColumns(snnsData$eight_016.pat)]
+#' outputs <- snnsData$eight_016.pat[,outputColumns(snnsData$eight_016.pat)]
+#' 
+#' par(mfrow=c(1,2))
+#' 
+#' modelElman <- elman(inputs, outputs, size=8, decay=0.1, maxit=1000)
+#' modelElman
+#' modelJordan <- jordan(inputs, outputs, size=8, decay=0.1, maxit=1000)
+#' modelJordan
+#' 
+#' plotIterativeError(modelElman)
+#' plotIterativeError(modelJordan)
+#' 
+#' summary(modelElman)
+#' summary(modelJordan)
 elman.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="JE_Weights", initFuncParams=c(1.0,  -1.0,  0.3,  1.0,  0.5), 
     learnFunc="JE_BP", learnFuncParams=c(0.2), 

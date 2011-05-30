@@ -24,11 +24,11 @@
 #############################################################################
 
 
-#' Function to split data into training and test set.
-#'
+
 #' Split the input and target values to a training and a test set. Test set is taken from the end of the
 #' data. If the data is to be shuffled, this should be done before calling this function.
 #' 
+#' @title Function to split data into training and test set
 #' @param x inputs
 #' @param y targets
 #' @param ratio ratio of training and test sets (default: 15\% of the data is used for testing)
@@ -66,14 +66,13 @@ splitForTrainingAndTest <- function(x, y, ratio=0.15) {
   list(inputsTrain=inputsTrain, targetsTrain=targetsTrain, inputsTest=inputsTest, targetsTest=targetsTest)  
 }
 
-#' Function to normalize training and test set.
-#'
 #' Normalize training and test set as obtained by \code{\link{splitForTrainingAndTest}} in the following way:
 #' The \code{inputsTrain} member is normalized using \code{\link{normalizeData}} with the parameters given in \code{type}.
 #' The normalization parameters obtained during this normalization are then used to normalize the \code{inputsTest} member.
 #' if \code{dontNormTargets} is not set, then the targets are normalized in the same way. In classification problems,
 #' normalizing the targets normally makes no sense. For regression, normalizing also the targets is usually a good idea. 
 #' 
+#' @title Function to normalize training and test set
 #' @param x a list containing training and test data. Usually the output of \code{\link{splitForTrainingAndTest}}.
 #' @param dontNormTargets should the target values also be normalized?
 #' @param type type of the normalization. This parameter is passed to \code{\link{normalizeData}}. 
@@ -135,11 +134,12 @@ checkInput <- function(x,y) {
   ok
 }
 
-#' Plot the iterative training and test error of the net of this rsnns object.
+#' Plot the iterative training and test error of the net of this \code{\link{rsnns}} object.
 #'
 #' Plots (if present) the class members \code{IterativeFitError} (as black line) and 
 #' \code{IterativeTestError} (as red line).
 #' 
+#' @title Plot iterative errors of an rsnns object
 #' @param object the object to which to apply plotIterativeError
 #' @param ... additional function parameters
 #' @export
@@ -173,14 +173,16 @@ plotIterativeError.reg_class <- function(object, ...)
 }
 
 
-#' Decode class labels from a numerical or levels vector to a binary matrix.
-#'
-#' Convert the input vector to a binary matrix. In the matrix, the value \code{valTrue} (e.g. 1) is present
+#' This method decodes class labels from a numerical or levels vector to a binary matrix, i.e., 
+#' it converts the input vector to a binary matrix. 
+#' 
+#' In the matrix, the value \code{valTrue} (e.g. 1) is present
 #' exactly in the column given by the value in the input vector, and the value \code{valFalse} (e.g. 0) in the other 
 #' columns. The number of columns of the resulting matrix depends on the number of unique 
 #' labels found in the vector. E.g. the input c(1, 3, 2, 3) will result in an output matrix with rows: 
 #' 100 001 010 001
 #' 
+#' @title Decode class labels to a binary matrix
 #' @param x class label vector
 #' @param valTrue see Details paragraph
 #' @param valFalse see Details paragraph
@@ -218,6 +220,7 @@ decodeClassLabels <- function(x, valTrue=1, valFalse=0) {
 
 #' Applies \code{analyzeClassification} row-wise to a matrix.
 #' 
+#' @title Encode a matrix of (decoded) class labels
 #' @param x inputs
 #' @param method see \code{analyzeClassification}
 #' @param l idem
@@ -234,8 +237,9 @@ encodeClassLabels <- function(x, method="WTA", l=0.0, h=0.0) {
   apply(x, 1, function(y) analyzeClassification(y, method, l, h))
 }
 
-#' Converts a vector (of class labels) to a numeric vector.
+#' This function converts a vector (of class labels) to a numeric vector.
 #' 
+#' @title Convert a vector (of class labels) to a numeric vector
 #' @param x inputs
 #' @return the vector converted to a numeric vector
 #' @export
@@ -322,14 +326,15 @@ analyzeClassification <- function(y, method="WTA", l=0.0, h=0.0) {
   resClass  
 }
 
-#' Computes a confusion matrix.
-#' 
-#' If the class labels are not already encoded, they are encoded using \code{\link{encodeClassLabels}} 
-#' (with default values). The confusion matrix shows how many times a pattern
+#' The confusion matrix shows how many times a pattern
 #' with the real class x was classified as class y. A perfect method
 #' should result in a diagonal matrix. All values not on the diagonal
 #' are errors of the method.
 #' 
+#' If the class labels are not already encoded, they are encoded using \code{\link{encodeClassLabels}} 
+#' (with default values). 
+#' 
+#' @title Computes a confusion matrix
 #' @param targets the known, correct target values
 #' @param predictions the corresponding predictions of a method for the targets
 #' @return the confusion matrix
@@ -358,10 +363,12 @@ confusionMatrix <- function(targets, predictions) {
   cm
 }
 
-#' Plot a ROC curve.
-#'
+
+#' This function plots a receiver operating characteristic (ROC) curve. 
+#' 
 #' Code is taken from R news Volume 4/1, June 2004.
 #' 
+#' @title Plot a ROC curve
 #' @param T predictions
 #' @param D targets
 #' @param ... parameters passed to plot
@@ -379,13 +386,13 @@ plotROC <-function(T, D, ...){
 }
 
 
-#' Plot a regression error plot.
-#' 
+
 #' The plot shows target values on the x-axis and fitted/predicted values on the y-axis. 
 #' The optimal fit would yield a line through zero with gradient one.
 #' This optimal line is shown in black color. A linear fit to the actual data
-#'  is shown in red color.
+#' is shown in red color.
 #' 
+#' @title Plot a regression error plot
 #' @param targets the target values
 #' @param fits the values predicted/fitted by the model
 #' @param ... parameters passed to \code{plot}

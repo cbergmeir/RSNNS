@@ -23,31 +23,54 @@
 #
 #############################################################################
 
-
-#' Adaptive resonance theory (art) networks are association networks, they 
-#' perform clustering by finding a prototype to the given input. So, input and output
-#' are the same type of data. Art1 is for binary inputs only, if you have real-valued input, use 
-#' \code{\link{art2}} instead.  
+#' Adaptive resonance theory (ART) networks are association networks, they 
+#' perform clustering by finding a prototype to the given input. 
+#' They are mainly designed to solve the stability/plasticity dilemma (which is one of the 
+#' central problems in neural networks) in the following way: new input patterns 
+#' may generate new prototypes (plasticity), but patterns already present in the net 
+#' (represented by their prototypes) are only altered by similar new patterns, 
+#' not by others (stability).
+#' ART1 is for binary inputs only,
+#' if you have real-valued input, use \code{\link{art2}} instead. 
+#'  
+#' Learning in an ART network works as follows: 
+#' A new input is intended to be classified according 
+#' to the prototypes already present in the net. The similarity between the input and 
+#' all prototypes is calculated. The most similar prototype is the \emph{winner}. 
+#' If the similarity between the input and the winner is high enough (defined by the 
+#' vigilance parameter), the winner is adapted to make it more similar to the input. 
+#' If similarity is not high enough, a new prototype is created. So, at most the winner 
+#' is adapted, all other prototypes remain unchanged.
 #' 
-#' Internally, art1 networks have two layers of units: the comparison layer and the
-#' recognition layer.
+#' The architecture of an ART network is the following:
+#' ART is based on the more general concept of \emph{competitive learning}. The networks have 
+#' two fully connected layers (in both directions), the input/comparison layer and the recognition layer. 
+#' They propagate activation back and forth (resonance). The units in the recognition layer have lateral
+#' inhibition, so that they show a winner-takes-all behaviour, i.e., the unit that has the most activation
+#' inhibits activation of other units, so that after a few cycles its activation will converge to one, whereas
+#' the other units activations converge to zero. ART stabilizes this general learning mechanism by the presence
+#' of some special units. For details refer to the literature. 
 #' 
 #' In its current implementation, the network has two-dimensional input (and output). The matrix \code{x} contains all 
 #' (one dimensional) input patterns. Internally, every one of these patterns
 #' is converted to a two-dimensional pattern using parameters \code{dimX} and \code{dimY}.
-#' The parameter \code{nClusters} controls the amount of clusters that are assumed to
-#' be present in the input patterns. A detailed description of the theory is available from the SNNS documentation. 
+#' The parameter \code{f2Units} controls the number of units in the recognition layer, and therewith the maximal amount of clusters 
+#' that are assumed to be present in the input patterns. 
+#' 
+#' A detailed description of the theory and the parameters is available from the SNNS documentation and the other referenced literature. 
 #'
 #' @title Create and train an art1 network
 #' @references
+#' Carpenter, G. A. & Grossberg, S. (1987), 'A massively parallel architecture for a self-organizing neural pattern recognition machine', Comput. Vision Graph. Image Process. 37, 54--115.
+#' 
 #' Grossberg, S. (1988), Adaptive pattern classification and universal recoding. I.: parallel development and coding of neural feature detectors, MIT Press, Cambridge, MA, USA, chapter I, pp. 243--258.
 #' 
-#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart.
+#' Herrmann, K.-U. (1992), 'ART -- Adaptive Resonance Theory -- Architekturen, Implementierung und Anwendung', Master's thesis, IPVR, University of Stuttgart. (in German)
 #' 
-#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen.
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' 
-#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley.
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 art1 <- function(x, ...) UseMethod("art1")
 
@@ -57,7 +80,7 @@ art1 <- function(x, ...) UseMethod("art1")
 #' @param x a matrix with training inputs for the network
 #' @param dimX x dimension of inputs and outputs
 #' @param dimY y dimension of inputs and outputs
-#' @param nClusters controls the number of clusters assumed to be present
+#' @param f2Units controls the number of clusters assumed to be present
 #' @param maxit maximum of iterations to learn
 #' @param initFunc the initialization function to use
 #' @param initFuncParams the parameters for the initialization function
@@ -87,7 +110,7 @@ art1 <- function(x, ...) UseMethod("art1")
 #' 
 #' par(mfrow=c(3,3))
 #' for (i in 1:9) plotActMap(model$fitted.values[[i]])
-art1.default <- function(x, dimX, dimY, nClusters=nrow(x), maxit=100, 
+art1.default <- function(x, dimX, dimY, f2Units=nrow(x), maxit=100, 
     initFunc="ART1_Weights", initFuncParams=c(1.0, 1.0), 
     learnFunc="ART1", learnFuncParams=c(0.9, 0.0, 0.0), 
     updateFunc="ART1_Stable", updateFuncParams=c(0.0),    
@@ -104,10 +127,10 @@ art1.default <- function(x, dimX, dimY, nClusters=nrow(x), maxit=100,
       updateFuncParams=updateFuncParams,
       shufflePatterns=shufflePatterns, computeIterativeError=FALSE)
 
-  snns$archParams <- list(nClusters=nClusters, dimX=dimX, dimY=dimY)
+  snns$archParams <- list(f2Units=f2Units, dimX=dimX, dimY=dimY)
   
   #snns$snnsObject$setUnitDefaults(1,0,1,0,1,'Act_Logistic','Out_Identity')
-  snns$snnsObject$art1_createNet(dimX*dimY,dimX,nClusters,dimX)
+  snns$snnsObject$art1_createNet(dimX*dimY,dimX,f2Units,dimX)
  
   snns <- train(snns, inputsTrain=x)
   

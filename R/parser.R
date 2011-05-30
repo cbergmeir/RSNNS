@@ -24,11 +24,10 @@
 #############################################################################
 
 
-#' Rudimentary parser for res files.
-#'
 #' This function contains a rudimentary parser for SNNS .res files. It
 #' is completely implemented in R and doesn't make use of SNNS functionality.
 #' 
+#' @title Rudimentary parser for res files.
 #' @param filename the name of the .res file 
 #' @return a matrix containing the predicted values that were found in the .res file
 #' @export
@@ -72,11 +71,11 @@ readResFile <- function(filename)  {
   
 }
 
-#' Save data to a pat file.
-#'
+
 #' This function generates an \link{SnnsR-class} object, loads the given data there 
 #' as a pattern set and then uses the functionality of SNNS to save the data as a .pat file. 
 #' 
+#' @title Save data to a pat file
 #' @param inputs a matrix with input values 
 #' @param targets a matrix with target values
 #' @param filename the name of the .pat file 
@@ -94,12 +93,12 @@ savePatFile <- function(inputs, targets, filename)  {
   
 }
 
-#' Load data from a pat file.
-#'
+
 #' This function generates an \link{SnnsR-class} object, loads the given .pat file 
 #' there as a pattern set and then extracts the patterns to a matrix, 
 #' using \link{SnnsRObject$extractPatterns}. 
 #' 
+#' @title Load data from a pat file
 #' @param filename the name of the .pat file
 #' @return a matrix containing the data loaded from the .pat file. 
 #' @export
@@ -117,11 +116,11 @@ readPatFile <- function(filename)  {
   
 }
 
-#' Function to get the columns that are inputs.
-#'
+
 #' This function extracts all columns from a matrix whose column names begin with "in".
 #' The example data of this package follows this naming convention. 
 #' 
+#' @title Get the columns that are inputs
 #' @param patterns matrix or data.frame containing the patterns 
 #' @export
 inputColumns <- function(patterns)  {
@@ -131,11 +130,11 @@ inputColumns <- function(patterns)  {
 
 }
 
-#' Function to get the columns that are targets.
-#'
+
 #' This function extracts all columns from a matrix whose column names begin with "out".
 #' The example data of this package follows this naming convention. 
 #' 
+#' @title Get the columns that are targets
 #' @param patterns matrix or data.frame containing the patterns 
 #' @export
 outputColumns <- function(patterns)  {

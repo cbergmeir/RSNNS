@@ -24,8 +24,6 @@
 #############################################################################
 
 
-#' Getting started with the RSNNS package
-#'
 # \tabular{ll}{
 # Package: \tab RSNNS\cr
 # Type: \tab Package\cr
@@ -38,6 +36,9 @@
 #' The Stuttgart Neural Network Simulator (SNNS) is a library containing many 
 #' standard implementations of neural networks. This package wraps the SNNS 
 #' functionality to make it available from within R.
+#' 
+#' If you have problems using RSNNS, find a bug, or have suggestions, please contact the package maintainer by email, instead of writing to the general R lists or contacting the 
+#' authors of the original SNNS software. 
 #' 
 #' The package has a hierarchical architecture with three levels:
 #' \itemize{
@@ -82,9 +83,7 @@
 #' 
 #' Most of the example data included in SNNS is also present in this package, see \code{\link{snnsData}}.
 #' 
-#' If you have problems using RSNNS, find a bug, or have suggestions, please contact the package maintainer by email, instead of writing to the general R lists or contacting the 
-#' authors of the original SNNS software. 
-#' 
+#' @title Getting started with the RSNNS package
 #' @name RSNNS-package
 #' @aliases RSNNS
 #' @docType package
@@ -106,6 +105,8 @@
 #' Bishop, C. M. (2003), Neural networks for pattern recognition, University Press, Oxford.
 #' 
 #' Haykin, S. S. (1999), Neural networks :a comprehensive foundation, Prentice Hall, Upper Saddle River, NJ.
+#' 
+#' Kriesel, D. ( 2007 ), A Brief Introduction to Neural Networks. http://www.dkriesel.com
 #' 
 #' Ripley, B. D. (2007), Pattern recognition and neural networks, Cambridge University Press, Cambridge.
 #' 

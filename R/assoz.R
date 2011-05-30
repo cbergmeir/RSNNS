@@ -24,10 +24,18 @@
 #############################################################################
 
 
-#' Create and train an (auto-)associative memory.
-#'
-#' Similar to the \code{\link{art1}} and \code{\link{art2}} network types.
+#' The autoassociative memory is similar to the \code{\link{art1}} and \code{\link{art2}} network types. 
+#' It also performs clustering by finding a prototype to the given input. 
 #' The implementation assumes two-dimensional input and output (cf. \code{\link{art1}}).
+#' 
+#' @title Create and train an (auto-)associative memory
+#' @references 
+#' Palm, G. (1980), 'On associative memory', Biological Cybernetics 36, 19-31.
+#' 
+#' Rojas, R. (1996), Neural networks :a systematic introduction, Springer-Verlag, Berlin.
+#' 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' 
 #' @export
 assoz <- function(x, ...) UseMethod("assoz")
