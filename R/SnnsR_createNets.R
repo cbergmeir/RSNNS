@@ -23,21 +23,33 @@
 #
 #############################################################################
 
+# This is an SnnsR low-level function. You may want to have a look 
+# at \code{\link{SnnsR-class}} to find out how to properly use it.
+# @seealso \code{\link{SnnsR-class}}
 
 # @include SnnsWrapperFunctions.R
 #NULL
 
-#' Create a layered network.
-#'
+#' This function creates a layered network in the given SnnsR object.
+#' This is an SnnsR low-level function. You may want to have a look 
+#' at \code{\link{SnnsR-class}} to find out how to properly use it.
+#'  
+#' @title Create a layered network
 #' @param unitsPerLayer a vector of integers that represents the number of units in each layer, including input and output layer
 #' @param fullyConnectedFeedForward if \code{TRUE}, the network is fully connected as a feed-forward network. If \code{FALSE}, 
 #' no connections are created
 #' @rdname SnnsRObject$createNet
 #' @usage \S4method{createNet}{SnnsR}(unitsPerLayer, fullyConnectedFeedForward = TRUE)
 #' @aliases createNet,SnnsR-method createNet$getAllUnitsTType
+#' @seealso \code{\link{SnnsR-class}}
 #' @examples
-#' \dontrun{SnnsRObject$createNet(c(2,2), FALSE)}
-#' \dontrun{SnnsRObject$createNet(c(8,5,5,2), TRUE)}
+#' obj1 <- SnnsRObjectFactory()
+#' obj1$createNet(c(2,2), FALSE)
+#' obj1$getUnitDefinitions()
+#' 
+#' obj2 <- SnnsRObjectFactory()
+#' obj2$createNet(c(8,5,5,2), TRUE)
+#' obj2$getUnitDefinitions()
 SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForward = TRUE) {
   
   if(length(unitsPerLayer) < 2) stop("At least 2 layers have to be specified")

@@ -23,11 +23,15 @@
 #
 #############################################################################
 
-#' Get all units in the net of a certain \code{ttype}.
-#' 
+
+#' SnnsR low-level function to get all units in the net of a certain \code{ttype}. 
 #' Possible \code{ttype} defined by SNNS are, among others:
-#' "UNIT_OUTPUT", "UNIT_INPUT", and "UNIT_HIDDEN".
+#' "UNIT_OUTPUT", "UNIT_INPUT", and "UNIT_HIDDEN". For a full list, 
+#' call \code{RSNNS:::SnnsDefines$topologicalUnitTypes}
+#' As this is an SnnsR low-level function, you may want to have a look 
+#' at \code{\link{SnnsR-class}} to find out how to properly use it.
 #' 
+#' @title Get all units in the net of a certain \code{ttype}.
 #' @param ttype a string containing the \code{ttype}.
 #' @return a vector with integer numbers identifying the units.
 #' @rdname SnnsRObject$getAllUnitsTType
@@ -54,19 +58,24 @@ SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
   res
 }
 
-#' Get all output units of the net.
+
+#' SnnsR low-level function to get all units from the net with the ttype "UNIT_OUTPUT".
+#' This function calls \code{\link{SnnsRObject$getAllUnitsTType}} with the parameter "UNIT_OUTPUT".
 #' 
+#' @title Get all output units of the net.
 #' @return a vector with integer numbers identifying the units.
 #' @rdname SnnsRObject$getAllOutputUnits
 #' @usage \S4method{getAllOutputUnits}{SnnsR}()
 #' @aliases getAllOutputUnits,SnnsR-method SnnsRObject$getAllOutputUnits
-#' @seealso \link{SnnsRObject$getAllUnitsTType}
+#' @seealso \code{\link{SnnsRObject$getAllUnitsTType}}
 SnnsR__getAllOutputUnits <- function(snnsObject) {
   snnsObject$getAllUnitsTType("UNIT_OUTPUT")  
 }
 
-#' Get all input units of the net.
+#' SnnsR low-level function to get all units from the net with the ttype "UNIT_INPUT".
+#' This function calls \code{\link{SnnsRObject$getAllUnitsTType}} with the parameter "UNIT_INPUT".
 #' 
+#' @title Get all input units of the net
 #' @return a vector with integer numbers identifying the units.
 #' @rdname SnnsRObject$getAllInputUnits
 #' @usage \S4method{getAllInputUnits}{SnnsR}()
@@ -76,8 +85,10 @@ SnnsR__getAllInputUnits <- function(snnsObject) {
   snnsObject$getAllUnitsTType("UNIT_INPUT")  
 }
 
-#' Get all hidden units of the net.
+#' SnnsR low-level function to get all units from the net with the ttype "UNIT_HIDDEN".
+#' This function calls \code{\link{SnnsRObject$getAllUnitsTType}} with the parameter "UNIT_HIDDEN".
 #' 
+#' @title Get all hidden units of the net
 #' @return a vector with integer numbers identifying the units.
 #' @rdname SnnsRObject$getAllHiddenUnits
 #' @usage \S4method{getAllHiddenUnits}{SnnsR}()
@@ -88,8 +99,9 @@ SnnsR__getAllHiddenUnits <- function(snnsObject) {
 }
 
 
-#' Get the weight matrix between two sets of units
+#' SnnsR low-level function to get the weight matrix between two sets of units.
 #' 
+#' @title Get the weight matrix between two sets of units
 #' @param unitsSource a vector with numbers identifying the source units
 #' @param unitsTarget a vector with numbers identifying the target units
 #' @param setDimNames indicates, whether names of units are extracted and set as row/col names in the weight matrix

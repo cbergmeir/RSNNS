@@ -24,8 +24,9 @@
 #############################################################################
 
 
-#' Train a network and test it in every training iteration.
+#' SnnsR low-level function to train a network and test it in every training iteration.
 #'
+#' @title Train a network and test it in every training iteration
 #' @param inputsTrain a matrix with inputs for the network
 #' @param targetsTrain the corresponding targets
 #' @param initFunc the initialization function to use

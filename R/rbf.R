@@ -23,10 +23,23 @@
 #
 #############################################################################
 
-#' Create and train a radial basis function (rbf) network.
-#'
-#' The use of an rbf-network is similar to that of an \code{\link{mlp}}. However, its initialization
-#' can be difficult and require prior knowledge. Before use of this function, you might want
+
+#' The use of an RBF network is similar to that of an \code{\link{mlp}}. 
+#' The idea of radial basis function networks comes from function 
+#' interpolation theory. The RBF performs a linear combination of 
+#' n basis functions that are radially symmetric around a center/prototype.
+#' 
+#' RBF networks are feedforward networks with one hidden layer. Their activation 
+#' is not sigmoid (as in MLP), but radially symmetric (often gaussian). Thereby,
+#' information is represented locally in the network (in contrast to MLP, where 
+#' it is globally represented). Advantages of RBF networks in comparison to MLPs 
+#' are mainly, that the networks are more interpretable, training ought to be easier
+#' and faster, and the network only activates in areas of the feature space where it 
+#' was actually trained, and has therewith the possibility to indicate that it "doesn't 
+#' know".
+#' 
+#' Initialization of an RBF network can be difficult and require prior knowledge. 
+#' Before use of this function, you might want
 #' to read pp 172-183 of the SNNS User Manual 4.2. The initialization is performed in
 #' the current implementation by a call to \code{RBF_Weights_Kohonen(0,0,0,0,0)} 
 #' and a successive call to the given \code{initFunc} (usually \code{RBF_Weights}).
@@ -34,14 +47,22 @@
 #' to implement your own one. Have a look then at the demos/examples. 
 #' Also, we note that depending on whether linear or logistic output is chosen, 
 #' the initialization parameters have to be different (normally \code{c(0,1,...)}
-#'  for linear and \code{c(-4,4,...)} for logistic output).
+#' for linear and \code{c(-4,4,...)} for logistic output).
 #' 
+#' @title Create and train a radial basis function (RBF) network
 #' @references 
 #' Poggio, T. & Girosi, F. (1989), 'A Theory of Networks for Approximation and Learning'(A.I. Memo No.1140, C.B.I.P. Paper No. 31), Technical report, MIT ARTIFICIAL INTELLIGENCE LABORATORY.
+#' 
+#' Vogt, M. (1992), 'Implementierung und Anwendung von Generalized Radial Basis Functions in einem Simulator neuronaler Netze', Master's thesis, IPVR, University of Stuttgart. (in German)
+#' 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 rbf <- function(x, ...) UseMethod("rbf")
 
-#' Create and train a radial basis function (rbf) network.
+#' Create and train a radial basis function (RBF) network.
 #' 
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
@@ -73,8 +94,9 @@ rbf <- function(x, ...) UseMethod("rbf")
 #' outputs <- as.matrix(sin(inputs) + runif(inputs*0.2))
 #' outputs <- normalizeData(outputs, "0_1")
 #' 
-#' model <- rbf(inputs, outputs, size=40, maxit=1000, initFuncParams=c(0, 1, 0, 0.01, 0.01), 
-#' learnFuncParams=c(1e-8, 0, 1e-8, 0.1, 0.8), linOut=TRUE)
+#' model <- rbf(inputs, outputs, size=40, maxit=1000, 
+#'                      initFuncParams=c(0, 1, 0, 0.01, 0.01), 
+#'                      learnFuncParams=c(1e-8, 0, 1e-8, 0.1, 0.8), linOut=TRUE)
 #' 
 #' par(mfrow=c(2,1))
 #' plotIterativeError(model)

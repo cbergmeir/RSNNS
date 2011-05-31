@@ -366,8 +366,6 @@ confusionMatrix <- function(targets, predictions) {
 
 #' This function plots a receiver operating characteristic (ROC) curve. 
 #' 
-#' Code is taken from R news Volume 4/1, June 2004.
-#' 
 #' @title Plot a ROC curve
 #' @param T predictions
 #' @param D targets
@@ -375,7 +373,7 @@ confusionMatrix <- function(targets, predictions) {
 #' @references 
 #' R news Volume 4/1, June 2004
 #' @export
-#' @author ...
+#' @author  Code is taken from R news Volume 4/1, June 2004.
 plotROC <-function(T, D, ...){
   cutpoints<-c(-Inf, sort(unique(T)), Inf)
   sens<-sapply(cutpoints,

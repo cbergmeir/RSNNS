@@ -24,16 +24,20 @@
 #############################################################################
 
 
-#' Create and train a self-organizing map (som).
-#'
-#' This function creates and trains a self-organizing map. 
+
+#' This function creates and trains a self-organizing map (SOM).
+#'  
 #' As the computation might be slow if many patterns are involved,
 #' much of its output is made switchable (see comments on return values).  
 #' 
+#' @title Create and train a self-organizing map (SOM)
 #' @references 
 #' Kohonen, T. (1988), Self-organization and associative memory, Vol. 8, Springer-Verlag.
 #' 
-#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley.
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 som <- function(x, ...) UseMethod("som")
 
@@ -76,6 +80,30 @@ som <- function(x, ...) UseMethod("som")
 #' @examples 
 #' \dontrun{demo(som_iris)}
 #' \dontrun{demo(som_cubeSnnsR)}
+#' 
+#' 
+#' data(iris)
+#' inputs <- normalizeData(iris[,1:4], "norm")
+#' 
+#' model <- som(inputs, mapX=16, mapY=16, maxit=500,  
+#'                 calculateActMaps=TRUE, targets=iris[,5])
+#' 
+#' par(mfrow=c(3,3))
+#' for(i in 1:ncol(inputs)) plotActMap(model$componentMaps[[i]], 
+#'                                        col=rev(topo.colors(12)))
+#' 
+#' plotActMap(model$map, col=rev(heat.colors(12)))
+#' plotActMap(log(model$map+1), col=rev(heat.colors(12)))
+#' persp(1:model$archParams$mapX, 1:model$archParams$mapY, log(model$map+1), 
+#'      theta = 30, phi = 30, expand = 0.5, col = "lightblue")
+#' 
+#' plotActMap(model$labeledMap)
+#' 
+#' model$componentMaps
+#' model$labeledUnits
+#' model$map
+#' 
+#' names(model)
 som.default <- function(x, mapX=16, mapY=16, maxit=100, 
     initFuncParams = c(1.0,  -1.0), 
     learnFuncParams=c(0.5, mapX/2, 0.8, 0.8, mapX), 

@@ -27,8 +27,10 @@
 # @include SnnsRObjectFactory.R
 #NULL
 
-#' Create a pattern set.
+#' SnnsR low-level function to create a pattern set in the SNNS kernel from 
+#' the values given, so that they are available in the SNNS kernel for use.
 #' 
+#' @title Create a pattern set
 #' @param inputs the input values
 #' @param targets the target values
 #' @return a list with elements \code{err} and \code{set_no}. The latter one identifies the pattern set within the \code{\link{SnnsR-class}} object 
@@ -78,10 +80,9 @@ SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
 }
 
 
-#' Predict values with a trained net.
+#' SnnsR low-level function for generic prediction with a trained net.
 #' 
-#' Generic function for prediction with a trained net.
-#' 
+#' @title Predict values with a trained net
 #' @param units the units that define the output
 #' @param updateFuncParams the parameters for the update function (the function has to be already set)
 #' @return the predicted values
@@ -114,15 +115,15 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
 } 
 
 
-#' Get a list of output units of a net.
+#' SnnsR low-level function to get a list of output units of a net.
 #' 
 #' Depending on the network architecture, output is present in hidden units, in output units, etc.
 #' In some network types, the output units have a certain name prefix in SNNS. This function finds
-#' the output units according to certain network types. Possible types (= values for \code{outputMethod})
-#' are: "art1", "art2", "assoz", "som", "output". If the given \code{outputMethod} is unknown, 
-#' the function defaults to "output".  
+#' the output units according to certain network types. The type is specified by \code{outputMethod}.
+#' If the given \code{outputMethod} is unknown, the function defaults to "output".  
 #' 
-#' @param outputMethod a string defining the output method of the net. 
+#' @title Get a list of output units of a net
+#' @param outputMethod a string defining the output method of the net. Possible values are: "art1", "art2", "assoz", "som", "output".
 #' @return a list of numbers identifying the units
 #' @rdname SnnsRObject$whereAreResults
 #' @usage \S4method{whereAreResults}{SnnsR}(outputMethod="output")
@@ -163,13 +164,13 @@ SnnsR__whereAreResults <- function(snnsObject, outputMethod="output") {
   units
 }
 
-
-#' Predict values with a trained net.
+#' SnnsR low-level function to predict values with a trained net.
 #' 
 #' This function has to be used embedded in a step of loading and afterwards 
 #' removing the patterns into the \code{\link{SnnsR-class}} object. As SNNS only supports 2 pattern sets
 #' in parallel, removing unneeded pattern sets is quite important.
 #' 
+#' @title Predict values with a trained net
 #' @param outputMethod is passed to \link{SnnsRObject$whereAreResults}
 #' @param updateFuncParams parameters passed to the networks update function
 #' @return the predicted values
@@ -184,8 +185,9 @@ SnnsR__predictCurrPatSet <- function(snnsObject, outputMethod="reg_class", updat
 }
 
 
-#' Calculate the som component maps.
+#' SnnsR low-level function to calculate the som component maps.
 #' 
+#' @title Calculate the som component maps
 #' @param updateFuncParams parameters passed to the networks update function
 #' @return a matrix containing all componant maps as 1d vectors
 #' @rdname SnnsRObject$somPredictComponentMaps
@@ -221,11 +223,9 @@ SnnsR__somPredictComponentMaps <- function(snnsObject, updateFuncParams=c(0.0, 0
 } 
 
 
-
-#' Get most of the relevant results from a som.
-#'
-#' This function is most conveniently used through \code{\link{som}}.
+#' SnnsR low-level function to get most of the relevant results from a SOM.
 #'  
+#' @title Get most of the relevant results from a som
 #' @param updateFuncParams parameters passed to the networks update function
 #' @param saveWinnersPerPattern should a list with the winners for every pattern be saved?
 #' @param targets optional target classes of the patterns
@@ -306,8 +306,12 @@ SnnsR__somPredictCurrPatSetWinners <- function(snnsObject, updateFuncParams=c(0.
 } 
 
 
-#' Get the spanning tree of the som, calculated directly by SNNS.
+#' SnnsR low-level function to get the spanning tree of the SOM, This function 
+#' calls directly the corresponding SNNS kernel function (the only one available for SOM).
+#' Advantage are faster computation, disadvantage is somewhat limited information in
+#' the output. 
 #' 
+#' @title Get the spanning tree of the SOM
 #' @return the spanning tree, which is the som, showing for each unit a number identifying 
 #' the last pattern for which this unit won. (We note that, also if there are more than 
 #' one patterns, only the last one is saved)  

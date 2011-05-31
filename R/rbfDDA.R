@@ -24,15 +24,20 @@
 #############################################################################
 
 
-#' Create and train a rbf network with the DDA algorithm.
-#'
-#' As the output is winner-takes-all, this type of net can only be used
-#' for classification.
-#'
+#' Create and train an RBF network with the dynamic decay adjustment (DDA) algorithm. 
+#' This type of network can only be used for classification. The training typically begins
+#' with an empty network, i.e., a network only consisting of input and output units, and
+#' adds new units successively. It is a lot easier to use than normal RBF, because it only 
+#' requires two quite uncritical parameters.
+#' 
+#' @title Create and train an RBF network with the DDA algorithm
 #' @references 
 #' Berthold, M. R. & Diamond, J. (1995), Boosting the Performance of RBF Networks with Dynamic Decay Adjustment, in 'Advances in Neural Information Processing Systems', MIT Press, , pp. 521--528.
 #' 
 #' Hudak, M. (1993), 'RCE classifiers: theory and practice', Cybernetics and Systems 23(5), 483--515.
+#' 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' @export
 rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 
@@ -58,6 +63,19 @@ rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 #' @examples 
 #' \dontrun{demo(iris)}
 #' \dontrun{demo(rbfDDA_spiralsSnnsR)}
+#' 
+#' 
+#' data(iris)
+#' iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
+#' irisValues <- iris[,1:4]
+#' irisTargets <- decodeClassLabels(iris[,5])
+#' iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
+#' iris <- normTrainingAndTestSet(iris)
+#' 
+#' model <- rbfDDA(iris$inputsTrain, iris$targetsTrain)
+#' 
+#' summary(model)
+#' plotIterativeError(model)
 rbfDDA.default <- function(x, y, maxit=1, 
     initFunc="Randomize_Weights", initFuncParams=c(-0.3, 0.3), 
     learnFunc="RBF-DDA", learnFuncParams=c(0.4, 0.2, 5), 

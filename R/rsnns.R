@@ -100,7 +100,8 @@ exportToSnnsNetFile <- function(object, filename, netname="RSNNS_untitled") {
 #' @param object the \code{\link{rsnns}} object
 #' @param origSnnsFormat show data in SNNS's original format in which networks are saved, or show output of \code{\link{extractNetInfo}}
 #' @param ... additional function parameters (currently not used)
-#' @return the contents of the .net file that SNNS would generate from the object, as a string.  
+#' @return Either the contents of the .net file that SNNS would generate from 
+#' the object, as a string. Or the output of \code{\link{extractNetInfo}}.  
 #' @export
 #' @S3method summary rsnns
 #' @method summary rsnns
@@ -160,7 +161,7 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
 #' @aliases rsnns
 #' @export
 #' @seealso \code{\link{mlp}}, \code{\link{dlvq}}, \code{\link{rbf}}, \code{\link{rbfDDA}}, \code{\link{elman}}, 
-#' \code{\link{jordan}}, \code{\link{som}}, \code{\link{art1}}, \code{\link{art2}}, \code{\link{assoz}}
+#' \code{\link{jordan}}, \code{\link{som}}, \code{\link{art1}}, \code{\link{art2}}, \code{\link{artmap}}, \code{\link{assoz}}
 rsnnsObjectFactory <- function(subclass, nInputs, maxit, 
     initFunc, initFuncParams, 
     learnFunc, learnFuncParams, 

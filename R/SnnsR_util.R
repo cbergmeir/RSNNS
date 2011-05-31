@@ -24,10 +24,11 @@
 #############################################################################
 
 
-#' Reset the \code{SnnsR-class} object.
-#' 
-#' Delete all pattern sets and delete the current net in the \code{\link{SnnsR-class}} object.
-#'  
+
+#' SnnsR low-level function to delete all pattern sets and 
+#' delete the current net in the \code{\link{SnnsR-class}} object.
+#'
+#' @title Reset the SnnsR object.  
 #' @rdname SnnsRObject$resetRSNNS
 #' @usage \S4method{resetRSNNS}{SnnsR}()
 #' @aliases resetRSNNS,SnnsR-method SnnsRObject$resetRSNNS

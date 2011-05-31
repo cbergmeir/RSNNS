@@ -24,9 +24,21 @@
 #############################################################################
 
 
-#' This function creates a multilayer perceptron and trains it.
+#' This function creates a multilayer perceptron (MLP) and trains it.
+#' MLPs are fully connected feedforward networks, and probably the most 
+#' common network architecture in use.  
+#' Training is usually performed by error backpropagation or a related procedure. 
+#'  
+#' @title Create and train a multi-layer perceptron (MLP)
+#' @references
+#' Rosenblatt, F. (1958), 'The perceptron: A probabilistic model for information storage and organization in the brain', Psychological Review 65(6), 386--408.
 #' 
-#' @title Create and train a multi-layer perceptron (mlp)
+#' Rumelhart, D. E.; Clelland, J. L. M. & Group, P. R. (1986), Parallel distributed processing :explorations in the microstructure of cognition, Mit, Cambridge, MA etc.
+#'  
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
+#' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export
 mlp <- function(x, ...) UseMethod("mlp")
 
