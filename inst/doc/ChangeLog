@@ -1,10 +1,49 @@
-version 0.3-1: fixes to make it run on Solaris
+version 0.4-0:
 
-version 0.3: port of the relevant SNNS parts to C++, resulting in an SNNS fork named SnnsCLib.
+- The art2 demo was fixed
+- changed package encoding to UTF-8
+- wrapping of some of the missing functions was added
+- artmap was added in the high-level interfact
+- initialization to zero was added for all former static variables 
+  (this was not always performed before, but it turned out that some
+  SNNS functions rely on this and crash otherwise, e.g. dlvq and artmap)
+- segfaults related to Rcpp wrapping of (const char*) NULL were fixed
+- an object serializaton mechanism was implemented that now allows for rsnns
+  objects being saved and loaded through R's normal save/load mechanism
+- new normalization functions were added that allow for denormalization,
+  and norm of the test set with the parameters obtained on the training set
+- some new high-level functions were implemented to extract internals of 
+  the neural networks (getWeights, getUnitDefinitions)
+- documentation of the high-level functions was greatly improved with references
+  to original literature and some descriptions
+
+version 0.3-1: 
+
+fixes to make it run on Solaris
+
+version 0.3: 
+
+port of the relevant SNNS parts to C++, 
+resulting in an SNNS fork named SnnsCLib.
 
 version 0.1 and 0.2 were unpublished. 
 
-version 0.2 used nearly unchanged SNNS code. In order to train various networks and use them later for prediction, different ways seem possible: After training, the model could be saved as a temporary .net file to disk or even to memory using e.g. the C function fmemopen. For prediction, the net could be loaded into the SNNS kernel again. Another potential possibility is to load the SNNS library various times to memory. However, all these methods have mayor drawbacks in stability, performanc, and are not parallelizable. 
+version 0.2: 
 
-version 0.1 used swig instead of Rcpp to wrap the SNNS code. This has the advantage, that the wrapper functions are automatically generated. However, it turned out that some of the interfaces of SNNS functions are quite complicated and the support of swig for R is not as advanced as for other programming languages. Extending swig in order to get the needed functionality seemed quite difficult, so that we chose to implement the wrapping manually using Rcpp.
+used nearly unchanged SNNS code. In order to train various networks and 
+use them later for prediction, different ways seem possible: After training, 
+the model could be saved as a temporary .net file to disk or even to memory 
+using e.g. the C function fmemopen. For prediction, the net could be loaded 
+into the SNNS kernel again. Another potential possibility is to load the SNNS 
+library various times to memory. However, all these methods have mayor drawbacks 
+in stability, performance, and are not parallelizable. 
+
+version 0.1: 
+
+used swig instead of Rcpp to wrap the SNNS code. This has the advantage, 
+that the wrapper functions are automatically generated. However, it turned 
+out that some of the interfaces of SNNS functions are quite complicated 
+and the support of swig for R is not as advanced as for other programming 
+languages. Extending swig in order to get the needed functionality seemed 
+quite difficult, so that we chose to implement the wrapping manually using Rcpp.
 
