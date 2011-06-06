@@ -112,7 +112,7 @@ artmap.default <- function(x, nInputsTrain, nInputsTargets, nUnitsRecLayerTrain,
     return()
   }
 
-  snns <- rsnnsObjectFactory(subclass=c("artmap", "association"), nInputs=nInputs, maxit=maxit, 
+  snns <- rsnnsObjectFactory(subclass=c("artmap"), nInputs=nInputs, maxit=maxit, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 

@@ -102,7 +102,7 @@ art2.default <- function(x, f2Units=5, maxit=100,
   
   nInputs <- dim(x)[2L]
   
-  snns <- rsnnsObjectFactory(subclass=c("art2", "association"), nInputs=nInputs, maxit=maxit, 
+  snns <- rsnnsObjectFactory(subclass=c("art2"), nInputs=nInputs, maxit=maxit, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 

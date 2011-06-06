@@ -100,7 +100,7 @@ dlvq.default <- function(x, y,
   
   nInputs <- dim(x)[2L]
   
-  snns <- rsnnsObjectFactory(subclass=c("dlvq", "reg_class"), nInputs=nInputs, maxit=1, 
+  snns <- rsnnsObjectFactory(subclass=c("dlvq"), nInputs=nInputs, maxit=1, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 

@@ -113,7 +113,7 @@ normTrainingAndTestSet <- function(x, dontNormTargets=TRUE, type="norm") {
 
 
 
-## Check the input of a reg_class object for eventual problems.
+## Check the input for eventual problems.
 checkInput <- function(x,y) {
   
   ok <- TRUE
@@ -147,15 +147,15 @@ plotIterativeError <- function(object, ...) UseMethod("plotIterativeError")
 
 #' Plot the iterative training and test error of the net of this rsnns object.
 #' 
-#' @param object a reg_class object
+#' @param object a rsnns object
 #' @param ... parameters passed to \code{plot}
 #' @export
-#' @S3method plotIterativeError reg_class
-#' @method plotIterativeError reg_class
+#' @S3method plotIterativeError rsnns
+#' @method plotIterativeError rsnns
 #' @rdname plotIterativeError
-plotIterativeError.reg_class <- function(object, ...)
+plotIterativeError.rsnns <- function(object, ...)
 {
-  if(!inherits(object, "reg_class")) stop("not a legitimate reg_class model")
+  if(!inherits(object, "rsnns")) stop("not a legitimate rsnns model")
   
   if(object$computeIterativeError) {
     plot(object$IterativeFitError, ylab="Weighted SSE", xlab="Iteration", type="l", ...)
@@ -397,7 +397,6 @@ plotROC <-function(T, D, ...){
 #' @export
 plotRegressionError <- function(targets, fits, ...)
 {
-  #if(!inherits(object, "reg_class")) stop("not a legitimate reg_class model")
   
   plot(targets, fits, xlim=c(0,1), ylim=c(0,1), ...)
   

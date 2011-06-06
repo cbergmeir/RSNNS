@@ -110,7 +110,7 @@ elman.default <- function(x, y, size=c(5), maxit=100,
   nInputs <- dim(x)[2L]
   nOutputs <- dim(y)[2L]
   
-  snns <- rsnnsObjectFactory(subclass=c("elman", "reg_class"), nInputs=nInputs, maxit=maxit, 
+  snns <- rsnnsObjectFactory(subclass=c("elman"), nInputs=nInputs, maxit=maxit, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 

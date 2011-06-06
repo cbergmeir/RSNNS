@@ -86,7 +86,7 @@ assoz.default <- function(x, dimX, dimY, maxit=100,
   
   nInputs <- dim(x)[2L]
   
-  snns <- rsnnsObjectFactory(subclass=c("assoz", "association"), nInputs=nInputs, maxit=maxit, 
+  snns <- rsnnsObjectFactory(subclass=c("assoz"), nInputs=nInputs, maxit=maxit, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 

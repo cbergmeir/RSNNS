@@ -133,7 +133,7 @@ som.default <- function(x, mapX=16, mapY=16, maxit=100,
   nInputs <- dim(x)[2L]
   nOutputs <- mapX*mapY
   
-  snns <- rsnnsObjectFactory(subclass=c("som", "clustering"), nInputs=nInputs, maxit=maxit, 
+  snns <- rsnnsObjectFactory(subclass=c("som"), nInputs=nInputs, maxit=maxit, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 

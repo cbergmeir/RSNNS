@@ -94,7 +94,7 @@ rbfDDA.default <- function(x, y, maxit=1,
   nInputs <- dim(x)[2L]
   nOutputs <- dim(y)[2L]
   
-  snns <- rsnnsObjectFactory(subclass=c("rbfDDA", "reg_class"), nInputs=nInputs, maxit=maxit, 
+  snns <- rsnnsObjectFactory(subclass=c("rbfDDA"), nInputs=nInputs, maxit=maxit, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
       updateFunc=updateFunc, 
