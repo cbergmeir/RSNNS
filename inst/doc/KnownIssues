@@ -46,14 +46,7 @@ for all the preprocessing and extraction of sub-patterns, and to present the alr
 fixed subpatterns to the net.
 
 -----------------------------------------------------------------------------------------------
-5. Flag for 2D output
------------------------------------------------------------------------------------------------
-
-Some network types are currently restricted in rsnns to 2D output. This is somewhat unnecessary 
-and could be made switchable. A workaround is to use the low-level api.
-
------------------------------------------------------------------------------------------------
-6. Functions not wrapped so far from the SNNS kernel to be callable from SnnsR
+5. Functions not wrapped so far from the SNNS kernel to be callable from SnnsR
 -----------------------------------------------------------------------------------------------
 
 The following functions are currently not wrapped and therewith not callable from R. However, 

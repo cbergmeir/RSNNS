@@ -77,7 +77,7 @@ GROUP: include files
 #################################################*/
 
 
-
+//#include <R_ext/Print.h>
 
 #include <stdlib.h>
 
@@ -976,10 +976,19 @@ int  SnnsCLib::kra2_getClassNo (void)
     } /*if*/
 
     /* look for winning unit */
-    for (i = 1;
+/*    for (i = 1;
          (i <= Art2_NoOfRecUnits) || ((*topo_ptr)->Out.output == kra2_get_d());
          i++, topo_ptr++
         );
+*/
+
+// bergmeir 20110603 
+    for (i = 1; i <= Art2_NoOfRecUnits; i++) {
+      //Rprintf("get_d: %f\n", kra2_get_d());
+      //Rprintf("Out.o: %f\n\n", (*topo_ptr)->Out.output);
+      if((*topo_ptr)->Out.output == kra2_get_d()) break;
+      topo_ptr++;
+    }
 
     if ((i > Art2_NoOfRecUnits) && ((*topo_ptr)->Out.output < kra2_get_d())) {
        return (-1);

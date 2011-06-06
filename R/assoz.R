@@ -71,8 +71,10 @@ assoz <- function(x, ...) UseMethod("assoz")
 #' 
 #' model <- assoz(patterns, dimX=7, dimY=5)
 #' 
+#' actMaps <- matrixToActMapList(model$fitted.values, nrow=7)
+#' 
 #' par(mfrow=c(3,3))
-#' for (i in 1:9) plotActMap(model$fitted.values[[i]])
+#' for (i in 1:9) plotActMap(actMaps[[i]])
 assoz.default <- function(x, dimX, dimY, maxit=100, 
     initFunc="RM_Random_Weights", initFuncParams=c(1.0, -1.0), 
     learnFunc="RM_delta", learnFuncParams=c(0.01, 100, 0.0, 0.0, 0.0), 
@@ -98,7 +100,7 @@ assoz.default <- function(x, dimX, dimY, maxit=100,
   
   snns <- train(snns, inputsTrain=x)
   
-  snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
+  #snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
   
   snns
 }

@@ -120,6 +120,7 @@ krui_err SnnsCLib::artui_getClassifiedStatus (art_cl_status *status)
            *status = ART_NOT_CLASSIFIABLE;
          } /*if*/
       } /*if*/
+      break;  //bergmeir 20110606
    case ARTMAP_TOPO_TYPE:
       if (ARTMAP_CLASSIFIED) {
          if (kram_AllMapUnitsActive()) {
@@ -132,6 +133,7 @@ krui_err SnnsCLib::artui_getClassifiedStatus (art_cl_status *status)
             *status = ART_NOT_CLASSIFIABLE;
          } /*if*/
       } /*if*/
+      break;  //bergmeir 20110606
    default:
       break;
    } /* switch */
@@ -180,10 +182,12 @@ krui_err SnnsCLib::artui_getClassNo (int *class_no)
       if (ART2_CLASSIFIED) {
          *class_no = kra2_getClassNo ();
       } /*if*/
+      break;  //bergmeir 20110606
    case ARTMAP_TOPO_TYPE:
       if (ARTMAP_CLASSIFIED && (!kram_AllMapUnitsActive())) {
          *class_no = kram_getClassNo ();
       } /*if*/
+      break;  //bergmeir 20110606
    default:
       break;
    } /* switch */

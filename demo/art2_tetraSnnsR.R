@@ -44,5 +44,29 @@ snnsObject$saveNewPatterns(paste(basePath,"art2_tetraSnnsR_train.pat",sep=""), p
 outputs <- snnsObject$predictCurrPatSet("art2", parameters)
 outputs
 
+encodeClassLabels(outputs)
+
 library(scatterplot3d)
-scatterplot3d(outputs[,1:3])
+scatterplot3d(inputs, pch=encodeClassLabels(outputs))
+
+##------------------------------------------------------------------------------------------------
+## using the artui interface of SNNS instead of the normal functions
+## however, the artui interface is currently not included in the wrapping as it seems to be rather
+## unstable and the normal interface can be used instead..
+#noOfPatterns <- snnsObject$getNoOfPatterns()
+#updateFuncParams <- parameters
+#
+#print(snnsObject$artui_getN())
+#print(snnsObject$artui_getM())
+#
+#classNumbers <- NULL
+#for(currentPattern in 1:noOfPatterns) {
+#  snnsObject$setPatternNo(currentPattern)
+#  snnsObject$showPattern(resolveSnnsRDefine("patternUpdateModes","OUTPUT_NOTHING"))
+#  snnsObject$updateNet(updateFuncParams)
+#  
+#  print(snnsObject$artui_getClassifiedStatus()$status)
+#  classNumbers <- c(classNumbers, snnsObject$artui_getClassNo()$class_no)
+#  
+#}
+#classNumbers

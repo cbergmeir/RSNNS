@@ -135,13 +135,16 @@ SnnsR__whereAreResults <- function(snnsObject, outputMethod="output") {
   
   if(outputMethod == "art1") {  
     # in the ART1 network, the units that represent the output patterns are named cmp1, cmp2, ...
-    units <- snnsObject$getUnitsByName("cmp")
+    #units <- snnsObject$getUnitsByName("cmp")
+    units <- snnsObject$getUnitsByName("rec")
     
   } else if(outputMethod == "art2") {
     
-    unitsX <- snnsObject$getUnitsByName("x")
-    unitsQ <- snnsObject$getUnitsByName("q")
-    units <- c(unitsX, unitsQ) 
+    #unitsX <- snnsObject$getUnitsByName("x")
+    #unitsQ <- snnsObject$getUnitsByName("q")
+    #units <- c(unitsX, unitsQ) 
+    
+    units <- snnsObject$getUnitsByName("rec")
     
   } else if(outputMethod == "artmap") {
     

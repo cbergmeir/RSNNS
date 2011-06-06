@@ -201,6 +201,12 @@ char   *krio_writeUnitDefinitions_blank;
 
 char   *krio_getTType_ttype[10];
 
+//------------------------------------------------
+// art_ui.h
+//------------------------------------------------
+
+#include "art_ui.h" 
+
 
 private:
 
@@ -303,12 +309,6 @@ FlintType  *LEARN_SCG_old_gradient, *LEARN_SCG_p, *LEARN_SCG_r, *LEARN_SCG_old_w
 //------------------------------------------------
 
 #include "trans_f.h"
-
-//------------------------------------------------
-// art_ui.h
-//------------------------------------------------
-
-#include "art_ui.h"      
 
 //------------------------------------------------
 // cc_prune.h

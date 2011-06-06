@@ -34,8 +34,9 @@ for(i in 1:maxit) {
 snnsObject$saveNet(paste(basePath,"art1_lettersSnnsR.net",sep=""),"art1_lettersSnnsR")
 snnsObject$saveNewPatterns(paste(basePath,"art1_lettersSnnsR.pat",sep=""), patset$set_no);
 
-outputs <- snnsObject$predictCurrPatSet("art1", c(0, 0, 0, 0, 0))
-outputMaps <- matrixToActMapList(outputs, nrow=7)
+outputs <- snnsObject$predictCurrPatSet("art1", parameters)
+encodeClassLabels(outputs)
 
+inputMaps <- matrixToActMapList(inputs, nrow=7)
 par(mfrow=c(3,3))
-for (i in 1:9) plotActMap(outputMaps[[i]])
+for (i in 1:9) plotActMap(inputMaps[[i]])

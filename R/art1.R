@@ -105,11 +105,12 @@ art1 <- function(x, ...) UseMethod("art1")
 #' data(snnsData)
 #' patterns <- snnsData$art1_letters.pat
 #' 
-#' model <- art1(patterns, dimX=7, dimY=5)
-#' model$fitted.values
-#' 
+#' inputMaps <- matrixToActMapList(patterns, nrow=7)
 #' par(mfrow=c(3,3))
-#' for (i in 1:9) plotActMap(model$fitted.values[[i]])
+#' for (i in 1:9) plotActMap(inputMaps[[i]])
+#' 
+#' model <- art1(patterns, dimX=7, dimY=5)
+#' encodeClassLabels(model$fitted.values)
 art1.default <- function(x, dimX, dimY, f2Units=nrow(x), maxit=100, 
     initFunc="ART1_Weights", initFuncParams=c(1.0, 1.0), 
     learnFunc="ART1", learnFuncParams=c(0.9, 0.0, 0.0), 
@@ -134,7 +135,7 @@ art1.default <- function(x, dimX, dimY, f2Units=nrow(x), maxit=100,
  
   snns <- train(snns, inputsTrain=x)
   
-  snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
+  #snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
   
   snns
 }

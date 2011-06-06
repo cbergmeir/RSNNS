@@ -78,7 +78,7 @@ krui_err        setErrorHandler(void(* error_Handler )(int));
 
 #include <Rcpp.h>
 
-#include <R_ext/Print.h>
+//#include <R_ext/Print.h>
 
 //using namespace Rcpp ;
 
@@ -95,6 +95,9 @@ SEXP myWrap(const char* str) {
 }
 
 
+//-------------------------------------------------------------------
+// Wrapper for krui functions
+//-------------------------------------------------------------------
 
 RcppExport SEXP SnnsCLib__new(){
  return Rcpp::XPtr<SnnsCLib>( new SnnsCLib, true ) ;
@@ -870,12 +873,6 @@ RcppExport SEXP SnnsCLib__deleteSite(SEXP xp) {
 // Wrapping for these functions is not implemented so far:
 // Parameters with a type different from SEXP are not handled correctly so far.
 //------------------------------------------
-
-
-
-
-
-
 
 RcppExport SEXP SnnsCLib__getFirstPredUnit(SEXP xp) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -2380,11 +2377,9 @@ RcppExport SEXP SnnsCLib__execHandler(SEXP xp, SEXP error_code) {
 }
 
 
-
-//----------------------------------------------------
-// Bignet
-//
-//----------------------------------------------------
+//-------------------------------------------------------------------
+// Wrapper for Bignet functions
+//-------------------------------------------------------------------
 
 RcppExport SEXP SnnsCLib__jordan_createNet(SEXP xp, SEXP IUnits, SEXP HUnits, SEXP OUnits, SEXP ICols, SEXP HCols, SEXP OCols) {
 
@@ -2515,6 +2510,140 @@ RcppExport SEXP SnnsCLib__assoz_createNet (SEXP xp, SEXP X, SEXP Y) {
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+/*
+//The artui functions don't work reliably and usually, normal kernel functions
+//can be used instead..so wrapping is not active.
+//-------------------------------------------------------------------
+// Wrapper for artui functions
+//-------------------------------------------------------------------
+
+
+//krui_err artui_getClassifiedStatus ( art_cl_status *status );
+
+RcppExport SEXP SnnsCLib__artui_getClassifiedStatus(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int status;
+
+  int err = snnsCLib->artui_getClassifiedStatus(&status);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "status" ) = status
+    	) ;
+}
+
+RcppExport SEXP SnnsCLib__artui_getClassNo(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int class_no;
+
+  int err = snnsCLib->artui_getClassNo(&class_no);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "class_no" ) = class_no
+    	) ;
+}
+
+
+
+//krui_err artui_getN (int *N);
+
+RcppExport SEXP SnnsCLib__artui_getN(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int N;
+
+  int err = snnsCLib->artui_getN(&N);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "N" ) = N
+    	) ;
+}
+
+//krui_err artui_getM (int *M);
+
+RcppExport SEXP SnnsCLib__artui_getM(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int M;
+
+  int err = snnsCLib->artui_getM(&M);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "M" ) = M
+    	) ;
+}
+
+//krui_err artui_getNa (int *Na);
+
+RcppExport SEXP SnnsCLib__artui_getNa(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int Na;
+
+  int err = snnsCLib->artui_getNa(&Na);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "Na" ) = Na
+    	) ;
+}
+
+//krui_err artui_getNb (int *Nb);
+
+RcppExport SEXP SnnsCLib__artui_getNb(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int Nb;
+
+  int err = snnsCLib->artui_getNb(&Nb);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "Nb" ) = Nb
+    	) ;
+}
+
+//krui_err artui_getMa (int *Ma);
+
+RcppExport SEXP SnnsCLib__artui_getMa(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int Ma;
+
+  int err = snnsCLib->artui_getMa(&Ma);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "Ma" ) = Ma
+    	) ;
+}
+
+//krui_err artui_getMb (int *Mb);
+
+RcppExport SEXP SnnsCLib__artui_getMb(SEXP xp) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int Mb;
+
+  int err = snnsCLib->artui_getMb(&Mb);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "Mb" ) = Mb
+    	) ;
+}
+*/
+
+//-------------------------------------------------------------------
+// Other wrapper functions
+//-------------------------------------------------------------------
+
+
 RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP io_type)  {
 
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
@@ -2526,7 +2655,7 @@ RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP 
   int size=0;
   float* patternData = snnsCLib->kr_getSubPatData(p1, p2, p3, &size);
 
-Rprintf("size:%d", size);
+//Rprintf("size:%d", size);
   Rcpp::NumericVector pattern(size);
 
   for (int i=0; i<size; i++) {
@@ -2535,6 +2664,7 @@ Rprintf("size:%d", size);
 
   return pattern;
 }
+
 
 //This function reimplements the functionality of the SNNS function spanning_tree(), to get the winners of all patterns. 
 //This is necessary to get the complete self-organizing map.
@@ -2641,4 +2771,5 @@ RcppExport SEXP isnil(SEXP address)
   UNPROTECT(1);
   return(ret);*/
 }
+
 

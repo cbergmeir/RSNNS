@@ -112,7 +112,7 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
   if(origSnnsFormat) {
 
     s <- object$snnsObject$serializeNet("RSNNS_untitled")
-    
+    s <- s$serialization
 #    filename <- tempfile(pattern = "rsnns")
 #    object$snnsObject$saveNet(filename, " ")
 #    file <- file(filename, "r")
@@ -126,7 +126,9 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
       s$fullWeightMatrix <- "omitting full weight matrix as it is bigger than 20*20"
       
   }
-  invisible(s$serialization)
+  #invisible(s$serialization)
+  cat(s)
+  invisible(s)
 }
 
 

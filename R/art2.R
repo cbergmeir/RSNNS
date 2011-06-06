@@ -83,11 +83,14 @@ art2 <- function(x, ...) UseMethod("art2")
 #'                   updateFuncParams=c(0.99, 20, 20, 0.1, 0))
 #' model
 #' 
+#' testPatterns <- snnsData$art2_tetra_high.pat
+#' predictions <- predict(model, testPatterns)
+#' 
 #' \dontrun{library(scatterplot3d)}
 #' 
 #' \dontrun{par(mfrow=c(2,2))}
-#' \dontrun{scatterplot3d(patterns)}
-#' \dontrun{scatterplot3d(model$fitted.values[,1:3])}
+#' \dontrun{scatterplot3d(patterns, pch=encodeClassLabels(model$fitted.values))}
+#' \dontrun{scatterplot3d(testPatterns, pch=encodeClassLabels(predictions))}
 art2.default <- function(x, f2Units=5, maxit=100, 
     initFunc="ART2_Weights", initFuncParams=c(0.9, 2.0), 
     learnFunc="ART2", learnFuncParams=c(0.98, 10.0, 10.0, 0.1, 0.0), 
