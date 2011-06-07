@@ -49,14 +49,14 @@
 #' @rdname SnnsRObject$train
 #' @usage \S4method{train}{SnnsR}(inputsTrain, targetsTrain=NULL, 
 #'     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
-#'     learnFunc="Quickprop", learnFuncParams=c(0.2, 0, 0, 0),
+#'     learnFunc="Std_Backpropagation", learnFuncParams=c(0.2, 0),
 #'     updateFunc="Topological_Order", updateFuncParams=c(0.0), 
 #'     outputMethod="reg_class", maxit=100, shufflePatterns=TRUE, 
 #'     computeError=TRUE, inputsTest=NULL, targetsTest=NULL)
 #' @aliases train,SnnsR-method SnnsRObject$train
 SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL, 
     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
-    learnFunc="Quickprop", learnFuncParams=c(0.2, 0, 0, 0),
+    learnFunc="Std_Backpropagation", learnFuncParams=c(0.2, 0),
     updateFunc="Topological_Order", updateFuncParams=c(0.0), outputMethod="reg_class", 
     maxit=100, shufflePatterns=TRUE, computeError=TRUE, inputsTest=NULL, targetsTest=NULL, 
     serializeTrainedObject=TRUE) {

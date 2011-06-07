@@ -109,7 +109,7 @@ mlp <- function(x, ...) UseMethod("mlp")
 #'                                                        method="402040", l=0.4, h=0.6))
 mlp.default <- function(x, y, size=c(5), maxit=100, 
     initFunc="Randomize_Weights", initFuncParams=c(-0.3, 0.3), 
-    learnFunc="Quickprop", learnFuncParams=c(0.2), 
+    learnFunc="Std_Backpropagation", learnFuncParams=c(0.2, 0.0), 
     updateFunc="Topological_Order", updateFuncParams=c(0.0),
     hiddenActFunc="Act_Logistic",
     shufflePatterns=TRUE, linOut=FALSE, inputsTest=NULL, targetsTest=NULL, ...) {

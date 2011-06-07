@@ -18,8 +18,12 @@ iris <- splitForTrainingAndTest(irisValues, irisTargets, ratio=0.15)
 #normalize data
 iris <- normTrainingAndTestSet(iris)
 
-model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFuncParams=c(0.1), 
-    maxit=50, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
+#model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFunc="Quickprop", learnFuncParams=c(0.1, 2.0, 0.0001, 0.1), 
+#    maxit=50, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
+
+model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFunc="BackpropBatch", learnFuncParams=c(10, 0.1), 
+    maxit=100, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
+
 
 #model <- rbfDDA(iris$inputsTrain, iris$targetsTrain)
 
