@@ -24,6 +24,9 @@ iris <- normTrainingAndTestSet(iris)
 model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFunc="BackpropBatch", learnFuncParams=c(10, 0.1), 
     maxit=100, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
 
+#model <- mlp(iris$inputsTrain, iris$targetsTrain, size=5, learnFunc="SCG", learnFuncParams=c(0, 0, 0, 0), 
+#    maxit=30, inputsTest=iris$inputsTest, targetsTest=iris$targetsTest)
+
 
 #model <- rbfDDA(iris$inputsTrain, iris$targetsTrain)
 
