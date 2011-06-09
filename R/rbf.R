@@ -29,14 +29,14 @@
 #' interpolation theory. The RBF performs a linear combination of 
 #' n basis functions that are radially symmetric around a center/prototype.
 #' 
-#' RBF networks are feedforward networks with one hidden layer. Their activation 
+#' RBF networks are feed-forward networks with one hidden layer. Their activation 
 #' is not sigmoid (as in MLP), but radially symmetric (often gaussian). Thereby,
 #' information is represented locally in the network (in contrast to MLP, where 
 #' it is globally represented). Advantages of RBF networks in comparison to MLPs 
 #' are mainly, that the networks are more interpretable, training ought to be easier
 #' and faster, and the network only activates in areas of the feature space where it 
-#' was actually trained, and has therewith the possibility to indicate that it "doesn't 
-#' know".
+#' was actually trained, and has therewith the possibility to indicate that it "just 
+#' doesn't know".
 #' 
 #' Initialization of an RBF network can be difficult and require prior knowledge. 
 #' Before use of this function, you might want

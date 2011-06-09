@@ -31,14 +31,26 @@
 #' presented before.
 #' 
 #' Learning on Jordan networks:
-#' Backpropagation algorithms for feed forward networks can be adapted for their use with 
+#' Backpropagation algorithms for feed-forward networks can be adapted for their use with 
 #' this type of networks. In SNNS, there exist adapted versions of several backpropagation-type
 #' algorithms for Jordan and Elman networks.  
 #' 
-#' Network architecture: A Jordan network can be seen as a feed forward network with additional
+#' Network architecture: A Jordan network can be seen as a feed-forward network with additional
 #' context units in the input layer. These context units take input from themselves (direct feedback), and from 
 #' the output units. The context units save the current state of the net. In a Jordan net, the number of context 
 #' units and output units has to be the same.
+#' 
+#' Initialization of Jordan and Elman nets should be done with the default init function \code{JE_Weights}, which 
+#' has five parameters. The first two parameters define an interval from which the forward connections are randomly
+#' chosen. The third parameter gives the self-excitation weights of the context units. The fourth parameter gives the
+#' weights of context units between them, and the fifth parameter gives the initial activation of context units.
+#' 
+#' Learning functions are \code{JE_BP}, \code{JE_BP_Momentum}, \code{JE_Quickprop}, and \code{JE_Rprop}, which are all
+#' adapted versions of their standard-procedure counterparts.  
+#' Update functions that can be used are \code{JE_Order} and \code{JE_Special}.
+#' 
+#' A detailed description of the theory and the parameters is available, as always, from the SNNS 
+#' documentation and the other referenced literature.
 #' 
 #' @title Create and train a Jordan network
 #' @references 

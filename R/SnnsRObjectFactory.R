@@ -50,6 +50,10 @@
 #' 
 #' @title The main class of the package
 # @slot variables holds an environment with all member variables of the class 
+#' @references 
+#' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' 
 #' @seealso \code{\link{$}}, \code{\link{SnnsRObjectFactory}}
 #' @examples
 #' \dontrun{demo(encoderSnnsCLib)} 
@@ -129,7 +133,7 @@ setClass( "SnnsR", representation( variables="environment" ))
 #' then \code{SnnsCLib__error} is called to use the SNNS kernel function to get the corresponding error message code
 #' and an R warning is thrown containing this message.
 #' 
-#' Furthermore, a serialization mechanism is implemented that use all models present in the package to be able to
+#' Furthermore, a serialization mechanism is implemented which all models present in the package use to be able to
 #' be saved and loaded by R's normal save/load mechanism (as RData files). 
 #' 
 #' The completely trained object can be serialized with

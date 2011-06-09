@@ -28,13 +28,19 @@
 #' In theory, these could be ART1, ART2, or others. However, in SNNS ARTMAP is
 #' implemented for ART1 only. So, this function is to be used with binary input. 
 #' As explained in the description of \code{\link{art1}}, ART aims at solving the stability/plasticity
-#' dilemma. So, the advantage of ARTMAP are, that it is a supervised learning mechanism
+#' dilemma. So the advantage of ARTMAP is that it is a supervised learning mechanism
 #' that guarantees stability.
 #'
 #' See also the details section of \code{\link{art1}}. The two ART1 networks are connected by a \emph{map field}.
 #' The input of the first ART1 network is the training input, the input of the second network are the target values, 
-#' the teacher signals. The two networks are often called ARTa and ARTb, we call them here training data ART network 
+#' the teacher signals. The two networks are often called ARTa and ARTb, we call them here training data network 
 #' and target data network.  
+#' 
+#' In analogy to the ART1 and ART2 implementations, there are one initialization function, one learning function, 
+#' and two update functions present that are suitable to ARTMAP. The parameters are basically as in ART1, but for 
+#' two networks. The learning function and the update functions have 3 parameters, the vigilance parameters of the 
+#' two ART1 networks and an additional vigilance parameter for inter ART reset control. The initialization function
+#' has for parameters, i.e., two for every ART1 network.
 #' 
 #' A detailed description of the theory and the parameters is available from 
 #' the SNNS documentation and the other referenced literature. 

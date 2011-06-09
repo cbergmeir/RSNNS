@@ -23,8 +23,7 @@
 #
 #############################################################################
 
-#' Adaptive resonance theory (ART) networks are association networks, they 
-#' perform clustering by finding a prototype to the given input. 
+#' Adaptive resonance theory (ART) networks perform clustering by finding prototypes. 
 #' They are mainly designed to solve the stability/plasticity dilemma (which is one of the 
 #' central problems in neural networks) in the following way: new input patterns 
 #' may generate new prototypes (plasticity), but patterns already present in the net 
@@ -37,8 +36,8 @@
 #' A new input is intended to be classified according 
 #' to the prototypes already present in the net. The similarity between the input and 
 #' all prototypes is calculated. The most similar prototype is the \emph{winner}. 
-#' If the similarity between the input and the winner is high enough (defined by the 
-#' vigilance parameter), the winner is adapted to make it more similar to the input. 
+#' If the similarity between the input and the winner is high enough (defined by a
+#' \emph{vigilance parameter}), the winner is adapted to make it more similar to the input. 
 #' If similarity is not high enough, a new prototype is created. So, at most the winner 
 #' is adapted, all other prototypes remain unchanged.
 #' 
@@ -46,12 +45,19 @@
 #' ART is based on the more general concept of \emph{competitive learning}. The networks have 
 #' two fully connected layers (in both directions), the input/comparison layer and the recognition layer. 
 #' They propagate activation back and forth (resonance). The units in the recognition layer have lateral
-#' inhibition, so that they show a winner-takes-all behaviour, i.e., the unit that has the most activation
+#' inhibition, so that they show a winner-takes-all behaviour, i.e., the unit that has the highest activation
 #' inhibits activation of other units, so that after a few cycles its activation will converge to one, whereas
 #' the other units activations converge to zero. ART stabilizes this general learning mechanism by the presence
 #' of some special units. For details refer to the literature. 
 #' 
-#' In its current implementation, the network has two-dimensional input (and output). The matrix \code{x} contains all 
+#' The default initialization function, \code{ART1_Weights}, is the only one suitable for ART1 networks. It has 
+#' two parameters, which are explained in the SNNS User Manual pp.189. A default of 1.0 for both is usually fine.
+#' The only learning function suitable for ART1 is \code{ART1}. Update functions are \code{ART1_Stable} and 
+#' \code{ART1_Synchronous}. The difference between the two is that the first one updates until the network is in a 
+#' stable state, and the latter one only performs one update step. Both the learning function and the update functions 
+#' have one parameter, the vigilance parameter.
+#' 
+#' In its current implementation, the network has two-dimensional input. The matrix \code{x} contains all 
 #' (one dimensional) input patterns. Internally, every one of these patterns
 #' is converted to a two-dimensional pattern using parameters \code{dimX} and \code{dimY}.
 #' The parameter \code{f2Units} controls the number of units in the recognition layer, and therewith the maximal amount of clusters 

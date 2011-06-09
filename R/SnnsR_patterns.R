@@ -123,7 +123,7 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
 #' If the given \code{outputMethod} is unknown, the function defaults to "output".  
 #' 
 #' @title Get a list of output units of a net
-#' @param outputMethod a string defining the output method of the net. Possible values are: "art1", "art2", "assoz", "som", "output".
+#' @param outputMethod a string defining the output method of the net. Possible values are: "art1", "art2", "artmap", "assoz", "som", "output".
 #' @return a list of numbers identifying the units
 #' @rdname SnnsRObject$whereAreResults
 #' @usage \S4method{whereAreResults}{SnnsR}(outputMethod="output")

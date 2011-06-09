@@ -53,7 +53,7 @@
 #' 
 #' \code{demo()}
 #'  
-#' It is a good idea to start with the demos of the high-level api (which is much more convenient to use). E.g. to access
+#' It is a good idea to start with the demos of the high-level api (which is much more convenient to use). E.g., to access
 #' the iris classification demo type:
 #' 
 #' \code{demo(iris)}
@@ -78,7 +78,7 @@
 #' object, so that they can be called conveniently using the "$"-operator. This calling mechanism also allows for transparent masking of methods or extending the 
 #' kernel with new methods from within R. See \code{\link{$,SnnsR-method}}. R-functions that are added by RSNNS to the kernel are documented in 
 #' this manual under topics beginning with \code{SnnsRObject$}. Documentation of the original SNNS kernel user interface functions can be found in the SNNS User Manual 4.2 pp 290-314. 
-#' A call to e.g. the SNNS kernel function \code{krui_getNoOfUnits(..)} can be done with \code{SnnsRObject$getNoOfUnits(...)}. However, a few functions were excluded 
+#' A call to, e.g., the SNNS kernel function \code{krui_getNoOfUnits(..)} can be done with \code{SnnsRObject$getNoOfUnits(...)}. However, a few functions were excluded 
 #' from the wrapping for various reasons. Fur more details and other known issues see the file /inst/doc/KnownIssues.
 #' 
 #' Most of the example data included in SNNS is also present in this package, see \code{\link{snnsData}}.

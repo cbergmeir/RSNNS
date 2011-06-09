@@ -27,7 +27,7 @@
 #' Elman networks are partially recurrent networks 
 #' and similar to Jordan networks (function \code{\link{jordan}}). For details, see explanations there. 
 #' 
-#' Learning on Elman networks:
+#' Learning in Elman networks:
 #' Same as in Jordan networks (see \code{\link{jordan}}).
 #' 
 #' Network architecture: The difference between Elman and Jordan networks is that in an Elman
@@ -36,6 +36,9 @@
 #' units has to be the same. The main advantage of Elman nets is that the number of context 
 #' units is not directly determined by the output dimension (as in Jordan nets), but by the number of
 #' hidden units, which is more flexible, as it is easy to add/remove hidden units, but not output units.
+#' 
+#' A detailed description of the theory and the parameters is available, as always, from the SNNS 
+#' documentation and the other referenced literature.
 #' 
 #' @title Create and train an Elman network
 #' @references 

@@ -24,9 +24,16 @@
 #############################################################################
 
 
-#' The autoassociative memory is similar to the \code{\link{art1}} and \code{\link{art2}} network types. 
-#' It also performs clustering by finding a prototype to the given input. 
+#' The autoassociative memory performs clustering by finding a prototype to the given input. 
 #' The implementation assumes two-dimensional input and output (cf. \code{\link{art1}}).
+#' 
+#' The default initialization and update functions are the only ones suitable for this kind of 
+#' network. The update function takes one parameter, which is the number of iterations that will 
+#' be performed. The default of 50 usually does not have to be modified. For learning, \code{RM_delta} 
+#' and \code{Hebbian} functions can be used, though the first one usually performs better.
+#' 
+#' A more detailed description of the theory and the parameters is available from 
+#' the SNNS documentation and the other referenced literature. 
 #' 
 #' @title Create and train an (auto-)associative memory
 #' @references 

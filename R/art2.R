@@ -26,15 +26,18 @@
 
 #' ART2 is very similar to ART1, but for real-valued input. See \code{\link{art1}}
 #' for more information. Opposed to the ART1 implementation, the ART2 implementation 
-#' does not assume two-dimensional input and output. 
+#' does not assume two-dimensional input. 
 #'
 #' As comparison of real-valued vectors is more difficult than comparison of binary vectors, 
 #' the comparison layer is more complex in ART2, and actually consists of three layers. With a more
 #' complex comparison layer, also other parts of the network enhance their complexity.
-#' In SNNS, this enhanced complexity is refelcted by the presence of more parameters in initialization-, learning-,
+#' In SNNS, this enhanced complexity is reflected by the presence of more parameters in initialization-, learning-,
 #' and update function.  
 #' 
-#' A detailed description of the theory and the parameters is available from the SNNS documentation and the other referenced literature. 
+#' In analogy to the implementation to ART1, there are one initialization function, one learning function and two 
+#' update functions.  The learning and update functions have five parameters, the initialization function has two 
+#' parameters. For details see the SNNS User Manual, p. 67 and pp. 192.
+#'  
 #' 
 #' @title Create and train an art2 network
 #' @references

@@ -42,6 +42,11 @@
 #' automatically, and does not need their number to be specified in advance, the procedure is called
 #' \emph{dynamic} LVQ in SNNS.
 #' 
+#' The default initialization, learning, and update functions are the only ones suitable for this kind of 
+#' network. The three parameters of the learning function specify two learning rates (for the cases 
+#' correctly/uncorrectly classified), and the number of cycles the net is trained before mean vectors are 
+#' calculated.
+#' 
 #' A detailed description of the theory and the parameters is available, as always, from the SNNS 
 #' documentation and the other referenced literature.
 #' 
