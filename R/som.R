@@ -41,6 +41,10 @@
 #' As the computation of this function might be slow if many patterns are involved,
 #' much of its output is made switchable (see comments on return values).  
 #' 
+#' Internally, this function uses the initialization function \code{Kohonen_Weights_v3.2},
+#' the learning function \code{Kohonen}, and the update function \code{Kohonen_Order} of
+#' SNNS. 
+#' 
 #' @title Create and train a self-organizing map (SOM)
 #' @references 
 #' Kohonen, T. (1988), Self-organization and associative memory, Vol. 8, Springer-Verlag.

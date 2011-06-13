@@ -29,6 +29,21 @@
 #' common network architecture in use.  
 #' Training is usually performed by error backpropagation or a related procedure. 
 #'  
+#' There are a lot of different learning functions present in SNNS that can be 
+#' used together with this function, e.g., \code{Std_Backpropagation}, \code{BackpropBatch},
+#' \code{BackpropChunk}, \code{BackpropMomentum}, \code{BackpropWeightDecay}, \code{Rprop},
+#' \code{Quickprop}, \code{SCG} (scaled conjugate gradient), ...
+#' 
+#' \code{Std_Backpropagation}, \code{BackpropBatch}, e.g., have two parameters, the learning rate
+#' and the maximum output difference. The learning rate is usually a value between 0.1 and 1.
+#' It specifies the gradient descent step width. The maximum difference defines, how much difference between output
+#' and target value is treated as zero error, and not backpropagated. This parameter is used to prevent overtraining.
+#' For a complete list of the parameters of all the learning functions, see the SNNS User Manual, pp. 67.
+#' 
+#' The defaults that are set for initialization and update functions usually don't have to be changed. 
+#' 
+#' 
+#' 
 #' @title Create and train a multi-layer perceptron (MLP)
 #' @references
 #' Rosenblatt, F. (1958), 'The perceptron: A probabilistic model for information storage and organization in the brain', Psychological Review 65(6), 386--408.

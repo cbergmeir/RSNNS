@@ -30,6 +30,11 @@
 #' adds new units successively. It is a lot easier to use than normal RBF, because it only 
 #' requires two quite uncritical parameters.
 #' 
+#' The default functions do not have to be altered. The learning function \code{RBF-DDA} has
+#' three parameters: a positive threshold, and a negative threshold, that controls adding units to 
+#' the network, and a parameter for display purposes in the original SNNS. This parameter has 
+#' no effect in RSNNS. See p 74 of the original SNNS User Manual for details.
+#' 
 #' @title Create and train an RBF network with the DDA algorithm
 #' @references 
 #' Berthold, M. R. & Diamond, J. (1995), Boosting the Performance of RBF Networks with Dynamic Decay Adjustment, in 'Advances in Neural Information Processing Systems', MIT Press, , pp. 521--528.
