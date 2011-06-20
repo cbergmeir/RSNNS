@@ -34,8 +34,8 @@
 #' In SNNS, this enhanced complexity is reflected by the presence of more parameters in initialization-, learning-,
 #' and update function.  
 #' 
-#' In analogy to the implementation to ART1, there are one initialization function, one learning function and two 
-#' update functions.  The learning and update functions have five parameters, the initialization function has two 
+#' In analogy to the implementation of ART1, there are one initialization function, one learning function and two 
+#' update functions suitable for ART2.  The learning and update functions have five parameters, the initialization function has two 
 #' parameters. For details see the SNNS User Manual, p. 67 and pp. 192.
 #'  
 #' 

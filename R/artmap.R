@@ -37,10 +37,10 @@
 #' and target data network.  
 #' 
 #' In analogy to the ART1 and ART2 implementations, there are one initialization function, one learning function, 
-#' and two update functions present that are suitable to ARTMAP. The parameters are basically as in ART1, but for 
+#' and two update functions present that are suitable for ARTMAP. The parameters are basically as in ART1, but for 
 #' two networks. The learning function and the update functions have 3 parameters, the vigilance parameters of the 
 #' two ART1 networks and an additional vigilance parameter for inter ART reset control. The initialization function
-#' has for parameters, i.e., two for every ART1 network.
+#' has four parameters, two for every ART1 network.
 #' 
 #' A detailed description of the theory and the parameters is available from 
 #' the SNNS documentation and the other referenced literature. 

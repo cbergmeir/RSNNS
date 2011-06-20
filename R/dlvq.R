@@ -25,7 +25,7 @@
 
 #' Dynamic learning vector quantization (DLVQ) networks are similar to 
 #' self-organizing maps (SOM, \code{\link{som}}). But they perform supervised learning
-#' and lack a neighbourhood relationship between the prototypes. 
+#' and lack a neighborhood relationship between the prototypes. 
 #' 
 #' The input data has to be normalized in order to use DLVQ.
 #' 
@@ -35,7 +35,7 @@
 #' class x, the prototype of class y is moved away from the pattern, and the prototype 
 #' of class x is moved towards the pattern. This procedure is repeated iteratively until no more changes 
 #' in classification take place. Then, new prototypes are introduced in the net per class
-#' as new hidden units, initialized by the mean vector of misclassified patterns in that class.
+#' as new hidden units, and initialized by the mean vector of misclassified patterns in that class.
 #'  
 #' Network architecture: The network only has one hidden layer, containing one unit for each prototype.
 #' The prototypes/hidden units are also called codebook vectors. Because SNNS generates the units 

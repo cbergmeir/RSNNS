@@ -48,7 +48,7 @@
 #' inhibition, so that they show a winner-takes-all behaviour, i.e., the unit that has the highest activation
 #' inhibits activation of other units, so that after a few cycles its activation will converge to one, whereas
 #' the other units activations converge to zero. ART stabilizes this general learning mechanism by the presence
-#' of some special units. For details refer to the literature. 
+#' of some special units. For details refer to the referenced literature. 
 #' 
 #' The default initialization function, \code{ART1_Weights}, is the only one suitable for ART1 networks. It has 
 #' two parameters, which are explained in the SNNS User Manual pp.189. A default of 1.0 for both is usually fine.

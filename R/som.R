@@ -28,15 +28,15 @@
 #' This function creates and trains a self-organizing map (SOM).
 #' SOMs are neural networks with one hidden layer. 
 #' The network structure is similar to LVQ, but the method is unsupervised 
-#' and uses a notion of neighbourhood between the units. 
-#' The idea is that the map develops on itself a notion of similarity among 
+#' and uses a notion of neighborhood between the units. 
+#' The general idea is that the map develops by itself a notion of similarity among 
 #' the input and represents this as spatial nearness on the map.
 #' Every hidden unit represents a prototype. The goal of learning is to
 #' distribute the prototypes in the feature space such that the (probability 
 #' density of the) input is represented well.
 #' SOMs are usually built with 1d, 2d quadratic, 2d hexagonal, or 3d 
-#' neighbourhood, so that they can be visualized straightforwardly.
-#' The SOM implemented in SNNS has a 2d quadratic neighbourhood.
+#' neighborhood, so that they can be visualized straightforwardly.
+#' The SOM implemented in SNNS has a 2d quadratic neighborhood.
 #'  
 #' As the computation of this function might be slow if many patterns are involved,
 #' much of its output is made switchable (see comments on return values).  
