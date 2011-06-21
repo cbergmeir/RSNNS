@@ -16,6 +16,7 @@ version 0.4-0:
   the neural networks (getWeights, getUnitDefinitions)
 - documentation of the high-level functions was greatly improved with references
   to original literature and some descriptions
+- original SNNS 4.2 User Manual was added to inst/doc
 
 version 0.3-1: 
 
