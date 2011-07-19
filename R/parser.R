@@ -84,7 +84,7 @@ savePatFile <- function(inputs, targets, filename)  {
 
   snnsObject <- SnnsRObjectFactory()
 
-  snnsObject$createFullyConnectedFeedForwardNet(unitsPerLayer=c(ncol(as.matrix(inputs)),ncol(as.matrix(targets))))
+  snnsObject$createNet(unitsPerLayer=c(ncol(as.matrix(inputs)),ncol(as.matrix(targets))), fullyConnectedFeedForward = TRUE)
   
   patSet <- snnsObject$createPatSet(inputs, targets)
   snnsObject$saveNewPatterns(filename, patSet$set_no)
