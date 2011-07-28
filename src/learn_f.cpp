@@ -5257,8 +5257,7 @@ krui_err SnnsCLib::TEST_rprop(int start_pattern, int end_pattern,
 {
     register struct Unit *unit_ptr;
     register Patterns out_pat;
-    register float  error,	/* error  */
-                    sum_error,	/* sum of the error  */
+    register float  sum_error,	/* sum of the error  */ //error,	/* error  */
                     devit;	/* deviation  */
     TopoPtrArray    topo_ptr;
     int size;
@@ -5283,7 +5282,7 @@ krui_err SnnsCLib::TEST_rprop(int start_pattern, int end_pattern,
 	sum_error += devit * devit;	/* sum up the error of the network  */
 
 	/* calc. error for output units	 */
-	error = devit * ((this->*unit_ptr->act_deriv_func) ( unit_ptr ));
+	//error = devit * ((this->*unit_ptr->act_deriv_func) ( unit_ptr ));
 
     }
 
@@ -6728,9 +6727,8 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
     register Patterns out_pat;
     register float  error, sum_error, devit, delta, tmp;
     register TopoPtrArray topo_ptr;
-    TopoPtrArray    first_hidden_ptr;
-    int             all_correct = 1;	/* flag, wether all bits in the
-					   pattern are correct */
+    //TopoPtrArray    first_hidden_ptr;
+    //int             all_correct = 1;	/* flag, wether all bits in the pattern are correct */
     int size;
 
     /* Initdelta, Step 1: clear all olddeltas (accumulate delta in olddelta) */
@@ -6741,7 +6739,7 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
     }
 
     /* store first hidden unit pointer */
-    first_hidden_ptr = topo_ptr;
+    //first_hidden_ptr = topo_ptr;
     while ((unit_ptr = *++topo_ptr) != NULL) {	/* hidden units */
 	unit_ptr->olddelta = 0.0;
     }
@@ -6771,13 +6769,13 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 	if (devit > 0.5) {
 	    if (tmp > 0.5)
 		NoOfLearnedPatterns++;
-	    else
-		all_correct = 0;
+	    //else
+		//all_correct = 0;
 	} else {
 	    if (tmp <= 0.5)
 		NoOfLearnedPatterns++;
-	    else
-		all_correct = 0;
+	    //else
+		//all_correct = 0;
 	}
 
 	devit = devit - tmp;	/* calc. devitation (target_j - output_j) */
@@ -6958,7 +6956,7 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
  float SnnsCLib::BPTT_propagateNetBackward(int pattern_no, int sub_pat_no,int nhist)
 {
     float           error = 0.0;
-    float           dummy;
+    //float           dummy;
     int             backstep;
 
     /* go nhist steps back thru time */
@@ -6967,7 +6965,8 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 	    /* start at output, pattern-error is calculated first */
 	    error = oneStepBackprop(backstep, pattern_no, sub_pat_no, nhist);
 	} else {
-	    dummy = oneStepBackprop(backstep, pattern_no, sub_pat_no, nhist);
+	    //dummy = 
+            oneStepBackprop(backstep, pattern_no, sub_pat_no, nhist);
 	}
     return (error);
 }
@@ -7090,7 +7089,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
 		    float **parameterOutArray, int *NoOfOutParams)
 {
     //static float    TEST_BPTT_OutParameter[1];	/* TEST_BPTT_OutParameter[0] stores the learning error  */
-    int             ret_code, pattern_no, sub_pat_no, patterns;
+    int             ret_code, pattern_no, sub_pat_no;//, patterns;
     int             nhist;	/* number of steps back in time */
     register struct Unit *unit_ptr;
 
@@ -7143,7 +7142,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
     if(KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
 
-    patterns = 0;
+    //patterns = 0;
 
     while (kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)) {
 

@@ -286,8 +286,8 @@ float SnnsCLib::cc_getErr (int StartPattern, int EndPattern)
     float sse=0, devit,error;
     register Patterns out_pat;
     register struct Unit *OutputUnitPtr;
-    int Correct;
-    int WhichWin,CorrWin;
+    //int Correct;
+    //int WhichWin,CorrWin;
     float MaxAct;
 
     KernelErrorCode = kr_initSubPatternOrder(StartPattern,EndPattern);
@@ -297,7 +297,7 @@ float SnnsCLib::cc_getErr (int StartPattern, int EndPattern)
     SumSqError = 0.0;
 
     for(p=start; p<=end;p++){
-	Correct=TRUE;
+	//Correct=TRUE;
 	MaxAct=0.0;
 	cc_getActivationsForActualPattern(p,start,&pat,&sub);
 	PROPAGATE_THROUGH_OUTPUT_LAYER(OutputUnitPtr,dummy,p);
@@ -305,14 +305,14 @@ float SnnsCLib::cc_getErr (int StartPattern, int EndPattern)
 	out_pat = kr_getSubPatData(pat,sub,OUTPUT,NULL);
 
 	FOR_ALL_OUTPUT_UNITS(OutputUnitPtr,dummy){
-	    if (*out_pat > 0.5) CorrWin = dummy;
+	    //if (*out_pat > 0.5) CorrWin = dummy;
 	    devit =  OutputUnitPtr->Out.output - *(out_pat++);
 	    if  (OutputUnitPtr->Out.output > MaxAct)
 	    {
 		MaxAct=OutputUnitPtr->Out.output;
-		WhichWin=dummy;
+		//WhichWin=dummy;
 	    }
-	    if (abs(devit) > 0.2) Correct=FALSE;
+	    //if (abs(devit) > 0.2) Correct=FALSE;
 	    sse += devit*devit;
 	    error = devit * 
 		((this->*OutputUnitPtr->act_deriv_func)(OutputUnitPtr) + cc_fse);

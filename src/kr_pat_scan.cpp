@@ -846,7 +846,7 @@ int SnnsCLib::yylex YY_PROTO(( void ))
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-        unsigned int xx_res_not_used;
+//        unsigned int xx_res_not_used;
 //#line 56 "kr_pat_scan.l"
 
 
@@ -1081,7 +1081,8 @@ case 29:
 YY_RULE_SETUP
 //#line 130 "kr_pat_scan.l"
 //ECHO;
-xx_res_not_used = fwrite( yytext, yyleng, 1, yyout );
+//xx_res_not_used = 
+        fwrite( yytext, yyleng, 1, yyout );
 	YY_BREAK
 //#line 1039 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):

@@ -2,6 +2,7 @@ version 0.4-1:
 
 - fixed a bug that prevented savePatFile to work
 - fixed a bug that prevented compilation on Mac OSX
+- fixed the "variable set but not used" warnings that occur in the most recent gcc versions
 
 version 0.4-0:
 

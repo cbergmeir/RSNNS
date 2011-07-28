@@ -3995,7 +3995,7 @@ krui_err  SnnsCLib::kr_callNetworkFunction(int type, float *parameterInArray,
 
 //Rprintf("callNetworkFunction1\n");
 
-  krui_err dummy;
+  //krui_err dummy;
   if (NoOfUnits == 0)
     {  /*  No Units defined  */
     KernelErrorCode = KRERR_NO_UNITS;
@@ -4013,7 +4013,8 @@ krui_err  SnnsCLib::kr_callNetworkFunction(int type, float *parameterInArray,
       /*  normal network presentation  */
       /*  the result of this call has been void which is not compatible */
       /*  to the declaration; therefor the dummy error variable is included */
-      dummy = kr_callNetworkFunctionSTD( type, parameterInArray, NoOfInParams,
+      //dummy = 
+      kr_callNetworkFunctionSTD( type, parameterInArray, NoOfInParams,
                                         parameterOutArray, NoOfOutParams,
                                         start_pattern, end_pattern );
 //Rprintf("callNetworkFunction5\n");

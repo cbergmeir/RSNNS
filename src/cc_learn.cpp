@@ -254,12 +254,13 @@ void SnnsCLib::cc_trainSpecialUnits(int maxNoOfCovarianceUpdateCycles,
     int s;
     int counter,start,end,n;
     float oldHighScore=0.0,newHighScore;
-    float Error;
+    //float Error;
 
     cc_printHeadline(const_cast<char*>("Training of the candidates"),LENGTH_HEADLINE);
     cc_calculateOutputUnitError(StartPattern,EndPattern);
     if (SumSqError==0.0){
-	Error = cc_getErr(StartPattern,EndPattern); /* calc SumSqError */
+	//Error = 
+        cc_getErr(StartPattern,EndPattern); /* calc SumSqError */
 	if (SumSqError==0.0)
 	    return;
     }
@@ -394,7 +395,7 @@ void SnnsCLib::cc_calculateOutputUnitError(int StartPattern,int EndPattern)
 
     register struct Unit *UnitPtr;
     register Patterns  out_pat;
-    register TopoPtrArray     topo_ptr;
+    //register TopoPtrArray     topo_ptr;
     register int o,p;
     int start, end,pat,sub,n;
   
@@ -405,7 +406,7 @@ void SnnsCLib::cc_calculateOutputUnitError(int StartPattern,int EndPattern)
     ERROR_CHECK_WRC;
 
     for(p=start; p<=end;p++){
-	topo_ptr = topo_ptr_array;
+	//topo_ptr = topo_ptr_array;
         cc_getActivationsForActualPattern(p,start,&pat,&sub);
 	out_pat = kr_getSubPatData(pat,sub,OUTPUT,NULL);
         ERROR_CHECK_WRC;

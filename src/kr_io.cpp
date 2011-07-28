@@ -899,7 +899,7 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 
 krui_err  SnnsCLib::krio_writeSiteDefinitions(void)
 {
-  int   err;
+  //int   err;
   char  *site_name,
         *site_func;
 
@@ -907,7 +907,8 @@ krui_err  SnnsCLib::krio_writeSiteDefinitions(void)
   if ( !krui_getFirstSiteTableEntry( &site_name, &site_func ) )
     return( 0 );
 
-  err = krio_fmtShapeing( SITE_DEF );
+  //err = 
+  krio_fmtShapeing( SITE_DEF );
   retchk( stream_out );
 
   *stream_out << format( "\n\n%s :\n\n", title[8] );
@@ -1044,13 +1045,14 @@ char  *SnnsCLib::getTType(int st)
 
 krui_err  SnnsCLib::krio_writeDefaultDefinitions(void)
 {
-  int   err;
+  //int   err;
   FlintType  act, bias;
   int   st, subnet_no, layer_no;
   char  *act_func,  *out_func;
 
 
-  err = krio_fmtShapeing( DEFAULT_DEF );
+  //err = 
+  krio_fmtShapeing( DEFAULT_DEF );
   retchk( stream_out );
 
   *stream_out << format( "\n\n%s :\n\n", title[13] );
@@ -1106,10 +1108,9 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 
   bool  no_Ftype, second,
         writeUnitActFuncName, writeUnitOutFuncName;
-  int   err,
-        unit_no,
+  int   unit_no,
         u_no,
-        st_def, subnet_no, layer_no;
+        st_def, subnet_no, layer_no; //err,
 
   FlintType  act_def, bias_def;
 
@@ -1117,7 +1118,8 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 
   if (NoOfUnits <= 0)  return( KRERR_NO_ERROR );
 
-  err = krio_fmtShapeing( UNIT_DEF );
+  //err = 
+  krio_fmtShapeing( UNIT_DEF );
   retchk( stream_out );
 
   *stream_out << format( "\n\n%s :\n\n", title[10] );
@@ -1354,8 +1356,8 @@ krui_err  SnnsCLib::krio_writeSourcesAndWeights(void)
 krui_err  SnnsCLib::krio_writeConnectionDefs(void)
 {
   bool  second;
-  int   target_unit, unit_no,
-        err;
+  int   target_unit, unit_no;
+//        err;
 
 
   FlintType  weight;
@@ -1363,7 +1365,8 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
 
   if (kr_io_NoOfLinks == 0)  return( 0 );
 
-  err = krio_fmtShapeing( CONNECT_DEF );
+  //err = 
+  krio_fmtShapeing( CONNECT_DEF );
   retchk( stream_out );
 
   *stream_out << format( "\n\n%s :\n\n", title[11] );
@@ -1381,7 +1384,8 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
       case  DIRECT_LINKS:
 	*stream_out << format( fmt_shape1, target_unit, " ");
         retchk( stream_out );
-	err = krio_writeSourcesAndWeights();
+	//err = 
+        krio_writeSourcesAndWeights();
         retchk( stream_out );
 
         break;
@@ -1402,7 +1406,8 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
               retchk( stream_out );
 	    }
 
-	    err = krio_writeSourcesAndWeights();
+	    //err = 
+            krio_writeSourcesAndWeights();
             retchk( stream_out );
 
             second = TRUE;
@@ -1436,7 +1441,7 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
 {
   struct Unit   *unit_ptr,
                 *unit_ptr2;
-  int	i,  k, elem_no, err, dummy2, def_subnet_no;
+  int	i,  k, elem_no, dummy2, def_subnet_no; //err,
   short  subnet_no;
   FlintType  dummy1;
   char	*dummy3;
@@ -1444,7 +1449,8 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
 
   if (!is_subnet_info)  return( 0 );
 
-  err = krio_fmtShapeing( SUBNET_DEF );
+  //err = 
+  krio_fmtShapeing( SUBNET_DEF );
   retchk( stream_out );
 
   *stream_out << format( "\n\n%s :\n\n", title[12] );
@@ -1522,7 +1528,7 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
   struct Unit   *unit_ptr,
                 *unit_ptr2;
 
-  int	i,  k, elem_no, err, dummy2, def_layer_no;
+  int	i,  k, elem_no, dummy2, def_layer_no; //err,
   short  layer_no;
   FlintType  dummy1;
   char	    *dummy3;
@@ -1530,7 +1536,8 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
 
   if (!is_layer_info)  return( KRERR_NO_ERROR );
 
-  err = krio_fmtShapeing( LAYER_DEF );
+  //err = 
+  krio_fmtShapeing( LAYER_DEF );
   retchk( stream_out );
 
   *stream_out << format( "\n\n%s :\n\n", title[15] );
@@ -2740,7 +2747,7 @@ void  SnnsCLib::krio_readConnectionDefs(void)
   bool  new_unit, unit_has_sites;
   float tacoma_xi,tacoma_ri;
   int fscanRet;
-  struct Link* LinkDummy;
+  //struct Link* LinkDummy;
 
 
   if ( !skipComments() )  return;
@@ -2803,7 +2810,8 @@ void  SnnsCLib::krio_readConnectionDefs(void)
         KernelErrorCode = KRERR_FILE_SYNTAX;
         return;
       }
-      LinkDummy=krui_createLinkWithAdditionalParameters
+      //LinkDummy=
+      krui_createLinkWithAdditionalParameters
                       ( src_unit_no, weight,tacoma_ri,tacoma_xi,0.0);
       if (KernelErrorCode!=KRERR_NO_ERROR) return;
       if ( !comma() )  break;

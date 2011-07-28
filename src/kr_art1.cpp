@@ -803,7 +803,7 @@ krui_err   SnnsCLib::kra1_get_DelUnits (TopoPtrArray *topo_ptr, int *no_of_del_u
 
    int                    count;
 
-   bool                   checked_del_rec_units   = FALSE;
+   //bool                   checked_del_rec_units   = FALSE;
    bool                   checked_first_del_unit  = FALSE;
    bool                   checked_secnd_del_unit  = FALSE;
    bool                   checked_third_del_unit  = FALSE;
@@ -849,7 +849,7 @@ krui_err   SnnsCLib::kra1_get_DelUnits (TopoPtrArray *topo_ptr, int *no_of_del_u
 
    } /* FOR_ALL_UNITS*/
 
-   checked_del_rec_units = TRUE;
+   //checked_del_rec_units = TRUE;
 
 
    /* Now we are looking for the first other delay unit which has got incoming

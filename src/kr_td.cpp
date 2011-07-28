@@ -228,9 +228,9 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
     register struct Unit   *unit_ptr, *unit_ptr1 ;
     register struct Unit   *ref_unit;
     register Patterns      out_pat;
-    register float         error,  sum_error,  eta,  devit, learn_error;
+    register float         error,  sum_error, eta, devit, learn_error;
     register TopoPtrArray  topo_ptr;
-    int                    last_log_layer, i;
+    int                    i; //last_log_layer,
     int                    size;
 
     sum_error = 0.0;		/*  reset network error  */
@@ -239,7 +239,7 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
     /*  calculate address of the output pattern (with number pattern_no + 1) */
 
     topo_ptr = topo_ptr_array + (no_of_topo_units + 2);
-    last_log_layer = (*topo_ptr)->lln;
+    //last_log_layer = (*topo_ptr)->lln;
     out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
     out_pat += size;
 
@@ -619,7 +619,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
     register Patterns      out_pat;
     register float         error,  sum_error,  eta,  devit, learn_error;
     register TopoPtrArray  topo_ptr;
-    int                    last_log_layer, i;
+    int                    i; //last_log_layer, 
     int                    size;
 
 
@@ -629,7 +629,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
     /*  calculate address of the output pattern (with number pattern_no + 1) */
 
     topo_ptr = topo_ptr_array + (no_of_topo_units + 2);
-    last_log_layer = (*topo_ptr)->lln;
+    //last_log_layer = (*topo_ptr)->lln;
     out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
     out_pat += size;
 
@@ -857,18 +857,18 @@ krui_err  SnnsCLib::TEST_TDbackprop( int start_pattern, int end_pattern,
 { 
     register struct Unit   *unit_ptr;
     register Patterns      out_pat;
-    register float         sum_error,  eta,  devit;
+    register float         sum_error,  devit; //eta,
     register TopoPtrArray  topo_ptr;
-    int                    last_log_layer;
+    //int                    last_log_layer;
     int                    size;
 
     sum_error = 0.0;		/*  reset network error  */
-    eta = learn_parameter;	/*  store learn_parameter in CPU register  */
+    //eta = learn_parameter;	/*  store learn_parameter in CPU register  */
 
     /*  calculate address of the output pattern (with number pattern_no + 1) */
 
     topo_ptr = topo_ptr_array + (no_of_topo_units + 2);
-    last_log_layer = (*topo_ptr)->lln;
+    //last_log_layer = (*topo_ptr)->lln;
     out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
     out_pat += size;
 

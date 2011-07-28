@@ -451,7 +451,7 @@ krui_err SnnsCLib::tac_generateNewUnit(int UnitNo,int LayerNo,int StartPattern,i
 {
    struct Unit* NewUnitPtr;
    struct Unit* UnitPtr;
-   struct Link* NewLink;
+   //struct Link* NewLink;
    int CurrentUnit;
    float Correlation;
 
@@ -477,7 +477,8 @@ krui_err SnnsCLib::tac_generateNewUnit(int UnitNo,int LayerNo,int StartPattern,i
 	 &&(tac_connect(UnitNo,UnitPtr,StartPattern,EndPattern,&Correlation))) 
          {
             ERROR_CHECK;
-            NewLink=kr_createLinkWithAdditionalParameters(GET_UNIT_NO(UnitPtr),
+            //NewLink=
+            kr_createLinkWithAdditionalParameters(GET_UNIT_NO(UnitPtr),
 	      cc_generateRandomNo(TAC_MAX_VALUE), 0.0, 0.0, 0.0); 
             ERROR_CHECK;
             if(!IS_INPUT_UNIT(UnitPtr)){
@@ -1082,7 +1083,7 @@ krui_err SnnsCLib::LEARN_Tacoma(int StartPattern, int EndPattern,
    int TempErrorCode; /* Used by the macro ERROR_CHECK_WITH_MEM_DEALLOC */
    int LayerNo; 
    struct Unit * UnitPtr,*OutputUnitPtr;
-   struct Link* LinkPtr;
+   //struct Link* LinkPtr;
    int dummy;
    int CurrentUnit;    
    float MaxError;
@@ -1155,7 +1156,8 @@ krui_err SnnsCLib::LEARN_Tacoma(int StartPattern, int EndPattern,
 	   CurrentUnit = GET_UNIT_NO(OutputUnitPtr);
 	   KernelErrorCode = krui_setCurrentUnit(CurrentUnit); 
 	   ERROR_CHECK;
-	   LinkPtr = krui_createLinkWithAdditionalParameters
+	   //LinkPtr = 
+           krui_createLinkWithAdditionalParameters
                (GET_UNIT_NO(UnitPtr), 0.0, 0.0, 0.0, 0.0 );
 	   ERROR_CHECK; 
 	}   

@@ -2124,7 +2124,7 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
     struct np_symtab *newsym;
     struct np_symtab *last = NULL;
     int list_cmp;
-    int last_cmp;
+    //int last_cmp;
     int i;
 
     TRACE_IN();
@@ -2133,7 +2133,7 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
     while (list != NULL && (list_cmp = strcmp(symbol, list->symname)) > 0)
     {
 	last = list;
-	last_cmp = list_cmp;
+	//last_cmp = list_cmp;
 	list = list->next;
     }
     

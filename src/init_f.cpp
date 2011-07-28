@@ -1178,7 +1178,7 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 	register TopoPtrArray	help_topo_ptr;
 	register struct Unit	*winner;	/* Unit who's links	*/
 						/* change		*/
-	float			norm_init;	/* initialization value	*/
+	//float			norm_init;	/* initialization value	*/
 	register struct Unit	*hidden_unit;	/* current hidden unit	*/
 	register int		hidden_units;	/* number of hidden u.	*/
 	register int		act_hidden_num;	/* number of current hu.*/
@@ -1228,7 +1228,7 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 #endif
 
 	/* initialize all weights leading to hidden units		*/
-	norm_init = 1.0 / (float) sqrt((float) NoOfInputUnits);
+	//norm_init = 1.0 / (float) sqrt((float) NoOfInputUnits);
 	act_hidden_num = 0;
 	while ((hidden_unit = *(++topo_ptr)) != NULL)
 	{

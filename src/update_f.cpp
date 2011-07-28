@@ -569,7 +569,7 @@ krui_err  SnnsCLib::UPDATE_ART1_syncPropagate(float *parameterArray, int NoOfPar
     krui_err     ret_code      = KRERR_NO_ERROR;
 
     int          i;
-    struct Unit  *winner_ptr; /* recognition unit which is the winner of w.t.a*/
+    //struct Unit  *winner_ptr; /* recognition unit which is the winner of w.t.a*/
     struct Unit  *unit_ptr;
     TopoPtrArray topo_layer[6];	/* topo_layer[0] : *first input unit
 				   topo_layer[1] : *first comp. unit
@@ -673,7 +673,8 @@ krui_err  SnnsCLib::UPDATE_ART1_syncPropagate(float *parameterArray, int NoOfPar
     /* look for the recognition unit with the highest activation
        returns a NULL pointer if all recognition units have
        activation 0.0 */
-    winner_ptr = krart_get_winner (topo_layer[2],1.0);
+    //winner_ptr = 
+    krart_get_winner (topo_layer[2],1.0);
 
     return (ret_code);
 
@@ -696,7 +697,7 @@ krui_err  SnnsCLib::UPDATE_ART1_Propagate(float *parameterArray, int NoOfParams)
 {
     krui_err     ret_code      = KRERR_NO_ERROR;
     int          i;
-    struct Unit  *winner_ptr;	/* recogn. unit which is the winner of w.t.a */
+    //struct Unit  *winner_ptr;	/* recogn. unit which is the winner of w.t.a */
     TopoPtrArray topo_layer[6];	/* topo_layer[0] : *first input unit
 				   topo_layer[1] : *first comp. unit
 				   topo_layer[2] : *first rec.  unit
@@ -768,7 +769,8 @@ krui_err  SnnsCLib::UPDATE_ART1_Propagate(float *parameterArray, int NoOfParams)
 	/* look for the recognition unit with the highest activation
 	   returns a NULL pointer if all recognition units have
 	   activation 0.0 */
-	winner_ptr = krart_get_winner (topo_layer[2],1.0);
+	//winner_ptr = 
+        krart_get_winner (topo_layer[2],1.0);
 
     } while (!(ART1_CLASSIFIED) && !(ART1_NOT_CLASSIFIABLE));
 
@@ -794,7 +796,7 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
 {
     krui_err     ret_code      = KRERR_NO_ERROR;
     int          i;
-    struct Unit  *winner_ptr; /* recogn. unit which is the winner of w.t.a */
+    //struct Unit  *winner_ptr; /* recogn. unit which is the winner of w.t.a */
     struct Unit  *unit_ptr;
     TopoPtrArray topo_layer[12]; /* topo_layer[0] : *first input unit
                                     topo_layer[1] : *first w unit
@@ -944,7 +946,8 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
     krart_prop_synch ();
 
     /* Get winner */
-    winner_ptr = krart_get_winner (topo_layer[ART2_REC_LAY-1], UPDATE_ART2_syncPropagate_param_d);
+    //winner_ptr = 
+    krart_get_winner (topo_layer[ART2_REC_LAY-1], UPDATE_ART2_syncPropagate_param_d);
 
     /* Check F1 stability */
     kra2_check_f1_stability ();
@@ -971,7 +974,7 @@ krui_err  SnnsCLib::UPDATE_ART2_Propagate(float *parameterArray, int NoOfParams)
 {
     krui_err     ret_code      = KRERR_NO_ERROR;
     int          i;
-    struct Unit  *winner_ptr; /* recogn. unit which is the winner of w.t.a */
+    //struct Unit  *winner_ptr; /* recogn. unit which is the winner of w.t.a */
     TopoPtrArray topo_layer[12]; /* topo_layer[0] : *first input unit
                                           topo_layer[1] : *first w unit
                                           topo_layer[2] : *first x unit
@@ -1074,7 +1077,8 @@ krui_err  SnnsCLib::UPDATE_ART2_Propagate(float *parameterArray, int NoOfParams)
 
 	/* look for the recognition unit with the highest activation returns
 	   a NULL pointer if all recognition units have activation 0.0 */
-	winner_ptr = krart_get_winner (topo_layer[ART2_REC_LAY-1], param_d);
+	//winner_ptr = 
+        krart_get_winner (topo_layer[ART2_REC_LAY-1], param_d);
 
 	/* Check if F1-Layer is stable */
 	kra2_check_f1_stability();
@@ -1103,8 +1107,8 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
 {
     krui_err     ret_code      = KRERR_NO_ERROR;
     int          i;
-    struct Unit  *winner_ptr_a;	/* the winner of wta of ARTa */
-    struct Unit  *winner_ptr_b;	/* the winner of w.t.a of ARTb */
+    //struct Unit  *winner_ptr_a;	/* the winner of wta of ARTa */
+    //struct Unit  *winner_ptr_b;	/* the winner of w.t.a of ARTb */
     struct Unit  *unit_ptr;
     TopoPtrArray topo_layer[14]; /* topo_layer[0] : *first input unit ARTa
                                     topo_layer[1] : *first comp. unit ARTa
@@ -1230,8 +1234,10 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
 
     /* look for the recognition unit with the highest activation returns a 
        NULL pointer if all recognition units have activation 0.0 */
-    winner_ptr_a = krart_get_winner (topo_layer[2],1.0);
-    winner_ptr_b = krart_get_winner (topo_layer[8],1.0);
+    //winner_ptr_a = 
+    krart_get_winner (topo_layer[2],1.0);
+    //winner_ptr_b = 
+    krart_get_winner (topo_layer[8],1.0);
 
     return (ret_code);
 
@@ -1253,8 +1259,8 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_Propagate(float *parameterArray, int NoOfParam
 {
     krui_err     ret_code      = KRERR_NO_ERROR;
     int          i;
-    struct Unit  *winner_ptr_a;	/* the winner of w.t.a of ARTa */
-    struct Unit  *winner_ptr_b;	/* the winner of w.t.a of ARTb */
+    //struct Unit  *winner_ptr_a;	/* the winner of w.t.a of ARTa */
+    //struct Unit  *winner_ptr_b;	/* the winner of w.t.a of ARTb */
     TopoPtrArray topo_layer[14]; /* topo_layer[0] : *first input unit ARTa
                                     topo_layer[1] : *first comp. unit ARTa
 				    topo_layer[2] : *first rec.  unit ARTa
@@ -1335,8 +1341,10 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_Propagate(float *parameterArray, int NoOfParam
 	/* look for the recognition unit with the highest activation
 	   returns a NULL pointer if all recognition units have
 	   activation 0.0 */
-	winner_ptr_a = krart_get_winner (topo_layer[2],1.0);
-	winner_ptr_b = krart_get_winner (topo_layer[8],1.0);
+	//winner_ptr_a = 
+        krart_get_winner (topo_layer[2],1.0);
+	//winner_ptr_b = 
+        krart_get_winner (topo_layer[8],1.0);
 
     } while (!(ARTMAP_CLASSIFIED) && !(ARTMAP_NOT_CLASSIFIABLE));
 
@@ -1948,7 +1956,7 @@ krui_err  SnnsCLib::UPDATE_syncPropagateHop(float *parameterArray, int NoOfParam
 krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
 {
     register struct Unit   *unit_ptr; 
-    FlintType               sum, aux, min;
+    FlintType               sum, min; //aux,
     //ACT_FUNC_DEFS    /* defines link- and site-pointer */
     register struct Link  *__link_ptr;
     register int            i;
@@ -1985,7 +1993,7 @@ krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
  
     FOR_ALL_UNITS(unit_ptr) {
 	/* get the netInput of this unit */
-	sum =  0.0; aux = 0.0;
+	sum =  0.0; //aux = 0.0;
 	if (GET_FIRST_UNIT_LINK( unit_ptr )){
 	    do
 		sum += GET_WEIGHTED_OUTPUT;
