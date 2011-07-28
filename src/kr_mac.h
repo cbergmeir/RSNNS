@@ -79,9 +79,9 @@
 #ifndef Min
 #define Min(a,b)	       (a>b ? b : a)
 #endif
-#ifndef abs
-#define abs(x)		       (x>=0 ? x : -(x))
-#endif
+//#ifndef abs
+//#define abs(x)		       (x>=0 ? x : -(x))
+//#endif
 
 
 /*  Macros for stepping thru the unit array and the site/link lists
