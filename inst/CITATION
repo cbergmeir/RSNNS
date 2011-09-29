@@ -1,8 +1,8 @@
 citHeader("To cite package 'RSNNS' in publications use:")
 
 citEntry(entry="Manual",
-	title = "Neural Networks in R using the Stuttgart Neural Network Simulator: RSNNS",
+	title = "Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS",
 	author = "Christoph Bergmeir, Jos\\'e M. Ben\\'itez",
 	year = 2010,
-	note = "R package version 0.3",
-	textVersion = "Christoph Bergmeir, Jose M. Benitez (2010). Neural Networks in R using the Stuttgart Neural Network Simulator: RSNNS")
+	note = "R package version 0.4-2",
+	textVersion = "Christoph Bergmeir, Jose M. Benitez (2010). Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS")

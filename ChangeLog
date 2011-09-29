@@ -1,10 +1,14 @@
-version 0.4-1:
+version 0.4-2 (29-9-2011):
+
+- removed original SNNS manual, to avoid license confusions, as it states an outdated license
+
+version 0.4-1 (28-7-2011):
 
 - fixed a bug that prevented savePatFile to work
 - fixed a bug that prevented compilation on Mac OSX
 - fixed the "variable set but not used" warnings that occur in the most recent gcc versions
 
-version 0.4-0:
+version 0.4-0 (21-6-2011):
 
 - The art2 demo was fixed
 - changed package encoding to UTF-8
@@ -24,11 +28,11 @@ version 0.4-0:
   to original literature and some descriptions
 - original SNNS 4.2 User Manual was added to inst/doc
 
-version 0.3-1: 
+version 0.3-1 (17-11-2010): 
 
 fixes to make it run on Solaris
 
-version 0.3: 
+version 0.3 (15-11-2010): 
 
 port of the relevant SNNS parts to C++, 
 resulting in an SNNS fork named SnnsCLib.
