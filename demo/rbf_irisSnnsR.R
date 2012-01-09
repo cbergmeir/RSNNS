@@ -63,5 +63,5 @@ predictions <- snnsObject$predictCurrPatSet("output", c(0))
 confusionMatrix(outputs,predictions)
 
 snnsObject$saveNet(paste(basePath,"rbf_irisSnnsR.net",sep=""),"rbf_irisSnnsR")
-snnsObject$saveNewPatterns(paste(basePath,"rbf_irisSnnsR.pat",sep=""), patset$set_no);
+snnsObject$saveNewPatterns(paste(basePath,"rbf_irisSnnsR.pat",sep=""), patset$set_no)
 

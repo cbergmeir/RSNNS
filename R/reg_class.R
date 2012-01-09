@@ -183,40 +183,31 @@ plotIterativeError.rsnns <- function(object, ...)
 #' 100 001 010 001
 #' 
 #' @title Decode class labels to a binary matrix
+#' @references
+#' Venables, W. N. and Ripley, B. D. (2002), 'Modern Applied Statistics with S', Springer-Verlag.
 #' @param x class label vector
 #' @param valTrue see Details paragraph
 #' @param valFalse see Details paragraph
 #' @return a matrix containing the decoded class labels
 #' @export
+#' @author The implementation is a slightly modified version of the function \code{class.ind} from the \code{nnet} package of Brian Ripley.
 #' @examples
 #' decodeClassLabels(c(1,3,2,3))
+#' decodeClassLabels(c("r","b","b","r", "g", "g"))
 #' 
 #' data(iris)
 #' decodeClassLabels(iris[,5])
-decodeClassLabels <- function(x, valTrue=1, valFalse=0) {
+decodeClassLabels <- function(x, valTrue=1, valFalse=0)
+{
+  n <- length(x)
+  x <- as.factor(x)
+  res <- matrix(valFalse, n, length(levels(x)) )
+  res[(1:n) + n*(unclass(x)-1)] <- valTrue
+  dimnames(res) <- list(names(x), levels(x))
   
-  #y <- gl(2, 4, 8)
-  #levels(y) <- c("low", "high")
-  #if(length(levels(y))!=0) {}
-
-  classes <- unique(x)
-  numClasses <- 1:length(classes)
-  names(numClasses) <- classes
-
-  targets <- matrix(nrow=length(x), ncol=length(classes))
-  for(i in 1:length(x))
-    for(j in numClasses)  {
-      if(j == numClasses[x[i]]) {
-        targets[i,j] <- valTrue  
-      }
-      else {
-        targets[i,j] <- valFalse
-      }
-    }
-  
-  colnames(targets) <- classes
-  targets
+  res
 }
+
 
 #' Applies \code{analyzeClassification} row-wise to a matrix.
 #' 

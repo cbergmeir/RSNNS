@@ -88,9 +88,9 @@ elman <- function(x, ...) UseMethod("elman")
 #' 
 #' par(mfrow=c(1,2))
 #' 
-#' modelElman <- elman(inputs, outputs, size=8, decay=0.1, maxit=1000)
+#' modelElman <- elman(inputs, outputs, size=8, learnFuncParams=c(0.1), maxit=1000)
 #' modelElman
-#' modelJordan <- jordan(inputs, outputs, size=8, decay=0.1, maxit=1000)
+#' modelJordan <- jordan(inputs, outputs, size=8, learnFuncParams=c(0.1), maxit=1000)
 #' modelJordan
 #' 
 #' plotIterativeError(modelElman)

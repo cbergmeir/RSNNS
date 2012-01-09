@@ -6,7 +6,7 @@ Title: Neural Networks in R using the Stuttgart Neural Network
 LinkingTo: Rcpp
 Type: Package
 LazyLoad: yes
-Author: Christoph Bergmeir <c.bergmeir@decsai.ugr.es>
+Author: Christoph Bergmeir and José M. Benítez
 Description: The Stuttgart Neural Network Simulator (SNNS) is a library
     containing many standard implementations of neural networks. This
     package wraps the SNNS functionality to make it available from
@@ -15,9 +15,9 @@ Description: The Stuttgart Neural Network Simulator (SNNS) is a library
     Furthermore, the package contains a convenient high-level
     interface, so that the most common neural network topologies and
     learning algorithms integrate seamlessly into R.
-Version: 0.4-2
+Version: 0.4-3
 URL: http://sci2s.ugr.es/dicits/software/RSNNS
-Date: 2011-09-29
+Date: 2012-01-09
 Depends: R (>= 2.10.0), methods, Rcpp (>= 0.8.5)
 Suggests: scatterplot3d
 Encoding: UTF-8

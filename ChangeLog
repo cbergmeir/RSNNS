@@ -1,3 +1,11 @@
+version 0.4-3 (09-1-2012):
+
+- included a citation to the JSS article about RSNNS in the documentation and the CITATION file
+- recompressed example data to fix a warning in CRAN checks
+- fixed the jordan and elman examples: "decay=0.1" was given as parameter, instead of the correct "learnFuncParams=c(0.1)" 
+- added an example for training an MLP for the iris data, using the low-level api (mlp_irisSnnsR.R)
+- fixed the decodeClassLables() function, which didn't correctly translate factor level names to column names  
+
 version 0.4-2 (29-9-2011):
 
 - removed original SNNS manual, to avoid license confusions, as it states an outdated license
@@ -13,7 +21,7 @@ version 0.4-0 (21-6-2011):
 - The art2 demo was fixed
 - changed package encoding to UTF-8
 - wrapping of some of the missing functions was added
-- artmap was added in the high-level interfact
+- artmap was added in the high-level interface
 - initialization to zero was added for all former static variables 
   (this was not always performed before, but it turned out that some
   SNNS functions rely on this and crash otherwise, e.g. dlvq and artmap)
