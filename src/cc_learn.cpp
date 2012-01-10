@@ -773,6 +773,7 @@ krui_err SnnsCLib::LEARN_CasCor(int StartPattern, int EndPattern,
     /* prune the new hidden unit and retrain the output connections again */
     if (CC_PRUNE_ONOFF) {
 	cc_pruneNet(StartPattern, EndPattern, PRUNE_FUNC);
+        ERROR_CHECK_WITH_MEMORY_DEALLOCATION;
 	if((OUT_PATIEN != 0) && (MAX_NO_ERROR_UPDATE_CYCLES != 0)) {
 	    cc_trainOutputUnits(MAX_NO_ERROR_UPDATE_CYCLES, BACKFITT_PATIENCE,
 				MINIMAL_ERROR_CHANGE,

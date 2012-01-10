@@ -76,6 +76,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "SnnsCLibGeneric_util.h"
+
 /* Use prototypes in function declarations. */
 #define YY_USE_PROTOS
 
@@ -1869,8 +1871,9 @@ static void yy_fatal_error( msg )
 char msg[];
 #endif
 	{
-	(void) fprintf( stderr, "%s\n", msg );
-	exit( YY_EXIT_FAILURE );
+           SNNSpanic(msg);
+	//(void) fprintf( stderr, "%s\n", msg );
+	//exit( YY_EXIT_FAILURE );
 	}
 
 

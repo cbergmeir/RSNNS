@@ -78,7 +78,7 @@
 #include <memory.h>
 
 #include "SnnsCLib.h"
-
+#include "SnnsCLibGeneric_util.h"
 
 /*****************************************************************************
   FUNCTION : float cc_calculatePruneError(int p,int n,float sse)
@@ -125,9 +125,9 @@ float SnnsCLib::cc_getPruningError(int pruneFunc,int StartPattern,int EndPattern
 
   if (mode>0){
     if (mode==1){
-       printf("Selection criterion is %s\n", cc_pruningFuncArray[pruneFunc]);
+       SNNSprintf("Selection criterion is %s\n", cc_pruningFuncArray[pruneFunc]);
     } 
-    printf("%s %s inserting unit (p=%i): %f\n",
+    SNNSprintf("%s %s inserting unit (p=%i): %f\n",
           cc_pruningFuncArray[pruneFunc],(mode==1)?"before":"after",
           p,GeTe);
   }
@@ -173,7 +173,7 @@ void SnnsCLib::cc_pruneNet (int StartPattern, int EndPattern, int pruneFunc)
 	link_ptr->weight = tmp;
         sbc_ifKilled=cc_calculatePruneError(pruneFunc,p,n,sse);
 
-	printf("selection criterion if link %i-->%i gets killed: %f\n",
+	SNNSprintf("selection criterion if link %i-->%i gets killed: %f\n",
 	       GET_UNIT_NO(link_ptr->to),GET_UNIT_NO(outputUnit_ptr),
 	       sbc_ifKilled);
 	if (sbc_ifKilled<sbc) {
@@ -193,7 +193,7 @@ void SnnsCLib::cc_pruneNet (int StartPattern, int EndPattern, int pruneFunc)
 
     sbc_ifKilled=cc_calculatePruneError(pruneFunc,p,n,sse);
 
-    printf("selection criterion if link %i-->%i gets killed: %f\n",
+    SNNSprintf("selection criterion if link %i-->%i gets killed: %f\n",
 	   GET_UNIT_NO(link_ptr->to),GET_UNIT_NO(unit_ptr),
 	   sbc_ifKilled);
     if (sbc_ifKilled<sbc) {
@@ -208,6 +208,8 @@ void SnnsCLib::cc_pruneNet (int StartPattern, int EndPattern, int pruneFunc)
     ERROR_CHECK_WRC;
     cc_pruneNet(StartPattern, EndPattern, pruneFunc);
   }
+
+  KernelErrorCode = 0;
 }
 
 
@@ -237,7 +239,7 @@ void SnnsCLib::cc_remove_Unit(void)
 	OUT_PATIEN,StartPattern,EndPattern,PARAM1,
 	PARAM2,PARAM3,ParameterOutArray,NoOfOutParams); 
 	*/
-      printf("\nNOTE: selection criterion is increasing, the net is becoming too big!\n=====================================================================\n\n");
+      SNNSprintf("\nNOTE: selection criterion is increasing, the net is becoming too big!\n=====================================================================\n\n");
 }
 
 
@@ -262,20 +264,21 @@ void SnnsCLib::cc_killLink (int source, int target)
   /* ...kill that beast */
   KernelErrorCode=krui_deleteLink();
   if(KernelErrorCode!=KRERR_NO_ERROR) { 
-    printf("\nLink not deleted%i",KernelErrorCode); 
+    SNNSprintf("\nLink not deleted%i",KernelErrorCode); 
   } else {
-    printf("link %i ----> %i killed\n",source,target);
+    SNNSprintf("link %i ----> %i killed\n",source,target);
   }
   KernelErrorCode = kr_topoSort(TOPOLOGICAL_CC);
   if(KernelErrorCode==KRERR_DEAD_UNITS) { 
-    printf("\nlast link removed, killing Unit !"); 
+    SNNSprintf("\nlast link removed, killing Unit !"); 
     unit_ptr=kr_getUnitPtr(topo_msg.src_error_unit); 
     KernelErrorCode = kr_removeUnit(unit_ptr);
     if(KernelErrorCode!=KRERR_NO_ERROR) { 
-      printf("\nSNNS-kernel panic:%i cannot remove unit! aborting",
+      SNNSprintf("\nSNNS-kernel panic:%i cannot remove unit! aborting",
 	     KernelErrorCode);
-      fflush(stdout);
-      exit (0);
+      return;
+      //fflush(stdout);
+      //exit (0);
     }
     KernelErrorCode = kr_topoSort(TOPOLOGICAL_CC);
   }  
