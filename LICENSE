@@ -1,0 +1,27 @@
+RSNNS, i.e. all content of this package except the /src and 
+the /data sub-directory are Copyright (c) DiCITS Lab, Sci2s group, 
+DECSAI, University of Granada.
+
+SnnsCLib (present in the /src and /data subdirectories of this package)
+is a fork of the kernel and parts of the GUI of the Stuttgart Neural 
+Network Simulator (SNNS), version 4.3.
+
+The original source code of SNNS 4.3 can be found at:
+
+http://www.ra.cs.uni-tuebingen.de/SNNS/
+
+SNNS  is (Copyright) 1990-95  University of Stuttgart,  Institute  for
+Parallel   and   Distributed   High   Performance   Systems    (IPVR),
+Breitwiesenstr. 20-22,  D-70565 Stuttgart,  Fed.  Rep.  of Germany and 
+(Copyright)  1996-2008   University  of   Tuebingen,   Wilhelm-Schickard 
+Institute for Computer Science, Sand. 1, D-72076 Tuebingen.
+
+SnnsCLib and RSNNS were developed in 2010 by Christoph Bergmeir under 
+supervision of José M. Benítez, both affiliated to DiCITS Lab, 
+Sci2s group, DECSAI, University of Granada
+
+SNNSv4.3, SnnsCLib, and RSNNS are licensed under the GNU LIBRARY GENERAL 
+PUBLIC LICENSE Version 2, June 1991. You can get a copy from here:
+
+http://www.r-project.org/Licenses/LGPL-2
+

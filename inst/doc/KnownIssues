@@ -1,0 +1,85 @@
+This document contains some known issues of SnnsCLib and RSNNS, and possible workarounds.
+
+-----------------------------------------------------------------------------------------------
+1. Configure mechanism of SNNS was cut down
+-----------------------------------------------------------------------------------------------
+
+The main focus of SnnsCLib was getting it to work properly under up-to-date Linux, Solaris, and
+Windows systems, using the R-internal compilation mechanism. So, as the environment is pretty clear,
+the configure mechanism of SNNS was mostly removed, possibly loosing compatibility with some 
+architectures SNNS runs on.
+
+-----------------------------------------------------------------------------------------------
+2. Bignet functions for hopfield, td are missing
+-----------------------------------------------------------------------------------------------
+
+As RSNNS has a 3-level architecture:
+
+RSNNS high-level api (rsnns)
+RSNNS low-level api (SnnsR)
+C++ api (SnnsCLib)
+
+methods might be implemented on an architecture level, but not on the next one above. 
+E.g. for hopfield and td networks, there is currently no convenient create function for the 
+networks in RSNNS. However, these can be created with the original bignet tool and then loaded 
+into RSNNS, or they could be created using low-level functionality to create units and links.
+Such a "manual" creation using SnnsR functions is shown e.g. in the encoder demo.
+If you are interested in a particular type of network, don't hesitate to make a feature request.
+
+-----------------------------------------------------------------------------------------------
+3. Radial basis function initialization
+-----------------------------------------------------------------------------------------------
+
+As it turns out to be quite difficult to initialize a RBF network reliably, the SNNS manual has
+a section commenting on this problem. The rbf high-level implementenation of rsnns only implements
+a standard version of this. If you need something different, stick to the low-level api. See the demo
+rbf_sinSnnsR.
+
+-----------------------------------------------------------------------------------------------
+4. .pat files containing variable-dimension patterns are only partly supported
+-----------------------------------------------------------------------------------------------
+
+SNNS .pat files can contain patterns with variable dimension. Loading and training using the 
+low-level api works as in original SNNS (using SnnsCLib::krui_loadNewPatterns). However, loading 
+such files with readPatFile, is known not to work. The straightforward way around this is to use R 
+for all the preprocessing and extraction of sub-patterns, and to present the already extracted, 
+fixed subpatterns to the net.
+
+-----------------------------------------------------------------------------------------------
+5. Functions not wrapped so far from the SNNS kernel to be callable from SnnsR
+-----------------------------------------------------------------------------------------------
+
+The following functions are currently not wrapped and therewith not callable from R. However, 
+their wrapping is prepared and commented-out code is present in SnnsCLibWrapper.cpp.
+Mostly, only wrapping of some parameters is not implemented. 
+
+krui_err     deleteUnitList(int no_of_units, int unit_list[]);
+krui_err     createFTypeEntry(char *Ftype_symbol, char *act_func_name, char *out_func_name, int no_of_sites, char **array_of_site_names);
+
+struct Link*    createLinkWithAdditionalParameters(int source_unit_no, FlintTypeParam weight,float val_a,float val_b,float val_c);
+
+krui_err     trainNetwork(NetLearnParameters *parameters);
+krui_err     getNetworkErrorArray(double **learnErrors,int **atEpoch,int *noOfErrors);
+
+(krui_err        setClassDistribution(unsigned int *classDist);)
+
+krui_err        xyTransTable(int op, int *x, int *y, int z);
+krui_err        getUnitCenters(int unit_no, int center_no,struct PositionVector **unit_center);
+krui_err        setUnitCenters(int unit_no, int center_no,struct PositionVector *unit_center);
+
+#ifdef MASPAR_KERNEL
+
+krui_err        MasPar( mode );
+krui_err        getMasParStatus(void);
+krui_err        MasParBenchmark( func_type, cycles, result );
+
+#endif
+
+void            inv_forwardPass(struct UnitList *inputs);
+double          inv_backwardPass(float learn, float delta_max,int *err_units, float ratio,struct UnitList *inputs,struct UnitList *outputs);
+
+krui_err        setErrorHandler(void(* error_Handler )(int));
+
+
+
+

@@ -1,0 +1,20 @@
+citHeader("To cite RSNNS in publications use:")
+
+citEntry(entry = "Article",
+  title        = "Neural Networks in {R} Using the Stuttgart Neural Network Simulator: {RSNNS}",
+  author       = personList(as.person("Christoph Bergmeir"),
+                   as.person(" Jos\\'e M. Ben\\'itez")),
+  journal      = "Journal of Statistical Software",
+  year         = "2012",
+  volume       = "46",
+  number       = "7",
+  pages        = "1--26",
+  url          = "http://www.jstatsoft.org/v46/i07/",
+
+  textVersion  =
+  paste("Christoph Bergmeir,  Jose M. Benitez (2012).",
+        "Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS.",
+        "Journal of Statistical Software, 46(7), 1-26.",
+        "URL http://www.jstatsoft.org/v46/i07/.")
+)
+
