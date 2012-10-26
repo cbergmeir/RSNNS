@@ -173,14 +173,14 @@ plotIterativeError.rsnns <- function(object, ...)
 }
 
 
-#' This method decodes class labels from a numerical or levels vector to a binary matrix, i.e., 
-#' it converts the input vector to a binary matrix. 
+#' This method decodes class labels from a numerical or levels vector to a
+#' binary matrix, i.e.,  it converts the input vector to a binary matrix.
 #' 
-#' In the matrix, the value \code{valTrue} (e.g. 1) is present
-#' exactly in the column given by the value in the input vector, and the value \code{valFalse} (e.g. 0) in the other 
-#' columns. The number of columns of the resulting matrix depends on the number of unique 
-#' labels found in the vector. E.g. the input c(1, 3, 2, 3) will result in an output matrix with rows: 
-#' 100 001 010 001
+#' In the matrix, the value \code{valTrue} (e.g. 1) is present exactly in the
+#' column given by the value in the input vector, and the value \code{valFalse}
+#' (e.g. 0) in the other columns. The number of columns of the resulting matrix
+#' depends on the number of unique labels found in the vector. E.g. the input
+#' c(1, 3, 2, 3) will result in an output matrix with rows: 100 001 010 001
 #' 
 #' @title Decode class labels to a binary matrix
 #' @references
@@ -190,7 +190,8 @@ plotIterativeError.rsnns <- function(object, ...)
 #' @param valFalse see Details paragraph
 #' @return a matrix containing the decoded class labels
 #' @export
-#' @author The implementation is a slightly modified version of the function \code{class.ind} from the \code{nnet} package of Brian Ripley.
+#' @author The implementation is a slightly modified version of the function
+#' \code{class.ind} from the \code{nnet} package of Brian Ripley.
 #' @examples
 #' decodeClassLabels(c(1,3,2,3))
 #' decodeClassLabels(c("r","b","b","r", "g", "g"))
@@ -243,10 +244,12 @@ toNumericClassLabels <- function(x) {
 }
 
  
-#' This function converts the continuous outputs to binary outputs that can be used for classification.
-#' The two methods 402040, and winner-takes-all (WTA), are implemented as described in the SNNS User Manual 4.2. 
+#' This function converts the continuous outputs to binary outputs that can be
+#' used for classification. The two methods 402040, and winner-takes-all (WTA),
+#' are implemented as described in the SNNS User Manual 4.2.
 #' 
-#' The following text is an edited citation from the SNNS User Manual 4.2 (pp 269):
+#' The following text is an edited citation from the SNNS User Manual 4.2 (pp
+#' 269):
 #' 
 #' \describe{
 #' \item{402040}{ 

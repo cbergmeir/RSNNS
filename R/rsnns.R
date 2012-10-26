@@ -132,9 +132,10 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
 }
 
 
-#' The object factory generates an \code{rsnns} object and initializes its member variables
-#' with the values given as parameters. Furthermore, it generates an object of \code{\link{SnnsR-class}}.
-#' Later, this information is to be used to train the network.
+#' The object factory generates an \code{rsnns} object and initializes its
+#' member variables with the values given as parameters. Furthermore, it
+#' generates an object of \code{\link{SnnsR-class}}. Later, this information is
+#' to be used to train the network.
 #' 
 #' The typical procedure implemented in \code{rsnns} subclasses is the following: 
 #' \itemize{
@@ -143,9 +144,9 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
 #' \item train the network (with \code{\link{train}})
 #' }
 #'
-#' In every \code{rsnns} object, the iterative error is the summed squared error (SSE) of all patterns. If
-#' the SSE is computed on the test set, then it is weighted to take care of the different amount of patterns
-#' in the sets.
+#' In every \code{rsnns} object, the iterative error is the summed squared error
+#' (SSE) of all patterns. If the SSE is computed on the test set, then it is
+#' weighted to take care of the different amount of patterns in the sets.
 #' 
 #' @title Object factory for generating rsnns objects
 #' @param subclass the subclass of rsnns to generate (vector of strings)

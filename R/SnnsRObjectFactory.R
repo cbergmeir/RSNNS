@@ -122,19 +122,21 @@ setClass( "SnnsR", representation( variables="environment" ))
 
 #' Enable calling of C++ functions as methods of \code{SnnsR-class} objects.
 #'
-#' This function makes methods of SnnsR__ and SnnsCLib__ accessible via "$".
-#' If no SnnsR__ method is present, then the according SnnsCLib__ 
-#' method is called. This enables a very flexible method handling.
-#' To mask a method from SnnsCLib, e.g. to do some parameter checking or postprocessing,
-#' only a method with the same name, but beginning with SnnsR__ has to be present in R. 
-#' See e.g. \code{\link{SnnsRObject$initializeNet}} for such an implementation. 
+#' This function makes methods of SnnsR__ and SnnsCLib__ accessible via "$". If
+#' no SnnsR__ method is present, then the according SnnsCLib__ method is
+#' called. This enables a very flexible method handling. To mask a method from
+#' SnnsCLib, e.g. to do some parameter checking or postprocessing, only a method
+#' with the same name, but beginning with SnnsR__ has to be present in R.  See
+#' e.g. \code{\link{SnnsRObject$initializeNet}} for such an implementation.
 #' 
-#' Error handling is also done within the method caller. If the result of a function is a list with a member \code{err}, 
-#' then \code{SnnsCLib__error} is called to use the SNNS kernel function to get the corresponding error message code
-#' and an R warning is thrown containing this message.
+#' Error handling is also done within the method caller. If the result of a
+#' function is a list with a member \code{err},  then \code{SnnsCLib__error} is
+#' called to use the SNNS kernel function to get the corresponding error message
+#' code and an R warning is thrown containing this message.
 #' 
-#' Furthermore, a serialization mechanism is implemented which all models present in the package use to be able to
-#' be saved and loaded by R's normal save/load mechanism (as RData files). 
+#' Furthermore, a serialization mechanism is implemented which all models
+#' present in the package use to be able to be saved and loaded by R's normal
+#' save/load mechanism (as RData files).
 #' 
 #' The completely trained object can be serialized with
 #' 
@@ -172,7 +174,9 @@ setMethod( "$", "SnnsR", function(x, name ){
             envir = as.environment(-1), 
             ifnotfound = list(FALSE), inherits=TRUE)
         
-        #very usefull for debugging..everytime an SnnsR or SnnsCLib funtion is called, its name is printed
+        #very usefull for debugging..everytime an SnnsR or SnnsCLib funtion is
+        #called, its name is printed
+        
         #print(name)
         
         if(is.function(myFunc[[1]])) {

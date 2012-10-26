@@ -117,10 +117,11 @@ SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=
 
 #' SnnsR low-level function to get a list of output units of a net.
 #' 
-#' Depending on the network architecture, output is present in hidden units, in output units, etc.
-#' In some network types, the output units have a certain name prefix in SNNS. This function finds
-#' the output units according to certain network types. The type is specified by \code{outputMethod}.
-#' If the given \code{outputMethod} is unknown, the function defaults to "output".  
+#' Depending on the network architecture, output is present in hidden units, in
+#' output units, etc. In some network types, the output units have a certain
+#' name prefix in SNNS. This function finds the output units according to
+#' certain network types. The type is specified by \code{outputMethod}. If the
+#' given \code{outputMethod} is unknown, the function defaults to "output".
 #' 
 #' @title Get a list of output units of a net
 #' @param outputMethod a string defining the output method of the net. Possible values are: "art1", "art2", "artmap", "assoz", "som", "output".
