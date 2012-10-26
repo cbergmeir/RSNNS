@@ -151,7 +151,9 @@ mlp.default <- function(x, y, size=c(5), maxit=100,
   snns$archParams <- list(size=size)
   
   snns$snnsObject$setUnitDefaults(0,0,1,0,1,"Act_Logistic","Out_Identity")
-  snns$snnsObject$createNet(unitsPerLayer=c(nInputs, size, nOutputs), fullyConnectedFeedForward=TRUE)
+  snns$snnsObject$createNet(unitsPerLayer=c(nInputs, size, nOutputs),
+                            fullyConnectedFeedForward=TRUE,
+                            iNames = colnames(x), oNames = colnames(y))
   
   if(linOut) {
     outputActFunc <- "Act_Identity"
