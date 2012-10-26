@@ -35,9 +35,12 @@
 #' at \code{\link{SnnsR-class}} to find out how to properly use it.
 #'  
 #' @title Create a layered network
+#' @param snnsObject 
 #' @param unitsPerLayer a vector of integers that represents the number of units in each layer, including input and output layer
 #' @param fullyConnectedFeedForward if \code{TRUE}, the network is fully connected as a feed-forward network. If \code{FALSE}, 
 #' no connections are created
+#' @param iNames names of input units
+#' @param oNames names of output units
 #' @rdname SnnsRObject$createNet
 #' @usage \S4method{createNet}{SnnsR}(unitsPerLayer, fullyConnectedFeedForward = TRUE)
 #' @aliases createNet,SnnsR-method createNet$getAllUnitsTType
@@ -50,7 +53,7 @@
 #' obj2 <- SnnsRObjectFactory()
 #' obj2$createNet(c(8,5,5,2), TRUE)
 #' obj2$getUnitDefinitions()
-SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForward = TRUE) {
+SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForward = TRUE, iNames = NULL, oNames = NULL) {
   
   if(length(unitsPerLayer) < 2) stop("At least 2 layers have to be specified")
   
@@ -59,13 +62,20 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
   
   nInputs <- unitsPerLayer[currLayer]
   layers[[currLayer]] <- vector()
+
+  if( is.null(iNames) )
+    iNames <- paste("Input", 1:nInputs, sep="_")
+  else {
+    iNames <- as.character(iNames)
+    stopifnot( length(iNames) == nInputs )
+  }
   
   for(i in 1:nInputs) {
     
     num <- snnsObject$createDefaultUnit()
     layers[[currLayer]][i] <- num
     
-    snnsObject$setUnitName(num,paste("Input_",i,sep=""))
+    snnsObject$setUnitName(num, iNames[[i]])
     
     snnsObject$setUnitTType(num, resolveSnnsRDefine("topologicalUnitTypes","UNIT_INPUT"))
     
@@ -107,13 +117,21 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
   
   nOutputs <- unitsPerLayer[currLayer]
   layers[[currLayer]] <- vector()
+
+  
+  if( is.null(oNames) )
+    oNames <- paste("Output", 1:nOutputs, sep="_")
+  else {
+    oNames <- as.character(oNames)
+    stopifnot( length(oNames) == nOutputs )
+  }
   
   for(i in 1:nOutputs) {
     
     num <- snnsObject$createDefaultUnit()
     layers[[currLayer]][i] <- num
     
-    snnsObject$setUnitName(num,paste("Output_",i,sep=""))
+    snnsObject$setUnitName(num, oNames[[i]])
     
     snnsObject$setUnitTType(num, resolveSnnsRDefine("topologicalUnitTypes","UNIT_OUTPUT"))
     
