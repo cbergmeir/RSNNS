@@ -36,8 +36,13 @@
 #' @param x input data
 #' @param type 
 #' \describe{
-#' \item{either}{type string specifying the type of normalization. Implemented are "0_1", "center", and "norm"}
-#' \item{or}{attribute list of a former call to this method to apply e.g. normalization of the training data to the test data}
+#'
+#' \item{either}{type string specifying the type of normalization. Implemented
+#' are "0_1", "center", and "norm"}
+#' 
+#' \item{or}{attribute list of a former call to this method to apply
+#' e.g. normalization of the training data to the test data}
+#' 
 #' }
 #' @return column-wise normalized input. The normalization parameters that were used for the normalization are present as attributes
 #' of the output. They can be obtained with \code{\link{getNormParameters}}.
@@ -146,6 +151,8 @@ computeNormalizationParameters <- function(x, type="norm") {
 normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
   
   x <- as.matrix(x)
+
+  dnames <- dimnames(x)
   
   res <- NULL
   
@@ -200,6 +207,8 @@ normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
   }
   
   attr(res, "normParams") <- normParams
+
+  dimnames(res) <- dnames
   res
   
 }
