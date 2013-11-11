@@ -461,12 +461,15 @@ float  TEST_SimulatedAnnealing_OutParameter[1];
 
 void kr_recTouchContextUnits(Unit*);
 
+public:
 
 //------------------------------------------------
 // prun_f.h
 //------------------------------------------------
 
 #include "prun_f.h"   
+
+private:
 
 //former static variables
 

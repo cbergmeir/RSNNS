@@ -2643,6 +2643,17 @@ RcppExport SEXP SnnsCLib__artui_getMb(SEXP xp) {
 // Other wrapper functions
 //-------------------------------------------------------------------
 
+//krui_err pr_callPrunFunc (int pattern);
+
+RcppExport SEXP SnnsCLib__callPrunFunc(SEXP xp, SEXP pattern) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  int p1 = Rcpp::as<int>(pattern);
+  int err = snnsCLib->pr_callPrunFunc(p1);
+
+  return Rcpp::List::create( Rcpp::Named( "err" ) = err );
+}
+
 
 RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP io_type)  {
 
