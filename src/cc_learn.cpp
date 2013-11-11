@@ -669,7 +669,7 @@ krui_err SnnsCLib::LEARN_CC(int StartPattern, int EndPattern,
 		  float **ParameterOutArray, int *NoOfOutParams)
 {
 
-  NetLearnAlgorithm = CC;
+  NetLearnAlgorithm = SNNSCLIB_CC;
 
   return(LEARN_CasCor(StartPattern,EndPattern,ParameterInArray,NoOfInParams,
 		      ParameterOutArray,NoOfOutParams));

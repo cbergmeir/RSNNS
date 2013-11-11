@@ -1,6 +1,6 @@
 Package: RSNNS
 Maintainer: Christoph Bergmeir <c.bergmeir@decsai.ugr.es>
-License: LGPL (>= 2)
+License: LGPL (>= 2) | file LICENSE
 Title: Neural Networks in R using the Stuttgart Neural Network
     Simulator (SNNS)
 LinkingTo: Rcpp
@@ -15,7 +15,7 @@ Description: The Stuttgart Neural Network Simulator (SNNS) is a library
     Furthermore, the package contains a convenient high-level
     interface, so that the most common neural network topologies and
     learning algorithms integrate seamlessly into R.
-Version: 0.4-3
+Version: 0.4-4
 URL: http://sci2s.ugr.es/dicits/software/RSNNS
 Date: 2012-01-10
 Depends: R (>= 2.10.0), methods, Rcpp (>= 0.8.5)
