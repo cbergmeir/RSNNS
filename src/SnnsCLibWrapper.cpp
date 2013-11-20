@@ -2654,6 +2654,19 @@ RcppExport SEXP SnnsCLib__callPrunFunc(SEXP xp, SEXP pattern) {
   return Rcpp::List::create( Rcpp::Named( "err" ) = err );
 }
 
+//krui_err pr_calcMeanDeviation (int pattern, float *sum_error);
+
+RcppExport SEXP SnnsCLib__calcMeanDeviation(SEXP xp, SEXP pattern) {
+ Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
+
+  float sum_error;
+  int p1 = Rcpp::as<int>(pattern);
+  int err = snnsCLib->pr_calcMeanDeviation(p1, &sum_error);
+
+  return Rcpp::List::create( Rcpp::Named( "err" ) = err,
+                             Rcpp::Named( "sum_error" ) = sum_error);
+}
+
 
 RcppExport SEXP SnnsCLib__getSubPatData(SEXP xp, SEXP pat_no, SEXP sub_no, SEXP io_type)  {
 
