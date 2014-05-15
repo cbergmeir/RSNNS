@@ -34,9 +34,10 @@
 #' @title Get all units in the net of a certain \code{ttype}.
 #' @param ttype a string containing the \code{ttype}.
 #' @return a vector with integer numbers identifying the units.
-#' @rdname SnnsRObject$getAllUnitsTType
+#' @rdname SnnsRObject-getAllUnitsTType
+#' @name SnnsRObject$getAllUnitsTType
 #' @usage \S4method{getAllUnitsTType}{SnnsR}(ttype)
-#' @aliases getAllUnitsTType,SnnsR-method SnnsRObject$getAllUnitsTType
+#' @aliases getAllUnitsTType,SnnsR-method SnnsR__getAllUnitsTType
 #' @seealso \link{SnnsRObject$getAllOutputUnits}, \link{SnnsRObject$getAllInputUnits}, \link{SnnsRObject$getAllHiddenUnits}
 SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
   
@@ -64,9 +65,10 @@ SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
 #' 
 #' @title Get all output units of the net.
 #' @return a vector with integer numbers identifying the units.
-#' @rdname SnnsRObject$getAllOutputUnits
+#' @rdname SnnsRObject-getAllOutputUnits
+#' @name SnnsRObject$getAllOutputUnits
 #' @usage \S4method{getAllOutputUnits}{SnnsR}()
-#' @aliases getAllOutputUnits,SnnsR-method SnnsRObject$getAllOutputUnits
+#' @aliases getAllOutputUnits,SnnsR-method SnnsR__getAllOutputUnits
 #' @seealso \code{\link{SnnsRObject$getAllUnitsTType}}
 SnnsR__getAllOutputUnits <- function(snnsObject) {
   snnsObject$getAllUnitsTType("UNIT_OUTPUT")  
@@ -77,9 +79,10 @@ SnnsR__getAllOutputUnits <- function(snnsObject) {
 #' 
 #' @title Get all input units of the net
 #' @return a vector with integer numbers identifying the units.
-#' @rdname SnnsRObject$getAllInputUnits
+#' @rdname SnnsRObject-getAllInputUnits
+#' @name SnnsRObject$getAllInputUnits
 #' @usage \S4method{getAllInputUnits}{SnnsR}()
-#' @aliases getAllInputUnits,SnnsR-method SnnsRObject$getAllInputUnits
+#' @aliases getAllInputUnits,SnnsR-method SnnsR__getAllInputUnits
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getAllInputUnits <- function(snnsObject) {
   snnsObject$getAllUnitsTType("UNIT_INPUT")  
@@ -90,9 +93,10 @@ SnnsR__getAllInputUnits <- function(snnsObject) {
 #' 
 #' @title Get all hidden units of the net
 #' @return a vector with integer numbers identifying the units.
-#' @rdname SnnsRObject$getAllHiddenUnits
+#' @rdname SnnsRObject-getAllHiddenUnits
+#' @name SnnsRObject$getAllHiddenUnits
 #' @usage \S4method{getAllHiddenUnits}{SnnsR}()
-#' @aliases getAllHiddenUnits,SnnsR-method SnnsRObject$getAllHiddenUnits
+#' @aliases getAllHiddenUnits,SnnsR-method SnnsR__getAllHiddenUnits
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getAllHiddenUnits <- function(snnsObject) {
   snnsObject$getAllUnitsTType("UNIT_HIDDEN")  
@@ -106,9 +110,10 @@ SnnsR__getAllHiddenUnits <- function(snnsObject) {
 #' @param unitsTarget a vector with numbers identifying the target units
 #' @param setDimNames indicates, whether names of units are extracted and set as row/col names in the weight matrix
 #' @return the weight matrix between the two sets of neurons 
-#' @rdname SnnsRObject$getWeightMatrix
+#' @rdname SnnsRObject-getWeightMatrix
+#' @name SnnsRObject$getWeightMatrix
 #' @usage \S4method{getWeightMatrix}{SnnsR}(unitsSource, unitsTarget, setDimNames)
-#' @aliases getWeightMatrix,SnnsR-method SnnsRObject$getWeightMatrix
+#' @aliases getWeightMatrix,SnnsR-method SnnsR__getWeightMatrix
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getWeightMatrix <- function (snnsObject, unitsSource, unitsTarget, setDimNames=TRUE) {
   
@@ -157,9 +162,10 @@ SnnsR__getWeightMatrix <- function (snnsObject, unitsSource, unitsTarget, setDim
 #'  
 #' @param ttype a string containing the \code{ttype}.
 #' @param act_func the name of the activation function to set.
-#' @rdname SnnsRObject$setTTypeUnitsActFunc
+#' @rdname SnnsRObject-setTTypeUnitsActFunc
+#' @name SnnsRObject$setTTypeUnitsActFunc
 #' @usage \S4method{setTTypeUnitsActFunc}{SnnsR}(ttype, act_func)
-#' @aliases setTTypeUnitsActFunc,SnnsR-method SnnsRObject$setTTypeUnitsActFunc
+#' @aliases setTTypeUnitsActFunc,SnnsR-method SnnsR__setTTypeUnitsActFunc
 #' @seealso \code{\link{SnnsRObject$getAllUnitsTType}}
 #' @examples
 #' \dontrun{SnnsRObject$setTTypeUnitsActFunc("UNIT_HIDDEN", "Act_Logistic")}
@@ -176,9 +182,10 @@ SnnsR__setTTypeUnitsActFunc <- function(snnsObject, ttype, act_func) {
 #' Get all units present in the net.
 #' 
 #' @return a vector with integer numbers identifying the units.
-#' @rdname SnnsRObject$getAllUnits
+#' @rdname SnnsRObject-getAllUnits
+#' @name SnnsRObject$getAllUnits
 #' @usage \S4method{getAllUnits}{SnnsR}()
-#' @aliases getAllUnits,SnnsR-method SnnsRObject$getAllUnits
+#' @aliases getAllUnits,SnnsR-method SnnsR__getAllUnits
 SnnsR__getAllUnits <- function(snnsObject) {
   
   #res <- data.frame()
@@ -204,9 +211,10 @@ SnnsR__getAllUnits <- function(snnsObject) {
 #' 
 #' @param setDimNames indicates, whether names of units are extracted and set as row/col names in the weight matrix
 #' @return the complete weight matrix
-#' @rdname SnnsRObject$getCompleteWeightMatrix
+#' @rdname SnnsRObject-getCompleteWeightMatrix
+#' @name SnnsRObject$getCompleteWeightMatrix
 #' @usage \S4method{getCompleteWeightMatrix}{SnnsR}(setDimNames)
-#' @aliases getCompleteWeightMatrix,SnnsR-method SnnsRObject$getCompleteWeightMatrix
+#' @aliases getCompleteWeightMatrix,SnnsR-method SnnsR__getCompleteWeightMatrix
 SnnsR__getCompleteWeightMatrix <- function(snnsObject, setDimNames=TRUE) {
   
   allUnits <- snnsObject$getAllUnits()
@@ -219,9 +227,10 @@ SnnsR__getCompleteWeightMatrix <- function(snnsObject, setDimNames=TRUE) {
 #' 
 #' @param prefix a prefix that the names of the units to find have.
 #' @return a vector with integer numbers identifying the units.
-#' @rdname SnnsRObject$getUnitsByName
+#' @rdname SnnsRObject-getUnitsByName
+#' @name SnnsRObject$getUnitsByName
 #' @usage \S4method{getUnitsByName}{SnnsR}(prefix)
-#' @aliases getUnitsByName,SnnsR-method SnnsRObject$getUnitsByName
+#' @aliases getUnitsByName,SnnsR-method SnnsR__getUnitsByName
 SnnsR__getUnitsByName <- function(snnsObject, prefix) {
   
   res <- NULL
@@ -242,9 +251,10 @@ SnnsR__getUnitsByName <- function(snnsObject, prefix) {
 #' Get an info header of the network.
 #'  
 #' @return a data frame containing some general characteristics of the network.
-#' @rdname SnnsRObject$getInfoHeader
+#' @rdname SnnsRObject-getInfoHeader
+#' @name SnnsRObject$getInfoHeader
 #' @usage \S4method{getInfoHeader}{SnnsR}()
-#' @aliases getInfoHeader,SnnsR-method SnnsRObject$getInfoHeader 
+#' @aliases getInfoHeader,SnnsR-method SnnsR__getInfoHeader 
 SnnsR__getInfoHeader <- function(snnsObject) {
   
   NoOfUnits <- snnsObject$getNoOfUnits()
@@ -278,9 +288,10 @@ SnnsR__getInfoHeader <- function(snnsObject) {
 #' Get the unit definitions of the network.
 #'  
 #' @return a data frame containing information about all units present in the network.
-#' @rdname SnnsRObject$getUnitDefinitions
+#' @rdname SnnsRObject-getUnitDefinitions
+#' @name SnnsRObject$getUnitDefinitions
 #' @usage \S4method{getUnitDefinitions}{SnnsR}()
-#' @aliases getUnitDefinitions,SnnsR-method SnnsRObject$getUnitDefinitions 
+#' @aliases getUnitDefinitions,SnnsR-method SnnsR__getUnitDefinitions 
 SnnsR__getUnitDefinitions <- function(snnsObject) {
   
   blank <- " "
@@ -366,9 +377,10 @@ SnnsR__getUnitDefinitions <- function(snnsObject) {
 #' Get the sites definitions of the network.
 #'  
 #' @return a data frame containing information about all sites present in the network.
-#' @rdname SnnsRObject$getSiteDefinitions
+#' @rdname SnnsRObject-getSiteDefinitions
+#' @name SnnsRObject$getSiteDefinitions
 #' @usage \S4method{getSiteDefinitions}{SnnsR}()
-#' @aliases getSiteDefinitions,SnnsR-method SnnsRObject$getSiteDefinitions 
+#' @aliases getSiteDefinitions,SnnsR-method SnnsR__getSiteDefinitions 
 SnnsR__getSiteDefinitions <- function(snnsObject) {
   
   res <- NULL
@@ -389,9 +401,10 @@ SnnsR__getSiteDefinitions <- function(snnsObject) {
 #' Get the FType definitions of the network.
 #'  
 #' @return a data frame containing information about FType units present in the network.
-#' @rdname SnnsRObject$getTypeDefinitions
+#' @rdname SnnsRObject-getTypeDefinitions
+#' @name SnnsRObject$getTypeDefinitions
 #' @usage \S4method{getTypeDefinitions}{SnnsR}()
-#' @aliases getTypeDefinitions,SnnsR-method SnnsRObject$getTypeDefinitions 
+#' @aliases getTypeDefinitions,SnnsR-method SnnsR__getTypeDefinitions 
 SnnsR__getTypeDefinitions <- function(snnsObject) {
   
   blank <- " "
@@ -480,9 +493,10 @@ SnnsR__getTimeDelayDefs <- function(snnsObject) {
 #' }
 #'  
 #' @return a list of data frames containing information extracted from the network.
-#' @rdname SnnsRObject$extractNetInfo
+#' @rdname SnnsRObject-extractNetInfo
+#' @name SnnsRObject$extractNetInfo
 #' @usage \S4method{extractNetInfo}{SnnsR}()
-#' @aliases extractNetInfo,SnnsR-method SnnsRObject$extractNetInfo
+#' @aliases extractNetInfo,SnnsR-method SnnsR__extractNetInfo
 SnnsR__extractNetInfo <- function(snnsObject) {
   
   res <- list()

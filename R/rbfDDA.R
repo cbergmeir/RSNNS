@@ -46,8 +46,7 @@
 #' @export
 rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 
-#' Create and train an rbf with the DDA algorithm.
-#'
+
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
 #' @param maxit maximum of iterations to learn

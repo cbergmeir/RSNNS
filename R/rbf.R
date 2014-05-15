@@ -62,8 +62,7 @@
 #' @export
 rbf <- function(x, ...) UseMethod("rbf")
 
-#' Create and train a radial basis function (RBF) network.
-#' 
+
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
 #' @param size number of units in the hidden layer(s)

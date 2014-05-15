@@ -69,8 +69,7 @@
 #' @export
 jordan <- function(x, ...) UseMethod("jordan")
 
-#' Create and train a jordan network. 
-#' 
+
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
 #' @param size number of units in the hidden layer(s)

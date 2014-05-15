@@ -61,8 +61,7 @@
 #' @export
 dlvq <- function(x, ...) UseMethod("dlvq")
 
-#' Create and train a dlvq network.
-#' 
+
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding target values
 #' @param initFunc the initialization function to use

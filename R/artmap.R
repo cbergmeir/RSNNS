@@ -61,8 +61,7 @@
 artmap <- function(x, ...) UseMethod("artmap")
 
 
-#' Create and train an artmap network.
-#' 
+
 #' @param x a matrix with training inputs and targets for the network
 #' @param nInputsTrain the number of columns of the matrix that are training input
 #' @param nInputsTargets the number of columns that are target values

@@ -57,8 +57,7 @@
 #' @export
 elman <- function(x, ...) UseMethod("elman")
 
-#' Create and train an elman network. 
-#' 
+
 #' @param x a matrix with training inputs for the network
 #' @param y the corresponding targets values
 #' @param size number of units in the hidden layer(s)

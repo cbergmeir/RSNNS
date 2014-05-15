@@ -29,9 +29,10 @@
 #' delete the current net in the \code{\link{SnnsR-class}} object.
 #'
 #' @title Reset the SnnsR object.  
-#' @rdname SnnsRObject$resetRSNNS
+#' @rdname SnnsRObject-resetRSNNS
+#' @name SnnsRObject$resetRSNNS
 #' @usage \S4method{resetRSNNS}{SnnsR}()
-#' @aliases resetRSNNS,SnnsR-method SnnsRObject$resetRSNNS
+#' @aliases resetRSNNS,SnnsR-method SnnsR__resetRSNNS
 SnnsR__resetRSNNS <- function(snnsObject)  {
   
   res <- list()

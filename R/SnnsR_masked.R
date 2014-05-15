@@ -31,9 +31,10 @@
 #' @title Initialize the network
 #' @param parameterInArray the parameters of the initialization function
 #' @param initFunc the name of the initialization function
-#' @rdname SnnsRObject$initializeNet
+#' @rdname SnnsRObject-initializeNet
+#' @name SnnsRObject$initializeNet
 #' @usage \S4method{initializeNet}{SnnsR}(parameterInArray, initFunc)
-#' @aliases initializeNet,SnnsR-method SnnsRObject$initializeNet
+#' @aliases initializeNet,SnnsR-method SnnsR__initializeNet
 SnnsR__initializeNet <- function(snnsObject, parameterInArray, initFunc) {
   
   if(!missing(initFunc)) {
@@ -58,9 +59,10 @@ SnnsR__initializeNet <- function(snnsObject, parameterInArray, initFunc) {
 #' @param layer_no idem
 #' @param act_func idem
 #' @param out_func idem
-#' @rdname SnnsRObject$setUnitDefaults
+#' @rdname SnnsRObject-setUnitDefaults
+#' @name SnnsRObject$setUnitDefaults
 #' @usage \S4method{setUnitDefaults}{SnnsR}(act, bias, st, subnet_no, layer_no, act_func, out_func)
-#' @aliases setUnitDefaults,SnnsR-method SnnsRObject$setUnitDefaults
+#' @aliases setUnitDefaults,SnnsR-method SnnsR__setUnitDefaults
 SnnsR__setUnitDefaults <- function(snnsObject, act, bias, st, subnet_no, layer_no, act_func, out_func) {
   
   #act <- c(1,0,1,0,1,"Act_Logistic","Out_Identity")

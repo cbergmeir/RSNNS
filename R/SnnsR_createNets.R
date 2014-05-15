@@ -35,15 +35,15 @@
 #' at \code{\link{SnnsR-class}} to find out how to properly use it.
 #'  
 #' @title Create a layered network
-#' @param snnsObject 
 #' @param unitsPerLayer a vector of integers that represents the number of units in each layer, including input and output layer
 #' @param fullyConnectedFeedForward if \code{TRUE}, the network is fully connected as a feed-forward network. If \code{FALSE}, 
 #' no connections are created
 #' @param iNames names of input units
 #' @param oNames names of output units
-#' @rdname SnnsRObject$createNet
-#' @usage \S4method{createNet}{SnnsR}(unitsPerLayer, fullyConnectedFeedForward = TRUE)
-#' @aliases createNet,SnnsR-method createNet$getAllUnitsTType
+#' @rdname SnnsRObject-createNet
+#' @name SnnsRObject$createNet
+#' @usage \S4method{createNet}{SnnsR}(unitsPerLayer, fullyConnectedFeedForward = TRUE, iNames = NULL, oNames = NULL)
+#' @aliases createNet,SnnsR-method SnnsR__createNet
 #' @seealso \code{\link{SnnsR-class}}
 #' @examples
 #' obj1 <- SnnsRObjectFactory()

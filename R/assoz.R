@@ -47,8 +47,7 @@
 #' @export
 assoz <- function(x, ...) UseMethod("assoz")
 
-#' Create and train an (auto-)associative memory.
-#' 
+
 #' @param x a matrix with training inputs for the network
 #' @param dimX x dimension of inputs and outputs
 #' @param dimY y dimension of inputs and outputs

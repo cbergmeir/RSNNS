@@ -56,8 +56,7 @@
 #' @export
 som <- function(x, ...) UseMethod("som")
 
-#' Create and train a self-organizing map (som).
-#'
+
 #' @param x a matrix with training inputs for the network
 #' @param mapX the x dimension of the som
 #' @param mapY the y dimension of the som

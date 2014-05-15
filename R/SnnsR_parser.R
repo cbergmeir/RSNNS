@@ -29,9 +29,10 @@
 #'  
 #' @title Extract the current pattern set to a matrix
 #' @return a matrix containing the patterns of the currently loaded patern set.
-#' @rdname SnnsRObject$extractPatterns
+#' @rdname SnnsRObject-extractPatterns
+#' @name SnnsRObject$extractPatterns
 #' @usage \S4method{extractPatterns}{SnnsR}()
-#' @aliases extractPatterns,SnnsR-method SnnsRObject$extractPatterns
+#' @aliases extractPatterns,SnnsR-method SnnsR__extractPatterns
 SnnsR__extractPatterns <- function(snnsObject)  {
   
   noPatterns <- snnsObject$getNoOfPatterns()

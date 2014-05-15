@@ -54,8 +54,7 @@
 #' @export
 art2 <- function(x, ...) UseMethod("art2")
 
-#' Create and train an art2 network.
-#' 
+
 #' @param x a matrix with training inputs for the network
 #' @param f2Units controls the number of clusters assumed to be present
 #' @param maxit maximum of iterations to learn

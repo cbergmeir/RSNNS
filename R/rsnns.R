@@ -199,8 +199,8 @@ rsnnsObjectFactory <- function(subclass, nInputs, maxit,
 #' a new model on the S3 layer you most probably don't want to use this function.
 #' 
 #' @title Internal generic train function for rsnns objects
-#' @param object the object to which to apply train
-#' @param ... additional function parameters
+# @param object the object to which to apply train
+# @param ... additional function parameters
 #' @export
 train <- function(object, ...) UseMethod("train")
 
@@ -283,8 +283,8 @@ predict.rsnns <- function(object, newdata, ...) {
 #' The function calls \code{\link{SnnsRObject$getCompleteWeightMatrix}} and returns its result.
 #'
 #' @title Function to extract the weight matrix of an rsnns object
-#' @param object the object to which to apply weightMatrix
-#' @param ... additional function parameters
+# @param object the object to which to apply weightMatrix
+# @param ... additional function parameters
 #' @export
 weightMatrix <- function(object, ...) UseMethod("weightMatrix")
 

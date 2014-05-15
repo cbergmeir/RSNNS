@@ -81,8 +81,6 @@
 art1 <- function(x, ...) UseMethod("art1")
 
 
-#' Create and train an art1 network.
-#' 
 #' @param x a matrix with training inputs for the network
 #' @param dimX x dimension of inputs and outputs
 #' @param dimY y dimension of inputs and outputs

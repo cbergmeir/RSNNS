@@ -54,6 +54,7 @@
 #' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
 #' 
+#' @name SnnsR-class
 #' @seealso \code{\link{$}}, \code{\link{SnnsRObjectFactory}}
 #' @examples
 #' \dontrun{demo(encoderSnnsCLib)} 
@@ -151,10 +152,11 @@ setClass( "SnnsR", representation( variables="environment" ))
 # @export
 #' @title Method caller for SnnsR objects 
 #' @rdname SnnsRObjectMethodCaller
+#' @name SnnsRObjectMethodCaller
 #' @param x object of class \link{SnnsR-class}
 #' @param name function to call
 #' @usage \S4method{$}{SnnsR}(x, name) 
-#' @aliases $,SnnsR-method
+#' @aliases $,SnnsR-method $
 setMethod( "$", "SnnsR", function(x, name ){
       function(...) {
         #print(x)

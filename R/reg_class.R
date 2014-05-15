@@ -140,8 +140,8 @@ checkInput <- function(x,y) {
 #' \code{IterativeTestError} (as red line).
 #' 
 #' @title Plot iterative errors of an rsnns object
-#' @param object the object to which to apply plotIterativeError
-#' @param ... additional function parameters
+# @param object the object to which to apply plotIterativeError
+# @param ... additional function parameters
 #' @export
 plotIterativeError <- function(object, ...) UseMethod("plotIterativeError")
 
