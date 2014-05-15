@@ -865,11 +865,11 @@ int SnnsCLib::yylex YY_PROTO(( void ))
 		if ( ! yy_start )
 			yy_start = 1;	/* first start state */
 
-		if ( ! yyin )
-			yyin = stdin;
+		//if ( ! yyin )
+		//	yyin = stdin;
 
-		if ( ! yyout )
-			yyout = stdout;
+		//if ( ! yyout )
+		//	yyout = stdout;
 
 		if ( ! yy_current_buffer )
 			yy_current_buffer =

@@ -15,16 +15,41 @@ Description: The Stuttgart Neural Network Simulator (SNNS) is a library
     Furthermore, the package contains a convenient high-level
     interface, so that the most common neural network topologies and
     learning algorithms integrate seamlessly into R.
-Version: 0.4-4
+Version: 0.4-5
 URL: http://sci2s.ugr.es/dicits/software/RSNNS
-Date: 2012-01-10
-Depends: R (>= 2.10.0), methods, Rcpp (>= 0.8.5)
-Suggests: scatterplot3d
+Date: 2014-05-15
+Depends:
+    R (>= 2.10.0),
+    methods,
+    Rcpp (>= 0.8.5)
+Suggests:
+    scatterplot3d
 Encoding: UTF-8
-Collate: 'art1.R' 'art2.R' 'artmap.R' 'assoz.R' 'dlvq.R' 'docData.R'
-    'elman.R' 'jordan.R' 'mlp.R' 'normalizeData.R' 'parser.R' 'rbf.R'
-    'rbfDDA.R' 'reg_class.R' 'RSNNS-package.R' 'rsnns.R'
-    'SnnsDefines.R' 'SnnsR_createNets.R' 'SnnsR_extractNetInfo.R'
-    'SnnsR_masked.R' 'SnnsR_parser.R' 'SnnsR_patterns.R'
-    'SnnsR_train.R' 'SnnsR_util.R' 'SnnsRObjectFactory.R' 'som.R'
+Collate:
+    'art1.R'
+    'art2.R'
+    'artmap.R'
+    'assoz.R'
+    'dlvq.R'
+    'docData.R'
+    'elman.R'
+    'jordan.R'
+    'mlp.R'
+    'normalizeData.R'
+    'parser.R'
+    'rbf.R'
+    'rbfDDA.R'
+    'reg_class.R'
+    'RSNNS-package.R'
+    'rsnns.R'
+    'SnnsDefines.R'
+    'SnnsR_createNets.R'
+    'SnnsR_extractNetInfo.R'
+    'SnnsR_masked.R'
+    'SnnsR_parser.R'
+    'SnnsR_patterns.R'
+    'SnnsR_train.R'
+    'SnnsR_util.R'
+    'SnnsRObjectFactory.R'
+    'som.R'
     'util.R'

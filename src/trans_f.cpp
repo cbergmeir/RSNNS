@@ -710,7 +710,7 @@ FlintType SnnsCLib::RbfUnitGetNormsqr(struct Unit *unit_ptr)
 
         if (!GET_FIRST_UNIT_LINK(unit_ptr))
         {
-                fprintf(stderr,"No input links!\n");
+                //fprintf(stderr,"No input links!\n");
                 return norm_2;
         }
 
@@ -1003,8 +1003,8 @@ FlintType   SnnsCLib::ACT_TD_Logistic(struct Unit *unit_ptr)
   }
   else
   {
-      fprintf(stderr, 
-              "Warning: Illegal link structure used in time delay layer\n");
+      //fprintf(stderr, 
+        //      "Warning: Illegal link structure used in time delay layer\n");
   }
   return( (FlintType) (1.0 / (1.0 + exp_s( -sum - ref_unit->bias))) );
 }
@@ -1047,8 +1047,8 @@ FlintType   SnnsCLib::ACT_TD_Elliott(struct Unit *unit_ptr)
   }
   else
   {
-      fprintf(stderr, 
-              "Warning: Illegal link structure used in time delay layer\n");
+      //fprintf(stderr, 
+        //      "Warning: Illegal link structure used in time delay layer\n");
   }
 
   sum += ref_unit->bias;

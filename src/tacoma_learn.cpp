@@ -482,10 +482,10 @@ krui_err SnnsCLib::tac_generateNewUnit(int UnitNo,int LayerNo,int StartPattern,i
 	      cc_generateRandomNo(TAC_MAX_VALUE), 0.0, 0.0, 0.0); 
             ERROR_CHECK;
             if(!IS_INPUT_UNIT(UnitPtr)){
-               PRINTF(
+               /*PRINTF(
                "Link from unit %2d to unit %2d added. Correlation between the units is %5.3f\n",
                GET_UNIT_NO(UnitPtr),
-               GET_UNIT_NO(NewUnitPtr),Correlation);
+               GET_UNIT_NO(NewUnitPtr),Correlation);*/
             }
          }
       ERROR_CHECK;
@@ -624,7 +624,7 @@ int  SnnsCLib::tac_NextSpecialUnit(int p,Patterns in_pat_First)
 
 void SnnsCLib::tac_printRanks(float MaxSummedError)
 {
-  int UnitNo,NewUnitCnt=0;
+/*  int UnitNo,NewUnitCnt=0;
 
   if (cc_printOnOff)
   {
@@ -642,6 +642,7 @@ void SnnsCLib::tac_printRanks(float MaxSummedError)
     }
     printf("\nInstalled %d units on layer %d\n",NewUnitCnt,NoOfLayers+1);
   }
+*/
 }
 
 /*****************************************************************************
@@ -744,7 +745,7 @@ int SnnsCLib::tac_calculateRanksAndRadius(int start,int end)
   ERROR_CHECK;
 
   for (d=0;d<TAC_KOHONEN;d++){
-     if ((d % Modulo)==0) PRINTF("Pass %5d\n",d);
+     //if ((d % Modulo)==0) PRINTF("Pass %5d\n",d);
      for(p=start;p<=end;p++){
 	kr_getSubPatternByNo(&pat,&sub,p);
 	in_pat = kr_getSubPatData(pat,sub,INPUT,NULL);
@@ -784,7 +785,7 @@ int SnnsCLib::tac_calculateRanksAndRadius(int start,int end)
  cc_getPatternParameter(StartPattern,EndPattern,&start,&end,&n);
  ERROR_CHECK;
 
- PRINTF("Cycle %3d ",counter);
+ //PRINTF("Cycle %3d ",counter);
  FOR_ALL_SPECIAL_UNITS(SpecialUnitPtr,s) {
    SpecialUnitData[s].ErrorCorrelation = 0.0;
    FOR_ALL_OUTPUT_UNITS(OutputUnitPtr,o) {
@@ -794,7 +795,7 @@ int SnnsCLib::tac_calculateRanksAndRadius(int start,int end)
      SIGN_OF_THE_CORRELATION[s][o] = SIGN(scoreBuffer);
    }
    SpecialUnitData[s].ErrorCorrelation /= SumSqError;
-   PRINTF("s[%2d]=%4f   ",s,SpecialUnitData[s].ErrorCorrelation);
+   //PRINTF("s[%2d]=%4f   ",s,SpecialUnitData[s].ErrorCorrelation);
    MeanYi[s]= SpecialUnitSumAct[s] / n;
  }
  return KRERR_NO_ERROR;
@@ -976,7 +977,7 @@ krui_err SnnsCLib::tac_initSpecialUnitLinks(void)
             (StartPattern,EndPattern,counter==0);
         ERROR_CHECK;
 
-        PRINTF("AntiCorr is %0.5f\n",AntiCorr);
+        //PRINTF("AntiCorr is %0.5f\n",AntiCorr);
 
 	(this->*cc_propagateSpecialUnitsBackward)
 			     (start,end,n,counter,param1,param2,param3);
@@ -994,7 +995,7 @@ krui_err SnnsCLib::tac_initSpecialUnitLinks(void)
 	}
         
     } 
-  PRINTF("\n");
+  //PRINTF("\n");
   return(KRERR_NO_ERROR);
 }
 

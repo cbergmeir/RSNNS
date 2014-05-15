@@ -162,7 +162,7 @@ float SnnsCLib::cc_calculateCorrelation(int StartPattern, int EndPattern, int co
     cc_getPatternParameter(StartPattern,EndPattern,&start,&end,&n);
     ERROR_CHECK;
 
-    if(cc_printOnOff)  printf("Cycle %d ",counter);
+    //if(cc_printOnOff)  printf("Cycle %d ",counter);
 
     FOR_ALL_SPECIAL_UNITS(SpecialUnitPtr,s) {
 	unchangedhighScore = 0.0;
@@ -183,12 +183,12 @@ float SnnsCLib::cc_calculateCorrelation(int StartPattern, int EndPattern, int co
 	    bestSpecialUnitUnchangedScore = unchangedhighScore;
 	    bestSpecialUnitPtr = SpecialUnitPtr;
 	}
-	if(cc_printOnOff)  printf("S[%d]: %.4f ",s,unchangedhighScore);
+	//if(cc_printOnOff)  printf("S[%d]: %.4f ",s,unchangedhighScore);
     }
-    if(cc_printOnOff) {
-	printf("Best : %d:%.4f \n",GET_UNIT_NO(bestSpecialUnitPtr),
-	       bestSpecialUnitScore);
-    } 
+    //if(cc_printOnOff) {
+	//printf("Best : %d:%.4f \n",GET_UNIT_NO(bestSpecialUnitPtr),
+	  //     bestSpecialUnitScore);
+    //} 
     return(bestSpecialUnitUnchangedScore);
 }
 
@@ -366,8 +366,8 @@ void SnnsCLib::cc_trainOutputUnits(int maxNoOfErrorUpdateCycles, int backfittPat
          NET_ERROR(m_cc_trainOutputUnits_OutParameter)=cc_getErr(StartPattern,EndPattern);
 
 	 /* otherways, it's not the actual error */
-	 if(cc_printOnOff) printf("Epoch: %d NetError: %f \n",counter+1, 
-				  NET_ERROR(m_cc_trainOutputUnits_OutParameter));
+	 //if(cc_printOnOff) printf("Epoch: %d NetError: %f \n",counter+1, 
+	//			  NET_ERROR(m_cc_trainOutputUnits_OutParameter));
 	 if ((counter % outPatience)==0){
 	    if(fabs(NET_ERROR(m_cc_trainOutputUnits_OutParameter)-oldNetError) < 
 	       minErrorChange * oldNetError)
@@ -819,14 +819,14 @@ krui_err SnnsCLib::cc_generateLayerList(void)
     /* calculating data for the layers */
     FOR_ALL_UNITS(UnitPtr){
 	if (IS_HIDDEN_UNIT(UnitPtr)){
-	    if(CC_LAYER_NO(UnitPtr) >=SizeOfLayerlist)
-		printf("\n\n\nInternal error with layers\n\n\n");
-	    else{
+	    //if(CC_LAYER_NO(UnitPtr) >=SizeOfLayerlist)
+		//printf("\n\n\nInternal error with layers\n\n\n");
+	    //else{
 		ListOfLayers[CC_LAYER_NO(UnitPtr)].NoOfUnitsInLayer++;
 		ListOfLayers[CC_LAYER_NO(UnitPtr)].xPosFirstRow =
 		    MIN(ListOfLayers[CC_LAYER_NO(UnitPtr)].xPosFirstRow,
 			GET_UNIT_XPOS(UnitPtr));
-	    }
+	    //}
 	}
     } 
     return(KRERR_NO_ERROR);

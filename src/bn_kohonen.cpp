@@ -92,6 +92,7 @@ krui_err SnnsCLib::bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits)
   struct PosType    unit_pos;
   krui_err ret;
 
+  unit_pos.z = 0;
 
   /*  Allocate units */
   

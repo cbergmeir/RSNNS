@@ -1806,13 +1806,31 @@ RcppExport SEXP SnnsCLib__DefShowSubPat(SEXP xp) {
 RcppExport SEXP SnnsCLib__DefTrainSubPat(SEXP xp) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
-  int insize=0;
-  int outsize=0;
-  int instep=0;
-  int outstep=0;
-  int max_n_pos=0;
+/*
+  int insize[MAX_NO_OF_VAR_DIM];
+  int outsize[MAX_NO_OF_VAR_DIM];
+  int instep[MAX_NO_OF_VAR_DIM];
+  int outstep[MAX_NO_OF_VAR_DIM];
+  int max_n_pos[MAX_NO_OF_VAR_DIM];
 
-  int err = snnsCLib->krui_DefTrainSubPat(&insize, &outsize, &instep, &outstep, &max_n_pos);
+  for(int i=0; i< MAX_NO_OF_VAR_DIM; i++) {
+
+   insize[i]=0;
+   outsize[i]=0;
+   instep[i]=0;
+   outstep[i]=0;
+   max_n_pos[i]=0;
+
+  }
+*/
+
+  std::vector<int> insize(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> outsize(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> instep(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> outstep(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> max_n_pos(MAX_NO_OF_VAR_DIM, 0);
+
+  int err = snnsCLib->krui_DefTrainSubPat(&insize[0], &outsize[0], &instep[0], &outstep[0], &max_n_pos[0]);
 
   return Rcpp::List::create( 
     	Rcpp::Named( "err" ) = err, 
@@ -1828,6 +1846,39 @@ RcppExport SEXP SnnsCLib__DefTrainSubPat(SEXP xp) {
 RcppExport SEXP SnnsCLib__DefTrainSubPatXX(SEXP xp, SEXP insize, SEXP outsize, SEXP instep, SEXP outstep, SEXP max_n_pos) {
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
+  Rcpp::NumericVector p1(insize);
+  Rcpp::NumericVector p2(outsize);
+  Rcpp::NumericVector p3(instep);
+  Rcpp::NumericVector p4(outstep);
+  Rcpp::NumericVector p5(max_n_pos);
+
+  std::vector<int> p_insize(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> p_outsize(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> p_instep(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> p_outstep(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> p_max_n_pos(MAX_NO_OF_VAR_DIM, 0);
+
+  for (int i=0; (i<p1.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
+    p_insize[i] = p1(i);
+  }
+
+  for (int i=0; (i<p2.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
+    p_outsize[i] = p2(i);
+  }
+
+  for (int i=0; (i<p3.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
+    p_instep[i] = p3(i);
+  }
+
+  for (int i=0; (i<p4.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
+    p_outstep[i] = p4(i);
+  }
+
+  for (int i=0; (i<p5.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
+    p_max_n_pos[i] = p5(i);
+  }
+
+/*
   int p1 = Rcpp::as<int>(insize);
   int p2 = Rcpp::as<int>(outsize);
   int p3 = Rcpp::as<int>(instep);
@@ -1835,14 +1886,17 @@ RcppExport SEXP SnnsCLib__DefTrainSubPatXX(SEXP xp, SEXP insize, SEXP outsize, S
   int p5 = Rcpp::as<int>(max_n_pos);
 
   int err = snnsCLib->krui_DefTrainSubPat(&p1, &p2, &p3, &p4, &p5);
+*/
+
+  int err = snnsCLib->krui_DefTrainSubPat(&p_insize[0], &p_outsize[0], &p_instep[0], &p_outstep[0], &p_max_n_pos[0]);
 
   return Rcpp::List::create( 
     	Rcpp::Named( "err" ) = err, 
-    	Rcpp::Named( "insize" ) = insize,
-    	Rcpp::Named( "outsize" ) = outsize,
-    	Rcpp::Named( "instep" ) = instep, 
-    	Rcpp::Named( "outstep" ) = outstep,
-    	Rcpp::Named( "max_n_pos" ) = max_n_pos
+    	Rcpp::Named( "insize" ) = p_insize,
+    	Rcpp::Named( "outsize" ) = p_outsize,
+    	Rcpp::Named( "instep" ) = p_instep, 
+    	Rcpp::Named( "outstep" ) = p_outstep,
+    	Rcpp::Named( "max_n_pos" ) = p_max_n_pos
     	) ;
 }
 

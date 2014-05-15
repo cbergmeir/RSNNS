@@ -340,7 +340,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 	    indx[j] = imax;
 	    if (RbfMatrixGetValue(m, j, j) == 0.0)
 	    {
-		fprintf(stderr,"RbfLUDcmp: seems to be a singular matrix\n");
+		//fprintf(stderr,"RbfLUDcmp: seems to be a singular matrix\n");
 		free(vv);
 		return 0;
 	    }
@@ -708,7 +708,7 @@ void	SnnsCLib::RbfPrintMatrix(RbfFloatMatrix *m, FILE *s)
 
 void    SnnsCLib::ErrMess(char *message)
 {
-        fprintf(stderr, "%s", message);
+        //fprintf(stderr, "%s", message);
 }
 
 /************************************************************************/

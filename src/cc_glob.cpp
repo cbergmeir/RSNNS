@@ -254,6 +254,7 @@ const int  SnnsCLib::NoOfMessages = (sizeof (err_message)) / (sizeof (err_messag
 ******************************************************************************/
 void SnnsCLib::cc_printHeadline(char* s,int Length)
 {
+/*
     int LengthText,Length1,Length2;
     int i;
 
@@ -262,13 +263,14 @@ void SnnsCLib::cc_printHeadline(char* s,int Length)
 	return;
     Length2 = ((Length-LengthText) / 2);
     Length1 = Length-Length2-LengthText;
-    printf("\n");
+    //printf("\n");
     for (i=0;i<Length1;i++)
-	printf("-");
-    printf(" %s ",s);
+	//printf("-");
+    //printf(" %s ",s);
     for (i=0;i<Length2;i++)
-	printf("-");
+	//printf("-");
     printf("\n\n");
+*/
 }
 
 

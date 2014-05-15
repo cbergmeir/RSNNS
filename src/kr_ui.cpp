@@ -3765,7 +3765,7 @@ krui_err SnnsCLib::krui_setClassDistribution(unsigned int *classDist)
 ******************************************************************************/
 krui_err SnnsCLib::krui_setClassInfo(char *name)
 {
-    printf("Kernel debug: new pattern class : %s \n",name);
+    //printf("Kernel debug: new pattern class : %s \n",name);
     return(kr_npui_setClass(name));
 }
 

@@ -177,6 +177,8 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   struct PosType    unit_pos;
 
+  unit_pos.z = 0;
+
   char              name[10];
 
 

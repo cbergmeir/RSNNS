@@ -92,6 +92,8 @@ krui_err SnnsCLib::bn_assoz_createNet(int X, int Y)
   struct PosType    unit_pos;
   krui_err ret = KRERR_NO_ERROR;
 
+  unit_pos.z = 0;
+
   int HUnits= X*Y;
   int IUnits= X*Y;
 

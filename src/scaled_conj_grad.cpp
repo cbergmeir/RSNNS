@@ -215,7 +215,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
       if ((LEARN_SCG_step == NULL)||(scg_gradient == NULL)||(LEARN_SCG_weights == NULL)
 	||(LEARN_SCG_p==NULL)||(LEARN_SCG_r==NULL) ||(LEARN_SCG_old_weights==NULL) ||(LEARN_SCG_old_gradient ==NULL))
 	{
-	  printf("SCG : malloc problem\n") ;
+	  //printf("SCG : malloc problem\n") ;
 	  return(KRERR_CRITICAL_MALLOC);
       }
       else TRACE(("SCG - malloc's done\n"));

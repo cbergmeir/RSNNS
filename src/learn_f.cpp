@@ -664,19 +664,19 @@ float SnnsCLib::propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no, f
     pattern_class = kr_getSubPatClass(pattern_no,sub_pat_no);
     if (pattern_class >= maxclasses)
     {
-	fprintf(stderr, 
+	/*fprintf(stderr, 
 		"propagateClassNetBackwardBatch: pattern class index %d out of range\n"
-		"pattern is trained as usual\n", pattern_class);
+		"pattern is trained as usual\n", pattern_class);*/
 	pattern_class = -1;
     }
     if (pattern_class >= 0)
 	class_flag = ((unsigned long int) 1) << pattern_class;
-
+/*
 #ifdef DEBUG
     printf("maxclasses: %d, pattern_class: %d, class_flag: %lx\n",
 	  maxclasses, pattern_class, class_flag);
 #endif
-
+*/
     out_pat += size;
 
     /* add 3 to no_of_topo_units because the topologic array contains 4 NULL
@@ -692,11 +692,13 @@ float SnnsCLib::propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no, f
 	    continue;
 
 	adjust_this= (pattern_class == -1 || unit_ptr->usr_flags & class_flag);
+/*
 #ifdef DEBUG
 	printf("%s%s ", 
 	       adjust_this ? "+" : "-", 
 	       unit_ptr->unit_name ? unit_ptr->unit_name : "");
 #endif
+*/
 	sum_error += devit * devit; /* sum up the error of the network  */
 
 	/* calc. error for output units	 */
@@ -735,11 +737,13 @@ float SnnsCLib::propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no, f
     /* change is performed  by updateWeights */
     while ((unit_ptr = *--topo_ptr) != NULL) {
 	adjust_this= (pattern_class == -1 || unit_ptr->usr_flags & class_flag);
+/*
 #ifdef DEBUG
 	printf("%s%s ", 
 	       adjust_this ? "+" : "-", 
 	       unit_ptr->unit_name ? unit_ptr->unit_name : "");
 #endif
+*/
 	/* calc. the error of the (hidden) unit  */
 	error = (this->*unit_ptr->act_deriv_func) (unit_ptr) * unit_ptr->Aux.flint_no;
 	/* calc. the error for adjusting weights and bias of the pred. units */
@@ -776,10 +780,11 @@ float SnnsCLib::propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no, f
 	    }
 	}
     }
-
+/*
 #ifdef DEBUG
     printf("\n");
 #endif
+*/
     return (sum_error);		/* return the error of the network */
 }
 
@@ -2029,11 +2034,11 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 		    class_num = atoi(class_str);
 		    if (class_num >= maxclasses)
 		    {
-			fprintf(stderr, 
+			/*fprintf(stderr, 
 				"LEARN_backpropClassJogChunk: "
 				"units class information not handled\n"
 				"%d is >= %d (maxclasses)\n",
-				class_num, maxclasses);
+				class_num, maxclasses);*/
 			class_add_flags = ((unsigned long int) 0);
 		    }
 		    else
@@ -2050,15 +2055,19 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 	    }
 	    else
 		unit_ptr->usr_flags = ~((unsigned long int) 0); /* 11111111 */
+/*
 #ifdef DEBUG
 	    printf("%s: %lx  ", 
 		  unit_ptr->unit_name ? unit_ptr->unit_name : "",
 		  unit_ptr->usr_flags);
 #endif
+*/
 	}
+/*
 #ifdef DEBUG
 	printf("\n");
 #endif
+*/
 	NetModified = FALSE;
     }
 
@@ -3542,8 +3551,8 @@ void SnnsCLib::RbfLearnAdjustWeights(float para_center, float para_bias,
     RbfLearnAdjustWeights_step++;
     sprintf(filename, "rbf_%04d.prot", RbfLearnAdjustWeights_step);
     protfile = fopen(filename, "w");
-    if (protfile == NULL)
-	fprintf(stderr, "RbfLearnAdjustWeights: Can't open protfile\n");
+    //if (protfile == NULL)
+	//fprintf(stderr, "RbfLearnAdjustWeights: Can't open protfile\n");
 #endif
 
     /* start with last unit in output layer:			 */
@@ -3587,8 +3596,8 @@ void SnnsCLib::RbfLearnAdjustWeights(float para_center, float para_bias,
 	if (!IS_SPECIAL_UNIT(curr_unit)) {
 	    /* adjust bias of hidden unit (parameter of RBF function):	 */
 	    curr_unit->bias += para_bias * (curr_unit->value_b);
-	    if (curr_unit->bias <= 0.0)
-		fprintf(stderr, "Hidden unit bias %f !\n", curr_unit->bias);
+	    //if (curr_unit->bias <= 0.0)
+		//fprintf(stderr, "Hidden unit bias %f !\n", curr_unit->bias);
 
 #ifdef RBF_DELTA_PROT
 	    fprintf(protfile, "%13s:\t\n", curr_unit->unit_name);
@@ -3711,7 +3720,7 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 	NetModified = FALSE;
     }
     if (NetInitialize || LearnFuncHasChanged) {
-	fprintf(stderr, "Initialization RBF_Weights should be called!\n");
+	//fprintf(stderr, "Initialization RBF_Weights should be called!\n");
 	/* initialize fields for momentum term */
 	FOR_ALL_UNITS(unit_ptr) {
 	    FOR_ALL_LINKS(unit_ptr, link_ptr) {
@@ -4103,10 +4112,10 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 		    else 
 		      link_ptr->to->bias = 1.0/RBF_SQR( RBF_MIN_SIGMA );
 		  }
-#ifdef RBF_DEBUG
+/*#ifdef RBF_DEBUG
 		else
 		  fprintf(stderr,"\nRBF-DDA WARNING: Sigma too small (competing)!\n");
-#endif
+#endif*/
 	      }
       /* End Shrink competing RBFs */
 
@@ -4228,10 +4237,10 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 			  else 
 			    new_rbf_ptr->bias = 1.0/RBF_SQR( RBF_MIN_SIGMA );
 		        }
-#ifdef RBF_DEBUG
+/*#ifdef RBF_DEBUG
 		      else
 		        fprintf( stderr, "\nRBF-DDA WARNING: Sigma too small (new)!\n" );
-#endif
+#endif*/
 		  }
 	    
 	  } /* end else not covered/new rbf */
@@ -5158,8 +5167,8 @@ krui_err SnnsCLib::LEARN_RpropMAP(int start_pattern, int end_pattern,
         else
           lambda = alpha / beta;
 
-      fprintf(stderr,"Epoch %d, beta:  %.4f alpha: %.4f lambda: %.4f \n",
-              LEARN_RpropMAP_counter, beta, alpha, lambda);
+      //fprintf(stderr,"Epoch %d, beta:  %.4f alpha: %.4f lambda: %.4f \n",
+        //      LEARN_RpropMAP_counter, beta, alpha, lambda);
     }
     /*  modify links and bias  */
     MODI_rprop(maxeps, lambda); 
@@ -7156,7 +7165,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
 	    += BPTT_propagateNetBackward(pattern_no, sub_pat_no, nhist);
   
     }
-printf("%d bits correct\n",    NoOfLearnedPatterns);fflush(stdout); 
+//printf("%d bits correct\n",    NoOfLearnedPatterns);fflush(stdout); 
     return (ret_code);
 }
 

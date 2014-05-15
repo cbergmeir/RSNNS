@@ -116,17 +116,17 @@ krui_err SnnsCLib::cc_TestWhetherParametersAreValid(void)
   switch(cc_modification){
       case(CC_GCC) :
            if (CCS_NO_OF_GROUPS <=0){
-          	 printf("0 groups isn't valid. Changed to 1 group.\n");
+          	 //printf("0 groups isn't valid. Changed to 1 group.\n");
               cc_Parameter[0]=1.0;
            }
            if (CCS_NO_OF_GROUPS > NoOfOutputUnits){
-              printf("I'm not able to make more groups than OutputUnits.\n");
-              printf("Changed to %d groups.\n",NoOfOutputUnits);
+              //printf("I'm not able to make more groups than OutputUnits.\n");
+              //printf("Changed to %d groups.\n",NoOfOutputUnits);
               cc_Parameter[0]= (float)NoOfOutputUnits;
            }
            if (CCS_NO_OF_GROUPS > cc_MaxSpecialUnitNo){
-              printf("I'm not able to make more groups than candidates.\n");
-              printf("Changed to %d groups.\n",cc_MaxSpecialUnitNo);
+              //printf("I'm not able to make more groups than candidates.\n");
+              //printf("Changed to %d groups.\n",cc_MaxSpecialUnitNo);
               cc_Parameter[0]= (float)cc_MaxSpecialUnitNo;
            }
          break;
@@ -410,7 +410,7 @@ void SnnsCLib::cc_MakeMiscCalculationsForModifications(void)
                      (u_drand48()*2.0*CCM_DIFF_HEIGHT-CCM_DIFF_HEIGHT));
                          /* add or substract radom didderence */
             }     
-            PRINTF("HeightOfLayer %d set to %d.\n",NoOfLayers,((Height>0) ? Height : 1));
+            //PRINTF("HeightOfLayer %d set to %d.\n",NoOfLayers,((Height>0) ? Height : 1));
         
             ccm_CurrentLayerHeight = ccm_MissingUnitsInLayer = ((Height>0) ? Height : 1);
                         /* Height is correct, if it's bigger than 0 */

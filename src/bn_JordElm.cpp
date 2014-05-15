@@ -227,6 +227,7 @@
     int             col, row ;
     int             i ;
  
+    unit_pos.z = 0;
 
     col = x ;
     row = y ;

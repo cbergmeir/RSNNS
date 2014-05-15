@@ -681,7 +681,7 @@ void SnnsCLib::initMixupArray(void)
 ******************************************************************************/
 void SnnsCLib::printMixupArray(int cycle)
 {
-    int i,j;
+/*    int i,j;
 
     printf("Cycle %d \n",cycle+1);
     printf("Total number of incorrectly classified items: %d \n",
@@ -695,6 +695,7 @@ void SnnsCLib::printMixupArray(int cycle)
 	printf("\n");
     }
     printf("\n\n");
+*/
 }
 
 

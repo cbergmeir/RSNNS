@@ -391,6 +391,7 @@ krui_err SnnsCLib::bn_artmap_make_layer (int  units, int  rows, int  cols,
    int                  site_no;
    char                 name[10];
 
+   unit_pos.z = 0;
 
    /* Create Site Table Entries */
    site_no = 1;

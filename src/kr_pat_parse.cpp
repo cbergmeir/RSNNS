@@ -779,13 +779,13 @@ do {						\
 
 # define YY_SYMBOL_PRINT(Title, Type, Value, Location)			  \
 do {									  \
-  if (yydebug)								  \
+/*  if (yydebug)								  \
     {									  \
       YYFPRINTF (stderr, "%s ", Title);					  \
       yy_symbol_print (stderr,						  \
 		  Type, Value); \
       YYFPRINTF (stderr, "\n");						  \
-    }									  \
+    }*/									  \
 } while (YYID (0))
 
 
@@ -863,10 +863,10 @@ yy_stack_print (bottom, top)
     yytype_int16 *top;
 #endif
 {
-  YYFPRINTF (stderr, "Stack now");
-  for (; bottom <= top; ++bottom)
-    YYFPRINTF (stderr, " %d", *bottom);
-  YYFPRINTF (stderr, "\n");
+  //YYFPRINTF (stderr, "Stack now");
+  //for (; bottom <= top; ++bottom)
+    //YYFPRINTF (stderr, " %d", *bottom);
+  //YYFPRINTF (stderr, "\n");
 }
 
 # define YY_STACK_PRINT(Bottom, Top)				\
@@ -894,16 +894,16 @@ yy_reduce_print (yyvsp, yyrule)
   int yynrhs = yyr2[yyrule];
   int yyi;
   unsigned long int yylno = yyrline[yyrule];
-  YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
-	     yyrule - 1, yylno);
+  //YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
+	//     yyrule - 1, yylno);
   /* The symbols being reduced.  */
   for (yyi = 0; yyi < yynrhs; yyi++)
     {
-      fprintf (stderr, "   $%d = ", yyi + 1);
-      yy_symbol_print (stderr, yyrhs[yyprhs[yyrule] + yyi],
-		       &(yyvsp[(yyi + 1) - (yynrhs)])
-		       		       );
-      fprintf (stderr, "\n");
+      //fprintf (stderr, "   $%d = ", yyi + 1);
+      //yy_symbol_print (stderr, yyrhs[yyprhs[yyrule] + yyi],
+	//	       &(yyvsp[(yyi + 1) - (yynrhs)])
+	//	       		       );
+      //fprintf (stderr, "\n");
     }
 }
 
@@ -1288,7 +1288,7 @@ SnnsCLib::yyparse ()
      Keep to zero when no symbol should be popped.  */
   int yylen = 0;
 
-  YYDPRINTF ((stderr, "Starting parse\n"));
+  //YYDPRINTF ((stderr, "Starting parse\n"));
 
   yystate = 0;
   yyerrstatus = 0;
@@ -1374,14 +1374,14 @@ SnnsCLib::yyparse ()
       yyvsp = yyvs + yysize - 1;
 
 
-      YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-		  (unsigned long int) yystacksize));
+      //YYDPRINTF ((stderr, "Stack size increased to %lu\n",
+	//	  (unsigned long int) yystacksize));
 
       if (yyss + yystacksize - 1 <= yyssp)
 	YYABORT;
     }
 
-  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
+  //YYDPRINTF ((stderr, "Entering state %d\n", yystate));
 
   goto yybackup;
 
@@ -1403,14 +1403,14 @@ yybackup:
   /* YYCHAR is either YYEMPTY or YYEOF or a valid look-ahead symbol.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token: "));
+      //YYDPRINTF ((stderr, "Reading a token: "));
       yychar = YYLEX;
     }
 
   if (yychar <= YYEOF)
     {
       yychar = yytoken = YYEOF;
-      YYDPRINTF ((stderr, "Now at end of input.\n"));
+      //YYDPRINTF ((stderr, "Now at end of input.\n"));
     }
   else
     {
@@ -2156,8 +2156,8 @@ yyreturn:
 ******************************************************************************/
 void SnnsCLib::yyerror(char *error)
 {
-    fprintf(stderr, "Parse error in pattern file at line %d:\n%s\n",
-	    lineno, error);
+    //fprintf(stderr, "Parse error in pattern file at line %d:\n%s\n",
+	//    lineno, error);
 }
 
 /*****************************************************************************

@@ -758,7 +758,7 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 
 
     abort = FALSE;
-
+/*
     if (init_type == RBF_INIT_FULL){
 	fprintf(stderr,"RBF_Weights called, start initialization:\n");
     }else{
@@ -766,7 +766,7 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
     }
 	
     fprintf(stderr, "... preparing initialization\n");
-
+*/
     /* count the units of the hidden layer (only one) and the output layer */
     hidden_units = 0;
     output_units = 0;
@@ -871,7 +871,7 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 	
 #endif
 
-    fprintf(stderr,"... compute activation of hidden layer on centers\n");
+    //fprintf(stderr,"... compute activation of hidden layer on centers\n");
 
     /* Now set the centers and fill the inter activation matrix: */
     unit_nr = 0;
@@ -914,7 +914,7 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 			  i_smooth);
     }
 
-    fprintf(stderr,"... compute activation of hidden layer on patterns\n");
+    //fprintf(stderr,"... compute activation of hidden layer on patterns\n");
 
     /* Fill the hidden units activation matrix */
     for (abs_sub_nr = start_sp; abs_sub_nr <= end_sp; abs_sub_nr++){
@@ -932,23 +932,23 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 	RbfMatrixSetValue(&hidden_act, h_unit_nr, hidden_units - 1, 1.0);
     }
 	
-    fprintf(stderr,"... calculate the moore-penrose inverse matrix\n");
+    //fprintf(stderr,"... calculate the moore-penrose inverse matrix\n");
 
     /* Now calculate the Moore-Penrose Pseudoinverse: */
-    fprintf(stderr,"...... transposing\n");
+    //fprintf(stderr,"...... transposing\n");
     RbfTranspMatrix(&t_hidden_act, &hidden_act);
-    fprintf(stderr,"...... multiplying\n");
+    //fprintf(stderr,"...... multiplying\n");
     RbfMulTranspMatrix(&hidden_produkt, &t_hidden_act);
-    fprintf(stderr,"...... adding\n");
+    //fprintf(stderr,"...... adding\n");
     RbfAddMatrix(&hidden_sum, &hidden_produkt, &inter_act);
 
 #ifdef RBF_MATRIX_TEST
     RbfSetMatrix(&alt_hidden_sum, &hidden_sum);
 #endif
 
-    fprintf(stderr,"...... inverting\n");
+    //fprintf(stderr,"...... inverting\n");
     if ((tmp_err = RbfInvMatrix(&hidden_sum)) != 1){
-	fprintf(stderr,"... impossible to invert matrix!\n");
+	//fprintf(stderr,"... impossible to invert matrix!\n");
 	abort = TRUE;
     }
 
@@ -959,11 +959,11 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 #endif
 
     if (!abort){
-	fprintf(stderr,"...... multiplying\n");
+	//fprintf(stderr,"...... multiplying\n");
 	RbfMulMatrix(&m_p_inverse, &hidden_sum, &t_hidden_act);
 
-	fprintf(stderr,
-		"... calculate weights between hidden and output layer\n");
+	//fprintf(stderr,
+	//	"... calculate weights between hidden and output layer\n");
 	
 	/* set topo_ptr to the NULL between hidden and output layer: */
 	topo_ptr = topo_hidden_ptr;
@@ -1007,12 +1007,13 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 	    unit_nr++;
 	}
 
-	fprintf(stderr,"Initialization done !\n");
-    }else{
-	if (tmp_err == 0)
-	    fprintf(stderr,"singular matrix !\n");
-	fprintf(stderr,"Initialization aborted !\n");
+	//fprintf(stderr,"Initialization done !\n");
     }
+//else{
+	//if (tmp_err == 0)
+	  //  fprintf(stderr,"singular matrix !\n");
+	//fprintf(stderr,"Initialization aborted !\n");
+  //  }
     RbfFreeMatrix(&hidden_act);
     RbfFreeMatrix(&t_hidden_act);
     RbfFreeMatrix(&hidden_produkt);
@@ -1151,10 +1152,10 @@ void SnnsCLib::RbfKohonenConvexInit(int start_pattern,int end_pattern,float alph
 		    printf("(%d,%d) ", winner -> unit_pos.x, 
 			winner -> unit_pos.y); 
 		}
-		else
-		{
-		    fprintf(stderr,"Internal error in RbfKohonenConvexInit\n");
-		}
+	//	else
+	//	{
+	//	    fprintf(stderr,"Internal error in RbfKohonenConvexInit\n");
+	//	}
 	    }
 	}
 }
@@ -1184,9 +1185,9 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 	register int		act_hidden_num;	/* number of current hu.*/
 	int			reshuffle = FALSE;	/* restore shuffled p.	*/
 
-#ifdef RBF_DEBUG
-	fprintf(stderr, "RBF_Weights_Kohonen called, start initialization:\n");
-#endif
+//#ifdef RBF_DEBUG
+//	fprintf(stderr, "RBF_Weights_Kohonen called, start initialization:\n");
+//#endif
 
 	/* search for the first hidden unit				*/
 	topo_ptr = topo_ptr_array;
@@ -1223,9 +1224,9 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 	end_sp = kr_AbsPosOfFirstSubPat(end_pattern) + 
 	    kr_NoOfSubPatPairs(end_pattern) - 1;
 	
-#ifdef RBF_DEBUG
-	fprintf(stderr, "... init weights between input and hidden layer\n");
-#endif
+//#ifdef RBF_DEBUG
+//	fprintf(stderr, "... init weights between input and hidden layer\n");
+//#endif
 
 	/* initialize all weights leading to hidden units		*/
 	//norm_init = 1.0 / (float) sqrt((float) NoOfInputUnits);
@@ -1281,12 +1282,12 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 	}
 
 	/* do the kohonen training <count> times			*/
-#ifdef RBF_DEBUG
+/*#ifdef RBF_DEBUG
 	if (count > 0)
 	{
 	   fprintf(stderr, "... begin kohonen training\n");
 	}
-#endif
+#endif*/
 	for (; count > 0; count--)
 	{
 	    /* compute the necessary sub patterns */
@@ -1353,15 +1354,15 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 			    (link_ptr->to->Out.output - link_ptr->weight);
 		    }
 		}
-		else
+	/*	else
 		{
 		    fprintf(stderr,"Internal error in RbfKohonenConvexInit\n");
-		}
+		}*/
 	    }
 	}
-#ifdef RBF_DEBUG
+/*#ifdef RBF_DEBUG
 	fprintf(stderr, "Initialization done\n");
-#endif
+#endif*/
 	return KRERR_NO_ERROR;
 }
 

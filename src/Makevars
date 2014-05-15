@@ -1,6 +1,9 @@
 PKG_LIBS = `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"`
 #PKG_LIBS = $(shell $(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()" )
 
+#PKG_CPPFLAGS=-std=c++98 -pedantic
+PKG_CPPFLAGS=-DR_USE_C99_IN_CXX
+
 .PHONY: all
 
 all: $(SHLIB)

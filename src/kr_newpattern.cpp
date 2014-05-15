@@ -912,8 +912,8 @@ krui_err SnnsCLib::kr_npui_setClassDistribution(unsigned int *class_sizes)
 	    list = list->next;
 	    index++;
 	}
-	if (index != np_info[npui_pat_sets[npui_curr_pat_set]].pub.classes)
-	    fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
+	//if (index != np_info[npui_pat_sets[npui_curr_pat_set]].pub.classes)
+	  //  fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
     }
 
     if (has_changed > 0)
@@ -1717,7 +1717,7 @@ Patterns SnnsCLib::kr_getSubPatData(int pat_no, int sub_no, int io_type, int *si
 
 #ifdef DEBUG_PATTERN
     TRACE_INDENT();
-    fprintf(stderr, "pattern %d, sub %d, %s\n", pat_no, sub_no, io_type == INPUT ? "INPUT" : "OUTPUT");
+    //fprintf(stderr, "pattern %d, sub %d, %s\n", pat_no, sub_no, io_type == INPUT ? "INPUT" : "OUTPUT");
 #endif
 
     set = npui_pat_sets[npui_curr_pat_set];
@@ -2317,8 +2317,8 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
 	/* we have not allocated this memory slot !
 	   gracefull return but print out error */
     {
-	fprintf(stderr, 
-		"kr_np_floatfree: function called with illegal argument\n");
+	//fprintf(stderr, 
+	//	"kr_np_floatfree: function called with illegal argument\n");
 	return;
     }
 
@@ -2618,7 +2618,7 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
            set. Otherwise an error inside the pattern handling occured
            at some other place.... */
 
-	fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
+	//fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
     }
 
     list = np_st[pat_set];
@@ -3123,8 +3123,8 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
 	    }
 	    if (count != np_info[pat_set].pub.classes || list != NULL)
 	    {
-		fprintf(stderr, "internal error, file %s, line %d\n",
-			__FILE__, __LINE__);
+		//fprintf(stderr, "internal error, file %s, line %d\n",
+		//	__FILE__, __LINE__);
 		{ TRACE_RETURN(KRERR_INSUFFICIENT_MEM); }
 	    }
 	    list = np_st[pat_set];
@@ -4013,8 +4013,8 @@ The parameter entries returns the number of entries in the data field.
 	    list = list->next;
 	}
 
-	if (total != np_info[pattern_set].pub.virtual_no_of_pattern)
-	    fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
+	//if (total != np_info[pattern_set].pub.virtual_no_of_pattern)
+	  //  fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
     }
 
     /* copy set amounts with shuffling */
@@ -4113,8 +4113,8 @@ The parameter entries returns the number of entries in the data field.
 	chunk_size += list->chunk_amount;
 	list = list->next;
     }
-    if (chunk_size == 0)
-	fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
+    //if (chunk_size == 0)
+	//fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
 
     list = np_st[pat_set];
     while (list != NULL)
@@ -4223,8 +4223,8 @@ The parameter entries returns the number of entries in the data field.
 	    chunk_size += list->chunk_amount;
 	    list = list->next;
 	}
-	if (chunk_size == 0)
-	    fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
+	//if (chunk_size == 0)
+	  //  fprintf(stderr, "internal error, file %s, line %d", __FILE__, __LINE__);
 	
 	list = np_st[pat_set];
 	while (list != NULL)
@@ -4285,8 +4285,8 @@ The parameter entries returns the number of entries in the data field.
 	}
 */
 
-	if (insert_pos != np_info[pat_set].pub.virtual_no_of_pattern)
-	    fprintf(stderr, "internal error, file %s, line %d\n", __FILE__, __LINE__);
+	//if (insert_pos != np_info[pat_set].pub.virtual_no_of_pattern)
+	  //  fprintf(stderr, "internal error, file %s, line %d\n", __FILE__, __LINE__);
     }
     else
     {
