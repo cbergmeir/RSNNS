@@ -464,7 +464,6 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
     FlintType min, max, offset;
     int  ret_code;
 
-
     if ( (unit_array == NULL) || (NoOfUnits == 0) )
 	return( KRERR_NO_UNITS ); /*  there is nothing to do  */
 
@@ -477,7 +476,7 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
     { intervall = 2.0; offset = -1.0;
     } else if ((!(min < 0.0)) && ((max < 0.0)))
     { intervall = 2.0; offset = -1.0;
-    } else if ((!(min < 0.0)) && (!(max < 0.0)))
+    } else //if ((!(min < 0.0)) && (!(max < 0.0)))
     { intervall = 1.0; offset = 0.0;
     }
 

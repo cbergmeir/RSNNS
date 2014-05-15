@@ -20,7 +20,7 @@ patset <- snnsObject$createPatSet(inputs, outputs)
 snnsObject$setCurrPatSet(patset$set_no)
 
 snnsObject$initializeNet(c(1.0,  -1.0,  0.3,  1.0,  0.5) )
-snnsObject$shufflePatterns(TRUE)
+snnsObject$shufflePatterns(FALSE)
 snnsObject$DefTrainSubPat()
 
 snnsObject$saveNet(paste(basePath,"eight_elmanSnnsR_untrained.net",sep=""),"eight_elmanSnnsR_untrained")

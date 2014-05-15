@@ -794,6 +794,7 @@ do {									  \
 `--------------------------------*/
 
 /*ARGSUSED*/
+/*
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 static void
@@ -820,12 +821,12 @@ yy_symbol_value_print (yyoutput, yytype, yyvaluep)
 	break;
     }
 }
-
+*/
 
 /*--------------------------------.
 | Print this symbol on YYOUTPUT.  |
 `--------------------------------*/
-
+/*
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 static void
@@ -846,6 +847,7 @@ yy_symbol_print (yyoutput, yytype, yyvaluep)
   yy_symbol_value_print (yyoutput, yytype, yyvaluep);
   YYFPRINTF (yyoutput, ")");
 }
+*/
 
 /*------------------------------------------------------------------.
 | yy_stack_print -- Print the state stack from its BOTTOM up to its |
@@ -893,7 +895,7 @@ yy_reduce_print (yyvsp, yyrule)
 {
   int yynrhs = yyr2[yyrule];
   int yyi;
-  unsigned long int yylno = yyrline[yyrule];
+  //unsigned long int yylno = yyrline[yyrule];
   //YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
 	//     yyrule - 1, yylno);
   /* The symbols being reduced.  */

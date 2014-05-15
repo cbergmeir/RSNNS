@@ -8,9 +8,6 @@ seed <- 2
 set.seed(seed)
 setSnnsRSeedValue(seed)
 
-#shuffle the vector
-#iris <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
-
 #normalize data
 inputs <- normalizeData(iris[,1:4], "norm")
 

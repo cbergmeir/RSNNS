@@ -732,9 +732,9 @@ int SnnsCLib::tac_calculateRanksAndRadius(int start,int end)
   int pat,sub;
   Patterns in_pat;
   int UnitNo;
-  int Modulo;
 
-  Modulo = TAC_KOHONEN /20;  /* for the printing */
+  //int Modulo;
+  //Modulo = TAC_KOHONEN /20;  /* for the printing */
 
   cc_printHeadline(const_cast<char*>("Kohonen-Training"),LENGTH_HEADLINE);
 

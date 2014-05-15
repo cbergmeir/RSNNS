@@ -6,16 +6,12 @@ RSNNS: Neural Networks in R using the Stuttgart Neural Network Simulator (SNNS)
 
 TODOs for the next version:
 
-- Remove printf throughout the code (replace with Rprintf)
+- Remove printf throughout the code (replace commented printf's with Rprintf, diff of commit May-15h)
+- mention JavaNNS in documentation
+- include pruning (at least as a demo)
+
 - use the "colorspace" package for heatmaps
 - add JSS paper as vignette
-- elman: shufflePatterns should be FALSE by default
-- switch to roxygen2
-- bug: in regression plot, the axis labels are inverted
-- mention JavaNNS in documentation
-- change in demos using iris the shuffling to something like: 
-  irisShuffled <- iris[sample(nrow(iris)),]
-
 
 TODOs for a far away future:
 

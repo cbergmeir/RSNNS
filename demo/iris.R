@@ -7,7 +7,7 @@ setSnnsRSeedValue(seed)
 data(iris)
 
 #shuffle the vector
-df <- iris[sample(1:nrow(iris),length(1:nrow(iris))),1:ncol(iris)]
+df <- iris[sample(nrow(iris)),]
 
 dfValues <- df[,1:4]
 dfTargets <- decodeClassLabels(df[,5])
@@ -50,7 +50,7 @@ plotIterativeError(model)
 
 predictions <- predict(model,df$inputsTest)
 
-plotRegressionError(predictions[,2], df$targetsTest[,2])
+plotRegressionError(df$targetsTest[,2], predictions[,2])
 
 confusionMatrix(df$targetsTrain,fitted.values(model))
 confusionMatrix(df$targetsTest,predictions)

@@ -1,6 +1,12 @@
 version 0.4-5 (07-05-2014):
 
 - fixing memory access issues, discovered by valgrind and AddressSanitizer
+- switch to roxygen2
+- elman, jordan: shufflePatterns is now FALSE by default; also changes this in the low-level demo
+- included changes of Vitalie Spinu from github
+- change in demos using iris the shuffling to: 
+  irisShuffled <- iris[sample(nrow(iris)),]
+- fixed bug in iris demo: plotRegressionError was called with targets and fits the wrong way around
 
 version 0.4-4 (04-12-2013):
 

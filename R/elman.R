@@ -107,7 +107,7 @@ elman.default <- function(x, y, size=c(5), maxit=100,
     initFunc="JE_Weights", initFuncParams=c(1.0,  -1.0,  0.3,  1.0,  0.5), 
     learnFunc="JE_BP", learnFuncParams=c(0.2), 
     updateFunc="JE_Order", updateFuncParams=c(0.0),    
-    shufflePatterns=TRUE, linOut=TRUE, outContext=FALSE, inputsTest=NULL, targetsTest=NULL, ...) {
+    shufflePatterns=FALSE, linOut=TRUE, outContext=FALSE, inputsTest=NULL, targetsTest=NULL, ...) {
   
 
   x <- as.matrix(x)
