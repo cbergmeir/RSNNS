@@ -66,7 +66,7 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
   if( is.null(iNames) )
     iNames <- paste("Input", 1:nInputs, sep="_")
   else {
-    iNames <- as.character(iNames)
+    iNames <- paste("Input", as.character(iNames), sep="_")
     stopifnot( length(iNames) == nInputs )
   }
   
@@ -122,7 +122,7 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
   if( is.null(oNames) )
     oNames <- paste("Output", 1:nOutputs, sep="_")
   else {
-    oNames <- as.character(oNames)
+    oNames <- paste("Output", as.character(oNames), sep="_")
     stopifnot( length(oNames) == nOutputs )
   }
   

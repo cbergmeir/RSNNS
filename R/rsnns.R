@@ -160,6 +160,9 @@ summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
 #' @param updateFuncParams the parameters for the update function
 #' @param shufflePatterns should the patterns be shuffled?
 #' @param computeIterativeError should the error be computed in every iteration? 
+#' @param pruneFunc the pruning function to use
+#' @param pruneFuncParams the parameters for the pruning function. Unlike the other functions, 
+#' these have to be given in a named list. See the pruning demos for further explanation. 
 #' @return a partly initialized \code{rsnns} object 
 #' @aliases rsnns
 #' @export
@@ -169,7 +172,7 @@ rsnnsObjectFactory <- function(subclass, nInputs, maxit,
     initFunc, initFuncParams, 
     learnFunc, learnFuncParams, 
     updateFunc, updateFuncParams, 
-    shufflePatterns=TRUE, computeIterativeError=TRUE) {
+    shufflePatterns=TRUE, computeIterativeError=TRUE, pruneFunc=NULL, pruneFuncParams=NULL) {
   
   snns <- NULL
   
@@ -184,6 +187,9 @@ rsnnsObjectFactory <- function(subclass, nInputs, maxit,
   snns$updateFuncParams <- updateFuncParams    
   snns$shufflePatterns <- shufflePatterns
   snns$computeIterativeError <- computeIterativeError
+  
+  snns$pruneFunc <- pruneFunc
+  snns$pruneFuncParams <- pruneFuncParams
   
   snns$snnsObject <- SnnsRObjectFactory()
   
@@ -227,7 +233,8 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
       learnFunc=object$learnFunc, learnFuncParams=object$learnFuncParams, updateFunc=object$updateFunc, 
       updateFuncParams=object$updateFuncParams, outputMethod=class(object)[1], maxit=object$maxit, 
       shufflePatterns=object$shufflePatterns, computeError=object$computeIterativeError, 
-      inputsTest=inputsTest, targetsTest=targetsTest, serializeTrainedObject=serializeTrainedObject)
+      inputsTest=inputsTest, targetsTest=targetsTest, serializeTrainedObject=serializeTrainedObject,
+      pruneFunc=object$pruneFunc, pruneFuncParams=object$pruneFuncParams)
   
   object$IterativeFitError <- trainResult$IterativeFitError
   object$IterativeTestError <- trainResult$IterativeTestError

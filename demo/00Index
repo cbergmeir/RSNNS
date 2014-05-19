@@ -9,6 +9,7 @@ dlvq_ziff	the original SNNS dlvq ziff example, using the RSNNS high-level api (r
 eight_elman	the original SNNS eight elman example, using the RSNNS high-level api (rsnns)
 rbf_sin	a rbf network to approximante a a noisy sin function, using the RSNNS high-level api (rsnns)
 mlp_iris_tuning training of an mlp for iris, with grid search of the hyper-parameters (rsnns)
+pruning_iris	example with the iris dataset and mlp for how to prune a network
 mlp_irisSnnsR	a mlp for classification of the iris data, using the RSNNS low-level api (SnnsR)
 encoderSnnsCLib	the original SNNS encoder example, using the RSNNS low-level api (SnnsR), and only functions directly mapped to SnnsCLib functions
 art1_lettersSnnsR	the original art1 letters example, using the RSNNS low-level api (SnnsR)

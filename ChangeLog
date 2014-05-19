@@ -8,7 +8,9 @@ version 0.4-5 (20-05-2014):
   irisShuffled <- iris[sample(nrow(iris)),]
 - fixed bug in iris demo: plotRegressionError was called with targets and fits the wrong way around
 - mentioned javaNNS in the documentation
-- added some missing wrappers to make pruning work, and included a low-level demo for pruning (thanks to Max Greene)
+- mentioned the "plot.nnet" function in the documentation
+- added some missing wrappers to make pruning work, and included pruning into the mlp function, 
+  and two demos for pruning (with the help of Max Greene)
 
 version 0.4-4 (04-12-2013):
 

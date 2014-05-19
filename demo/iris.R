@@ -21,8 +21,8 @@ df <- normTrainingAndTestSet(df)
 model <- mlp(df$inputsTrain, df$targetsTrain, size=5, learnFunc="Quickprop", learnFuncParams=c(0.1, 2.0, 0.0001, 0.1), 
              maxit=50, inputsTest=df$inputsTest, targetsTest=df$targetsTest)
 
-model <- mlp(df$inputsTrain, df$targetsTrain, size=5, learnFunc="BackpropBatch", learnFuncParams=c(10, 0.1), 
-    maxit=100, inputsTest=df$inputsTest, targetsTest=df$targetsTest)
+#model <- mlp(df$inputsTrain, df$targetsTrain, size=5, learnFunc="BackpropBatch", learnFuncParams=c(10, 0.1), 
+#    maxit=100, inputsTest=df$inputsTest, targetsTest=df$targetsTest)
 
 #model <- mlp(df$inputsTrain, df$targetsTrain, size=5, learnFunc="SCG", learnFuncParams=c(0, 0, 0, 0), 
 #    maxit=30, inputsTest=df$inputsTest, targetsTest=df$targetsTest)

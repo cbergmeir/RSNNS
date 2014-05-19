@@ -77,6 +77,9 @@ mlp <- function(x, ...) UseMethod("mlp")
 #' @param linOut sets the activation function of the output units to linear or logistic
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
+#' @param pruneFunc the pruning function to use
+#' @param pruneFuncParams the parameters for the pruning function. Unlike the other functions, 
+#' these have to be given in a named list. See the pruning demos for further explanation. 
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object.
 #' @export
@@ -130,7 +133,7 @@ mlp.default <- function(x, y, size=c(5), maxit=100,
     learnFunc="Std_Backpropagation", learnFuncParams=c(0.2, 0.0), 
     updateFunc="Topological_Order", updateFuncParams=c(0.0),
     hiddenActFunc="Act_Logistic",
-    shufflePatterns=TRUE, linOut=FALSE, inputsTest=NULL, targetsTest=NULL, ...) {
+    shufflePatterns=TRUE, linOut=FALSE, inputsTest=NULL, targetsTest=NULL, pruneFunc=NULL, pruneFuncParams=NULL, ...) {
 
 
   x <- as.matrix(x)
@@ -147,7 +150,8 @@ mlp.default <- function(x, y, size=c(5), maxit=100,
     initFunc=initFunc, initFuncParams=initFuncParams, 
     learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
     updateFunc=updateFunc, updateFuncParams=updateFuncParams,
-    shufflePatterns=shufflePatterns, computeIterativeError=TRUE)
+    shufflePatterns=shufflePatterns, computeIterativeError=TRUE,
+    pruneFunc=pruneFunc, pruneFuncParams=pruneFuncParams)
   
   snns$archParams <- list(size=size)
   snns$snnsObject$setUnitDefaults(0,0,1,0,1,"Act_Logistic","Out_Identity")

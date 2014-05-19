@@ -71,7 +71,7 @@ SnnsR__getAllUnitsTType <- function(snnsObject, ttype) {
 #' @aliases getAllOutputUnits,SnnsR-method SnnsR__getAllOutputUnits
 #' @seealso \code{\link{SnnsRObject$getAllUnitsTType}}
 SnnsR__getAllOutputUnits <- function(snnsObject) {
-  snnsObject$getAllUnitsTType("UNIT_OUTPUT")  
+  c(snnsObject$getAllUnitsTType("UNIT_OUTPUT"), snnsObject$getAllUnitsTType("UNIT_SPECIAL_O"))  
 }
 
 #' SnnsR low-level function to get all units from the net with the ttype "UNIT_INPUT".
@@ -85,7 +85,7 @@ SnnsR__getAllOutputUnits <- function(snnsObject) {
 #' @aliases getAllInputUnits,SnnsR-method SnnsR__getAllInputUnits
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getAllInputUnits <- function(snnsObject) {
-  snnsObject$getAllUnitsTType("UNIT_INPUT")  
+  c(snnsObject$getAllUnitsTType("UNIT_INPUT"), snnsObject$getAllUnitsTType("UNIT_SPECIAL_I"))  
 }
 
 #' SnnsR low-level function to get all units from the net with the ttype "UNIT_HIDDEN".
@@ -99,7 +99,7 @@ SnnsR__getAllInputUnits <- function(snnsObject) {
 #' @aliases getAllHiddenUnits,SnnsR-method SnnsR__getAllHiddenUnits
 #' @seealso \link{SnnsRObject$getAllUnitsTType}
 SnnsR__getAllHiddenUnits <- function(snnsObject) {
-  snnsObject$getAllUnitsTType("UNIT_HIDDEN")  
+  c(snnsObject$getAllUnitsTType("UNIT_HIDDEN"), snnsObject$getAllUnitsTType("UNIT_SPECIAL_H")  )  
 }
 
 

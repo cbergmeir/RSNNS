@@ -158,6 +158,12 @@
 #' \url{http://www.ra.cs.uni-tuebingen.de/software/JavaNNS}
 #'
 #' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley.
+#' 
+#' \emph{Other resources:}
+#' 
+#' A function to plot networks from the \code{\link{mlp}} function:
+#' \url{https://beckmw.wordpress.com/2013/11/14/visualizing-neural-networks-in-r-update/}
+#' 
 
 #' 
 #' @keywords package neural networks SNNS
