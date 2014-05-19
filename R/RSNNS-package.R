@@ -80,7 +80,9 @@
 #' You might also want to have a look at the original SNNS program and the SNNS
 #' User Manual 4.2, especially pp 67-87 for explications on all the parameters
 #' of the learning functions, and pp 145-215 for detailed (theoretical)
-#' explications of the methods and advice on their use.
+#' explications of the methods and advice on their use. And, there is also the 
+#' javaNNS, the sucessor of SNNS from the original authors. It makes the C core 
+#' functionality available from a Java GUI.
 #' 
 #' Demos ending with "SnnsR" show the use of the low-level api. If you want to
 #' do special things with neural networks that are currently not implemented in
@@ -151,7 +153,10 @@
 #' 
 #' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen.
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
-#' 
+#'
+#' javaNNS, the sucessor of the original SNNS with a Java GUI: 
+#' \url{http://www.ra.cs.uni-tuebingen.de/software/JavaNNS}
+#'
 #' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley.
 
 #' 

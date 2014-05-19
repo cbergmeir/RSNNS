@@ -21,7 +21,7 @@ som_cubeSnnsR	the original SNNS som cube example, and a som with the iris data, 
 rbf_irisSnnsR	a rbf for classification of the iris data, using the RSNNS low-level api (SnnsR)
 rbf_sinSnnsR	a rbf network to approximante a a noisy sin function, using the RSNNS low-level api (SnnsR)
 rbfDDA_spiralsSnnsR	the original SNNS rbf-dda example with the spirals dataset, using the RSNNS low-level api (SnnsR)
-
+pruning_irisSnnsR	example with the iris dataset and mlp for how to prune a network, using the RSNNS low-level api (SnnsR)
 
 
 
