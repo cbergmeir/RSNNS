@@ -56,7 +56,8 @@
 #'     learnFunc="Std_Backpropagation", learnFuncParams=c(0.2, 0),
 #'     updateFunc="Topological_Order", updateFuncParams=c(0.0), 
 #'     outputMethod="reg_class", maxit=100, shufflePatterns=TRUE, 
-#'     computeError=TRUE, inputsTest=NULL, targetsTest=NULL)
+#'     computeError=TRUE, inputsTest=NULL, targetsTest=NULL,
+#'     pruneFunc=NULL, pruneFuncParams=NULL)
 #' @aliases train,SnnsR-method SnnsR__train
 SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL, 
     initFunc="Randomize_Weights", initFuncParams=c(1.0, -1.0), 
