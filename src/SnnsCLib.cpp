@@ -1029,7 +1029,7 @@ SnnsCLib::~SnnsCLib() {}
 void SnnsCLib::setIntArrayToZero(int* array, int n) {
 
   for(int i=0;i<n;i++) array[i] = 0;
-};
+}
 
 void SnnsCLib::setFuncInfoDescriptorToZero(FuncInfoDescriptor* f) {
 
@@ -1042,5 +1042,5 @@ void SnnsCLib::setFuncInfoDescriptorToZero(FuncInfoDescriptor* f) {
 #ifdef PARAGON_KERNEL
   f->parallelized = 0;
 #endif
-};
+}
 

@@ -176,7 +176,7 @@ setMethod( "$", "SnnsR", function(x, name ){
             envir = as.environment(-1), 
             ifnotfound = list(FALSE), inherits=TRUE)
         
-        #very usefull for debugging..everytime an SnnsR or SnnsCLib funtion is
+        #very useful for debugging. Everytime an SnnsR or SnnsCLib function is
         #called, its name is printed
         
         #print(name)

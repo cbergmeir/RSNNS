@@ -11,6 +11,7 @@ version 0.4-5 (20-05-2014):
 - mentioned the "plot.nnet" function in the documentation
 - added some missing wrappers to make pruning work, and included pruning into the mlp function, 
   and two demos for pruning (with the help of Max Greene)
+- added imports for methods and Rcpp to NAMESPACE, to comply to new CRAN rules
 
 version 0.4-4 (04-12-2013):
 
