@@ -185,7 +185,8 @@ setMethod( "$", "SnnsR", function(x, name ){
           res <- myFunc[[1]](x, ... )
         }
         else {
-          res <- .Call( paste( "SnnsCLib", name, sep = "__" ) , x@variables$snnsCLibPointer , ... )
+          myFuncName <- paste( "SnnsCLib", name, sep = "__" )
+          res <- .Call( myFuncName, x@variables$snnsCLibPointer , ... )
         }
         
         if(is.list(res))
@@ -224,6 +225,4 @@ SnnsRObjectFactory <- function(){
   
   snnsObject
 }
-
-
 

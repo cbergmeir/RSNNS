@@ -1,6 +1,7 @@
-version 0.4-5 (20-05-2014):
+version 0.4-5 (22-05-2014):
 
 - fixing memory access issues, discovered by valgrind and AddressSanitizer
+- actually freeing memory now in the destructor
 - switch to roxygen2
 - elman, jordan: shufflePatterns is now FALSE by default; also changes this in the low-level demo
 - included changes of Vitalie Spinu from github
@@ -12,6 +13,7 @@ version 0.4-5 (20-05-2014):
 - added some missing wrappers to make pruning work, and included pruning into the mlp function, 
   and two demos for pruning (with the help of Max Greene)
 - added imports for methods and Rcpp to NAMESPACE, to comply to new CRAN rules
+- fixes for "-Wformat-security", to comply to CRAN rules
 
 version 0.4-4 (04-12-2013):
 

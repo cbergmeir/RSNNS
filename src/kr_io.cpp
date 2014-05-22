@@ -111,7 +111,7 @@ const char* SnnsCLib::resHeader[] = {
 		"input patterns included\n",
 		"teaching output included\n"
 };
-
+/*
 const char* SnnsCLib::headers[] = {
 		" site name | site function",
 		" name | act func | out func | sites",
@@ -123,7 +123,7 @@ const char* SnnsCLib::headers[] = {
 		" delta x | delta y | z",
 		" no. | LLN | LUN | Toff | Soff | Ctype"
 };
-
+*/
 const char* SnnsCLib::title[] = {
 		"SNNS network definition file",
 		"generated at",
@@ -927,11 +927,11 @@ krui_err  SnnsCLib::krio_writeSiteDefinitions(void)
 	sprintf( buf, "\n\n%s :\n\n", title[8] );
 	*stream_out << buf;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr1 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr1;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	do
@@ -943,8 +943,8 @@ krui_err  SnnsCLib::krio_writeSiteDefinitions(void)
 	}
 	while (krui_getNextSiteTableEntry( &site_name, &site_func ) );
 
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 	return( 0 );
 }
@@ -977,11 +977,11 @@ krui_err  SnnsCLib::krio_writeTypeDefinitions(void)
 	sprintf( buf, "\n\n%s :\n\n", title[9] );
 	*stream_out << buf;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr1 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr1;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	do  {
@@ -995,8 +995,8 @@ krui_err  SnnsCLib::krio_writeTypeDefinitions(void)
 			second = FALSE;
 			do  {
 				if (second)  {
-					sprintf( buf, fmt_blank );
-					*stream_out << buf;
+
+					*stream_out << fmt_blank;
 					retchk( stream_out );
 				}
 
@@ -1014,8 +1014,8 @@ krui_err  SnnsCLib::krio_writeTypeDefinitions(void)
 	}
 	while (krui_setNextFTypeEntry() );
 
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	if (err <= 0)  return( err );
 
 	return( 0 );
@@ -1086,11 +1086,11 @@ krui_err  SnnsCLib::krio_writeDefaultDefinitions(void)
 	sprintf( buf, "\n\n%s :\n\n", title[13] );
 	*stream_out << buf;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr1 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr1;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	krui_getUnitDefaults( &act, &bias, &st, &subnet_no, &layer_no,
@@ -1109,8 +1109,8 @@ krui_err  SnnsCLib::krio_writeDefaultDefinitions(void)
 
 	retchk( stream_out );
 
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	return( 0 );
@@ -1161,11 +1161,11 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 	sprintf( buf, "\n\n%s :\n\n", title[10] );
 	*stream_out << buf;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr1 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr1;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	krui_getUnitDefaults( &act_def, &bias_def, &st_def, &subnet_no, &layer_no,
@@ -1265,8 +1265,8 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 				second = FALSE;
 				do  {
 					if (second)  {
-						sprintf( buf, fmt_blank );
-						*stream_out << buf;
+
+						*stream_out << fmt_blank;
 						retchk( stream_out );
 					}
 
@@ -1286,8 +1286,8 @@ krui_err  SnnsCLib::krio_writeUnitDefinitions(void)
 	}
 	while ( (unit_no = krui_getNextUnit() ) > 0);
 
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	return( KRERR_NO_ERROR );
@@ -1329,7 +1329,7 @@ krui_err    SnnsCLib::krio_writeTimeDelayDefs(void)
 		sprintf( buf, "\n\n%s :\n\n", title[18] ); 
 		*stream_out << buf;
 		retchk( stream_out );
-		sprintf( buf, "%s\n", headers[8]);
+		sprintf( buf, "%s\n", " no. | LLN | LUN | Toff | Soff | Ctype");
 		*stream_out << buf;
 		//retchk (err);
 		sprintf( buf, "-----|-----|-----|------|------|-------\n");
@@ -1407,8 +1407,8 @@ krui_err  SnnsCLib::krio_writeSourcesAndWeights(void)
 
 		if (++i > max_connects_per_line)  {
 			i = 1;
-			sprintf( buf, fmt_blank );
-			*stream_out << buf;
+
+			*stream_out << fmt_blank;
 			retchk( stream_out );
 		}
 		if ((tacoma_mode)&&((val_a != 0.0)&&(val_b != 0.0))) {
@@ -1461,11 +1461,11 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
 	sprintf( buf, "\n\n%s :\n\n", title[11] );
 	*stream_out << buf;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr1 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr1;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	unit_no = krui_getFirstUnit();
@@ -1517,8 +1517,8 @@ krui_err  SnnsCLib::krio_writeConnectionDefs(void)
 	}
 	while ( (unit_no = krui_getNextUnit()) > 0 );
 
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 	return( KRERR_NO_ERROR );
 }
@@ -1555,11 +1555,11 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
 	sprintf( buf, "\n\n%s :\n\n", title[12] );
 	*stream_out << buf;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr1 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr1;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	/*  get default subnet number  */
@@ -1598,8 +1598,8 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
 						retchk( stream_out );
 
 						if ( (++elem_no % max_subnets_per_line) == 0)  {
-							sprintf( buf, fmt_blank );
-							*stream_out << buf;
+
+							*stream_out << fmt_blank;
 							retchk( stream_out );
 						}
 
@@ -1611,11 +1611,11 @@ krui_err  SnnsCLib::krio_writeSubnetDefs(void)
 			}
 		}
 
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
-	sprintf( buf, "\n" );
-	*stream_out << buf;
+
+	*stream_out << "\n";
 	retchk( stream_out );
 
 	return( KRERR_NO_ERROR );
@@ -1652,11 +1652,11 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
 	sprintf( buf, "\n\n%s :\n\n", title[15] );
 	*stream_out << buf;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr1 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr1;
 	retchk( stream_out );
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
 
 	/*  get default layer number	*/
@@ -1694,8 +1694,8 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
 						retchk( stream_out );
 
 						if ( (++elem_no % max_layers_per_line) == 0)  {
-							sprintf( buf, fmt_blank );
-							*stream_out << buf;
+
+							*stream_out << fmt_blank;
 							retchk( stream_out );
 						}
 
@@ -1707,11 +1707,11 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
 			}
 		}
 
-	sprintf( buf, fmt_hdr2 );
-	*stream_out << buf;
+
+	*stream_out << fmt_hdr2;
 	retchk( stream_out );
-	sprintf( buf, "\n" );
-	*stream_out << buf;
+
+	*stream_out << "\n";
 	retchk( stream_out );
 
 	return( KRERR_NO_ERROR );
@@ -2489,10 +2489,12 @@ int  SnnsCLib::str_to_Ttype(char *str)
   UPDATE   : 
  ******************************************************************************/
 
+
 void  SnnsCLib::krio_readSiteDefinitions(void)
 {
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[0] ) != 0) ||
+//	if ((fscanf( file_in, headers[0] ) != 0) ||
+	if ((fscanf( file_in, " site name | site function" ) != 0) ||
 			!matchHead2( 1 ) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -2537,7 +2539,8 @@ void  SnnsCLib::krio_readTypeDefinitions(void)
 	NoOfUnitTypes = 0;
 
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[1] ) != 0) ||
+	//if ((fscanf( file_in, headers[1] ) != 0) ||
+        if ((fscanf( file_in, " name | act func | out func | sites" ) != 0) ||
 			!matchHead2( 3 ) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -2620,7 +2623,8 @@ void  SnnsCLib::krio_readDefaultDefinitions(void)
 
 
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[2] ) != 0) ||
+	//if ((fscanf( file_in, headers[2] ) != 0) ||
+        if ((fscanf( file_in, " act | bias | st | subnet | layer | act func | out func" ) != 0) ||
 			!matchHead2( 6 ) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -2664,7 +2668,8 @@ void  SnnsCLib::krio_readUnitDefinitions(void)
 
 
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[3] ) != 0) ||
+//	if ((fscanf( file_in, headers[3] ) != 0) ||
+        if ((fscanf( file_in, " no. | typeName | unitName | act | bias | st | position | act func | out func | sites" ) != 0) ||
 			!matchHead2( 9 ) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -2878,7 +2883,8 @@ void  SnnsCLib::krio_readConnectionDefs(void)
 
 
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[4] ) != 0) ||
+	//if ((fscanf( file_in, headers[4] ) != 0) ||
+        if ((fscanf( file_in, " target | site | source:weight" ) != 0) ||
 			(!matchHead2( 2 )) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -2975,7 +2981,8 @@ void  SnnsCLib::krio_readSubnetDefs(void)
 
 
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[5] ) != 0) ||
+	//if ((fscanf( file_in, headers[5] ) != 0) ||
+        if ((fscanf( file_in, " subnet | unitNo." ) != 0) ||
 			!matchHead2( 1 ) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -3024,7 +3031,8 @@ void  SnnsCLib::krio_readLayerDefs(void)
 
 
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[6] ) != 0) ||
+	//if ((fscanf( file_in, headers[6] ) != 0) ||
+        if ((fscanf( file_in, " layer | unitNo." ) != 0) ||
 			!matchHead2( 1 ) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -3068,6 +3076,7 @@ void  SnnsCLib::krio_readLayerDefs(void)
   RETURNS  : 
   UPDATE   : 
  ******************************************************************************/
+
 void  SnnsCLib::readXYTransTable(void)
 {
 	int x, y, z, c;
@@ -3076,7 +3085,8 @@ void  SnnsCLib::readXYTransTable(void)
 	kr_xyTransTable( OP_TRANSTABLE_CLEAR, &x, &y, 0 );
 
 	if ( !skipComments() )  return;
-	if ((fscanf( file_in, headers[7] ) != 0) ||
+	//if ((fscanf( file_in, headers[7] ) != 0) ||
+        if ((fscanf( file_in, " delta x | delta y | z" ) != 0) ||
 			!matchHead2( 2 ) )  {
 		KernelErrorCode = KRERR_FILE_SYNTAX;
 		return;
@@ -3125,7 +3135,9 @@ void SnnsCLib::krio_readTimeDelayDefs(void)
 	struct Unit *unit_ptr;
 
 	if ( !skipComments() )  return;
-	if (fscanf( file_in, headers[8] ) != 0)
+		
+	//if (fscanf( file_in, headers[8] ) != 0)
+	if (fscanf( file_in, " no. | LLN | LUN | Toff | Soff | Ctype" ) != 0)
 	{  KernelErrorCode = KRERR_FILE_SYNTAX;  return;  }
 	if ( !matchHead2( 5 ) )
 	{  KernelErrorCode = KRERR_FILE_SYNTAX;  return;  }
@@ -3403,15 +3415,15 @@ krui_err SnnsCLib::krio_saveResult(char *filename, bool create, int startpattern
 	/* write additional format information */
 	if (includeinput)
 	{
-		sprintf( buf, resHeader[7]);
-		*stream_out << buf;
+
+		*stream_out << resHeader[7];
 		RETCHKGTO( stream_out );
 		lineno += 1;
 	}
 	if (includeoutput)
 	{
-		sprintf( buf, resHeader[8]);
-		*stream_out << buf;
+
+		*stream_out << resHeader[8];
 		RETCHKGTO( stream_out );
 		lineno += 1;
 	}

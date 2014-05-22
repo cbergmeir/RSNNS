@@ -152,7 +152,9 @@ normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
   
   x <- as.matrix(x)
 
-  dnames <- dimnames(x)
+  #preserving the dimnames breaks package semiArtificial, 
+  #it seems that there this function is called with an empty matrix?!
+  #dnames <- dimnames(x)
   
   res <- NULL
   
@@ -208,7 +210,7 @@ normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
   
   attr(res, "normParams") <- normParams
 
-  dimnames(res) <- dnames
+  #dimnames(res) <- dnames
   res
   
 }

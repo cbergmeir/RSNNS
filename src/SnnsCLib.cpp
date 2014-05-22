@@ -49,7 +49,6 @@
 
 SnnsCLib::SnnsCLib() {
 
-
 //------------------------------------------------
 // kr_ui.h
 //------------------------------------------------
@@ -1024,7 +1023,23 @@ krui_setSeedNo(u_getCurrentSeedVal());
 
 }
 
-SnnsCLib::~SnnsCLib() {}
+
+
+//------------------------------------------------
+// Destructor: delete net and pat sets
+//------------------------------------------------
+
+SnnsCLib::~SnnsCLib() {
+
+  krui_err err = 0;
+
+  while (err == 0) {
+    err = krui_deletePatSet(0);
+  }
+  
+  krui_deleteNet();
+
+}
 
 void SnnsCLib::setIntArrayToZero(int* array, int n) {
 
