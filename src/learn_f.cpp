@@ -3719,15 +3719,31 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 
 	NetModified = FALSE;
     }
-    if (NetInitialize || LearnFuncHasChanged) {
+/*    if (NetInitialize || LearnFuncHasChanged) {
 	//fprintf(stderr, "Initialization RBF_Weights should be called!\n");
-	/* initialize fields for momentum term */
+	// initialize fields for momentum term
 	FOR_ALL_UNITS(unit_ptr) {
 	    FOR_ALL_LINKS(unit_ptr, link_ptr) {
 		link_ptr->value_a = 0.0;
 	    }
 	}
     }
+*/
+//patch by TamerRizk on 15/9/2014
+    if (NetInitialize || LearnFuncHasChanged) {
+      FOR_ALL_UNITS(unit_ptr) {
+        if UNIT_HAS_SITES( unit_ptr ){
+          FOR_ALL_SITES_AND_LINKS(unit_ptr, site_ptr, link_ptr) {
+            link_ptr->value_a = 0.0;
+          }
+        }else{
+          FOR_ALL_LINKS(unit_ptr, link_ptr) {
+            link_ptr->value_a = 0.0;
+          }
+        }
+      }
+    }
+
     NET_ERROR(LEARN_RBF_OutParameter) = 0.0;
     para_center = -LEARN_PARAM1(parameterInArray);
     para_bias = LEARN_PARAM2(parameterInArray);
