@@ -45,6 +45,8 @@
 
 //#include <R_ext/Print.h>
 
+#include <stdlib.h>
+
 #include "SnnsCLib.h"
 
 SnnsCLib::SnnsCLib() {
@@ -169,6 +171,7 @@ np_pat_sets                 = NULL;
 np_info                      = NULL;
 np_info_valid                = NULL;
 np_st                       = NULL;
+
 np_current_pattern           = NULL;
 np_i_subpat                  = NULL;
 np_i_subpatsize               = 0;
@@ -1038,6 +1041,63 @@ SnnsCLib::~SnnsCLib() {
   }
   
   krui_deleteNet();
+
+//Delete anything that may be left
+
+  if (np_pat_train_order != (int *) NULL)
+    free(np_pat_train_order);
+
+  if (np_sub_pat_train_order != (int *) NULL)
+    free(np_sub_pat_train_order);
+
+  if (np_pat_mapping_order != (int *) NULL)
+    free(np_pat_mapping_order);
+
+  if (np_abs_count != (int *) NULL)
+    free(np_abs_count);
+
+  if (np_pat_set_used != (bool *) NULL)
+    free(np_pat_set_used);
+
+  if (np_pat_sets != (np_pattern_descriptor**) NULL)
+    free(np_pat_sets);
+
+  if (np_info != (np_pattern_set_info*) NULL)
+    free(np_info);
+
+  if (np_info_valid != (bool *) NULL)
+    free(np_info_valid);
+
+  if (np_st != (np_symtab**) NULL)
+    free(np_st);
+
+//DLVQ
+
+  if (lastInsertedUnitArray != (int *) NULL)
+    free(lastInsertedUnitArray);
+
+  if (initialUnitArray != (MIX_UP*) NULL) {
+    for(int j=0;j<noOfClasses;j++) {
+	if(initialUnitArray[j].link != (double*) NULL)
+          free(initialUnitArray[j].link);
+    }
+    free(initialUnitArray);
+  }
+
+
+  if (mixupArray != (MIX_UP**) NULL) {
+
+    for(int i=0;i<noOfClasses;i++) {
+      if (mixupArray[i] != (MIX_UP*) NULL) {
+	for(int j=0;j<noOfClasses;j++) {
+	    if(mixupArray[i][j].link != (double*) NULL)
+              free(mixupArray[i][j].link);
+	}
+        free(mixupArray[i]);
+      }
+    }
+    free(mixupArray);
+  }
 
 }
 
