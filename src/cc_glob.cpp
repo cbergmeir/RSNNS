@@ -314,7 +314,7 @@ float SnnsCLib::cc_getErr (int StartPattern, int EndPattern)
 		MaxAct=OutputUnitPtr->Out.output;
 		//WhichWin=dummy;
 	    }
-	    //if (abs(devit) > 0.2) Correct=FALSE;
+	    //if (fabs(devit) > 0.2) Correct=FALSE;
 	    sse += devit*devit;
 	    error = devit * 
 		((this->*OutputUnitPtr->act_deriv_func)(OutputUnitPtr) + cc_fse);

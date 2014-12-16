@@ -343,12 +343,12 @@ krui_err SnnsCLib::pr_calcMeanDeviation (int pattern, float *sum_error)
 {
 
     if ((pr_candidateLink == NULL) ||
-	(abs (link_ptr->weight) < pr_candidateSaliency))
+	(fabs (link_ptr->weight) < pr_candidateSaliency))
 	/* found first or least important link so far */
     {
 	pr_candidateTargetUnit = unit_ptr;
 	pr_candidateLink = link_ptr;
-	pr_candidateSaliency = abs (link_ptr->weight);
+	pr_candidateSaliency = fabs (link_ptr->weight);
     }
 
 }
@@ -704,12 +704,12 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 	    else
 		help = 0;
 
-	    if (UNIT_HAS_DIRECT_INPUTS (unit_ptr))
+	    if (UNIT_HAS_DIRECT_INPUTS (unit_ptr)) {
 		FOR_ALL_LINKS (unit_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			/* calculate derivative and propagate information back */
 			pr_obs_calculateDerivative (link_ptr, help, weight_no++);
-	    else
+            }  else
 		FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			/* calculate derivative and propagate information back */
@@ -724,12 +724,12 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 	{
 	    help = (this->*unit_ptr->act_deriv_func) (unit_ptr) *
 		unit_ptr->value_a;
-	    if (UNIT_HAS_DIRECT_INPUTS (unit_ptr))
+	    if (UNIT_HAS_DIRECT_INPUTS (unit_ptr)) {
 		FOR_ALL_LINKS (unit_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			/* calculate derivative and propagate information back */
 			pr_obs_calculateDerivative (link_ptr, help, weight_no++);
-	    else
+            }  else
 		FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			/* calculate derivative and propagate information back */
@@ -986,33 +986,35 @@ krui_err SnnsCLib::PRUNE_OBS (int pattern)
 	 unit_ptr != NULL;
 	 unit_ptr = *(topo_ptr--))
 	/* process links to all output units */
-	if (!IS_SPECIAL_UNIT (unit_ptr))
-	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr)
+	if (!IS_SPECIAL_UNIT (unit_ptr)) {
+	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr) {
 		/* unit has direct inputs */
 		FOR_ALL_LINKS (unit_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_processLink (unit_ptr, link_ptr, link_no++);
-	    else
+	    }  else
 		/* unit has sites */
 		FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_processLink (unit_ptr, link_ptr, link_no++);
+        }
 
     for (unit_ptr = *(topo_ptr--);
 	 unit_ptr != NULL;
 	 unit_ptr = *(topo_ptr--))
 	/* process links to all hidden units */
-	if (!IS_SPECIAL_UNIT (unit_ptr))
-	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr)
+	if (!IS_SPECIAL_UNIT (unit_ptr)) {
+	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr) {
 		/* unit has direct inputs */
 		FOR_ALL_LINKS (unit_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_processLink (unit_ptr, link_ptr, link_no++);
-	    else
+	    }  else
 		/* unit has sites */
 		FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_processLink (unit_ptr, link_ptr, link_no++);
+        }
 
     /* calculate auxiliary variable for efficient update of weights */
     update_const = pr_candidateLink->weight /
@@ -1026,33 +1028,35 @@ krui_err SnnsCLib::PRUNE_OBS (int pattern)
 	 unit_ptr != NULL;
 	 unit_ptr = *(topo_ptr--))
 	/* process links to all output units */
-	if (!IS_SPECIAL_UNIT (unit_ptr))
-	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr)
+	if (!IS_SPECIAL_UNIT (unit_ptr)) {
+	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr) {
 		/* unit has direct inputs */
 		FOR_ALL_LINKS (unit_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_updateLink (link_ptr, update_const, link_no++);
-	    else
+	    }  else
 		/* unit has sites */
 		FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_updateLink (link_ptr, update_const, link_no++);
+        }
 
     for (unit_ptr = *(topo_ptr--);
 	 unit_ptr != NULL;
 	 unit_ptr = *(topo_ptr--))
 	/* process links to all hidden units */
-	if (!IS_SPECIAL_UNIT (unit_ptr))
-	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr)
+	if (!IS_SPECIAL_UNIT (unit_ptr)) {
+	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr) {
 		/* unit has direct inputs */
 		FOR_ALL_LINKS (unit_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_updateLink (link_ptr, update_const, link_no++);
-	    else
+	    }  else
 		/* unit has sites */
 		FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
 		    if (!IS_SPECIAL_UNIT (link_ptr->to))
 			pr_obs_updateLink (link_ptr, update_const, link_no++);
+        }
 
     /* free matrixes */
     RbfFreeMatrix (&pr_inverseHessian);

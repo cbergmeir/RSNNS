@@ -3689,6 +3689,7 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
                     para_momentum,para_delta_max;
 
     register struct Unit *unit_ptr;
+    register struct Site *site_ptr;
     register struct Link *link_ptr;
 
 #ifdef RBF_LEARN_PROT
@@ -3729,18 +3730,19 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 	}
     }
 */
-//patch by TamerRizk on 15/9/2014
+//patch by TamerRizk on 15/9/2014, revised by Christoph Bergmeir 16/12/2014
     if (NetInitialize || LearnFuncHasChanged) {
       FOR_ALL_UNITS(unit_ptr) {
-        if UNIT_HAS_SITES( unit_ptr ){
-          FOR_ALL_SITES_AND_LINKS(unit_ptr, site_ptr, link_ptr) {
-            link_ptr->value_a = 0.0;
-          }
-        }else{
-          FOR_ALL_LINKS(unit_ptr, link_ptr) {
-            link_ptr->value_a = 0.0;
-          }
-        }
+
+	    if UNIT_HAS_DIRECT_INPUTS (unit_ptr) {
+		/* unit has direct inputs */
+                FOR_ALL_LINKS(unit_ptr, link_ptr)
+                  link_ptr->value_a = 0.0;
+	    }  else {
+		/* unit has sites */
+                FOR_ALL_SITES_AND_LINKS(unit_ptr, site_ptr, link_ptr)
+                  link_ptr->value_a = 0.0;
+            }
       }
     }
 

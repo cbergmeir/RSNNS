@@ -1540,7 +1540,7 @@ krui_err  SnnsCLib::kr_copyOutputLinks(struct Unit *source_unit_ptr,
   KernelErrorCode = KRERR_NO_ERROR;
 
   FOR_ALL_UNITS( unit_ptr )
-    if UNIT_IN_USE( unit_ptr )
+    if UNIT_IN_USE( unit_ptr ) {
       if UNIT_HAS_DIRECT_INPUTS( unit_ptr )
 	FOR_ALL_LINKS( unit_ptr, link_ptr )
 	  if (link_ptr->to == source_unit_ptr)
@@ -1572,6 +1572,7 @@ krui_err  SnnsCLib::kr_copyOutputLinks(struct Unit *source_unit_ptr,
 
 	      break;	/*  next site/unit  */
 	    }
+       }
   return( KernelErrorCode );
 }
 
