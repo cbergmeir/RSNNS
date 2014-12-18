@@ -1778,6 +1778,8 @@ krui_err  SnnsCLib::krio_saveNet(char *filename, char *netname)
 
 	static_cast<std::ofstream*>(stream_out)->close();
 
+        delete stream_out;
+
 	return( err );
 }
 

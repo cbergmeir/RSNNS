@@ -1,0 +1,120 @@
+* installing *source* package ‘RSNNS’ ...
+** package ‘RSNNS’ successfully unpacked and MD5 sums checked
+** libs
+make[1]: Entering directory `/data/gannet/ripley/R/packages/tests-clang/RSNNS/src'
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c SnnsCLib.cpp -o SnnsCLib.o
+clang -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c SnnsCLibGenericR_util.c -o SnnsCLibGenericR_util.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c SnnsCLibWrapper.cpp -o SnnsCLibWrapper.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c art_ui.cpp -o art_ui.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c arttr_f.cpp -o arttr_f.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c bn_JordElm.cpp -o bn_JordElm.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c bn_art1.cpp -o bn_art1.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c bn_art2.cpp -o bn_art2.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c bn_artmap.cpp -o bn_artmap.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c bn_assoz.cpp -o bn_assoz.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c bn_kohonen.cpp -o bn_kohonen.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c cc_display.cpp -o cc_display.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c cc_glob.cpp -o cc_glob.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c cc_learn.cpp -o cc_learn.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c cc_modify.cpp -o cc_modify.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c cc_prune.cpp -o cc_prune.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c dlvq_learn.cpp -o dlvq_learn.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c func_tbl.cpp -o func_tbl.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c init_f.cpp -o init_f.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kernel.cpp -o kernel.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_JordElm.cpp -o kr_JordElm.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_amap.cpp -o kr_amap.o
+kernel.cpp:1559:7: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+      else
+      ^
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_art.cpp -o kr_art.o
+1 warning generated.
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_art1.cpp -o kr_art1.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_art2.cpp -o kr_art2.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_funcs.cpp -o kr_funcs.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_inversion.cpp -o kr_inversion.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_io.cpp -o kr_io.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_mem.cpp -o kr_mem.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_newpattern.cpp -o kr_newpattern.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_pat_parse.cpp -o kr_pat_parse.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_pat_scan.cpp -o kr_pat_scan.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_td.cpp -o kr_td.o
+kr_pat_parse.cpp:501:27: warning: unused variable 'yyprhs' [-Wunused-const-variable]
+static const yytype_uint8 yyprhs[] =
+                          ^
+kr_pat_parse.cpp:511:26: warning: unused variable 'yyrhs' [-Wunused-const-variable]
+static const yytype_int8 yyrhs[] =
+                         ^
+kr_pat_parse.cpp:529:28: warning: unused variable 'yyrline' [-Wunused-const-variable]
+static const yytype_uint16 yyrline[] =
+                           ^
+kr_pat_parse.cpp:542:26: warning: unused variable 'yytname' [-Wunused-const-variable]
+static const char *const yytname[] =
+                         ^
+4 warnings generated.
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c kr_ui.cpp -o kr_ui.o
+kr_pat_scan.cpp:1472:12: warning: function 'yyinput' is not needed and will not be emitted [-Wunneeded-internal-declaration]
+static int yyinput()
+           ^
+1 warning generated.
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c learn_f.cpp -o learn_f.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c matrix.cpp -o matrix.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c prun_f.cpp -o prun_f.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c remap_f.cpp -o remap_f.o
+prun_f.cpp:346:3: warning: using integer absolute value function 'abs' when argument is of floating point type [-Wabsolute-value]
+        (abs (link_ptr->weight) < pr_candidateSaliency))
+         ^
+prun_f.cpp:346:3: note: use function 'std::abs' instead
+        (abs (link_ptr->weight) < pr_candidateSaliency))
+         ^~~
+         std::abs
+prun_f.cpp:346:3: note: include the header <cmath> or explicitly provide a declaration for 'std::abs'
+prun_f.cpp:351:25: warning: using integer absolute value function 'abs' when argument is of floating point type [-Wabsolute-value]
+        pr_candidateSaliency = abs (link_ptr->weight);
+                               ^
+prun_f.cpp:351:25: note: use function 'std::abs' instead
+        pr_candidateSaliency = abs (link_ptr->weight);
+                               ^~~
+                               std::abs
+prun_f.cpp:351:25: note: include the header <cmath> or explicitly provide a declaration for 'std::abs'
+prun_f.cpp:712:6: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+            else
+            ^
+prun_f.cpp:732:6: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+            else
+            ^
+prun_f.cpp:995:6: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+            else
+            ^
+prun_f.cpp:1011:6: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+            else
+            ^
+prun_f.cpp:1035:6: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+            else
+            ^
+prun_f.cpp:1051:6: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+            else
+            ^
+8 warnings generated.
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c scaled_conj_grad.cpp -o scaled_conj_grad.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c stochastic_learn_f.cpp -o stochastic_learn_f.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c tacoma_learn.cpp -o tacoma_learn.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c tbl_func.cpp -o tbl_func.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c trans_f.cpp -o trans_f.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c u_lrand48.cpp -o u_lrand48.o
+clang++ -stdlib=libc++ -I/data/gannet/ripley/R/R-clang/include -DNDEBUG -DR_USE_C99_IN_CXX -I/usr/local/include -I"/data/gannet/ripley/R/test-clang/Rcpp/include"   -fpic  -g -O3 -Wall -pedantic -mtune=native  -c update_f.cpp -o update_f.o
+clang++ -stdlib=libc++ -shared -L/usr/local/clang/lib64 -L/usr/local/lib64 -o RSNNS.so SnnsCLib.o SnnsCLibGenericR_util.o SnnsCLibWrapper.o art_ui.o arttr_f.o bn_JordElm.o bn_art1.o bn_art2.o bn_artmap.o bn_assoz.o bn_kohonen.o cc_display.o cc_glob.o cc_learn.o cc_modify.o cc_prune.o dlvq_learn.o func_tbl.o init_f.o kernel.o kr_JordElm.o kr_amap.o kr_art.o kr_art1.o kr_art2.o kr_funcs.o kr_inversion.o kr_io.o kr_mem.o kr_newpattern.o kr_pat_parse.o kr_pat_scan.o kr_td.o kr_ui.o learn_f.o matrix.o prun_f.o remap_f.o scaled_conj_grad.o stochastic_learn_f.o tacoma_learn.o tbl_func.o trans_f.o u_lrand48.o update_f.o
+make[1]: Leaving directory `/data/gannet/ripley/R/packages/tests-clang/RSNNS/src'
+make[1]: Entering directory `/data/gannet/ripley/R/packages/tests-clang/RSNNS/src'
+make[1]: Leaving directory `/data/gannet/ripley/R/packages/tests-clang/RSNNS/src'
+installing to /data/gannet/ripley/R/packages/tests-clang/RSNNS.Rcheck/RSNNS/libs
+** R
+** data
+** demo
+** inst
+** preparing package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (RSNNS)

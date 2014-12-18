@@ -1,0 +1,249 @@
+../cran_R/bin/R -d valgrind --vanilla < RSNNS-Ex.R
+
+../cran_R/bin/R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < RSNNS-Ex.R
+
+./cran_R/bin/R CMD build RSNNS
+./cran_R/bin/R CMD INSTALL RSNNS_0.4-6.tar.gz
+
+
+==30684== 
+==30684== HEAP SUMMARY:
+==30684==     in use at exit: 53,835,890 bytes in 24,277 blocks
+==30684==   total heap usage: 237,697 allocs, 213,420 frees, 1,560,036,782 bytes allocated
+==30684== 
+==30684== 4 bytes in 1 blocks are definitely lost in loss record 9 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CACBC: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1770)
+==30684==    by 0x101A0BDC: SnnsCLib::getNoOfClasses(int, int) (dlvq_learn.cpp:144)
+==30684==    by 0x101A2436: SnnsCLib::LEARN_DLVQ(int, int, float*, int, float**, int*) (dlvq_learn.cpp:1064)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 4 bytes in 1 blocks are definitely lost in loss record 10 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101A43FE: SnnsCLib::RbfKohonenInit(int, int, float, int, int) (init_f.cpp:1254)
+==30684==    by 0x101AC92A: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3968)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3977: SnnsCLib::krui_initializeNet(float*, int) (kr_ui.cpp:3296)
+==30684==    by 0x101841B4: SnnsCLib__initializeNet (SnnsCLibWrapper.cpp:1207)
+==30684==    by 0x47C84F: do_dotcall (dotcode.c:587)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684== 
+==30684== 4 bytes in 1 blocks are definitely lost in loss record 11 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CACBC: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1770)
+==30684==    by 0x101D9B27: SnnsCLib::RbfLearnForward(int, int) (learn_f.cpp:3387)
+==30684==    by 0x101A3C67: SnnsCLib::RbfInitNetwork(int, int, float, float, float, float, float, int) (init_f.cpp:921)
+==30684==    by 0x101AC92A: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3968)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3977: SnnsCLib::krui_initializeNet(float*, int) (kr_ui.cpp:3296)
+==30684==    by 0x101841B4: SnnsCLib__initializeNet (SnnsCLibWrapper.cpp:1207)
+==30684==    by 0x47C84F: do_dotcall (dotcode.c:587)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 12 bytes in 1 blocks are definitely lost in loss record 26 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101DD1EC: SnnsCLib::put_ART2_in_pattern(int, int, Unit**) (learn_f.cpp:5971)
+==30684==    by 0x101DD5C2: SnnsCLib::LEARN_ART2(int, int, float*, int, float**, int*) (learn_f.cpp:5894)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 12 bytes in 1 blocks are definitely lost in loss record 27 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CACBC: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1770)
+==30684==    by 0x101D50F6: SnnsCLib::propagateNetBackward2(int, int, float, float) (learn_f.cpp:213)
+==30684==    by 0x101D5511: SnnsCLib::LEARN_backprop(int, int, float*, int, float**, int*) (learn_f.cpp:387)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 12 bytes in 1 blocks are definitely lost in loss record 28 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CACBC: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1770)
+==30684==    by 0x101D9B27: SnnsCLib::RbfLearnForward(int, int) (learn_f.cpp:3387)
+==30684==    by 0x101DA998: SnnsCLib::LEARN_RBF_DDA(int, int, float*, int, float**, int*) (learn_f.cpp:4076)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 16 bytes in 1 blocks are definitely lost in loss record 37 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101D4F69: SnnsCLib::propagateNetForward(int, int) (learn_f.cpp:122)
+==30684==    by 0x101D54F7: SnnsCLib::LEARN_backprop(int, int, float*, int, float**, int*) (learn_f.cpp:378)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 16 bytes in 1 blocks are definitely lost in loss record 38 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101D9A63: SnnsCLib::RbfLearnForward(int, int) (learn_f.cpp:3353)
+==30684==    by 0x101DA998: SnnsCLib::LEARN_RBF_DDA(int, int, float*, int, float**, int*) (learn_f.cpp:4076)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 24 bytes in 3 blocks are definitely lost in loss record 40 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101D4F69: SnnsCLib::propagateNetForward(int, int) (learn_f.cpp:122)
+==30684==    by 0x101DFCD2: SnnsCLib::LEARN_JE_Backprop(int, int, float*, int, float**, int*) (learn_f.cpp:7968)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 24 bytes in 3 blocks are definitely lost in loss record 41 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CACBC: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1770)
+==30684==    by 0x101D50F6: SnnsCLib::propagateNetBackward2(int, int, float, float) (learn_f.cpp:213)
+==30684==    by 0x101DFCEF: SnnsCLib::LEARN_JE_Backprop(int, int, float*, int, float**, int*) (learn_f.cpp:7972)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 76 (16 direct, 60 indirect) bytes in 1 blocks are definitely lost in loss record 66 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101970A6: SnnsCLib::bn_artmap_createNet(int, int, int, int, int, int, int, int) (bn_artmap.cpp:497)
+==30684==    by 0x1018B637: SnnsCLib__artmap_createNet (SnnsCLibWrapper.cpp:2535)
+==30684==    by 0x47CB64: do_dotcall (dotcode.c:612)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684==    by 0x4BC418: do_begin (eval.c:1633)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684==    by 0x4BC418: do_begin (eval.c:1633)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684== 
+==30684== 76 (16 direct, 60 indirect) bytes in 1 blocks are definitely lost in loss record 67 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101970B3: SnnsCLib::bn_artmap_createNet(int, int, int, int, int, int, int, int) (bn_artmap.cpp:498)
+==30684==    by 0x1018B637: SnnsCLib__artmap_createNet (SnnsCLibWrapper.cpp:2535)
+==30684==    by 0x47CB64: do_dotcall (dotcode.c:612)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684==    by 0x4BC418: do_begin (eval.c:1633)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684==    by 0x4BC418: do_begin (eval.c:1633)
+==30684==    by 0x4BA3E8: Rf_eval (eval.c:629)
+==30684== 
+==30684== 140 bytes in 1 blocks are definitely lost in loss record 82 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101DCDEC: SnnsCLib::put_ART1_in_pattern(int, int, Unit**) (learn_f.cpp:5636)
+==30684==    by 0x101DD0F5: SnnsCLib::LEARN_ART1(int, int, float*, int, float**, int*) (learn_f.cpp:5573)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 140 bytes in 1 blocks are definitely lost in loss record 83 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101E08AF: SnnsCLib::RM_propagate(int, int, float) (learn_f.cpp:8531)
+==30684==    by 0x101E0F5D: SnnsCLib::LEARN_RM_delta(int, int, float*, int, float**, int*) (learn_f.cpp:8683)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 300 bytes in 1 blocks are definitely lost in loss record 119 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101DD69D: SnnsCLib::put_ARTMAP_in_pattern(int, int, Unit**, Unit**) (learn_f.cpp:6325)
+==30684==    by 0x101DDC0C: SnnsCLib::LEARN_ARTMAP(int, int, float*, int, float**, int*) (learn_f.cpp:6250)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== 1,024 bytes in 1 blocks are definitely lost in loss record 229 of 2,281
+==30684==    at 0x4A0645D: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30684==    by 0x101CA516: SnnsCLib::kr_np_GetSubPat(bool, int*, int*, float**, int*) (kr_newpattern.cpp:3361)
+==30684==    by 0x101CAD62: SnnsCLib::kr_getSubPatData(int, int, int, int*) (kr_newpattern.cpp:1740)
+==30684==    by 0x101A11EA: SnnsCLib::initInitialUnitArray(int, int) (dlvq_learn.cpp:445)
+==30684==    by 0x101A2466: SnnsCLib::LEARN_DLVQ(int, int, float*, int, float**, int*) (dlvq_learn.cpp:1068)
+==30684==    by 0x101ACA0C: SnnsCLib::kr_callNetworkFunctionSTD(int, float*, int, float**, int*, int, int) (kernel.cpp:3953)
+==30684==    by 0x101ACAB6: SnnsCLib::kr_callNetworkFunction(int, float*, int, float**, int*, int, int) (kernel.cpp:4020)
+==30684==    by 0x101D3CAF: SnnsCLib::krui_learnAllPatterns(float*, int, float**, int*) (kr_ui.cpp:3505)
+==30684==    by 0x1018591A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
+==30684==    by 0x47C776: do_dotcall (dotcode.c:584)
+==30684==    by 0x4BA57E: Rf_eval (eval.c:657)
+==30684==    by 0x4BD665: do_set (eval.c:2031)
+==30684== 
+==30684== LEAK SUMMARY:
+==30684==    definitely lost: 1,764 bytes in 20 blocks
+==30684==    indirectly lost: 120 bytes in 4 blocks
+==30684==      possibly lost: 0 bytes in 0 blocks
+==30684==    still reachable: 53,834,006 bytes in 24,253 blocks
+==30684==         suppressed: 0 bytes in 0 blocks
+==30684== Reachable blocks (those to which a pointer was found) are not shown.
+==30684== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==30684== 
+==30684== For counts of detected and suppressed errors, rerun with: -v
+==30684== ERROR SUMMARY: 16 errors from 16 contexts (suppressed: 2 from 2)
+

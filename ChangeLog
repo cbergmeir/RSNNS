@@ -1,3 +1,10 @@
+version 0.4-6 (18-12-2014):
+
+- fixing more memory access issues, discovered by valgrind
+- included a bugfix by Tamer Rizk from github, slightly modified
+- fixed some "dangling else" warnings
+- fixed warnings for misuse of abs() function for floating point values; fabs has to be used in that case
+
 version 0.4-5 (22-05-2014):
 
 - fixing memory access issues, discovered by valgrind and AddressSanitizer
