@@ -97,7 +97,7 @@ art1 <- function(x, ...) UseMethod("art1")
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member of the object contains a 
 #' list of two-dimensional activation patterns.
 #' @export
-#' @S3method art1 default
+# @S3method art1 default
 #' @method art1 default
 #' @seealso \code{\link{art2}}, \code{\link{artmap}}
 #' @rdname art1

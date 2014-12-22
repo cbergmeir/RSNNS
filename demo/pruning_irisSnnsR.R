@@ -3,9 +3,8 @@
 library(RSNNS)
 basePath <- ("./")
 data(iris)
-seed <- 2
-set.seed(seed)
-setSnnsRSeedValue(seed)
+
+set.seed(2)
 
 #shuffle the vector
 iris <- iris[sample(nrow(iris)),]

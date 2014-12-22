@@ -76,7 +76,7 @@ elman <- function(x, ...) UseMethod("elman")
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object.
 #' @export
-#' @S3method elman default
+# @S3method elman default
 #' @method elman default
 #' @rdname elman
 #' @seealso \code{\link{jordan}}

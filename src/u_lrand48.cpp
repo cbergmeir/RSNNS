@@ -54,23 +54,42 @@
 
 #include "u_lrand48.h"
 
+#include <R_ext/Random.h>
+
 long u_currentSeedVal = 0;
 
 long u_lrand48(void)
 {
-    return (long) rand();
+    //using system RNG:
+    //return (long) rand();
+
+    //Using R's RNG
+    GetRNGstate();
+    long l = (long) (RAND_MAX * unif_rand());
+    PutRNGstate();
+
+    return l;
+
+
 }
 
 void u_srand48(long seedval)
 {
-    srand(seedval);
+    //using system RNG:
+    //srand(seedval);
 }
 
 double u_drand48(void)
 {
-//RAND_MAX 0x7fffffff
-    return((double) (rand() & RAND_MAX)
-	   / (double) RAND_MAX);
+    //using system RNG:
+    //RAND_MAX 0x7fffffff
+    //return((double) (rand() & RAND_MAX) / (double) RAND_MAX);
+
+    //Using R's RNG
+    GetRNGstate();
+    double d = unif_rand();
+    PutRNGstate();
+    return d;
 }
 
 void u_setCurrentSeedVal(long seedval)

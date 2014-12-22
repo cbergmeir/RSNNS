@@ -4,9 +4,7 @@ basePath <- ("./")
 
 data(iris)
 
-seed <- 2
-set.seed(seed)
-setSnnsRSeedValue(seed)
+set.seed(2)
 
 #normalize data
 inputs <- normalizeData(iris[,1:4], "norm")

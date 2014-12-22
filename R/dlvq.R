@@ -75,7 +75,7 @@ dlvq <- function(x, ...) UseMethod("dlvq")
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member contains the 
 #' activation patterns for all inputs.
 #' @export
-#' @S3method dlvq default
+# @S3method dlvq default
 #' @method dlvq default
 #' @rdname dlvq
 #' @examples 

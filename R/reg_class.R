@@ -150,7 +150,7 @@ plotIterativeError <- function(object, ...) UseMethod("plotIterativeError")
 #' @param object a rsnns object
 #' @param ... parameters passed to \code{plot}
 #' @export
-#' @S3method plotIterativeError rsnns
+# @S3method plotIterativeError rsnns
 #' @method plotIterativeError rsnns
 #' @rdname plotIterativeError
 plotIterativeError.rsnns <- function(object, ...)

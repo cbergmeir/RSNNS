@@ -83,7 +83,7 @@ artmap <- function(x, ...) UseMethod("artmap")
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member of the object contains a 
 #' list of two-dimensional activation patterns.
 #' @export
-#' @S3method artmap default
+# @S3method artmap default
 #' @method artmap default
 #' @seealso \code{\link{art1}}, \code{\link{art2}}
 #' @rdname artmap

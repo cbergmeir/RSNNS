@@ -1,9 +1,11 @@
-version 0.4-6 (18-12-2014):
+version 0.4-6 (22-12-2014):
 
 - fixing more memory access issues, discovered by valgrind
 - included a bugfix by Tamer Rizk from github, slightly modified
 - fixed some "dangling else" warnings
 - fixed warnings for misuse of abs() function for floating point values; fabs has to be used in that case
+- removed @S3method keywords to fix warnings in roxygen2-4
+- now using R's random number generator instead of the system's one
 
 version 0.4-5 (22-05-2014):
 

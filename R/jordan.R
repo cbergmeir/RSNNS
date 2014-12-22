@@ -87,7 +87,7 @@ jordan <- function(x, ...) UseMethod("jordan")
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object.
 #' @export
-#' @S3method jordan default
+# @S3method jordan default
 #' @method jordan default
 #' @rdname jordan
 #' @seealso \code{\link{elman}}

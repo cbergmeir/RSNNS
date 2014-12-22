@@ -80,7 +80,7 @@ rbf <- function(x, ...) UseMethod("rbf")
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object.
 #' @export
-#' @S3method rbf default
+# @S3method rbf default
 #' @method rbf default
 #' @rdname rbf
 #' @examples 

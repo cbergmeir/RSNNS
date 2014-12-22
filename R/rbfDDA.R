@@ -61,7 +61,7 @@ rbfDDA <- function(x, ...) UseMethod("rbfDDA")
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object.
 #' @export
-#' @S3method rbfDDA default
+# @S3method rbfDDA default
 #' @method rbfDDA default
 #' @rdname rbfDDA
 #' @examples 

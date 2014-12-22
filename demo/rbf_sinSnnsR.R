@@ -5,9 +5,7 @@ basePath <- ("./")
 #inputs <- as.matrix(seq(0,1,0.01))
 #outputs <- as.matrix(sin(x))
 
-seed <- 2
-set.seed(seed)
-setSnnsRSeedValue(seed)
+set.seed(2)
 
 inputs <- as.matrix(seq(0,10,0.1))
 outputs <- as.matrix(sin(inputs) + runif(inputs*0.2))

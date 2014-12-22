@@ -83,7 +83,7 @@ mlp <- function(x, ...) UseMethod("mlp")
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object.
 #' @export
-#' @S3method mlp default
+# @S3method mlp default
 #' @method mlp default
 #' @rdname mlp
 #' @examples 

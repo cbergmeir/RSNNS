@@ -30,7 +30,7 @@
 #' @param x the \code{\link{rsnns}} object
 #' @param ... additional function parameters (currently not used)
 #' @export
-#' @S3method print rsnns
+# @S3method print rsnns
 #' @method print rsnns
 # @rdname rsnns
 print.rsnns <- function(x, ...) {
@@ -103,7 +103,7 @@ exportToSnnsNetFile <- function(object, filename, netname="RSNNS_untitled") {
 #' @return Either the contents of the .net file that SNNS would generate from 
 #' the object, as a string. Or the output of \code{\link{extractNetInfo}}.  
 #' @export
-#' @S3method summary rsnns
+# @S3method summary rsnns
 #' @method summary rsnns
 #' @seealso \code{\link{extractNetInfo}} 
 summary.rsnns <- function(object, origSnnsFormat=TRUE, ...) {
@@ -221,7 +221,7 @@ train <- function(object, ...) UseMethod("train")
 #' @param ... additional function parameters (currently not used)
 #' @return an \code{\link{rsnns}} object, to which the results of training have been added. 
 #' @export
-#' @S3method train rsnns
+# @S3method train rsnns
 #' @method train rsnns
 #' @rdname train
 train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL, targetsTest=NULL, serializeTrainedObject=TRUE, ...) {
@@ -254,7 +254,7 @@ train.rsnns <- function(object, inputsTrain, targetsTrain=NULL, inputsTest=NULL,
 #' @param newdata the new input data which is used for prediction
 #' @param ... additional function parameters (currently not used)
 #' @return the predicted values
-#' @S3method predict rsnns
+# @S3method predict rsnns
 #' @method predict rsnns
 # @rdname rsnns
 #' @export
@@ -301,7 +301,7 @@ weightMatrix <- function(object, ...) UseMethod("weightMatrix")
 #' @param ... additional function parameters (currently not used)
 #' @return a matrix with all weights from all neurons present in the net. 
 #' @export
-#' @S3method weightMatrix rsnns
+# @S3method weightMatrix rsnns
 #' @method weightMatrix rsnns
 #' @rdname weightMatrix
 weightMatrix.rsnns <- function(object, ...) {

@@ -88,7 +88,7 @@ som <- function(x, ...) UseMethod("som")
 #' As the other results are more informative, the spanning tree is only interesting, if the other functions are too slow or if the original SNNS
 #' implementation is needed.}
 #' @export
-#' @S3method som default
+# @S3method som default
 #' @method som default
 #' @rdname som
 #' @examples 

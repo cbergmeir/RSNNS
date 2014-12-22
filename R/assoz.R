@@ -63,7 +63,7 @@ assoz <- function(x, ...) UseMethod("assoz")
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member contains the 
 #' activation patterns for all inputs.
 #' @export
-#' @S3method assoz default
+# @S3method assoz default
 #' @method assoz default
 #' @rdname assoz
 #' @seealso \code{\link{art1}}, \code{\link{art2}}

@@ -69,7 +69,7 @@ art2 <- function(x, ...) UseMethod("art2")
 #' @return an \code{\link{rsnns}} object. The \code{fitted.values} member contains the 
 #' activation patterns for all inputs.
 #' @export
-#' @S3method art2 default
+# @S3method art2 default
 #' @method art2 default
 #' @seealso \code{\link{art1}}, \code{\link{artmap}}
 #' @rdname art2

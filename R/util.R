@@ -173,15 +173,18 @@ resolveSnnsRDefine <- function(defList, def)  {
 #  warning(paste("An error occured in ", func,": ", SnnsDefines_getDefine(SnnsDefines_errorCodes, err),sep=""))
 #}
 
-#' Set the seed value used in all \code{SnnsR} objects.
-#' The seed value is used in the constructor of 
-#' every \code{SnnsCLib} object to set the seed of rand().
+# Set the seed value used in all \code{SnnsR} objects.
+# The seed value is used in the constructor of 
+# every \code{SnnsCLib} object to set the seed of rand().
+#' DEPRECATED, now just calls R's set.seed(), that should be used instead.
 #'
-#' @title Set the SnnsR seed value
+#' @title DEPRECATED, Set the SnnsR seed value
 #' @param seed the seed to use. If 0, a seed based on the system time is generated.
 #' @export
 setSnnsRSeedValue <- function(seed) {
-  .Call("setCurrentSeedVal", seed, package="RSNNS")  
+  #.Call("setCurrentSeedVal", seed, package="RSNNS")  
+  warning("Function setSnnsRSeedValue is deprecated. Now the R RNG is used, so use set.seed() instead")
+  set.seed(seed)
 }
 
 getKrioTitle <- function(title_num) {
