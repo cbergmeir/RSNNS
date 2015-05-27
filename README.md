@@ -18,7 +18,6 @@ Possible TODOs for the next version:
 ==32137==    by 0x1018347A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
 
 - Remove printf throughout the code (replace commented printf's with Rprintf, diff of commit May-15h)
-- include visualization functionality as in https://gist.github.com/fawda123/7471137
 - use the "colorspace" package for heatmaps
 - add JSS paper as vignette
 
