@@ -65,7 +65,7 @@ SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
   for(i in 1:nrow(x)) {
     for(j in 1:nInputs)  {
       #snnsObject$setUnitActivation(iUnits[(nInputs+1)-j], x[i,j])
-      snnsObject$setUnitActivation(iUnits[(nInputs+1)-j], x[i,j])
+      snnsObject$setUnitActivation(iUnits[j], x[i,j])
     }
     
     if(!missing(targets) && length(targets) != 0) {  
