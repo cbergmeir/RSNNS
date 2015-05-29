@@ -64,15 +64,17 @@ SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
   
   for(i in 1:nrow(x)) {
     for(j in 1:nInputs)  {
-      snnsObject$setUnitActivation(iUnits[(nInputs+1)-j], x[i,j]);
+      #snnsObject$setUnitActivation(iUnits[(nInputs+1)-j], x[i,j])
+      snnsObject$setUnitActivation(iUnits[(nInputs+1)-j], x[i,j])
     }
     
     if(!missing(targets) && length(targets) != 0) {  
       for(j in 1:nOutputs)  {
-        snnsObject$setUnitActivation(oUnits[(nOutputs+1)-j], y[i,j]);
+        #snnsObject$setUnitActivation(oUnits[(nOutputs+1)-j], y[i,j])
+        snnsObject$setUnitActivation(oUnits[j], y[i,j])
       }
     }
-    snnsObject$newPattern();
+    snnsObject$newPattern()
   }
 
   snnsObject$setCurrPatSet(patSet$set_no)

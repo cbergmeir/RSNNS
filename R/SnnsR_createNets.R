@@ -64,9 +64,9 @@ SnnsR__createNet <- function(snnsObject, unitsPerLayer, fullyConnectedFeedForwar
   layers[[currLayer]] <- vector()
 
   if( is.null(iNames) )
-    iNames <- paste("Input", 1:nInputs, sep="_")
+    iNames <- paste("Input", nInputs:1, sep="_")
   else {
-    iNames <- paste("Input", as.character(iNames), sep="_")
+    iNames <- paste("Input", rev(as.character(iNames)), sep="_")
     stopifnot( length(iNames) == nInputs )
   }
   
