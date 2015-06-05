@@ -105,6 +105,9 @@
 #' from the wrapping for various reasons. Fur more details and other known
 #' issues see the file /inst/doc/KnownIssues.
 #' 
+#' Another nice tool is the \code{NeuralNetTools} package, that can be used to
+#' visualize and analyse the networks generated with RSNNS.
+#' 
 #' Most of the example data included in SNNS is also present in this package, see \code{\link{snnsData}}.
 #' 
 #' Additional information is also available at the project website: 

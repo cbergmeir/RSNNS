@@ -18,7 +18,6 @@ Possible TODOs for the next version:
 ==32137==    by 0x1018347A: SnnsCLib__learnAllPatterns (SnnsCLibWrapper.cpp:1278)
 
 - Remove printf throughout the code (replace commented printf's with Rprintf, diff of commit May-15h)
-- Put NeuralNetTools in suggests field and mention it in the documentation
 - use the "colorspace" package for heatmaps
 - add JSS paper as vignette
 
@@ -26,3 +25,4 @@ TODOs for a far away future:
 
 - Implement Softmax/Entropy for elman?
 - Make it possible to implement learning functions in R
+- Implement more sophisticated convergence detection

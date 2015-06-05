@@ -23,5 +23,5 @@ Depends:
     methods,
     Rcpp (>= 0.8.5)
 Suggests:
-    scatterplot3d
+    scatterplot3d,NeuralNetTools
 Encoding: UTF-8
