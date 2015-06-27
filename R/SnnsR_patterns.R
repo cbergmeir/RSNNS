@@ -40,9 +40,9 @@
 #' @aliases createPatSet,SnnsR-method SnnsR__createPatSet
 SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
 
-  #sort is necessary to fix problems with pruned networks, where the order may change
-  iUnits <- sort(snnsObject$getAllInputUnits())
-  oUnits <- sort(snnsObject$getAllOutputUnits())
+  #sort is necessary to fix problems with pruned networks, where the order may change  
+  iUnits <- if(is.null(snnsObject$getAllInputUnits())) NULL else sort(snnsObject$getAllInputUnits())  
+  oUnits <- if(is.null(snnsObject$getAllOutputUnits())) NULL else sort(snnsObject$getAllOutputUnits())
   
   x <- as.matrix(inputs)
   nInputs <- ncol(x)

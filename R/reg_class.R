@@ -122,10 +122,24 @@ checkInput <- function(x,y) {
     stop("missing values in 'x'")
     ok <- FALSE
   }
+  
   if(any(is.na(y))) {
     stop("missing values in 'y'")
     ok <- FALSE
   }
+   
+  
+  if(!(is.numeric(x))) {
+    stop("'x' has to be numeric, after a conversion to matrix")
+    ok <- FALSE
+  }
+  
+  if(!(is.numeric(y))) {
+    stop("'y' has to be numeric, after a conversion to matrix")
+    ok <- FALSE
+  }
+  
+  
   if(dim(x)[1L] != dim(y)[1L]) {
     stop("nrows of 'x' and 'y' must match")
     ok <- FALSE    
