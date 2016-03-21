@@ -3,6 +3,8 @@ version 0.4-8 (XX-XX-XXXX):
 - single quoted 'RSNNS' in DESCRIPTION (required by CRAN maintainer)
 - added a check for NULL in the unit sorting introduced in 0.4-7, to prevent a warning for architectures with no output.
 - now checking if the input is numeric, after a conversion to matrix. Before, string input yielded an error in the C++ code and R stopped.
+- fixed a bug in the rbfDDA algorithm, related to memory allocation. This will have affected every network architecture that is growing in size of units.
+
 
 version 0.4-7 (05-06-2015):
 
