@@ -400,7 +400,7 @@ TopoPtrArray  topo_ptr_array;  /* pointers to topological sorted units
 					   used by kr_topoSort()  */
 
 int  no_of_topo_units;  /*  no. of unit pointers in the topo_ptr_array  */
-
+int  topo_ptr_array_size;
 
 
 /*  Kernel Interface Error Code */

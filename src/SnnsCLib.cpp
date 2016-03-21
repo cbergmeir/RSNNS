@@ -237,6 +237,8 @@ topo_ptr_array   = NULL;
 
 no_of_topo_units = 0;
 
+topo_ptr_array_size = 0;
+
 KernelErrorCode = KRERR_NO_ERROR;
 
 lineno = 0;

@@ -89,6 +89,8 @@
 #include <limits.h>
 #define MAXINT INT_MAX
 
+#include <R_ext/Print.h>
+
 #include "SnnsCLib.h"
 
 /*****************************************************************************
@@ -3851,10 +3853,24 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
 
 #define RBF_GET_UNIT_NO( unit_ptr ) ( (unit_ptr) - unit_array ) 
 
+/*
+void checkRBFError(krui_err KernelErrorCode) {
+
+  Rprintf("ErrorCode: %d", KernelErrorCode);
+  struct Link *l;
+  l=NULL;
+  l->to = (Unit *) 5;
+}
+         checkRBFError(KernelErrorCode); \
+*/
+
 #define RBF_ERROR_CHECK( x ) \
   KernelErrorCode = ( x ); \
   if ( KernelErrorCode < KRERR_NO_ERROR && \
-       KernelErrorCode != KRERR_DEAD_UNITS ) return KernelErrorCode; 
+       KernelErrorCode != KRERR_DEAD_UNITS ) { \
+              return KernelErrorCode; \
+ }
+
 
 /* Factor for the calculation of the inverse RBF activation function */
 #define RBF_INV ( -1.0 * log(theta_neg) )
@@ -4162,9 +4178,13 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 	  /* Not covered:
 	     No RBF near enough or no RBF at all yet ... commit new RBF */
 	  {
+
 	    struct Unit *new_rbf_ptr;
 	    int new_rbf_no = kr_makeDefaultUnit();
-	    
+
+            //20160321 C. Bergmeir: unit memory may be reallocated and pointers may be invalidated by kr_makeDefaultUnit()
+            correct_output_unit_ptr = kr_getUnitPtr ( correct_output_unit_no );
+
 	    NetModified = TRUE;
 	    RBF_ERROR_CHECK( new_rbf_no );
 	    RBF_ERROR_CHECK( kr_unitSetTType ( new_rbf_no, HIDDEN ) );
@@ -4199,7 +4219,8 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 	    
 	    /* Scan all competing RBFs */
 	    
-	    new_rbf_ptr = kr_getUnitPtr ( new_rbf_no );
+            //20160321 C. Bergmeir: the following line shouldn't be necessary
+	    //new_rbf_ptr = kr_getUnitPtr ( new_rbf_no );
 	    topo_ptr = topo_ptr_array + 2 + NoOfInputUnits + NoOfHiddenUnits;
 	    
 	    while ( (output_unit_ptr = * ++topo_ptr ) != NULL)
@@ -4260,7 +4281,7 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 		        fprintf( stderr, "\nRBF-DDA WARNING: Sigma too small (new)!\n" );
 #endif*/
 		  }
-	    
+	   
 	  } /* end else not covered/new rbf */
       }
     } /* end while kr_getSubPatternByOrder (Main Loop) */

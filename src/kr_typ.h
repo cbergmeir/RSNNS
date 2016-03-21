@@ -259,7 +259,7 @@ struct   Unit  {
                                    /* topo_ptr_array */
     int           target_offset;   /* offset to prototype target unit via */
                                    /* topo_ptr_array */
-    int           source_offset;   /* offset to logioal source unit via */
+    int           source_offset;   /* offset to logical source unit via */
                                    /* prototype target and topo_ptr_array */
     int           td_connect_typ;  /* recept. field or not */
     }  TD;  /* TimeDelay net datas */

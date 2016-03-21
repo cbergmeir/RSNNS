@@ -300,7 +300,7 @@ struct Site  *krm_getFtypeSite(void);
 
 void    krm_releaseAllFtypeSites(struct Site *first_site_ptr);
  void    krm_releaseSiteArrays(void);
- void    krm_relocateLinkPtrs(int offset);
+ void    krm_relocateLinkPtrs(long int offset);
 	void	krm_releaseUnitArrays(void);
  int     krm_allocNTableArray(void);
 struct NameTable  *krm_getNTableEntry(void);
