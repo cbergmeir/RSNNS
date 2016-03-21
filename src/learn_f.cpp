@@ -89,7 +89,7 @@
 #include <limits.h>
 #define MAXINT INT_MAX
 
-#include <R_ext/Print.h>
+//#include <R_ext/Print.h>
 
 #include "SnnsCLib.h"
 

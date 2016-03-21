@@ -79,7 +79,7 @@
 
 #include "SnnsCLib.h"
 
-#include <R_ext/Print.h>
+//#include <R_ext/Print.h>
 
 #ifndef MAXSHORT
 #define MAXSHORT SHRT_MAX
@@ -588,9 +588,6 @@ void  SnnsCLib::krm_unitArrayGC(void)
 	if UNIT_HAS_DIRECT_INPUTS( unit_ptr )
 	  FOR_ALL_LINKS( unit_ptr, link_ptr ) {
 
-//    Rprintf("link_ptr1->to->act: %f\n", link_ptr->to->act);
-//    Rprintf("link_ptr2->to->act: %f\n", ((struct Unit *) ((char *) link_ptr->to + offset))->act);
-
             link_ptr->to = (struct Unit *) ((char *) link_ptr->to + offset);
 }
     }
@@ -612,19 +609,10 @@ krui_err  SnnsCLib::krm_allocUnits(int N)
   UnitArray  tmp_ptr;
   long int offset;
 
-//Rprintf("sizeof(int): %d\n", sizeof(int));
-Rprintf("SnnsCLib::krm_allocUnits(int N) N: %d\n", N);
-
-Rprintf("NoOfAllocUnits: %d\n", NoOfAllocUnits);
-Rprintf("NoOfUnits: %d\n", NoOfUnits);
-
-
   if ((NoOfAllocUnits - NoOfUnits) < N)
     {  /*  alloc units	*/
     N = (N / UNIT_BLOCK + 1) * UNIT_BLOCK;
   }
-
-Rprintf("2SnnsCLib::krm_allocUnits(int N) N: %d\n", N);
 
   if (unit_array == NULL)  {
     tmp_ptr = (UnitArray) calloc((unsigned int)( NoOfAllocUnits + N + 1 ), 
@@ -643,9 +631,6 @@ Rprintf("2SnnsCLib::krm_allocUnits(int N) N: %d\n", N);
   }
   else  {
 
-    Rprintf("1unit_array: %#010x\n", (char *) unit_array - 0);
-    Rprintf("1unit_array->act: %f\n", unit_array->act);
-
     tmp_ptr = (UnitArray) realloc( (char *) unit_array, (unsigned int)
                                    ((NoOfAllocUnits + N + 1 ) * UNIT_SIZE) );
 
@@ -657,69 +642,22 @@ Rprintf("2SnnsCLib::krm_allocUnits(int N) N: %d\n", N);
 
     offset = (char *) tmp_ptr - (char *) unit_array;
 
-    Rprintf("offset: %#010x\n", offset);
-    Rprintf("unit_array: %#010x\n", (char *) unit_array - 0);
-    Rprintf("tmp_ptr: %#010x\n", (char *) tmp_ptr - 0);
-
-//    Rprintf("unit_array->act: %f\n", unit_array->act);
-//    Rprintf("tmp_ptr->act: %f\n", tmp_ptr->act);
-
-//    struct Link   *link_ptr;
-//    link_ptr = (struct Link *) (unit_array)->sites;
-
-//    link_ptr2 = (struct Unit *) ((char *) link_ptr1->to + offset);
-
-//    Rprintf("link_ptr1->to->act: %f\n", link_ptr->to->act);
-//    Rprintf("link_ptr2->to->act: %f\n", ((struct Unit *) ((char *) link_ptr->to + offset))->act);
-
     unit_array = tmp_ptr;
 
     if (offset != 0)  krm_relocateLinkPtrs( offset );
 
     if(topo_ptr_array != NULL) {
-      Rprintf("topo_ptr_array[1]: %#010x\n", (char *) topo_ptr_array[1] - 0);
-      Rprintf("no_of_topo_units: %d\n", no_of_topo_units);
 
-      Rprintf("topo_ptr_array_size: %d\n", topo_ptr_array_size);
+      for(int i = 0; i < topo_ptr_array_size; i++) {
 
-
-//TODO: until when do I want to loop?? Until I find a NULL or through the whole array??
-
-//for(int i = 0; topo_ptr_array[++i] != NULL;) {
-
-// The first member is always be zero, and then there are more zero's to divide different types of units (hidden/output/etc.)
-//for(int i = 0; i < no_of_topo_units; i++) {
-for(int i = 0; i < topo_ptr_array_size; i++) {
-
-
-//      Rprintf("topo_ptr_array[%d]: %#010x\n", i, (char *) topo_ptr_array[i] - 0);
-
-//if(topo_ptr_array[i] == NULL) break;
-
-//topo_ptr_array[i] = (struct Unit *) ((char *) topo_ptr_array[i] + offset);
-
-
-if(topo_ptr_array[i] != NULL) {
-topo_ptr_array[i] = (struct Unit *) ((char *) topo_ptr_array[i] + offset);
-} 
-//else {
-//      Rprintf("topo_ptr_array[%d]: %#010x\n", i, (char *) topo_ptr_array[i] - 0);
-//}
-
-
-
-}
-
+        if(topo_ptr_array[i] != NULL) {
+          topo_ptr_array[i] = (struct Unit *) ((char *) topo_ptr_array[i] + offset);
+        } 
+      }
     }
-
-
-
   }
 
   NoOfAllocUnits += N;
-
-Rprintf("Final NoOfAllocUnits: %d\n", NoOfAllocUnits);
-Rprintf("Final NoOfUnits: %d\n", NoOfUnits);
 
   KernelErrorCode = KRERR_NO_ERROR;
   return( KernelErrorCode );
