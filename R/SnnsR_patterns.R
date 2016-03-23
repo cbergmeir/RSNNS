@@ -41,8 +41,8 @@
 SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
 
   #sort is necessary to fix problems with pruned networks, where the order may change  
-  iUnits <- if(is.null(snnsObject$getAllInputUnits())) NULL else sort(snnsObject$getAllInputUnits())  
-  oUnits <- if(is.null(snnsObject$getAllOutputUnits())) NULL else sort(snnsObject$getAllOutputUnits())
+  iUnits <- if(is.null(snnsObject$getAllInputUnits())) vector() else sort(snnsObject$getAllInputUnits())  
+  oUnits <- if(is.null(snnsObject$getAllOutputUnits())) vector() else sort(snnsObject$getAllOutputUnits())
   
   x <- as.matrix(inputs)
   nInputs <- ncol(x)
@@ -57,67 +57,79 @@ SnnsR__createPatSet <- function(snnsObject, inputs, targets) {
     
     if(nrow(x) != nrow(y)) 
       stop(paste("input value rows ",nrow(x)," not same as output value rows ",nrow(y),sep=""))
+  } else {
+    y <- matrix()
   }
   
-  patSet <- snnsObject$allocNewPatternSet()
-
-
+  targetsExist <- !missing(targets) && length(targets) != 0
   
-  for(i in 1:nrow(x)) {
-    for(j in 1:nInputs)  {
-      #snnsObject$setUnitActivation(iUnits[(nInputs+1)-j], x[i,j])
-      snnsObject$setUnitActivation(iUnits[j], x[i,j])
-    }
-    
-    if(!missing(targets) && length(targets) != 0) {  
-      for(j in 1:nOutputs)  {
-        #snnsObject$setUnitActivation(oUnits[(nOutputs+1)-j], y[i,j])
-        snnsObject$setUnitActivation(oUnits[j], y[i,j])
-      }
-    }
-    snnsObject$newPattern()
-  }
-
-  snnsObject$setCurrPatSet(patSet$set_no)
-  
-  return(patSet)
+  patSet <- snnsObject$createPatSetUtil(iUnits, oUnits, x, y, targetsExist)
+  patSet
 }
 
+##this function has been reimplemented in C++, to speed things up.
+#SnnsR__createPatSetUtil <- function(snnsObject, iUnits, oUnits, x, y, targetsExist) {
+#  
+#  patSet <- snnsObject$allocNewPatternSet()
+#  
+#  for(i in 1:nrow(x)) {
+#    for(j in 1:ncol(x))  {
+#      snnsObject$setUnitActivation(iUnits[j], x[i,j])
+#    }
+#    
+#    if(targetsExist) {  
+#      for(j in 1:ncol(y))  {
+#        snnsObject$setUnitActivation(oUnits[j], y[i,j])
+#      }
+#    }
+#    snnsObject$newPattern()
+#  }
+#  
+#  snnsObject$setCurrPatSet(patSet$set_no)
+#  
+#  return(patSet)
+#}
 
-#' SnnsR low-level function for generic prediction with a trained net.
-#' 
-#' @title Predict values with a trained net
-#' @param units the units that define the output
-#' @param updateFuncParams the parameters for the update function (the function has to be already set)
-#' @return the predicted values
-#' @rdname SnnsRObject-genericPredictCurrPatSet
-#' @name SnnsRObject$genericPredictCurrPatSet
-#' @usage \S4method{genericPredictCurrPatSet}{SnnsR}(units, updateFuncParams=c(0.0))
-#' @aliases genericPredictCurrPatSet,SnnsR-method SnnsR__genericPredictCurrPatSet
-SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=c(0.0))  {
-  
-  noOfPatterns <- snnsObject$getNoOfPatterns()
-  
-  predictions <- matrix(nrow= noOfPatterns, ncol=length(units))
-  
-  snnsObject$DefTrainSubPat()  
-  
-  for(currentPattern in 1:noOfPatterns)  {
-    
-    snnsObject$setPatternNo(currentPattern)
-    
-    snnsObject$showPattern(resolveSnnsRDefine("patternUpdateModes","OUTPUT_NOTHING"))
-    
-    snnsObject$updateNet(updateFuncParams)
-    
-    for(i in 1:length(units)) {
-      predictions[currentPattern,i] <- snnsObject$getUnitOutput(units[i])
-    }
-    
-  }
-  
-  return(predictions)
-} 
+
+
+# SnnsR low-level function for generic prediction with a trained net.
+# 
+# @title Predict values with a trained net
+# @param units the units that define the output
+# @param updateFuncParams the parameters for the update function (the function has to be already set)
+# @return the predicted values
+# @rdname SnnsRObject-genericPredictCurrPatSet
+# @name SnnsRObject$genericPredictCurrPatSet
+# @usage \S4method{genericPredictCurrPatSet}{SnnsR}(units, updateFuncParams=c(0.0))
+# @aliases genericPredictCurrPatSet,SnnsR-method SnnsR__genericPredictCurrPatSet
+
+##this function has been reimplemented in C++, to speed things up.
+#SnnsR__genericPredictCurrPatSet <- function(snnsObject, units, updateFuncParams=c(0.0))  {
+#  
+#  noOfPatterns <- snnsObject$getNoOfPatterns()
+#  
+#  predictions <- matrix(nrow= noOfPatterns, ncol=length(units))
+#  
+#  snnsObject$DefTrainSubPat()  
+#  
+#  for(currentPattern in 1:noOfPatterns)  {
+#    
+#    snnsObject$setPatternNo(currentPattern)
+#    
+#    snnsObject$showPattern(resolveSnnsRDefine("patternUpdateModes","OUTPUT_NOTHING"))
+#    
+#    snnsObject$updateNet(updateFuncParams)
+#    
+#    for(i in 1:length(units)) {
+#      predictions[currentPattern,i] <- snnsObject$getUnitOutput(units[i])
+#    }
+#    
+#  }
+#  
+#  return(predictions)
+#} 
+
+
 
 
 #' SnnsR low-level function to get a list of output units of a net.

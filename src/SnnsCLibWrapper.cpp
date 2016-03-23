@@ -2750,7 +2750,7 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
  
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
-  Rcpp::NumericVector hu(hidden_units);
+  Rcpp::NumericVector units(hidden_units);
   Rcpp::NumericVector params(updateFuncParams);
 
   int n = params.size();
@@ -2760,17 +2760,11 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
     p1[i] = static_cast<float>(params(i));
   }
 
-  int nUnits = hu.size();
-  //int units[nUnits+1];
-  int* units = new int[nUnits+1];
-
-  for (int i=0; i<nUnits; i++) {
-    units[i] = static_cast<int>(hu(i));
-  }
+  int nUnits = units.size();
 
   int noPat = Rcpp::as<int>(noOfPatterns);
-  //int winners[noPat+1];
-  int* winners = new int[noPat+1];
+
+  Rcpp::NumericVector retWinners(noPat);
 
   for(int i=1; i<=noPat; i++) {
 
@@ -2794,22 +2788,126 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
       }
     }
  
-    winners[i-1] = argmin;
-
+    retWinners[i-1] = argmin;
   }
  
-  Rcpp::NumericVector retWinners(noPat);
-
-  for (int i=0; i<noPat; i++) {
-    retWinners[i] = winners[i];
-  }
-
   delete[] p1;
-  delete[] units;
-  delete[] winners;
 
   return retWinners;
 }
+
+
+
+//This function reimplements SnnsR__genericPredictCurrPatSet, to speed up predictions. 
+RcppExport SEXP SnnsCLib__genericPredictCurrPatSet(SEXP p_xp, SEXP p_units, SEXP p_updateFuncParams) {
+
+  Rcpp::XPtr<SnnsCLib> snnsCLib(p_xp);
+
+  Rcpp::NumericVector units(p_units);
+  Rcpp::NumericVector params(p_updateFuncParams);
+
+  int n = params.size();
+  float* p1 = new float[n+1];
+
+  for (int i=0; i<n; i++) {
+    p1[i] = static_cast<float>(params(i));
+  }
+
+  int nUnits = units.size();
+
+  int noOfPatterns = snnsCLib->krui_getNoOfPatterns();
+
+  std::vector<int> insize(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> outsize(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> instep(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> outstep(MAX_NO_OF_VAR_DIM, 0);
+  std::vector<int> max_n_pos(MAX_NO_OF_VAR_DIM, 0);
+
+  snnsCLib->krui_DefTrainSubPat(&insize[0], &outsize[0], &instep[0], &outstep[0], &max_n_pos[0]);
+
+  Rcpp::NumericMatrix predictions(noOfPatterns, nUnits);
+
+  for(int currentPattern = 0; currentPattern < noOfPatterns; currentPattern++)  {
+    
+    snnsCLib->krui_setPatternNo(currentPattern + 1);
+    
+    snnsCLib->krui_showPattern(OUTPUT_NOTHING);
+    
+    snnsCLib->krui_updateNet(p1, n);
+    
+    for(int i=0; i < nUnits; i++) {
+      float currValue = snnsCLib->krui_getUnitOutput(units[i]);
+      predictions(currentPattern, i) = currValue;
+    }
+  }
+
+  delete[] p1;
+
+  return predictions;
+}
+
+
+/*
+SnnsR__createPatSetUtil <- function(snnsObject, iUnits, oUnits, x, y, targetsExist) {
+  
+  patSet <- snnsObject$allocNewPatternSet()
+  
+  for(i in 1:nrow(x)) {
+    for(j in 1:ncol(x))  {
+      snnsObject$setUnitActivation(iUnits[j], x[i,j])
+    }
+    
+    if(targetsExist) {  
+      for(j in 1:ncol(y))  {
+        snnsObject$setUnitActivation(oUnits[j], y[i,j])
+      }
+    }
+    snnsObject$newPattern()
+  }
+  
+  snnsObject$setCurrPatSet(patSet$set_no)
+  
+  return(patSet)
+}
+*/
+
+
+RcppExport SEXP SnnsCLib__createPatSetUtil(SEXP p_xp, SEXP p_iUnits, SEXP p_oUnits, SEXP p_x, SEXP p_y, SEXP p_targetsExist) {
+
+  Rcpp::XPtr<SnnsCLib> snnsCLib(p_xp);
+
+  Rcpp::NumericMatrix x(p_x);
+  Rcpp::NumericMatrix y(p_y);
+
+  Rcpp::NumericVector iUnits(p_iUnits);
+  Rcpp::NumericVector oUnits(p_oUnits);
+
+  bool targetsExist = Rcpp::as<bool>(p_targetsExist);
+
+  int set_no;
+  int err = snnsCLib->krui_allocNewPatternSet(&set_no);
+
+  for(int i=0; i<x.nrow();i++) {
+    for(int j=0; j<x.ncol();j++)  {
+      snnsCLib->krui_setUnitActivation(iUnits[j], x(i,j));
+    }
+    
+    if(targetsExist) {  
+      for(int j=0; j<y.ncol();j++)  {
+        snnsCLib->krui_setUnitActivation(oUnits[j], y(i,j));
+      }
+    }
+    snnsCLib->krui_newPattern();
+  }
+
+  snnsCLib->krui_setCurrPatSet(set_no);
+
+  return Rcpp::List::create( 
+    	Rcpp::Named( "err" ) = err, 
+    	Rcpp::Named( "set_no" ) = set_no
+    	) ;
+}
+
 
 /*
 RcppExport SEXP setCurrentSeedVal (SEXP seedval) {

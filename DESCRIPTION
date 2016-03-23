@@ -17,6 +17,7 @@ Description: The Stuttgart Neural Network Simulator (SNNS) is a library
     learning algorithms integrate seamlessly into R.
 Version: 0.4-8
 URL: http://sci2s.ugr.es/dicits/software/RSNNS
+BugReports: https://github.com/cbergmeir/RSNNS/issues
 Date: 2015-06-12
 Depends:
     R (>= 2.10.0),
