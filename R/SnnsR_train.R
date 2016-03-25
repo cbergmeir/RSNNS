@@ -194,9 +194,11 @@ SnnsR__train <- function(snnsObject, inputsTrain, targetsTrain=NULL,
       pr_res <- snnsObject$callPrunFunc(PR_ALL_PATTERNS)
       
       # calculate net error
+print("calculating mean deviation\n")
       pr_res <- snnsObject$calcMeanDeviation(PR_ALL_PATTERNS) 
       net_error[1] <- pr_res[[2]]
-      
+print(pr_res[[2]])      
+
       # retrain network
       if (net_error[1] > min_error_to_stop){ 
         

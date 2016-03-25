@@ -78,6 +78,7 @@
 
 #include "SnnsCLib.h"
 
+#include <R_ext/Print.h>
 
 /*****************************************************************************
 
@@ -298,7 +299,13 @@ krui_err SnnsCLib::pr_calcMeanDeviation (int pattern, float *sum_error)
 	out_pat += size;
 	
 	/* propagate pattern through net */
+
+Rprintf("PatternNo: %d \n", pattern_no);
+Rprintf("SubPatNo: %d \n", sub_pat_no);
+
 	propagateNetForward (pattern_no, sub_pat_no);
+
+Rprintf("End.\n", sub_pat_no);
 
 	/* calculate deviation for output units */
 	for (topo_ptr = topo_ptr_array + no_of_topo_units + 2,
@@ -1017,9 +1024,16 @@ krui_err SnnsCLib::PRUNE_OBS (int pattern)
         }
 
     /* calculate auxiliary variable for efficient update of weights */
+
+/*TODO Christoph: pr_candidateLink can be NULL here, which causes a segmentation fault*/
+if(pr_candidateLink==NULL) {
+Rprintf("pr_candidateLink is NULL!\n");
+update_const = 0;
+} else {
     update_const = pr_candidateLink->weight /
 	RbfMatrixGetValue (&pr_inverseHessian, pr_candidateLinkNo,
 			   pr_candidateLinkNo);
+}
 
     /* update all links */
     link_no = 0;
