@@ -5,6 +5,7 @@ version 0.4-8 (XX-XX-XXXX):
 - now checking if the input is numeric, after a conversion to matrix. Before, string input yielded an error in the C++ code and R stopped.
 - fixed a bug in the rbfDDA algorithm, related to memory allocation. This will have affected every network architecture that is growing in size of units.
 - reimplemented SnnsR__genericPredictCurrPatSet and parts of SnnsR__createPatSet in C++, to get general speed-ups.
+- fixed handling of the target variable in DLVQ. Was only working for numeric values starting from 0. Now converting to factor
 
 version 0.4-7 (05-06-2015):
 
