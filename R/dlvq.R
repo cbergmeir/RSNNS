@@ -104,6 +104,12 @@ dlvq.default <- function(x, y,
   
   nInputs <- dim(x)[2L]
   
+  numY <- is.numeric(y)
+  y <- as.factor(y)
+  facLevels <- levels(y) 
+  if(numY) facLevels <- as.numeric(facLevels)
+  y <- as.numeric(y)-1
+  
   snns <- rsnnsObjectFactory(subclass=c("dlvq"), nInputs=nInputs, maxit=1, 
       initFunc=initFunc, initFuncParams=initFuncParams, 
       learnFunc=learnFunc, learnFuncParams=learnFuncParams, 
@@ -118,6 +124,7 @@ dlvq.default <- function(x, y,
   
   snns <- train(snns, inputsTrain=x, targetsTrain=y)
   
+  snns$fitted.values <- facLevels[snns$fitted.values+1] 
   #snns$fitted.values <- matrixToActMapList(snns$fitted.values, nrow=dimX)
   
   snns
