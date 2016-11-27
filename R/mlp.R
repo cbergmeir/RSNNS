@@ -74,7 +74,8 @@ mlp <- function(x, ...) UseMethod("mlp")
 #' @param updateFuncParams the parameters for the update function
 #' @param hiddenActFunc the activation function of all hidden units
 #' @param shufflePatterns should the patterns be shuffled?
-#' @param linOut sets the activation function of the output units to linear or logistic
+#' @param linOut sets the activation function of the output units to linear or logistic (ignored if outputActFunc is given)
+#' @param outputActFunc the activation function of all output units
 #' @param inputsTest a matrix with inputs to test the network
 #' @param targetsTest the corresponding targets for the test input
 #' @param pruneFunc the pruning function to use
@@ -133,7 +134,8 @@ mlp.default <- function(x, y, size=c(5), maxit=100,
     learnFunc="Std_Backpropagation", learnFuncParams=c(0.2, 0.0), 
     updateFunc="Topological_Order", updateFuncParams=c(0.0),
     hiddenActFunc="Act_Logistic",
-    shufflePatterns=TRUE, linOut=FALSE, inputsTest=NULL, targetsTest=NULL, pruneFunc=NULL, pruneFuncParams=NULL, ...) {
+    shufflePatterns=TRUE, linOut=FALSE, outputActFunc=if(linOut) "Act_Identity" else "Act_Logistic", 
+    inputsTest=NULL, targetsTest=NULL, pruneFunc=NULL, pruneFuncParams=NULL, ...) {
 
 
   x <- as.matrix(x)
@@ -159,7 +161,7 @@ mlp.default <- function(x, y, size=c(5), maxit=100,
                             fullyConnectedFeedForward=TRUE,
                             iNames = colnames(x), oNames = colnames(y))
   
-  outputActFunc <- if(linOut)  "Act_Identity" else  "Act_Logistic"
+  #outputActFunc <- if(linOut)  "Act_Identity" else  "Act_Logistic"
   
   snns$snnsObject$setTTypeUnitsActFunc("UNIT_INPUT", "Act_Identity")
   snns$snnsObject$setTTypeUnitsActFunc("UNIT_HIDDEN", hiddenActFunc)
