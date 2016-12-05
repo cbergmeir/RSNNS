@@ -1,0 +1,89 @@
+Here is a collection of example code for experimenting
+with the RSNNS multilayer perceptron function (mlp).
+All of the examples generate their own training and
+test sets and can be configured by changing some of
+the parameters in the R code. The code generates 
+perfectly separable classes, so you can achieve perfect
+accuracy if you have enough hidden nodes and training
+samples.
+
+In order to run these examples, your R system requires
+the RSNNS and NeuralNetTools packages to be installed. 
+To run, you simply source one of these files.
+Output will appear in your console and some plots will pop up.
+
+There is no user interface in these programs, so you
+need to edit the code in order to experiment with the
+various parameters. (It is suggested that you keep
+the originals somewhere else.)
+
+To start off, you should begin with rsnns_eval.R and
+rsnns_plot.R.
+
+Here is a short description of the example files.
+
+
+
+rsnns_eval.R and rsnns_plot.R
+
+These programs produce samples that are uniformly distributed
+inside a square (or hypercube).  There are nclass centers
+in the feature space and each sample is assigned to a class
+which is closest to one of these centers. In two dimensions,
+this produces Voronoi regions.  In higher dimensions, the classes
+are inside convex polytopes. rsnns_eval.R runs this model,
+displays the training sample, displays the convergence curve,
+and outputs the confusion matrix and accuracy for the training
+and test samples.  rsnns_plot.R runs this model, but displays 
+the computed neural net model applied to a grid of test samples.
+
+
+rsnns_plot_with_my_predict.R
+
+This is a more complicated version of rsnns_plot.R. If you
+are still learning R, you may want to work on it later. The
+RSNNS predict() function can be implemented in R source code,
+using the information extracted from the mlp model. The R
+implementation provides some more options that are not yet
+available in the RSNNS package. rsnns_plot_with_my_predict.R
+sources a separate file called rsnns_my_predict.R, which
+contains the predict() emulator and a few other functions.
+The effect of disabling particular hidden nodes is demonstrated.
+The activation distributions are also shown.
+
+
+complex_rsnns_eval.R and complex_rsnns_plot.R
+
+This is an extension of rsnns_eval.R and rsnns_plot.R.
+It demonstrates that the complexity of the class distributions
+is just as important as the number of classes. The class
+distributions are no longer convex or simply connected as
+before. This was done by reassigning the Voronoi regions
+in rsnns_plot.R to a few classes. To get any
+reasonable accuracy we need more hidden nodes. The processing
+time is also longer.
+
+
+rsnns_eval6.R
+
+In this extension of rssns_eval.R the data is basically
+still 2-dimensional; however, it is embedded in a 6-dimensional
+space. The other 4 dimensions can be uniform white noise or
+a nonlinear transformation of the original 2-dimensional
+data. In the latter case, the data can be viewed as a
+warped surface embedded in 6-dimensional space.
+In other words, the other dimensions are correlated or
+dependent on the first two components of the data.
+The mlp() network does not have much difficulty handling
+this form of data.
+
+
+1dim_rsnns_eval.R
+
+This toy example allows you to see how the predictor fails
+when you do not have enough hidden nodes. The data is uniformly
+distributed along a line segment, but the two classes are
+disjointed (not simply connected). For purposes of plotting
+only, we added a y coordinate containing uniform noise; however,
+the learning algorithm sees only the x coordinate.
+
