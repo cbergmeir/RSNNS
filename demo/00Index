@@ -23,10 +23,15 @@ rbf_irisSnnsR	a rbf for classification of the iris data, using the RSNNS low-lev
 rbf_sinSnnsR	a rbf network to approximante a a noisy sin function, using the RSNNS low-level api (SnnsR)
 rbfDDA_spiralsSnnsR	the original SNNS rbf-dda example with the spirals dataset, using the RSNNS low-level api (SnnsR)
 pruning_irisSnnsR	example with the iris dataset and mlp for how to prune a network, using the RSNNS low-level api (SnnsR)
-
-
-
-
+rsnns_eval.R	mlp test on perfectly separable synthesized data
+rsnns_plot.R	mlp plot on perfectly separable synthesized data 
+rsnns_plot_with_my_predict.R	rssns_plot with predict() emulator demonstrating other features
+rsnns_my_predict.R	this code is not stand alone but is sourced into rsnss_plot_with_my_predict.R
+complex_rsnns_eval.R	rsnns_eval applied to complex but perfectly separable classes
+complex_rsnns_plot.R	rsnns_plot applied to complex but perfectly separable classes
+rsnns_eval6.R	rsnns_eval applied to 2-dimensional data embedded in a 6 dimensional space
+1dim_rsnns_eval.R	mlp applied to 1 dimensional but multimodal data
+binary_rsnns_eval.R	mlp applied to synthesized and perfectly separable binary data
 
 
 
