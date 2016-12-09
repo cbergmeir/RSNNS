@@ -1,4 +1,4 @@
-# rsnns_plot.R
+# mlp_plot.R
 
 # Produces plots either for a report or display of the
 # training set and the test set (arranged along a 2D grid).
@@ -18,6 +18,11 @@ if (nclasses > 16) {
 if (Dim > 16) {
   stop("dimension two high")
 }
+
+
+cat("Reference: 'Experiments with Neural Networks using R' by Seymour Shlien\n")
+cat("To change the model parameters (number of classes, training size, test size...)\nyou need to edit this file which you can download from the following\nsite")
+cat(" http://ifdo.ca/~seymour/R\n\n")
 
 # If you want a random plot each time, comment out the
 # next line.

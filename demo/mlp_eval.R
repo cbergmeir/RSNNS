@@ -1,4 +1,4 @@
-# rsnns_eval.R
+# mlp_eval.R
 
 # Creates a training set and test set of samples uniformly distributed
 # inside a square (or hypercube) which are perfectly separable
@@ -30,6 +30,11 @@ learnfunc.selection <- c(
   'QuickProp',
   'SCG'
 )
+
+cat("Reference: 'Experiments with Neural Networks using R' by Seymour Shlien\n")
+cat("To change the model parameters (number of classes, training size, test size...)\nyou need to edit this file which you can download from the following\nsite")
+cat(" http://ifdo.ca/~seymour/R\n\n")
+
 
 # Comment the next line if you want a different training/test set
 # each time you run this program.

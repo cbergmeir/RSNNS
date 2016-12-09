@@ -1,10 +1,10 @@
-# rsnns_plot_with_simulator.R
+# mlp_plot_with_my_predict.R
 
 # applies the RSNNS neuralnet package to samples
 # in a 2D space which are grouped into Voronoi
 # regions and plots the resulting mlp model.
 # This version illustrates how to include the
-# code rsnns_my_predict.R. This code allows you
+# code mlp_my_predict.R. This code allows you
 # to view the activation response of particular
 # nodes or to disable particular nodes in the
 # neural network.
@@ -177,12 +177,12 @@ test.data <- data.frame(expand.grid(seq(0, 1, 0.025), seq(0, 1, 0.025)))
 setwd("C:/Users/User/Documents/r_work/")
 # The standard source() function does not work because
 # we also need to import the global variables that were
-# set in the module rsnns_my_predict.R. Though the use
+# set in the module mlp_my_predict.R. Though the use
 # of global variables is somewhat discouraged, it makes
 # it easier to save state variables set by other functions
 # and makes it easier to see what is happening with the
 # R interpreter when I am debugging.
-sys.source ("rsnns_my_predict.R",envir=globalenv())
+sys.source ("mlp_my_predict.R",envir=globalenv())
 setup_my_predict()
 modeled_output <- my_predict(test.data,0)
 

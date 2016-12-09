@@ -1,4 +1,4 @@
-# binary_rsnns_eval.R
+# mlp_binary_eval.R
 
 # Apply mlp to binary categorical features. We investigate
 # the effect of dimension and models for the categorical

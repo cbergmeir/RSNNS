@@ -1,4 +1,4 @@
-# rsnns_eval6.R
+# mlp_eval6.R
 
 # In this version of rsnns_eval, the 2 dimensional
 # space is extended to 6 dimensions by introducing

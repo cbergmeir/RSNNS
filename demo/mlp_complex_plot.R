@@ -1,4 +1,4 @@
-# complex_rsnns_plot.R
+# mlp_complex_plot.R
 
 # applies the RSNNS neuralnet package to samples
 # in a 2D space which are grouped into different Voronoi

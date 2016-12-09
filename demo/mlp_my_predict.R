@@ -1,4 +1,4 @@
-#rsnns_my_predict.R
+#mlp_my_predict.R
 
 # Sets up the neural network emulator which
 # is implemented in R.

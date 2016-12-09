@@ -1,4 +1,4 @@
-# 1dim_rsnns_eval.R
+# mlp_1dim_eval.R
 
 # This trivial model demonstrates that even a
 # a two class problem in one dimensional space

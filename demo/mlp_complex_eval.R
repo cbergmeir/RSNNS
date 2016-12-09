@@ -1,4 +1,4 @@
-# complex_rsnns_eval.R
+# mlp_complex_eval.R
 # Tests the mlp algorithm on complex data
 # produced by combining voronoi regions in
 # classes. The classes are no longer convex
