@@ -21,6 +21,8 @@ Possible TODOs for the next version:
 - use the "colorspace" package for heatmaps
 - add JSS paper as vignette
 
+- Make it possible to pass already trained models in the high-level functions, and use them to initialize the network.
+
 TODOs for a far away future:
 
 - Implement Softmax/Entropy for elman?
