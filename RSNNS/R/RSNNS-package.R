@@ -175,6 +175,8 @@
 #' @useDynLib RSNNS .registration=TRUE
 #' @import methods
 #' @import Rcpp
+#' @importFrom graphics abline image lines plot
+#' @importFrom stats fitted lm sd
 # @exportPattern "^[[:alpha:]]+"
 # @examples
 # \dontrun{mlp(...)}
