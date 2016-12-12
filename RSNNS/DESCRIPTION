@@ -18,7 +18,7 @@ Description: The Stuttgart Neural Network Simulator (SNNS) is a library
 Version: 0.4-8
 URL: http://sci2s.ugr.es/dicits/software/RSNNS
 BugReports: https://github.com/cbergmeir/RSNNS/issues
-Date: 2015-06-12
+Date: 2016-12-12
 Depends:
     R (>= 2.10.0),
     methods,
@@ -26,3 +26,4 @@ Depends:
 Suggests:
     scatterplot3d,NeuralNetTools
 Encoding: UTF-8
+RoxygenNote: 5.0.1
