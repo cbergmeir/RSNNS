@@ -164,7 +164,7 @@ setMethod( "$", "SnnsR", function(x, name ){
         if(is.nil(x@variables$snnsCLibPointer)) {
           if( x@variables$serialization[1] != "") {
             
-            eval.parent({x@variables$snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")}, 2 )
+            eval.parent({x@variables$snnsCLibPointer <- .Call("SnnsCLib__new", PACKAGE="RSNNS")}, 2 )
             SnnsR__deserialize(x, x@variables$serialization)
           } else {
             warning("The internal SnnsCLib object is not present, nor its serialization. Exiting..")
@@ -220,7 +220,7 @@ SnnsRObjectFactory <- function(){
   
   snnsObject@variables <- new.env()
   
-  snnsObject@variables$snnsCLibPointer <- .Call("SnnsCLib__new", package="RSNNS")
+  snnsObject@variables$snnsCLibPointer <- .Call("SnnsCLib__new", PACKAGE="RSNNS")
   snnsObject@variables$serialization <- ""
   
   snnsObject

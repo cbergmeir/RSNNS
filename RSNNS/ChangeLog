@@ -8,6 +8,7 @@ version 0.4-8 (XX-XX-XXXX):
 - reimplemented SnnsR__genericPredictCurrPatSet and parts of SnnsR__createPatSet in C++, to get general speed-ups.
 - fixed handling of the target variable in DLVQ. Was only working for numeric values starting from 0. Now converting to factor
 - added outputActFunc as a parameter to mlp()
+- bugfix: changed "package" to "PACKAGE" in .Call calls
 
 version 0.4-7 (05-06-2015):
 

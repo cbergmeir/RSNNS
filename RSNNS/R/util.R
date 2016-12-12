@@ -182,13 +182,13 @@ resolveSnnsRDefine <- function(defList, def)  {
 #' @param seed the seed to use. If 0, a seed based on the system time is generated.
 #' @export
 setSnnsRSeedValue <- function(seed) {
-  #.Call("setCurrentSeedVal", seed, package="RSNNS")  
+  #.Call("setCurrentSeedVal", seed, PACKAGE="RSNNS")  
   warning("Function setSnnsRSeedValue is deprecated. Now the R RNG is used, so use set.seed() instead")
   set.seed(seed)
 }
 
 getKrioTitle <- function(title_num) {
-  .Call("getKrioTitle", title_num, package="RSNNS")  
+  .Call("getKrioTitle", title_num, PACKAGE="RSNNS")  
 }
 
 is.nil <- function(ptr) {
