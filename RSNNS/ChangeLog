@@ -1,4 +1,4 @@
-version 0.4-8 (XX-XX-XXXX):
+version 0.4-8 (14-12-2016):
 
 - added demos kindly provided by Seymour Shlien
 - single quoted 'RSNNS' in DESCRIPTION (required by CRAN maintainer)
