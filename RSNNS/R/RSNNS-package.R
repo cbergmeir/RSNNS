@@ -38,8 +38,11 @@
 #' functionality to make it available from within R.
 #' 
 #' If you have problems using RSNNS, find a bug, or have suggestions, please
-#' contact the package maintainer by email, instead of writing to the general R
-#' lists or contacting the authors of the original SNNS software.
+#' do not write to the general R lists or contact the authors of the original 
+#' SNNS software. Instead, you should: File an issue on github (bugs/suggestions),
+#' Ask your question on Stackoverflow under the tag RSNNS, or write to the mailing list
+#' (rsnns@@googlegroups.com). If all that fails, then you can also contact the maintainer 
+#' directly by email. 
 #' 
 #' If you use the package, please cite the following work in your publications:
 #'
@@ -113,6 +116,11 @@
 #' Additional information is also available at the project website: 
 #' 
 #' \url{http://sci2s.ugr.es/dicits/software/RSNNS}
+#' 
+#' A comprehensive report with many examples showing the usage of RSNNS, 
+#' developed by Seymour Shlien, is available here:
+#' 
+#' \url{http://ifdo.ca/~seymour/R/}
 #' 
 #' @title Getting started with the RSNNS package
 #' @name RSNNS-package

@@ -12,7 +12,7 @@ install: roxy
 
 roxy:
 	rm -f ./$(rPackageName)/man/*.Rd
-	echo "library(roxygen2)\npath <- \"./$(rPackageName)/\"\nroxygenize(package.dir=path)\n" > tmp_roxy.R
+	printf "library(roxygen2)\npath <- \"./$(rPackageName)/\"\nroxygenize(package.dir=path)\n" > tmp_roxy.R
 	R CMD BATCH tmp_roxy.R
 	cd ./$(rPackageName) && sed -i 's/\(Date: \).*/Date: '"$(newDate)"'/' DESCRIPTION
 	cd ./$(rPackageName) && sed -i -e 's/\".registration=TRUE\"/.registration=TRUE/' NAMESPACE
