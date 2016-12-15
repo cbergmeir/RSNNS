@@ -262,6 +262,13 @@ typedef YYTYPE_INT16 yytype_int16;
 typedef short int yytype_int16;
 #endif
 
+/*20161216 Fix for kr_pat_parse.cpp:267:20: warning: ISO C++ 1998 does not support 'long long' [-Wlong-long]
+ #  define YYSIZE_T __SIZE_TYPE__
+*/
+
+#define YYSIZE_T unsigned int
+
+/*
 #ifndef YYSIZE_T
 # ifdef __SIZE_TYPE__
 #  define YYSIZE_T __SIZE_TYPE__
@@ -269,12 +276,13 @@ typedef short int yytype_int16;
 #  define YYSIZE_T size_t
 # elif ! defined YYSIZE_T && (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
-#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
+#  include <stddef.h> 
 #  define YYSIZE_T size_t
 # else
 #  define YYSIZE_T unsigned int
 # endif
 #endif
+*/
 
 #define YYSIZE_MAXIMUM ((YYSIZE_T) -1)
 
