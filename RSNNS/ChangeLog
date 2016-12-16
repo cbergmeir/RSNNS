@@ -1,4 +1,8 @@
-version 0.4-8 (14-12-2016):
+version 0.4-10 (XX-XX-XXXX):
+
+- ...
+
+version 0.4-9 (16-12-2016):
 
 - added demos kindly provided by Seymour Shlien
 - single quoted 'RSNNS' in DESCRIPTION (required by CRAN maintainer)
@@ -9,6 +13,8 @@ version 0.4-8 (14-12-2016):
 - fixed handling of the target variable in DLVQ. Was only working for numeric values starting from 0. Now converting to factor
 - added outputActFunc as a parameter to mlp()
 - bugfix: changed "package" to "PACKAGE" in .Call calls
+
+version 0.4-8: --
 
 version 0.4-7 (05-06-2015):
 
