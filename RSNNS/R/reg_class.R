@@ -70,7 +70,8 @@ splitForTrainingAndTest <- function(x, y, ratio=0.15) {
 #' The \code{inputsTrain} member is normalized using \code{\link{normalizeData}} with the parameters given in \code{type}.
 #' The normalization parameters obtained during this normalization are then used to normalize the \code{inputsTest} member.
 #' if \code{dontNormTargets} is not set, then the targets are normalized in the same way. In classification problems,
-#' normalizing the targets normally makes no sense. For regression, normalizing also the targets is usually a good idea. 
+#' normalizing the targets normally makes no sense. For regression, normalizing also the targets is usually a good idea.
+#' The default is to not normalize targets values. 
 #' 
 #' @title Function to normalize training and test set
 #' @param x a list containing training and test data. Usually the output of \code{\link{splitForTrainingAndTest}}.
