@@ -263,8 +263,14 @@ predict.rsnns <- function(object, newdata, ...) {
   #type <- match.arg(type)
   if(missing(newdata)) z <- fitted(object)
   else {
-    if(is.null(dim(newdata)))
-      dim(newdata) <- c(1L, length(newdata)) # a row vector
+    if(is.null(dim(newdata))) {
+      if(object$nInputs == 1) {
+        dim(newdata) <- c(1L, length(newdata)) # a row vector        
+      } else {
+        dim(newdata) <- c(length(newdata), 1L) # a column vector
+      }
+    }
+      
     x <- as.matrix(newdata)     # to cope with dataframes
     if(any(is.na(x))) stop("missing values in 'x'")
     
