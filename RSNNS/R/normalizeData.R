@@ -156,7 +156,8 @@ normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
   #it seems that there this function is called with an empty matrix?!
   #dnames <- dimnames(x)
   
-  res <- NULL
+  res <- matrix(NA, nrow(x), ncol(x))
+  
   
   type <- normParams$type
   
@@ -169,11 +170,11 @@ normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
       
       if(norm) {
         if((colMax - colMin) != 0)
-          res <- cbind(res, (x[,i] - colMin) / (colMax - colMin))
+          res[,i] <- (x[,i] - colMin) / (colMax - colMin)
         else 
-          res <- cbind(res, (x[,i]))
+          res[,i] <- x[,i]
       } else
-        res <- cbind(res, x[,i] * (colMax - colMin) + colMin)
+        res[,i] <- x[,i] * (colMax - colMin) + colMin
       
     }    
     
@@ -184,9 +185,9 @@ normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
       colMean <- normParams$colMeans[i]
       
       if(norm)
-        res <- cbind(res, x[,i] - colMean)
+        res[,i] <- x[,i] - colMean
       else  
-        res <- cbind(res, x[,i] + colMean)
+        res[,i] <- x[,i] + colMean
       
     }
     
@@ -199,11 +200,11 @@ normalizeDataWithParams <- function(x, normParams, norm=TRUE) {
       
       if(norm) {
         if(colSd != 0)
-          res <- cbind(res, (x[,i] - colMean) / colSd )
+          res[,i] <- (x[,i] - colMean) / colSd
         else
-          res <- cbind(res, (x[,i] - colMean))
+          res[,i] <- x[,i] - colMean
       } else
-        res <- cbind(res, x[,i] * colSd + colMean)
+        res[,i] <- x[,i] * colSd + colMean
     }
     
   }
