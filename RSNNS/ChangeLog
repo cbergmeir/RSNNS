@@ -1,7 +1,7 @@
 version 0.4-10 (XX-XX-XXXX):
 
 - speedups for data normalization
-- ...
+- SnnsRObjectFactory now has an optional parameter to deep-copy objects
 
 version 0.4-9 (16-12-2016):
 

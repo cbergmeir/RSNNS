@@ -208,20 +208,28 @@ setMethod( "$", "SnnsR", function(x, name ){
 #' with a new environment, generates a new C++ object of class SnnsCLib, and an empty object serialization. 
 #' 
 #' @title SnnsR object factory
+#' @param x (optional) object of class \link{SnnsR-class}, to be deep-copied
 #' @export
 #' @seealso \code{\link{$}}, \code{\link{SnnsR-class}}
 #' @examples 
 #' mySnnsObject <- SnnsRObjectFactory()
 #' mySnnsObject$setLearnFunc('Quickprop')
 #' mySnnsObject$setUpdateFunc('Topological_Order') 
-SnnsRObjectFactory <- function(){
-
+SnnsRObjectFactory <- function(x = NULL){
+  
   snnsObject <- new( "SnnsR")
   
   snnsObject@variables <- new.env()
   
-  snnsObject@variables$snnsCLibPointer <- .Call("SnnsCLib__new", PACKAGE="RSNNS")
-  snnsObject@variables$serialization <- ""
+  if(is.null(x)) {
+    
+    snnsObject@variables$snnsCLibPointer <- .Call("SnnsCLib__new", PACKAGE="RSNNS")
+    snnsObject@variables$serialization <- ""    
+  } else {
+    snnsObject@variables$snnsCLibPointer <- new("externalptr") 
+    serNet <- x$serializeNet("RSNNS_untitled")
+    snnsObject@variables$serialization <- serNet$serialization
+  }
   
   snnsObject
 }
