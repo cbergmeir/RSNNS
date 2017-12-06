@@ -93,7 +93,7 @@
 {
     krui_err     error_code = KRERR_NO_ERROR ;
     int          i, unit_no, first_unit = -1;
-    char         name[10] ;
+    char         name[100] ;
 
   
     if (no_of_units < 1) return (KRERR_NO_UNITS) ;
@@ -352,7 +352,7 @@ Parameters:
   int       i, no_of_context_layers ;
   int       no_of_hidden_layers, o_layer ;
   int       dx, cx, cy ;
-  char      name[10] ;
+  char      name[100] ;
 
 
   no_of_hidden_layers = no_of_layers - 2 ;

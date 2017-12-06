@@ -179,7 +179,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   unit_pos.z = 0;
 
-  char              name[10];
+  char              name[100];
 
 
   ICol = NoOfUnitsPerRow = ((int) (IUnits/IRow) + POS_SIGN(IUnits % IRow));

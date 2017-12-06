@@ -389,7 +389,7 @@ krui_err SnnsCLib::bn_artmap_make_layer (int  units, int  rows, int  cols,
    struct PosType       unit_pos;
    char                 *site_name, *site_func_name;
    int                  site_no;
-   char                 name[10];
+   char                 name[100];
 
    unit_pos.z = 0;
 

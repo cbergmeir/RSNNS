@@ -246,7 +246,7 @@ krui_err SnnsCLib::bn_art2_make_layer (
    struct PosType       unit_pos;
    char                 *site_name;
    int                  site_no;
-   char                 name[10];
+   char                 name[100];
 
    unit_pos.z = 0;
 
