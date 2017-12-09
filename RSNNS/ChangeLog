@@ -4,6 +4,8 @@ version 0.4-11 (XX-XX-XXXX):
 
 version 0.4-10 (08-12-2017):
 
+- changed title as requested by CRAN
+- added all original SNNS authors as authors of the package, as requested by CRAN
 - fixed the Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’ note
 - changed size of some name buffers from 10 to 100, to get rid of "-Wformat-overflow" warnings
 - speedups for data normalization
