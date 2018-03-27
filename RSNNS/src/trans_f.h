@@ -149,6 +149,8 @@ FlintType   ACT_DERIV_LogisticSym(struct Unit *unit_ptr);
 FlintType   ACT_DERIV_tanh(struct Unit *unit_ptr);
 FlintType   ACT_2_DERIV_tanh(struct Unit *unit_ptr);
 FlintType   ACT_TACOMA(struct Unit *unit_ptr);
+FlintType   ACT_RELU(struct Unit *unit_ptr);
+
 void kohonen_SetExtraParameter(int x);
 
 
