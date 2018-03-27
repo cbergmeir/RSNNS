@@ -1712,6 +1712,30 @@ FlintType SnnsCLib::ACT_2_DERIV_tanh (struct Unit *unit_ptr)
 }
 
 
+FlintType   SnnsCLib::ACT_RELU(struct Unit *unit_ptr)
+{
+  ACT_FUNC_DEFS
+  register FlintType  sum;
+
+  sum =  0.0;
+  if (GET_FIRST_UNIT_LINK( unit_ptr ))
+    do
+      sum += GET_WEIGHTED_OUTPUT;
+    while (GET_NEXT_LINK);
+  else
+    if (GET_FIRST_SITE( unit_ptr ))
+      do
+  sum += GET_SITE_VALUE;
+      while (GET_NEXT_SITE);
+  zero = 0.0;
+
+  relu = ( sum > zero ) ? sum : zero
+  if (sum > 0.0)  return( (FlintType) relu );
+  return( (FlintType) relu );
+}
+
+
+
 #ifdef  __BORLANDC__
 #pragma option -w+.
 #endif
