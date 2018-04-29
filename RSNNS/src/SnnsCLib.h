@@ -50,6 +50,10 @@
 #define MAXFLOAT FLT_MAX
 #endif
 
+#if __cplusplus > 199711L
+#define register      // Deprecated in C++11.
+#endif  // #if __cplusplus > 199711L
+
 #include "u_lrand48.h"
 
 #include "glob_typ.h"

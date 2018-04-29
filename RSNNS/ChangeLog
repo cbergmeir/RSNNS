@@ -1,6 +1,6 @@
 version 0.4-11 (XX-XX-XXXX):
 
-- ...
+- fixes for warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
 
 version 0.4-10 (08-12-2017):
 

@@ -72,6 +72,10 @@
 #ifndef _TRANS_F_DEFINED_
 #define  _TRANS_F_DEFINED_
 
+#if __cplusplus > 199711L
+#define register      // Deprecated in C++11.
+#endif  // #if __cplusplus > 199711L
+
 /* begin global definition section */
 
 FlintType  OUTP_Identity(register FlintType activation);
