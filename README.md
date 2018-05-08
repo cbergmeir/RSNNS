@@ -12,6 +12,8 @@ kr_funcs.cpp: In member function 'int SnnsCLib::krf_getNoOfFuncs()':
 kr_funcs.cpp:301:32: warning: 'functionDescr.FuncInfoDescriptor::number' may be used uninitialized in this function [-Wmaybe-uninitialized]
    return( functionDescr.number );
 
+- fix crash of Jordan function if called with a matrix
+
 - fix remaining memory leaks, detected by valgrind, e.g. this one:
 
 ==32137== 206,480 (80 direct, 206,400 indirect) bytes in 1 blocks are definitely lost in loss record 2,312 of 2,347
