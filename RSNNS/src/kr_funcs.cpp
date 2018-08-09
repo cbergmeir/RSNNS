@@ -296,6 +296,8 @@ int  SnnsCLib::krf_getNoOfFuncs(void)
 {
   struct FuncInfoDescriptor  functionDescr;
 
+//20180809 fix for -Wmaybe-uninitialized warning
+  functionDescr.number = 0;
 
   KernelErrorCode = krf_getFuncInfo( GET_NO_OF_FUNCS, &functionDescr );
   return( functionDescr.number );

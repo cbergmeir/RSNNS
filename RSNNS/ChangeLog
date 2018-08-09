@@ -1,6 +1,8 @@
-version 0.4-11 (XX-XX-XXXX):
+version 0.4-11 (09-08-2018):
 
 - fixes for warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+- fix for kr_funcs.cpp:301:32: warning: 'functionDescr.FuncInfoDescriptor::number' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   return( functionDescr.number );
 
 version 0.4-10 (08-12-2017):
 
