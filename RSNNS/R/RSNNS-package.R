@@ -180,7 +180,7 @@
 #' @keywords package neural networks SNNS
 #' @seealso \code{\link{mlp}}, \code{\link{dlvq}}, \code{\link{rbf}}, \code{\link{rbfDDA}}, \code{\link{elman}}, 
 #' \code{\link{jordan}}, \code{\link{som}}, \code{\link{art1}}, \code{\link{art2}}, \code{\link{artmap}}, \code{\link{assoz}}
-#' @useDynLib RSNNS .registration=TRUE
+#' @useDynLib RSNNS, .registration=TRUE
 #' @import methods
 #' @import Rcpp
 #' @importFrom graphics abline image lines plot
