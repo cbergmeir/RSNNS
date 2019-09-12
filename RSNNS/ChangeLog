@@ -1,6 +1,6 @@
-version 0.4-12 (XX-XX-XXXX):
+version 0.4-12 (12-09-2019):
 
-- ...
+- made C++11 a requirement, to use C99 code in C++
 
 version 0.4-11 (10-08-2018):
 
