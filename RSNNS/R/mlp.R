@@ -55,7 +55,7 @@
 #' Rumelhart, D. E.; Clelland, J. L. M. & Group, P. R. (1986), Parallel distributed processing :explorations in the microstructure of cognition, Mit, Cambridge, MA etc.
 #'  
 #' Zell, A. et al. (1998), 'SNNS Stuttgart Neural Network Simulator User Manual, Version 4.2', IPVR, University of Stuttgart and WSI, University of Tübingen. 
-#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/}
+#' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/welcome.html}
 #' 
 #' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley. (in German)
 #' @export

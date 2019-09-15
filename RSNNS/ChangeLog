@@ -2,6 +2,7 @@ version 0.4-12 (12-09-2019):
 
 - made C++11 a requirement, to use C99 code in C++
 - fixed useDynLib roxygen issue
+- fixed original SNNS url
 
 version 0.4-11 (10-08-2018):
 
