@@ -4822,7 +4822,7 @@ char  *SnnsCLib::krui_topo_err_msg(void)
         return( krui_topo_err_msg_msg2 );
 
     if (topo_msg.src_error_unit > 0)
-        strcat( krui_topo_err_msg_msg1, krui_topo_err_msg_msg2 );
+        strncat( krui_topo_err_msg_msg1, krui_topo_err_msg_msg2, sizeof(krui_topo_err_msg_msg2)+1);
 
     return( krui_topo_err_msg_msg1 );
 }
@@ -4876,12 +4876,12 @@ const char  *SnnsCLib::krui_error(int error_code)
 	    case KRERR_CYCLES:
 		sprintf( krui_error_aux, "%d cycle(s) in the network. ", 
 			 topo_msg.no_of_cycles );
-		strcat( krui_error_mesg, krui_error_aux );
+		strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 		break;
 	    case KRERR_DEAD_UNITS:
 		sprintf( krui_error_aux, "%d dead unit(s) in the network. ", 
 			 topo_msg.no_of_dead_units );
-		strcat( krui_error_mesg, krui_error_aux );
+		strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 		break;
 
 	    default: break;
@@ -4908,21 +4908,21 @@ const char  *SnnsCLib::krui_error(int error_code)
 	      default: break;
 	      }
 
-	      strcat( krui_error_mesg, krui_error_aux );
+	      strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 	      return( krui_error_mesg );
 
           case KRERR_NO_OF_UNITS_IN_LAYER:
 	      strcpy (krui_error_mesg, ext_messages[2]);
 	      strcat (krui_error_mesg, err_message [error_code]);
 	      sprintf (krui_error_aux, "The name of the layer is: %s", topo_msg.name);
-	      strcat (krui_error_mesg, krui_error_aux);
+	      strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 	      return (krui_error_mesg);
 
           case KRERR_UNIT_MISSING:
 	      strcpy (krui_error_mesg, ext_messages[2]);
 	      strcat (krui_error_mesg, err_message [error_code]);
 	      sprintf (krui_error_aux, "The missing unit is the %s unit.", topo_msg.name);
-	      strcat (krui_error_mesg, krui_error_aux);
+	      strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 	      return (krui_error_mesg);
 
 
@@ -4934,7 +4934,7 @@ const char  *SnnsCLib::krui_error(int error_code)
 	      if (lineno != 0){               /*  file I/O error  */
 		  strcpy( krui_error_mesg, ext_messages[1] );
 		  sprintf( krui_error_aux, "Loading file failed at line %d : ", lineno );
-		  strcat( krui_error_mesg, krui_error_aux );
+		  strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 		  strcat( krui_error_mesg, err_message[ error_code ] );
 
 		  lineno = 0;

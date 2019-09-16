@@ -537,7 +537,7 @@ krui_err  SnnsCLib::krf_setCurrentNetworkFunc(char *function_name, int type)
     case (FF_LEARN_FUNC | LEARN_FUNC):
       if (func_has_changed)
         krf_storeCurrentNetworkFunc (function_name, type);
-        krf_storeCurrentNetworkFunc( function_name, TEST_FUNC );
+      krf_storeCurrentNetworkFunc( function_name, TEST_FUNC );
       break;
 
     case  INIT_FUNC:

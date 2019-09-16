@@ -3864,12 +3864,12 @@ void checkRBFError(krui_err KernelErrorCode) {
          checkRBFError(KernelErrorCode); \
 */
 
-#define RBF_ERROR_CHECK( x ) \
+#define RBF_ERROR_CHECK( x ) {\
   KernelErrorCode = ( x ); \
   if ( KernelErrorCode < KRERR_NO_ERROR && \
        KernelErrorCode != KRERR_DEAD_UNITS ) { \
               return KernelErrorCode; \
- }
+ }}
 
 
 /* Factor for the calculation of the inverse RBF activation function */

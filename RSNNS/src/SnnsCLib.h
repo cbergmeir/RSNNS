@@ -121,10 +121,10 @@ public:
 
 long kr_ui_randomSeedVal;
 
-char  krui_topo_err_msg_msg1[512];
+char  krui_topo_err_msg_msg1[1024];
 char  krui_topo_err_msg_msg2[512];
 
-char  krui_error_mesg[512], krui_error_aux[512];
+char  krui_error_mesg[1024], krui_error_aux[512];
 
 char  krui_getUnitActFuncName_act_func_name[FUNCTION_NAME_MAX_LEN];
 char  krui_getUnitOutFuncName_out_func_name[FUNCTION_NAME_MAX_LEN];
