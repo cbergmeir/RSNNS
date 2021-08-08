@@ -120,7 +120,7 @@
 #' A comprehensive report with many examples showing the usage of RSNNS, 
 #' developed by Seymour Shlien, is available here:
 #' 
-#' \url{http://ifdo.ca/~seymour/R/}
+#' \url{https://ifdo.ca/~seymour/R/}
 #' 
 #' @title Getting started with the RSNNS package
 #' @name RSNNS-package
@@ -135,12 +135,12 @@
 #' 
 #' DiCITS Lab, Sci2s group, DECSAI, University of Granada.
 #' 
-#' \url{http://dicits.ugr.es}, \url{http://sci2s.ugr.es}
+#' \url{http://dicits.ugr.es}, \url{https://sci2s.ugr.es}
 #' 
 #' @references 
 #' 
 #' Bergmeir, C. and Benítez, J.M. (2012), 'Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS', Journal of Statistical Software, 46(7), 1-26.
-#' \url{http://www.jstatsoft.org/v46/i07/}
+#' \url{https://www.jstatsoft.org/v46/i07/}
 #'
 #' \emph{General neural network literature:}
 #' 
@@ -166,7 +166,7 @@
 #' \url{http://www.ra.cs.uni-tuebingen.de/SNNS/welcome.html}
 #'
 #' javaNNS, the sucessor of the original SNNS with a Java GUI: 
-#' \url{http://www.ra.cs.uni-tuebingen.de/software/JavaNNS}
+#' \url{http://www.ra.cs.uni-tuebingen.de/software/JavaNNS/}
 #'
 #' Zell, A. (1994), Simulation Neuronaler Netze, Addison-Wesley.
 #' 
