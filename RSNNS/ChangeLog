@@ -1,3 +1,10 @@
+version 0.4-13 (08-08-2021):
+
+- fixed warnings:
+  Clang: kr_pat_scan.cpp:1472:12: warning: function 'yyinput' is not needed and will not be emitted [-Wunneeded-internal-declaration] 
+  kr_io.cpp:891:9: warning: 'char* strcat(char*, const char*)' accessing 631 or more bytes at offsets 6719 and 7349 may overlap 1 byte at offset 7349 [-Wrestrict]
+  kr_io.cpp:868:9: warning: 'char* strcat(char*, const char*)' accessing 631 or more bytes at offsets 6719 and 7349 may overlap 1 byte at offset 7349 [-Wrestrict]
+
 version 0.4-12 (16-09-2019):
 
 - made C++11 a requirement, to use C99 code in C++

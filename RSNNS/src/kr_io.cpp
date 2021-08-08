@@ -865,9 +865,10 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 		mstrcpy( fmt_shape2, " %", aux, "d", (char *) 0 );
 
 		max_subnets_per_line = (BEST_LINE_LEN - len1 - 1) / (unit_no_len + 2);
-		strcat( fmt_hdr2, krio_repchar( '-', (unit_no_len + 2) 
-				* max_subnets_per_line ) );
-
+		
+		//fixing CRAN-fun, 20210808
+		//strcat( fmt_hdr2, krio_repchar( '-', (unit_no_len + 2) * max_subnets_per_line ) );
+                mstrcat( fmt_hdr2, krio_repchar( '-', (unit_no_len + 2) * max_subnets_per_line ), (char *) 0 );
 		break;
 
 	case  LAYER_DEF:
@@ -888,9 +889,10 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 		mstrcpy( fmt_shape2, " %", aux, "d", (char *) 0 );
 
 		max_layers_per_line = (BEST_LINE_LEN - len1 - 1) / (unit_no_len + 2);
-		strcat( fmt_hdr2, krio_repchar( '-', (unit_no_len + 2) 
-				* max_layers_per_line ) );
-
+		
+		//fixing CRAN-fun, 20210808
+		//strcat( fmt_hdr2, krio_repchar( '-', (unit_no_len + 2) * max_layers_per_line ) );
+                mstrcat( fmt_hdr2, krio_repchar( '-', (unit_no_len + 2) * max_layers_per_line ), (char *) 0 );
 		break;
 	}
 
