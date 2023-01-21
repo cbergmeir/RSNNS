@@ -1986,13 +1986,13 @@ int SnnsCLib::pplex(void)
     if (scanner_pattern_end_flag)
     {
 	scanner_pattern_end_flag = 0;
-	yylval.value = 0.0;
+	yylval.value = 0.0f;
 	return PATTERNEND;
     }
     else if (scanner_no_class_flag)
     {
 	scanner_no_class_flag = 0;
-	yylval.value = 0.0;
+	yylval.value = 0.0f;
 	return PATTERNNOCLASS;
     }
     else

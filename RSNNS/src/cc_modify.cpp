@@ -117,7 +117,7 @@ krui_err SnnsCLib::cc_TestWhetherParametersAreValid(void)
       case(CC_GCC) :
            if (CCS_NO_OF_GROUPS <=0){
           	 //printf("0 groups isn't valid. Changed to 1 group.\n");
-              cc_Parameter[0]=1.0;
+              cc_Parameter[0]=1.0f;
            }
            if (CCS_NO_OF_GROUPS > NoOfOutputUnits){
               //printf("I'm not able to make more groups than OutputUnits.\n");
@@ -131,16 +131,16 @@ krui_err SnnsCLib::cc_TestWhetherParametersAreValid(void)
            }
          break;
       case(CC_SDCC) :
-           if (CCB_LAMBDA < 0.0) return (KRERR_CC_INVALID_ADD_PARAMETERS);
+           if (CCB_LAMBDA < 0.0f) return (KRERR_CC_INVALID_ADD_PARAMETERS);
          break;
       case(CC_LFCC) :
            if (CCR_NO_OF_LINKS < 1) return (KRERR_CC_INVALID_ADD_PARAMETERS);
          break;
       case(CC_RLCC):
-           if (CCO_FAKTOR <= 0.0) return (KRERR_CC_INVALID_ADD_PARAMETERS);
+           if (CCO_FAKTOR <= 0.0f) return (KRERR_CC_INVALID_ADD_PARAMETERS);
          break;
       case(CC_ECC):
-           if (CCC_M <= 0.0) return (KRERR_CC_INVALID_ADD_PARAMETERS);
+           if (CCC_M <= 0.0f) return (KRERR_CC_INVALID_ADD_PARAMETERS);
          break;
       case(CC_STAT) :
          break;       /* everything's possible, since 0 or negative LayerHeights

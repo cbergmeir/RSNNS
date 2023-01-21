@@ -481,7 +481,7 @@ GROUP: 3D-Kernel Definitions
 #define HAVE_QSORT
 
 struct   PosType  {
-  short  x,
+  int  x,
          y,
          z;
 };

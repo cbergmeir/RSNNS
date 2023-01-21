@@ -156,7 +156,7 @@ void  SnnsCLib::kr_inv_forwardPass(struct UnitList *inputs)
    while((unit_ptr = *++topo_ptr) != NULL){
 
      /*  clear error values  */
-     unit_ptr->Aux.flint_no = 0.0;
+     unit_ptr->Aux.flint_no = 0.0f;
 
      if(unit_ptr->out_func == OUT_IDENTITY)
         unit_ptr->Out.output = unit_ptr->act = IUnit->act;
@@ -171,7 +171,7 @@ void  SnnsCLib::kr_inv_forwardPass(struct UnitList *inputs)
    while((unit_ptr = *++topo_ptr) != NULL){
 
      /*  clear error values  */
-     unit_ptr->Aux.flint_no = 0.0;
+     unit_ptr->Aux.flint_no = 0.0f;
 
      /*  calculate the activation value of the unit: 
 	 call the activation function if needed  */
@@ -190,7 +190,7 @@ void  SnnsCLib::kr_inv_forwardPass(struct UnitList *inputs)
    while((unit_ptr = *++topo_ptr) != NULL){
 
      /*  clear error values  */
-     unit_ptr->Aux.flint_no = 0.0;
+     unit_ptr->Aux.flint_no = 0.0f;
 
      /*  calculate the activation value of the unit: 
 	 call the activation function if needed  */
@@ -224,7 +224,7 @@ double SnnsCLib::kr_inv_backwardPass(float learn, float delta_max, int *err_unit
    struct UnitList        *IUnit, *OUnit;
 
 
-   sum_error = 0.0;    /*  reset network error  */
+   sum_error = 0.0f;    /*  reset network error  */
    *err_units = 0;     /*  reset error units */
    eta = learn;        /*  store learn_parameter in CPU register  */
 

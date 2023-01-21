@@ -317,8 +317,9 @@ struct TopologicMessages  {
   int  error_code,         /*  stores the internal error code  */
        no_of_cycles,       /*  no. of detected cycles in the network  */
        no_of_dead_units,   /*  no. of dead units in the network  */
-       no_of_layers,       /*  no. of layers of the network */
-       dest_error_unit,    /*  first error unit (destination unit)  */
+       no_of_layers;       /*  no. of layers of the network */
+       
+  long dest_error_unit,    /*  first error unit (destination unit)  */
        src_error_unit;     /*  first error unit (source unit)  */
   char name[20];           /*  a chararcter string that can be passed */
 };

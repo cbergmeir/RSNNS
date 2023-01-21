@@ -496,7 +496,7 @@
 /* Global fix parameters */
 
 /* for ART 2 */
-#define ART2_PARAM_e                 0.00001
+#define ART2_PARAM_e                 0.00001f
 
 
 

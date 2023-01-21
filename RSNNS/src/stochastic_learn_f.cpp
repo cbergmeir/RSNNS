@@ -162,7 +162,7 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(LEARN_MonteCarlo_OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(LEARN_MonteCarlo_OutParameter) = 0.0f; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {
@@ -245,7 +245,7 @@ SnnsCLib::TEST_MonteCarlo(int start_pattern, int end_pattern, float *parameterIn
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(TEST_MonteCarlo_OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(TEST_MonteCarlo_OutParameter) = 0.0f; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {
@@ -313,19 +313,19 @@ SnnsCLib::calculate_WTA_error(int pattern_no, int sub_pat_no)
 	    }
 	}
 	if (wta_pos != out_pat_pos) {
-	    return ((float) 1.0);
+	    return ((float) 1.0f);
 	}
     } else {
 	unit_ptr = *--topo_ptr;
 	if ((float) unit_ptr->Out.output > 0.5) {
 	    if (*(--out_pat) < 0.5)
-		return ((float) 1.0);
+		return ((float) 1.0f);
 	} else {
 	    if (*(--out_pat) > 0.5)
-		return ((float) 1.0);
+		return ((float) 1.0f);
 	}
     }
-    return ((float) 0.0);
+    return ((float) 0.0f);
 }
 /*****************************************************************************
   FUNCTION : calculate_w_WTA_errror
@@ -383,24 +383,24 @@ SnnsCLib::calculate_w_WTA_error(int pattern_no, int sub_pat_no)
 	    }
 	}
 	if (wta_pos != out_pat_pos)
-	    return ((float) 1.0);
+	    return ((float) 1.0f);
 	else
 	    return ((float) fabs(wta_value - (sum_value - wta_value) / (--j)));
     } else {
 	unit_ptr = *--topo_ptr;
 	if ((float) unit_ptr->Out.output > 0.5) {
 	    if (*(--out_pat) < 0.5)
-		return ((float) 1.0);
+		return ((float) 1.0f);
 	    else
 		return ((float) fabs(unit_ptr->Out.output - *(out_pat)) / 2);
 	} else {
 	    if (*(--out_pat) > 0.5)
-		return ((float) 1.0);
+		return ((float) 1.0f);
 	    else
 		return ((float) fabs(*(out_pat) - unit_ptr->Out.output) / 2);
 	}
     }
-    return ((float) 0.0);
+    return ((float) 0.0f);
 }
 
 /*****************************************************************************
@@ -642,7 +642,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(LEARN_SimulatedAnnealing_OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(LEARN_SimulatedAnnealing_OutParameter) = 0.0f; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {
@@ -804,7 +804,7 @@ SnnsCLib::TEST_SimulatedAnnealing(int start_pattern, int end_pattern,
     KernelErrorCode = kr_initSubPatternOrder(start_pattern, end_pattern);
     if (KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
-    NET_ERROR(TEST_SimulatedAnnealing_OutParameter) = 0.0; /* reset network error value  */
+    NET_ERROR(TEST_SimulatedAnnealing_OutParameter) = 0.0f; /* reset network error value  */
 
     /* calculate performance of new net */
     while (kr_getSubPatternByOrder(&pattern_no, &sub_pat_no)) {

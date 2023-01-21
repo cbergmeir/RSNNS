@@ -316,7 +316,7 @@ void SnnsCLib::normPatterns(int startPattern, int endPattern)
 
 	kr_getSubPatternByNo(&pat,&sub,p);
 	in_pat = kr_getSubPatData(pat,sub,INPUT,&count);
-	sum = 0.0;  
+	sum = 0.0f;  
 	in_patStorage = in_pat;  
 
 	for(i=0;i<count;i++){   
@@ -349,7 +349,7 @@ void SnnsCLib::normReferenceVec(struct Unit *hiddenUnitPtr)
     double sum,sqrtSum;
     struct Link *linkPtr;
 
-    sum = 0.0;
+    sum = 0.0f;
     FOR_ALL_LINKS(hiddenUnitPtr,linkPtr) {
 	sum += linkPtr->weight * linkPtr->weight;
     }
@@ -361,7 +361,7 @@ void SnnsCLib::normReferenceVec(struct Unit *hiddenUnitPtr)
 	    linkPtr->weight = linkPtr->weight / sqrtSum;
 	else
 	    /* Special case */
-	    linkPtr->weight = 0.0;
+	    linkPtr->weight = 0.0f;
     }
 }
 
@@ -619,7 +619,7 @@ krui_err SnnsCLib::insertNewUnits(void)
 	    newUnitPtr->unit_pos.y += 1;     
    
 	    /*init new unit */
-	    sum = 0.0;
+	    sum = 0.0f;
 	    k = 0;
 	    FOR_ALL_UNITS(inputUnitPtr){
 		if(IS_INPUT_UNIT(inputUnitPtr) && UNIT_IN_USE(inputUnitPtr)) {
@@ -745,7 +745,7 @@ void SnnsCLib::dlvq_trainNet(int noOfTrainingCycles, int startPattern,
 	    wrongMaxActivatedUnitPtr = NULL;
 	    
 	    FOR_ALL_HIDDEN_UNITS(hiddenUnitPtr,h) {
-		act = 0.0;
+		act = 0.0f;
 		FOR_ALL_LINKS(hiddenUnitPtr,linkPtr) {
 		    act += linkPtr->weight * linkPtr->to->act;
 		}
@@ -914,7 +914,7 @@ krui_err SnnsCLib::insertFirstUnit(struct Unit **hiddenUnitPtr)
     /* generate links between hidden unit and input units */
     FOR_ALL_UNITS(inputUnitPtr) {
 	if(IS_INPUT_UNIT(inputUnitPtr) && UNIT_IN_USE(inputUnitPtr)){
-	    KernelErrorCode = krui_createLink(GET_UNIT_NO(inputUnitPtr),0.0);
+	    KernelErrorCode = krui_createLink(GET_UNIT_NO(inputUnitPtr),0.0f);
 	    ERROR_CHECK;
 	}
     }
@@ -922,7 +922,7 @@ krui_err SnnsCLib::insertFirstUnit(struct Unit **hiddenUnitPtr)
     /* generate a link between the output unit and the hidden unit */
     KernelErrorCode = krui_setCurrentUnit(GET_UNIT_NO(*FirstOutputUnitPtr));
     ERROR_CHECK;
-    KernelErrorCode = krui_createLink(hiddenUnit,1.0); 
+    KernelErrorCode = krui_createLink(hiddenUnit,1.0f); 
     ERROR_CHECK;
     return(KRERR_NO_ERROR);
 }

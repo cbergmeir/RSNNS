@@ -271,7 +271,7 @@ krui_err SnnsCLib::pr_calcMeanDeviation (int pattern, float *sum_error)
     int size, pattern_no, sub_pat_no, no_of_patterns;
     
     /* initialize sum error */
-    *sum_error = 0.0;
+    *sum_error = 0.0f;
 
     /* initialize value_a of each unit */
     FOR_ALL_UNITS (unit_ptr)
@@ -484,17 +484,17 @@ krui_err SnnsCLib::PRUNE_OBD (int pattern)
     /* reset auxiliary variables in unit array */
     FOR_ALL_UNITS (unit_ptr)
     {
-	unit_ptr->value_a = 0.0;
-	unit_ptr->value_b = 0.0;
+	unit_ptr->value_a = 0.0f;
+	unit_ptr->value_b = 0.0f;
 
 	if UNIT_HAS_DIRECT_INPUTS (unit_ptr)
 	    /* unit has direct inputs */
 	    FOR_ALL_LINKS (unit_ptr, link_ptr)
-		link_ptr->value_a = 0.0;
+		link_ptr->value_a = 0.0f;
 	else
 	    /* unit has sites */
 	    FOR_ALL_SITES_AND_LINKS (unit_ptr, site_ptr, link_ptr)
-		link_ptr->value_a = 0.0;
+		link_ptr->value_a = 0.0f;
     }
 
     /* compute the necessary sub patterns */
@@ -690,7 +690,7 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 
     /* initialize units */
     FOR_ALL_UNITS (unit_ptr)
-	unit_ptr->value_a = 0.0;
+	unit_ptr->value_a = 0.0f;
 
     /* process output units */
     for (topo_ptr = topo_ptr_array + no_of_topo_units + 2,
@@ -760,8 +760,8 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
     denominator = (float) no_of_patterns;
     for (i = 0; i < pr_noOfLinks; i++)
     {
-	hx = 0.0;
-	xh = 0.0;
+	hx = 0.0f;
+	xh = 0.0f;
 
 	for (j = 0 ; j < pr_noOfLinks; j++)
 	{
@@ -812,7 +812,7 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
     int no_of_patterns, pattern_no, sub_pat_no, i;
 
     /* initialize matrix */
-    RbfClearMatrix (&pr_inverseHessian, 0.0);
+    RbfClearMatrix (&pr_inverseHessian, 0.0f);
     for (i = 0; i < pr_noOfLinks; i++)
 	/* diagonal elements are set */
 	RbfMatrixSetValue (&pr_inverseHessian, i, i, 1/pr_obs_initParameter);
@@ -1116,7 +1116,7 @@ krui_err SnnsCLib::PRUNE_OBS (int pattern)
     /* calculate saliency of unit */
     unit_ptr->actbuf[0] = 0.8 * unit_ptr->actbuf[0] + 0.2 * unit_ptr->value_b;
     saliency = unit_ptr->actbuf[0];
-    if (saliency != 0.0)   /* is it the initial-value? (for already pruned input units)*/ 
+    if (saliency != 0.0f)   /* is it the initial-value? (for already pruned input units)*/ 
       if ((pr_candidateUnit == NULL) ||
 	  (fabs(saliency) < pr_candidateSaliency))
 	/* found first or least important unit so far */
@@ -1153,12 +1153,12 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
 
     if (PRUNE_Skeletonization_first){
       FOR_ALL_UNITS (unit_ptr)
-	unit_ptr->actbuf[0] = 0.0;
+	unit_ptr->actbuf[0] = 0.0f;
       PRUNE_Skeletonization_first = FALSE;
     }
 
     FOR_ALL_UNITS (unit_ptr)
-	unit_ptr->value_b = 0.0;
+	unit_ptr->value_b = 0.0f;
     
     /* compute the necessary sub patterns */
     if (pattern == PR_ALL_PATTERNS)
@@ -1179,7 +1179,7 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
     {
       /* initialize value_a of each unit */
       FOR_ALL_UNITS (unit_ptr)
-	unit_ptr->value_a = 0.0;
+	unit_ptr->value_a = 0.0f;
 
 
       /* calculate address of the output pattern */
@@ -1277,7 +1277,7 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
 
 
     if (pr_candidateUnit != NULL){
-      pr_candidateUnit->actbuf[0] = 0.0;
+      pr_candidateUnit->actbuf[0] = 0.0f;
     }
       
     return (KRERR_NO_ERROR);
@@ -1366,9 +1366,9 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
                                              - this_unit_ptr->Out.output);
                 } else {
                     unit_ptr->value_c += (unit_ptr->Out.output 
-                                             + this_unit_ptr->Out.output - 1.0)
+                                             + this_unit_ptr->Out.output - 1.0f)
                                          * (unit_ptr->Out.output 
-                                             + this_unit_ptr->Out.output - 1.0);
+                                             + this_unit_ptr->Out.output - 1.0f);
                 } 
             }
     }

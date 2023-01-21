@@ -98,7 +98,7 @@ float SnnsCLib::cc_calculatePruneError(int prune_func,int p,int n,float sse)
       case CMSEP:
 	return sse/(n-2*p);
       default:
-	return 0.0;
+	return 0.0f;
     }
 }
 
@@ -168,7 +168,7 @@ void SnnsCLib::cc_pruneNet (int StartPattern, int EndPattern, int pruneFunc)
     FOR_ALL_LINKS(outputUnit_ptr,link_ptr) {
       if (link_ptr->to == unit_ptr) {
 	tmp = link_ptr->weight;
-	link_ptr->weight = 0.0;
+	link_ptr->weight = 0.0f;
 	sse = cc_getErr (StartPattern, EndPattern);
 	link_ptr->weight = tmp;
         sbc_ifKilled=cc_calculatePruneError(pruneFunc,p,n,sse);
@@ -187,7 +187,7 @@ void SnnsCLib::cc_pruneNet (int StartPattern, int EndPattern, int pruneFunc)
   /* check for useless connections to input/hidden units */
   FOR_ALL_LINKS (unit_ptr,link_ptr) {
     tmp = link_ptr->weight;
-    link_ptr->weight = 0.0;
+    link_ptr->weight = 0.0f;
     sse = cc_getErr (StartPattern, EndPattern);
     link_ptr->weight = tmp;
 

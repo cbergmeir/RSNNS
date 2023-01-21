@@ -136,14 +136,14 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
 
     /* DEFAULTS: */
 
-    if (( sigma_1 = LEARN_PARAM1( parameterInArray )) == 0.0) 
+    if (( sigma_1 = LEARN_PARAM1( parameterInArray )) == 0.0f) 
 	  sigma_1 = SCG_FIRST_SIGMA ;
 
-    if (( lambda_1 = LEARN_PARAM2( parameterInArray )) == 0.0) 
+    if (( lambda_1 = LEARN_PARAM2( parameterInArray )) == 0.0f) 
 	lambda_1 = SCG_FIRST_LAMBDA ;
 
 				/* param 3 is DELTA_max */
-    if (( tolerance = LEARN_PARAM4( parameterInArray )) == 0.0) 
+    if (( tolerance = LEARN_PARAM4( parameterInArray )) == 0.0f) 
 	  tolerance = SCG_TOLERANCE ; 
 
 
@@ -368,7 +368,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
 
 
       TRACE(("ERROR REDUCTION of %e %% --- ",
-	     (LEARN_SCG_old_error-LEARN_SCG_current_error)/LEARN_SCG_old_error*100.0));
+	     (LEARN_SCG_old_error-LEARN_SCG_current_error)/LEARN_SCG_old_error*100.0f));
 
       under_tolerance =
 	2.0 * fabs(LEARN_SCG_old_error-LEARN_SCG_current_error)
@@ -509,7 +509,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
     if(KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
 
-    *error = 0.0;	/* reset network error value  */
+    *error = 0.0f;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
     

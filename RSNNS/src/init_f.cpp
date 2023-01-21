@@ -110,7 +110,7 @@ krui_err  SnnsCLib::INIT_randomizeWeights(float *parameterArray, int NoOfParams)
     max_weight = INIT_PARAM2( parameterArray ); 
     range = max_weight - min_weight;
 
-    if (range == 0.0)  {
+    if (range == 0.0f)  {
 	FOR_ALL_UNITS( unit_ptr )  {
 	    flags = unit_ptr->flags;
 
@@ -193,7 +193,7 @@ krui_err  SnnsCLib::INIT_RM_randomizeWeights(float *parameterArray, int NoOfPara
   max_weight = INIT_PARAM2( parameterArray ); 
   range = max_weight - min_weight;
 
-  if (range == 0.0)  {
+  if (range == 0.0f)  {
     FOR_ALL_UNITS( unit_ptr )  {
       flags = unit_ptr->flags;
 
@@ -279,14 +279,14 @@ krui_err  SnnsCLib::INIT_randomizeWeights_perc(float *parameterArray, int NoOfPa
 
     /* compute no of predecessor Units */
     FOR_ALL_UNITS( unit_ptr ){
-	unit_ptr->value_c=0.0;
+	unit_ptr->value_c=0.0f;
 	FOR_ALL_LINKS( unit_ptr, link_ptr ){
 	    unit_ptr->value_c++;
 	}
     }
 
 
-    if (range == 0.0)  {
+    if (range == 0.0f)  {
 	FOR_ALL_UNITS( unit_ptr )  {
 	    flags = unit_ptr->flags;
 
@@ -316,7 +316,7 @@ krui_err  SnnsCLib::INIT_randomizeWeights_perc(float *parameterArray, int NoOfPa
 	    if ( ((flags & UFLAG_IN_USE) == UFLAG_IN_USE) 
 		&& (!IS_SPECIAL_UNIT(unit_ptr))) {
 		/*  unit is in use  */
-		unit_ptr->bias = 0.0;
+		unit_ptr->bias = 0.0f;
 
 		if ( (flags & UFLAG_INPUT_PAT) == UFLAG_SITES ){
 		    /*  unit has sites  */
@@ -395,7 +395,7 @@ krui_err SnnsCLib::INIT_Weights_CPNv32(float *parameterArray, int NoOfParams)
 	/*  this is a hidden unit  */
 
 	/*     initialize the weights to the Kohonen Layer         */
-	sum = 0.0;
+	sum = 0.0f;
 	if UNIT_HAS_SITES( unit_ptr ){
 	    /* the unit has sites */
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
@@ -470,14 +470,14 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
     min = INIT_PARAM1( parameterArray );
     max = INIT_PARAM2( parameterArray );
     range = max - min;
-    if (((min < 0.0)) && ((max < 0.0)))
-    { intervall = 1.0; offset = -1.0;
-    } else if (((min < 0.0)) && (!(max < 0.0)))
-    { intervall = 2.0; offset = -1.0;
-    } else if ((!(min < 0.0)) && ((max < 0.0)))
-    { intervall = 2.0; offset = -1.0;
-    } else //if ((!(min < 0.0)) && (!(max < 0.0)))
-    { intervall = 1.0; offset = 0.0;
+    if (((min < 0.0f)) && ((max < 0.0f)))
+    { intervall = 1.0f; offset = -1.0f;
+    } else if (((min < 0.0f)) && (!(max < 0.0f)))
+    { intervall = 2.0f; offset = -1.0f;
+    } else if ((!(min < 0.0f)) && ((max < 0.0f)))
+    { intervall = 2.0f; offset = -1.0f;
+    } else //if ((!(min < 0.0f)) && (!(max < 0.0f)))
+    { intervall = 1.0f; offset = 0.0f;
     }
 
     if (NetModified || (TopoSortID != TOPOLOGIC_TYPE)){
@@ -498,20 +498,20 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
 	/*     initialize the weights to the Kohonen Layer         */
 	if UNIT_HAS_SITES( unit_ptr ){
 	    /* the unit has sites */
-          do { sum = 0.0;
+          do { sum = 0.0f;
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
 		link_ptr->weight = (FlintType) u_drand48() * intervall + offset;
 		sum += link_ptr->weight * link_ptr->weight;
 	    }
-          } while ((sum > 1.0) || (sum == 0.0));
+          } while ((sum > 1.0f) || (sum == 0.0f));
 	}else{
 	    /* the unit has direct links */
-          do { sum = 0.0;
+          do { sum = 0.0f;
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )  {
 		link_ptr->weight = (FlintType) u_drand48() * intervall + offset;
 		sum += link_ptr->weight * link_ptr->weight;
 	    }
-          } while ((sum > 1.0) || (sum == 0.0));
+          } while ((sum > 1.0f) || (sum == 0.0f));
 	}
 
 	/* normalize the weightvector to the Kohonen Layer */
@@ -588,7 +588,7 @@ krui_err SnnsCLib::INIT_Weights_CPN_Rand_Pat(float *parameterArray, int NoOfPara
 
     /* random initialization of Kohonen layer, the parameters are:
      * use all patterns (0, kr_TotalNoOfPattern() - 1)
-     * unused learning rate (0.0)
+     * unused learning rate (0.0f)
      * no learning cycles (0)
      * shuffle pattern flag (1)
      */
@@ -607,13 +607,13 @@ krui_err SnnsCLib::INIT_Weights_CPN_Rand_Pat(float *parameterArray, int NoOfPara
 	{
 	    /* the unit has sites */
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )
-		link_ptr->weight = (FlintType) 1.0;
+		link_ptr->weight = (FlintType) 1.0f;
 	}
 	else
 	{
 	    /* the unit has direct links */
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )
-		link_ptr->weight = (FlintType) 1.0;
+		link_ptr->weight = (FlintType) 1.0f;
 	}
     }
 
@@ -660,7 +660,7 @@ void SnnsCLib::RbfInitSetCenter(int pattern_no, int sub_pat_no,
     }
 
     /* set the weights of the links: */
-    if (deviation == 0.0){
+    if (deviation == 0.0f){
 	FOR_ALL_LINKS(hidden_unit, link_ptr){
 	    link_ptr -> weight = link_ptr -> to -> Out.output;
 	}
@@ -862,7 +862,7 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 	deviation = i_devi;	/* maximum change = i_devi * activation	*/
     }else{
 	/* less hidden units than learn patterns; no symmetry breaking	*/
-	deviation = 0.0;       
+	deviation = 0.0f;       
     }
 #else
     /* set deviation to parameter */
@@ -928,7 +928,7 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 	
     /* Add entrys for the additional bias: */
     for (h_unit_nr = 0; h_unit_nr < pattern_anz; h_unit_nr++){
-	RbfMatrixSetValue(&hidden_act, h_unit_nr, hidden_units - 1, 1.0);
+	RbfMatrixSetValue(&hidden_act, h_unit_nr, hidden_units - 1, 1.0f);
     }
 	
     //fprintf(stderr,"... calculate the moore-penrose inverse matrix\n");
@@ -1125,7 +1125,7 @@ void SnnsCLib::RbfKohonenConvexInit(int start_pattern,int end_pattern,float alph
 		while ((unit_ptr = *(topo_ptr++)) != NULL)
 		{
 		    /* calculate scalar product of current hidden unit	*/
-		    scalar_prod = (float) 0.0;
+		    scalar_prod = (float) 0.0f;
 		    FOR_ALL_LINKS(unit_ptr, link_ptr)
 		    {
 			scalar_prod += link_ptr -> weight * 
@@ -1329,7 +1329,7 @@ krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float lear
 		while ((unit_ptr = *(topo_ptr++)) != NULL)
 		{
 		    /* calculate scalar product of current hidden unit	*/
-		    scalar_prod = (float) 0.0;
+		    scalar_prod = (float) 0.0f;
 		    FOR_ALL_LINKS(unit_ptr, link_ptr)
 		    {
 			scalar_prod += link_ptr -> weight * 
@@ -1417,7 +1417,7 @@ krui_err SnnsCLib::RbfStartInit(float *parameterArray, int NoOfParams, int init_
 		learn_rate = INIT_PARAM2(parameterArray);
 		ret_code = RbfKohonenInit(0, kr_TotalNoOfPattern() - 1,
 					  learn_rate, count, 
-					  INIT_PARAM3(parameterArray) != 0.0);
+					  INIT_PARAM3(parameterArray) != 0.0f);
 		break;
 	}
 
@@ -1502,7 +1502,7 @@ krui_err SnnsCLib::INIT_Weights_ART1(float *parameterArray, int NoOfParams)
   gamma = parameterArray [1];
 
 
-  if ((beta <= 0.0) || (gamma <= 0.0)) {
+  if ((beta <= 0.0f) || (gamma <= 0.0f)) {
      /* the parameters beta and gamma have to be greater than 0.0
      */
      ret_code = KRERR_PARAMETERS;
@@ -1639,8 +1639,8 @@ krui_err SnnsCLib::INIT_Weights_ART2(float *parameterArray, int NoOfParams)
   gamma   = parameterArray [1];
 
 
-  if ((param_d <= 0.0) || (param_d >= 1.0) ||
-      (gamma < 1.0))
+  if ((param_d <= 0.0f) || (param_d >= 1.0f) ||
+      (gamma < 1.0f))
   {
      /* the parameters d has to fit the constraint 0 < d < 1,
         gamma >= 1.0
@@ -1679,7 +1679,7 @@ krui_err SnnsCLib::INIT_Weights_ART2(float *parameterArray, int NoOfParams)
      where gamma is parameter gamma, d is parameter param_d, N
      is the number of F1-nodes.
 
-     Choosing gamma as small as possible (gamma=1.0) biases the
+     Choosing gamma as small as possible (gamma=1.0f) biases the
      ART2 system as much as possible toward choosing uncommited
      nodes.
   */
@@ -1776,8 +1776,8 @@ krui_err SnnsCLib::INIT_Weights_ARTMAP(float *parameterArray, int NoOfParams)
   gamma_b = parameterArray [3];
 
 
-  if ((beta_a <= 0.0) || (gamma_a <= 0.0) || 
-      (beta_b <= 0.0) || (gamma_b <= 0.0)) {
+  if ((beta_a <= 0.0f) || (gamma_a <= 0.0f) || 
+      (beta_b <= 0.0f) || (gamma_b <= 0.0f)) {
      /* the parameters beta and gamma have to be greater than 0.0
      */
      ret_code = KRERR_PARAMETERS;
@@ -2051,7 +2051,7 @@ krui_err SnnsCLib::INIT_SOM_Rand_Pat(float *parameterArray, int NoOfParams)
 
     /* random initialization of Kohonen layer, the parameters are:
      * use all patterns (0, kr_TotalNoOfPattern() - 1)
-     * unused learning rate (0.0)
+     * unused learning rate (0.0f)
      * no learning cycles (0)
      * shuffle pattern flag (1)
      */
@@ -2113,7 +2113,7 @@ krui_err SnnsCLib::INIT_SOM_Weights_v32(float *parameterArray, int NoOfParams)
       /***********************************************************/
       /*     initialize the weights to the Kohonen Layer         */
       /***********************************************************/
-    sum = 0.0;
+    sum = 0.0f;
     if UNIT_HAS_SITES( unit_ptr )
       { /* the unit has sites */
       FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
@@ -2131,10 +2131,10 @@ krui_err SnnsCLib::INIT_SOM_Weights_v32(float *parameterArray, int NoOfParams)
     /* normalize the weightvector to the Kohonen Layer */
 
 
-    amount = ((sum==0.0)? 0.0 : (1.0 / sqrt( sum )));
+    amount = ((sum==0.0f)? 0.0 : (1.0 / sqrt( sum )));
    
-    unit_ptr->bias = 0.0;
-    unit_ptr->value_a = 0.0; /*initialisation is necessary for spanning tree */
+    unit_ptr->bias = 0.0f;
+    unit_ptr->value_a = 0.0f; /*initialisation is necessary for spanning tree */
    
     if UNIT_HAS_SITES( unit_ptr )
       /* the unit has sites */
@@ -2200,8 +2200,8 @@ krui_err SnnsCLib::INIT_SOM_Weights_const(float *parameterArray, int NoOfParams)
 	  }
       }
 
-      unit_ptr->bias = 0.0;
-      unit_ptr->value_a = 0.0; /*initialisation is necessary for spanning tree*/
+      unit_ptr->bias = 0.0f;
+      unit_ptr->value_a = 0.0f; /*initialisation is necessary for spanning tree*/
   }
 
   return( KRERR_NO_ERROR );
@@ -2249,7 +2249,7 @@ krui_err  SnnsCLib::INIT_JE_Weights (float *parameterArray, int NoOfParams)
   //SnnsCLib: random number generator is now initialized in the constructor
   //krui_setSeedNo(0);
 
-  /* if (range < 0.0) return (KRERR_PARAMETERS) ; */
+  /* if (range < 0.0f) return (KRERR_PARAMETERS) ; */
 
   FOR_ALL_UNITS (unit_ptr) 
   {
@@ -2350,13 +2350,13 @@ krui_err SnnsCLib::INIT_Hebb(float *parameterArray, int NoOfParams)
   
   FOR_ALL_UNITS(unit_ptr) {
     if (IS_INPUT_UNIT(unit_ptr)){
-      if (BiasIn == 1.0)   
+      if (BiasIn == 1.0f)   
 	unit_ptr->bias = (FlintType) log((double) NoOfOutputUnits); 
       else 
 	unit_ptr->bias = BiasIn;
     }
     else if IS_OUTPUT_UNIT(unit_ptr) {
-      if (BiasOut == -1.0)   
+      if (BiasOut == -1.0f)   
 	unit_ptr->bias = (FlintType) log((double) NoOfInputUnits);
       else 
 	unit_ptr->bias = BiasOut;
@@ -2367,7 +2367,7 @@ krui_err SnnsCLib::INIT_Hebb(float *parameterArray, int NoOfParams)
   
   FOR_ALL_UNITS(unit_ptr)
     FOR_ALL_LINKS(unit_ptr, link_ptr)
-      { link_ptr->weight = 0.0;
+      { link_ptr->weight = 0.0f;
       }
   
   /* compute the necessary sub patterns */
@@ -2435,13 +2435,13 @@ krui_err SnnsCLib::INIT_ClippHebb(float *parameterArray, int NoOfParams)
   
   FOR_ALL_UNITS(unit_ptr) {
     if (IS_INPUT_UNIT(unit_ptr)){
-      if (BiasIn == 1.0)   
+      if (BiasIn == 1.0f)   
 	unit_ptr->bias = (FlintType) log((double) NoOfOutputUnits); 
       else 
 	unit_ptr->bias = BiasIn;
     }
     else if IS_OUTPUT_UNIT(unit_ptr) {
-      if (BiasOut == -1.0)   
+      if (BiasOut == -1.0f)   
 	unit_ptr->bias = (FlintType) log((double) NoOfInputUnits);
       else 
 	unit_ptr->bias = BiasOut;
@@ -2451,7 +2451,7 @@ krui_err SnnsCLib::INIT_ClippHebb(float *parameterArray, int NoOfParams)
   
   FOR_ALL_UNITS(unit_ptr)
     FOR_ALL_LINKS(unit_ptr, link_ptr)
-      { link_ptr->weight = 0.0;
+      { link_ptr->weight = 0.0f;
       }
   
   /* compute the necessary sub patterns */
@@ -2531,7 +2531,7 @@ krui_err SnnsCLib::INIT_HOP_FixAct(float *parameterArray, int NoOfParams)
   
   
   activity  = (float)parameterArray [0]/(float)NoOfUnits;
-  error_probability = parameterArray [1]/100.0;
+  error_probability = parameterArray [1]/100.0f;
   
   
   /* set bias to the value, that Amari published in Neur.Netw. Vol.2, 451-457 '89 */  
@@ -2546,7 +2546,7 @@ krui_err SnnsCLib::INIT_HOP_FixAct(float *parameterArray, int NoOfParams)
   
   FOR_ALL_UNITS(unit_ptr) {
     FOR_ALL_LINKS(unit_ptr, link_ptr)
-      link_ptr->weight = 0.0;
+      link_ptr->weight = 0.0f;
   }
   
   /* compute the necessary sub patterns */
@@ -2614,12 +2614,12 @@ krui_err   SnnsCLib::PseudoInv(RbfFloatMatrix *source, int NoOfColumns, RbfFloat
 	 = 0T        if a == 0      
 	 */
       
-      qnorm = 0.0;
+      qnorm = 0.0f;
       for (i = 0; i <= (source->rows - 1); i++)
 	qnorm += RbfMatrixGetValue(source, i, 0)*RbfMatrixGetValue(source, i, 0);
       
       for (i = 0; i <= (source->rows - 1); i++)
-	if (qnorm != 0.0)
+	if (qnorm != 0.0f)
 	  /* set the 1-st row of target to the 1-st column of source */
 	  RbfMatrixSetValue(target, 0, i, RbfMatrixGetValue(source, i, 0)/qnorm);
 	else 
@@ -2689,7 +2689,7 @@ krui_err   SnnsCLib::PseudoInv(RbfFloatMatrix *source, int NoOfColumns, RbfFloat
 
       /* calculate  'p'  */
       RbfMulMatrix(&P, &A, &PA);                                         /* P = A*PA   */
-      RbfMulScalarMatrix(&P, -1.0);                                      /* P = Id - P */
+      RbfMulScalarMatrix(&P, -1.0f);                                      /* P = Id - P */
       for (i = (P.rows -1) ; i>=0; i--) {                                 
 	RbfMatrixSetValue(&P, i, i, RbfMatrixGetValue(&P, i, i) + 1);
       }
@@ -2707,7 +2707,7 @@ krui_err   SnnsCLib::PseudoInv(RbfFloatMatrix *source, int NoOfColumns, RbfFloat
       /* calculate target */
       RbfTranspMatrix(&pT, &p);
       RbfMulMatrix(&P, &a, &pT);                                         /* P = A*pT   */ 
-      RbfMulScalarMatrix(&P, -1.0);                                      /* P = Id - P */
+      RbfMulScalarMatrix(&P, -1.0f);                                      /* P = Id - P */
       for (i = (P.rows -1) ; i>=0; i--){                                 
 	RbfMatrixSetValue(&P, i, i, RbfMatrixGetValue(&P, i, i) + 1);
       }
@@ -2778,7 +2778,7 @@ krui_err SnnsCLib::INIT_PseudoInv(float *parameterArray, int NoOfParams)
   
   FOR_ALL_UNITS(unit_ptr)
     FOR_ALL_LINKS(unit_ptr, link_ptr)
-      { link_ptr->weight = 0.0;
+      { link_ptr->weight = 0.0f;
       }
   /* allocate memory for the matrices */
   
@@ -2803,10 +2803,10 @@ krui_err SnnsCLib::INIT_PseudoInv(float *parameterArray, int NoOfParams)
       return(KRERR_INSUFFICIENT_MEM);
     }
   
-  RbfClearMatrix(&X, 0.0); 
-  RbfClearMatrix(&W, 0.0);  
-  RbfClearMatrix(&PIofX, 0.0);
-  RbfClearMatrix(&Y, 0.0);
+  RbfClearMatrix(&X, 0.0f); 
+  RbfClearMatrix(&W, 0.0f);  
+  RbfClearMatrix(&PIofX, 0.0f);
+  RbfClearMatrix(&Y, 0.0f);
    
   /* set X  and Y */
   

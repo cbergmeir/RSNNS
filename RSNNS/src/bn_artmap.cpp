@@ -816,16 +816,16 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM inpa units */
-      ret_code = krui_createLink (INPa_UNIT(i),0.0);
+      ret_code = krui_createLink (INPa_UNIT(i),0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM g1a unit */
-      ret_code = krui_createLink (G1a_UNIT, 0.0);
+      ret_code = krui_createLink (G1a_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM dela units */
       for (j=1; j<=f2aUnits; j++) {
-         ret_code = krui_createLink (DELa_UNIT(j), 0.0);
+         ret_code = krui_createLink (DELa_UNIT(j), 0.0f);
          CHECK_RETURN (ret_code);
       } /*for*/
 
@@ -840,20 +840,20 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
       /* FROM cmpa units */
       for (j=1; j<=f1aUnits; j++) {
-         ret_code = krui_createLink (CMPa_UNIT(j), 0.0);
+         ret_code = krui_createLink (CMPa_UNIT(j), 0.0f);
          CHECK_RETURN (ret_code);
       } /*for*/
 
       /* FROM rga unit */
-      ret_code = krui_createLink (RGa_UNIT, 0.0);
+      ret_code = krui_createLink (RGa_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM rsta units */
-      ret_code = krui_createLink (RSTa_UNIT(i), 0.0);
+      ret_code = krui_createLink (RSTa_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM g2a unit */
-      ret_code = krui_createLink (G2a_UNIT, 0.0);
+      ret_code = krui_createLink (G2a_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
    } /*for*/
@@ -866,7 +866,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM reca units */
-      ret_code = krui_createLink (RECa_UNIT(i), 0.0);
+      ret_code = krui_createLink (RECa_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
    } /*for*/
@@ -883,7 +883,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM itself */
-      ret_code = krui_createLink (RSTa_UNIT(i), 0.0);
+      ret_code = krui_createLink (RSTa_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* second Site */
@@ -891,11 +891,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM dela units */
-      ret_code = krui_createLink (DELa_UNIT(i), 0.0);
+      ret_code = krui_createLink (DELa_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM rga unit */
-      ret_code = krui_createLink (RGa_UNIT, 0.0);
+      ret_code = krui_createLink (RGa_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
 
@@ -908,7 +908,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM dela units */
    for (j=1; j<=f2aUnits; j++) {
-      ret_code = krui_createLink (DELa_UNIT(j), 0.0);
+      ret_code = krui_createLink (DELa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -918,7 +918,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM d1a unit */
-   ret_code = krui_createLink (Da_UNIT(1), 0.0);
+   ret_code = krui_createLink (Da_UNIT(1), 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -927,7 +927,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM d2a unit */
-   ret_code = krui_createLink (Da_UNIT(2), 0.0);
+   ret_code = krui_createLink (Da_UNIT(2), 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -941,7 +941,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM reca units */
    for (j=1; j<=f2aUnits; j++) {
-      ret_code = krui_createLink (RECa_UNIT(j), 0.0);
+      ret_code = krui_createLink (RECa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -951,7 +951,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM inpa units */
    for (j=1; j<=f1aUnits; j++) {
-      ret_code = krui_createLink (INPa_UNIT(j), 0.0);
+      ret_code = krui_createLink (INPa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -966,7 +966,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM inpa units */
    for (j=1; j<=f1aUnits; j++) {
-      ret_code = krui_createLink (INPa_UNIT(j), 0.0);
+      ret_code = krui_createLink (INPa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -975,7 +975,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* from rhoa unit */
-   ret_code = krui_createLink (RHOa_UNIT, 0.0);
+   ret_code = krui_createLink (RHOa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -985,7 +985,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM cmpa units */
    for (j=1; j<=f1aUnits; j++) {
-      ret_code = krui_createLink (CMPa_UNIT(j), 0.0);
+      ret_code = krui_createLink (CMPa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -995,11 +995,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM ria unit */
-   ret_code = krui_createLink (RIa_UNIT, 0.0);
+   ret_code = krui_createLink (RIa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM rca unit */
-   ret_code = krui_createLink (RCa_UNIT, 0.0);
+   ret_code = krui_createLink (RCa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1008,15 +1008,15 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM d3a unit */
-   ret_code = krui_createLink (Da_UNIT(3), 0.0);
+   ret_code = krui_createLink (Da_UNIT(3), 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM rga unit */
-   ret_code = krui_createLink (RGa_UNIT, 0.0);
+   ret_code = krui_createLink (RGa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM g2a unit */
-   ret_code = krui_createLink (G2a_UNIT, 0.0);
+   ret_code = krui_createLink (G2a_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1026,7 +1026,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM rsta units */
    for (j=1; j<=f2aUnits; j++) {
-      ret_code = krui_createLink (RSTa_UNIT(j), 0.0);
+      ret_code = krui_createLink (RSTa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1035,11 +1035,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM itself */
-   ret_code = krui_createLink (RHOa_UNIT, 0.0);
+   ret_code = krui_createLink (RHOa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM drho unit */
-   ret_code = krui_createLink (DRHO_UNIT, 0.0);
+   ret_code = krui_createLink (DRHO_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1049,7 +1049,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM inpa units */
    for (j = 1; j <= f1aUnits; j++) {
-      ret_code = krui_createLink (INPa_UNIT(j), 0.0);
+      ret_code = krui_createLink (INPa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1064,16 +1064,16 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
       /* FROM dela units */
       for (j=1; j<=f2aUnits; j++) {
-         ret_code = krui_createLink (DELa_UNIT(j), 0.0);
+         ret_code = krui_createLink (DELa_UNIT(j), 0.0f);
          CHECK_RETURN (ret_code);
       } /*for*/
 
       /* FROM delb unit */
-      ret_code = krui_createLink (DELb_UNIT(i), 0.0);
+      ret_code = krui_createLink (DELb_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM G unit */
-      ret_code = krui_createLink (G_UNIT, 0.0);
+      ret_code = krui_createLink (G_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
    } /*for*/
@@ -1085,7 +1085,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM delb units */
    for (j=1; j<=f2bUnits; j++) {
-      ret_code = krui_createLink (DELb_UNIT(j), 0.0);
+      ret_code = krui_createLink (DELb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1100,7 +1100,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM reca units */
    for (j=1; j<=f2aUnits; j++) {
-      ret_code = krui_createLink (RECa_UNIT(j), 0.0);
+      ret_code = krui_createLink (RECa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1110,7 +1110,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM recb units */
    for (j=1; j<=f2bUnits; j++) {
-      ret_code = krui_createLink (RECb_UNIT(j), 0.0);
+      ret_code = krui_createLink (RECb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1124,7 +1124,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM d1 unit */
-   ret_code = krui_createLink (D1_UNIT, 0.0);
+   ret_code = krui_createLink (D1_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* second Site */
@@ -1132,7 +1132,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* from rho unit */
-   ret_code = krui_createLink (RHO_UNIT, 0.0);
+   ret_code = krui_createLink (RHO_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1142,7 +1142,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM map units */
    for (j=1; j<=f2bUnits; j++) {
-      ret_code = krui_createLink (MAP_UNIT(j), 0.0);
+      ret_code = krui_createLink (MAP_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1152,11 +1152,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM rb unit */
-   ret_code = krui_createLink (RB_UNIT, 0.0);
+   ret_code = krui_createLink (RB_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM rm unit */
-   ret_code = krui_createLink (RM_UNIT, 0.0);
+   ret_code = krui_createLink (RM_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1165,15 +1165,15 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM cla unit */
-   ret_code = krui_createLink (CLa_UNIT, 0.0);
+   ret_code = krui_createLink (CLa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM clb unit */
-   ret_code = krui_createLink (CLb_UNIT, 0.0);
+   ret_code = krui_createLink (CLb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM rg unit */
-   ret_code = krui_createLink (RG_UNIT, 0.0);
+   ret_code = krui_createLink (RG_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1182,11 +1182,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM nca unit */
-   ret_code = krui_createLink (NCa_UNIT, 0.0);
+   ret_code = krui_createLink (NCa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM ncb unit */
-   ret_code = krui_createLink (NCb_UNIT, 0.0);
+   ret_code = krui_createLink (NCb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* TO rho unit */
@@ -1194,7 +1194,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* from itself */
-   ret_code = krui_createLink (RHO_UNIT, 0.0);
+   ret_code = krui_createLink (RHO_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1208,7 +1208,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM inpa units */
    for (j=1; j <= f1aUnits; j++) {
-      ret_code = krui_createLink (INPa_UNIT(j), 0.0);
+      ret_code = krui_createLink (INPa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1218,7 +1218,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* from cmpa units */
    for (j=1; j<=f1aUnits; j++) {
-      ret_code = krui_createLink (CMPa_UNIT(j), 0.0);
+      ret_code = krui_createLink (CMPa_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1228,27 +1228,27 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* from itself */
-   ret_code = krui_createLink (DRHO_UNIT, 0.0);
+   ret_code = krui_createLink (DRHO_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* from rg unit */
-   ret_code = krui_createLink (RG_UNIT, 0.0);
+   ret_code = krui_createLink (RG_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* from qu unit */
-   ret_code = krui_createLink (QU_UNIT, 0.0);
+   ret_code = krui_createLink (QU_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* from rhoa unit */
-   ret_code = krui_createLink (RHOa_UNIT, 0.0);
+   ret_code = krui_createLink (RHOa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* from rga unit */
-   ret_code = krui_createLink (RGa_UNIT, 0.0);
+   ret_code = krui_createLink (RGa_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* from clb unit */
-   ret_code = krui_createLink (CLb_UNIT, 0.0);
+   ret_code = krui_createLink (CLb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1261,16 +1261,16 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM inpb units */
-      ret_code = krui_createLink (INPb_UNIT(i),0.0);
+      ret_code = krui_createLink (INPb_UNIT(i),0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM g1b unit */
-      ret_code = krui_createLink (G1b_UNIT, 0.0);
+      ret_code = krui_createLink (G1b_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM delb units */
       for (j=1; j<=f2bUnits; j++) {
-         ret_code = krui_createLink (DELb_UNIT(j), 0.0);
+         ret_code = krui_createLink (DELb_UNIT(j), 0.0f);
          CHECK_RETURN (ret_code);
       } /*for*/
 
@@ -1285,20 +1285,20 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
       /* FROM cmpb units */
       for (j=1; j<=f1bUnits; j++) {
-         ret_code = krui_createLink (CMPb_UNIT(j), 0.0);
+         ret_code = krui_createLink (CMPb_UNIT(j), 0.0f);
          CHECK_RETURN (ret_code);
       } /*for*/
 
       /* FROM rgb unit */
-      ret_code = krui_createLink (RGb_UNIT, 0.0);
+      ret_code = krui_createLink (RGb_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM rstb units */
-      ret_code = krui_createLink (RSTb_UNIT(i), 0.0);
+      ret_code = krui_createLink (RSTb_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM g2b unit */
-      ret_code = krui_createLink (G2b_UNIT, 0.0);
+      ret_code = krui_createLink (G2b_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
    } /*for*/
@@ -1311,11 +1311,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM recb units */
-      ret_code = krui_createLink (RECb_UNIT(i), 0.0);
+      ret_code = krui_createLink (RECb_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM map units */
-      ret_code = krui_createLink (MAP_UNIT(i), 0.0);
+      ret_code = krui_createLink (MAP_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
    } /*for*/
@@ -1332,7 +1332,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM itself */
-      ret_code = krui_createLink (RSTb_UNIT(i), 0.0);
+      ret_code = krui_createLink (RSTb_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* second Site */
@@ -1340,11 +1340,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
       CHECK_RETURN (ret_code);
 
       /* FROM delb units */
-      ret_code = krui_createLink (DELb_UNIT(i), 0.0);
+      ret_code = krui_createLink (DELb_UNIT(i), 0.0f);
       CHECK_RETURN (ret_code);
 
       /* FROM rgb unit */
-      ret_code = krui_createLink (RGb_UNIT, 0.0);
+      ret_code = krui_createLink (RGb_UNIT, 0.0f);
       CHECK_RETURN (ret_code);
 
    } /*for*/
@@ -1356,7 +1356,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM delb units */
    for (j=1; j<=f2bUnits; j++) {
-      ret_code = krui_createLink (DELb_UNIT(j), 0.0);
+      ret_code = krui_createLink (DELb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1366,7 +1366,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM d1b unit */
-   ret_code = krui_createLink (Db_UNIT(1), 0.0);
+   ret_code = krui_createLink (Db_UNIT(1), 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1375,7 +1375,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM d2b unit */
-   ret_code = krui_createLink (Db_UNIT(2), 0.0);
+   ret_code = krui_createLink (Db_UNIT(2), 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1389,7 +1389,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM recb units */
    for (j=1; j<=f2bUnits; j++) {
-      ret_code = krui_createLink (RECb_UNIT(j), 0.0);
+      ret_code = krui_createLink (RECb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1399,7 +1399,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM inpb units */
    for (j=1; j<=f1bUnits; j++) {
-      ret_code = krui_createLink (INPb_UNIT(j), 0.0);
+      ret_code = krui_createLink (INPb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1414,7 +1414,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM inpb units */
    for (j=1; j<=f1bUnits; j++) {
-      ret_code = krui_createLink (INPb_UNIT(j), 0.0);
+      ret_code = krui_createLink (INPb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1423,7 +1423,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* from rhob unit */
-   ret_code = krui_createLink (RHOb_UNIT, 0.0);
+   ret_code = krui_createLink (RHOb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1433,7 +1433,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM cmpb units */
    for (j=1; j<=f1bUnits; j++) {
-      ret_code = krui_createLink (CMPb_UNIT(j), 0.0);
+      ret_code = krui_createLink (CMPb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1443,11 +1443,11 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM rib unit */
-   ret_code = krui_createLink (RIb_UNIT, 0.0);
+   ret_code = krui_createLink (RIb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM rcb unit */
-   ret_code = krui_createLink (RCb_UNIT, 0.0);
+   ret_code = krui_createLink (RCb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1456,15 +1456,15 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* FROM d3b unit */
-   ret_code = krui_createLink (Db_UNIT(3), 0.0);
+   ret_code = krui_createLink (Db_UNIT(3), 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM rgb unit */
-   ret_code = krui_createLink (RGb_UNIT, 0.0);
+   ret_code = krui_createLink (RGb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
    /* FROM g2b unit */
-   ret_code = krui_createLink (G2b_UNIT, 0.0);
+   ret_code = krui_createLink (G2b_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1474,7 +1474,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM rstb units */
    for (j=1; j<=f2bUnits; j++) {
-      ret_code = krui_createLink (RSTb_UNIT(j), 0.0);
+      ret_code = krui_createLink (RSTb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 
@@ -1484,7 +1484,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
    CHECK_RETURN (ret_code);
 
    /* from itself */
-   ret_code = krui_createLink (RHOb_UNIT, 0.0);
+   ret_code = krui_createLink (RHOb_UNIT, 0.0f);
    CHECK_RETURN (ret_code);
 
 
@@ -1494,7 +1494,7 @@ krui_err SnnsCLib::bn_artmap_createNet(int f1aUnits, int f1aRows, int f2aUnits,
 
    /* FROM inpb units */
    for (j = 1; j <= f1bUnits; j++) {
-      ret_code = krui_createLink (INPb_UNIT(j), 0.0);
+      ret_code = krui_createLink (INPb_UNIT(j), 0.0f);
       CHECK_RETURN (ret_code);
    } /*for*/
 

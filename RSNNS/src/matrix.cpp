@@ -156,7 +156,7 @@ void SnnsCLib::RbfClearMatrix(RbfFloatMatrix *m, double c)
 float SnnsCLib::RbfSquareOfNorm(RbfFloatMatrix *m)
 {
   int	i, j;
-  float norm = 0.0;
+  float norm = 0.0f;
 
   for (i = m->rows -1 ; i>=0; i--)
     {
@@ -287,13 +287,13 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 
 	for (i = 0; i < m -> rows; i++)
 	{
-	    big = 0.0;
+	    big = 0.0f;
 	    for (j = 0; j < m -> rows; j++)
 	    {
 		if ((temp = fabs(RbfMatrixGetValue(m, i, j))) > big)
 		    big = temp;
 	    }
-	    if (big == 0.0)
+	    if (big == 0.0f)
 	    {
 		free(vv);
 		return 0;
@@ -310,7 +310,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 			   RbfMatrixGetValue(m, k, j);
 		RbfMatrixSetValue(m, i, j, sum);
 	    }
-	    big = 0.0;
+	    big = 0.0f;
 	    for (i = j; i < m -> rows; i++)
 	    {
 		sum = RbfMatrixGetValue(m, i, j);
@@ -338,7 +338,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 		vv[j] = dum;
 	    }
 	    indx[j] = imax;
-	    if (RbfMatrixGetValue(m, j, j) == 0.0)
+	    if (RbfMatrixGetValue(m, j, j) == 0.0f)
 	    {
 		//fprintf(stderr,"RbfLUDcmp: seems to be a singular matrix\n");
 		free(vv);
@@ -377,7 +377,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 		for (j = ii-1; j < i; j++)
 		    sum -= RbfMatrixGetValue(m, i, j) * b[j];
 	    }
-	    else if (sum != 0.0)
+	    else if (sum != 0.0f)
 		ii = i+1;
 	    b[i] = sum;
 	}
@@ -433,8 +433,8 @@ int	SnnsCLib::RbfInvMatrix(RbfFloatMatrix *m)
 	for (j = 0; j < m -> rows; j++)
 	{
 	    for (i = 0; i < m -> rows; i++)
-		b[i] = 0.0;
-	    b[j] = 1.0;
+		b[i] = 0.0f;
+	    b[j] = 1.0f;
 	    RbfLUBksb(&help, indx, b);
 	    for (i = 0; i < m -> rows; i++)
 		RbfMatrixSetValue(m, i, j, b[i]);
@@ -508,7 +508,7 @@ int	SnnsCLib::RbfInvMatrix(RbfFloatMatrix *m)
 	    /* test if matrix is singulary:				*/
 	    /* if true, then return directly and report errorcode	*/
 
-	    if (max == 0.0)
+	    if (max == 0.0f)
 	    {
 		RbfFreeMatrix(&help);
 		return 0;
@@ -602,7 +602,7 @@ void	SnnsCLib::RbfMulTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
     {
 	for (dest_c = dest_r; dest_c < m1 -> rows; dest_c++)
 	{
-	    scalar_product = 0.0;
+	    scalar_product = 0.0f;
 	    for (count = 0; count < m2 -> columns; count++)
 	    {
 		scalar_product += RbfMatrixGetValue(m2, dest_r, count) *
@@ -640,7 +640,7 @@ void	SnnsCLib::RbfMulMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2, RbfFloatMatr
 	/* This seems to be a strange way to multiply two matrices but  */
 	/* it prevents the swapper from trashing:                       */
 
-	RbfClearMatrix(m1, 0.0);
+	RbfClearMatrix(m1, 0.0f);
 
 	for (dest_r = 0; dest_r < m1 -> rows; dest_r++)
 	{

@@ -676,17 +676,17 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     CHECK_RETURN( ret_code );
 
     /* from input units */
-    ret_code = krui_createLink ((i-IUnits), 0.0);
+    ret_code = krui_createLink ((i-IUnits), 0.0f);
     CHECK_RETURN( ret_code );
 
     /* from delay units */
     FOR_ALL_ART1_DEL_UNITS (j) {
-       ret_code = krui_createLink (j,0.0);
+       ret_code = krui_createLink (j,0.0f);
        CHECK_RETURN (ret_code);
     }
 
     /* from g1 unit */
-    ret_code = krui_createLink (G1_UNIT, 0.0);
+    ret_code = krui_createLink (G1_UNIT, 0.0f);
 
   }
 
@@ -697,20 +697,20 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
      /* from comparison units */
      FOR_ALL_ART1_CMP_UNITS (j) {
-        ret_code = krui_createLink (j,0.0);
+        ret_code = krui_createLink (j,0.0f);
         CHECK_RETURN (ret_code);
      }
 
      /* from reset units */
-     ret_code = krui_createLink ((i+2*CUnits+3), 0.0);
+     ret_code = krui_createLink ((i+2*CUnits+3), 0.0f);
      CHECK_RETURN (ret_code);
 
      /* from reset general unit */
-     ret_code = krui_createLink (RG_UNIT, 0.0);
+     ret_code = krui_createLink (RG_UNIT, 0.0f);
      CHECK_RETURN (ret_code);
 
      /* from gain 2 unit */
-     ret_code = krui_createLink (G2_UNIT, 0.0);
+     ret_code = krui_createLink (G2_UNIT, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -720,7 +720,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
      CHECK_RETURN (ret_code);
 
      /* from recognition units */
-     ret_code = krui_createLink ((i-CUnits), 0.0);
+     ret_code = krui_createLink ((i-CUnits), 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -732,17 +732,17 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
      /* from itself */
      ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_RST_SELF));
      CHECK_RETURN (ret_code);
-     ret_code = krui_createLink (i, 0.0);
+     ret_code = krui_createLink (i, 0.0f);
      CHECK_RETURN (ret_code);
 
      /* from delay units */
      ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_RST_SIGNAL));
      CHECK_RETURN (ret_code);
-     ret_code = krui_createLink ((i-CUnits-3), 0.0);
+     ret_code = krui_createLink ((i-CUnits-3), 0.0f);
      CHECK_RETURN (ret_code);
 
      /* from reset general unit */
-     ret_code = krui_createLink (RG_UNIT, 0.0);
+     ret_code = krui_createLink (RG_UNIT, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -755,7 +755,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   /* from all delay units */
   FOR_ALL_ART1_DEL_UNITS (j) {
-     ret_code = krui_createLink (j, 0.0);
+     ret_code = krui_createLink (j, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -764,7 +764,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* from d1 */
-  ret_code = krui_createLink (D_UNIT (1), 0.0);
+  ret_code = krui_createLink (D_UNIT (1), 0.0f);
   CHECK_RETURN (ret_code);
 
   /* d3 */
@@ -772,7 +772,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* from d2 */
-  ret_code = krui_createLink (D_UNIT (2), 0.0);
+  ret_code = krui_createLink (D_UNIT (2), 0.0f);
   CHECK_RETURN (ret_code);
 
 
@@ -784,7 +784,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_INP_G1));
   CHECK_RETURN (ret_code);
   FOR_ALL_ART1_INP_UNITS (j) {
-     ret_code = krui_createLink (j, 0.0);
+     ret_code = krui_createLink (j, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -792,7 +792,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   ret_code = krui_setSite (const_cast<char*>(ART1_SITE_NAME_REC_G1));
   CHECK_RETURN (ret_code);
   FOR_ALL_ART1_REC_UNITS (j) {
-     ret_code = krui_createLink (j, 0.0);
+     ret_code = krui_createLink (j, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -807,7 +807,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   /* from input units */
   FOR_ALL_ART1_INP_UNITS (j) {
-     ret_code = krui_createLink (j, 0.0);
+     ret_code = krui_createLink (j, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -816,7 +816,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* from RHO unit */
-  ret_code = krui_createLink (RHO_UNIT, 0.0);
+  ret_code = krui_createLink (RHO_UNIT, 0.0f);
   CHECK_RETURN (ret_code);
 
 
@@ -826,7 +826,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   /* from comparison units */
   FOR_ALL_ART1_CMP_UNITS (j) {
-     ret_code = krui_createLink (j, 0.0);
+     ret_code = krui_createLink (j, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -836,11 +836,11 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* from ResetI unit */
-  ret_code = krui_createLink (RI_UNIT, 0.0);
+  ret_code = krui_createLink (RI_UNIT, 0.0f);
   CHECK_RETURN (ret_code);
 
   /* from ResetC unit */
-  ret_code = krui_createLink (RC_UNIT, 0.0);
+  ret_code = krui_createLink (RC_UNIT, 0.0f);
   CHECK_RETURN (ret_code);
 
 
@@ -849,15 +849,15 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* from d3 unit */
-  ret_code = krui_createLink (D_UNIT (3), 0.0);
+  ret_code = krui_createLink (D_UNIT (3), 0.0f);
   CHECK_RETURN (ret_code);
 
   /* from reset general unit */
-  ret_code = krui_createLink (RG_UNIT, 0.0);
+  ret_code = krui_createLink (RG_UNIT, 0.0f);
   CHECK_RETURN (ret_code);
 
   /* from gain 2 unit */
-  ret_code = krui_createLink (G2_UNIT, 0.0);
+  ret_code = krui_createLink (G2_UNIT, 0.0f);
   CHECK_RETURN (ret_code);
 
 
@@ -867,7 +867,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   /* from local reset units */
   FOR_ALL_ART1_RST_UNITS (j) {
-     ret_code = krui_createLink (j, 0.0);
+     ret_code = krui_createLink (j, 0.0f);
      CHECK_RETURN (ret_code);
   }
 
@@ -876,7 +876,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
   CHECK_RETURN (ret_code);
 
   /* from itself */
-  ret_code = krui_createLink (RHO_UNIT, 0.0);
+  ret_code = krui_createLink (RHO_UNIT, 0.0f);
   CHECK_RETURN (ret_code);
 
 
@@ -886,7 +886,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
 
   /* from input units */
   FOR_ALL_ART1_INP_UNITS (j) {
-     ret_code = krui_createLink (j, 0.0);
+     ret_code = krui_createLink (j, 0.0f);
      CHECK_RETURN (ret_code);
   } /*FOR_ALL_ART1_INP_UNITS*/
 

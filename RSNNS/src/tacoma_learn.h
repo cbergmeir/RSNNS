@@ -102,9 +102,9 @@ krui_err tac_testCorrectnessOfAddParameters(void);
    /* tests correctness of additional parameters. Correct values are :
       [0] TAC_KOHONEN             [0    .. inf)
       [1] TAC_XI_RI_ETA           [0.0  .. inf)
-      [2] TAC_THRESHOLD           (-inf .. 1.0)
+      [2] TAC_THRESHOLD           (-inf .. 1.0f)
       [3] TAC_LAMBDA              (-inf .. inf)
-      [4] TAC_BETA                (0.0  .. 1.0)
+      [4] TAC_BETA                (0.0  .. 1.0f)
       if parameter setting is incorrect KRERR_CC_INVALID_ADD_PARAMETERS
       will be returned */
 

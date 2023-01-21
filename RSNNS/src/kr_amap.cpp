@@ -103,19 +103,19 @@ krui_err SnnsCLib::kram_init_i_act (double rhoa, double rhob, double rho)
       case ARTMAP_SPECa_LAY:
          switch (unit_ptr->lun) {
          case ARTMAP_G1a_UNIT :
-            unit_ptr->i_act = 0.0;
+            unit_ptr->i_act = 0.0f;
             break;
          case ARTMAP_RIa_UNIT :
-            unit_ptr->i_act = 1.0;
+            unit_ptr->i_act = 1.0f;
             break;
          case ARTMAP_RGa_UNIT :
-            unit_ptr->i_act = 1.0;
+            unit_ptr->i_act = 1.0f;
             break;
          case ARTMAP_RHOa_UNIT :
             unit_ptr->i_act = (FlintType) rhoa;
             break;
          default :
-            unit_ptr->i_act = 0.0;
+            unit_ptr->i_act = 0.0f;
             break;
          } /*switch*/
          break;
@@ -123,19 +123,19 @@ krui_err SnnsCLib::kram_init_i_act (double rhoa, double rhob, double rho)
       case ARTMAP_SPECb_LAY:
          switch (unit_ptr->lun) {
          case ARTMAP_G1b_UNIT :
-            unit_ptr->i_act = 0.0;
+            unit_ptr->i_act = 0.0f;
             break;
          case ARTMAP_RIb_UNIT :
-            unit_ptr->i_act = 1.0;
+            unit_ptr->i_act = 1.0f;
             break;
          case ARTMAP_RGb_UNIT :
-            unit_ptr->i_act = 1.0;
+            unit_ptr->i_act = 1.0f;
             break;
          case ARTMAP_RHOb_UNIT :
             unit_ptr->i_act = (FlintType) rhob;
             break;
          default :
-            unit_ptr->i_act = 0.0;
+            unit_ptr->i_act = 0.0f;
             break;
          } /*switch*/
          break;
@@ -143,19 +143,19 @@ krui_err SnnsCLib::kram_init_i_act (double rhoa, double rhob, double rho)
       case ARTMAP_SPEC_LAY:
          switch (unit_ptr->lun) {
          case ARTMAP_G_UNIT:
-            unit_ptr->i_act = 1.0;
+            unit_ptr->i_act = 1.0f;
             break;
          case ARTMAP_RHO_UNIT:
             unit_ptr->i_act = (FlintType) rho;
             break;
          default:
-            unit_ptr->i_act = 0.0;
+            unit_ptr->i_act = 0.0f;
             break;
          } /*switch*/
          break;
 
       default :
-         unit_ptr->i_act = 0.0;
+         unit_ptr->i_act = 0.0f;
          break;
       } /*switch*/
 

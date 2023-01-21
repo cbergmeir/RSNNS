@@ -1413,7 +1413,7 @@ krui_err  SnnsCLib::krio_writeSourcesAndWeights(void)
 			*stream_out << fmt_blank;
 			retchk( stream_out );
 		}
-		if ((tacoma_mode)&&((val_a != 0.0)&&(val_b != 0.0))) {
+		if ((tacoma_mode)&&((val_a != 0.0f)&&(val_b != 0.0f))) {
 			snprintf( buf, sizeof(buf), fmt_shape4, source_unit, weight, val_b, val_a);
 			*stream_out << buf;
 		}   else {
@@ -2787,10 +2787,10 @@ void  SnnsCLib::krio_readUnitDefinitions(void)
 				KernelErrorCode = KRERR_FILE_SYNTAX;
 				return;
 			}
-			pos.x = (short) x;
-			pos.y = (short) y;
+			pos.x = x;
+			pos.y = y;
 
-			pos.z = (short) 0;
+			pos.z = 0;
 
 			krui_setUnitPosition( def_unit_no, &pos );
 
@@ -2801,10 +2801,10 @@ void  SnnsCLib::krio_readUnitDefinitions(void)
 				KernelErrorCode = KRERR_FILE_SYNTAX;
 				return;
 			}
-			pos.x = (short) x;
-			pos.y = (short) y;
+			pos.x = x;
+			pos.y = y;
 
-			pos.z = (short) z;
+			pos.z = z;
 
 			krui_setUnitPosition( def_unit_no, &pos );
 
@@ -2942,14 +2942,14 @@ void  SnnsCLib::krio_readConnectionDefs(void)
 			fscanRet = fscanf( file_in, "%d:%f (%f,%f) ", &src_unit_no, &weight, 
 					&tacoma_xi, &tacoma_ri );
 			if (fscanRet==2) 
-				tacoma_xi=tacoma_ri=0.0;
+				tacoma_xi=tacoma_ri=0.0f;
 			if ((fscanRet!=2)&&(fscanRet!=4)){
 				KernelErrorCode = KRERR_FILE_SYNTAX;
 				return;
 			}
 			//LinkDummy=
 			krui_createLinkWithAdditionalParameters
-			( src_unit_no, weight,tacoma_ri,tacoma_xi,0.0);
+			( src_unit_no, weight,tacoma_ri,tacoma_xi,0.0f);
 			if (KernelErrorCode!=KRERR_NO_ERROR) return;
 			if ( !comma() )  break;
 		}

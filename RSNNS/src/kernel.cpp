@@ -327,7 +327,7 @@ int  SnnsCLib::kr_makeDefaultUnit(void)
   unit_ptr->value_c = (FlintType) 0;          /*actual bias slope*/
 
   for (i = 0; i < MAX_BPTT_BACKSTEP; i++)
-    unit_ptr->actbuf[i] = 0.0;
+    unit_ptr->actbuf[i] = 0.0f;
 
 
   if (DefaultUFuncAct == NULL)  {
@@ -1877,7 +1877,7 @@ krui_err SnnsCLib::kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2,
     }
 
     /* reset correlation matrix */
-    RbfClearMatrix(&m_kernel_kr_CorrMatrix, 0.0);
+    RbfClearMatrix(&m_kernel_kr_CorrMatrix, 0.0f);
 	
     /* compute the necessary sub patterns (allways work on all patterns) */
     KernelErrorCode = 
@@ -1937,7 +1937,7 @@ krui_err SnnsCLib::kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2,
        also find minimum and maximum correlation (hint: 0 means not correlated, 
        1.0 means correlated -1.0 means anti-correlated
     */
-    mincorr = maxcorr = 0.0;
+    mincorr = maxcorr = 0.0f;
     FOR_ALL_UNITS (unit_ptr)
         if (! IS_SPECIAL_UNIT (unit_ptr) && IS_HIDDEN_UNIT (unit_ptr)) 
 	{
@@ -1978,13 +1978,13 @@ krui_err SnnsCLib::kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2,
     RbfPrintMatrix(&m_kernel_kr_CorrMatrix, stderr);
 #endif
 
-    if (-mincorr > maxcorr && -mincorr > 0.0)
+    if (-mincorr > maxcorr && -mincorr > 0.0f)
     {
 	*res_corr = -mincorr;
 	*hn1 = first_hidden + mincorrcol;
 	*hn2 = first_hidden + mincorrrow;
     }
-    else if (maxcorr > -mincorr && maxcorr > 0.0)
+    else if (maxcorr > -mincorr && maxcorr > 0.0f)
     {
 	*res_corr = maxcorr;
 	*hn1 = first_hidden + maxcorrcol;
@@ -1992,7 +1992,7 @@ krui_err SnnsCLib::kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2,
     }
     else
     {
-	*res_corr = 0.0;
+	*res_corr = 0.0f;
 	*hn1 = *hn2 = NULL;
     }
 	
@@ -2066,14 +2066,14 @@ krui_err  SnnsCLib::kr_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus,
 	if (flags & UFLAG_DLINKS)
 	{
 	    /*  unit has direct links   */
-	    maxweight = 0.0;
+	    maxweight = 0.0f;
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )
 	    {
 		if (fabs(link_ptr->weight) > maxweight)
 		    maxweight = fabs(link_ptr->weight);
 	    }
-	    if (maxweight > 1.0)
-		maxweight = 1.0;
+	    if (maxweight > 1.0f)
+		maxweight = 1.0f;
 	    FOR_ALL_LINKS( unit_ptr, link_ptr )
                 link_ptr->weight += 
 		    maxweight * ((FlintType) u_drand48() * range + min);
@@ -3823,7 +3823,7 @@ float SnnsCLib::kr_NA_Error(int currentPattern, int error_unit, int error, bool 
     }
   }
   /* Only for the warning */
-  return(0.0);
+  return(0.0f);
 }
 
 /*#################################################

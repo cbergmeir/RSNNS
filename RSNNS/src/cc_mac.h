@@ -120,7 +120,7 @@
 #define CONTINUE_LEARNING 1
 #define STOP_LEARNING 0
 
-#define CC_MAX_VALUE  0.1 
+#define CC_MAX_VALUE  0.1f 
 
 
 
@@ -139,7 +139,7 @@
 #define  SPECIAL_FUNC_TYPE                  SYM_SIGMOID
 
 /* global parameter definitions */
-#define  MAX_PIXEL_ERROR 0.2
+#define  MAX_PIXEL_ERROR 0.2f
 #define  LEARNING_FUNC   QUICKPROP
 #define  MODIFICATION    CC_NO_MOD
 #define  ON_OFF   OFF
@@ -407,21 +407,21 @@ for ((link_ptr) = ((struct Link *) (unit_ptr)->sites)->next; (link_ptr) != NULL;
 #define PARAM3                          ParameterInArray[2]
 #define PARAM4                          ParameterInArray[3]
 #define PARAM5                          ParameterInArray[4]
-#define PARAM6                          0.0001
+#define PARAM6                          0.0001f
 #define MAX_PIXEL_ERR                   ParameterInArray[6]
 #define LEARNING_FUNCTION               (int)ParameterInArray[7]
 #define CC_PRINT_ONOFF                  (int)ParameterInArray[8]
 #define MIN_COVAR_CHANGE                ParameterInArray[9]
 #define SPEC_PATIENCE                   ParameterInArray[10]
-#define MAX_NO_OF_COVAR_UPDATE_CYCLES   ParameterInArray[11] 
-#define MAX_SPECIAL_UNIT_NUMBER         ParameterInArray[12] 
+#define MAX_NO_OF_COVAR_UPDATE_CYCLES   (int)ParameterInArray[11] 
+#define MAX_SPECIAL_UNIT_NUMBER         (int)ParameterInArray[12] 
 #define SPECIAL_FUNCTION_TYPE           (int)ParameterInArray[13] 
 #define MINIMAL_ERROR_CHANGE            ParameterInArray[14]
-#define OUT_PATIEN                      ParameterInArray[15] 
-#define MAX_NO_ERROR_UPDATE_CYCLES      ParameterInArray[16]
+#define OUT_PATIEN                      (int)ParameterInArray[15] 
+#define MAX_NO_ERROR_UPDATE_CYCLES      (int)ParameterInArray[16]
 #define CC_PRUNE_ONOFF                  (int)ParameterInArray[17]
 #define CC_BACKFITTING_ONOFF            (int)ParameterInArray[18]
-#define BACKFITT_PATIENCE               ParameterInArray[19]
+#define BACKFITT_PATIENCE               (int)ParameterInArray[19]
 #define PRUNE_FUNC                      (int)ParameterInArray[20]
 #define MODIFICATION_NO                 (int)ParameterInArray[21]
 #define CC_PARAMETER1                   ParameterInArray[22]
@@ -448,13 +448,13 @@ for ((link_ptr) = ((struct Link *) (unit_ptr)->sites)->next; (link_ptr) != NULL;
 
 #define CCB_LAMBDA                      cc_Parameter[0]
 
-#define SGN(x) (((x)==0.0)?0.0:(((x)<0.0)?-1.0:1.0))
+#define SGN(x) (((x)==0.0f)?0.0:(((x)<0.0f)?-1.0:1.0f))
 
 
 /* And now .... the TACOMA macros... */
 
 
-#define TAC_ALPHA(d,max) (0.1 * ((max-d)/(max)))
+#define TAC_ALPHA(d,max) (0.1f * ((max-d)/(max)))
 
 
 #define TAC_KOHONEN  ((int)cc_Parameter[0])
@@ -467,14 +467,14 @@ for ((link_ptr) = ((struct Link *) (unit_ptr)->sites)->next; (link_ptr) != NULL;
    /* A connection ist built in, iff the correlation is better than lambda */
 #define TAC_BETA      cc_Parameter[4]
    /* To determine the initial radius of a link.*/
-#define TAC_ETA       0.7
+#define TAC_ETA       0.7f
 
 
 #define TAC_XIRI_ONLINE TRUE
 
 
 #define TAC_EXP(x) \
-	( (x>88.72) ? MAXFLOAT : ((x<-88.0) ? 0.0 : exp(x)) )
+	( (x>88.72f) ? MAXFLOAT : ((x<-88.0f) ? 0.0f : exp(x)) )
 
 #define XI_OF_LINK(LinkPtr) \
 	(LinkPtr->value_b)
@@ -497,13 +497,13 @@ for ((link_ptr) = ((struct Link *) (unit_ptr)->sites)->next; (link_ptr) != NULL;
 
 #define UPS_BEST_WEIGHT(LinkPtr) LinkPtr->value_c
 
-#define UPS_MODIFIKATION_ON  (cc_Parameter[0] > 0.0)
+#define UPS_MODIFIKATION_ON  (cc_Parameter[0] > 0.0f)
 
 #define UPS_ETA (cc_Parameter[1])
 
-#define UPS_NEW_MODE (cc_Parameter[1]>0.0)
+#define UPS_NEW_MODE (cc_Parameter[1]>0.0f)
 
-#define UPS_TEST (cc_Parameter[2]>0.0)
+#define UPS_TEST (cc_Parameter[2]>0.0f)
 
 #define UPS_NOT_CALCULATED 0
 

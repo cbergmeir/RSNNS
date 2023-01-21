@@ -182,7 +182,7 @@ struct Unit  *SnnsCLib::krart_get_winner (TopoPtrArray wta_layer, FlintType winn
                                           activation
                                        */
 
-   FlintType      max_out  = 0.0;      /* contains the maximal activation
+   FlintType      max_out  = 0.0f;      /* contains the maximal activation
                                        */
 
 
@@ -221,7 +221,7 @@ struct Unit  *SnnsCLib::krart_get_winner (TopoPtrArray wta_layer, FlintType winn
    while ((unit_ptr = *topo_ptr++) != NULL) {
 
       if (unit_ptr != winner_ptr) {
-         unit_ptr->Out.output = 0.0;
+         unit_ptr->Out.output = 0.0f;
       } else {
          unit_ptr->Out.output = winner_output;
       } /*if*/

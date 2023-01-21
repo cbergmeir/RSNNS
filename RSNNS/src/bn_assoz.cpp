@@ -147,14 +147,14 @@ krui_err SnnsCLib::bn_assoz_createNet(int X, int Y)
     
       /* (backward) connect current (hidden) unit with input unit */
       /* set all link weights from the input units to one */
-      ret = krui_createLink( i-IUnits, 1.0);
+      ret = krui_createLink( i-IUnits, 1.0f);
       CHECK_RETURN (ret);
 
       /* Make connections from all hidden units  */
       /* set link weights to zero */
       for (j = IUnits + 1; j <= IUnits + HUnits; j++) {
 	  if (j != i){
-	      ret = krui_createLink( j, 0.0);
+	      ret = krui_createLink( j, 0.0f);
 	      CHECK_RETURN (ret);
 	  }
       }

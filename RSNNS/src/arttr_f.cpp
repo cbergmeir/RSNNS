@@ -96,7 +96,7 @@ GROUP: Unit Output Functions
 FlintType  SnnsCLib::OUT_ART2_Noise_PLin (FlintType activation)
 {
    if (activation < kra2_get_theta()) {
-      return (0.0);
+      return (0.0f);
    } else {
       return (activation);
    } /*if*/
@@ -128,7 +128,7 @@ FlintType  SnnsCLib::OUT_ART2_Noise_ContDiff (FlintType activation)
       if (activation >= theta) {
          return (activation);
       } else {
-         return (0.0);
+         return (0.0f);
       } /*if*/
    } /*if*/
 } /* OUT_ART2_Noise_ContDiff () */
@@ -150,7 +150,7 @@ GROUP: Unit Activation Functions
 FlintType  SnnsCLib::ACT_ART1_NC  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   FlintType     sum = 0.0;
+   FlintType     sum = 0.0f;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -165,9 +165,9 @@ FlintType  SnnsCLib::ACT_ART1_NC  (struct Unit *unit_ptr)
    } /*if*/
 
    if (((int) (sum+0.5)) >= Art1_NoOfRecUnits) {
-      return (1.0);
+      return (1.0f);
    } else {
-      return (0.0);
+      return (0.0f);
    } /*if*/
 } /* ACT_ART1_NC () */
 
@@ -178,7 +178,7 @@ FlintType  SnnsCLib::ACT_ART1_NC  (struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_ART2_Linear (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   FlintType     sum = 0.0;
+   FlintType     sum = 0.0f;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -205,7 +205,7 @@ FlintType SnnsCLib::ACT_ART2_NormP  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
    FlintType              NormP;
-   FlintType     sum = 0.0;
+   FlintType     sum = 0.0f;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -234,7 +234,7 @@ FlintType SnnsCLib::ACT_ART2_NormV  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
    FlintType              NormV;
-   FlintType     sum = 0.0;
+   FlintType     sum = 0.0f;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -263,7 +263,7 @@ FlintType SnnsCLib::ACT_ART2_NormW  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
    FlintType              NormW;
-   FlintType     sum  = 0.0;
+   FlintType     sum  = 0.0f;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -293,7 +293,7 @@ FlintType SnnsCLib::ACT_ART2_NormIP  (struct Unit *unit_ptr)
    ACT_FUNC_DEFS
    FlintType              NormP;
    FlintType              NormInp;
-   FlintType     sum = 0.0;
+   FlintType     sum = 0.0f;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -323,13 +323,13 @@ FlintType SnnsCLib::ACT_ART2_NormIP  (struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_ART2_Rec  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   FlintType     sum  = 0.0;
+   FlintType     sum  = 0.0f;
 
 
    /* Top Down Phase */
    if (kra2_topdn_phase()) {
       if (kra2_Reset()) {
-         return (-1.0);
+         return (-1.0f);
       } else {
          return (unit_ptr->act);
       } /*if*/
@@ -338,7 +338,7 @@ FlintType SnnsCLib::ACT_ART2_Rec  (struct Unit *unit_ptr)
 
    /* Bottom Up Phase */
    if ( ! kra2_f1_stable() ) {
-      return (-1.0);
+      return (-1.0f);
    } /*if*/
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
@@ -362,7 +362,7 @@ FlintType SnnsCLib::ACT_ART2_Rec  (struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_ART2_Rst  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   FlintType     sum  = 0.0;
+   FlintType     sum  = 0.0f;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -379,9 +379,9 @@ FlintType SnnsCLib::ACT_ART2_Rst  (struct Unit *unit_ptr)
    if (((sum >= unit_ptr->bias - 0.0001) &&
        (kra2_Reset())) || (unit_ptr->act >= 0.9))
    {
-      return (1.0);
+      return (1.0f);
    } else {
-      return (0.0);
+      return (0.0f);
    } /*if*/
 } /* ACT_ART2_Rst () */
 
@@ -400,7 +400,7 @@ FlintType SnnsCLib::ACT_ART2_Rst  (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_ARTMAP_NCa  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   FlintType     sum = 0.0;
+   FlintType     sum = 0.0f;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -415,9 +415,9 @@ FlintType  SnnsCLib::ACT_ARTMAP_NCa  (struct Unit *unit_ptr)
    } /*if*/
 
    if (((int) (sum+0.5)) >= ArtMap_NoOfRecUnits_a) {
-      return (1.0);
+      return (1.0f);
    } else {
-      return (0.0);
+      return (0.0f);
    } /*if*/
 } /* ACT_ARTMAP_NCa () */
 
@@ -425,7 +425,7 @@ FlintType  SnnsCLib::ACT_ARTMAP_NCa  (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_ARTMAP_NCb  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   FlintType     sum = 0.0;
+   FlintType     sum = 0.0f;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -440,9 +440,9 @@ FlintType  SnnsCLib::ACT_ARTMAP_NCb  (struct Unit *unit_ptr)
    } /*if*/
 
    if (((int) (sum+0.5)) >= ArtMap_NoOfRecUnits_b) {
-      return (1.0);
+      return (1.0f);
    } else {
-      return (0.0);
+      return (0.0f);
    } /*if*/
 } /* ACT_ARTMAP_NCb () */
 
@@ -456,8 +456,8 @@ FlintType  SnnsCLib::ACT_ARTMAP_NCb  (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_ARTMAP_DRho (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   FlintType    sum = 0.0;
-   float                 epsilon = 0.0001;
+   FlintType    sum = 0.0f;
+   float                 epsilon = 0.0001f;
 
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
@@ -476,7 +476,7 @@ FlintType  SnnsCLib::ACT_ARTMAP_DRho (struct Unit *unit_ptr)
    if (sum - 2 >= 0) {
       return (sum - 2 + epsilon);
    } else {
-      return (0.0);
+      return (0.0f);
    } /*if*/
 
 } /* ACT_ARTMAP_DRho () */

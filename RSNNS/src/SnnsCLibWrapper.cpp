@@ -369,9 +369,9 @@ RcppExport SEXP SnnsCLib__setUnitPosition(SEXP xp, SEXP UnitNo, SEXP x, SEXP y, 
   int p1 = Rcpp::as<int>(UnitNo);
 
   PosType position;
-  position.x = Rcpp::as<short>(x);
-  position.y = Rcpp::as<short>(y);
-  position.z = Rcpp::as<short>(z);
+  position.x = Rcpp::as<int>(x);
+  position.y = Rcpp::as<int>(y);
+  position.z = Rcpp::as<int>(z);
 
   snnsCLib->krui_setUnitPosition(p1, &position);
   return R_NilValue;
@@ -382,9 +382,9 @@ RcppExport SEXP SnnsCLib__getUnitNoAtPosition(SEXP xp, SEXP x, SEXP y, SEXP z,
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
   PosType position;
-  position.x = Rcpp::as<short>(x);
-  position.y = Rcpp::as<short>(y);
-  position.z = Rcpp::as<short>(z);
+  position.x = Rcpp::as<int>(x);
+  position.y = Rcpp::as<int>(y);
+  position.z = Rcpp::as<int>(z);
 
   int p2 = Rcpp::as<int>(subnet_no);
 
@@ -398,9 +398,9 @@ RcppExport SEXP SnnsCLib__getUnitNoNearPosition(SEXP xp, SEXP x, SEXP y, SEXP z,
  Rcpp::XPtr<SnnsCLib> snnsCLib(xp);
 
   PosType position;
-  position.x = Rcpp::as<short>(x);
-  position.y = Rcpp::as<short>(y);
-  position.z = Rcpp::as<short>(z);
+  position.x = Rcpp::as<int>(x);
+  position.y = Rcpp::as<int>(y);
+  position.z = Rcpp::as<int>(z);
 
   int p2 = Rcpp::as<int>(subnet_no);
   int p3 = Rcpp::as<int>(range);
@@ -1143,9 +1143,9 @@ RcppExport SEXP SnnsCLib__setRemapFunc(SEXP xp, SEXP name, SEXP parameterInArray
   float p2[NO_OF_REMAP_PARAMS];
   for(int i=0;i<NO_OF_REMAP_PARAMS;i++) p2[i]=0;
 
-  int n = params.size();
+  long n = params.size();
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p2[i] = static_cast<float>(params(i));
   }
 
@@ -1159,10 +1159,10 @@ RcppExport SEXP SnnsCLib__updateNet(SEXP xp, SEXP parameterInArray) {
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
   float* p1 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
@@ -1196,11 +1196,11 @@ RcppExport SEXP SnnsCLib__initializeNet(SEXP xp, SEXP parameterInArray) {
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
 
   float* p1 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
@@ -1264,11 +1264,11 @@ RcppExport SEXP SnnsCLib__learnAllPatterns(SEXP xp, SEXP parameterInArray) {
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
 
   float* p1 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
@@ -1296,11 +1296,11 @@ RcppExport SEXP SnnsCLib__testAllPatterns(SEXP xp, SEXP parameterInArray) {
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
 
   float* p1 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
@@ -1342,10 +1342,10 @@ RcppExport SEXP SnnsCLib__learnSinglePattern(SEXP xp, SEXP pattern_no, SEXP para
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
   float* p2 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p2[i] = static_cast<float>(params(i));
   }
 
@@ -1390,10 +1390,10 @@ RcppExport SEXP SnnsCLib__testSinglePattern(SEXP xp, SEXP pattern_no, SEXP param
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
   float* p2 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p2[i] = static_cast<float>(params(i));
   }
 
@@ -1444,10 +1444,10 @@ RcppExport SEXP SnnsCLib__learnAllPatternsFF(SEXP xp, SEXP parameterInArray) {
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
   float* p1 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
@@ -1491,10 +1491,10 @@ RcppExport SEXP SnnsCLib__learnSinglePatternFF(SEXP xp, SEXP pattern_no, SEXP pa
 
   Rcpp::NumericVector params(parameterInArray);
 
-  int n = params.size();
+  long n = params.size();
   float* p2 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p2[i] = static_cast<float>(params(i));
   }
 
@@ -1859,23 +1859,23 @@ RcppExport SEXP SnnsCLib__DefTrainSubPatXX(SEXP xp, SEXP insize, SEXP outsize, S
   std::vector<int> p_max_n_pos(MAX_NO_OF_VAR_DIM, 0);
 
   for (int i=0; (i<p1.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
-    p_insize[i] = p1(i);
+    p_insize[i] = (int) p1(i);
   }
 
   for (int i=0; (i<p2.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
-    p_outsize[i] = p2(i);
+    p_outsize[i] = (int) p2(i);
   }
 
   for (int i=0; (i<p3.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
-    p_instep[i] = p3(i);
+    p_instep[i] = (int) p3(i);
   }
 
   for (int i=0; (i<p4.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
-    p_outstep[i] = p4(i);
+    p_outstep[i] = (int) p4(i);
   }
 
   for (int i=0; (i<p5.size()) && (i<MAX_NO_OF_VAR_DIM); i++) {
-    p_max_n_pos[i] = p5(i);
+    p_max_n_pos[i] = (int) p5(i);
   }
 
 /*
@@ -1997,10 +1997,10 @@ RcppExport SEXP SnnsCLib__saveResultParam(SEXP xp, SEXP filename, SEXP create,
 
   Rcpp::NumericVector params(Update_param_array);
 
-  int n = params.size();
+  long n = params.size();
   float* p7 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p7[i] = static_cast<float>(params(i));
   }
 
@@ -2459,18 +2459,18 @@ RcppExport SEXP SnnsCLib__elman_createNet(SEXP xp, SEXP layer, SEXP columns, SEX
   Rcpp::NumericVector paramsLayer(layer);
   Rcpp::NumericVector paramsColumns(columns);
 
-  int n = paramsLayer.size();
+  long n = paramsLayer.size();
 
   if(n != paramsColumns.size()) return Rcpp::wrap(-1);
 
   int* p1 = new int[n+1];
   int* p2 = new int[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<int>(paramsLayer(i));
   }
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p2[i] = static_cast<int>(paramsColumns(i));
   }
 
@@ -2753,14 +2753,14 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
   Rcpp::NumericVector units(hidden_units);
   Rcpp::NumericVector params(updateFuncParams);
 
-  int n = params.size();
+  long n = params.size();
   float* p1 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
-  int nUnits = units.size();
+  long nUnits = units.size();
 
   int noPat = Rcpp::as<int>(noOfPatterns);
 
@@ -2776,9 +2776,9 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
 
     float min = 0;
     int argmin = 1;
-    for(int j=1;j<=nUnits; j++) {
+    for(long j=1;j<=nUnits; j++) {
 
-      float currValue = snnsCLib->krui_getUnitOutput(units[j-1]);
+      float currValue = snnsCLib->krui_getUnitOutput((int) units[j-1]);
 
       if(j==1) {
         min = currValue;
@@ -2806,14 +2806,14 @@ RcppExport SEXP SnnsCLib__genericPredictCurrPatSet(SEXP p_xp, SEXP p_units, SEXP
   Rcpp::NumericVector units(p_units);
   Rcpp::NumericVector params(p_updateFuncParams);
 
-  int n = params.size();
+  long n = params.size();
   float* p1 = new float[n+1];
 
-  for (int i=0; i<n; i++) {
+  for (long i=0; i<n; i++) {
     p1[i] = static_cast<float>(params(i));
   }
 
-  int nUnits = units.size();
+  long nUnits = units.size();
 
   int noOfPatterns = snnsCLib->krui_getNoOfPatterns();
 
@@ -2835,8 +2835,8 @@ RcppExport SEXP SnnsCLib__genericPredictCurrPatSet(SEXP p_xp, SEXP p_units, SEXP
     
     snnsCLib->krui_updateNet(p1, n);
     
-    for(int i=0; i < nUnits; i++) {
-      float currValue = snnsCLib->krui_getUnitOutput(units[i]);
+    for(long i=0; i < nUnits; i++) {
+      float currValue = snnsCLib->krui_getUnitOutput((int) units[i]);
       predictions(currentPattern, i) = currValue;
     }
   }
@@ -2889,12 +2889,12 @@ RcppExport SEXP SnnsCLib__createPatSetUtil(SEXP p_xp, SEXP p_iUnits, SEXP p_oUni
 
   for(int i=0; i<x.nrow();i++) {
     for(int j=0; j<x.ncol();j++)  {
-      snnsCLib->krui_setUnitActivation(iUnits[j], x(i,j));
+      snnsCLib->krui_setUnitActivation((int) iUnits[j], x(i,j));
     }
     
     if(targetsExist) {  
       for(int j=0; j<y.ncol();j++)  {
-        snnsCLib->krui_setUnitActivation(oUnits[j], y(i,j));
+        snnsCLib->krui_setUnitActivation((int) oUnits[j], y(i,j));
       }
     }
     snnsCLib->krui_newPattern();

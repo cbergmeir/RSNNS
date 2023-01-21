@@ -141,7 +141,7 @@ krui_err SnnsCLib::bn_kohonen_createNet(int X, int Y, int IUnits, int HUnits)
     
       /* (backward) connect current (hidden) unit with input unit */
       for (j = 1; j <= IUnits; j++) {
-	  ret = krui_createLink( j,0.0);
+	  ret = krui_createLink( j,0.0f);
 	  CHECK_RETURN( ret );
       }
   } 

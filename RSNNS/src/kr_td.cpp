@@ -181,18 +181,18 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
       while (unit_ptr != NULL){
 	  /*  initialization for propagating hidden units  */
 	  /*  clear error values */
-	  unit_ptr->Aux.flint_no = 0.0;
+	  unit_ptr->Aux.flint_no = 0.0f;
 
 	  if (UNIT_HAS_DIRECT_INPUTS(unit_ptr)){
 	      /* this is a reference unit, initialize link weight change */
 	      /* and counter of link usage */
 	      FOR_ALL_LINKS(unit_ptr, link_ptr){
-		  link_ptr->value_b = link_ptr->value_c = 0.0;
+		  link_ptr->value_b = link_ptr->value_c = 0.0f;
 	      }
 	  }
 
 	  /* reset bias-change and td-step-counter before each lerning epoch */
-	  unit_ptr->value_b = unit_ptr->value_c = 0.0;
+	  unit_ptr->value_b = unit_ptr->value_c = 0.0f;
 
 	  unit_ptr->act = (this->*unit_ptr->act_func) (unit_ptr);
 	  if (unit_ptr->out_func == OUT_IDENTITY){
@@ -233,7 +233,7 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
     int                    i; //last_log_layer,
     int                    size;
 
-    sum_error = 0.0;		/*  reset network error  */
+    sum_error = 0.0f;		/*  reset network error  */
     eta = learn_parameter;	/*  store learn_parameter in CPU register  */
 
     /*  calculate address of the output pattern (with number pattern_no + 1) */
@@ -265,7 +265,7 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
 
 	/* adjust bias value  */
 	unit_ptr->value_b += learn_error;
-	unit_ptr->value_c += 1.0;
+	unit_ptr->value_c += 1.0f;
 
 	if (UNIT_HAS_DIRECT_INPUTS( unit_ptr )){ /* the unit has direkt links */
 	    /* error must be saved for each unit of the hiddenlayer */
@@ -273,7 +273,7 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
 		/* adjust link weights and calc. sum of errors of pred. units*/
 		link_ptr->to->Aux.flint_no += link_ptr->weight * error;
 		link_ptr->value_b += learn_error * link_ptr->to->Out.output;
-		link_ptr->value_c += 1.0;
+		link_ptr->value_c += 1.0f;
 	    }
 	}else{ /* the unit has sites: not necessary for TD-Network  */
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr ){
@@ -307,7 +307,7 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
 	    ref_unit = *(unit_ptr->TD.my_topo_ptr + unit_ptr->TD.target_offset);
 	    /*	adjust bias value  */
 	    ref_unit->value_b += learn_error;
-	    ref_unit->value_c += 1.0;
+	    ref_unit->value_c += 1.0f;
 	
 	    if (UNIT_HAS_DIRECT_INPUTS( ref_unit )){
 		/*  the unit has direkt links	*/
@@ -329,7 +329,7 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
 		       Networks! Add the the delta(ij) of all td_steps in the 
 		       Linkarray(value_c) of the first recept. field  */
 		    link_ptr->value_b += learn_error * (unit_ptr1)->Out.output;
-		    link_ptr->value_c += 1.0;
+		    link_ptr->value_c += 1.0f;
 		}
 	    }
 	}else{
@@ -370,7 +370,7 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
 	while (unit_ptr != NULL){
 	    if (unit_ptr->TD.td_connect_typ==1 && 
 		UNIT_HAS_DIRECT_INPUTS(unit_ptr) &&
-		unit_ptr->value_c > 0.0){
+		unit_ptr->value_c > 0.0f){
 		/* this is a reference unit of a time delay layer */
 
 		/* update bias of reference unit by average bias change */
@@ -471,7 +471,7 @@ krui_err  SnnsCLib::LEARN_TDbackprop( int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(LEARN_TDbackprop_OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_TDbackprop_OutParameter) = 0.0f;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -577,7 +577,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(LEARN_TDBP_McClelland_OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(LEARN_TDBP_McClelland_OutParameter) = 0.0f;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -623,7 +623,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
     int                    size;
 
 
-    sum_error = 0.0;		/*  reset network error  */
+    sum_error = 0.0f;		/*  reset network error  */
     eta = learn_parameter;	/*  store learn_parameter in CPU register  */
 
     /*  calculate address of the output pattern (with number pattern_no + 1) */
@@ -656,7 +656,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 
 	/* adjust bias value  */
 	unit_ptr->value_b += learn_error;
-	unit_ptr->value_c += 1.0;
+	unit_ptr->value_c += 1.0f;
 
 	if (UNIT_HAS_DIRECT_INPUTS( unit_ptr )){
 	    /*  the unit has direkt links  */
@@ -665,7 +665,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 		/* adjust link weights and calc. sum of errors of pred. units*/
 		link_ptr->to->Aux.flint_no += link_ptr->weight * error;
 		link_ptr->value_b += learn_error * link_ptr->to->Out.output;
-		link_ptr->value_c += 1.0;
+		link_ptr->value_c += 1.0f;
 	    }
 	}else{ /* the unit has sites: not necessary for TD-Network  */
 	    FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr ){
@@ -700,7 +700,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 	    ref_unit = *(unit_ptr->TD.my_topo_ptr + unit_ptr->TD.target_offset);
 	    /*	adjust bias value  */
 	    ref_unit->value_b += learn_error;
-	    ref_unit->value_c += 1.0;
+	    ref_unit->value_c += 1.0f;
 	
 	    if (UNIT_HAS_DIRECT_INPUTS( ref_unit )){
 		/*  the unit has direkt links	*/
@@ -722,7 +722,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 		       Networks! Add the the delta(ij) of all td_steps in the 
 		       Linkarray(value_c) of the first recept. field  */
 		    link_ptr->value_b += learn_error * (unit_ptr1)->Out.output;
-		    link_ptr->value_c += 1.0;
+		    link_ptr->value_c += 1.0f;
 		}
 	    }
 	}else{
@@ -764,7 +764,7 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 	while (unit_ptr != NULL){
 	    if (unit_ptr->TD.td_connect_typ==1 && 
 		UNIT_HAS_DIRECT_INPUTS(unit_ptr) &&
-		unit_ptr->value_c > 0.0){
+		unit_ptr->value_c > 0.0f){
 		/* this is a reference unit of a time delay layer */
 
 		/* update bias of reference unit by average bias change */
@@ -818,7 +818,7 @@ krui_err  SnnsCLib::TEST_TDbackprop( int start_pattern, int end_pattern,
 	return (KernelErrorCode);
 
 
-    NET_ERROR(TEST_TDbackprop_OutParameter) = 0.0;	/* reset network error value  */
+    NET_ERROR(TEST_TDbackprop_OutParameter) = 0.0f;	/* reset network error value  */
 
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
@@ -862,7 +862,7 @@ krui_err  SnnsCLib::TEST_TDbackprop( int start_pattern, int end_pattern,
     //int                    last_log_layer;
     int                    size;
 
-    sum_error = 0.0;		/*  reset network error  */
+    sum_error = 0.0f;		/*  reset network error  */
     //eta = learn_parameter;	/*  store learn_parameter in CPU register  */
 
     /*  calculate address of the output pattern (with number pattern_no + 1) */

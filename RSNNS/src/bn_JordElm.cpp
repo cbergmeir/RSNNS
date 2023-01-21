@@ -278,19 +278,19 @@
 
   /* ---------------------------   create links  ----------------------------*/
 
-  error_code = connectFull     (i_unit, IUnits, h_unit, HUnits, 0.0) ;
+  error_code = connectFull     (i_unit, IUnits, h_unit, HUnits, 0.0f) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = connectFull     (h_unit, HUnits, o_unit, OUnits, 0.0) ;
+  error_code = connectFull     (h_unit, HUnits, o_unit, OUnits, 0.0f) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = connectFull     (s_unit, OUnits, h_unit, HUnits, 0.0) ;
+  error_code = connectFull     (s_unit, OUnits, h_unit, HUnits, 0.0f) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = connectOneToOne (o_unit, s_unit, OUnits, 0.0) ;
+  error_code = connectOneToOne (o_unit, s_unit, OUnits, 0.0f) ;
   IF_ERROR_RETURN (error_code) ;
 
-  error_code = connectSelfRec  (s_unit, OUnits, 0.0) ; 
+  error_code = connectSelfRec  (s_unit, OUnits, 0.0f) ; 
   IF_ERROR_RETURN (error_code) ;
 
 
@@ -398,7 +398,7 @@ Parameters:
 
   /* ---------------------------   create links  ----------------------------*/
 
-  error_code = connectFull (i_unit, layer[0], h_unit[1], layer[1], 0.0) ;
+  error_code = connectFull (i_unit, layer[0], h_unit[1], layer[1], 0.0f) ;
   IF_ERROR_RETURN (error_code) ;
 
   for (i = 1 ; i < no_of_hidden_layers ; i++)

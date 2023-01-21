@@ -1710,7 +1710,7 @@ Patterns SnnsCLib::kr_getSubPatData(int pat_no, int sub_no, int io_type, int *si
     int subpos[MAX_NO_OF_VAR_DIM];
     float *data;
     krui_err err;
-    //static float kr_getSubPatData_dummy_data = 0.0;
+    //static float kr_getSubPatData_dummy_data = 0.0f;
     int intsize;
 
     TRACE_IN();

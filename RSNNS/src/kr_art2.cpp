@@ -722,7 +722,7 @@ FlintType  SnnsCLib::kra2_L2_Norm (int Layer)
    case ART2_R_LAY:
       return (NormR);
    default :
-      return (0.0);
+      return (0.0f);
    } /* switch */
 } /* kra2_L2_Norm () */
 /*___________________________________________________________________________*/
@@ -1135,7 +1135,7 @@ void   SnnsCLib::kra2_set_fix_weight (struct Unit *src_unit, struct Unit *trgt_u
 FlintType SnnsCLib::kra2_compute_l2_norm (int Layer)
 {
     TopoPtrArray    topo_ptr = topo_layer[Layer-1];
-    FlintType       sum = 0.0;
+    FlintType       sum = 0.0f;
     FlintType       val;
 
    while (*topo_ptr != NULL) {
@@ -2235,7 +2235,7 @@ krui_err SnnsCLib::kra2_init_i_act (void)
 
    FOR_ALL_UNITS (unit_ptr) {
 
-         unit_ptr->i_act = 0.0;
+         unit_ptr->i_act = 0.0f;
 
    } /*FOR_ALL_UNITS*/
 

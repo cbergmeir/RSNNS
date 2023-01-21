@@ -109,7 +109,7 @@ krui_err  SnnsCLib::REMAP_binary(float *pat_data, int pat_size,
     int   i;
 
     for(i=0; i<pat_size; i++){
-	*pat_data = (*pat_data < 0.5)? 0.0: 1.0;
+	*pat_data = (*pat_data < 0.5)? 0.0: 1.0f;
 	pat_data++;
     }
 
@@ -132,7 +132,7 @@ krui_err  SnnsCLib::REMAP_invers(float *pat_data, int pat_size,
     int   i;
 
     for(i=0; i<pat_size; i++){
-	*pat_data = (*pat_data < 0.5)? 1.0: 0.0;
+	*pat_data = (*pat_data < 0.5)? 1.0: 0.0f;
 	pat_data++;
     }
 
@@ -184,14 +184,14 @@ krui_err  SnnsCLib::REMAP_norm(float *pat_data, int pat_size,
 		     float *remap_params, int no_of_remap_params)
 {
     int i;
-    double length = 0.0;
+    double length = 0.0f;
 
     for(i=0; i<pat_size; i++){
 	length += pat_data[i] * pat_data[i];
     }
     length = sqrt(length);
 
-    if(length == 0.0)
+    if(length == 0.0f)
 	return(KRERR_CANT_NORM);
 
     for(i=0; i<pat_size; i++)

@@ -113,25 +113,25 @@ krui_err  SnnsCLib::kra1_init_i_act (double rho)
       case ART1_SPEC_LAY:
          switch (unit_ptr->lun) {
          case ART1_G1_UNIT :
-            unit_ptr->i_act = 0.0;
+            unit_ptr->i_act = 0.0f;
             break;
          case ART1_RI_UNIT :
-            unit_ptr->i_act = 1.0;
+            unit_ptr->i_act = 1.0f;
             break;
          case ART1_RG_UNIT :
-            unit_ptr->i_act = 1.0;
+            unit_ptr->i_act = 1.0f;
             break;
          case ART1_RHO_UNIT :
             unit_ptr->i_act = (FlintType) rho;
             break;
          default :
-            unit_ptr->i_act = 0.0;
+            unit_ptr->i_act = 0.0f;
             break;
          } /*switch*/
          break;
 
       default :
-         unit_ptr->i_act = 0.0;
+         unit_ptr->i_act = 0.0f;
          break;
       } /*switch*/
 

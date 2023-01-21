@@ -182,7 +182,7 @@ np_pages                     = NULL;
 
 //former static variables
 
-kr_getSubPatData_dummy_data = 0.0;
+kr_getSubPatData_dummy_data = 0.0f;
 
 kr_np_order_pat_entries_shuffle = 0;
 kr_np_order_pat_entries_c_start = 0;
@@ -470,9 +470,9 @@ UPDATE_ART2_syncPropagate_param_c = 0;
 UPDATE_ART2_syncPropagate_param_d = 0; 
 UPDATE_ART2_syncPropagate_theta = 0;
 
-UPDATE_ARTMAP_syncPropagate_rho_a = -1.0;
-UPDATE_ARTMAP_syncPropagate_rho_b = -1.0;
-UPDATE_ARTMAP_syncPropagate_rho   = -1.0;
+UPDATE_ARTMAP_syncPropagate_rho_a = -1.0f;
+UPDATE_ARTMAP_syncPropagate_rho_b = -1.0f;
+UPDATE_ARTMAP_syncPropagate_rho   = -1.0f;
 
 //------------------------------------------------
 // cc_display.h
@@ -504,8 +504,8 @@ continueLearning=0;
 
 dlvq_learn_cycleCounter=0;
 dlvq_learn_noOfTrainingCycles=0;
-dlvq_learn_learnParam1=0.03;
-dlvq_learn_learnParam2=0.03;
+dlvq_learn_learnParam1=0.03f;
+dlvq_learn_learnParam2=0.03f;
 
 dlvq_learn_OutParameter[0] = 0;
 
@@ -655,11 +655,11 @@ cc_data.GLOBAL.pruneOnOff = 0;
 cc_data.GLOBAL.backfittOnOff = 0;
 cc_data.GLOBAL.backfittPatience = 150;
 cc_data.GLOBAL.pruneFunc = SBC;
-cc_data.GLOBAL.addParameters[0]=0.0; 
-cc_data.GLOBAL.addParameters[1]=0.0; 
-cc_data.GLOBAL.addParameters[2]=0.0; 
-cc_data.GLOBAL.addParameters[3]=0.0; 
-cc_data.GLOBAL.addParameters[4]=0.0; 
+cc_data.GLOBAL.addParameters[0]=0.0f; 
+cc_data.GLOBAL.addParameters[1]=0.0f; 
+cc_data.GLOBAL.addParameters[2]=0.0f; 
+cc_data.GLOBAL.addParameters[3]=0.0f; 
+cc_data.GLOBAL.addParameters[4]=0.0f; 
 cc_data.GLOBAL.fastmode=OFF;
 
 cc_data.CAND.covarianceChange = MIN_COVARIANCE_CHANGE;
@@ -735,7 +735,7 @@ cc_actualNetSaved = FALSE;
 ActOfUnit = NULL;
 NetLearnAlgorithm = NO_INC_ALGORITHM;
 
-cc_fse = 0.1;
+cc_fse = 0.1f;
 
 cc_learningFunction = 0;
 
@@ -764,21 +764,21 @@ Art2_nc_unit = NULL;
 
 /* Global variable for parameter values */
 
-Param_rho   = 0.8;
-Param_a     = 0.0;
-Param_b     = 0.0;
-Param_c     = 0.0;
-Param_d     = 0.0;
+Param_rho   = 0.8f;
+Param_a     = 0.0f;
+Param_b     = 0.0f;
+Param_c     = 0.0f;
+Param_d     = 0.0f;
 Param_theta = 0.5;
 
 /* Global variables for vector norms */
 
-NormInp     = 0.0;
-NormW       = 0.0;
-NormU       = 0.0;
-NormV       = 0.0;
-NormP       = 0.0;
-NormR       = 0.0;
+NormInp     = 0.0f;
+NormW       = 0.0f;
+NormU       = 0.0f;
+NormV       = 0.0f;
+NormP       = 0.0f;
+NormR       = 0.0f;
 
 NoOfDelaySteps = 0;
 

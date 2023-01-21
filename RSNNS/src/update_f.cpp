@@ -418,7 +418,7 @@ krui_err  SnnsCLib::UPDATE_CPNPropagate(float *parameterArray, int NoOfParams)
     }
 
     topo_ptr = topo_ptr_array;
-    sum = 0.0;
+    sum = 0.0f;
 
     /*  propagagate all input units  */
     while ((unit_ptr = *++topo_ptr) != NULL){
@@ -427,7 +427,7 @@ krui_err  SnnsCLib::UPDATE_CPNPropagate(float *parameterArray, int NoOfParams)
 	sum += unit_ptr->Out.output * unit_ptr->Out.output;
     }
   
-    if (sum != 0.0)
+    if (sum != 0.0f)
 	/* normalize the inputvector */
 	update_f_normalize_inputvector( sum );
 
@@ -443,7 +443,7 @@ krui_err  SnnsCLib::UPDATE_CPNPropagate(float *parameterArray, int NoOfParams)
     /*  propagagate all hidden units  */
     while ((unit_ptr = *++topo_ptr) != NULL){
 	/* this is a hidden unit */
-	unit_ptr_net = 0.0;
+	unit_ptr_net = 0.0f;
 
 	if (unit_ptr->flags & UFLAG_SITES){
 	    /* the unit has sites */
@@ -599,7 +599,7 @@ krui_err  SnnsCLib::UPDATE_ART1_syncPropagate(float *parameterArray, int NoOfPar
 
     UPDATE_ART1_syncPropagate_rho = parameterArray[0];
 
-    if ((UPDATE_ART1_syncPropagate_rho < 0.0) || (UPDATE_ART1_syncPropagate_rho > 1.0)) {
+    if ((UPDATE_ART1_syncPropagate_rho < 0.0f) || (UPDATE_ART1_syncPropagate_rho > 1.0f)) {
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     }
@@ -674,7 +674,7 @@ krui_err  SnnsCLib::UPDATE_ART1_syncPropagate(float *parameterArray, int NoOfPar
        returns a NULL pointer if all recognition units have
        activation 0.0 */
     //winner_ptr = 
-    krart_get_winner (topo_layer[2],1.0);
+    krart_get_winner (topo_layer[2],1.0f);
 
     return (ret_code);
 
@@ -718,7 +718,7 @@ krui_err  SnnsCLib::UPDATE_ART1_Propagate(float *parameterArray, int NoOfParams)
 
     rho = parameterArray[0];
 
-    if ((rho < 0.0) || (rho > 1.0)) {
+    if ((rho < 0.0f) || (rho > 1.0f)) {
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     }
@@ -770,7 +770,7 @@ krui_err  SnnsCLib::UPDATE_ART1_Propagate(float *parameterArray, int NoOfParams)
 	   returns a NULL pointer if all recognition units have
 	   activation 0.0 */
 	//winner_ptr = 
-        krart_get_winner (topo_layer[2],1.0);
+        krart_get_winner (topo_layer[2],1.0f);
 
     } while (!(ART1_CLASSIFIED) && !(ART1_NOT_CLASSIFIABLE));
 
@@ -893,8 +893,8 @@ krui_err  SnnsCLib::UPDATE_ART2_syncPropagate(float *parameterArray, int NoOfPar
 
     /* Check values of the parameters */
 
-    if ((UPDATE_ART2_syncPropagate_rho < 0.0) || (UPDATE_ART2_syncPropagate_rho > 1.0) || (UPDATE_ART2_syncPropagate_param_a <= 0.0) || (UPDATE_ART2_syncPropagate_param_b <= 0.0) ||
-	((UPDATE_ART2_syncPropagate_param_c*UPDATE_ART2_syncPropagate_param_d)/(1-UPDATE_ART2_syncPropagate_param_d) > 1.0) ||(UPDATE_ART2_syncPropagate_theta < 0.0) || (UPDATE_ART2_syncPropagate_theta > 1.0)){
+    if ((UPDATE_ART2_syncPropagate_rho < 0.0f) || (UPDATE_ART2_syncPropagate_rho > 1.0f) || (UPDATE_ART2_syncPropagate_param_a <= 0.0f) || (UPDATE_ART2_syncPropagate_param_b <= 0.0f) ||
+	((UPDATE_ART2_syncPropagate_param_c*UPDATE_ART2_syncPropagate_param_d)/(1-UPDATE_ART2_syncPropagate_param_d) > 1.0f) ||(UPDATE_ART2_syncPropagate_theta < 0.0f) || (UPDATE_ART2_syncPropagate_theta > 1.0f)){
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     } 
@@ -1027,8 +1027,8 @@ krui_err  SnnsCLib::UPDATE_ART2_Propagate(float *parameterArray, int NoOfParams)
 
     /* Check values of the parameters */
 
-    if ((rho < 0.0) || (rho > 1.0) ||(param_a <= 0.0) || (param_b <= 0.0) ||
-	((param_c*param_d)/(1-param_d)>1.0) || (theta<0.0) || (theta>1.0)){
+    if ((rho < 0.0f) || (rho > 1.0f) ||(param_a <= 0.0f) || (param_b <= 0.0f) ||
+	((param_c*param_d)/(1-param_d)>1.0f) || (theta<0.0f) || (theta>1.0f)){
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     }
@@ -1127,9 +1127,9 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
                                     topo_layer[12]: *first map unit
 				    topo_layer[13]: *first special map unit */
     TopoPtrArray topo_ptr;
-    //static float UPDATE_ARTMAP_syncPropagate_rho_a = -1.0;
-    //static float UPDATE_ARTMAP_syncPropagate_rho_b = -1.0;
-    //static float UPDATE_ARTMAP_syncPropagate_rho   = -1.0;
+    //static float UPDATE_ARTMAP_syncPropagate_rho_a = -1.0f;
+    //static float UPDATE_ARTMAP_syncPropagate_rho_b = -1.0f;
+    //static float UPDATE_ARTMAP_syncPropagate_rho   = -1.0f;
     bool         inp_pat_changed   = FALSE;
     bool         rho_has_changed   = FALSE;
 
@@ -1151,8 +1151,8 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
     UPDATE_ARTMAP_syncPropagate_rho   = parameterArray[2];
 
 
-    if((UPDATE_ARTMAP_syncPropagate_rho_a<0.0) || (UPDATE_ARTMAP_syncPropagate_rho_a>1.0) || (UPDATE_ARTMAP_syncPropagate_rho_b<0.0) || (UPDATE_ARTMAP_syncPropagate_rho_b>1.0) ||
-       (UPDATE_ARTMAP_syncPropagate_rho<0.0) || (UPDATE_ARTMAP_syncPropagate_rho>1.0)){
+    if((UPDATE_ARTMAP_syncPropagate_rho_a<0.0f) || (UPDATE_ARTMAP_syncPropagate_rho_a>1.0f) || (UPDATE_ARTMAP_syncPropagate_rho_b<0.0f) || (UPDATE_ARTMAP_syncPropagate_rho_b>1.0f) ||
+       (UPDATE_ARTMAP_syncPropagate_rho<0.0f) || (UPDATE_ARTMAP_syncPropagate_rho>1.0f)){
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     }
@@ -1235,9 +1235,9 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_syncPropagate(float *parameterArray, int NoOfP
     /* look for the recognition unit with the highest activation returns a 
        NULL pointer if all recognition units have activation 0.0 */
     //winner_ptr_a = 
-    krart_get_winner (topo_layer[2],1.0);
+    krart_get_winner (topo_layer[2],1.0f);
     //winner_ptr_b = 
-    krart_get_winner (topo_layer[8],1.0);
+    krart_get_winner (topo_layer[8],1.0f);
 
     return (ret_code);
 
@@ -1294,8 +1294,8 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_Propagate(float *parameterArray, int NoOfParam
     rho_b = parameterArray[1];
     rho   = parameterArray[2];
 
-    if ((rho_a < 0.0) || (rho_a > 1.0) || (rho_b < 0.0) ||
-	(rho_b > 1.0) || (rho   < 0.0) || (rho   > 1.0)){
+    if ((rho_a < 0.0f) || (rho_a > 1.0f) || (rho_b < 0.0f) ||
+	(rho_b > 1.0f) || (rho   < 0.0f) || (rho   > 1.0f)){
 	ret_code = KRERR_PARAMETERS;
 	return (ret_code);
     } 
@@ -1342,9 +1342,9 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_Propagate(float *parameterArray, int NoOfParam
 	   returns a NULL pointer if all recognition units have
 	   activation 0.0 */
 	//winner_ptr_a = 
-        krart_get_winner (topo_layer[2],1.0);
+        krart_get_winner (topo_layer[2],1.0f);
 	//winner_ptr_b = 
-        krart_get_winner (topo_layer[8],1.0);
+        krart_get_winner (topo_layer[8],1.0f);
 
     } while (!(ARTMAP_CLASSIFIED) && !(ARTMAP_NOT_CLASSIFIABLE));
 
@@ -1496,10 +1496,10 @@ krui_err SnnsCLib::UPDATE_DLVQ_Propagate(float parameterArray[], int NoOfParams)
 	inputUnitPtr->Out.output = inputUnitPtr->act;
     }
   
-    maxAct = -1.0;
+    maxAct = -1.0f;
  
     FOR_ALL_HIDDEN_UNITS(hiddenUnitPtr,h) {
-	hiddenUnitPtr->Out.output = hiddenUnitPtr->act = act = 0.0;
+	hiddenUnitPtr->Out.output = hiddenUnitPtr->act = act = 0.0f;
 	FOR_ALL_LINKS(hiddenUnitPtr,linkPtr) {
 	    act += linkPtr->weight * linkPtr->to->Out.output;
 	}
@@ -1509,7 +1509,7 @@ krui_err SnnsCLib::UPDATE_DLVQ_Propagate(float parameterArray[], int NoOfParams)
 	}
     }
 
-    maxActivatedUnitPtr->Out.output = maxActivatedUnitPtr->act = 1.0;
+    maxActivatedUnitPtr->Out.output = maxActivatedUnitPtr->act = 1.0f;
     (*FirstOutputUnitPtr)->Out.output = 
 	(*FirstOutputUnitPtr)->act = maxActivatedUnitPtr->bias;
     return(KRERR_NO_ERROR);
@@ -1573,7 +1573,7 @@ krui_err  SnnsCLib::UPDATE_BPTT(float *parameterArray, int NoOfParams)
     first_hidden_ptr = topo_ptr;
 
     if (all_zero_input) {	/* clear netact-copies */
-	FOR_ALL_UNITS( unit_ptr ) unit_ptr->i_act = 0.0;
+	FOR_ALL_UNITS( unit_ptr ) unit_ptr->i_act = 0.0f;
     }
 
     /* copy last unit_ptr->i_act to unit_ptr->Out.output */
@@ -1993,7 +1993,7 @@ krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
  
     FOR_ALL_UNITS(unit_ptr) {
 	/* get the netInput of this unit */
-	sum =  0.0; //aux = 0.0;
+	sum =  0.0f; //aux = 0.0f;
 	if (GET_FIRST_UNIT_LINK( unit_ptr )){
 	    do
 		sum += GET_WEIGHTED_OUTPUT;
@@ -2023,11 +2023,11 @@ krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
 
     /*    update unit activations    */
     FOR_ALL_UNITS(unit_ptr){
-	unit_ptr->act =  0.0;
+	unit_ptr->act =  0.0f;
     }
     for(i=0; i<= NoOfOnes-1; i++){
 	unit_ptr = unitsToUpdate[i];
-	unit_ptr->act =  1.0;
+	unit_ptr->act =  1.0f;
     }
 
     /* output update for resultfile */
@@ -2251,7 +2251,7 @@ GROUP: Update Functions for the use with the GA tool Enzo
   while ((unit_ptr = *++topo_ptr) != NULL)
     {  /*  topo_ptr points to a (topological sorted) unit stucture */
     /*  clear error values  */
-    unit_ptr->Aux.flint_no = 0.0;
+    unit_ptr->Aux.flint_no = 0.0f;
 
     /*  calculate the activation value of the unit: 
 	call the activation function if needed  */
@@ -2269,7 +2269,7 @@ GROUP: Update Functions for the use with the GA tool Enzo
   while ((unit_ptr = *++topo_ptr) != NULL)
     {  /*  topo_ptr points to a (topological sorted) unit stucture */
     /*  clear error values  */
-    unit_ptr->Aux.flint_no = 0.0;
+    unit_ptr->Aux.flint_no = 0.0f;
 
     /*  calculate the activation value of the unit: 
 	call the activation function if needed  */

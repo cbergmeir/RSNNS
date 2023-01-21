@@ -4803,19 +4803,19 @@ char  *SnnsCLib::krui_topo_err_msg(void)
     if (topo_msg.dest_error_unit > 0) {
         if (dest_unit_name == NULL)
             snprintf( krui_topo_err_msg_msg1, sizeof(krui_topo_err_msg_msg1), "Unit #%d is the destination unit. ", 
-		     topo_msg.dest_error_unit );
+		     (int) topo_msg.dest_error_unit );
         else
             snprintf( krui_topo_err_msg_msg1, sizeof(krui_topo_err_msg_msg1), "Unit #%d (%s) is the destination unit. ", 
-		     topo_msg.dest_error_unit, dest_unit_name );
+		     (int) topo_msg.dest_error_unit, dest_unit_name );
     }
 
     if (topo_msg.src_error_unit > 0) {
         if (src_unit_name == NULL)
             snprintf( krui_topo_err_msg_msg2, sizeof(krui_topo_err_msg_msg2), "Unit #%d is the source unit. ", 
-		     topo_msg.src_error_unit );
+		     (int) topo_msg.src_error_unit );
         else
             snprintf( krui_topo_err_msg_msg2, sizeof(krui_topo_err_msg_msg2), "Unit #%d (%s) is the source unit. ", 
-		     topo_msg.src_error_unit, src_unit_name );
+		     (int) topo_msg.src_error_unit, src_unit_name );
     }
 
     if (topo_msg.dest_error_unit == 0)
