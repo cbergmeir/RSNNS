@@ -219,7 +219,7 @@ void    SnnsCLib::krm_releaseAllLinks(struct Link *first_link_ptr)
 ******************************************************************************/
 void  SnnsCLib::krm_releaseLinkArrays(void)
 {
-  register struct Link  *tmp_ptr1, *tmp_ptr2;
+   struct Link  *tmp_ptr1, *tmp_ptr2;
 
 
   NoOfLinks = NoOfAllocLinks = 0;
@@ -498,10 +498,10 @@ GROUP: Unit Functions
 ******************************************************************************/
 void  SnnsCLib::krm_unitArrayGC(void)
 {
-  register struct Link   *link_ptr;
-  register struct Site   *site_ptr;
-  register struct Unit   *unit_ptr;
-  register struct Unit   *new_unit_ptr;
+   struct Link   *link_ptr;
+   struct Site   *site_ptr;
+   struct Unit   *unit_ptr;
+   struct Unit   *new_unit_ptr;
   struct Unit   *dest_unit_ptr;
 
 
@@ -574,9 +574,9 @@ void  SnnsCLib::krm_unitArrayGC(void)
 ******************************************************************************/
  void    SnnsCLib::krm_relocateLinkPtrs(long int offset)
 {
-  register struct Link   *link_ptr;
-  register struct Site   *site_ptr;
-  register struct Unit   *unit_ptr;
+   struct Link   *link_ptr;
+   struct Site   *site_ptr;
+   struct Unit   *unit_ptr;
 
 
   FOR_ALL_UNITS( unit_ptr )
@@ -676,7 +676,7 @@ krui_err  SnnsCLib::krm_allocUnits(int N)
 ******************************************************************************/
 int  SnnsCLib::krm_getUnit(void)
 {
-  register int   unit_no;
+   int   unit_no;
   int ret_fact = 1;
 
   KernelErrorCode = KRERR_NO_ERROR;

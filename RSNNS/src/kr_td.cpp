@@ -87,10 +87,10 @@
 ******************************************************************************/
  krui_err SnnsCLib::initializeTDBackprop(void)
 {
-  register FlagWord      flags;
-  register struct Link   *link_ptr;
-  register struct Unit   *unit_ptr;
-  register struct Site   *site_ptr; 
+   FlagWord      flags;
+   struct Link   *link_ptr;
+   struct Unit   *unit_ptr;
+   struct Site   *site_ptr; 
 
   /*  set unit's bias to zero  */
   FOR_ALL_UNITS( unit_ptr ){
@@ -133,10 +133,10 @@
 ******************************************************************************/
 void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
 { 
-  register struct Unit    *unit_ptr;
-  register struct Link    *link_ptr;
-  register Patterns       in_pat;
-  register TopoPtrArray   topo_ptr;
+   struct Unit    *unit_ptr;
+   struct Link    *link_ptr;
+   Patterns       in_pat;
+   TopoPtrArray   topo_ptr;
   int                     i;
 
   if (pattern_no >= 0){
@@ -223,13 +223,13 @@ void  SnnsCLib::propagateTDNetForward(int pattern_no, int sub_pat_no)
 				     float learn_parameter, 
 				     float delta_max)
 { 
-    register struct Link   *link_ptr;
-    register struct Site   *site_ptr;
-    register struct Unit   *unit_ptr, *unit_ptr1 ;
-    register struct Unit   *ref_unit;
-    register Patterns      out_pat;
-    register float         error,  sum_error, eta, devit, learn_error;
-    register TopoPtrArray  topo_ptr;
+     struct Link   *link_ptr;
+     struct Site   *site_ptr;
+     struct Unit   *unit_ptr, *unit_ptr1 ;
+     struct Unit   *ref_unit;
+     Patterns      out_pat;
+     float         error,  sum_error, eta, devit, learn_error;
+     TopoPtrArray  topo_ptr;
     int                    i; //last_log_layer,
     int                    size;
 
@@ -612,13 +612,13 @@ krui_err  SnnsCLib::LEARN_TDBP_McClelland( int start_pattern, int end_pattern,
 					   float learn_parameter,
 					   float delta_max)
 { 
-    register struct Link   *link_ptr;
-    register struct Site   *site_ptr;
-    register struct Unit   *unit_ptr, *unit_ptr1 ;
-    register struct Unit   *ref_unit;
-    register Patterns      out_pat;
-    register float         error,  sum_error,  eta,  devit, learn_error;
-    register TopoPtrArray  topo_ptr;
+     struct Link   *link_ptr;
+     struct Site   *site_ptr;
+     struct Unit   *unit_ptr, *unit_ptr1 ;
+     struct Unit   *ref_unit;
+     Patterns      out_pat;
+     float         error,  sum_error,  eta,  devit, learn_error;
+     TopoPtrArray  topo_ptr;
     int                    i; //last_log_layer, 
     int                    size;
 
@@ -855,10 +855,10 @@ krui_err  SnnsCLib::TEST_TDbackprop( int start_pattern, int end_pattern,
 				     float learn_parameter, 
 				     float delta_max)
 { 
-    register struct Unit   *unit_ptr;
-    register Patterns      out_pat;
-    register float         sum_error,  devit; //eta,
-    register TopoPtrArray  topo_ptr;
+     struct Unit   *unit_ptr;
+     Patterns      out_pat;
+     float         sum_error,  devit; //eta,
+     TopoPtrArray  topo_ptr;
     //int                    last_log_layer;
     int                    size;
 

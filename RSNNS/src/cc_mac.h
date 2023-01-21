@@ -121,7 +121,6 @@
 #define STOP_LEARNING 0
 
 #define CC_MAX_VALUE  0.1 
-#define FLOAT_MAX 1E+37
 
 
 

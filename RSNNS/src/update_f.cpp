@@ -93,7 +93,7 @@ GROUP: Update Functions
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_syncPropagate(float *parameterArray, int NoOfParams)
 {
-    register struct Unit   *unit_ptr;
+     struct Unit   *unit_ptr;
 
 
     /*    update unit activations first  */
@@ -130,7 +130,7 @@ krui_err  SnnsCLib::UPDATE_syncPropagate(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_serialPropagate(float *parameterArray, int NoOfParams)
 {
-    register struct Unit   *unit_ptr;
+     struct Unit   *unit_ptr;
 
 
     /*    update unit activations and outputs */
@@ -166,8 +166,8 @@ krui_err  SnnsCLib::UPDATE_serialPropagate(float *parameterArray, int NoOfParams
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_randomOrderPropagate(float *parameterArray, int NoOfParams)
 {
-    register struct Unit   *unit_ptr, *u_array;
-    register int   no_of_units;
+     struct Unit   *unit_ptr, *u_array;
+     int   no_of_units;
     int   n;
 
 
@@ -207,8 +207,8 @@ krui_err  SnnsCLib::UPDATE_randomOrderPropagate(float *parameterArray, int NoOfP
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_randomPermutPropagate(float *parameterArray, int NoOfParams)
 {
-    register struct Unit	 *unit_ptr;
-    register TopoPtrArray  topo_ptr;
+     struct Unit	 *unit_ptr;
+     TopoPtrArray  topo_ptr;
     int  ret_code;
 
 
@@ -252,8 +252,8 @@ krui_err  SnnsCLib::UPDATE_randomPermutPropagate(float *parameterArray, int NoOf
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_topologicalPropagate(float *parameterArray, int NoOfParams)
 {
-    register struct Unit  *unit_ptr;
-    register TopoPtrArray  topo_ptr;
+     struct Unit  *unit_ptr;
+     TopoPtrArray  topo_ptr;
     int  ret_code;
 
 
@@ -321,8 +321,8 @@ krui_err  SnnsCLib::UPDATE_topologicalPropagate(float *parameterArray, int NoOfP
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_KohonenPropagate(float *parameterArray, int NoOfParams)
 {
-    register struct Unit  *unit_ptr;
-    register TopoPtrArray  topo_ptr;
+     struct Unit  *unit_ptr;
+     TopoPtrArray  topo_ptr;
     int  ret_code;
 
 
@@ -374,8 +374,8 @@ krui_err  SnnsCLib::UPDATE_KohonenPropagate(float *parameterArray, int NoOfParam
 ******************************************************************************/
  void SnnsCLib::update_f_normalize_inputvector(float sum)
 {
-    register struct Unit *unit_ptr;
-    register float amount;
+     struct Unit *unit_ptr;
+     float amount;
 
 
     amount = 1.0 / sqrt( sum );
@@ -399,10 +399,10 @@ krui_err  SnnsCLib::UPDATE_KohonenPropagate(float *parameterArray, int NoOfParam
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_CPNPropagate(float *parameterArray, int NoOfParams)
 {
-    register struct Unit   *unit_ptr, *winner_ptr;
-    register struct Site   *site_ptr;
-    register struct Link   *link_ptr;
-    register TopoPtrArray  topo_ptr;
+     struct Unit   *unit_ptr, *winner_ptr;
+     struct Site   *site_ptr;
+     struct Link   *link_ptr;
+     TopoPtrArray  topo_ptr;
 
     float maximum, unit_ptr_net, sum; 
     int  ret_code;
@@ -491,8 +491,8 @@ krui_err  SnnsCLib::UPDATE_CPNPropagate(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_TimeDelayPropagate(float parameterArray[], int NoOfParams )
 {
-    register struct Unit    *unit_ptr;
-    register TopoPtrArray   topo_ptr;
+     struct Unit    *unit_ptr;
+     TopoPtrArray   topo_ptr;
     int                     ret_code;
 
     /* initialization if necessary */
@@ -1365,8 +1365,8 @@ krui_err  SnnsCLib::UPDATE_ARTMAP_Propagate(float *parameterArray, int NoOfParam
 ******************************************************************************/
 krui_err SnnsCLib::UPDATE_CC_Propagate(float parameterArray[],  int NoOfParams)
 {
-    register struct Unit  *inputUnitPtr,*outputUnitPtr,*hiddenUnitPtr,*unitPtr;
-    register int dummy,o;
+     struct Unit  *inputUnitPtr,*outputUnitPtr,*hiddenUnitPtr,*unitPtr;
+     int dummy,o;
   
     if(NetModified || LearnFuncHasChanged) {
     
@@ -1539,9 +1539,9 @@ krui_err SnnsCLib::UPDATE_DLVQ_Propagate(float parameterArray[], int NoOfParams)
 krui_err  SnnsCLib::UPDATE_BPTT(float *parameterArray, int NoOfParams)
 {
     krui_err ret_code;
-    register struct Unit   *unit_ptr;
-    register TopoPtrArray  topo_ptr;
-    register TopoPtrArray  first_hidden_ptr;
+     struct Unit   *unit_ptr;
+     TopoPtrArray  topo_ptr;
+     TopoPtrArray  first_hidden_ptr;
     int all_zero_input=1;	/* flag to reset net-copies */
     int done_hidden;
 
@@ -1635,9 +1635,9 @@ krui_err  SnnsCLib::UPDATE_BPTT(float *parameterArray, int NoOfParams)
 krui_err  SnnsCLib::UPDATE_BAM(float *parameterArray, int NoOfParams)
 {
     krui_err ret_code;
-    register struct Unit   *unit_ptr;
-    register TopoPtrArray  topo_ptr;
-    register TopoPtrArray  first_hidden_ptr;
+     struct Unit   *unit_ptr;
+     TopoPtrArray  topo_ptr;
+     TopoPtrArray  first_hidden_ptr;
     int done_hidden;
     FlintType new_output;
 
@@ -1715,8 +1715,8 @@ krui_err  SnnsCLib::UPDATE_BAM(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_JE_Propagate (float *parameterArray, int NoOfParams)
 {
-    register struct Unit  *unit_ptr ;
-    register TopoPtrArray  topo_ptr, help_ptr ;
+     struct Unit  *unit_ptr ;
+     TopoPtrArray  topo_ptr, help_ptr ;
     int      ret_code, i ;
 
 
@@ -1790,8 +1790,8 @@ krui_err  SnnsCLib::UPDATE_JE_Propagate (float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_JE_Special (float *parameterArray, int NoOfParams)
 {
-    register struct Unit  *unit_ptr  ;
-    register TopoPtrArray  topo_ptr, help_ptr ;
+     struct Unit  *unit_ptr  ;
+     TopoPtrArray  topo_ptr, help_ptr ;
     int      ret_code, i ;
 
 
@@ -1882,7 +1882,7 @@ krui_err  SnnsCLib::UPDATE_JE_Special (float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_syncPropagateHop(float *parameterArray, int NoOfParams)
 {
-    register struct Unit   *unit_ptr; 
+     struct Unit   *unit_ptr; 
 
     /* update unit outputs first, because the patterns set only          */
     /* the activations of the input units, and they would be overwritten */
@@ -1955,11 +1955,11 @@ krui_err  SnnsCLib::UPDATE_syncPropagateHop(float *parameterArray, int NoOfParam
 ******************************************************************************/
 krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
 {
-    register struct Unit   *unit_ptr; 
+     struct Unit   *unit_ptr; 
     FlintType               sum, min; //aux,
     //ACT_FUNC_DEFS    /* defines link- and site-pointer */
-    register struct Link  *__link_ptr;
-    register int            i;
+     struct Link  *__link_ptr;
+     int            i;
     int                     NoOfOnes, where;
     struct Unit            **unitsToUpdate;
     FlintType              *netInputArray;
@@ -2058,7 +2058,7 @@ krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err SnnsCLib::UPDATE_RM_Propagate (float *parameterArray, int NoOfParams)
 {
-  register struct Unit   *unit_ptr;
+   struct Unit   *unit_ptr;
   int t, NoTimes; 
 
   NoTimes = parameterArray[0];
@@ -2108,10 +2108,10 @@ GROUP: Update Functions for the use with the GA tool Enzo
 ******************************************************************************/
  krui_err  SnnsCLib::ENZO_PROPAGATE_error_back(void)
 {
-  register struct Link *link_ptr;
-  register struct Site *site_ptr;
-  register struct Unit *unit_ptr;
-  register float error;                    /*  error  */
+   struct Link *link_ptr;
+   struct Site *site_ptr;
+   struct Unit *unit_ptr;
+   float error;                    /*  error  */
   TopoPtrArray topo_ptr;
   int ret_code;
 
@@ -2208,8 +2208,8 @@ GROUP: Update Functions for the use with the GA tool Enzo
 ******************************************************************************/
  krui_err SnnsCLib::ENZO_PROPAGATE_ff(void)
 {
-  register struct Unit   *unit_ptr;
-  register TopoPtrArray     topo_ptr;
+   struct Unit   *unit_ptr;
+   TopoPtrArray     topo_ptr;
   int ret_code;
 
   if (NetModified || (TopoSortID != TOPOLOGICAL_FF))

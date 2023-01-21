@@ -101,10 +101,10 @@ SnnsCLib::LEARN_MonteCarlo(int start_pattern, int end_pattern, float *parameterI
     //static float    LEARN_MonteCarlo_OutParameter[1]; /* LEARN_MonteCarlo_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
     float           error;
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
 
     if (NoOfInParams < 2)
 	return (KRERR_PARAMETERS); /* Not enough input parameters  */
@@ -275,9 +275,9 @@ SnnsCLib::calculate_WTA_error(int pattern_no, int sub_pat_no)
 {
     int             j, wta_pos, out_pat_pos, size;
     float           wta_value, out_pat_value;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     TopoPtrArray topo_ptr;
 
     /* calculate address of the output pattern (with number pattern_no + 1) */
     out_pat = kr_getSubPatData(pattern_no, sub_pat_no, OUTPUT, &size);
@@ -343,9 +343,9 @@ SnnsCLib::calculate_w_WTA_error(int pattern_no, int sub_pat_no)
 {
     int             j, wta_pos, out_pat_pos, size;
     float           wta_value, out_pat_value, sum_value;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     TopoPtrArray topo_ptr;
 
     /* calculate address of the output pattern (with number pattern_no + 1) */
     out_pat = kr_getSubPatData(pattern_no, sub_pat_no, OUTPUT, &size);
@@ -419,9 +419,9 @@ SnnsCLib::calculate_SS_error(int pattern_no, int sub_pat_no)
 {
     int             size;
     float           sum_error, error;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     TopoPtrArray topo_ptr;
 
     /* calculate address of the output pattern (with number pattern_no + 1) */
     out_pat = kr_getSubPatData(pattern_no, sub_pat_no, OUTPUT, &size);
@@ -530,10 +530,10 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
     int             ret_code, pattern_no, sub_pat_no;
     float           error = 0;
     long int        NextParameter;
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
 
     if (NoOfInParams < 4)
 	return (KRERR_PARAMETERS); /* Not enough input parameters  */

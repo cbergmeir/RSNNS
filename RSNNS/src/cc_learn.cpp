@@ -321,7 +321,7 @@ void SnnsCLib::cc_trainOutputUnits(int maxNoOfErrorUpdateCycles, int backfittPat
 {
 
     int p,pat,sub,counter=0;
-    float oldNetError=FLOAT_MAX;
+    float oldNetError= MAXFLOAT;
     int start,end,n;
     struct Unit* UnitPtr;
     struct Link* LinkPtr;
@@ -393,10 +393,10 @@ void SnnsCLib::cc_trainOutputUnits(int maxNoOfErrorUpdateCycles, int backfittPat
 void SnnsCLib::cc_calculateOutputUnitError(int StartPattern,int EndPattern)
 {
 
-    register struct Unit *UnitPtr;
-    register Patterns  out_pat;
-    //register TopoPtrArray     topo_ptr;
-    register int o,p;
+     struct Unit *UnitPtr;
+     Patterns  out_pat;
+    // TopoPtrArray     topo_ptr;
+     int o,p;
     int start, end,pat,sub,n;
   
     FOR_ALL_OUTPUT_UNITS(UnitPtr,o) 
@@ -441,8 +441,8 @@ void SnnsCLib::cc_calculateOutputUnitError(int StartPattern,int EndPattern)
 void SnnsCLib::cc_calculateSpecialUnitActivation(int StartPattern, int EndPattern)
 { 
 
-    register struct Unit  *specialUnitPtr,*outputUnitPtr;
-    register int o,s,p;
+     struct Unit  *specialUnitPtr,*outputUnitPtr;
+     int o,s,p;
     int pat,sub;
     int start,end,n;
 

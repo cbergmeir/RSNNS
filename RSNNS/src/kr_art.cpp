@@ -241,7 +241,7 @@ struct Unit  *SnnsCLib::krart_get_winner (TopoPtrArray wta_layer, FlintType winn
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 void  SnnsCLib::krart_deleteTouchFlags (void)
 {
-   register struct Unit *unit_ptr;
+    struct Unit *unit_ptr;
 
    FOR_ALL_UNITS (unit_ptr) {
 
@@ -261,7 +261,7 @@ void  SnnsCLib::krart_deleteTouchFlags (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 void  SnnsCLib::krart_init_sorting (void)
 {
-   register struct Unit *unit_ptr;
+    struct Unit *unit_ptr;
 
 
    krart_deleteTouchFlags ();
@@ -282,7 +282,7 @@ void  SnnsCLib::krart_init_sorting (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 int  SnnsCLib::krart_get_NoOfInputUnits (void)
 {
-   register struct Unit  *unit_ptr;
+    struct Unit  *unit_ptr;
    int                   count           = 0;
 
 
@@ -306,7 +306,7 @@ int  SnnsCLib::krart_get_NoOfInputUnits (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 bool   SnnsCLib::krart_check_undeterminedUnits (void)
 {
-   register struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr;
 
    FOR_ALL_UNITS (unit_ptr) {
 

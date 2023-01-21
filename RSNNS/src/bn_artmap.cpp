@@ -433,9 +433,9 @@ krui_err SnnsCLib::bn_artmap_make_layer (int  units, int  rows, int  cols,
          CHECK_RETURN (ret_code);
 
          if (units > 1) {
-            sprintf (name,"%s%d",name_prefix,count);
+            snprintf (name, sizeof(name), "%s%d",name_prefix,count);
          } else {
-            sprintf (name,"%s",name_prefix);
+            snprintf (name, sizeof(name), "%s",name_prefix);
          } /*if*/
 
          ret_code = krui_setUnitName (unit_no, name);

@@ -409,7 +409,7 @@ void  SnnsCLib::kr_recTopoSortJE (struct Unit *unit_ptr, int depth)
 krui_err SnnsCLib::kr_topoSortJE (void)
 
 { 
-  register struct Unit	 *unit_ptr ;
+   struct Unit	 *unit_ptr ;
 
 
   KernelErrorCode  = KRERR_NO_ERROR ;  /* reset return code                  */

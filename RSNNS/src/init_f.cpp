@@ -87,11 +87,11 @@
 ******************************************************************************/
 krui_err  SnnsCLib::INIT_randomizeWeights(float *parameterArray, int NoOfParams)
 {
-    register unsigned short    flags;
-    register struct Link   *link_ptr;
-    register struct Site   *site_ptr;
-    register struct Unit   *unit_ptr;
-    register FlintType     range, min_weight;
+     unsigned short    flags;
+     struct Link   *link_ptr;
+     struct Site   *site_ptr;
+     struct Unit   *unit_ptr;
+     FlintType     range, min_weight;
     FlintType   max_weight;
     /* make sure the random number generator is initialized before
        this function is run */
@@ -179,11 +179,11 @@ krui_err  SnnsCLib::INIT_randomizeWeights(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err  SnnsCLib::INIT_RM_randomizeWeights(float *parameterArray, int NoOfParams)
 {
-  register unsigned short    flags;
-  register struct Link   *link_ptr;
-  register struct Site   *site_ptr;
-  register struct Unit   *unit_ptr;
-  register FlintType     range, min_weight;
+   unsigned short    flags;
+   struct Link   *link_ptr;
+   struct Site   *site_ptr;
+   struct Unit   *unit_ptr;
+   FlintType     range, min_weight;
   FlintType   max_weight;
 
   if ( (unit_array == NULL) || (NoOfUnits == 0) )
@@ -262,11 +262,11 @@ krui_err  SnnsCLib::INIT_RM_randomizeWeights(float *parameterArray, int NoOfPara
 ******************************************************************************/
 krui_err  SnnsCLib::INIT_randomizeWeights_perc(float *parameterArray, int NoOfParams)
 {
-    register unsigned short    flags;
-    register struct Link   *link_ptr;
-    register struct Site   *site_ptr;
-    register struct Unit   *unit_ptr;
-    register FlintType     range, min_weight;
+     unsigned short    flags;
+     struct Link   *link_ptr;
+     struct Site   *site_ptr;
+     struct Unit   *unit_ptr;
+     FlintType     range, min_weight;
     FlintType              max_weight;
     FlintType              ar;
 
@@ -360,11 +360,11 @@ krui_err  SnnsCLib::INIT_randomizeWeights_perc(float *parameterArray, int NoOfPa
 ******************************************************************************/
 krui_err SnnsCLib::INIT_Weights_CPNv32(float *parameterArray, int NoOfParams)
 {
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register TopoPtrArray  topo_ptr;
-    register FlintType  sum, amount, range;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     TopoPtrArray  topo_ptr;
+     FlintType  sum, amount, range;
     FlintType min, max;
     int  ret_code;
 
@@ -456,11 +456,11 @@ krui_err SnnsCLib::INIT_Weights_CPNv32(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
 {
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register TopoPtrArray  topo_ptr;
-    register FlintType  sum, amount, range, intervall;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     TopoPtrArray  topo_ptr;
+     FlintType  sum, amount, range, intervall;
     FlintType min, max, offset;
     int  ret_code;
 
@@ -561,10 +561,10 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err SnnsCLib::INIT_Weights_CPN_Rand_Pat(float *parameterArray, int NoOfParams)
 {
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register TopoPtrArray  topo_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     TopoPtrArray  topo_ptr;
     krui_err ret_code;
 
     if ( (unit_array == NULL) || (NoOfUnits == 0) )
@@ -641,10 +641,10 @@ krui_err SnnsCLib::INIT_Weights_CPN_Rand_Pat(float *parameterArray, int NoOfPara
 void SnnsCLib::RbfInitSetCenter(int pattern_no, int sub_pat_no, 
 		      struct Unit *hidden_unit, float deviation, float bias)
 {
-    register struct Unit	*unit_ptr;
-    register struct Link	*link_ptr;
-    register Patterns	current_in_pattern;
-    register TopoPtrArray	topo_ptr;
+     struct Unit	*unit_ptr;
+     struct Link	*link_ptr;
+     Patterns	current_in_pattern;
+     TopoPtrArray	topo_ptr;
 
     /* calculate index of the input pattern in Pattern array:	*/
     current_in_pattern = kr_getSubPatData(pattern_no,sub_pat_no,INPUT,NULL);
@@ -692,7 +692,7 @@ void SnnsCLib::RbfInitSetCenter(int pattern_no, int sub_pat_no,
 ******************************************************************************/
 void SnnsCLib::RbfInitBPCenter(struct Unit *hidden_unit)
 {
-    register struct Link	*curr_link;
+     struct Link	*curr_link;
 
     FOR_ALL_LINKS(hidden_unit, curr_link){
 	curr_link -> to -> Out.output = curr_link -> weight;
@@ -719,26 +719,26 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 			 float i_devi, float i_f_0, float i_f_1, 
 			 float i_smooth, int init_type)
 {
-    register struct Unit    *unit_ptr;
-    register struct Unit    *h_unit_ptr;
-    register struct Link    *link_ptr;
-    register Patterns       current_out_pattern;
-    register TopoPtrArray   topo_ptr;
-    register TopoPtrArray   topo_hidden_ptr;
-    register TopoPtrArray   topo_work;
-    register int	    hidden_units;
-    register int	    output_units;
-    register int	    unit_nr;
-    register int	    h_unit_nr;
-    register int	    abs_sub_nr;
-    register int	    pattern_anz;
+     struct Unit    *unit_ptr;
+     struct Unit    *h_unit_ptr;
+     struct Link    *link_ptr;
+     Patterns       current_out_pattern;
+     TopoPtrArray   topo_ptr;
+     TopoPtrArray   topo_hidden_ptr;
+     TopoPtrArray   topo_work;
+     int	    hidden_units;
+     int	    output_units;
+     int	    unit_nr;
+     int	    h_unit_nr;
+     int	    abs_sub_nr;
+     int	    pattern_anz;
     int	                    pattern_no;
     int                     sub_pat_no;
-    register float	    deviation;
-    register int	    abort;
-    register int	    tmp_err;
-    register int            start_sp;
-    register int            end_sp;
+     float	    deviation;
+     int	    abort;
+     int	    tmp_err;
+     int            start_sp;
+     int            end_sp;
 
     RbfFloatMatrix	    hidden_act;
     RbfFloatMatrix	    t_hidden_act;
@@ -1044,19 +1044,19 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 void SnnsCLib::RbfKohonenConvexInit(int start_pattern,int end_pattern,float alpha_start,
 			  float alpha_increment,float learn_rate,int count)
 {
-	register float		scalar_prod;	/* act. scalar product	*/
-	register float		maximum;	/* max scalar product	*/
-	register struct Link	*link_ptr;	/* current Link		*/
-	register struct Unit	*unit_ptr;	/* current Unit		*/
-	register TopoPtrArray	topo_ptr;
-	register Patterns	current_in_pattern;	/* in pattern	*/
-	register int		pattern_no;
-	register int            sub_pat_no;
-	register TopoPtrArray	topo_hidden_ptr;/* first hidden Unit	*/
-	register float		alpha;		/* convex combination	*/
-	register struct Unit	*winner;	/* Unit who's links	*/
+	 float		scalar_prod;	/* act. scalar product	*/
+	 float		maximum;	/* max scalar product	*/
+	 struct Link	*link_ptr;	/* current Link		*/
+	 struct Unit	*unit_ptr;	/* current Unit		*/
+	 TopoPtrArray	topo_ptr;
+	 Patterns	current_in_pattern;	/* in pattern	*/
+	 int		pattern_no;
+	 int            sub_pat_no;
+	 TopoPtrArray	topo_hidden_ptr;/* first hidden Unit	*/
+	 float		alpha;		/* convex combination	*/
+	 struct Unit	*winner;	/* Unit who's links	*/
 						/* change		*/
-	register float		norm_alpha;	/* convex combination	*/
+	 float		norm_alpha;	/* convex combination	*/
 	float			norm_init;	/* initialization value	*/
 	
 	/* search for the first hidden unit				*/
@@ -1163,25 +1163,25 @@ void SnnsCLib::RbfKohonenConvexInit(int start_pattern,int end_pattern,float alph
 
 krui_err SnnsCLib::RbfKohonenInit(int start_pattern, int end_pattern, float learn_rate, int count, int shuffle)
 {
-	register float		scalar_prod;	/* act. scalar product	*/
-	register float		maximum;	/* max scalar product	*/
-	register struct Link	*link_ptr;	/* current Link		*/
-	register struct Unit	*unit_ptr;	/* current Unit		*/
-	register TopoPtrArray	topo_ptr;
-	register Patterns	current_in_pattern;	/* in pattern	*/
+	 float		scalar_prod;	/* act. scalar product	*/
+	 float		maximum;	/* max scalar product	*/
+	 struct Link	*link_ptr;	/* current Link		*/
+	 struct Unit	*unit_ptr;	/* current Unit		*/
+	 TopoPtrArray	topo_ptr;
+	 Patterns	current_in_pattern;	/* in pattern	*/
 	int	         	pattern_no;
 	int                     sub_pat_no;
-	register int            start_sp;
-	register int            end_sp;
-	register int            act_sub_nr;
-	register TopoPtrArray	topo_hidden_ptr;/* first hidden Unit	*/
-	register TopoPtrArray	help_topo_ptr;
-	register struct Unit	*winner;	/* Unit who's links	*/
+	 int            start_sp;
+	 int            end_sp;
+	 int            act_sub_nr;
+	 TopoPtrArray	topo_hidden_ptr;/* first hidden Unit	*/
+	 TopoPtrArray	help_topo_ptr;
+	 struct Unit	*winner;	/* Unit who's links	*/
 						/* change		*/
 	//float			norm_init;	/* initialization value	*/
-	register struct Unit	*hidden_unit;	/* current hidden unit	*/
-	register int		hidden_units;	/* number of hidden u.	*/
-	register int		act_hidden_num;	/* number of current hu.*/
+	 struct Unit	*hidden_unit;	/* current hidden unit	*/
+	 int		hidden_units;	/* number of hidden u.	*/
+	 int		act_hidden_num;	/* number of current hu.*/
 	int			reshuffle = FALSE;	/* restore shuffled p.	*/
 
 //#ifdef RBF_DEBUG
@@ -1472,8 +1472,8 @@ krui_err SnnsCLib::INIT_RBF_Weights_kohonen(float *parameterArray, int NoOfParam
 */
 krui_err SnnsCLib::INIT_Weights_ART1(float *parameterArray, int NoOfParams)
 {
-  register struct Unit    *unit_ptr;
-  register struct Link    *link_ptr;
+   struct Unit    *unit_ptr;
+   struct Link    *link_ptr;
 
   TopoPtrArray            topo_cmp_ptr,
                           topo_rec_ptr,
@@ -1612,8 +1612,8 @@ krui_err SnnsCLib::INIT_Weights_ART1(float *parameterArray, int NoOfParams)
 */
 krui_err SnnsCLib::INIT_Weights_ART2(float *parameterArray, int NoOfParams)
 {
-  register struct Unit    *unit_ptr;
-  register struct Link    *link_ptr;
+   struct Unit    *unit_ptr;
+   struct Link    *link_ptr;
 
   TopoPtrArray            topo_p_ptr,
                           topo_rec_ptr,
@@ -1741,8 +1741,8 @@ krui_err SnnsCLib::INIT_Weights_ART2(float *parameterArray, int NoOfParams)
 */
 krui_err SnnsCLib::INIT_Weights_ARTMAP(float *parameterArray, int NoOfParams)
 {
-  register struct Unit    *unit_ptr;
-  register struct Link    *link_ptr;
+   struct Unit    *unit_ptr;
+   struct Link    *link_ptr;
 
   TopoPtrArray            topo_cmpa_ptr,
                           topo_reca_ptr,
@@ -2074,12 +2074,12 @@ krui_err SnnsCLib::INIT_SOM_Rand_Pat(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err SnnsCLib::INIT_SOM_Weights_v32(float *parameterArray, int NoOfParams)
 {
-  register struct Unit *unit_ptr;
-  register struct Site *site_ptr;
-  register struct Link *link_ptr;
-  register TopoPtrArray  topo_ptr;
+   struct Unit *unit_ptr;
+   struct Site *site_ptr;
+   struct Link *link_ptr;
+   TopoPtrArray  topo_ptr;
 
-  register FlintType  sum, amount, range;
+   FlintType  sum, amount, range;
   FlintType min, max;
   int  ret_code;
 
@@ -2162,10 +2162,10 @@ krui_err SnnsCLib::INIT_SOM_Weights_v32(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err SnnsCLib::INIT_SOM_Weights_const(float *parameterArray, int NoOfParams)
 {
-  register struct Unit *unit_ptr;
-  register struct Site *site_ptr;
-  register struct Link *link_ptr;
-  register TopoPtrArray  topo_ptr;
+   struct Unit *unit_ptr;
+   struct Site *site_ptr;
+   struct Link *link_ptr;
+   TopoPtrArray  topo_ptr;
 
   int  ret_code;
 
@@ -2221,10 +2221,10 @@ krui_err SnnsCLib::INIT_SOM_Weights_const(float *parameterArray, int NoOfParams)
 krui_err  SnnsCLib::INIT_JE_Weights (float *parameterArray, int NoOfParams)
 
 {
-  register unsigned short   flags    ;
-  register struct   Link   *link_ptr ;
-  register struct   Site   *site_ptr ;
-  register struct   Unit   *unit_ptr ;
+   unsigned short   flags    ;
+   struct   Link   *link_ptr ;
+   struct   Site   *site_ptr ;
+   struct   Unit   *unit_ptr ;
   FlintType                 range     , min_weight, max_weight ;
   FlintType                 srl_weight, rec_weight, con_iact   ;
 
@@ -2328,9 +2328,9 @@ krui_err  SnnsCLib::INIT_JE_Weights (float *parameterArray, int NoOfParams)
 
 krui_err SnnsCLib::INIT_Hebb(float *parameterArray, int NoOfParams)
 {
-  register struct Unit  *unit_ptr;
-  register struct Link  *link_ptr;
-  register Patterns     in_pat,  out_pat;
+   struct Unit  *unit_ptr;
+   struct Link  *link_ptr;
+   Patterns     in_pat,  out_pat;
   FlintType             BiasIn, BiasOut;
   int                   pattern_no, sub_pat_no;
   
@@ -2414,9 +2414,9 @@ krui_err SnnsCLib::INIT_Hebb(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err SnnsCLib::INIT_ClippHebb(float *parameterArray, int NoOfParams)
 {
-  register struct Unit *unit_ptr;
-  register struct Link *link_ptr;
-  register Patterns     in_pat,  out_pat;
+   struct Unit *unit_ptr;
+   struct Link *link_ptr;
+   Patterns     in_pat,  out_pat;
   FlintType             BiasIn, BiasOut; 
   int                   pattern_no, sub_pat_no;
   
@@ -2504,9 +2504,9 @@ krui_err SnnsCLib::INIT_ClippHebb(float *parameterArray, int NoOfParams)
 ******************************************************************************/
 krui_err SnnsCLib::INIT_HOP_FixAct(float *parameterArray, int NoOfParams)
 {
-  register struct Unit       *unit_ptr;
-  register struct Link       *link_ptr;
-  register Patterns          in_pat;
+   struct Unit       *unit_ptr;
+   struct Link       *link_ptr;
+   Patterns          in_pat;
   
   FlintType                  activity;
   FlintType                  error_probability;
@@ -2750,9 +2750,9 @@ krui_err   SnnsCLib::PseudoInv(RbfFloatMatrix *source, int NoOfColumns, RbfFloat
 
 krui_err SnnsCLib::INIT_PseudoInv(float *parameterArray, int NoOfParams)
 {
-  register struct Unit *unit_ptr;
-  register struct Link *link_ptr;
-  register Patterns     in_pat,  out_pat;
+   struct Unit *unit_ptr;
+   struct Link *link_ptr;
+   Patterns     in_pat,  out_pat;
   int          unit_no;
   float       *ptr_to_W;
   RbfFloatMatrix       X;  /* rows = NoOfInputUnits columns = kr_TotalNoOfSubPatPairs()*/

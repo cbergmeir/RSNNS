@@ -115,9 +115,9 @@
 ******************************************************************************/
 void SnnsCLib::propagateNetForward(int pattern_no, int sub_pat_no)
 {
-    register struct Unit *unit_ptr;
-    register Patterns in_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns in_pat;
+     TopoPtrArray topo_ptr;
 
 
     /* calculate startaddress for input pattern array  */
@@ -200,16 +200,16 @@ void SnnsCLib::propagateNetForward(int pattern_no, int sub_pat_no)
  float SnnsCLib::propagateNetBackward2(int pattern_no, int sub_pat_no, 
 				   float learn_parameter, float delta_max)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error, sum_error, eta, devit, learn_error;
-    register TopoPtrArray topo_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error, sum_error, eta, devit, learn_error;
+     TopoPtrArray topo_ptr;
     int size;
 
     sum_error = 0.0;		/* reset network error  */
-    eta = learn_parameter;	/* store learn_parameter in CPU register  */
+    eta = learn_parameter;	/* store learn_parameter in CPU   */
 
     /* calculate address of the output pattern (with number pattern_no + 1)  */
     out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
@@ -483,10 +483,10 @@ krui_err SnnsCLib::TEST_backprop(int start_pattern, int end_pattern,
  float SnnsCLib::testNetBackward2(int pattern_no, int sub_pat_no, 
 				   float learn_parameter, float delta_max)
 {
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float sum_error, devit;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float sum_error, devit;
+     TopoPtrArray topo_ptr;
     int size;
 
     sum_error = 0.0;		/* reset network error  */
@@ -531,12 +531,12 @@ krui_err SnnsCLib::TEST_backprop(int start_pattern, int end_pattern,
 ******************************************************************************/
 float SnnsCLib::propagateNetBackwardBatch(int pattern_no, int sub_pat_no, float delta_max)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error, sum_error, devit;
-    register TopoPtrArray topo_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error, sum_error, devit;
+     TopoPtrArray topo_ptr;
     int size;
 
     sum_error = 0.0;		/* reset network error  */
@@ -644,12 +644,12 @@ float SnnsCLib::propagateNetBackwardBatch(int pattern_no, int sub_pat_no, float 
 ******************************************************************************/
 float SnnsCLib::propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no, float delta_max)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error, sum_error, devit;
-    register TopoPtrArray topo_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error, sum_error, devit;
+     TopoPtrArray topo_ptr;
     int size;
     int pattern_class;
     unsigned long int class_flag = 0;
@@ -802,11 +802,11 @@ float SnnsCLib::propagateClassNetBackwardBatch(int pattern_no, int sub_pat_no, f
 ******************************************************************************/
 krui_err SnnsCLib::clearDeltas(void)
 {
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register FlintType fastnull = 0.0;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     FlintType fastnull = 0.0;
 
     FOR_ALL_UNITS(unit_ptr) {
 	flags = unit_ptr->flags;
@@ -840,11 +840,11 @@ krui_err SnnsCLib::clearDeltas(void)
 ******************************************************************************/
 krui_err SnnsCLib::clearAllDeltas(void)
 {
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register FlintType fastnull = 0.0;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     FlintType fastnull = 0.0;
 
     FOR_ALL_UNITS(unit_ptr) {
 	flags = unit_ptr->flags;
@@ -890,10 +890,10 @@ krui_err SnnsCLib::clearAllDeltas(void)
 ******************************************************************************/
  krui_err SnnsCLib::updateWeights(float eta)
 {
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
 
     FOR_ALL_UNITS(unit_ptr) {
 	if (!IS_SPECIAL_UNIT(unit_ptr)) {
@@ -933,11 +933,11 @@ krui_err SnnsCLib::clearAllDeltas(void)
 ******************************************************************************/
  krui_err SnnsCLib::updateNormalizedWeights(float eta)
 {
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register FlintType fastnull = 0.0;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     FlintType fastnull = 0.0;
 
     FOR_ALL_UNITS(unit_ptr) {
 	if (!IS_SPECIAL_UNIT(unit_ptr)) {
@@ -1081,10 +1081,10 @@ krui_err  SnnsCLib::LEARN_backpropBatch(int start_pattern, int end_pattern,
 ******************************************************************************/
  krui_err SnnsCLib::initializeBackpropMomentum(void)
 {
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
 
 
     FOR_ALL_UNITS(unit_ptr) {
@@ -1125,17 +1125,17 @@ krui_err  SnnsCLib::LEARN_backpropBatch(int start_pattern, int end_pattern,
 				   float learn_parameter, 
 				   float mu, float FSE_term, float delta_max)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error, sum_error, eta, devit, learn_error, mu_help;
-    register TopoPtrArray topo_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error, sum_error, eta, devit, learn_error, mu_help;
+     TopoPtrArray topo_ptr;
     int size;
 
 
     sum_error = 0.0;		/* reset network error  */
-    eta = learn_parameter;	/* store learn_parameter in CPU register  */
+    eta = learn_parameter;	/* store learn_parameter in CPU   */
 
     /* calculate address of the output pattern (with number pattern_no + 1)  */
     out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
@@ -1445,15 +1445,15 @@ krui_err SnnsCLib::TEST_backpropMomentum(int start_pattern, int end_pattern,
 
 {
 
-    register Patterns out_pat;
-    register float error, sum_error, eta, devit, learn_error;
-    register TopoPtrArray topo_ptr;
+     Patterns out_pat;
+     float error, sum_error, eta, devit, learn_error;
+     TopoPtrArray topo_ptr;
     int size;
 
     /* reset network error  */
     sum_error = 0.0;
 
-    /* store learn_parameter in CPU register  */
+    /* store learn_parameter in CPU   */
     eta = learn_parameter;
 
     /* calculate address of the output pattern (with number pattern_no + 1)  */
@@ -2154,10 +2154,10 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 ******************************************************************************/
  krui_err SnnsCLib::initializeQuickprop(void)
 {
-    register unsigned short flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
+     unsigned short flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
 
 
     FOR_ALL_UNITS(unit_ptr) {
@@ -2200,11 +2200,11 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
  float SnnsCLib::propagateNetBackwardQuickprop(int pattern_no, int sub_pat_no, 
 					   float delta_max)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error,	/* error  */
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error,	/* error  */
     sum_error,			/* sum of the error  */
     devit;			/* deviation  */
     TopoPtrArray    topo_ptr;
@@ -2311,9 +2311,9 @@ krui_err  SnnsCLib::LEARN_backpropClassJogChunk(int start_pattern, int end_patte
 {
     double          deltaw;	/* actual weight (bias) change */
     float           shfac;	/* shrink factor */
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
     TopoPtrArray    topo_ptr;
     bool            hidden_units;
 
@@ -2590,7 +2590,7 @@ krui_err SnnsCLib::LEARN_quickprop(int start_pattern, int end_pattern,
 ******************************************************************************/
  krui_err SnnsCLib::initializeCPN(void)
 {
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
 
 
     NoOfLearnedPatterns = 0;
@@ -2616,9 +2616,9 @@ krui_err SnnsCLib::LEARN_quickprop(int start_pattern, int end_pattern,
 ******************************************************************************/
  void SnnsCLib::normalize_weight(struct Unit * winner_ptr, float sum)
 {
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register float  amount;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     float  amount;
 
 
     amount = 1.0 / sqrt(sum);
@@ -2647,8 +2647,8 @@ krui_err SnnsCLib::LEARN_quickprop(int start_pattern, int end_pattern,
 ******************************************************************************/
  void SnnsCLib::normalize_inputvector(float sum)
 {
-    register struct Unit *unit_ptr;
-    register float  amount;
+     struct Unit *unit_ptr;
+     float  amount;
 
 
     amount = 1.0 / sqrt(sum);
@@ -2673,15 +2673,15 @@ krui_err SnnsCLib::LEARN_quickprop(int start_pattern, int end_pattern,
  float SnnsCLib::propagateNet_CPN(int pattern_no, int sub_pat_no, float alpha,
 			      float beta, float threshold)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register struct Unit *winner_ptr;
-    register Patterns in_pat, out_pat;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     struct Unit *winner_ptr;
+     Patterns in_pat, out_pat;
     float           maximum, sum_error, devit, learn_error, sum;
     float           unit_ptr_net;
     float           noOfPatterns_mul_NoHiddenUnits;
-    register TopoPtrArray topo_ptr;
+     TopoPtrArray topo_ptr;
 
     /* calculate the activation and the output values         */
     /* of the input units (Input Layer)                       */
@@ -2958,9 +2958,9 @@ krui_err  SnnsCLib::LEARN_CPN(int start_pattern, int end_pattern,
 ******************************************************************************/
  void SnnsCLib::propagateNetForward_perc(int pattern_no, int sub_pat_no)
 {
-    register struct Unit *unit_ptr;
-    register Patterns in_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns in_pat;
+     TopoPtrArray topo_ptr;
 
     /* calculate startaddress for input pattern array  */
     in_pat = kr_getSubPatData(pattern_no,sub_pat_no,INPUT,NULL);
@@ -3042,21 +3042,21 @@ krui_err  SnnsCLib::LEARN_CPN(int start_pattern, int end_pattern,
 				       float learn_parameter,
 				       float delta_max, float *perc_error)
 {
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error, sum_error, eta, devit;
-    register TopoPtrArray topo_ptr;
-    register float  norm, delta_sig_normaliser, message_weight;
-    register float  act_err, normalised_error, scaled_error, 
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error, sum_error, eta, devit;
+     TopoPtrArray topo_ptr;
+     float  norm, delta_sig_normaliser, message_weight;
+     float  act_err, normalised_error, scaled_error, 
                     delta_weight_normaliser;
-    register float  der = 0.0;
-    register float  tmp;	
-    register int    is_special;
+     float  der = 0.0;
+     float  tmp;	
+     int    is_special;
     int size;
 
     sum_error = 0.0;		/* reset network error  */
-    eta = learn_parameter;	/* store learn_parameter in CPU register  */
+    eta = learn_parameter;	/* store learn_parameter in CPU   */
 
     /* calculate address of the output pattern (with number pattern_no + 1)  */
     out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
@@ -3183,7 +3183,7 @@ krui_err SnnsCLib::LEARN_perc(int start_pattern, int end_pattern,
     //static float    LEARN_perc_OutParameter[1];	/* LEARN_perc_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;
     float           p_error, l_error;
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
 
     if (NoOfInParams < 1)	        /* have to be changed (must be 2)  */
 	return (KRERR_PARAMETERS);	/* Not enough input parameters  */
@@ -3319,8 +3319,8 @@ krui_err SnnsCLib::LEARN_perc(int start_pattern, int end_pattern,
 ******************************************************************************/
 krui_err SnnsCLib::RbfLearnClean(void)
 {
-    register struct Unit *unit_ptr;
-    register struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Link *link_ptr;
 
     FOR_ALL_UNITS(unit_ptr) {
 	unit_ptr->value_b = 0.0;
@@ -3346,10 +3346,10 @@ krui_err SnnsCLib::RbfLearnClean(void)
 ******************************************************************************/
 krui_err  SnnsCLib::RbfLearnForward(int pattern_no, int sub_pat_no)
 {
-    register struct Unit *unit_ptr;
-    register Patterns current_in_pattern;
-    register Patterns current_out_pattern;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns current_in_pattern;
+     Patterns current_out_pattern;
+     TopoPtrArray topo_ptr;
 
     /* calculate index of current input pattern in Pattern array:	 */
     current_in_pattern = kr_getSubPatData(pattern_no,sub_pat_no,INPUT,NULL);
@@ -3420,15 +3420,15 @@ float SnnsCLib::RbfLearnAdjustDelta(float para_center, float para_bias,
 			  float para_momentum, float para_delta_max, 
 			  int learn_mask)
 {
-    register struct Unit *curr_unit;	/* current unit		 */
-    register struct Link *curr_link;	/* current link		 */
-    register struct Unit *source_unit;	/* input unit to link	 */
-    register TopoPtrArray topo_ptr;
-    register float  center_delta;	/* delta of centers	 */
-    register float  w_error;	        /* weighted error of 	 */
+     struct Unit *curr_unit;	/* current unit		 */
+     struct Link *curr_link;	/* current link		 */
+     struct Unit *source_unit;	/* input unit to link	 */
+     TopoPtrArray topo_ptr;
+     float  center_delta;	/* delta of centers	 */
+     float  w_error;	        /* weighted error of 	 */
                                         /* output unit		 */
-    register float  w2_error;           /* w_error for special u.*/
-    register float  learn_error;
+     float  w2_error;           /* w_error for special u.*/
+     float  learn_error;
 
     /* start with last unit in output layer:			 */
     topo_ptr = topo_ptr_array + no_of_topo_units + 3;
@@ -3538,9 +3538,9 @@ float SnnsCLib::RbfLearnAdjustDelta(float para_center, float para_bias,
 void SnnsCLib::RbfLearnAdjustWeights(float para_center, float para_bias, 
 			   float para_weight, float para_momentum)
 {
-    register struct Unit *curr_unit;	/* current unit		 */
-    register struct Link *curr_link;	/* current link		 */
-    register TopoPtrArray topo_ptr;
+     struct Unit *curr_unit;	/* current unit		 */
+     struct Link *curr_link;	/* current link		 */
+     TopoPtrArray topo_ptr;
 
 #ifdef RBF_DELTA_PROT
     //static int      RbfLearnAdjustWeights_step = 0;	/* current learning RbfLearnAdjustWeights_step */
@@ -3551,7 +3551,7 @@ void SnnsCLib::RbfLearnAdjustWeights(float para_center, float para_bias,
 
 #ifdef RBF_DELTA_PROT
     RbfLearnAdjustWeights_step++;
-    sprintf(filename, "rbf_%04d.prot", RbfLearnAdjustWeights_step);
+    snprintf(filename, sizeof(filename), "rbf_%04d.prot", RbfLearnAdjustWeights_step);
     protfile = fopen(filename, "w");
     //if (protfile == NULL)
 	//fprintf(stderr, "RbfLearnAdjustWeights: Can't open protfile\n");
@@ -3690,9 +3690,9 @@ krui_err SnnsCLib::LEARN_RBF(int start_pattern, int end_pattern,
     float           para_bias, para_center, para_weight, para_pain, 
                     para_momentum,para_delta_max;
 
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
 
 #ifdef RBF_LEARN_PROT
     //static int      LEARN_RBF_schritt = 1;
@@ -4441,10 +4441,10 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 ******************************************************************************/
  krui_err SnnsCLib::initializeRprop(float update_val)
 {
-    register unsigned short flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
+     unsigned short flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
 
   FOR_ALL_UNITS( unit_ptr ){
 	flags = unit_ptr->flags;
@@ -4588,9 +4588,9 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
  void SnnsCLib::propagateNetForwardMAP(int pattern_no, int sub_pat_no, 
 				   int errorType)
 {
-    register struct Unit *unit_ptr;
-    register Patterns in_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns in_pat;
+     TopoPtrArray topo_ptr;
     float sum_act = 0.0;
 
     /* calculate startaddress for input pattern array  */
@@ -4689,11 +4689,11 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 ******************************************************************************/
  float SnnsCLib::propagateNetBackwardRprop(int pattern_no, int sub_pat_no)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error,	/* error  */
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error,	/* error  */
                     sum_error,	/* sum of the error  */
                     devit;	/* deviation  */
     TopoPtrArray    topo_ptr;
@@ -4784,10 +4784,10 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
  float SnnsCLib::propagateNetBackwardMAP(int pattern_no, int sub_pat_no, 
 				     int errorType)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
     float  error,       /* error  */
                     sum_error,  /* sum of the error  */
                     devit;      /* deviation  */
@@ -4879,9 +4879,9 @@ krui_err SnnsCLib::LEARN_RBF_DDA(int start_pattern, int end_pattern,
 ******************************************************************************/
  void SnnsCLib::MODI_rprop(float maxeps, float weight_decay)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
     TopoPtrArray    topo_ptr;
     bool            hidden_units;
     float           direction;
@@ -5303,9 +5303,9 @@ krui_err SnnsCLib::TEST_rprop(int start_pattern, int end_pattern,
 ******************************************************************************/
  float SnnsCLib::testNetBackwardRprop(int pattern_no, int sub_pat_no)
 {
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  sum_error,	/* sum of the error  */ //error,	/* error  */
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  sum_error,	/* sum of the error  */ //error,	/* error  */
                     devit;	/* deviation  */
     TopoPtrArray    topo_ptr;
     int size;
@@ -5349,8 +5349,8 @@ krui_err SnnsCLib::TEST_rprop(int start_pattern, int end_pattern,
 ******************************************************************************/
  float SnnsCLib::testNetBackwardMAP(int pattern_no, int sub_pat_no, int errorType)
 {
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
     float           sum_error,  /* sum of the error  */
                     devit;      /* deviation  */
     TopoPtrArray    topo_ptr;
@@ -5649,7 +5649,7 @@ krui_err  SnnsCLib::LEARN_ART1(int start_pattern, int end_pattern,
 				    TopoPtrArray topo_inp_ptr)
 {
     int             ret_code = KRERR_NO_ERROR;
-    register Patterns in_pat;
+     Patterns in_pat;
     struct Unit    *unit_ptr;
     TopoPtrArray    topo_ptr = topo_inp_ptr;
 
@@ -5984,7 +5984,7 @@ krui_err SnnsCLib::LEARN_ART2(int start_pattern, int end_pattern,
 				    TopoPtrArray topo_inp_ptr)
 {
     int               ret_code = KRERR_NO_ERROR;
-    register Patterns in_pat;
+     Patterns in_pat;
     struct Unit       *unit_ptr;
     TopoPtrArray      topo_ptr = topo_inp_ptr;
 
@@ -6336,7 +6336,7 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 				      TopoPtrArray topo_inpb_ptr)
 {
     int               ret_code = KRERR_NO_ERROR;
-    register Patterns in_pat;
+     Patterns in_pat;
     struct Unit       *unit_ptr;
     TopoPtrArray      topo_ptr_a = topo_inpa_ptr;
     TopoPtrArray      topo_ptr_b = topo_inpb_ptr;
@@ -6596,7 +6596,7 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 ******************************************************************************/
  krui_err SnnsCLib::BPTT_clear_deltaw(void)
 {
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
     struct Link    *link_ptr;
 
 
@@ -6632,7 +6632,7 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 ******************************************************************************/
  krui_err SnnsCLib::initializeBPTT(void)
 {
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
     int             i;
 
     FOR_ALL_UNITS(unit_ptr) {
@@ -6656,9 +6656,9 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 ******************************************************************************/
  void SnnsCLib::BPTT_propagateNetForward(int pattern_no, int sub_pat_no, int nhist)
 {
-    register struct Unit *unit_ptr;
-    register Patterns in_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     Patterns in_pat;
+     TopoPtrArray topo_ptr;
     TopoPtrArray    first_hidden_ptr;
     int             i, done_hidden;
     int             all_zero_input = 1;	/* flag to reset net-copies */
@@ -6770,11 +6770,11 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 ******************************************************************************/
  float SnnsCLib::initOldDeltas(int pattern_no, int sub_pat_no)
 {
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register Patterns out_pat;
-    register float  error, sum_error, devit, delta, tmp;
-    register TopoPtrArray topo_ptr;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     Patterns out_pat;
+     float  error, sum_error, devit, delta, tmp;
+     TopoPtrArray topo_ptr;
     //TopoPtrArray    first_hidden_ptr;
     //int             all_correct = 1;	/* flag, wether all bits in the pattern are correct */
     int size;
@@ -6875,10 +6875,10 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
  float SnnsCLib::oneStepBackprop(int backstep, int pattern_no, int sub_pat_no, 
 			     int nhist)
 {
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
     double          delta, sum_error;
-    register TopoPtrArray topo_ptr;
+     TopoPtrArray topo_ptr;
     int             done_hidden, nextlayer;
     float           tmp;
 
@@ -6954,9 +6954,9 @@ krui_err SnnsCLib::LEARN_ARTMAP(int start_pattern, int end_pattern,
 ******************************************************************************/
  void SnnsCLib::BPTTadapt(float step_size, float bptt_momentum)
 {
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register TopoPtrArray topo_ptr;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     TopoPtrArray topo_ptr;
     int             done_hidden = 0;
     float           delta;
 
@@ -7041,7 +7041,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
     //static float    LEARN_BPTT_OutParameter[1];	/* LEARN_BPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no, patterns;
     int             nhist;	/* number of steps back in time */
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
 
     if (NoOfUnits == 0)
 	return (KRERR_NO_UNITS);        /* No Units defined	 */
@@ -7139,7 +7139,7 @@ krui_err SnnsCLib::TEST_BPTT(int start_pattern, int end_pattern,
     //static float    TEST_BPTT_OutParameter[1];	/* TEST_BPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no;//, patterns;
     int             nhist;	/* number of steps back in time */
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
 
     if (NoOfUnits == 0)
 	return (KRERR_NO_UNITS);        /* No Units defined	 */
@@ -7228,7 +7228,7 @@ krui_err SnnsCLib::LEARN_BBPTT(int start_pattern, int end_pattern,
     //static float    LEARN_BBPTT_OutParameter[1];	/* LEARN_BBPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no, patterns;
     int             nhist;	/* number of steps back in time */
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
 
     if (NoOfUnits == 0)
 	return (KRERR_NO_UNITS);        /* No Units defined	 */
@@ -7327,7 +7327,7 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
     //static float    LEARN_QPTT_OutParameter[1];	/* LEARN_QPTT_OutParameter[0] stores the learning error  */
     int             ret_code, pattern_no, sub_pat_no, patterns;
     int             nhist;	/* number of steps back in time */
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
 
     if (NoOfUnits == 0)
 	return (KRERR_NO_UNITS);/* No Units defined	 */
@@ -7431,16 +7431,16 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
  float SnnsCLib::propagateNet_kohonen(int pattern_no, int sub_pat_no, float height,
 				  float radius, int sizehor)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register struct Unit *unit_ptr;
-    register struct Unit *winner_ptr;
-    register Patterns in_pat;
-    register int    NoOfCompounds, sizever, verwin, horwin, hor, ver, helpver,
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     struct Unit *unit_ptr;
+     struct Unit *winner_ptr;
+     Patterns in_pat;
+     int    NoOfCompounds, sizever, verwin, horwin, hor, ver, helpver,
     helphor, range;
     float           maximum, sum_error, deviat, learn_error, sum;
     float           unit_ptr_net;
-    register TopoPtrArray topo_ptr;
+     TopoPtrArray topo_ptr;
     float           adapt;
     int             winner = -1, current_no;
 
@@ -7605,8 +7605,8 @@ krui_err  SnnsCLib::LEARN_QPTT(int start_pattern, int end_pattern,
 ******************************************************************************/
  krui_err SnnsCLib::initializeKohonenLearning(void)
 {
-    register unsigned short flags;
-    register struct Unit *unit_ptr;
+     unsigned short flags;
+     struct Unit *unit_ptr;
 
     FOR_ALL_UNITS(unit_ptr) {
 	flags = unit_ptr->flags;
@@ -7726,8 +7726,8 @@ krui_err SnnsCLib::LEARN_kohonen(int start_pattern, int end_pattern,
 ******************************************************************************/
 krui_err  SnnsCLib::spanning_tree(void)
 {
-    register TopoPtrArray topo_ptr;
-    register struct Unit *unit_ptr;
+     TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
     int             ret_code, n, pattern_no, sub_pat_no;
 
 
@@ -7813,9 +7813,9 @@ krui_err  SnnsCLib::spanning_tree(void)
 				     float use_real_value_percent) 
 
 {
-    register TopoPtrArray   topo_ptr, topo_ptr_context ;
-    register struct Unit   *unit_ptr ;
-    register Patterns       out_pat  ;
+     TopoPtrArray   topo_ptr, topo_ptr_context ;
+     struct Unit   *unit_ptr ;
+     Patterns       out_pat  ;
     int size;
 
 
@@ -7880,8 +7880,8 @@ krui_err  SnnsCLib::spanning_tree(void)
  void SnnsCLib::reset_je_context_units (void)
 
 {
-  register TopoPtrArray   topo_ptr ;
-  register struct Unit   *unit_ptr ;
+   TopoPtrArray   topo_ptr ;
+   struct Unit   *unit_ptr ;
 
  
   topo_ptr = topo_ptr_array + (no_of_topo_units + 3) ;
@@ -8147,9 +8147,9 @@ krui_err SnnsCLib::TEST_JE_BackpropMomentum(int start_pattern, int end_pattern,
  void SnnsCLib::test_update_je_context_units (int pattern_no, int sub_pat_no) 
 
 {
-    register TopoPtrArray   topo_ptr, topo_ptr_context ;
-    register struct Unit   *unit_ptr ;
-    register Patterns       out_pat  ;
+     TopoPtrArray   topo_ptr, topo_ptr_context ;
+     struct Unit   *unit_ptr ;
+     Patterns       out_pat  ;
     int size;
 
 
@@ -8543,9 +8543,9 @@ krui_err  SnnsCLib::TEST_JE_Rprop    (int     start_pattern    , int  end_patter
 {
 
     int t;
-    register struct Unit   *unit_ptr;
-    register Patterns      in_pat;
-    register TopoPtrArray  topo_ptr;
+     struct Unit   *unit_ptr;
+     Patterns      in_pat;
+     TopoPtrArray  topo_ptr;
 
 
     /*  calculate startaddress for input pattern array  */
@@ -8604,9 +8604,9 @@ krui_err  SnnsCLib::TEST_JE_Rprop    (int     start_pattern    , int  end_patter
 ******************************************************************************/
  void SnnsCLib::RM_learn(float learn_parameter)
 {
-    register struct Link *link_ptr;
-    register struct Site *site_ptr = NULL;
-    register struct Unit *unit_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr = NULL;
+     struct Unit *unit_ptr;
     float ex_in = 0, in_in, error, eta;
 
     eta = learn_parameter;
@@ -8789,11 +8789,11 @@ krui_err SnnsCLib::LEARN_HEBB (int start_pattern, int end_pattern,
     int pattern_no, sub_pat_no;
     int NoOfTimes;
     float Learn_p, Weight_MAX;
-    register struct Unit *unit_ptr;
-    register struct Link *link_ptr;
-    register struct Site *site_ptr;
-    register Patterns in_pat;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     struct Link *link_ptr;
+     struct Site *site_ptr;
+     Patterns in_pat;
+     TopoPtrArray topo_ptr;
 
 
     KernelErrorCode = KRERR_NO_ERROR;

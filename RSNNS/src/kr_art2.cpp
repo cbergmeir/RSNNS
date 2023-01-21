@@ -800,7 +800,7 @@ bool  SnnsCLib::kra2_not_classifiable (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 void  SnnsCLib::kra2_save_for_stability_check (void)
 {
-   register TopoPtrArray    topo_ptr ;
+    TopoPtrArray    topo_ptr ;
 
    topo_ptr = topo_layer[ART2_W_LAY-1];
 
@@ -861,7 +861,7 @@ void  SnnsCLib::kra2_save_for_stability_check (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 void  SnnsCLib::kra2_check_f1_stability (void)
 {
-   register TopoPtrArray    topo_ptr;
+    TopoPtrArray    topo_ptr;
 
    if (f1_stable && ( ! kra2_topdn_phase())) {
       TopDownPhase = TRUE;
@@ -1134,9 +1134,9 @@ void   SnnsCLib::kra2_set_fix_weight (struct Unit *src_unit, struct Unit *trgt_u
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 FlintType SnnsCLib::kra2_compute_l2_norm (int Layer)
 {
-   register TopoPtrArray    topo_ptr = topo_layer[Layer-1];
-   register FlintType       sum = 0.0;
-   register FlintType       val;
+    TopoPtrArray    topo_ptr = topo_layer[Layer-1];
+    FlintType       sum = 0.0;
+    FlintType       val;
 
    while (*topo_ptr != NULL) {
       val = (*topo_ptr)->Out.output;
@@ -1152,7 +1152,7 @@ FlintType SnnsCLib::kra2_compute_l2_norm (int Layer)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 int SnnsCLib::kra2_get_NoOfRecUnits (void)
 {
-   register struct Unit  *unit_ptr;
+    struct Unit  *unit_ptr;
    int                   count           = 0;
 
 
@@ -1175,7 +1175,7 @@ int SnnsCLib::kra2_get_NoOfRecUnits (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_get_InpUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit  *unit_ptr;
+    struct Unit  *unit_ptr;
 
    krui_err              ret_code = KRERR_NO_ERROR;
 
@@ -1210,10 +1210,10 @@ krui_err SnnsCLib::kra2_get_InpUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err  SnnsCLib::kra2_get_WUnits (TopoPtrArray *topo_ptr, int *no_of_w_units)
 {
-   register struct Unit   *unit_ptr;
-   register struct Unit   *unit_ptr2;
-   register struct Link   *link_ptr;
-   register struct Link   *link_ptr2;
+    struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr2;
+    struct Link   *link_ptr;
+    struct Link   *link_ptr2;
 
    bool                   has_link_to_inp    = FALSE;
    bool                   has_outgoing_links = FALSE;
@@ -1303,8 +1303,8 @@ krui_err SnnsCLib::kra2_get_XUnits (TopoPtrArray *topo_ptr, int *no_of_x_units)
 {
    krui_err               ret_code   = KRERR_NO_ERROR;
 
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
 
    bool                   has_link_to_w;
 
@@ -1352,9 +1352,9 @@ krui_err SnnsCLib::kra2_get_XUnits (TopoPtrArray *topo_ptr, int *no_of_x_units)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_get_UUnits (TopoPtrArray *topo_ptr, int *no_of_u_units)
 {
-   register struct Unit    *unit_ptr1;
-   register struct Unit    *unit_ptr2 = NULL;
-   register struct Link    *link_ptr;
+    struct Unit    *unit_ptr1;
+    struct Unit    *unit_ptr2 = NULL;
+    struct Link    *link_ptr;
 
    bool                    is_u_unit;
 
@@ -1411,8 +1411,8 @@ krui_err SnnsCLib::kra2_get_UUnits (TopoPtrArray *topo_ptr, int *no_of_u_units)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_get_VUnits (TopoPtrArray *topo_ptr, int *no_of_v_units)
 {
-   register struct Unit  *unit_ptr;
-   register struct Link  *link_ptr;
+    struct Unit  *unit_ptr;
+    struct Link  *link_ptr;
    bool                  has_link_to_x;
 
    krui_err               ret_code   = KRERR_NO_ERROR;
@@ -1467,8 +1467,8 @@ krui_err SnnsCLib::kra2_get_VUnits (TopoPtrArray *topo_ptr, int *no_of_v_units)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_get_PUnits (TopoPtrArray *topo_ptr, int *no_of_p_units)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
 
    bool                   is_p_unit;
 
@@ -1532,8 +1532,8 @@ krui_err SnnsCLib::kra2_get_PUnits (TopoPtrArray *topo_ptr, int *no_of_p_units)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err  SnnsCLib::kra2_get_QUnits (TopoPtrArray *topo_ptr, int *no_of_q_units)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
 
    bool                   has_link_to_p;
    bool                   has_link_to_other;
@@ -1596,8 +1596,8 @@ krui_err  SnnsCLib::kra2_get_QUnits (TopoPtrArray *topo_ptr, int *no_of_q_units)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_get_RUnits (TopoPtrArray *topo_ptr, int *no_of_r_units)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
 
    bool                   has_link_to_p;
    bool                   has_link_to_inp;
@@ -1664,7 +1664,7 @@ krui_err SnnsCLib::kra2_get_RUnits (TopoPtrArray *topo_ptr, int *no_of_r_units)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_get_RecUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit  *unit_ptr;
+    struct Unit  *unit_ptr;
 
    krui_err               ret_code   = KRERR_NO_ERROR;
 
@@ -1701,7 +1701,7 @@ krui_err SnnsCLib::kra2_get_RecUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_get_RstUnits (TopoPtrArray *topo_ptr, int *no_of_rst_units)
 {
-   register struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr;
 
    krui_err               ret_code   = KRERR_NO_ERROR;
 
@@ -1788,7 +1788,7 @@ krui_err  SnnsCLib::kra2_TopoPtrArray (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kra2_LinksToInpUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr;
 
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -1813,8 +1813,8 @@ krui_err   SnnsCLib::kra2_LinksToInpUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToWUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_inp, count_u;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -1862,8 +1862,8 @@ krui_err SnnsCLib::kra2_LinksToWUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToXUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_w;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -1904,8 +1904,8 @@ krui_err SnnsCLib::kra2_LinksToXUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToUUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_v;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -1946,8 +1946,8 @@ krui_err SnnsCLib::kra2_LinksToUUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToVUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_x, count_q;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -1996,8 +1996,8 @@ krui_err SnnsCLib::kra2_LinksToVUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToPUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_u, count_rec;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -2042,8 +2042,8 @@ krui_err SnnsCLib::kra2_LinksToPUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToQUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_p;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -2084,8 +2084,8 @@ krui_err SnnsCLib::kra2_LinksToQUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToRUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_inp, count_p;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -2134,8 +2134,8 @@ krui_err SnnsCLib::kra2_LinksToRUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToRecUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_p, count_rst;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -2180,8 +2180,8 @@ krui_err SnnsCLib::kra2_LinksToRecUnits (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err SnnsCLib::kra2_LinksToRstUnits (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Link   *link_ptr;
    int                    count_rec;
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -2224,7 +2224,7 @@ krui_err SnnsCLib::kra2_init_i_act (void)
 {
    int                    ret_code = KRERR_NO_ERROR;
 
-   register struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr;
 
 
    /* set initial activation values to 0.0 and
@@ -2251,9 +2251,9 @@ krui_err SnnsCLib::kra2_init_fix_weights (void)
 {
    int                    ret_code  = KRERR_NO_ERROR;
 
-   register struct Unit   *unit_ptr;
-   register struct Site   *site_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Site   *site_ptr;
+    struct Link   *link_ptr;
 
 
 

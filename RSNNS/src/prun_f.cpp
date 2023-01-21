@@ -265,9 +265,9 @@ krui_err SnnsCLib::pr_calcMeanDeviation (int pattern, float *sum_error)
 
 {
 
-    register struct Unit *unit_ptr;
-    register TopoPtrArray topo_ptr;
-    register Patterns out_pat;
+     struct Unit *unit_ptr;
+     TopoPtrArray topo_ptr;
+     Patterns out_pat;
     int size, pattern_no, sub_pat_no, no_of_patterns;
     
     /* initialize sum error */
@@ -373,9 +373,9 @@ krui_err SnnsCLib::PRUNE_Mag (int pattern)
 
 {
 
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
 
     FOR_ALL_UNITS (unit_ptr)
 	/* process links to all units */
@@ -473,12 +473,12 @@ krui_err SnnsCLib::PRUNE_OBD (int pattern)
 
 {
 
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register TopoPtrArray topo_ptr;
-    register Patterns out_pat;
-    register float deriv, delta, delta2, devit;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     TopoPtrArray topo_ptr;
+     Patterns out_pat;
+     float deriv, delta, delta2, devit;
     int size, pattern_no, sub_pat_no;
 
     /* reset auxiliary variables in unit array */
@@ -621,9 +621,9 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 
 {
 
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
 
     /* initialize global variable */
     pr_noOfLinks = 0;
@@ -681,10 +681,10 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 
 {
 
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     TopoPtrArray topo_ptr;
     float help;
     int weight_no = 0;
 
@@ -807,8 +807,8 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 
 {
 
-    register struct Unit *unit_ptr;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     TopoPtrArray topo_ptr;
     int no_of_patterns, pattern_no, sub_pat_no, i;
 
     /* initialize matrix */
@@ -932,10 +932,10 @@ void SnnsCLib::pr_obs_setInitParameter (float param)
 krui_err SnnsCLib::PRUNE_OBS (int pattern)
 {
 
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     TopoPtrArray topo_ptr;
     float update_const;
     int err, link_no;
 
@@ -1142,13 +1142,13 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
 
 {
 
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
-    register struct Link *link_ptr;
-    register TopoPtrArray topo_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
+     struct Link *link_ptr;
+     TopoPtrArray topo_ptr;
     //static bool PRUNE_Skeletonization_first = TRUE;
 
-    register Patterns out_pat;
+     Patterns out_pat;
     int size, pattern_no, sub_pat_no;//, no_of_patterns;
 
     if (PRUNE_Skeletonization_first){

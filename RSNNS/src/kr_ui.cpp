@@ -883,8 +883,8 @@ void    SnnsCLib::krui_setUnitPosition(int UnitNo, struct PosType *position)
 ******************************************************************************/
 int   SnnsCLib::krui_getUnitNoAtPosition(struct PosType *position, int subnet_no)
 {
-    register int       i;
-    register short     x, y, net_no;
+     int       i;
+     short     x, y, net_no;
     struct Unit     *unit_ptr;
 
     x = position->x;
@@ -921,8 +921,8 @@ int   SnnsCLib::krui_getUnitNoAtPosition(struct PosType *position, int subnet_no
 ******************************************************************************/
 int  SnnsCLib::krui_getUnitNoNearPosition(struct PosType *position, int subnet_no, int range, int gridWidth)
 {
-    register int       i, devit, width;
-    register short     x, y, net_no;
+     int       i, devit, width;
+     short     x, y, net_no;
     struct Unit        *unit_ptr;
 
     x = position->x;
@@ -2696,9 +2696,9 @@ int  SnnsCLib::krui_getNextSuccUnit(FlintType *weight)
 ******************************************************************************/
 bool  SnnsCLib::krui_areConnected(int sourceNo, int targetNo)
 {
-    register struct Link *link_ptr ;
-    register struct Unit *s_unit_ptr, *t_unit_ptr ;
-    register struct Site *site_ptr ;
+     struct Link *link_ptr ;
+     struct Unit *s_unit_ptr, *t_unit_ptr ;
+     struct Site *site_ptr ;
 
     s_unit_ptr = kr_getUnitPtr (sourceNo) ;
     t_unit_ptr = kr_getUnitPtr (targetNo) ;
@@ -3059,10 +3059,10 @@ GROUP: Functions for network propagation
 ******************************************************************************/
 float SnnsCLib::krui_getVariance (void)
 {
-    register struct Unit   *unit_ptr;
+     struct Unit   *unit_ptr;
     int   pattern_no=0, o, noOfOutputUnits, size, noOfPatternPairs, sub_pat_no;
     Patterns  out_pat;
-    register float *OutputUnitSumVariance, *OutputUnitVariance,Variance=0;
+     float *OutputUnitSumVariance, *OutputUnitVariance,Variance=0;
 
     noOfOutputUnits=krui_getNoOfOutputUnits();
     noOfPatternPairs=kr_np_pattern( PATTERN_GET_NUMBER,0, 0 );
@@ -3120,9 +3120,9 @@ float SnnsCLib::krui_getVariance (void)
 ******************************************************************************/
 int SnnsCLib::krui_countLinks(void)
 {
-  register struct Unit   *unit_ptr;
-  register struct Link   *link_ptr;
-  register int i=0;
+   struct Unit   *unit_ptr;
+   struct Link   *link_ptr;
+   int i=0;
 
   FOR_ALL_UNITS( unit_ptr )
     if ((IS_OUTPUT_UNIT(unit_ptr) || IS_HIDDEN_UNIT(unit_ptr))) {
@@ -3145,7 +3145,7 @@ int SnnsCLib::krui_countLinks(void)
 ******************************************************************************/
 krui_err   SnnsCLib::krui_updateSingleUnit(int unit_no)
 {
-    register struct Unit   *unit_ptr;
+     struct Unit   *unit_ptr;
 
 
 #ifdef MASPAR_KERNEL
@@ -3380,7 +3380,7 @@ int SnnsCLib::krui_checkPruning ()
 ******************************************************************************/
 krui_err SnnsCLib::krui_trainNetwork(NetLearnParameters *parameters)
 {
-    register int i;
+     int i;
     krui_err error;
     float parameterInArray[NO_OF_LEARN_PARAMS];
     float *parameterOutArray;
@@ -4567,8 +4567,8 @@ krui_err  SnnsCLib::krui_setUnitDefaults(FlintTypeParam act, FlintTypeParam bias
 ******************************************************************************/
 void  SnnsCLib::krui_resetNet(void)
 {
-    register int   i;
-    register struct Unit   *unit_ptr;
+     int   i;
+     struct Unit   *unit_ptr;
 
     if ( (unit_array == NULL) || (NoOfUnits == 0) )
         return;
@@ -4802,19 +4802,19 @@ char  *SnnsCLib::krui_topo_err_msg(void)
 
     if (topo_msg.dest_error_unit > 0) {
         if (dest_unit_name == NULL)
-            sprintf( krui_topo_err_msg_msg1, "Unit #%d is the destination unit. ", 
+            snprintf( krui_topo_err_msg_msg1, sizeof(krui_topo_err_msg_msg1), "Unit #%d is the destination unit. ", 
 		     topo_msg.dest_error_unit );
         else
-            sprintf( krui_topo_err_msg_msg1, "Unit #%d (%s) is the destination unit. ", 
+            snprintf( krui_topo_err_msg_msg1, sizeof(krui_topo_err_msg_msg1), "Unit #%d (%s) is the destination unit. ", 
 		     topo_msg.dest_error_unit, dest_unit_name );
     }
 
     if (topo_msg.src_error_unit > 0) {
         if (src_unit_name == NULL)
-            sprintf( krui_topo_err_msg_msg2, "Unit #%d is the source unit. ", 
+            snprintf( krui_topo_err_msg_msg2, sizeof(krui_topo_err_msg_msg2), "Unit #%d is the source unit. ", 
 		     topo_msg.src_error_unit );
         else
-            sprintf( krui_topo_err_msg_msg2, "Unit #%d (%s) is the source unit. ", 
+            snprintf( krui_topo_err_msg_msg2, sizeof(krui_topo_err_msg_msg2), "Unit #%d (%s) is the source unit. ", 
 		     topo_msg.src_error_unit, src_unit_name );
     }
 
@@ -4874,12 +4874,12 @@ const char  *SnnsCLib::krui_error(int error_code)
 
             switch (-error_code){
 	    case KRERR_CYCLES:
-		sprintf( krui_error_aux, "%d cycle(s) in the network. ", 
+		snprintf( krui_error_aux, sizeof(krui_error_aux), "%d cycle(s) in the network. ", 
 			 topo_msg.no_of_cycles );
 		strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 		break;
 	    case KRERR_DEAD_UNITS:
-		sprintf( krui_error_aux, "%d dead unit(s) in the network. ", 
+		snprintf( krui_error_aux, sizeof(krui_error_aux), "%d dead unit(s) in the network. ", 
 			 topo_msg.no_of_dead_units );
 		strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 		break;
@@ -4899,10 +4899,10 @@ const char  *SnnsCLib::krui_error(int error_code)
 
 	      switch (-error_code){
 	      case KRERR_FEW_LAYERS:
-		  sprintf(krui_error_aux, "Only %d layers found.", topo_msg.no_of_layers );
+		  snprintf(krui_error_aux, sizeof(krui_error_aux), "Only %d layers found.", topo_msg.no_of_layers );
 		  break;
 	      case KRERR_MUCH_LAYERS:
-		  sprintf( krui_error_aux, "%d layers found.", topo_msg.no_of_layers );
+		  snprintf( krui_error_aux, sizeof(krui_error_aux), "%d layers found.", topo_msg.no_of_layers );
 		  break;
 
 	      default: break;
@@ -4914,14 +4914,14 @@ const char  *SnnsCLib::krui_error(int error_code)
           case KRERR_NO_OF_UNITS_IN_LAYER:
 	      strcpy (krui_error_mesg, ext_messages[2]);
 	      strcat (krui_error_mesg, err_message [error_code]);
-	      sprintf (krui_error_aux, "The name of the layer is: %s", topo_msg.name);
+	      snprintf (krui_error_aux, sizeof(krui_error_aux), "The name of the layer is: %s", topo_msg.name);
 	      strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 	      return (krui_error_mesg);
 
           case KRERR_UNIT_MISSING:
 	      strcpy (krui_error_mesg, ext_messages[2]);
 	      strcat (krui_error_mesg, err_message [error_code]);
-	      sprintf (krui_error_aux, "The missing unit is the %s unit.", topo_msg.name);
+	      snprintf (krui_error_aux, sizeof(krui_error_aux), "The missing unit is the %s unit.", topo_msg.name);
 	      strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 	      return (krui_error_mesg);
 
@@ -4933,7 +4933,7 @@ const char  *SnnsCLib::krui_error(int error_code)
           default:
 	      if (lineno != 0){               /*  file I/O error  */
 		  strcpy( krui_error_mesg, ext_messages[1] );
-		  sprintf( krui_error_aux, "Loading file failed at line %d : ", lineno );
+		  snprintf( krui_error_aux, sizeof(krui_error_aux), "Loading file failed at line %d : ", lineno );
 		  strncat( krui_error_mesg, krui_error_aux, sizeof(krui_error_aux)+1 );
 		  strcat( krui_error_mesg, err_message[ error_code ] );
 

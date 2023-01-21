@@ -46,13 +46,11 @@
 #define SNNS_HEADER_ALL
 
 #ifndef MAXFLOAT
-#include <float.h>
-#define MAXFLOAT FLT_MAX
+//#include <float.h>
+//#define MAXFLOAT FLT_MAX
+#define MAXFLOAT 1e+37f
 #endif
 
-#if __cplusplus > 199711L
-#define register      // Deprecated in C++11.
-#endif  // #if __cplusplus > 199711L
 
 #include "u_lrand48.h"
 

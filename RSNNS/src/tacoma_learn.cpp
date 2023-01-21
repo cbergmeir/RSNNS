@@ -307,9 +307,9 @@ krui_err SnnsCLib::tac_initVariables(float* ParameterInArray,
 ******************************************************************************/
  krui_err SnnsCLib::tac_calculateOutputUnitError(int StartPattern,int EndPattern)
 {
-    register struct Unit *UnitPtr;
-    register Patterns  out_pat;
-    register int o,p;
+     struct Unit *UnitPtr;
+     Patterns  out_pat;
+     int o,p;
     int start, end,pat,sub,n;
     float devit;
   

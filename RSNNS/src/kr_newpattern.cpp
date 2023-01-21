@@ -1488,9 +1488,9 @@ bool SnnsCLib::kr_getSubPatternByOrder(int *pattern, int *sub)
 ******************************************************************************/
 bool SnnsCLib::kr_getSubPatternByNo(int *pattern, int *sub, int n)
 {
-    register int ts;
-    register int tp;
-    register int low, high, mid;
+     int ts;
+     int tp;
+     int low, high, mid;
 
     TRACE_IN();
 
@@ -1612,7 +1612,7 @@ int SnnsCLib::kr_TotalNoOfSubPatPairs(void)
 ******************************************************************************/
 int SnnsCLib::kr_NoOfSubPatPairs(int pattern)
 {
-    register int ps;
+     int ps;
 
     TRACE_IN();
 
@@ -3614,8 +3614,8 @@ The parameter entries returns the number of entries in the data field.
 				int *sstep, int *spos)
 {
     int ns[MAX_NO_OF_VAR_DIM];
-    register int i;
-    register int ts = 0;
+     int i;
+     int ts = 0;
 
     TRACE_IN();
 
@@ -3820,11 +3820,11 @@ The parameter entries returns the number of entries in the data field.
     //static int kr_np_order_pat_entries_c_start;
     //static int kr_np_order_pat_entries_c_end;
 
-    register int i;
-    register int *fp;
-    register int h;
-    register int s;
-    register int n;
+     int i;
+     int *fp;
+     int h;
+     int s;
+     int n;
 
     TRACE_IN();
 
@@ -3876,11 +3876,11 @@ The parameter entries returns the number of entries in the data field.
     //static int kr_np_order_sub_pat_entries_c_start;
     //static int kr_np_order_sub_pat_entries_c_end;
 
-    register int i;
-    register int *fp;
-    register int h;
-    register int s;
-    register int n;
+     int i;
+     int *fp;
+     int h;
+     int s;
+     int n;
 
     TRACE_IN();
 
@@ -4444,7 +4444,7 @@ The parameter entries returns the number of entries in the data field.
 ******************************************************************************/
  krui_err SnnsCLib::kr_np_showPatternSTD(int mode)
 {
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
     float *in_pat, *out_pat;
     np_pattern_descriptor *pattern;
     int in_pat_size, out_pat_size;
@@ -4539,7 +4539,7 @@ The parameter entries returns the number of entries in the data field.
 ******************************************************************************/
  krui_err SnnsCLib::kr_np_modifyPattern(void)
 {
-    register struct Unit *unit_ptr;
+     struct Unit *unit_ptr;
     float *in_pat, *out_pat;
     float *ip, *op;
     np_pattern_descriptor *pattern;

@@ -107,7 +107,7 @@ GROUP: Unit Output Functions
     This function isn't used now, because the identity output function is
     the NULL pointer.
 */
-FlintType  SnnsCLib::OUTP_Identity(register FlintType activation)
+FlintType  SnnsCLib::OUTP_Identity( FlintType activation)
 {
   return( activation );
 }
@@ -115,7 +115,7 @@ FlintType  SnnsCLib::OUTP_Identity(register FlintType activation)
 
 /*  Clipping [0,1] function
 */
-FlintType  SnnsCLib::OUT_Clip_01(register FlintType activation)
+FlintType  SnnsCLib::OUT_Clip_01( FlintType activation)
 {
   if (activation < 0.0)  return( (FlintType) 0.0 );
   if (activation > 1.0)  return( (FlintType) 1.0 );
@@ -125,7 +125,7 @@ FlintType  SnnsCLib::OUT_Clip_01(register FlintType activation)
 
 /*  Clipping [-1,1] function
 */
-FlintType  SnnsCLib::OUT_Clip_11(register FlintType activation)
+FlintType  SnnsCLib::OUT_Clip_11( FlintType activation)
 {
   if (activation < -1.0)  return( (FlintType) -1.0 );
   if (activation > 1.0)  return( (FlintType) 1.0 );
@@ -134,7 +134,7 @@ FlintType  SnnsCLib::OUT_Clip_11(register FlintType activation)
 
 /*  Threshold 0.5 Output Function
 */
-FlintType  SnnsCLib::OUT_Threshold05(register FlintType activation)
+FlintType  SnnsCLib::OUT_Threshold05( FlintType activation)
 {
   if (activation < 0.5)  return( (FlintType) 0.0 );
   return( (FlintType) 1.0 );
@@ -153,7 +153,7 @@ GROUP: Unit Activation Functions
 FlintType   SnnsCLib::ACT_Linear(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -175,7 +175,7 @@ FlintType   SnnsCLib::ACT_Linear(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_BSBFunction(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -197,7 +197,7 @@ FlintType   SnnsCLib::ACT_BSBFunction(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_MinOutPlusWeight(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  min1, min2;
+   FlintType  min1, min2;
 
 
   min1 = 0.0;
@@ -225,7 +225,7 @@ FlintType   SnnsCLib::ACT_MinOutPlusWeight(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_TanHFunction(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -248,7 +248,7 @@ FlintType   SnnsCLib::ACT_TanHFunction(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_TanHFunction_Xdiv2(struct Unit * unit_ptr )
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
    float expon;
    float wert;
 
@@ -280,7 +280,7 @@ FlintType   SnnsCLib::ACT_TanHFunction_Xdiv2(struct Unit * unit_ptr )
 FlintType   SnnsCLib::ACT_Logistic(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -303,7 +303,7 @@ FlintType   SnnsCLib::ACT_Logistic(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_Elliott(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -330,7 +330,7 @@ FlintType   SnnsCLib::ACT_Elliott(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_Perceptron(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -355,7 +355,7 @@ FlintType   SnnsCLib::ACT_Perceptron(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_Signum(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -380,7 +380,7 @@ FlintType   SnnsCLib::ACT_Signum(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_Softmax(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -400,7 +400,7 @@ FlintType   SnnsCLib::ACT_Softmax(struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_EXPONENT(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
   sum =  GET_UNIT_BIAS(unit_ptr);
   if (GET_FIRST_UNIT_LINK( unit_ptr ))
@@ -418,7 +418,7 @@ FlintType SnnsCLib::ACT_EXPONENT(struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_DERIV_EXPONENT(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  GET_UNIT_BIAS(unit_ptr);
@@ -437,7 +437,7 @@ FlintType SnnsCLib::ACT_DERIV_EXPONENT(struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_SIN(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  GET_UNIT_BIAS(unit_ptr);
@@ -457,7 +457,7 @@ FlintType SnnsCLib::ACT_SIN(struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_DERIV_SIN(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  GET_UNIT_BIAS(unit_ptr);
@@ -478,7 +478,7 @@ FlintType   SnnsCLib::ACT_CC_Threshold(struct Unit *unit_ptr)
      /* only used, because I need a pseudo-derivation */
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -509,7 +509,7 @@ FlintType   SnnsCLib::ACT_DERIV_CC_Threshold(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_Signum0(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -534,7 +534,7 @@ FlintType   SnnsCLib::ACT_Signum0(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_StepFunction(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -558,7 +558,7 @@ FlintType   SnnsCLib::ACT_StepFunction(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_HystStepFunction(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
            FlintType  Schwellwert = 0.1;
 
   sum =  0.0;
@@ -583,7 +583,7 @@ FlintType   SnnsCLib::ACT_HystStepFunction(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_BAMFunction(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -607,7 +607,7 @@ FlintType   SnnsCLib::ACT_BAMFunction(struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_RM (struct Unit *unit_ptr)
 {
     ACT_FUNC_DEFS
-    register FlintType RM_act, sum;
+     FlintType RM_act, sum;
     FlintType Eparam=.15, Dparam=.15;
 
     sum = 0.0;
@@ -641,9 +641,9 @@ FlintType SnnsCLib::ACT_RM (struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_TACOMA(struct Unit *unit_ptr)
 {
   //ACT_FUNC_DEFS
-  register struct Link  *__link_ptr;
+   struct Link  *__link_ptr;
 
-  register FlintType sum, coordAct,WeightSum;
+   FlintType sum, coordAct,WeightSum;
 
   sum =  0.0;
   WeightSum = GET_UNIT_BIAS( unit_ptr );
@@ -673,7 +673,7 @@ FlintType SnnsCLib::ACT_TACOMA(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_LogisticI(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum = 0.0;
@@ -703,9 +703,9 @@ FlintType   SnnsCLib::ACT_LogisticI(struct Unit *unit_ptr)
 FlintType SnnsCLib::RbfUnitGetNormsqr(struct Unit *unit_ptr)
 {
         //ACT_FUNC_DEFS
-        register struct Link  *__link_ptr;
-        register FlintType      norm_2 = 0.0;   /* |X - T|^2            */
-        register FlintType      diff;           /* difference           */
+         struct Link  *__link_ptr;
+         FlintType      norm_2 = 0.0;   /* |X - T|^2            */
+         FlintType      diff;           /* difference           */
 
 
         if (!GET_FIRST_UNIT_LINK(unit_ptr))
@@ -732,7 +732,7 @@ FlintType SnnsCLib::RbfUnitGetNormsqr(struct Unit *unit_ptr)
 
 FlintType   SnnsCLib::ACT_RBF_Gaussian(struct Unit *unit_ptr)
 {
-        register FlintType      norm_2;
+         FlintType      norm_2;
 
         norm_2 = RbfUnitGetNormsqr(unit_ptr);
         return (FlintType) exp_s(- GET_UNIT_BIAS(unit_ptr)*norm_2);
@@ -744,7 +744,7 @@ FlintType   SnnsCLib::ACT_RBF_Gaussian(struct Unit *unit_ptr)
 
 FlintType SnnsCLib::ACT_RBF_Multiquadratic(struct Unit *unit_ptr)
 {
-      register FlintType      norm_2;
+       FlintType      norm_2;
 
       norm_2 = RbfUnitGetNormsqr(unit_ptr);
       return (FlintType) sqrt(norm_2 + GET_UNIT_BIAS(unit_ptr));
@@ -756,8 +756,8 @@ FlintType SnnsCLib::ACT_RBF_Multiquadratic(struct Unit *unit_ptr)
 
 FlintType SnnsCLib::ACT_RBF_Thinplatespline(struct Unit *unit_ptr)
 {
-      register FlintType      norm_2;
-      register FlintType      bias;
+       FlintType      norm_2;
+       FlintType      bias;
 
       norm_2 = RbfUnitGetNormsqr(unit_ptr);
       bias = GET_UNIT_BIAS(unit_ptr);
@@ -773,7 +773,7 @@ FlintType SnnsCLib::ACT_RBF_Thinplatespline(struct Unit *unit_ptr)
 FlintType   SnnsCLib::ACT_Linear_bias(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;
@@ -799,7 +799,7 @@ FlintType   SnnsCLib::ACT_Linear_bias(struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_at_least_2 (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType    sum = 0.0;
+    FlintType    sum = 0.0;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -826,7 +826,7 @@ FlintType  SnnsCLib::ACT_at_least_2 (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_less_than_0 (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType    sum = 0.0;
+    FlintType    sum = 0.0;
 
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
@@ -856,7 +856,7 @@ FlintType  SnnsCLib::ACT_less_than_0 (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_at_least_1 (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType   sum = 0.0;
+    FlintType   sum = 0.0;
 
 
    if (GET_FIRST_SITE (unit_ptr)) {
@@ -885,7 +885,7 @@ FlintType  SnnsCLib::ACT_at_least_1 (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_at_most_0 (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType    sum = 0.0;
+    FlintType    sum = 0.0;
 
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
@@ -913,7 +913,7 @@ FlintType  SnnsCLib::ACT_at_most_0 (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_Product (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType    prod = 1.0;
+    FlintType    prod = 1.0;
 
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
@@ -942,7 +942,7 @@ FlintType  SnnsCLib::ACT_Product (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_exactly_1 (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType    sum = 0.0;
+    FlintType    sum = 0.0;
 
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
@@ -980,10 +980,10 @@ FlintType   SnnsCLib::ACT_TD_Logistic(struct Unit *unit_ptr)
 {
 /* the common macros are not used */
 
-  register FlintType  sum;
-  register UNIT_PTR ref_unit;
-  register int source_offset;
-  register struct Link *link;
+   FlintType  sum;
+   UNIT_PTR ref_unit;
+   int source_offset;
+   struct Link *link;
 
   if (unit_ptr -> TD.td_connect_typ == 0)
       return ACT_Logistic(unit_ptr);
@@ -1024,10 +1024,10 @@ FlintType   SnnsCLib::ACT_TD_Elliott(struct Unit *unit_ptr)
 {
 /* the common macros are not used */
 
-  register FlintType  sum;
-  register UNIT_PTR ref_unit;
-  register int source_offset;
-  register struct Link *link;
+   FlintType  sum;
+   UNIT_PTR ref_unit;
+   int source_offset;
+   struct Link *link;
 
   if (unit_ptr -> TD.td_connect_typ == 0)
       return ACT_Elliott(unit_ptr);
@@ -1075,7 +1075,7 @@ FlintType   SnnsCLib::ACT_Component( UNIT_PTR unit_ptr )
 
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
   int i=1,n;
 
   n = ExtraParameter;
@@ -1099,7 +1099,7 @@ FlintType   SnnsCLib::ACT_Euclid( UNIT_PTR unit_ptr )
 
 {
   ACT_FUNC_DEFS
-  register FlintType  dist;
+   FlintType  dist;
 
   dist=  0.0;
   if (GET_FIRST_SITE( unit_ptr ))
@@ -1147,7 +1147,7 @@ FlintType SnnsCLib::ACT_2_DERIV_Logistic (struct Unit *unit_ptr)
 */
 FlintType   SnnsCLib::ACT_DERIV_Elliott(struct Unit *unit_ptr)
 {
-    register FlintType act;
+     FlintType act;
     if ((act = GET_UNIT_ACT(unit_ptr)) <= 0.0)
 	act = 1.0 + act;
     else
@@ -1160,7 +1160,7 @@ FlintType   SnnsCLib::ACT_DERIV_Elliott(struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_2_DERIV_Elliott (struct Unit *unit_ptr)
 {
 
-    register FlintType act;
+     FlintType act;
     
     if ((act = GET_UNIT_ACT(unit_ptr)) <= 0.0)
 	act = 1.0 + act;
@@ -1189,7 +1189,7 @@ FlintType   SnnsCLib::ACT_DERIV_TD_Logistic(struct Unit *unit_ptr)
 
 FlintType   SnnsCLib::ACT_DERIV_TD_Elliott(struct Unit *unit_ptr)
 {
-    register FlintType act;
+     FlintType act;
     if ((act = GET_UNIT_ACT(unit_ptr)) <= 0.0)
 	act = 1.0 + act;
     else
@@ -1296,8 +1296,8 @@ FlintType SnnsCLib::ACT_2_DERIV_Dummy (struct Unit *unit_ptr)
 
 FlintType   SnnsCLib::ACT_DERIV_RBF_Gaussian(struct Unit *unit_ptr)
 {
-      register FlintType      rc;             /* return value         */
-      register FlintType      norm_2;         /* norm ^ 2             */
+       FlintType      rc;             /* return value         */
+       FlintType      norm_2;         /* norm ^ 2             */
 
       switch (unit_ptr -> Aux.int_no)
       {
@@ -1340,9 +1340,9 @@ FlintType   SnnsCLib::ACT_DERIV_RBF_Gaussian(struct Unit *unit_ptr)
 
 FlintType   SnnsCLib::ACT_DERIV_RBF_Multiquadratic(struct Unit *unit_ptr)
 {
-      register FlintType      rc;             /* return value         */
-      register FlintType      norm_2;         /* norm ^ 2             */
-      register FlintType      bias;           /* s                    */
+       FlintType      rc;             /* return value         */
+       FlintType      norm_2;         /* norm ^ 2             */
+       FlintType      bias;           /* s                    */
 
       bias = (FlintType) GET_UNIT_BIAS(unit_ptr);
       switch (unit_ptr -> Aux.int_no)
@@ -1377,9 +1377,9 @@ FlintType   SnnsCLib::ACT_DERIV_RBF_Multiquadratic(struct Unit *unit_ptr)
 
 FlintType   SnnsCLib::ACT_DERIV_RBF_Thinplatespline(struct Unit *unit_ptr)
 {
-      register FlintType      rc;             /* return value         */
-      register FlintType      norm_2;         /* norm ^ 2             */
-      register FlintType      bias;           /* s                    */
+       FlintType      rc;             /* return value         */
+       FlintType      norm_2;         /* norm ^ 2             */
+       FlintType      bias;           /* s                    */
 
       bias = (FlintType) GET_UNIT_BIAS(unit_ptr);
       switch (unit_ptr -> Aux.int_no)
@@ -1444,7 +1444,7 @@ FlintType SnnsCLib::ACT_DERIV_TACOMA(struct Unit *unit_ptr)
 
 
   //ACT_FUNC_DEFS
-  register struct Link  *__link_ptr;
+   struct Link  *__link_ptr;
   float sum,coordAct,WeightSum;
   float bruch;
 
@@ -1479,7 +1479,7 @@ GROUP: Site functions
 FlintType  SnnsCLib::SITE_WeightedSum(struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum = 0.0;
@@ -1497,7 +1497,7 @@ FlintType  SnnsCLib::SITE_WeightedSum(struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_Product(struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  prod;
+   FlintType  prod;
 
 
   if (GET_FIRST_SITE_LINK( site_ptr ))  {
@@ -1518,7 +1518,7 @@ FlintType  SnnsCLib::SITE_Product(struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_ProductA(struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  prod;
+   FlintType  prod;
 
 
   if (GET_FIRST_SITE_LINK( site_ptr ))  {
@@ -1543,7 +1543,7 @@ FlintType  SnnsCLib::SITE_ProductA(struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_Max(struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  max, out;
+   FlintType  max, out;
 
 
   if (GET_FIRST_SITE_LINK( site_ptr ))  {
@@ -1566,7 +1566,7 @@ FlintType  SnnsCLib::SITE_Max(struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_Min(struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  min, out;
+   FlintType  min, out;
 
 
   if (GET_FIRST_SITE_LINK( site_ptr ))  {
@@ -1588,7 +1588,7 @@ FlintType  SnnsCLib::SITE_Min(struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_at_least_2 (struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  sum = 0.0;
+   FlintType  sum = 0.0;
 
 
   sum = 0.0;
@@ -1609,7 +1609,7 @@ FlintType  SnnsCLib::SITE_at_least_2 (struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_at_least_1 (struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  sum = 0.0;
+   FlintType  sum = 0.0;
 
 
   sum = 0.0;
@@ -1630,7 +1630,7 @@ FlintType  SnnsCLib::SITE_at_least_1 (struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_at_most_0 (struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  sum = 0.0;
+   FlintType  sum = 0.0;
 
 
   sum = 0.0;
@@ -1656,7 +1656,7 @@ FlintType  SnnsCLib::SITE_at_most_0 (struct Site *site_ptr)
 FlintType  SnnsCLib::SITE_Reciprocal_WeightedSum (struct Site *site_ptr)
 {
   SITE_FUNC_DEFS
-  register FlintType  sum = 0.0;
+   FlintType  sum = 0.0;
 
 
   sum = 0.0;
@@ -1677,7 +1677,7 @@ FlintType  SnnsCLib::SITE_Reciprocal_WeightedSum (struct Site *site_ptr)
 FlintType   SnnsCLib::ACT_LogisticSym(struct Unit *unit_ptr)
 {
   ACT_FUNC_DEFS
-  register FlintType  sum;
+   FlintType  sum;
 
 
   sum =  0.0;

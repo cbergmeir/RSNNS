@@ -93,7 +93,7 @@ GROUP: Unit Output Functions
               |-
   It is piecewise linear (PLin)
 */
-FlintType  SnnsCLib::OUT_ART2_Noise_PLin (register FlintType activation)
+FlintType  SnnsCLib::OUT_ART2_Noise_PLin (FlintType activation)
 {
    if (activation < kra2_get_theta()) {
       return (0.0);
@@ -116,7 +116,7 @@ FlintType  SnnsCLib::OUT_ART2_Noise_PLin (register FlintType activation)
 */
 FlintType  SnnsCLib::OUT_ART2_Noise_ContDiff (FlintType activation)
 {
-   register FlintType theta;
+   FlintType theta;
 
    theta = kra2_get_theta();
 
@@ -150,7 +150,7 @@ GROUP: Unit Activation Functions
 FlintType  SnnsCLib::ACT_ART1_NC  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType     sum = 0.0;
+   FlintType     sum = 0.0;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -178,7 +178,7 @@ FlintType  SnnsCLib::ACT_ART1_NC  (struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_ART2_Linear (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType     sum = 0.0;
+   FlintType     sum = 0.0;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -205,7 +205,7 @@ FlintType SnnsCLib::ACT_ART2_NormP  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
    FlintType              NormP;
-   register FlintType     sum = 0.0;
+   FlintType     sum = 0.0;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -234,7 +234,7 @@ FlintType SnnsCLib::ACT_ART2_NormV  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
    FlintType              NormV;
-   register FlintType     sum = 0.0;
+   FlintType     sum = 0.0;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -263,7 +263,7 @@ FlintType SnnsCLib::ACT_ART2_NormW  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
    FlintType              NormW;
-   register FlintType     sum  = 0.0;
+   FlintType     sum  = 0.0;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -293,7 +293,7 @@ FlintType SnnsCLib::ACT_ART2_NormIP  (struct Unit *unit_ptr)
    ACT_FUNC_DEFS
    FlintType              NormP;
    FlintType              NormInp;
-   register FlintType     sum = 0.0;
+   FlintType     sum = 0.0;
 
    if (kra2_Reset()) {
       return (unit_ptr->i_act);
@@ -323,7 +323,7 @@ FlintType SnnsCLib::ACT_ART2_NormIP  (struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_ART2_Rec  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType     sum  = 0.0;
+   FlintType     sum  = 0.0;
 
 
    /* Top Down Phase */
@@ -362,7 +362,7 @@ FlintType SnnsCLib::ACT_ART2_Rec  (struct Unit *unit_ptr)
 FlintType SnnsCLib::ACT_ART2_Rst  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType     sum  = 0.0;
+   FlintType     sum  = 0.0;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -400,7 +400,7 @@ FlintType SnnsCLib::ACT_ART2_Rst  (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_ARTMAP_NCa  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType     sum = 0.0;
+   FlintType     sum = 0.0;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -425,7 +425,7 @@ FlintType  SnnsCLib::ACT_ARTMAP_NCa  (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_ARTMAP_NCb  (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType     sum = 0.0;
+   FlintType     sum = 0.0;
 
    if (GET_FIRST_UNIT_LINK (unit_ptr)) {
       do {
@@ -456,7 +456,7 @@ FlintType  SnnsCLib::ACT_ARTMAP_NCb  (struct Unit *unit_ptr)
 FlintType  SnnsCLib::ACT_ARTMAP_DRho (struct Unit *unit_ptr)
 {
    ACT_FUNC_DEFS
-   register FlintType    sum = 0.0;
+   FlintType    sum = 0.0;
    float                 epsilon = 0.0001;
 
 

@@ -201,7 +201,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     CHECK_RETURN (ret_code);
     ret_code = krui_setUnitOutFunc(unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
-    sprintf (name,"%s%d","inp",i);
+    snprintf (name, sizeof(name), "%s%d","inp",i);
     ret_code = krui_setUnitName (unit_no, name);
     CHECK_RETURN (ret_code);
 
@@ -240,7 +240,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     CHECK_RETURN (ret_code);
     ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
-    sprintf (name,"%s%d","cmp",i);
+    snprintf (name, sizeof(name), "%s%d","cmp",i);
     ret_code = krui_setUnitName (unit_no, name);
     CHECK_RETURN (ret_code);
 
@@ -283,7 +283,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     CHECK_RETURN (ret_code);
     ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
-    sprintf (name,"%s%d","rec",i);
+    snprintf (name, sizeof(name), "%s%d","rec",i);
     ret_code = krui_setUnitName (unit_no, name);
     CHECK_RETURN (ret_code);
 
@@ -323,7 +323,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     CHECK_RETURN (ret_code);
     ret_code = krui_setUnitOutFunc (unit_no, const_cast<char*>(ART1_OUTFUNC));
     CHECK_RETURN (ret_code);
-    sprintf (name,"%s%d","del",i);
+    snprintf (name, sizeof(name), "%s%d","del",i);
     ret_code = krui_setUnitName (unit_no, name);
     CHECK_RETURN (ret_code);
 
@@ -430,7 +430,7 @@ krui_err SnnsCLib::bn_art1_createNet (int IUnits, int IRow, int CUnits, int CRow
     CHECK_RETURN( ret_code );
     ret_code = krui_setUnitActFunc (unit_no, const_cast<char*>(ART1_ACTF_RST));
     CHECK_RETURN (ret_code);
-    sprintf (name,"%s%d","rst",i);
+    snprintf (name, sizeof(name), "%s%d","rst",i);
     ret_code = krui_setUnitName (unit_no, name);
     CHECK_RETURN (ret_code);
 

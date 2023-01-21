@@ -75,10 +75,10 @@
 #define  UNIT_PTR   struct Unit *
 #define  SITE_PTR   struct Site *
 
-#define  ACT_FUNC_DEFS      register struct Link  *__link_ptr; \
-                            register struct Site  *__site_ptr;
+#define  ACT_FUNC_DEFS       struct Link  *__link_ptr; \
+                             struct Site  *__site_ptr;
 
-#define  SITE_FUNC_DEFS     register struct Link  *__link_ptr;
+#define  SITE_FUNC_DEFS      struct Link  *__link_ptr;
 
 
 /*#################################################

@@ -140,7 +140,7 @@ void  SnnsCLib::kr_countUnits(struct Unit *unit_ptr, int mode)
 ******************************************************************************/
 bool    SnnsCLib::kr_symbolCheck(char *symbol)
 {
-  register  char  c;
+    char  c;
 
 
   KernelErrorCode = KRERR_SYMBOL;
@@ -590,7 +590,7 @@ int  SnnsCLib::kr_setSite(int mode, char *site_name)
 ******************************************************************************/
 int  SnnsCLib::kr_getUnit(int mode)
 {
-  register struct Unit   *unit_ptr;
+   struct Unit   *unit_ptr;
 
 
   if (NoOfUnits == 0)  return( 0 );
@@ -778,10 +778,10 @@ int  SnnsCLib::kr_searchOutputConnection(struct Unit *start_unit_ptr,
 				      struct Unit *source_unit_ptr, 
 				      FlintType *weight)
 {
-  register struct  Link  *link_ptr, *prev_link_ptr;
-  register struct  Unit  *source_unit;
-  register struct  Site  *site_ptr, *prev_site_ptr;
-  register struct  Unit  *unit_ptr;
+   struct  Link  *link_ptr, *prev_link_ptr;
+   struct  Unit  *source_unit;
+   struct  Site  *site_ptr, *prev_site_ptr;
+   struct  Unit  *unit_ptr;
 
 
   source_unit = source_unit_ptr;
@@ -936,9 +936,9 @@ int  SnnsCLib::kr_getSuccessorUnit(int mode, int source_unit_no, FlintType *weig
 ******************************************************************************/
 bool  SnnsCLib::kr_areConnected(int source_unit_no, int target_unit_no, FlintType *weight)
 {
-  register struct  Link  *link_ptr, *prev_link_ptr;
-  register struct  Unit  *source_unit_ptr;
-  register struct  Site  *site_ptr, *prev_site_ptr;
+   struct  Link  *link_ptr, *prev_link_ptr;
+   struct  Unit  *source_unit_ptr;
+   struct  Site  *site_ptr, *prev_site_ptr;
   struct  Unit	*target_unit_ptr;
 
 
@@ -1005,8 +1005,8 @@ bool  SnnsCLib::kr_areConnected(int source_unit_no, int target_unit_no, FlintTyp
 ******************************************************************************/
 bool  SnnsCLib::kr_isConnected(int source_unit_no, FlintType *weight)
 {
-  register struct  Link  *link_ptr, *prev_link_ptr;
-  register struct  Unit  *source_unit_ptr;
+   struct  Link  *link_ptr, *prev_link_ptr;
+   struct  Unit  *source_unit_ptr;
   struct  Link	*start_link_ptr;
 
 
@@ -1103,8 +1103,8 @@ void  SnnsCLib::kr_setLinkWeight(FlintTypeParam weight)
 ******************************************************************************/
 krui_err  SnnsCLib::kr_createLink(int source_unit_no, FlintTypeParam weight)
 {
-  register struct Link	*link_ptr;
-  register struct Unit	*source_unit_ptr;
+   struct Link	*link_ptr;
+   struct Unit	*source_unit_ptr;
 
 
   KernelErrorCode = KRERR_NO_ERROR;
@@ -1196,8 +1196,8 @@ krui_err  SnnsCLib::kr_createLink(int source_unit_no, FlintTypeParam weight)
                       (int source_unit_no, FlintTypeParam weight,
                        float val_a,float val_b,float val_c)
 {
-  register struct Link	*link_ptr=NULL;
-  register struct Unit	*source_unit_ptr;
+   struct Link	*link_ptr=NULL;
+   struct Unit	*source_unit_ptr;
 
 
   KernelErrorCode = KRERR_NO_ERROR;
@@ -1294,7 +1294,7 @@ krui_err  SnnsCLib::kr_createLink(int source_unit_no, FlintTypeParam weight)
 ******************************************************************************/
 krui_err  SnnsCLib::kr_deleteLink(void)
 {
-  register struct Link	 *next_link_ptr;
+   struct Link	 *next_link_ptr;
 
 
   if (linkPtr == NULL)
@@ -1432,7 +1432,7 @@ GROUP: Low-Level Kernel Functions
 ******************************************************************************/
 void    SnnsCLib::kr_deleteAllInputs(struct Unit *unit_ptr)
 {
-  register struct Site	*site_ptr;
+   struct Site	*site_ptr;
 
 
   if (UNIT_HAS_SITES( unit_ptr ))
@@ -1466,10 +1466,10 @@ void    SnnsCLib::kr_deleteAllInputs(struct Unit *unit_ptr)
 ******************************************************************************/
 void  SnnsCLib::kr_deleteAllOutputLinks(struct Unit *source_unit_ptr)
 {
-  register struct Link   *link_ptr,
+   struct Link   *link_ptr,
                          *pred_link_ptr;
-  register struct Site   *site_ptr;
-  register struct Unit   *unit_ptr;
+   struct Site   *site_ptr;
+   struct Unit   *unit_ptr;
 
 
   FOR_ALL_UNITS( unit_ptr )
@@ -1531,10 +1531,10 @@ void  SnnsCLib::kr_deleteAllOutputLinks(struct Unit *source_unit_ptr)
 krui_err  SnnsCLib::kr_copyOutputLinks(struct Unit *source_unit_ptr, 
 				    struct Unit *new_unit_ptr)
 {
-  register struct Link   *link_ptr,
+   struct Link   *link_ptr,
 			 *new_link;
-  register struct Site   *site_ptr;
-  register struct Unit   *unit_ptr;
+   struct Site   *site_ptr;
+   struct Unit   *unit_ptr;
 
 
   KernelErrorCode = KRERR_NO_ERROR;
@@ -1589,9 +1589,9 @@ krui_err  SnnsCLib::kr_copyOutputLinks(struct Unit *source_unit_ptr,
 krui_err  SnnsCLib::kr_copyInputLinks(struct Unit *source_unit_ptr, 
 				   struct Unit *new_unit_ptr)
 {
-  register struct Link	 *link_ptr, *new_link,
+   struct Link	 *link_ptr, *new_link,
 			 *last_link_ptr;
-  register struct Site	 *source_site_ptr, *dest_site_ptr;
+   struct Site	 *source_site_ptr, *dest_site_ptr;
 
 
   KernelErrorCode = KRERR_NO_ERROR;
@@ -1662,7 +1662,7 @@ GROUP: Site Name/Func functions
 ******************************************************************************/
 struct Site *SnnsCLib::kr_searchUnitSite(struct Unit *unit_ptr,struct SiteTable *stbl_ptr)
 {
-  register struct Site	*site_ptr;
+   struct Site	*site_ptr;
 
   FOR_ALL_SITES( unit_ptr, site_ptr )
     if (site_ptr->site_table == stbl_ptr)
@@ -1683,8 +1683,8 @@ struct Site *SnnsCLib::kr_searchUnitSite(struct Unit *unit_ptr,struct SiteTable 
 ******************************************************************************/
 int  SnnsCLib::kr_searchNetSite(struct SiteTable *stbl_ptr)
 {
-  register struct Site   *site_ptr;
-  register struct Unit   *unit_ptr;
+   struct Site   *site_ptr;
+   struct Unit   *unit_ptr;
 
 
   if (NoOfUnits == 0)
@@ -1726,11 +1726,11 @@ GROUP: Link Functions
 ******************************************************************************/
 void  SnnsCLib::kr_jogWeights(FlintTypeParam minus, FlintTypeParam plus)
 {
-  register  struct Link   *link_ptr;
+    struct Link   *link_ptr;
   FlagWord	flags;
   struct Unit   *unit_ptr;
   struct Site   *site_ptr;
-  register FlintType  range, min;
+   FlintType  range, min;
 
 
   if (NoOfUnits == 0)  return;  /*  no. units  */
@@ -2025,14 +2025,14 @@ krui_err SnnsCLib::kr_getCorrelatedHiddens(struct Unit **hn1, struct Unit **hn2,
 krui_err  SnnsCLib::kr_jogCorrWeights(FlintTypeParam minus, FlintTypeParam plus, 
 			    FlintTypeParam mincorr)
 {
-    register  struct Link   *link_ptr;
+      struct Link   *link_ptr;
     FlagWord	flags;
     struct Unit   *unit_ptr = NULL;
     struct Unit   *unit_ptr1 = NULL;
     struct Unit   *unit_ptr2 = NULL;
     double         correlation;
     struct Site   *site_ptr;
-    register FlintType  range, min;
+     FlintType  range, min;
     double maxweight;
 
     if (NoOfUnits == 0)  return KRERR_NO_UNITS;  /*  no. units  */
@@ -2146,8 +2146,8 @@ GROUP: Unit Functions
 ******************************************************************************/
 int  SnnsCLib::kr_unitNameSearch(int min_unit_no, char *unit_symbol_ptr)
 {
-  register char   *symbol;
-  register struct Unit   *unit_ptr;
+   char   *symbol;
+   struct Unit   *unit_ptr;
 
 
   if ((symbol = unit_symbol_ptr) == NULL)
@@ -2339,7 +2339,7 @@ GROUP: Ftype Unit Functions
 ******************************************************************************/
 void   SnnsCLib::kr_changeFtypeUnits(struct FtypeUnitStruct *Ftype_entry)
 {
-  register struct Unit   *unit_ptr;
+   struct Unit   *unit_ptr;
 
 
   if (NoOfUnits == 0)  return;  /*  no units  */
@@ -2371,7 +2371,7 @@ void   SnnsCLib::kr_changeFtypeUnits(struct FtypeUnitStruct *Ftype_entry)
 ******************************************************************************/
 void  SnnsCLib::kr_deleteUnitsFtype(struct FtypeUnitStruct *ftype_ptr)
 {
-  register struct Unit   *unit_ptr;
+   struct Unit   *unit_ptr;
 
 
   if (NoOfUnits == 0)  return;  /*  no units  */
@@ -2394,7 +2394,7 @@ void  SnnsCLib::kr_deleteUnitsFtype(struct FtypeUnitStruct *ftype_ptr)
 ******************************************************************************/
 int  SnnsCLib::kr_makeFtypeUnit(char *Ftype_symbol)
 {
-  register struct Site	*ftype_site, *site_ptr;
+   struct Site	*ftype_site, *site_ptr;
   struct Unit  *unit_ptr;
   struct FtypeUnitStruct  *ftype_ptr;
   int  unit_no;
@@ -2462,7 +2462,7 @@ int  SnnsCLib::kr_makeFtypeUnit(char *Ftype_symbol)
 bool  SnnsCLib::kr_FtypeSiteSearch(struct Site *ftype_first_site, 
 			 struct SiteTable *site_table_ptr)
 {
-  register struct  Site      *site_ptr;
+   struct  Site      *site_ptr;
 
 
   for (site_ptr = ftype_first_site; site_ptr != NULL; site_ptr = site_ptr->next)
@@ -2708,7 +2708,7 @@ int  SnnsCLib::kr_TType2Flags(int ttype)
 ******************************************************************************/
 void    SnnsCLib::kr_updateUnitOutputs(void)
 {
-  register struct Unit   *unit_ptr;
+   struct Unit   *unit_ptr;
 
 
   FOR_ALL_UNITS( unit_ptr )
@@ -2735,9 +2735,9 @@ void    SnnsCLib::kr_updateUnitOutputs(void)
 ******************************************************************************/
 int  SnnsCLib::kr_getNoOfUnits(int UnitTType)
 {
-  register struct Unit   *unit_ptr;
-  register int   no_of_units;
-  register FlagWord      ttyp_flg;
+   struct Unit   *unit_ptr;
+   int   no_of_units;
+   FlagWord      ttyp_flg;
   int   flg;
 
 
@@ -2767,9 +2767,9 @@ int  SnnsCLib::kr_getNoOfUnits(int UnitTType)
 ******************************************************************************/
 int  SnnsCLib::kr_getNoOfSpecialUnits(int UnitTType)
 {
-  register struct Unit   *unit_ptr;
-  register int   no_of_units;
-  register FlagWord      ttyp_flg;
+   struct Unit   *unit_ptr;
+   int   no_of_units;
+   FlagWord      ttyp_flg;
   int   flg;
 
 
@@ -2911,7 +2911,7 @@ GROUP: Topological Sorting Functions
 ******************************************************************************/
 void  SnnsCLib::clr_T_flags(void)
 {
-  register struct Unit   *unit_ptr;
+   struct Unit   *unit_ptr;
 
 
   FOR_ALL_UNITS( unit_ptr )
@@ -3105,7 +3105,7 @@ void  SnnsCLib::DepthFirst3(struct Unit *unit_ptr, int depth)
 ******************************************************************************/
 krui_err  SnnsCLib::kr_topoSortT(void)
 {
-  register struct Unit	 *unit_ptr;
+   struct Unit	 *unit_ptr;
   int	io_units;
 
 
@@ -3195,7 +3195,7 @@ krui_err  SnnsCLib::kr_topoSortT(void)
 ******************************************************************************/
 krui_err  SnnsCLib::kr_topoSortFF(void)
 {
-  register struct Unit	 *unit_ptr;
+   struct Unit	 *unit_ptr;
   int	io_units;
 
 
@@ -3300,7 +3300,7 @@ krui_err  SnnsCLib::kr_topoSortFF(void)
 krui_err  SnnsCLib::kr_topoSortIHO(void)
 {
   TopoPtrArray     topo_ptr;
-  register struct Unit   *unit_ptr;
+   struct Unit   *unit_ptr;
   int  no_of_units;
   int has_no_dual;
 
@@ -3668,8 +3668,8 @@ int  SnnsCLib::kr_topoCheck(void)
 ******************************************************************************/
 krui_err  SnnsCLib::kr_makeUnitPermutation(void)
 {
-  register struct Unit   *unit_ptr;
-  register int	   no_of_units, i;
+   struct Unit   *unit_ptr;
+   int	   no_of_units, i;
   TopoPtrArray     topo_ptr,  t_ptr1,  t_ptr2;
 
 
@@ -3732,8 +3732,8 @@ GROUP: Functions for pattern management
 ******************************************************************************/
 krui_err  SnnsCLib::kr_IOCheck(void)
 {
-  register struct Unit   *unit_ptr;
-  register int  no_of_i_units, no_of_o_units;
+   struct Unit   *unit_ptr;
+   int  no_of_i_units, no_of_o_units;
 
   KernelErrorCode = KRERR_NO_ERROR;  /*  reset return code  */
 
@@ -3770,9 +3770,9 @@ GROUP: other functions
 
 float SnnsCLib::kr_NA_Error(int currentPattern, int error_unit, int error, bool ave)
 {
-  register struct   Unit *unit_ptr, *error_unit_ptr = NULL;
-  register Patterns       out_pat  ;
-  register float          error_lin, error_sqr, error_su, devit ;
+   struct   Unit *unit_ptr, *error_unit_ptr = NULL;
+   Patterns       out_pat  ;
+   float          error_lin, error_sqr, error_su, devit ;
   int                     pattern_no, sub_pat_no;
 
 

@@ -93,7 +93,7 @@ krui_err SnnsCLib::kram_init_i_act (double rhoa, double rhob, double rho)
 {
    int                    ret_code = KRERR_NO_ERROR;
 
-   register struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr;
 
 
    FOR_ALL_UNITS (unit_ptr) {
@@ -666,9 +666,9 @@ krui_err  SnnsCLib::kram_get_InpUnits_a (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                   ret_code = KRERR_NO_ERROR;
 
-   register struct Unit       *unit_src_ptr, *unit_trg_ptr;
-   register struct Site       *site_trg_ptr;
-   register struct Link       *link_trg_ptr;
+    struct Unit       *unit_src_ptr, *unit_trg_ptr;
+    struct Site       *site_trg_ptr;
+    struct Link       *link_trg_ptr;
 
    int                        count_links;
 
@@ -742,9 +742,9 @@ krui_err  SnnsCLib::kram_get_CmpUnits_a (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                 ret_code  = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
+    struct Unit     *unit_ptr;
    struct Unit              *unit_src_ptr;
-   register struct Link     *link_ptr;
+    struct Link     *link_ptr;
    struct Link              *link_src_ptr;
 
    bool                     is_cmpa_unit;
@@ -847,8 +847,8 @@ krui_err  SnnsCLib::kram_get_RecUnits_a (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                   ret_code   = KRERR_NO_ERROR;
 
-   register struct Unit       *unit_ptr;
-   register struct Link       *link_ptr;
+    struct Unit       *unit_ptr;
+    struct Link       *link_ptr;
 
    bool                       is_reca_unit;
 
@@ -913,8 +913,8 @@ krui_err  SnnsCLib::kram_get_DelUnits_a (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                 ret_code      = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
    struct Link              *this_link = NULL;
 
    int                      count_links;
@@ -1114,9 +1114,9 @@ krui_err  SnnsCLib::kram_get_RstUnits_a (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                 ret_code   = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
-   register struct Site     *site_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Site     *site_ptr;
+    struct Link     *link_ptr;
 
    bool                     has_link_to_itself,
                             has_link_to_dela_unit;
@@ -1180,9 +1180,9 @@ krui_err  SnnsCLib::kram_get_SpecUnits_a (TopoPtrArray *topo_ptr, int *no_of_uni
 {
    krui_err                ret_code  = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
-   register struct Site     *site_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Site     *site_ptr;
+    struct Link     *link_ptr;
 
    TopoPtrArray             topo_spec_ptr = *topo_ptr;
 
@@ -1557,9 +1557,9 @@ krui_err  SnnsCLib::kram_get_InpUnits_b (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                   ret_code = KRERR_NO_ERROR;
 
-   register struct Unit       *unit_src_ptr, *unit_trg_ptr;
-   register struct Site       *site_trg_ptr;
-   register struct Link       *link_trg_ptr;
+    struct Unit       *unit_src_ptr, *unit_trg_ptr;
+    struct Site       *site_trg_ptr;
+    struct Link       *link_trg_ptr;
 
    int                        count_links;
 
@@ -1634,9 +1634,9 @@ krui_err  SnnsCLib::kram_get_CmpUnits_b (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                 ret_code  = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
+    struct Unit     *unit_ptr;
    struct Unit              *unit_src_ptr;
-   register struct Link     *link_ptr;
+    struct Link     *link_ptr;
    struct Link              *link_src_ptr;
 
    bool                     is_cmpb_unit;
@@ -1735,8 +1735,8 @@ krui_err  SnnsCLib::kram_get_RecUnits_b (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                   ret_code   = KRERR_NO_ERROR;
 
-   register struct Unit       *unit_ptr;
-   register struct Link       *link_ptr;
+    struct Unit       *unit_ptr;
+    struct Link       *link_ptr;
 
    bool                       is_recb_unit;
 
@@ -1801,8 +1801,8 @@ krui_err  SnnsCLib::kram_get_DelUnits_b (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                 ret_code      = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    int                      count_links;
    int                      no_of_delb_units = 0;
@@ -2011,9 +2011,9 @@ krui_err  SnnsCLib::kram_get_RstUnits_b (TopoPtrArray *topo_ptr, int *no_of_unit
 {
    krui_err                 ret_code   = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
-   register struct Site     *site_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Site     *site_ptr;
+    struct Link     *link_ptr;
 
    bool                     has_link_to_itself,
                             has_link_to_delb_unit;
@@ -2077,9 +2077,9 @@ krui_err  SnnsCLib::kram_get_SpecUnits_b (TopoPtrArray *topo_ptr, int *no_of_uni
 {
    krui_err                ret_code  = KRERR_NO_ERROR;
 
-   register struct Unit     *unit_ptr;
-   register struct Site     *site_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Site     *site_ptr;
+    struct Link     *link_ptr;
 
    TopoPtrArray             topo_spec_ptr = *topo_ptr;
 
@@ -2453,8 +2453,8 @@ krui_err  SnnsCLib::kram_get_MapUnits (TopoPtrArray *topo_ptr, int *no_of_units)
 {
    krui_err                ret_code  = KRERR_NO_ERROR;
 
-   register struct Unit    *unit_ptr;
-   register struct Link    *link_ptr;
+    struct Unit    *unit_ptr;
+    struct Link    *link_ptr;
 
    bool                    has_link_to_dela_unit,
                            has_link_to_delb_unit;
@@ -2525,9 +2525,9 @@ krui_err   SnnsCLib::kram_get_SpecUnits (TopoPtrArray *topo_ptr, int *no_of_unit
 {
     krui_err                  ret_code  = KRERR_NO_ERROR;
 
-    register struct Unit       *unit_ptr;
-    register struct Site       *site_ptr;
-    register struct Link       *link_ptr;
+     struct Unit       *unit_ptr;
+     struct Site       *site_ptr;
+     struct Link       *link_ptr;
 
     TopoPtrArray               topo_spec_ptr = *topo_ptr;
 
@@ -2985,8 +2985,8 @@ krui_err   SnnsCLib::kram_TopoPtrArray (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_Sites (void)
 {
-   register struct Unit   *unit_ptr;
-   register struct Site   *site_ptr;
+    struct Unit   *unit_ptr;
+    struct Site   *site_ptr;
 
    TopoPtrArray           topo_rsta_ptr,
                           topo_g1a_ptr,
@@ -3340,7 +3340,7 @@ krui_err   SnnsCLib::kram_Sites (void)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err  SnnsCLib::kram_LinksToInpUnits_a (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr;
 
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -3365,8 +3365,8 @@ krui_err  SnnsCLib::kram_LinksToInpUnits_a (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToCmpUnits_a (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    int                      count_inp,
                             count_spec,
@@ -3449,8 +3449,8 @@ krui_err   SnnsCLib::kram_LinksToCmpUnits_a (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToRecUnits_a (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    int                      count_cmp;
    int                      count_rst;
@@ -3535,8 +3535,8 @@ krui_err   SnnsCLib::kram_LinksToRecUnits_a (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToDelUnits_a (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    int                      count_rec;
    int                      count_del;
@@ -3685,8 +3685,8 @@ krui_err   SnnsCLib::kram_LinksToDelUnits_a (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToRstUnits_a (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    struct Site              *site_ptr,
                             *site_ptr1,
@@ -3812,8 +3812,8 @@ krui_err   SnnsCLib::kram_LinksToRstUnits_a (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToSpecUnits_a (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    struct Site              *site_ptr,
                             *site_ptr1,
@@ -4214,7 +4214,7 @@ krui_err   SnnsCLib::kram_LinksToSpecUnits_a (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err  SnnsCLib::kram_LinksToInpUnits_b (TopoPtrArray *topo_ptr)
 {
-   register struct Unit   *unit_ptr;
+    struct Unit   *unit_ptr;
 
    krui_err               ret_code = KRERR_NO_ERROR;
 
@@ -4239,8 +4239,8 @@ krui_err  SnnsCLib::kram_LinksToInpUnits_b (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToCmpUnits_b (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    int                      count_inp,
                             count_spec,
@@ -4323,8 +4323,8 @@ krui_err   SnnsCLib::kram_LinksToCmpUnits_b (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToRecUnits_b (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    int                      count_cmp;
    int                      count_rst;
@@ -4409,8 +4409,8 @@ krui_err   SnnsCLib::kram_LinksToRecUnits_b (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToDelUnits_b (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    int                      count_rec;
    int                      count_del;
@@ -4569,8 +4569,8 @@ krui_err   SnnsCLib::kram_LinksToDelUnits_b (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToRstUnits_b (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    struct Site              *site_ptr,
                             *site_ptr1,
@@ -4696,8 +4696,8 @@ krui_err   SnnsCLib::kram_LinksToRstUnits_b (TopoPtrArray *topo_ptr)
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 krui_err   SnnsCLib::kram_LinksToSpecUnits_b (TopoPtrArray *topo_ptr)
 {
-   register struct Unit     *unit_ptr;
-   register struct Link     *link_ptr;
+    struct Unit     *unit_ptr;
+    struct Link     *link_ptr;
 
    struct Site              *site_ptr,
                             *site_ptr1,
@@ -5090,8 +5090,8 @@ krui_err   SnnsCLib::kram_LinksToMapUnits (TopoPtrArray *topo_ptr)
 
    krui_err                  ret_code    = KRERR_NO_ERROR;
 
-   register struct Unit      *unit_ptr;
-   register struct Link      *link_ptr;
+    struct Unit      *unit_ptr;
+    struct Link      *link_ptr;
 
    int                       count_dela,
                              count_delb,
@@ -5171,11 +5171,11 @@ krui_err   SnnsCLib::kram_LinksToSpecUnits (TopoPtrArray *topo_ptr)
 {
     krui_err                  ret_code  = KRERR_NO_ERROR;
 
-    register struct Unit      *unit_ptr;
-    register struct Site      *site_ptr;
+     struct Unit      *unit_ptr;
+     struct Site      *site_ptr;
     struct Site               *site_ptr1,
                               *site_ptr2;
-    register struct Link      *link_ptr;
+     struct Link      *link_ptr;
 
     TopoPtrArray              topo_d1_ptr,
                               topo_cl_ptr,
@@ -5737,9 +5737,9 @@ krui_err SnnsCLib::kram_init_fix_weights (void)
 
    int                    ret_code  = KRERR_NO_ERROR;
 
-   register struct Unit   *unit_ptr;
-   register struct Site   *site_ptr;
-   register struct Link   *link_ptr;
+    struct Unit   *unit_ptr;
+    struct Site   *site_ptr;
+    struct Link   *link_ptr;
 
 
 

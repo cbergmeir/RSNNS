@@ -120,10 +120,10 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
     //static FlintType* *LEARN_SCG_weights ;
     //static FlintType  *LEARN_SCG_old_gradient, *LEARN_SCG_p, *LEARN_SCG_r, *LEARN_SCG_old_weights, *LEARN_SCG_step ;
 
-    register FlagWord flags;
-    register struct Link *link_ptr;
-    register struct Unit *unit_ptr;
-    register struct Site *site_ptr;
+     FlagWord flags;
+     struct Link *link_ptr;
+     struct Unit *unit_ptr;
+     struct Site *site_ptr;
 
     int   i, ret_code ;
     int   start_scg,  make_allocations, under_tolerance ;

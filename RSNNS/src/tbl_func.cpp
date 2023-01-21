@@ -93,8 +93,8 @@ FlintType   SnnsCLib::ACT_LogisticTbl(struct Unit *unit_ptr)
 #include "sigmoid_tbl.h"	/*  m,b value tables for linear approximation  */
 
   ACT_FUNC_DEFS
-  register FlintType  sum, x;
-  register int	index;
+   FlintType  sum, x;
+   int	index;
 
 
   sum =  0.0;

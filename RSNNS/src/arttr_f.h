@@ -72,13 +72,9 @@
 #ifndef _ARTTR_F_DEFINED_
 #define  _ARTTR_F_DEFINED_
 
-#if __cplusplus > 199711L
-#define register      // Deprecated in C++11.
-#endif  // #if __cplusplus > 199711L
-
 /* begin global definition section */
 
-FlintType  OUT_ART2_Noise_PLin (register FlintType activation);
+FlintType  OUT_ART2_Noise_PLin (FlintType activation);
 FlintType  OUT_ART2_Noise_ContDiff (FlintType activation);
 FlintType  ACT_ART1_NC  (struct Unit *unit_ptr);
 FlintType ACT_ART2_Linear (struct Unit *unit_ptr);

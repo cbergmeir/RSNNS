@@ -106,7 +106,7 @@ krui_err  SnnsCLib::REMAP_binary(float *pat_data, int pat_size,
 		       float *remap_params, int no_of_remap_params)
 {
 
-    register int   i;
+    int   i;
 
     for(i=0; i<pat_size; i++){
 	*pat_data = (*pat_data < 0.5)? 0.0: 1.0;
@@ -129,7 +129,7 @@ krui_err  SnnsCLib::REMAP_binary(float *pat_data, int pat_size,
 krui_err  SnnsCLib::REMAP_invers(float *pat_data, int pat_size, 
 		       float *remap_params, int no_of_remap_params)
 {
-    register int   i;
+    int   i;
 
     for(i=0; i<pat_size; i++){
 	*pat_data = (*pat_data < 0.5)? 1.0: 0.0;
@@ -152,9 +152,9 @@ krui_err  SnnsCLib::REMAP_invers(float *pat_data, int pat_size,
 krui_err  SnnsCLib::REMAP_clip(float *pat_data, int pat_size, 
 		     float *remap_params, int no_of_remap_params)
 {
-    register float param1;
-    register float param2;
-    register int   i;
+    float param1;
+    float param2;
+    int   i;
 
     param1 = remap_params[0];
     param2 = remap_params[1];
@@ -183,7 +183,7 @@ krui_err  SnnsCLib::REMAP_clip(float *pat_data, int pat_size,
 krui_err  SnnsCLib::REMAP_norm(float *pat_data, int pat_size, 
 		     float *remap_params, int no_of_remap_params)
 {
-    register int i;
+    int i;
     double length = 0.0;
 
     for(i=0; i<pat_size; i++){
@@ -219,11 +219,11 @@ krui_err  SnnsCLib::REMAP_threshold(float *pat_data, int pat_size,
 		     float *remap_params, int no_of_remap_params)
 {
 
-    register float param1;
-    register float param2;
-    register float param3;
-    register float param4;
-    register int   i;
+    float param1;
+    float param2;
+    float param3;
+    float param4;
+    int   i;
 
     param1 = remap_params[0];
     param2 = remap_params[1];
@@ -262,9 +262,9 @@ krui_err  SnnsCLib::REMAP_linearscale(float *pat_data, int pat_size,
 			    float *remap_params, int no_of_remap_params)
 {
 
-    register float param1;
-    register float param2;
-    register int   i;
+    float param1;
+    float param2;
+    int   i;
 
     param1 = remap_params[0];
     param2 = remap_params[1];
