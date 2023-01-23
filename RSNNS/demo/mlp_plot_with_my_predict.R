@@ -174,7 +174,7 @@ test.data <- data.frame(expand.grid(seq(0, 1, 0.025), seq(0, 1, 0.025)))
 # so I have more options.
 #modeled_output <- predict(nn, test.data)
 
-setwd("C:/Users/User/Documents/r_work/")
+# setwd("C:/Users/User/Documents/r_work/")
 # The standard source() function does not work because
 # we also need to import the global variables that were
 # set in the module mlp_my_predict.R. Though the use

@@ -193,7 +193,7 @@ getKrioTitle <- function(title_num) {
 
 is.nil <- function(ptr) {
   
-  if (class(ptr)!="externalptr") stop("argument given is not a pointer")
+  if (!inherits(ptr, "externalptr")) stop("argument given is not a pointer")
   
   res <- .Call("isnil", ptr)
   
