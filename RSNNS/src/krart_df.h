@@ -264,8 +264,8 @@
 
   /* Formulas to adjust the link weights in an ART2 network
   */
-#define ART2_ADJUST_LINK_REC_P(unit_u, d)       (unit_u->act / (1-d))
-#define ART2_ADJUST_LINK_P_REC(unit_u, d)       (unit_u->act / (1-d))
+#define ART2_ADJUST_LINK_REC_P(unit_u, d)       (unit_u->act / (float) (1-d))
+#define ART2_ADJUST_LINK_P_REC(unit_u, d)       (unit_u->act / (float) (1-d))
 
 
 
@@ -358,10 +358,10 @@
                    gamma has to be choosen > 1.0.
   */
 #define ARTMAP_LINK_CMPa_RECa(beta,gamma)    (1.0 / ((beta) + (gamma) * ArtMap_NoOfInpUnits_a))
-#define ARTMAP_LINK_DELa_CMPa                1.0
+#define ARTMAP_LINK_DELa_CMPa                1.0f
 #define ARTMAP_LINK_CMPb_RECb(beta,gamma)    (1.0 / ((beta) + (gamma) * ArtMap_NoOfInpUnits_b))
-#define ARTMAP_LINK_DELb_CMPb                1.0
-#define ARTMAP_LINK_DELa_MAP                 1.0
+#define ARTMAP_LINK_DELb_CMPb                1.0f
+#define ARTMAP_LINK_DELa_MAP                 1.0f
 
 /* Links of ARTMAP networks are adjusted using the ART1 formulas */
 

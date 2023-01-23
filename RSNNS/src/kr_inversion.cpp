@@ -302,7 +302,7 @@ double SnnsCLib::kr_inv_backwardPass(float learn, float delta_max, int *err_unit
 
      /* Calculate the new activation for the input units */
      IUnit->im_act += eta * error + ratio*(IUnit->i_act - (float)unit_ptr->act);
-     unit_ptr->act = 1.0 / (1.0 + exp((double)(-IUnit->im_act)));
+     unit_ptr->act = (float) (1.0 / (1.0 + exp((double)(-IUnit->im_act))));
      IUnit->act = unit_ptr->act;
      IUnit = IUnit->prev;
    }
@@ -310,7 +310,7 @@ double SnnsCLib::kr_inv_backwardPass(float learn, float delta_max, int *err_unit
 
    /*  return the error of the network */
 
-   sum_error *= 0.5;
+   sum_error *= 0.5f;
    return( sum_error ); 
 
 

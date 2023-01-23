@@ -503,9 +503,10 @@ static const yytype_uint8 yytranslate[] =
       15,    16,    17,    18,    19,    20,    21,    22,    23
 };
 
+/*
 #if YYDEBUG
-/* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
-   YYRHS.  */
+// YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
+//   YYRHS.
 static const yytype_uint8 yyprhs[] =
 {
        0,     0,     3,     4,     8,     9,    10,    11,    12,    28,
@@ -515,7 +516,7 @@ static const yytype_uint8 yyprhs[] =
      114,   116,   117,   119,   122,   124,   126
 };
 
-/* YYRHS -- A `-1'-separated list of the rules' RHS.  */
+// YYRHS -- A `-1'-separated list of the rules' RHS.
 static const yytype_int8 yyrhs[] =
 {
       25,     0,    -1,    -1,    27,    26,    46,    -1,    -1,    -1,
@@ -533,7 +534,7 @@ static const yytype_int8 yyrhs[] =
       54,    -1,    21,    -1,    20,    -1,    22,    -1
 };
 
-/* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
+// YYRLINE[YYN] -- source line where rule number YYN was defined.
 static const yytype_uint16 yyrline[] =
 {
        0,    63,    63,    62,    91,   100,   109,   116,    90,   123,
@@ -545,8 +546,8 @@ static const yytype_uint16 yyrline[] =
 #endif
 
 #if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
-/* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
-   First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
+// YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
+//   First, the terminals, then, starting at YYNTOKENS, nonterminals. 
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "L_BRACKET", "R_BRACKET",
@@ -562,6 +563,8 @@ static const char *const yytname[] =
   "pattern_class", 0
 };
 #endif
+*/
+
 
 # ifdef YYPRINT
 /* YYTOKNUM[YYLEX-NUM] -- Internal token number corresponding to
@@ -1324,12 +1327,12 @@ SnnsCLib::yyparse ()
   yyssp++;
 
  yysetstate:
-  *yyssp = yystate;
+  *yyssp = (short) yystate;
 
   if (yyss + yystacksize - 1 <= yyssp)
     {
       /* Get the current used size of the three stacks, in elements.  */
-      YYSIZE_T yysize = yyssp - yyss + 1;
+      YYSIZE_T yysize = (unsigned int) (yyssp - yyss + 1);
 
 #ifdef yyoverflow
       {
@@ -1600,7 +1603,7 @@ yyreduce:
   case 12:
 //#line 148 "kr_pat_parse_bison.y"
     {
-		variable_input_dim = (yyvsp[(2) - (4)].value); 
+		variable_input_dim = (int) (yyvsp[(2) - (4)].value); 
 		if (variable_input_dim < 0 || 
 		    variable_input_dim > MAX_NO_OF_VAR_I_DIM)
 		{ 
@@ -1625,7 +1628,7 @@ yyreduce:
   case 14:
 //#line 169 "kr_pat_parse_bison.y"
     {
-		variable_output_dim = (yyvsp[(2) - (4)].value); 
+		variable_output_dim = (int) (yyvsp[(2) - (4)].value); 
 		if (variable_output_dim < 0 || 
 		    variable_output_dim > MAX_NO_OF_VAR_O_DIM ||
 		    no_of_output == 0)

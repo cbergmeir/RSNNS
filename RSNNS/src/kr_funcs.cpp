@@ -224,7 +224,7 @@ krui_err  SnnsCLib::krf_getInternalFuncInfo(int mode, struct FuncInfoDescriptor 
           func_descr->no_of_output_parameters = ftbl_ptr->no_of_output_parameters;
           func_descr->function = ftbl_ptr->function;
           strcpy( func_descr->func_name, ftbl_ptr->func_name );
-          func_descr->number = ftbl_ptr - kernel_func_table;
+          func_descr->number = (int) (ftbl_ptr - kernel_func_table);
           return( KRERR_NO_ERROR );
         }
       }
@@ -317,7 +317,7 @@ bool  SnnsCLib::krf_funcSearch(const char *func_name, int func_type, FunctionPtr
 {
   struct FuncInfoDescriptor  functionDescr;
 
-  functionDescr.func_type = func_type;
+  functionDescr.func_type = (unsigned short) func_type;
   strcpy( functionDescr.func_name, func_name );
 
   KernelErrorCode = krf_getFuncInfo( SEARCH_FUNC, &functionDescr );
@@ -415,7 +415,7 @@ char  *SnnsCLib::krf_getCurrentNetworkFunc(int type)
 
   if (netFuncInit[sel])  return( &CurrNetworkFunc[sel][0] );
 
-  krf_getCurrentNetworkFunc_func_descr.func_type = type;
+  krf_getCurrentNetworkFunc_func_descr.func_type = (unsigned short) type;
   if (krf_getFuncInfo( GET_DEFAULT_FUNC, &krf_getCurrentNetworkFunc_func_descr ) == KRERR_NO_ERROR)
     return( krf_getCurrentNetworkFunc_func_descr.func_name );
 

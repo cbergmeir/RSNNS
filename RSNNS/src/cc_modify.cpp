@@ -230,7 +230,7 @@ void SnnsCLib::cc_actualizeGroupHighscores(double Score,int s,struct Unit* UnitP
 {
    if(cc_modification==CC_GCC){
       if(Score > ccs_GroupData[s % CCS_NO_OF_GROUPS].Score)
-         ccs_GroupData[s % CCS_NO_OF_GROUPS].Score = Score;
+         ccs_GroupData[s % CCS_NO_OF_GROUPS].Score = (int) Score;
       ccs_GroupData[s % CCS_NO_OF_GROUPS].BestUnitPtr = UnitPtr;
    }
 }
@@ -404,8 +404,8 @@ void SnnsCLib::cc_MakeMiscCalculationsForModifications(void)
                Height= (int)fTemp;
 	    }else{
                fTemp=
-                  exp((-NoOfLayers*CCM_DAEMPFUNG))*CCM_HEIGHT;
-                         /* calculate funtion */
+                  exp((-((float) NoOfLayers)*CCM_DAEMPFUNG))*CCM_HEIGHT;
+                         /* calculate function */
                Height = (int)(fTemp+
                      (u_drand48()*2.0*CCM_DIFF_HEIGHT-CCM_DIFF_HEIGHT));
                          /* add or substract radom didderence */

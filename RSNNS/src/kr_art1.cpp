@@ -389,7 +389,7 @@ int   SnnsCLib::kra1_getClassNo (void)
     if ((i > Art1_NoOfRecUnits) && ((*topo_ptr)->act < 0.9)) {
        return (-1);
     } else {
-       return (topo_ptr - Art1_del_layer + 1);
+       return (int) (topo_ptr - Art1_del_layer + 1);
     } /*if*/
 
 } /* kra1_getClassNo () */

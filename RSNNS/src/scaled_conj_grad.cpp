@@ -332,7 +332,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
     TRACE(("delta scaled = %e\n", LEARN_SCG_delta));
     
     if (LEARN_SCG_delta <=0) {		/* make the Hessian positive definite */
-      LEARN_SCG_lambda_bar = 2.0 * (LEARN_SCG_lambda - LEARN_SCG_delta/LEARN_SCG_norm_of_p_2) ;
+      LEARN_SCG_lambda_bar = 2.0f * (LEARN_SCG_lambda - LEARN_SCG_delta/LEARN_SCG_norm_of_p_2) ;
       LEARN_SCG_delta = -LEARN_SCG_delta + LEARN_SCG_lambda*LEARN_SCG_norm_of_p_2 ;
       LEARN_SCG_lambda = LEARN_SCG_lambda_bar ;
       TRACE(("hessian: l_bar=%e delta=%e lambda=%e\n",LEARN_SCG_lambda_bar,LEARN_SCG_delta,LEARN_SCG_lambda));
@@ -359,7 +359,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
     
     TRACE(("current error=%e\n",LEARN_SCG_current_error)) ;
     
-    grand_delta = 2.0*LEARN_SCG_delta*(LEARN_SCG_old_error-LEARN_SCG_current_error)/(mu*mu) ;
+    grand_delta = 2.0f*LEARN_SCG_delta*(LEARN_SCG_old_error-LEARN_SCG_current_error)/(mu*mu) ;
     TRACE(("grand delta=%e\n",grand_delta));
     if (grand_delta >= 0) {	/* a successful reduction in error */
 				/* can be made */
@@ -383,7 +383,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
 
       /* now, r <- r(k+1) */
       for (i=0 ; i < scg_space_size ; i++) {
-	tmp = -1.0 * *scg_gradient[i] ;
+	tmp = -1.0f * *scg_gradient[i] ;
 	r_sum +=  tmp * LEARN_SCG_r[i] ;
 	LEARN_SCG_r[i] = tmp ;
       }
@@ -403,7 +403,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
 	LEARN_SCG_restart_scg = FALSE ;
       }
 
-      if (grand_delta >=0.75) LEARN_SCG_lambda = LEARN_SCG_lambda/4.0 ;
+      if (grand_delta >=0.75f) LEARN_SCG_lambda = LEARN_SCG_lambda/4.0f ;
     }
     
     else {
@@ -520,7 +520,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
     }
 
     for (i=0 ; i< scg_space_size ; i++) 
-	*scg_gradient[i] = - 2.0 * *scg_gradient[i];
+	*scg_gradient[i] = - 2.0f * *scg_gradient[i];
 
     return (KernelErrorCode);
 }

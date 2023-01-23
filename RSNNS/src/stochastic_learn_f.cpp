@@ -385,7 +385,7 @@ SnnsCLib::calculate_w_WTA_error(int pattern_no, int sub_pat_no)
 	if (wta_pos != out_pat_pos)
 	    return ((float) 1.0f);
 	else
-	    return ((float) fabs(wta_value - (sum_value - wta_value) / (--j)));
+	    return ((float) fabs(wta_value - (sum_value - wta_value) / (float) (--j)));
     } else {
 	unit_ptr = *--topo_ptr;
 	if ((float) unit_ptr->Out.output > 0.5) {
@@ -672,7 +672,7 @@ SnnsCLib::LEARN_SimulatedAnnealing(int start_pattern, int end_pattern,
      */
     if ((NET_ERROR(LEARN_SimulatedAnnealing_OutParameter) > MinimumError) && (Temperature > 0) &&
 	(u_drand48() > exp((MinimumError - NET_ERROR(LEARN_SimulatedAnnealing_OutParameter)) /
-			 ((end_pattern - start_pattern) * Temperature)))) {
+			 ((float) (end_pattern - start_pattern) * Temperature)))) {
 	FOR_ALL_UNITS(unit_ptr) {
 	    flags = unit_ptr->flags;
 	    if ((flags & UFLAG_IN_USE) == UFLAG_IN_USE) {

@@ -581,7 +581,7 @@ krui_err SnnsCLib::kr_npui_loadNewPatterns(char *filename, int *set_no)
 	buf = (char *) malloc(strlen(filename)+strlen("zcat ")+1);
 	if (buf == (char *) NULL)
 	    { TRACE_RETURN(KRERR_INSUFFICIENT_MEM); }
-	sprintf(buf, "zcat %s", filename);
+	snprintf(buf, strlen(filename)+strlen("zcat "), "zcat %s", filename);
 	infile = popen(buf,"r");
 	read_from_pipe = 1;
     }
@@ -590,7 +590,7 @@ krui_err SnnsCLib::kr_npui_loadNewPatterns(char *filename, int *set_no)
 	buf = (char *) malloc(strlen(filename)+strlen("gunzip -c ")+1);
 	if (buf == (char *) NULL)
 	    { TRACE_RETURN(KRERR_INSUFFICIENT_MEM); }
-	sprintf(buf, "gunzip -c %s", filename);
+	snprintf(buf, strlen(filename)+strlen("gunzip -c "), "gunzip -c %s", filename);
 	infile = popen(buf,"r");
 	read_from_pipe = 1;
     }
@@ -2323,7 +2323,7 @@ krui_err SnnsCLib::kr_np_lookupSym(int pat_set, char *symbol, struct np_symtab *
     }
 
     *((int *) ptr) = page->firstfree;
-    page->firstfree = (ptr - page->data);
+    page->firstfree = (int) (ptr - page->data);
     page->no_of_free_slots++;
 
     if (page->no_of_free_slots == page->no_of_slots)
@@ -3953,7 +3953,7 @@ The parameter entries returns the number of entries in the data field.
     int no_of_pattern;
     int i;
     int sc, ps;
-    int total = 0;
+    //int total = 0;
 
     TRACE_IN();
 
@@ -4008,7 +4008,7 @@ The parameter entries returns the number of entries in the data field.
 			     list->pat_nums, ps * sizeof(int));
 		  }
 		
-		total += list->global_chunks * list->chunk_amount;
+		//total += list->global_chunks * list->chunk_amount;
 	    }
 	    list = list->next;
 	}

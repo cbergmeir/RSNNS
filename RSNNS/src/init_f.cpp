@@ -411,7 +411,7 @@ krui_err SnnsCLib::INIT_Weights_CPNv32(float *parameterArray, int NoOfParams)
 	}
 
 	/* normalize the weightvector to the Kohonen Layer */
-	amount = 1.0 / sqrt( sum );
+	amount = 1.0f / sqrt( sum );
 
 	if UNIT_HAS_SITES( unit_ptr )
 	    /* the unit has sites */
@@ -515,7 +515,7 @@ krui_err SnnsCLib::INIT_Weights_CPNv33(float *parameterArray, int NoOfParams)
 	}
 
 	/* normalize the weightvector to the Kohonen Layer */
-	amount = 1.0 / sqrt( sum );
+	amount = 1.0f / sqrt( sum );
 
 	if UNIT_HAS_SITES( unit_ptr )
 	    /* the unit has sites */
@@ -665,11 +665,11 @@ void SnnsCLib::RbfInitSetCenter(int pattern_no, int sub_pat_no,
 	    link_ptr -> weight = link_ptr -> to -> Out.output;
 	}
     }else{
-	deviation /= 6.3137515;
+	deviation /= 6.3137515f;
 	FOR_ALL_LINKS(hidden_unit, link_ptr){
 	    link_ptr->weight = link_ptr->to->Out.output *
-		(1.0 + deviation * 
-		 tan(((float)u_drand48() * 2.8274334 - 1.4137167)));
+		(1.0f + deviation * 
+		 tan(((float)u_drand48() * 2.8274334f - 1.4137167f)));
 	}
     }
 
@@ -1552,7 +1552,7 @@ krui_err SnnsCLib::INIT_Weights_ART1(float *parameterArray, int NoOfParams)
       for all 1 <= j <= M
   */
 
-  eta = gamma / Art1_NoOfRecUnits;
+  eta = gamma / (float) Art1_NoOfRecUnits;
 
   /* init weights from comparison units to recognition units */
   topo_ptr = topo_rec_ptr;
@@ -1568,7 +1568,7 @@ krui_err SnnsCLib::INIT_Weights_ART1(float *parameterArray, int NoOfParams)
      FOR_ALL_LINKS (unit_ptr, link_ptr) {
 
         if (link_ptr->to->lln == ART1_CMP_LAY) {
-           link_ptr->weight = ART1_LINK_CMP_REC(beta, (1.0+j*eta));
+           link_ptr->weight = (float) ART1_LINK_CMP_REC(beta, (1.0f+j*eta));
         } /*if*/
 
       } /*FOR_ALL_LINKS*/
@@ -1699,7 +1699,7 @@ krui_err SnnsCLib::INIT_Weights_ART2(float *parameterArray, int NoOfParams)
      FOR_ALL_LINKS (unit_ptr, link_ptr) {
 
         if (link_ptr->to->lln == ART2_P_LAY) {
-           link_ptr->weight = ART2_LINK_P_REC(param_d, gamma);
+           link_ptr->weight = (float) ART2_LINK_P_REC(param_d, gamma);
         } /*if*/
 
       } /*FOR_ALL_LINKS*/
@@ -1858,8 +1858,8 @@ krui_err SnnsCLib::INIT_Weights_ARTMAP(float *parameterArray, int NoOfParams)
       for all 1 <= j <= M
   */
 
-  eta_a = gamma_a / ArtMap_NoOfRecUnits_a;
-  eta_b = gamma_b / ArtMap_NoOfRecUnits_b;
+  eta_a = gamma_a / (float) ArtMap_NoOfRecUnits_a;
+  eta_b = gamma_b / (float) ArtMap_NoOfRecUnits_b;
 
   /* init weights from comparison units to recognition units for ARTa
   */
@@ -1876,7 +1876,7 @@ krui_err SnnsCLib::INIT_Weights_ARTMAP(float *parameterArray, int NoOfParams)
      FOR_ALL_LINKS (unit_ptr, link_ptr) {
 
         if (link_ptr->to->lln == ARTMAP_CMPa_LAY) {
-           link_ptr->weight = ARTMAP_LINK_CMPa_RECa(beta_a, (1.0+j*eta_a));
+           link_ptr->weight = (float) ARTMAP_LINK_CMPa_RECa(beta_a, (1.0f+j*eta_a));
         } /*if*/
 
       } /*FOR_ALL_LINKS*/
@@ -1924,7 +1924,7 @@ krui_err SnnsCLib::INIT_Weights_ARTMAP(float *parameterArray, int NoOfParams)
      FOR_ALL_LINKS (unit_ptr, link_ptr) {
 
         if (link_ptr->to->lln == ARTMAP_CMPb_LAY) {
-           link_ptr->weight = ARTMAP_LINK_CMPb_RECb(beta_b, (1.0+j*eta_b));
+           link_ptr->weight = (float) ARTMAP_LINK_CMPb_RECb(beta_b, (1.0f+j*eta_b));
         } /*if*/
 
      } /*FOR_ALL_LINKS*/
@@ -2131,7 +2131,7 @@ krui_err SnnsCLib::INIT_SOM_Weights_v32(float *parameterArray, int NoOfParams)
     /* normalize the weightvector to the Kohonen Layer */
 
 
-    amount = ((sum==0.0f)? 0.0 : (1.0 / sqrt( sum )));
+    amount = ((sum==0.0f)? 0.0f : (1.0f / sqrt( sum )));
    
     unit_ptr->bias = 0.0f;
     unit_ptr->value_a = 0.0f; /*initialisation is necessary for spanning tree */
@@ -2191,12 +2191,12 @@ krui_err SnnsCLib::INIT_SOM_Weights_const(float *parameterArray, int NoOfParams)
       if UNIT_HAS_SITES( unit_ptr ){
 	  /* the unit has sites */
 	  FOR_ALL_SITES_AND_LINKS( unit_ptr, site_ptr, link_ptr )  {
-	      link_ptr->weight = (FlintType) 1.0/sqrt((double)NoOfInputUnits);
+	      link_ptr->weight = (FlintType) 1.0f/(float)sqrt((double)NoOfInputUnits);
 	  }
       }else{
 	  /* the unit has direct links */
 	  FOR_ALL_LINKS( unit_ptr, link_ptr )  {
-	      link_ptr->weight = (FlintType) 1.0/sqrt((double)NoOfInputUnits);
+	      link_ptr->weight = (FlintType) 1.0/(float)sqrt((double)NoOfInputUnits);
 	  }
       }
 
@@ -2537,7 +2537,7 @@ krui_err SnnsCLib::INIT_HOP_FixAct(float *parameterArray, int NoOfParams)
   /* set bias to the value, that Amari published in Neur.Netw. Vol.2, 451-457 '89 */  
   
   activityHoch3 = ( FlintType ) pow( (double) activity, (double) 3.0 );
-  Bias = kr_TotalNoOfSubPatPairs()*( activityHoch3 ) + 0.5*activity*(1 - error_probability);
+  Bias = ((float) kr_TotalNoOfSubPatPairs())*( activityHoch3 ) + 0.5f*activity*(1 - error_probability);
   
   FOR_ALL_UNITS(unit_ptr)
     unit_ptr->bias = Bias;
@@ -2569,7 +2569,7 @@ krui_err SnnsCLib::INIT_HOP_FixAct(float *parameterArray, int NoOfParams)
       
       FOR_ALL_UNITS(unit_ptr) {
 	FOR_ALL_LINKS(unit_ptr, link_ptr)
-	  link_ptr->weight += (1.0/NoOfUnits)*(unit_ptr->act) * (link_ptr->to->act);
+	  link_ptr->weight += (1.0f/(float)NoOfUnits)*(unit_ptr->act) * (link_ptr->to->act);
       }
     }/* all patterns */
   

@@ -1166,7 +1166,7 @@ RcppExport SEXP SnnsCLib__updateNet(SEXP xp, SEXP parameterInArray) {
     p1[i] = static_cast<float>(params(i));
   }
 
-  int err = snnsCLib->krui_updateNet(p1, n);
+  int err = snnsCLib->krui_updateNet(p1, (int) n);
 
   delete[] p1;
 
@@ -1204,7 +1204,7 @@ RcppExport SEXP SnnsCLib__initializeNet(SEXP xp, SEXP parameterInArray) {
     p1[i] = static_cast<float>(params(i));
   }
 
-  int err = snnsCLib->krui_initializeNet(p1, n);
+  int err = snnsCLib->krui_initializeNet(p1, (int) n);
 
   delete[] p1;
 
@@ -1275,7 +1275,7 @@ RcppExport SEXP SnnsCLib__learnAllPatterns(SEXP xp, SEXP parameterInArray) {
   float *parameterOutArray;
   int NoOfOutParams = 0;
 
-  int err = snnsCLib->krui_learnAllPatterns(p1, n, &parameterOutArray, &NoOfOutParams);
+  int err = snnsCLib->krui_learnAllPatterns(p1, (int) n, &parameterOutArray, &NoOfOutParams);
 
   delete[] p1;
 
@@ -1307,7 +1307,7 @@ RcppExport SEXP SnnsCLib__testAllPatterns(SEXP xp, SEXP parameterInArray) {
   float *parameterOutArray;
   int NoOfOutParams = 0;
 
-  int err = snnsCLib->krui_testAllPatterns(p1, n, &parameterOutArray, &NoOfOutParams);
+  int err = snnsCLib->krui_testAllPatterns(p1, (int) n, &parameterOutArray, &NoOfOutParams);
 
   delete[] p1;
 
@@ -1352,7 +1352,7 @@ RcppExport SEXP SnnsCLib__learnSinglePattern(SEXP xp, SEXP pattern_no, SEXP para
   float *parameterOutArray;
   int NoOfOutParams = 0;
 
-  int err = snnsCLib->krui_learnSinglePattern(p1, p2, n, &parameterOutArray, &NoOfOutParams);
+  int err = snnsCLib->krui_learnSinglePattern(p1, p2, (int) n, &parameterOutArray, &NoOfOutParams);
 
   delete[] p2;
 
@@ -1400,7 +1400,7 @@ RcppExport SEXP SnnsCLib__testSinglePattern(SEXP xp, SEXP pattern_no, SEXP param
   float *parameterOutArray;
   int NoOfOutParams = 0;
 
-  int err = snnsCLib->krui_testSinglePattern(p1, p2, n, &parameterOutArray, &NoOfOutParams);
+  int err = snnsCLib->krui_testSinglePattern(p1, p2, (int) n, &parameterOutArray, &NoOfOutParams);
 
   delete[] p2;
 
@@ -1454,7 +1454,7 @@ RcppExport SEXP SnnsCLib__learnAllPatternsFF(SEXP xp, SEXP parameterInArray) {
   float *parameterOutArray;
   int NoOfOutParams = 0;
 
-  int err = snnsCLib->krui_learnAllPatternsFF(p1, n, &parameterOutArray, &NoOfOutParams);
+  int err = snnsCLib->krui_learnAllPatternsFF(p1, (int) n, &parameterOutArray, &NoOfOutParams);
 
   delete[] p1;
 
@@ -1501,7 +1501,7 @@ RcppExport SEXP SnnsCLib__learnSinglePatternFF(SEXP xp, SEXP pattern_no, SEXP pa
   float *parameterOutArray;
   int NoOfOutParams = 0;
 
-  int err = snnsCLib->krui_learnSinglePatternFF(p1, p2, n, &parameterOutArray, &NoOfOutParams);
+  int err = snnsCLib->krui_learnSinglePatternFF(p1, p2, (int) n, &parameterOutArray, &NoOfOutParams);
 
   delete[] p2;
 
@@ -2004,7 +2004,7 @@ RcppExport SEXP SnnsCLib__saveResultParam(SEXP xp, SEXP filename, SEXP create,
     p7[i] = static_cast<float>(params(i));
   }
 
-  int err = snnsCLib->krui_saveResultParam(const_cast<char*>(p1.c_str()), p2, p3, p4, p5, p6, p7, n);
+  int err = snnsCLib->krui_saveResultParam(const_cast<char*>(p1.c_str()), p2, p3, p4, p5, p6, p7, (int) n);
 
   delete[] p7;
 
@@ -2478,7 +2478,7 @@ RcppExport SEXP SnnsCLib__elman_createNet(SEXP xp, SEXP layer, SEXP columns, SEX
 
   bool p4 = Rcpp::as<bool>(out_context);
 
-  int err = snnsCLib->bn_elman_createNet(p1, p2, n, p4);
+  int err = snnsCLib->bn_elman_createNet(p1, p2, (int) n, p4);
 
   delete[] p1;
   delete[] p2;
@@ -2772,10 +2772,10 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
 
     //OUTPUT_NOTHING
     snnsCLib->krui_showPattern(1);
-    snnsCLib->krui_updateNet(p1, n);
+    snnsCLib->krui_updateNet(p1, (int) n);
 
     float min = 0;
-    int argmin = 1;
+    long argmin = 1;
     for(long j=1;j<=nUnits; j++) {
 
       float currValue = snnsCLib->krui_getUnitOutput((int) units[j-1]);
@@ -2788,7 +2788,7 @@ RcppExport SEXP SnnsCLib__somPredictCurrPatSetWinnersC(SEXP xp, SEXP hidden_unit
       }
     }
  
-    retWinners[i-1] = argmin;
+    retWinners[i-1] = (double) argmin;
   }
  
   delete[] p1;
@@ -2825,7 +2825,7 @@ RcppExport SEXP SnnsCLib__genericPredictCurrPatSet(SEXP p_xp, SEXP p_units, SEXP
 
   snnsCLib->krui_DefTrainSubPat(&insize[0], &outsize[0], &instep[0], &outstep[0], &max_n_pos[0]);
 
-  Rcpp::NumericMatrix predictions(noOfPatterns, nUnits);
+  Rcpp::NumericMatrix predictions(noOfPatterns, (int) nUnits);
 
   for(int currentPattern = 0; currentPattern < noOfPatterns; currentPattern++)  {
     
@@ -2833,9 +2833,9 @@ RcppExport SEXP SnnsCLib__genericPredictCurrPatSet(SEXP p_xp, SEXP p_units, SEXP
     
     snnsCLib->krui_showPattern(OUTPUT_NOTHING);
     
-    snnsCLib->krui_updateNet(p1, n);
+    snnsCLib->krui_updateNet(p1, (int) n);
     
-    for(long i=0; i < nUnits; i++) {
+    for(int i=0; i < nUnits; i++) {
       float currValue = snnsCLib->krui_getUnitOutput((int) units[i]);
       predictions(currentPattern, i) = currValue;
     }

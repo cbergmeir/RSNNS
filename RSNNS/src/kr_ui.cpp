@@ -884,7 +884,7 @@ void    SnnsCLib::krui_setUnitPosition(int UnitNo, struct PosType *position)
 int   SnnsCLib::krui_getUnitNoAtPosition(struct PosType *position, int subnet_no)
 {
      int       i;
-     short     x, y, net_no;
+     int     x, y, net_no;
     struct Unit     *unit_ptr;
 
     x = position->x;
@@ -922,7 +922,7 @@ int   SnnsCLib::krui_getUnitNoAtPosition(struct PosType *position, int subnet_no
 int  SnnsCLib::krui_getUnitNoNearPosition(struct PosType *position, int subnet_no, int range, int gridWidth)
 {
      int       i, devit, width;
-     short     x, y, net_no;
+     int     x, y, net_no;
     struct Unit        *unit_ptr;
 
     x = position->x;
@@ -1898,7 +1898,7 @@ bool  SnnsCLib::krui_getFuncParamInfo(char *func_name, int func_type,
 {
     //static struct FuncInfoDescriptor  krui_getFuncParamInfo_functionDescr;
 
-    krui_getFuncParamInfo_functionDescr.func_type = func_type;
+    krui_getFuncParamInfo_functionDescr.func_type = (unsigned short) func_type;
     strcpy( krui_getFuncParamInfo_functionDescr.func_name, func_name );
 
     KernelErrorCode = krf_getFuncInfo( SEARCH_FUNC, &krui_getFuncParamInfo_functionDescr );
@@ -3076,7 +3076,7 @@ float SnnsCLib::krui_getVariance (void)
     if(KernelErrorCode != KRERR_NO_ERROR) {
 	free (OutputUnitSumVariance);
 	free (OutputUnitVariance);
-	return (KernelErrorCode);
+	return ((float) KernelErrorCode);
     }
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 	out_pat = kr_getSubPatData(pattern_no,sub_pat_no,OUTPUT,&size);
@@ -3099,8 +3099,8 @@ float SnnsCLib::krui_getVariance (void)
     o=0;
     FOR_ALL_UNITS( unit_ptr )
 	if (IS_OUTPUT_UNIT( unit_ptr ) && UNIT_IN_USE( unit_ptr ))  {
-	    Variance += (OutputUnitVariance[o]/noOfPatternPairs)-
-		pow(OutputUnitSumVariance[o]/noOfPatternPairs,2) ;
+	    Variance += (float) ((OutputUnitVariance[o]/(float) noOfPatternPairs)-
+		pow(OutputUnitSumVariance[o]/(float) noOfPatternPairs,2)) ;
 	    o++;
 	}
     free (OutputUnitSumVariance);
@@ -3419,7 +3419,7 @@ krui_err SnnsCLib::krui_trainNetwork(NetLearnParameters *parameters)
             (double) parameterOutArray[0];
     storedAtEpoch[noOfStoredErrors++] =
         parameters->atEpoch[parameters->noOfErrors++] = i;
-    parameters->netError = (double) parameterOutArray[0];
+    parameters->netError = parameterOutArray[0];
     if( dotraining ){
         parameters->lastEpoch = parameters->noOfEpochs;
         parameters->interrupted = FALSE;
@@ -4795,10 +4795,10 @@ char  *SnnsCLib::krui_topo_err_msg(void)
     krui_topo_err_msg_msg2[0] = '\0';
 
     if (topo_msg.dest_error_unit > 0)
-        dest_unit_name = krui_getUnitName( topo_msg.dest_error_unit );
+        dest_unit_name = krui_getUnitName( (int) topo_msg.dest_error_unit );
 
     if (topo_msg.src_error_unit > 0)
-        src_unit_name = krui_getUnitName( topo_msg.src_error_unit );
+        src_unit_name = krui_getUnitName( (int) topo_msg.src_error_unit );
 
     if (topo_msg.dest_error_unit > 0) {
         if (dest_unit_name == NULL)

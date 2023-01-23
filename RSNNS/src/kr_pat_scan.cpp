@@ -721,6 +721,7 @@ static void yy_flex_strncpy YY_PROTO(( char *, yyconst char *, int ));
 static int yy_flex_strlen YY_PROTO(( yyconst char * ));
 #endif
 
+/*
 #ifndef YY_NO_INPUT
 #ifdef __cplusplus
 static int yyinput YY_PROTO(( void ));
@@ -728,6 +729,7 @@ static int yyinput YY_PROTO(( void ));
 static int input YY_PROTO(( void ));
 #endif
 #endif
+*/
 
 #if YY_STACK_USED
 static int yy_start_stack_ptr = 0;
@@ -796,7 +798,7 @@ YY_MALLOC_DECL
 			YY_FATAL_ERROR( "input in flex scanner failed" ); \
 		result = n; \
 		} \
-	else if ( ((result = fread( buf, 1, max_size, yyin )) == 0) \
+	else if ( ((result = (int) fread( buf, 1, max_size, yyin )) == 0) \
 		  && ferror( yyin ) ) \
 		YY_FATAL_ERROR( "input in flex scanner failed" );
 #endif
@@ -894,7 +896,7 @@ int SnnsCLib::yylex YY_PROTO(( void ))
 yy_match:
 		do
 			{
-			 YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
+			 YY_CHAR yy_c = (unsigned char) yy_ec[YY_SC_TO_UI(*yy_cp)];
 			if ( yy_accept[yy_current_state] )
 				{
 				yy_last_accepting_state = yy_current_state;
@@ -904,7 +906,7 @@ yy_match:
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
 				if ( yy_current_state >= 284 )
-					yy_c = yy_meta[(unsigned int) yy_c];
+					yy_c = (unsigned char) yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
@@ -996,7 +998,7 @@ YY_RULE_SETUP
 						    }
 						    else
 						    {
-							yylval.value=atof((char *) yytext);
+							yylval.value=(float) atof((char *) yytext);
 							return(NUMBER);
 						    }
 						}
@@ -1083,7 +1085,7 @@ case 29:
 YY_RULE_SETUP
 //#line 130 "kr_pat_scan.l"
 //ECHO;
-        xx_res_not_used = fwrite( yytext, yyleng, 1, yyout );
+        xx_res_not_used = (unsigned int) fwrite( yytext, yyleng, 1, yyout );
         xx_res_not_used++;
 	YY_BREAK
 //#line 1039 "lex.yy.c"
@@ -1369,7 +1371,7 @@ static yy_state_type yy_get_previous_state()
 
 	for ( yy_cp = yytext_ptr + YY_MORE_ADJ; yy_cp < yy_c_buf_p; ++yy_cp )
 		{
-		 YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
+		 YY_CHAR yy_c = (*yy_cp ? (unsigned char) yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
 		if ( yy_accept[yy_current_state] )
 			{
 			yy_last_accepting_state = yy_current_state;
@@ -1379,7 +1381,7 @@ static yy_state_type yy_get_previous_state()
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
 			if ( yy_current_state >= 284 )
-				yy_c = yy_meta[(unsigned int) yy_c];
+				yy_c = (unsigned char) yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 		}
@@ -1414,7 +1416,7 @@ yy_state_type yy_current_state;
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
 		if ( yy_current_state >= 284 )
-			yy_c = yy_meta[(unsigned int) yy_c];
+			yy_c = (unsigned char) yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 	yy_is_jam = (yy_current_state == 283);
@@ -1468,6 +1470,7 @@ int c;
 #endif	/* ifndef YY_NO_UNPUT */
 
 
+/*
 #ifndef YY_NO_INPUT
 #ifdef __cplusplus
 static int yyinput()
@@ -1481,36 +1484,35 @@ static int input()
 
 	if ( *yy_c_buf_p == YY_END_OF_BUFFER_CHAR )
 		{
-		/* yy_c_buf_p now points to the character we want to return.
-		 * If this occurs *before* the EOB characters, then it's a
-		 * valid NUL; if not, then we've hit the end of the buffer.
-		 */
+		// yy_c_buf_p now points to the character we want to return.
+		// If this occurs *before* the EOB characters, then it's a
+		// valid NUL; if not, then we've hit the end of the buffer.
+		 
 		if ( yy_c_buf_p < &yy_current_buffer->yy_ch_buf[yy_n_chars] )
-			/* This was really a NUL. */
+			// This was really a NUL. 
 			*yy_c_buf_p = '\0';
 
 		else
-			{ /* need more input */
-			int offset = yy_c_buf_p - yytext_ptr;
+			{ // need more input
+			int offset = (int) (yy_c_buf_p - yytext_ptr);
 			++yy_c_buf_p;
 
 			switch ( yy_get_next_buffer() )
 				{
 				case EOB_ACT_LAST_MATCH:
-					/* This happens because yy_g_n_b()
-					 * sees that we've accumulated a
-					 * token and flags that we need to
-					 * try matching the token before
-					 * proceeding.  But for input(),
-					 * there's no matching to consider.
-					 * So convert the EOB_ACT_LAST_MATCH
-					 * to EOB_ACT_END_OF_FILE.
-					 */
+					// This happens because yy_g_n_b()
+					// sees that we've accumulated a
+					// token and flags that we need to
+					// try matching the token before
+					// proceeding.  But for input(),
+					// there's no matching to consider.
+					// So convert the EOB_ACT_LAST_MATCH
+					// to EOB_ACT_END_OF_FILE.
 
-					/* Reset buffer status. */
+					// Reset buffer status.
 					yyrestart( yyin );
 
-					/* fall through */
+					// fall through
 
 				case EOB_ACT_END_OF_FILE:
 					{
@@ -1533,15 +1535,15 @@ static int input()
 			}
 		}
 
-	c = *(unsigned char *) yy_c_buf_p;	/* cast for 8-bit char's */
-	*yy_c_buf_p = '\0';	/* preserve yytext */
+	c = *(unsigned char *) yy_c_buf_p;	// cast for 8-bit char's
+	*yy_c_buf_p = '\0';	// preserve yytext
 	yy_hold_char = *++yy_c_buf_p;
 
 
 	return c;
 	}
 #endif
-
+*/
 
 #ifdef YY_USE_PROTOS
 void yyrestart( FILE *input_file )

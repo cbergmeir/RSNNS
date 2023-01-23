@@ -144,7 +144,7 @@ void SnnsCLib::RbfClearMatrix(RbfFloatMatrix *m, double c)
 
 	while(count--)
 	{
-		*ptoelement++ = c;
+		*ptoelement++ = (float) c;
 	}
 }
 
@@ -298,7 +298,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 		free(vv);
 		return 0;
 	    }
-	    vv[i] = 1.0/big;
+	    vv[i] = 1.0f/big;
 	}
 	for (j = 0; j < m -> rows; j++)
 	{
@@ -346,7 +346,7 @@ void	SnnsCLib::RbfTranspMatrix(RbfFloatMatrix *m1, RbfFloatMatrix *m2)
 	    }
 	    if (j != (m -> rows - 1))
 	    {
-		dum = 1.0/RbfMatrixGetValue(m, j, j);
+		dum = 1.0f/RbfMatrixGetValue(m, j, j);
 		for (i = j+1; i < m -> rows; i++)
 		    RbfMatrixSetValue(m, i, j,
 			RbfMatrixGetValue(m, i, j) * dum);

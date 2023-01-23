@@ -160,7 +160,7 @@ float SnnsCLib::cc_calculateCorrelation(int StartPattern, int EndPattern, int co
     int start, end;
 
     cc_getPatternParameter(StartPattern,EndPattern,&start,&end,&n);
-    ERROR_CHECK;
+    ERROR_CHECK_FLOAT;
 
     //if(cc_printOnOff)  printf("Cycle %d ",counter);
 
@@ -174,7 +174,7 @@ float SnnsCLib::cc_calculateCorrelation(int StartPattern, int EndPattern, int co
 	    SIGN_OF_THE_CORRELATION[s][o] = SIGN(scoreBuffer);
 	}
     
-	highScore = cc_modifyHighScore(SpecialUnitPtr,s,unchangedhighScore);
+	highScore = (float) cc_modifyHighScore(SpecialUnitPtr,s, unchangedhighScore);
 
 	cc_actualizeGroupHighscores(highScore,s,SpecialUnitPtr);
 
@@ -421,7 +421,7 @@ void SnnsCLib::cc_calculateOutputUnitError(int StartPattern,int EndPattern)
     }
 
     FOR_ALL_OUTPUT_UNITS(UnitPtr,o)
-       MeanOutputUnitError[o] = (OUTPUT_UNIT_SUM_ERROR[o] / n);
+       MeanOutputUnitError[o] = (OUTPUT_UNIT_SUM_ERROR[o] / (float) n);
 
     cc_actualNetSaved=TRUE;
 }
@@ -487,7 +487,7 @@ float SnnsCLib::cc_propagateOutput(int PatternNo, int sub_pat_no, float param1,
     int           dummy;
 
     out_pat = kr_getSubPatData(PatternNo,sub_pat_no,OUTPUT,NULL);
-    ERROR_CHECK;
+    ERROR_CHECK_FLOAT;
 
     FOR_ALL_OUTPUT_UNITS(OutputUnitPtr,dummy){
 	devit =  OutputUnitPtr->Out.output - *(out_pat++);
@@ -532,7 +532,7 @@ float SnnsCLib::cc_propagateOutputOnlineCase(int PatternNo, int sub_pat_no,
 
     sum_error = 0.0f; 
     out_pat = kr_getSubPatData(PatternNo,sub_pat_no,OUTPUT,NULL);
-    ERROR_CHECK;
+    ERROR_CHECK_FLOAT;
     FOR_ALL_OUTPUT_UNITS(OutputUnitPtr,dummy){
 	devit =  OutputUnitPtr->Out.output - *(out_pat++);
 

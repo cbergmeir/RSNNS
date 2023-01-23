@@ -3,7 +3,7 @@ version 0.4-14 (16-01-2023):
 - replaced sprintf with snprintf
 - removed "register" keyword, as it has no effect in modern compilers but the solution before with a "define" could lead to a warning on some systems.
 - user everywhere the same MAXFLOAT definition, and use a custom one as the one from float.h can lead to a warning on MAC.
-
+- fixed many many clang-14 warnings. Some functionality is now effectively untested. If things don't work for you, revert to the previous version (and please let me know).
 
 version 0.4-13 (08-08-2021):
 

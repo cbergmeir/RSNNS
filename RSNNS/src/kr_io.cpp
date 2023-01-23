@@ -333,7 +333,7 @@ krui_err  SnnsCLib::krio_writeHeader(char *version, char *net_name)
  ******************************************************************************/
 void SnnsCLib::krio_cutTrailingZeros(char *string)
 {
-	int j;
+	unsigned long j;
 
 
 	if (*string == EOS)  return;
@@ -404,7 +404,7 @@ void  SnnsCLib::krio_stringLimits(void)
 
 	if ( krui_getFirstSymbolTableEntry( &symbol, &sym_type) )  {
 		do  {
-			len = strlen( symbol );
+			len = (int) strlen( symbol );
 
 			switch (sym_type)  {
 			case  UNIT_SYM:
@@ -433,8 +433,8 @@ void  SnnsCLib::krio_stringLimits(void)
 	while ((unit_no = krui_getNextUnit() ) != 0);
 
 
-	def_out_func_len = strlen( def_out_func );
-	def_act_func_len = strlen( def_act_func );
+	def_out_func_len = (int) strlen( def_out_func );
+	def_act_func_len = (int) strlen( def_act_func );
 
 	if (krui_getFirstSiteTableEntry( &name, &symbol ))  {  
 		do
@@ -592,7 +592,7 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 		break;
 
 	case  DEFAULT_DEF:
-		len = Max( 8, strlen( krio_fmtShapeing_formats[ 10 ] ) );
+		len = Max( 8, (int) strlen( krio_fmtShapeing_formats[ 10 ] ) );
 		len1 = len + 2;
 		if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 		strcpy( fmt_shape1, "%8.5f |" );
@@ -603,7 +603,7 @@ krui_err  SnnsCLib::krio_fmtShapeing(int choose_me)
 
 		mstrcpy( fmt_hdr2, krio_repchar( '-', len + 1 ), "|", (char *) 0 );
 
-		len = Max( 8, strlen( krio_fmtShapeing_formats[ 11 ] ) );
+		len = Max( 8, (int) strlen( krio_fmtShapeing_formats[ 11 ] ) );
 		len1 = len1 + len + 3;
 		if (len1 > MAX_LIN_LEN)  return( KRERR_SAVE_LINE_LEN );
 		strcat( fmt_shape1, " %8.5f |" );
@@ -1674,7 +1674,7 @@ krui_err  SnnsCLib::krio_writeLayerDefs(void)
 			i++, unit_ptr++)
 		if (!UNIT_REFRESHED( unit_ptr ) && UNIT_IN_USE( unit_ptr ))
 		{				/*  unit is in use and 'fresh' */
-			layer_no = (int) unit_ptr->layer_no;
+			layer_no = unit_ptr->layer_no;
 			if (layer_no == def_layer_no)
 				continue;
 
@@ -2137,7 +2137,7 @@ bool  SnnsCLib::getSymbol(char *symbol)
 		s_ptr = symbol;
 		while (isgraph( c ))  {
 			if ((c == ',') || (c == '|'))  break;
-			*s_ptr++ = c;
+			*s_ptr++ = (char) c;
 			c = getc( file_in );
 		}
 

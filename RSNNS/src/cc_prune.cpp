@@ -92,11 +92,11 @@ float SnnsCLib::cc_calculatePruneError(int prune_func,int p,int n,float sse)
 {
     switch (prune_func){
       case SBC:
-	return n * log(sse/n) + p*log((double)n);
+	return ((float) n) * log(sse/((float) n)) + ((float) p)*log((float) n);
       case AIC:
-	return n* log(sse/n) + p*2;
+	return ((float) n)* log(sse/((float) n)) + ((float) p)*2;
       case CMSEP:
-	return sse/(n-2*p);
+	return sse/((float)(n-2*(p)));
       default:
 	return 0.0f;
     }
@@ -271,7 +271,7 @@ void SnnsCLib::cc_killLink (int source, int target)
   KernelErrorCode = kr_topoSort(TOPOLOGICAL_CC);
   if(KernelErrorCode==KRERR_DEAD_UNITS) { 
     SNNSprintf("\nlast link removed, killing Unit !"); 
-    unit_ptr=kr_getUnitPtr(topo_msg.src_error_unit); 
+    unit_ptr=kr_getUnitPtr((int) topo_msg.src_error_unit); 
     KernelErrorCode = kr_removeUnit(unit_ptr);
     if(KernelErrorCode!=KRERR_NO_ERROR) { 
       SNNSprintf("\nSNNS-kernel panic:%i cannot remove unit! aborting",

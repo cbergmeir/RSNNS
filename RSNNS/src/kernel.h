@@ -422,7 +422,7 @@ struct Site  *sitePtr,
 	     *prevSitePtr;
 struct Link  *linkPtr,
 	     *prevLinkPtr;
-int  unitNo;
+long  unitNo;
 
 
 int   specialNetworkType; /* topologic type of a network  */

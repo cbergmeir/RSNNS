@@ -97,7 +97,7 @@
 #define EXPONENTIAL  5
 #define RANDOM       6  /* RANDOM has to be last Act_function !!! */
 
-#define SIN_FAKTOR   0.1    
+#define SIN_FAKTOR   0.1f    
 #define THRESHOLD_DERIV 1   /* not used anymore */
 
 #define BACKPROP         0
@@ -209,6 +209,11 @@
      return(KernelErrorCode); \
    }  
 
+#define ERROR_CHECK_FLOAT \
+   if(KernelErrorCode!=KRERR_NO_ERROR) { \
+     return((float)KernelErrorCode); \
+   }  
+   
 #define ERROR_CHECK_WITH_MEMORY_DEALLOCATION \
    if((TempErrorCode=KernelErrorCode)!=KRERR_NO_ERROR) { \
      cc_freeStorage(StartPattern,EndPattern,0); \
@@ -412,7 +417,7 @@ for ((link_ptr) = ((struct Link *) (unit_ptr)->sites)->next; (link_ptr) != NULL;
 #define LEARNING_FUNCTION               (int)ParameterInArray[7]
 #define CC_PRINT_ONOFF                  (int)ParameterInArray[8]
 #define MIN_COVAR_CHANGE                ParameterInArray[9]
-#define SPEC_PATIENCE                   ParameterInArray[10]
+#define SPEC_PATIENCE                   (int)ParameterInArray[10]
 #define MAX_NO_OF_COVAR_UPDATE_CYCLES   (int)ParameterInArray[11] 
 #define MAX_SPECIAL_UNIT_NUMBER         (int)ParameterInArray[12] 
 #define SPECIAL_FUNCTION_TYPE           (int)ParameterInArray[13] 

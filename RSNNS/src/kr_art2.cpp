@@ -993,7 +993,7 @@ int  SnnsCLib::kra2_getClassNo (void)
     if ((i > Art2_NoOfRecUnits) && ((*topo_ptr)->Out.output < kra2_get_d())) {
        return (-1);
     } else {
-       return (topo_ptr - topo_layer[ART2_REC_LAY-1] + 1);
+       return (int) (topo_ptr - topo_layer[ART2_REC_LAY-1] + 1);
     } /*if*/
 
 } /* kra2_getClassNo () */
@@ -1143,7 +1143,7 @@ FlintType SnnsCLib::kra2_compute_l2_norm (int Layer)
       sum += val * val;
       topo_ptr++;
    } /*while*/
-   return ( sqrt((double) sum) );
+   return ( (float) sqrt((double) sum) );
 }
 /*___________________________________________________________________________*/
 

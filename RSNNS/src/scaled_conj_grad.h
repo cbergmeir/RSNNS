@@ -92,8 +92,8 @@ krui_err TEST_SCG(int start_pattern, int end_pattern,
  int        scg_space_size ;
  FlintType* *scg_gradient ;
 
-#define SCG_FIRST_SIGMA     1E-4	/* should be in ]0 ; 1E-4] */
-#define SCG_FIRST_LAMBDA    1E-6        /* should be in ]0 ; 1E-6] */
+#define SCG_FIRST_SIGMA     1E-4f	/* should be in ]0 ; 1E-4] */
+#define SCG_FIRST_LAMBDA    1E-6f        /* should be in ]0 ; 1E-6] */
 
 #define  LEARN_PARAM1( param )   param[ 0 ]  /* contains 1st learning param */
 #define  LEARN_PARAM2( param )   param[ 1 ]  /* contains 2nd learning param */
@@ -101,7 +101,7 @@ krui_err TEST_SCG(int start_pattern, int end_pattern,
 #define  LEARN_PARAM4( param )   param[ 3 ]  /* contains 4th learning param */
 
 
-#define SCG_TOLERANCE 1E-8		/* for single precision */
+#define SCG_TOLERANCE 1E-8f		/* for single precision */
 				/* should be 1E-16 for double precision */
 /* end private definition section */
 

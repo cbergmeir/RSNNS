@@ -378,7 +378,7 @@ krui_err  SnnsCLib::UPDATE_KohonenPropagate(float *parameterArray, int NoOfParam
      float amount;
 
 
-    amount = 1.0 / sqrt( sum );
+    amount = 1.0f / sqrt( sum );
 
     FOR_ALL_UNITS( unit_ptr )
 	if (IS_INPUT_UNIT( unit_ptr ) && UNIT_IN_USE( unit_ptr ))
@@ -438,7 +438,7 @@ krui_err  SnnsCLib::UPDATE_CPNPropagate(float *parameterArray, int NoOfParams)
        of the hidden units (Kohonen Layer) */
 
     winner_ptr = NULL;
-    maximum = -1.0e30;		/* contains the maximum of the activations */
+    maximum = -1.0e30f;		/* contains the maximum of the activations */
 
     /*  propagagate all hidden units  */
     while ((unit_ptr = *++topo_ptr) != NULL){
@@ -1440,7 +1440,7 @@ krui_err SnnsCLib::UPDATE_CC_Propagate(float parameterArray[],  int NoOfParams)
 krui_err SnnsCLib::UPDATE_DLVQ_Propagate(float parameterArray[], int NoOfParams)
 {
     struct Unit *inputUnitPtr,*hiddenUnitPtr,*maxActivatedUnitPtr=NULL;
-    double maxAct,act;
+    float maxAct,act;
     int i,h,startPattern,endPattern,d1,d2,d3,generatedNewUnit,noOfLinks;
 
     if(newPatternsLoaded){
@@ -1965,14 +1965,14 @@ krui_err  SnnsCLib::UPDATE_FixAct_Hop(float *parameterArray, int NoOfParams)
     FlintType              *netInputArray;
    
 
-    NoOfOnes = parameterArray[0]; /* the fixed Number of 1 */
+    NoOfOnes = (int) parameterArray[0]; /* the fixed Number of 1 */
 
     /* init netInputArray and unitsToUpdate */
     netInputArray = (FlintType *) calloc(NoOfOnes, sizeof(FlintType));
     unitsToUpdate = (struct Unit * *) calloc(NoOfOnes, sizeof( struct Unit *)); 
     for(i=0; i<= NoOfOnes-1; i++) {
 	unitsToUpdate[i] = NULL;
-	netInputArray[i] = -9e37;
+	netInputArray[i] = -9e37f;
     }
 
     FOR_ALL_UNITS(unit_ptr) { 
@@ -2061,7 +2061,7 @@ krui_err SnnsCLib::UPDATE_RM_Propagate (float *parameterArray, int NoOfParams)
    struct Unit   *unit_ptr;
   int t, NoTimes; 
 
-  NoTimes = parameterArray[0];
+  NoTimes = (int) parameterArray[0];
 
   for (t=0; t < NoTimes; ++t){ 
 
@@ -2303,7 +2303,7 @@ krui_err  SnnsCLib::ENZO_propagate( float *parameterArray, int NoOfParams )
   if (NoOfParams < 1)    
     return( KRERR_PARAMETERS );       /*  not enough input parameters  */
 
-  if (UPDATE_PARAM1 (parameterArray)) 
+  if ((int) UPDATE_PARAM1 (parameterArray)) 
     return (ENZO_PROPAGATE_error_back());  /* rueckwaerts-Propagieren */
   else
     return (ENZO_PROPAGATE_ff());          /* vorwaerts-Propagieren */

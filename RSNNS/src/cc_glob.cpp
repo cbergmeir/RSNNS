@@ -293,9 +293,9 @@ float SnnsCLib::cc_getErr (int StartPattern, int EndPattern)
     float MaxAct;
 
     KernelErrorCode = kr_initSubPatternOrder(StartPattern,EndPattern);
-    ERROR_CHECK;
+    ERROR_CHECK_FLOAT;
     cc_getPatternParameter(StartPattern,EndPattern,&start,&end,&n);
-    ERROR_CHECK;
+    ERROR_CHECK_FLOAT;
     SumSqError = 0.0f;
 
     for(p=start; p<=end;p++){
@@ -1143,7 +1143,7 @@ krui_err SnnsCLib::cc_topoSortMain(int topoSortId)
     *global_topo_ptr++ = NULL;
 
     /*  calc. no. of sorted units  */
-    no_of_topo_units = (global_topo_ptr - topo_ptr_array) - 5;
+    no_of_topo_units = (int) (global_topo_ptr - topo_ptr_array) - 5;
 
     /*  search for dead units i.e. units without inputs  */
     FOR_ALL_UNITS( unit_ptr )
@@ -1164,12 +1164,12 @@ krui_err SnnsCLib::cc_topoSortMain(int topoSortId)
 		case TOPOLOGICAL_CC : 
 		    break;
 		case TOPOLOGICAL_BCC : 
-		    if((LINKS_LEAVING(unit_ptr)+LINKS_ARRIVEING(unit_ptr)+1) !=
+		    if((int)(LINKS_LEAVING(unit_ptr)+LINKS_ARRIVEING(unit_ptr)+1) !=
 		       NoOfHiddenUnits) {
 			KernelErrorCode = KRERR_CC_ERROR6;
 			return(KernelErrorCode);
 		    }
-		    if(LINKS_ARRIVEING(unit_ptr) != counter++) {
+		    if((int)LINKS_ARRIVEING(unit_ptr) != counter++) {
 			KernelErrorCode = KRERR_CC_ERROR6;
 			return(KernelErrorCode);
 		    }

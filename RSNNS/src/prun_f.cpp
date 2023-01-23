@@ -313,7 +313,7 @@ krui_err SnnsCLib::pr_calcMeanDeviation (int pattern, float *sum_error)
 	 unit_ptr = *(topo_ptr--))
     {
 	*sum_error += unit_ptr->value_a;
-	unit_ptr->value_a /= no_of_patterns;
+	unit_ptr->value_a /= (float) no_of_patterns;
     }
 
     return (KernelErrorCode);
@@ -1114,7 +1114,7 @@ krui_err SnnsCLib::PRUNE_OBS (int pattern)
     float saliency;
 
     /* calculate saliency of unit */
-    unit_ptr->actbuf[0] = 0.8 * unit_ptr->actbuf[0] + 0.2 * unit_ptr->value_b;
+    unit_ptr->actbuf[0] = 0.8f * unit_ptr->actbuf[0] + 0.2f * unit_ptr->value_b;
     saliency = unit_ptr->actbuf[0];
     if (saliency != 0.0f)   /* is it the initial-value? (for already pruned input units)*/ 
       if ((pr_candidateUnit == NULL) ||
@@ -1375,7 +1375,7 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
 
     FOR_ALL_UNITS (unit_ptr)
         if (! IS_SPECIAL_UNIT (unit_ptr)) {
-            unit_ptr->value_c = sqrt ((double) unit_ptr->value_c 
+            unit_ptr->value_c = (float) sqrt ((double) unit_ptr->value_c 
                                       / (double) no_of_patterns);
         }        
 
@@ -1434,13 +1434,13 @@ krui_err SnnsCLib::PRUNE_Skeletonization (int pattern)
     int       unit_no, target_unit_no;
 
     if (unit_ptr == NULL) return (KRERR_UNIT_MISSING);
-    unit_no = unit_ptr - unit_array;
+    unit_no = (int) (unit_ptr - unit_array);
     w = link_ptr->weight;
 
     if (pr_candidatePass == PR_CONST) {
         unit_ptr->bias += w * pr_candidateUnit->value_b;
     } else {
-        target_unit_no = pr_candidateTargetUnit - unit_array;
+        target_unit_no = (int) (pr_candidateTargetUnit - unit_array);
 
         if (pr_candidatePass == PR_REVERSE) w = -w;
 
@@ -1734,7 +1734,7 @@ krui_err SnnsCLib::pr_callPrunFunc (int pattern)
         unitPtr = pr_candidateTargetUnit;
         unitNo = unitPtr - unit_array;
         pr_candidateSourceUnitNo =
-            pr_candidateLink->to - unit_array;
+            (int) (pr_candidateLink->to - unit_array);
         kr_isConnected (pr_candidateSourceUnitNo, &dummy);
         kr_deleteLink ();
     }

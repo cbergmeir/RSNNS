@@ -184,18 +184,18 @@ krui_err  SnnsCLib::REMAP_norm(float *pat_data, int pat_size,
 		     float *remap_params, int no_of_remap_params)
 {
     int i;
-    double length = 0.0f;
+    double length = 0.0;
 
     for(i=0; i<pat_size; i++){
 	length += pat_data[i] * pat_data[i];
     }
     length = sqrt(length);
 
-    if(length == 0.0f)
+    if(length == 0.0)
 	return(KRERR_CANT_NORM);
 
     for(i=0; i<pat_size; i++)
-	pat_data[i] = pat_data[i] / length;
+	pat_data[i] = pat_data[i] / (float) length;
 
     return(KRERR_NO_ERROR);
 }

@@ -359,7 +359,7 @@ typedef  struct SiteTable  *STableArray;
 
 
 struct   TransTable  {
-  short  z,
+  int  z,
          x,
 	 y;
 };
