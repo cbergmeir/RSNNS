@@ -479,7 +479,7 @@ for ((link_ptr) = ((struct Link *) (unit_ptr)->sites)->next; (link_ptr) != NULL;
 
 
 #define TAC_EXP(x) \
-	( (x>88.72f) ? MAXFLOAT : ((x<-88.0f) ? 0.0f : exp(x)) )
+	( (x>88.72f) ? RSNNS_MAXFLOAT : ((x<-88.0f) ? 0.0f : exp(x)) )
 
 #define XI_OF_LINK(LinkPtr) \
 	(LinkPtr->value_b)

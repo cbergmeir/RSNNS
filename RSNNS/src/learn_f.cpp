@@ -7039,7 +7039,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
 		    float **parameterOutArray, int *NoOfOutParams)
 {
     //static float    LEARN_BPTT_OutParameter[1];	/* LEARN_BPTT_OutParameter[0] stores the learning error  */
-    int             ret_code, pattern_no, sub_pat_no, patterns;
+    int             ret_code, pattern_no, sub_pat_no;//, patterns;
     int             nhist;	/* number of steps back in time */
      struct Unit *unit_ptr;
 
@@ -7096,7 +7096,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
     if(KernelErrorCode != KRERR_NO_ERROR)
 	return (KernelErrorCode);
 
-    patterns = 0;
+    //patterns = 0;
     while(kr_getSubPatternByOrder(&pattern_no,&sub_pat_no)){
 
 	/* FORWARD-BPTT */
@@ -7114,7 +7114,7 @@ krui_err SnnsCLib::LEARN_BPTT(int start_pattern, int end_pattern,
 	BPTTadapt(LEARN_PARAM1(parameterInArray), 
 		  LEARN_PARAM2(parameterInArray));
 
-	patterns++;
+	//patterns++;
     }
     return (ret_code);
 }

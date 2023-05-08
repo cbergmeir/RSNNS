@@ -45,11 +45,11 @@
 #ifndef SNNS_HEADER_ALL
 #define SNNS_HEADER_ALL
 
-#ifndef MAXFLOAT
+//#ifndef MAXFLOAT
 //#include <float.h>
 //#define MAXFLOAT FLT_MAX
-#define MAXFLOAT 1e+37f
-#endif
+#define RSNNS_MAXFLOAT 1e+37f
+//#endif
 
 
 #include "u_lrand48.h"

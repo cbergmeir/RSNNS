@@ -425,7 +425,7 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
 				   exceptions. Lambda may become too big even
 				   with the under_tolerance criterion, in case
 				   of a several consecutive 'NO REDUCTION'. */
-    if (LEARN_SCG_lambda > MAXFLOAT) LEARN_SCG_lambda = MAXFLOAT ;
+    if (LEARN_SCG_lambda > RSNNS_MAXFLOAT) LEARN_SCG_lambda = RSNNS_MAXFLOAT ;
     
     TRACE(("lambda after resizing=%e\n",LEARN_SCG_lambda)) ;
 

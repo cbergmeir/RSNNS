@@ -1,3 +1,7 @@
+version 0.4-16 (08-05-2023):
+
+- fixing warnings
+
 version 0.4-15 (22-01-2023):
 
 - replaced sprintf with snprintf

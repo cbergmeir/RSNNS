@@ -321,7 +321,7 @@ void SnnsCLib::cc_trainOutputUnits(int maxNoOfErrorUpdateCycles, int backfittPat
 {
 
     int p,pat,sub,counter=0;
-    float oldNetError= MAXFLOAT;
+    float oldNetError= RSNNS_MAXFLOAT;
     int start,end,n;
     struct Unit* UnitPtr;
     struct Link* LinkPtr;

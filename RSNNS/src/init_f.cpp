@@ -727,7 +727,7 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
      TopoPtrArray   topo_hidden_ptr;
      TopoPtrArray   topo_work;
      int	    hidden_units;
-     int	    output_units;
+     //int	    output_units;
      int	    unit_nr;
      int	    h_unit_nr;
      int	    abs_sub_nr;
@@ -768,13 +768,13 @@ krui_err  SnnsCLib::RbfInitNetwork(int start_pat, int end_pat, float i_bias,
 */
     /* count the units of the hidden layer (only one) and the output layer */
     hidden_units = 0;
-    output_units = 0;
+    //output_units = 0;
     FOR_ALL_UNITS(unit_ptr){
 	if ((unit_ptr -> flags & UFLAG_IN_USE) == UFLAG_IN_USE) {
 	    if (unit_ptr -> flags & UFLAG_TTYP_HIDD)
 		hidden_units++;
-	    if (unit_ptr -> flags & UFLAG_TTYP_OUT)
-		output_units++; 
+	    //if (unit_ptr -> flags & UFLAG_TTYP_OUT)
+		//output_units++; 
 	}
     }
 

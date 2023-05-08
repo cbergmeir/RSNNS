@@ -91,7 +91,7 @@ GROUP: Aritmetic Functions
 */
  float SnnsCLib::exp_s( float arg )
 {
-  if (arg > 88.72) return( MAXFLOAT );
+  if (arg > 88.72) return( RSNNS_MAXFLOAT );
   else if (arg < -88.0f) return( 0.0 );
   return( exp( arg ) );
 }
