@@ -1,8 +1,8 @@
 citHeader("To cite RSNNS in publications use:")
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
   title        = "Neural Networks in {R} Using the Stuttgart Neural Network Simulator: {RSNNS}",
-  author       = personList(as.person("Christoph Bergmeir"),
+  author       = c(as.person("Christoph Bergmeir"),
                    as.person(" Jos\\'e M. Ben\\'itez")),
   journal      = "Journal of Statistical Software",
   year         = "2012",

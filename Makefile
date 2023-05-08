@@ -21,3 +21,5 @@ clean:
 	rm -rf $(rPackageName)_$(rPackageVersion).tar.gz $(rPackageName).Rcheck
 	rm -rf ./$(rPackageName)/man/*.Rd
 	rm -rf ./tmp_roxy.R ./tmp_roxy.Rout
+	rm -rf ./$(rPackageName)/src/*.net
+	rm -rf ./$(rPackageName)/src/*.pat	
