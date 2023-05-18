@@ -46,7 +46,7 @@
 #' 
 #' If you use the package, please cite the following work in your publications:
 #'
-#' Bergmeir, C. and Benítez, J.M. (2012), Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS. Journal of Statistical Software, 46(7), 1-26. \url{https://www.jstatsoft.org/v46/i07/}
+#' Bergmeir, C. and Benítez, J.M. (2012), Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS. Journal of Statistical Software, 46(7), 1-26.
 #'
 #' The package has a hierarchical architecture with three levels:
 #' \itemize{
@@ -140,7 +140,6 @@
 #' @references 
 #' 
 #' Bergmeir, C. and Benítez, J.M. (2012), 'Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS', Journal of Statistical Software, 46(7), 1-26.
-#' \url{https://www.jstatsoft.org/v46/i07/}
 #'
 #' \emph{General neural network literature:}
 #' 
