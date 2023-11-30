@@ -1272,7 +1272,7 @@ void SnnsCLib::tac_propagateXiRiOnlineCase(struct Unit* SpecialUnitPtr,
   struct Unit* SecondSpecUnitPtr;
   struct Link* LinkPtr;
   int s2;
-  int First,Sec,i;
+  int First,Sec;//,i;
   float sum;
   float Diff,Prime_Xi,Prime_Ri,DeltaF;
 
@@ -1290,7 +1290,7 @@ void SnnsCLib::tac_propagateXiRiOnlineCase(struct Unit* SpecialUnitPtr,
     }
     DeltaF = (float) ((SummedDeltaS*AC_Nenner-nMinus1Divn*AC_Zaehler*sum) / (AC_Nenner*AC_Nenner));
     
-    i=0;
+    //i=0;
     FOR_ALL_LINKS(SpecialUnitPtr,LinkPtr){
        if (IS_INPUT_UNIT(LinkPtr->to)){
 	  Diff = 
@@ -1300,7 +1300,7 @@ void SnnsCLib::tac_propagateXiRiOnlineCase(struct Unit* SpecialUnitPtr,
 	  Prime_Ri=(Prime_Xi*Diff)/RI_OF_LINK(LinkPtr);
           XI_OF_LINK(LinkPtr) += Prime_Xi*eta;
           RI_OF_LINK(LinkPtr) += Prime_Ri*eta;    
-	  i++;
+	  //i++;
        }
     }
 }

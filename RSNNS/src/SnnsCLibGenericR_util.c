@@ -70,7 +70,7 @@ int SNNSprintf(const char* fmt, ...){
 
 void SNNSpanic(const char* fmt) {
 
-  Rf_error(fmt);
+  Rf_error("%s", fmt);
 
 }
 

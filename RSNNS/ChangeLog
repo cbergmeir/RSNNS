@@ -1,6 +1,7 @@
-version 0.4-17 (XX-XX-202X):
+version 0.4-17 (30-11-2023):
 
 - fixing JSS links
+- fixing two compiler warnings
 
 version 0.4-16 (08-05-2023):
 
