@@ -218,7 +218,9 @@ krui_err SnnsCLib::LEARN_SCG(int start_pattern, int end_pattern, float *paramete
 	  //printf("SCG : malloc problem\n") ;
 	  return(KRERR_CRITICAL_MALLOC);
       }
-      else TRACE(("SCG - malloc's done\n"));
+      else {
+      	TRACE(("SCG - malloc's done\n"));
+      };
 
       /* 2) store the adresses */
 
